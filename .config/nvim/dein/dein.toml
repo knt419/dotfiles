@@ -3,6 +3,10 @@ repo = 'Shougo/dein.vim'
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
+hook_add = '''
+set background=dark
+au MyAutoCmd VimEnter * nested colorscheme iceberg
+'''
 
 [[plugins]]
 repo = 'tyru/caw.vim'
@@ -23,8 +27,8 @@ let g:lightline = {
 repo = 'fatih/vim-go'
 on_ft = 'go'
 hook_add = '''
-au FileType go nmap gr (go-run)  
-au FileType go nmap gt (go-test)  
+au FileType go nnoremap gr (go-run)  
+au FileType go nnoremap gt (go-test)  
 let g:go_hightlight_functions = 1  
 let g:go_hightlight_methods = 1  
 let g:go_hightlight_structs = 1  

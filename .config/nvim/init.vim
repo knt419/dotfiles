@@ -17,7 +17,6 @@ set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 set mouse=a
 
-"検索設定
 set ignorecase
 set smartcase
 set wrapscan
@@ -32,45 +31,45 @@ set noshowmode
 set hidden
 filetype plugin indent on
 
-let g:tex_conceal=''
-
-filetype indent on
-
-"stop highlight
 nnoremap <ESC><ESC> :nohlsearch<CR>
-nnoremap SS :source ~/.config/nvim/init.vim<CR>
+nnoremap SS :source $HOME/.config/nvim/init.vim<CR>
 
-" 閉じカッコ
 inoremap {<Enter> {}<Left><CR><ESC><S-o>
 inoremap ( ()<Left>
 
-" When normal mode, change ; and :
 nnoremap : ;
 nnoremap ; :
 
-"python
-let g:python_host_prog='/data/data/com.termux/files/usr/bin/python2'
-let g:python3_host_prog='/data/data/com.termux/files/usr/bin/python3'
-"#######dein########
-
-if &compatible
-        set  nocompatible
+"local
+if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
+    source $HOME/.config/nvim/init.vim.local
 endif
 
-let s:dein_dir = expand('~/.cache/dein')
+"dein
+
+if &compatible
+    set  nocompatible
+endif
+
+" reset augroup
+augroup MyAutoCmd
+    autocmd!
+augroup END
+
+let s:dein_dir = expand('$HOME/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 if &runtimepath !~# '/dein.vim'
-  if !isdirectory(s:dein_repo_dir)
-    execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
-  endif
-  execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+    if !isdirectory(s:dein_repo_dir)
+        execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+    endif
+    execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
 endif
 
 if dein#load_state(s:dein_dir)
     call dein#begin(s:dein_dir)
 
-    let g:rc_dir    = expand('~/.config/nvim/dein')
+    let g:rc_dir    = expand('$HOME/.config/nvim/dein')
     let s:toml      = g:rc_dir . '/dein.toml'
     let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
 
@@ -86,4 +85,3 @@ if dein#check_install()
 endif
 
 syntax on
-colorscheme iceberg
