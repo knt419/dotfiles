@@ -40,21 +40,25 @@ inoremap ( ()<Left>
 nnoremap : ;
 nnoremap ; :
 
+"win
+if has(win32) | has(win64)
+    set shellslash
+endif
+
 "local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
-endif
-
-"dein
-
-if &compatible
-    set  nocompatible
 endif
 
 " reset augroup
 augroup MyAutoCmd
     autocmd!
 augroup END
+
+"dein
+if &compatible
+    set  nocompatible
+endif
 
 let s:dein_dir = expand('$HOME/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'

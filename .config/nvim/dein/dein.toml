@@ -1,5 +1,8 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
+hook_add = '''
+let g:dein#install_log_filename='$HOME/.cache/dein/dein.log'
+'''
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
@@ -11,8 +14,8 @@ au MyAutoCmd VimEnter * nested colorscheme iceberg
 [[plugins]]
 repo = 'tyru/caw.vim'
 hook_add = '''
-nmap <C-k> <Plug>(caw:hatpos:toggle)
-vmap <C-k> <Plug>(caw:hatpos:toggle)
+nnoremap <C-k> <Plug>(caw:hatpos:toggle)
+vnoremap <C-k> <Plug>(caw:hatpos:toggle)
 '''
 
 [[plugins]]
@@ -54,3 +57,6 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 '''
+
+[[plugins]]
+repo = 'tpope/vim-fugitive'
