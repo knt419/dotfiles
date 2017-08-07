@@ -1,5 +1,8 @@
 set termguicolors
 set t_Co=256
+set encoding=utf8
+set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932
+
 set number 
 set title 
 set showmatch 
@@ -8,6 +11,7 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 set smartindent
+
 set clipboard=unnamed
 set cursorline
 set list 
@@ -24,8 +28,6 @@ set wrapscan
 set laststatus=2
 set wildmenu
 set wrap
-set encoding=utf8
-set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932
 set showcmd
 set noshowmode
 set hidden
@@ -34,18 +36,15 @@ filetype plugin indent on
 nnoremap <ESC><ESC> :nohlsearch<CR>
 nnoremap SS :source $HOME/.config/nvim/init.vim<CR>
 
-inoremap {<Enter> {}<Left><CR><ESC><S-o>
-inoremap ( ()<Left>
-
 nnoremap : ;
 nnoremap ; :
 
-"win
-if has(win32) | has(win64)
+" windows
+if has('win32') | has('win64')
     set shellslash
 endif
 
-"local
+" local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
 endif

@@ -1,7 +1,7 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 hook_add = '''
-let g:dein#install_log_filename='$HOME/.cache/dein/dein.log'
+let g:dein#install_log_filename='$HOME/.cache/dein/install.log'
 '''
 
 [[plugins]]
@@ -60,3 +60,6 @@ let g:syntastic_check_on_wq = 0
 
 [[plugins]]
 repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'cohama/lexima.vim'
