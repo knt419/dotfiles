@@ -54,7 +54,7 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 
-"dein
+" dein
 if &compatible
     set  nocompatible
 endif
