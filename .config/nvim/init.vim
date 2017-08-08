@@ -41,8 +41,10 @@ nnoremap : ;
 nnoremap ; :
 
 "win
-if has(win32) | has(win64)
+if has('win32')
     set shellslash
+	set shell=C:/msys64/usr/bin/bash.exe
+	set shellcmdflag=-c
 endif
 
 "local
