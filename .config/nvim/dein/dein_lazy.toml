@@ -1,6 +1,10 @@
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
 on_i = 1
+hook_add = '''
+let g:deoplete#source#go#gocode_binary = '$HOME/go/bin/gocode'
+let g:deoplete#auto_complete_delay = 0
+'''
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
@@ -13,6 +17,7 @@ nnoremap <silent> ;b :<C-u>Denite buffer<CR>
 '''
 hook_post_source = '''
 call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+call denite#custom#option('default', 'prompt', '>')
 call denite#custom#var('grep', 'command', ['ag'])
 call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])

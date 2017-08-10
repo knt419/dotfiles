@@ -1,8 +1,14 @@
+scriptencoding utf-8
+set encoding=utf-8
+set termencoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932
 set termguicolors
 set t_Co=256
-set encoding=utf8
-set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932
 
+set nobackup
+set noswapfile
+set autoread
 set number 
 set title 
 set showmatch 
@@ -11,6 +17,7 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 set smartindent
+set autoindent
 
 set clipboard=unnamed
 set cursorline
@@ -23,7 +30,9 @@ set mouse=a
 
 set ignorecase
 set smartcase
+set incsearch
 set wrapscan
+set hlsearch
 
 set laststatus=2
 set wildmenu
@@ -31,19 +40,27 @@ set wrap
 set showcmd
 set noshowmode
 set hidden
+set completeopt+=noinsert
+
 filetype plugin indent on
 
-nnoremap <ESC><ESC> :nohlsearch<CR>
+nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
+nnoremap Y y$
+nnoremap j gj
+nnoremap k gk
+noremap <C-l> $
+noremap <C-h> ^
+
 nnoremap SS :source $HOME/.config/nvim/init.vim<CR>
 
 nnoremap : ;
 nnoremap ; :
 
 " windows
-if has('win32') | has('win64')
-    set shellslash
-    set shell=C:/msys64/usr/bin/bash.exe
-    set shellcmdflag=-c
+if has('win32')
+	set shellslash
+    set shell=cmd
+    set shellcmdflag=/c
 endif
 
 " local
