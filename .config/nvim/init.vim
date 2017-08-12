@@ -1,5 +1,5 @@
-scriptencoding utf-8
 set encoding=utf-8
+scriptencoding utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932
@@ -9,9 +9,10 @@ set t_Co=256
 set nobackup
 set noswapfile
 set autoread
-set number 
-set title 
 set confirm
+set number 
+set ruler
+set title 
 
 set showmatch 
 set matchtime=1
@@ -46,21 +47,21 @@ set completeopt+=noinsert
 
 filetype plugin indent on
 
-nnoremap <Esc><Esc> :nohlsearch<CR><Esc>
-nnoremap Y y$
-nnoremap j gj
-nnoremap k gk
-noremap <C-l> $
-noremap <C-h> ^
+nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
+nnoremap <silent> Y y$
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+noremap <silent> <C-l> $
+noremap <silent> <C-h> ^
 
-nnoremap SS :source $HOME/.config/nvim/init.vim<CR>
+nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
-nnoremap : ;
-nnoremap ; :
+nnoremap <silent> : ;
+nnoremap <silent> ; :
 
 " windows
 if has('win32') || has('win64')
-	set shellslash
+    set shellslash
     set shell=cmd
     set shellcmdflag=/c
 endif

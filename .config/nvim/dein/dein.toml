@@ -30,14 +30,14 @@ let g:lightline = {
 repo = 'fatih/vim-go'
 on_ft = 'go'
 hook_add = '''
-au FileType go nnoremap gr (go-run)  
-au FileType go nnoremap gt (go-test)  
-let g:go_hightlight_functions = 1  
-let g:go_hightlight_methods = 1  
-let g:go_hightlight_structs = 1  
-let g:go_hightlight_interfaces = 1  
-let g:go_hightlight_operators = 1  
-let g:go_hightlight_build_constraints = 1  
+au FileType go nnoremap gr (go-run)
+au FileType go nnoremap gt (go-test)
+let g:go_hightlight_functions = 1
+let g:go_hightlight_methods = 1
+let g:go_hightlight_structs = 1
+let g:go_hightlight_interfaces = 1
+let g:go_hightlight_operators = 1
+let g:go_hightlight_build_constraints = 1
 let g:go_fmt_command = "goimports"
 '''
 
