@@ -9,6 +9,7 @@ set t_Co=256
 set nobackup
 set noswapfile
 set autoread
+set hidden
 set confirm
 set number 
 set ruler
@@ -42,7 +43,6 @@ set wildmenu
 set wrap
 set showcmd
 set noshowmode
-set hidden
 set completeopt+=noinsert
 
 filetype plugin indent on
