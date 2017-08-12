@@ -11,6 +11,8 @@ set noswapfile
 set autoread
 set number 
 set title 
+set confirm
+
 set showmatch 
 set matchtime=1
 set tabstop=4 
@@ -57,7 +59,7 @@ nnoremap : ;
 nnoremap ; :
 
 " windows
-if has('win32')
+if has('win32') || has('win64')
 	set shellslash
     set shell=cmd
     set shellcmdflag=/c
