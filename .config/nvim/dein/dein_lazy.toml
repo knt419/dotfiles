@@ -1,7 +1,9 @@
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
+depends = ['neco-vim', 'neco-syntax']
 on_i = 1
 hook_add = '''
+let g:deoplete#enable_at_startup = 1
 let g:deoplete#source#go#gocode_binary = '$HOME/go/bin/gocode'
 let g:deoplete#auto_complete_delay = 0
 '''
@@ -14,9 +16,12 @@ nnoremap <silent> ;f :<C-u>Denite file_rec<CR>
 nnoremap <silent> ;m :<C-u>Denite file_mru<CR>
 nnoremap <silent> ;y :<C-u>Denite neoyank<CR>
 nnoremap <silent> ;b :<C-u>Denite buffer<CR>
+nnoremap <silent> ;d :<C-u>Denite directory_mru<CR>
 '''
 hook_post_source = '''
-call denite#custom#var('file_rec', 'command', ['ag', '--follow', '--nocolor', '--nogroup', '-g', ''])
+call denite#custom#var('file_rec', 'command',
+    \ ['ag', '--follow', '--nocolor', '--nogroup',
+    \  '--hidden', '-g', ''])
 call denite#custom#option('default', 'prompt', '>')
 call denite#custom#var('grep', 'command', ['ag'])
 call denite#custom#var('grep', 'recursive_opts', [])
@@ -29,3 +34,9 @@ repo = 'Shougo/neoyank.vim'
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+
+[[plugins]]
+repo = 'Shougo/neco-vim'

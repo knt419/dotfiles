@@ -23,22 +23,18 @@ repo = 'itchyny/lightline.vim'
 hook_add = '''
 let g:lightline = {
       \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \    'left': [
+      \      [ 'mode', 'paste' ],
+      \      [ 'gitbranch', 'readonly', 'filename', 'modified' ],
+      \    ]
+      \ },
+      \ 'component_function': {
+      \    'gitbranch': 'fugitive#head'
+      \ },
+      \ 'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
+      \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"},
       \ }
-'''
-
-[[plugins]]
-repo = 'fatih/vim-go'
-on_ft = 'go'
-hook_add = '''
-au FileType go nnoremap gr (go-run)
-au FileType go nnoremap gt (go-test)
-let g:go_hightlight_functions = 1
-let g:go_hightlight_methods = 1
-let g:go_hightlight_structs = 1
-let g:go_hightlight_interfaces = 1
-let g:go_hightlight_operators = 1
-let g:go_hightlight_build_constraints = 1
-let g:go_fmt_command = "goimports"
 '''
 
 [[plugins]]
@@ -63,3 +59,22 @@ repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
+
+[[plugins]]
+repo = 'fatih/vim-go'
+on_ft = 'go'
+hook_add = '''
+au FileType go nnoremap gr (go-run)
+au FileType go nnoremap gt (go-test)
+let g:go_hightlight_functions = 1
+let g:go_hightlight_methods = 1
+let g:go_hightlight_structs = 1
+let g:go_hightlight_interfaces = 1
+let g:go_hightlight_operators = 1
+let g:go_hightlight_build_constraints = 1
+let g:go_fmt_command = "goimports"
+'''
+
+[[plugins]]
+repo = 'cespare/vim-toml'
+on_ft = 'toml'
