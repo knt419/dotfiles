@@ -44,6 +44,7 @@ set wrap
 set showcmd
 set noshowmode
 set completeopt+=noinsert
+set iskeyword+=-
 
 filetype plugin indent on
 
@@ -51,6 +52,8 @@ nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
 nnoremap <silent> Y y$
 nnoremap <silent> j gj
 nnoremap <silent> k gk
+nnoremap <silent> x "_x
+nnoremap <silent> X "_X
 noremap <silent> <C-l> $
 noremap <silent> <C-h> ^
 

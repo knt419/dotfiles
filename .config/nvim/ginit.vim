@@ -1,1 +1,1 @@
-Guifont! Ricty Diminished for PL:h14
+Guifont! Ricty Diminished for Powerline:h14

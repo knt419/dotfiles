@@ -15,6 +15,7 @@ nnoremap <C-o> :<C-u>Vaffle<CR>
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
+colorscheme iceberg
 set background=dark
 au MyAutoCmd VimEnter * nested colorscheme iceberg
 '''
@@ -28,21 +29,36 @@ vnoremap <C-k> <Plug>(caw:hatpos:toggle)
 
 [[plugins]]
 repo = 'itchyny/lightline.vim'
+depends = ['iceberg.vim']
 hook_add = '''
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'iceberg',
       \ 'active': {
       \    'left': [
       \      [ 'mode', 'paste' ],
-      \      [ 'gitbranch', 'readonly', 'filename', 'modified' ],
+      \      [ 'readonly', 'fugitive', 'filename', 'modified' ],
       \    ]
       \ },
+      \ 'component': {
+      \   'lineinfo': "\ue0a1".' %3l:%-2v',
+      \ },
       \ 'component_function': {
-      \    'gitbranch': 'fugitive#head'
+      \    'readonly': 'LightlineReadonly',
+      \    'fugitive': 'LightlineFugitive',
       \ },
       \ 'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
       \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"},
       \ }
+function! LightlineReadonly()
+    return &readonly ? "\ue0a2" : ''
+endfunction
+function! LightlineFugitive()
+    if exists('*fugitive#head')
+        let branch = fugitive#head()
+        return branch !=# '' ? "\ue0a0".branch : ''
+    endif
+    return ''
+endfunction
 '''
 
 [[plugins]]
