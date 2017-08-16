@@ -40,7 +40,7 @@ let g:lightline = {
       \    ]
       \ },
       \ 'component': {
-      \   'lineinfo': "\ue0a1".' %3l:%-2v',
+      \   'lineinfo': "\ue0a1".'%3l:%-2v',
       \ },
       \ 'component_function': {
       \    'readonly': 'LightlineReadonly',
