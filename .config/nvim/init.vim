@@ -62,8 +62,6 @@ nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 nnoremap <silent> : ;
 nnoremap <silent> ; :
 
-let g:colors_name = 'iceberg'
-
 " windows
 if has('win32') || has('win64')
     set shellslash

@@ -5,6 +5,9 @@ let g:dein#install_log_filename='$HOME/.cache/dein/install.log'
 '''
 
 [[plugins]]
+repo = 'editorconfig/editorconfig'
+
+[[plugins]]
 repo = 'cocopon/vaffle.vim'
 hook_add = '''
 let g:vaffle_auto_cd = 1
