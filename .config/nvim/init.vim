@@ -74,11 +74,6 @@ if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
 endif
 
-" reset augroup
-augroup MyAutoCmd
-    autocmd!
-augroup END
-
 " dein
 if &compatible
     set  nocompatible
@@ -112,4 +107,6 @@ if dein#check_install()
     call dein#install()
 endif
 
+set background=dark
+colorscheme iceberg
 syntax on

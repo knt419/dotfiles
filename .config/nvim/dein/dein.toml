@@ -17,11 +17,6 @@ nnoremap <C-o> :<C-u>Vaffle<CR>
 
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
-hook_add = '''
-colorscheme iceberg
-set background=dark
-au MyAutoCmd VimEnter * nested colorscheme iceberg
-'''
 
 [[plugins]]
 repo = 'tyru/caw.vim'
