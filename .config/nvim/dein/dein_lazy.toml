@@ -1,6 +1,6 @@
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-depends = ['neco-vim', 'neco-syntax']
+depends = ['neco-vim', 'neco-syntax', 'deoplete-jedi']
 on_i = 1
 hook_add = '''
 let g:deoplete#enable_at_startup = 1
@@ -41,6 +41,9 @@ repo = 'Shougo/neomru.vim'
 
 [[plugins]]
 repo = 'Shougo/neco-syntax'
+
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
 
 [[plugins]]
 repo = 'Shougo/neco-vim'
