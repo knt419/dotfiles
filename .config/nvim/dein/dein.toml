@@ -88,6 +88,8 @@ on_ft = 'go'
 hook_add = '''
 au FileType go nnoremap gr (go-run)
 au FileType go nnoremap gt (go-test)
+au FileType go :highlight goErr cterm=bold ctermfg=214
+au FileType go :match goErr /\<err\>/
 let g:go_hightlight_functions = 1
 let g:go_hightlight_methods = 1
 let g:go_hightlight_structs = 1
