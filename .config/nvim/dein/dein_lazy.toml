@@ -1,6 +1,6 @@
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-depends = ['neco-vim', 'neco-syntax', 'deoplete-jedi']
+depends = ['neco-vim', 'neco-syntax', 'deoplete-jedi', 'neosnippet', 'neosnippet-snippets']
 on_i = 1
 hook_add = '''
 let g:deoplete#enable_at_startup = 1
@@ -35,6 +35,19 @@ call denite#custom#map('normal', "v", '<denite:do_action:vsplit>')
 
 [[plugins]]
 repo = 'Shougo/neoyank.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet'
+hook_source = '''
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+smap <expr><TAB> neosnippet#expandable_or_junpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
