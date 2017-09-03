@@ -42,7 +42,7 @@ hook_source = '''
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
-smap <expr><TAB> neosnippet#expandable_or_junpable() ?
+smap <expr><TAB> neosnippet#expandable() <Bar><Bar> neosnippet#junpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 '''
 
