@@ -42,12 +42,20 @@ hook_source = '''
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
-smap <expr><TAB> neosnippet#expandable() <Bar><Bar> neosnippet#junpable() ?
+imap <expr><TAB> neosnippet#expandable() <Bar><Bar> neosnippet#jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+smap <expr><TAB> neosnippet#expandable() <Bar><Bar> neosnippet#jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 '''
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+hook_source = '''
+let g:neosnippet#snippets_directory='$HOME/.cache/dein/repos/github.com/honza/vim-snippets/snippets'
+'''
 
 [[plugins]]
 repo = 'Shougo/neomru.vim'
