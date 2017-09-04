@@ -38,6 +38,7 @@ repo = 'Shougo/neoyank.vim'
 
 [[plugins]]
 repo = 'Shougo/neosnippet'
+depends = ['neosnippet-snippets', 'vim-snippets']
 hook_source = '''
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -53,7 +54,7 @@ repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
 repo = 'honza/vim-snippets'
-hook_source = '''
+hook_add= '''
 let g:neosnippet#snippets_directory='$HOME/.cache/dein/repos/github.com/honza/vim-snippets/snippets'
 '''
 
