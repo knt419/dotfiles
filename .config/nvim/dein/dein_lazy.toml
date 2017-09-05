@@ -12,11 +12,11 @@ let g:deoplete#auto_complete_delay = 0
 repo = 'Shougo/denite.nvim'
 depends = ['neoyank.vim', 'neomru.vim']
 hook_add = '''
-nnoremap <silent> ;f :<C-u>Denite file_rec<CR>
-nnoremap <silent> ;m :<C-u>Denite file_mru<CR>
-nnoremap <silent> ;y :<C-u>Denite neoyank<CR>
-nnoremap <silent> ;b :<C-u>Denite buffer<CR>
-nnoremap <silent> ;d :<C-u>Denite directory_mru<CR>
+nnoremap <silent> <Space>f :<C-u>Denite file_rec<CR>
+nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>
+nnoremap <silent> <Space>y :<C-u>Denite neoyank<CR>
+nnoremap <silent> <Space>b :<C-u>Denite buffer<CR>
+nnoremap <silent> <Space>d :<C-u>Denite directory_mru<CR>
 '''
 hook_post_source = '''
 call denite#custom#var('file_rec', 'command',
