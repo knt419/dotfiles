@@ -12,7 +12,7 @@ repo = 'cocopon/vaffle.vim'
 hook_add = '''
 let g:vaffle_auto_cd = 1
 let g:vaffle_show_hidden_files = 1
-nnoremap <C-o> :<C-u>Vaffle<CR>
+nnoremap <Space>v :<C-u>Vaffle<CR>
 '''
 
 [[plugins]]
@@ -21,7 +21,6 @@ repo = 'cocopon/iceberg.vim'
 [[plugins]]
 repo = 'tyru/caw.vim'
 hook_add = '''
-nnoremap <C-k> <Plug>(caw:hatpos:toggle)
 vnoremap <C-k> <Plug>(caw:hatpos:toggle)
 '''
 
