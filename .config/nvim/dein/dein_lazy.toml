@@ -2,6 +2,7 @@
 repo = 'Shougo/deoplete.nvim'
 depends = ['neco-vim', 'neco-syntax', 'deoplete-jedi', 'neosnippet', 'neosnippet-snippets']
 on_i = 1
+if = 'has("nvim")'
 hook_add = '''
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#source#go#gocode_binary = '$HOME/go/bin/gocode'
@@ -44,7 +45,7 @@ imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
 imap <expr><TAB> neosnippet#expandable() <Bar><Bar> neosnippet#jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+\ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable() <Bar><Bar> neosnippet#jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 '''
