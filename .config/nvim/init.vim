@@ -62,6 +62,9 @@ nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 nnoremap <silent> : ;
 nnoremap <silent> ; :
 
+inoremap <C-h> <Left>
+inoremap <C-l> <Right>
+
 " windows
 if has('win32') || has('win64')
     set shellslash
