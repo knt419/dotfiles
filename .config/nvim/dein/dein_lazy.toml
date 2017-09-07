@@ -29,7 +29,11 @@ call denite#custom#var('grep', 'recursive_opts', [])
 call denite#custom#var('grep', 'pattern_opt', [])
 call denite#custom#var('grep', 'default_opts', ['--follow', '--no-group', '--no-color'])
 call denite#custom#map('insert', "<C-j>", '<denite:move_to_next_line>')
+call denite#custom#map('insert', "<Tab>", '<denite:move_to_next_line>')
+call denite#custom#map('insert', "<Down>", '<denite:move_to_next_line>')
 call denite#custom#map('insert', "<C-k>", '<denite:move_to_previous_line>')
+call denite#custom#map('insert', "<S-Tab>", '<denite:move_to_previous_line>')
+call denite#custom#map('insert', "<Up>", '<denite:move_to_previous_line>')
 call denite#custom#map('insert', "<C-v>", '<denite:do_action:vsplit>')
 call denite#custom#map('normal', "v", '<denite:do_action:vsplit>')
 '''
@@ -44,10 +48,14 @@ hook_source = '''
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
-imap <expr><TAB> neosnippet#expandable() <Bar><Bar> neosnippet#jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+imap <expr><TAB> pumvisible() ? "\<C-n>" :
+\ neosnippet#jumpable() ?
+\ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
 smap <expr><TAB> neosnippet#expandable() <Bar><Bar> neosnippet#jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
 '''
 
 [[plugins]]
