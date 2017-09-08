@@ -78,3 +78,6 @@ repo = 'zchee/deoplete-jedi'
 
 [[plugins]]
 repo = 'Shougo/neco-vim'
+
+[[plugins]]
+repo = 'brooth/far.vim'

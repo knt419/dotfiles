@@ -21,12 +21,8 @@ repo = 'cocopon/iceberg.vim'
 [[plugins]]
 repo = 'tyru/caw.vim'
 hook_add = '''
-nnoremap [caw] <nop>
-vnoremap [caw] <nop>
-nmap <Space>c [caw]
-vmap <Space>c [caw]
-nnoremap [caw]t <Plug>(caw:hatpos:toggle)
-vnoremap [caw]t <Plug>(caw:hatpos:toggle)
+nmap <Space>c <Plug>(caw:hatpos:toggle)
+vmap <Space>c <Plug>(caw:hatpos:toggle)
 '''
 
 [[plugins]]
