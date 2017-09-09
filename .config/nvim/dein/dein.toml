@@ -81,6 +81,13 @@ repo = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
+hook_add = '''
+call lexima#add_rule({'char': '<TAB>', 'at': '\%#)', 'leave': ')'})
+call lexima#add_rule({'char': '<TAB>', 'at': '\%#"', 'leave': '"'})
+call lexima#add_rule({'char': '<TAB>', 'at': "\%#'", 'leave': "'"})
+call lexima#add_rule({'char': '<TAB>', 'at': '\%#]', 'leave': ']'})
+call lexima#add_rule({'char': '<TAB>', 'at': '\%#}', 'leave': '}'})
+'''
 
 [[plugins]]
 repo = 'fatih/vim-go'
