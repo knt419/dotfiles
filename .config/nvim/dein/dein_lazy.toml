@@ -48,7 +48,7 @@ hook_source = '''
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
-imap <expr> <CR> !pumvisible() ? lexima#expand('<CR>', 'i') :
+imap <expr> <CR> !pumvisible() ? lexima#expand('<LT>CR>', 'i') :
 \ neosnippet#expandable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : lexima#expand('<LT>CR>', 'i')
 imap <expr> <Tab> pumvisible() ? "\<C-n>" :
