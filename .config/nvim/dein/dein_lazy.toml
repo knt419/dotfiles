@@ -50,10 +50,10 @@ smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
 imap <expr> <CR> !pumvisible() ? lexima#expand('<LT>CR>', 'i') :
 \ neosnippet#expandable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : lexima#expand('<LT>CR>', 'i')
+\ "\<Plug>(neosnippet_expand)" : "\<C-y>"
 imap <expr> <Tab> pumvisible() ? "\<C-n>" :
 \ neosnippet#jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : lexima#expand('<LT>Tab>', 'i')
+\ "\<Plug>(neosnippet_jump)" : lexima#expand('<LT>Tab>', 'i')
 smap <expr> <Tab> neosnippet#expandable() <Bar><Bar> neosnippet#jumpable() ?
 \ "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
 if has('conceal')

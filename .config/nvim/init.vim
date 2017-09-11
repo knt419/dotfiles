@@ -43,7 +43,7 @@ set wildmenu
 set wrap
 set showcmd
 set noshowmode
-set completeopt+=noinsert
+" set completeopt+=noinsert
 set iskeyword+=-
 
 filetype plugin indent on
