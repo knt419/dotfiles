@@ -82,10 +82,11 @@ repo = 'tpope/vim-fugitive'
 [[plugins]]
 repo = 'cohama/lexima.vim'
 hook_add = '''
-inoremap <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>RIGHT>')<CR>
+inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 call lexima#add_rule({'char': '<Tab>', 'at': '\%#)', 'leave': ')'})
 call lexima#add_rule({'char': '<Tab>', 'at': '\%#"', 'leave': '"'})
 call lexima#add_rule({'char': '<Tab>', 'at': "\%#'", 'leave': "'"})
+call lexima#add_rule({'char': '<Tab>', 'at': '\%#`', 'leave': '`'})
 call lexima#add_rule({'char': '<Tab>', 'at': '\%#]', 'leave': ']'})
 call lexima#add_rule({'char': '<Tab>', 'at': '\%#}', 'leave': '}'})
 '''
