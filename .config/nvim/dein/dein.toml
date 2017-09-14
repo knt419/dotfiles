@@ -124,3 +124,15 @@ let QFixHowm_Template = [
   \"%DATE%",
   \""]
 '''
+
+[[plugins]]
+repo = 'rhysd/nyaovim-popup-tooltip'
+if = 'exists("g:nyaovim_version")'
+
+[[plugins]]
+repo = 'rhysd/nyaovim-markdown-preview'
+if = 'exists("g:nyaovim_version")'
+
+[[plugins]]
+repo = 'rhysd/nyaovim-mini-browser'
+if = 'exists("g:nyaovim_version")'
