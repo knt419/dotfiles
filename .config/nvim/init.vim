@@ -110,6 +110,9 @@ if dein#check_install()
     call dein#install()
 endif
 
+au ColorScheme * hi! icebergLLNormal ctermfg=234 ctermbg=110 guifg=#161821 guibg=#84a0c6
+au ColorScheme * hi! icebergLLInsert ctermfg=234 ctermbg=109 guifg=#161821 guibg=#89b8c2
+
 set background=dark
 colorscheme iceberg
 syntax on
