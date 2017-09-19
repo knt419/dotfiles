@@ -43,7 +43,6 @@ set wildmenu
 set wrap
 set showcmd
 set noshowmode
-" set completeopt+=noinsert
 set iskeyword+=-
 
 filetype plugin indent on
@@ -64,6 +63,11 @@ nnoremap <silent> ; :
 
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
+
+nnoremap <S-Left> <C-w><
+nnoremap <S-Right> <C-w>>
+nnoremap <S-Up> <C-w>-
+nnoremap <S-Down> <C-w>+
 
 " windows
 if has('win32') || has('win64')
