@@ -92,7 +92,7 @@ repo = 'tpope/vim-fugitive'
 repo = 'cohama/lexima.vim'
 hook_add = '''
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
-inoremap <silent> <Tab> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
+"inoremap <silent> <Tab> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 '''
 
 [[plugins]]
