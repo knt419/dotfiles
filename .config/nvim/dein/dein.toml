@@ -1,7 +1,7 @@
 [[plugins]]
 repo = 'Shougo/dein.vim'
 hook_add = '''
-let g:dein#install_log_filename='$HOME/.cache/dein/install.log'
+" let g:dein#install_log_filename='$HOME/.cache/dein/install.log'
 '''
 
 [[plugins]]
@@ -92,7 +92,6 @@ repo = 'tpope/vim-fugitive'
 repo = 'cohama/lexima.vim'
 hook_add = '''
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
-"inoremap <silent> <Tab> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 '''
 
 [[plugins]]
@@ -128,15 +127,3 @@ let QFixHowm_Template = [
   \"%DATE%",
   \""]
 '''
-
-[[plugins]]
-repo = 'rhysd/nyaovim-popup-tooltip'
-if = 'exists("g:nyaovim_version")'
-
-[[plugins]]
-repo = 'rhysd/nyaovim-markdown-preview'
-if = 'exists("g:nyaovim_version")'
-
-[[plugins]]
-repo = 'rhysd/nyaovim-mini-browser'
-if = 'exists("g:nyaovim_version")'
