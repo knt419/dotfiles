@@ -69,6 +69,10 @@ nnoremap <S-Right> <C-w>>
 nnoremap <S-Up> <C-w>-
 nnoremap <S-Down> <C-w>+
 
+" if has('nvim')
+    tnoremap <Esc> <C-\><C-n>
+" endif
+
 " windows
 if has('win32') || has('win64')
     set shellslash
