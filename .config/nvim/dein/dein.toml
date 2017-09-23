@@ -127,3 +127,10 @@ let QFixHowm_Template = [
   \"%DATE%",
   \""]
 '''
+
+[[plugins]]
+repo = 'kassio/neoterm'
+if = 'has("nvim")'
+hook_add = '''
+nnoremap <silent> <Space>t :<C-u>Tnew<CR>
+'''

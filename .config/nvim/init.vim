@@ -45,6 +45,10 @@ set showcmd
 set noshowmode
 set iskeyword+=-
 
+if has('nvim')
+    set sh=bash
+endif
+
 filetype plugin indent on
 
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
@@ -69,9 +73,7 @@ nnoremap <S-Right> <C-w>>
 nnoremap <S-Up> <C-w>-
 nnoremap <S-Down> <C-w>+
 
-" if has('nvim')
-    tnoremap <Esc> <C-\><C-n>
-" endif
+tnoremap <Esc> <C-\><C-n>
 
 " windows
 if has('win32') || has('win64')
