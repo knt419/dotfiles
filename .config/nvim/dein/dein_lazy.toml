@@ -1,6 +1,6 @@
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-depends = ['neco-vim', 'neco-syntax', 'deoplete-jedi', 'neosnippet', 'neosnippet-snippets']
+depends = ['neco-vim', 'neco-syntax', 'deoplete-jedi', 'neosnippet']
 on_i = 1
 if = 'has("nvim")'
 hook_add = '''
@@ -10,8 +10,9 @@ let g:deoplete#auto_complete_delay = 0
 '''
 [[plugins]]
 repo = 'Shougo/neocomplete.vim'
+depends = ['neco-vim', 'neco-syntax', 'neosnippet']
 on_i = 1
-if = '!has("nvim")'
+if = '!has("nvim")&&has("lua")'
 hook_add = '''
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#auto_complete_delay = 0
