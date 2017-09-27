@@ -20,8 +20,19 @@ let g:neocomplete#auto_complete_delay = 0
 '''
 
 [[plugins]]
+repo = 'Shougo/neocomplcache.vim'
+depends = ['neco-vim', 'neco-syntax', 'neosnippet']
+on_i = 1
+if = '!has("nvim")&&!has("lua")'
+hook_add = '''
+let g:acp_enableAtStartup = 0
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_smart_case = 0
+'''
+
+[[plugins]]
 repo = 'Shougo/denite.nvim'
-depends = ['neoyank.vim', 'neomru.vim']
+depends = ['neomru.vim']
 hook_add = '''
 nnoremap <silent> <Space>f :<C-u>Denite file_rec<CR>
 nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>
@@ -50,10 +61,16 @@ call denite#custom#map('normal', "v", '<denite:do_action:vsplit>')
 
 [[plugins]]
 repo = 'Shougo/neoyank.vim'
+if = 'has("win32")'
 
 [[plugins]]
 repo = 'Shougo/neosnippet'
-depends = ['neosnippet-snippets', 'vim-snippets']
+depends = ['vim-snippets']
+hook_add = '''
+let g:neosnippet#disable_runtime_snippets = {
+\   '_' : 1,
+\ }
+'''
 hook_source = '''
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
@@ -70,9 +87,6 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 '''
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
 
 [[plugins]]
 repo = 'honza/vim-snippets'
