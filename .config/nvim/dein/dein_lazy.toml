@@ -32,7 +32,7 @@ let g:neocomplcache_enable_smart_case = 0
 
 [[plugins]]
 repo = 'Shougo/denite.nvim'
-depends = ['neomru.vim']
+depends = ['neoyank.vim', 'neomru.vim']
 hook_add = '''
 nnoremap <silent> <Space>f :<C-u>Denite file_rec<CR>
 nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>
@@ -61,7 +61,9 @@ call denite#custom#map('normal', "v", '<denite:do_action:vsplit>')
 
 [[plugins]]
 repo = 'Shougo/neoyank.vim'
-if = 'has("win32")'
+hook_post_source = '''
+silent autocmd! neoyank CursorHold
+'''
 
 [[plugins]]
 repo = 'Shougo/neosnippet'
