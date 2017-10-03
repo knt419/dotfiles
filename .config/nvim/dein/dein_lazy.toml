@@ -77,20 +77,22 @@ hook_source = '''
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
-imap <expr> <CR> !pumvisible() ? lexima#expand('<LT>CR>', 'i') :
-\ neosnippet#expandable() ?
-\ "\<Plug>(neosnippet_expand)" : "\<C-y>"
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 imap <expr> <Tab> pumvisible() ? "\<C-n>" :
 \ neosnippet#jumpable() ?
 \ "\<Plug>(neosnippet_jump)" : "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
-smap <expr> <Tab> neosnippet#expandable() <Bar><Bar> neosnippet#jumpable() ?
-\ "\<Plug>(neosnippet_expand_or_jump)" : "\<Tab>"
+smap <expr> <Tab> neosnippet#jumpable() ?
+\ "\<Plug>(neosnippet_jump)" : "\<Tab>"
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
-autocmd InsertEnter * imap <expr> <CR> !pumvisible() ? lexima#expand('<LT>CR>', 'i') :
-\ neosnippet#expandable() ?
-\ "\<Plug>(neosnippet_expand)" : "\<C-y>"
+autocmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+    return !pumvisible() ?
+        \ lexima#expand('<CR>', 'i') :
+        \ neosnippet#expandable() ?
+        \ neosnippet#mappings#expand_impl() : "\<C-y>"
+endfunction
 '''
 
 [[plugins]]
