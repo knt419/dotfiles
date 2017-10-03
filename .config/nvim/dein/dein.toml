@@ -18,13 +18,13 @@ nnoremap <Space>v :<C-u>Vaffle<CR>
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
-au ColorScheme * hi! icebergLLNormal ctermfg=234 ctermbg=110 guifg=#161821 guibg=#84a0c6
-au ColorScheme * hi! icebergLLInsert ctermfg=234 ctermbg=150 guifg=#161821 guibg=#b4be82
-au ColorScheme * hi! icebergLLVisual ctermfg=234 ctermbg=140 guifg=#161821 guibg=#a093c7
-au ColorScheme * hi! icebergLLReplace ctermfg=234 ctermbg=109 guifg=#161821 guibg=#89b8c2
-au ColorScheme * hi! icebergLLGradient ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
-au ColorScheme * hi! icebergLLEdge ctermfg=243 ctermbg=237 guifg=#696d80 guibg=#34394e
-au ColorScheme * hi! icebergLLBase ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
+autocmd MyAutoCmd ColorScheme * hi! icebergLLNormal ctermfg=234 ctermbg=110 guifg=#161821 guibg=#84a0c6
+autocmd MyAutoCmd ColorScheme * hi! icebergLLInsert ctermfg=234 ctermbg=150 guifg=#161821 guibg=#b4be82
+autocmd MyAutoCmd ColorScheme * hi! icebergLLVisual ctermfg=234 ctermbg=140 guifg=#161821 guibg=#a093c7
+autocmd MyAutoCmd ColorScheme * hi! icebergLLReplace ctermfg=234 ctermbg=109 guifg=#161821 guibg=#89b8c2
+autocmd MyAutoCmd ColorScheme * hi! icebergLLGradient ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
+autocmd MyAutoCmd ColorScheme * hi! icebergLLEdge ctermfg=243 ctermbg=237 guifg=#696d80 guibg=#34394e
+autocmd MyAutoCmd ColorScheme * hi! icebergLLBase ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
 '''
 
 [[plugins]]
@@ -98,10 +98,10 @@ inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 repo = 'fatih/vim-go'
 on_ft = 'go'
 hook_add = '''
-au FileType go nnoremap gr (go-run)
-au FileType go nnoremap gt (go-test)
-au FileType go :highlight goErr cterm=bold ctermfg=214
-au FileType go :match goErr /\<err\>/
+autocmd MyAutoCmd FileType go nnoremap gr (go-run)
+autocmd MyAutoCmd FileType go nnoremap gt (go-test)
+autocmd MyAutoCmd FileType go :highlight goErr cterm=bold ctermfg=214
+autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 let g:go_hightlight_functions = 1
 let g:go_hightlight_methods = 1
 let g:go_hightlight_structs = 1

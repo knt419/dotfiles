@@ -86,7 +86,7 @@ smap <expr> <Tab> neosnippet#jumpable() ?
 if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
-autocmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
     return !pumvisible() ?
         \ lexima#expand('<CR>', 'i') :
