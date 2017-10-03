@@ -82,6 +82,11 @@ if has('win32') || has('win64')
     set shellcmdflag=/c
 endif
 
+" reset autocmd
+augroup MyAutoCmd
+    autocmd!
+augroup END
+
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
