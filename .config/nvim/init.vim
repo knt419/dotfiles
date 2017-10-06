@@ -72,6 +72,10 @@ nnoremap <S-Left> <C-w><
 nnoremap <S-Right> <C-w>>
 nnoremap <S-Up> <C-w>-
 nnoremap <S-Down> <C-w>+
+nnoremap <C-Left> <C-w>h
+nnoremap <C-Right> <C-w>l
+nnoremap <C-Up> <C-w>k
+nnoremap <C-Down> <C-w>j
 
 tnoremap <Esc> <C-\><C-n>
 
