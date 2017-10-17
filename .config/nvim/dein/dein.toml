@@ -6,6 +6,11 @@ hook_add = '''
 
 [[plugins]]
 repo = 'editorconfig/editorconfig-vim'
+hook_add = '''
+if has('nvim')
+    let g:EditorConfig_core_mode = 'external_command'
+endif
+'''
 
 [[plugins]]
 repo = 'cocopon/vaffle.vim'
