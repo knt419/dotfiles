@@ -1,11 +1,11 @@
 [[plugins]]
-repo = 'Shougo/dein.vim'
+repo     = 'Shougo/dein.vim'
 hook_add = '''
 " let g:dein#install_log_filename='$HOME/.cache/dein/install.log'
 '''
 
 [[plugins]]
-repo = 'editorconfig/editorconfig-vim'
+repo     = 'editorconfig/editorconfig-vim'
 hook_add = '''
 if has('nvim')
     let g:EditorConfig_core_mode = 'external_command'
@@ -13,7 +13,7 @@ endif
 '''
 
 [[plugins]]
-repo = 'cocopon/vaffle.vim'
+repo     = 'cocopon/vaffle.vim'
 hook_add = '''
 let g:vaffle_auto_cd = 1
 let g:vaffle_show_hidden_files = 1
@@ -21,7 +21,7 @@ nnoremap <Space>v :<C-u>Vaffle<CR>
 '''
 
 [[plugins]]
-repo = 'cocopon/iceberg.vim'
+repo     = 'cocopon/iceberg.vim'
 hook_add = '''
 autocmd MyAutoCmd ColorScheme * hi! icebergLLNormal ctermfg=234 ctermbg=110 guifg=#161821 guibg=#84a0c6
 autocmd MyAutoCmd ColorScheme * hi! icebergLLInsert ctermfg=234 ctermbg=150 guifg=#161821 guibg=#b4be82
@@ -33,15 +33,15 @@ autocmd MyAutoCmd ColorScheme * hi! icebergLLBase ctermfg=234 ctermbg=245 guifg=
 '''
 
 [[plugins]]
-repo = 'tyru/caw.vim'
+repo     = 'tyru/caw.vim'
 hook_add = '''
 nmap <Space>c <Plug>(caw:hatpos:toggle)
 vmap <Space>c <Plug>(caw:hatpos:toggle)
 '''
 
 [[plugins]]
-repo = 'itchyny/lightline.vim'
-depends = ['iceberg.vim']
+repo     = 'itchyny/lightline.vim'
+depends  = ['iceberg.vim']
 hook_add = '''
 let g:lightline = {
       \ 'colorscheme': 'iceberg',
@@ -74,14 +74,14 @@ endfunction
 '''
 
 [[plugins]]
-repo = 'Yggdroot/indentLine'
+repo     = 'Yggdroot/indentLine'
 
 [[plugins]]
-repo = 'kannokanno/previm'
+repo     = 'kannokanno/previm'
 
 [[plugins]]
-repo = 'scrooloose/syntastic'
-hook_add ='''
+repo     = 'scrooloose/syntastic'
+hook_add = '''
 set statusline+=%#warningmsg#
 set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
@@ -91,17 +91,17 @@ let g:syntastic_check_on_wq = 0
 '''
 
 [[plugins]]
-repo = 'tpope/vim-fugitive'
+repo     = 'tpope/vim-fugitive'
 
 [[plugins]]
-repo = 'cohama/lexima.vim'
+repo     = 'cohama/lexima.vim'
 hook_add = '''
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 '''
 
 [[plugins]]
-repo = 'fatih/vim-go'
-on_ft = 'go'
+repo     = 'fatih/vim-go'
+on_ft    = 'go'
 hook_add = '''
 autocmd MyAutoCmd FileType go nnoremap gr (go-run)
 autocmd MyAutoCmd FileType go nnoremap gt (go-test)
@@ -117,11 +117,11 @@ let g:go_fmt_command = "goimports"
 '''
 
 [[plugins]]
-repo = 'cespare/vim-toml'
-on_ft = 'toml'
+repo     = 'cespare/vim-toml'
+on_ft    = 'toml'
 
 [[plugins]]
-repo = 'fuenor/qfixhowm'
+repo     = 'fuenor/qfixhowm'
 hook_add = '''
 let QFixHowm_Key = 'g'
 let howm_filename = '%Y/%m/%Y-%m-%d-%H%M%S.md'
@@ -134,8 +134,15 @@ let QFixHowm_Template = [
 '''
 
 [[plugins]]
-repo = 'kassio/neoterm'
-if = 'has("nvim")'
+repo     = 'kassio/neoterm'
+if       = 'has("nvim")'
 hook_add = '''
 nnoremap <silent> <Space>t :<C-u>Tnew<CR>
+'''
+
+[[plugins]]
+repo     = 'junegunn/vim-easy-align'
+hook_add = '''
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 '''

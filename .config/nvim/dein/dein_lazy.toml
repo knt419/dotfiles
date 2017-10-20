@@ -1,46 +1,46 @@
 [[plugins]]
-repo = 'Shougo/deoplete.nvim'
-depends = ['neco-vim', 'neco-syntax', 'deoplete-jedi', 'neosnippet']
-on_i = 1
-if = 'has("nvim")'
-hook_add = '''
+repo        = 'Shougo/deoplete.nvim'
+depends     = ['neco-vim', 'neco-syntax', 'deoplete-jedi', 'neosnippet']
+on_i        = 1
+if          = 'has("nvim")'
+hook_add    = '''
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#source#go#gocode_binary = '$HOME/go/bin/gocode'
 let g:deoplete#auto_complete_delay = 0
 '''
 
 [[plugins]]
-repo = 'Shougo/neocomplete.vim'
-depends = ['neco-vim', 'neco-syntax', 'neosnippet']
-on_i = 1
-if = '!has("nvim")&&has("lua")'
-hook_add = '''
+repo        = 'Shougo/neocomplete.vim'
+depends     = ['neco-vim', 'neco-syntax', 'neosnippet']
+on_i        = 1
+if          = '!has("nvim")&&has("lua")'
+hook_add    = '''
 let g:neocomplete#enable_at_startup = 1
 let g:neocomplete#auto_complete_delay = 0
 '''
 
 [[plugins]]
-repo = 'Shougo/neocomplcache.vim'
-depends = ['neco-vim', 'neco-syntax', 'neosnippet']
-on_i = 1
-if = '!has("nvim")&&!has("lua")'
-hook_add = '''
+repo        = 'Shougo/neocomplcache.vim'
+depends     = ['neco-vim', 'neco-syntax', 'neosnippet']
+on_i        = 1
+if          = '!has("nvim")&&!has("lua")'
+hook_add    = '''
 let g:acp_enableAtStartup = 0
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 0
 '''
 
 [[plugins]]
-repo = 'Shougo/denite.nvim'
-depends = ['neoyank.vim', 'neomru.vim']
-hook_add = '''
+repo        = 'Shougo/denite.nvim'
+depends     = ['neoyank.vim', 'neomru.vim']
+hook_add    = '''
 nnoremap <silent> <Space>f :<C-u>Denite file_rec<CR>
 nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>
 nnoremap <silent> <Space>y :<C-u>Denite neoyank<CR>
 nnoremap <silent> <Space>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Space>d :<C-u>Denite directory_mru<CR>
 '''
-hook_post_source = '''
+hook_post_source   = '''
 call denite#custom#var('file_rec', 'command',
     \ ['ag', '--follow', '--nocolor', '--nogroup',
     \  '--hidden', '-g', ''])
@@ -60,15 +60,15 @@ call denite#custom#map('normal', "v", '<denite:do_action:vsplit>')
 '''
 
 [[plugins]]
-repo = 'Shougo/neoyank.vim'
-hook_post_source = '''
+repo        = 'Shougo/neoyank.vim'
+hook_post_source   = '''
 silent autocmd! neoyank CursorHold
 '''
 
 [[plugins]]
-repo = 'Shougo/neosnippet'
-depends = ['vim-snippets']
-hook_add = '''
+repo        = 'Shougo/neosnippet'
+depends     = ['vim-snippets']
+hook_add    = '''
 let g:neosnippet#disable_runtime_snippets = {
 \   '_' : 1,
 \ }
@@ -96,34 +96,34 @@ endfunction
 '''
 
 [[plugins]]
-repo = 'honza/vim-snippets'
-hook_add= '''
+repo        = 'honza/vim-snippets'
+hook_add    = '''
 let g:neosnippet#snippets_directory='$HOME/.cache/dein/repos/github.com/honza/vim-snippets/snippets'
 '''
 
 [[plugins]]
-repo = 'Shougo/neomru.vim'
+repo        = 'Shougo/neomru.vim'
 
 [[plugins]]
-repo = 'Shougo/neco-syntax'
+repo        = 'Shougo/neco-syntax'
 
 [[plugins]]
-repo = 'zchee/deoplete-jedi'
+repo        = 'zchee/deoplete-jedi'
 
 [[plugins]]
-repo = 'Shougo/neco-vim'
+repo        = 'Shougo/neco-vim'
 
 [[plugins]]
-repo = 'brooth/far.vim'
+repo        = 'brooth/far.vim'
 
 [[plugins]]
-repo = 'rhysd/nyaovim-popup-tooltip'
-if = 'exists("g:nyaovim_version")'
+repo        = 'rhysd/nyaovim-popup-tooltip'
+if          = 'exists("g:nyaovim_version")'
 
 [[plugins]]
-repo = 'rhysd/nyaovim-markdown-preview'
-if = 'exists("g:nyaovim_version")'
+repo        = 'rhysd/nyaovim-markdown-preview'
+if          = 'exists("g:nyaovim_version")'
 
 [[plugins]]
-repo = 'rhysd/nyaovim-mini-browser'
-if = 'exists("g:nyaovim_version")'
+repo        = 'rhysd/nyaovim-mini-browser'
+if          = 'exists("g:nyaovim_version")'
