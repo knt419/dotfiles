@@ -68,6 +68,7 @@ silent autocmd! neoyank CursorHold
 [[plugins]]
 repo        = 'Shougo/neosnippet'
 depends     = ['vim-snippets']
+on_event    = 'InsertCharPre'
 hook_add    = '''
 let g:neosnippet#disable_runtime_snippets = {
 \   '_' : 1,
