@@ -7,13 +7,15 @@ export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export FZF_DEFAULT_COMMAND='ag --follow --nocolor --nogroup --hidden -g ""'
-# export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
-export FZF_DEFAULT_OPTS='--reverse --ansi --select-1 --exit-0'
+export FZF_DEFAULT_OPTS='--reverse --ansi --select-1 --exit-0 --preview "head -100 {}"'
+
+# bash option
+shopt -s autocd
 
 # alias
 alias ls='ls --show-control-chars -F --color --ignore={NTUSER.*,ntuser.*}'
-alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
 alias vi=nvim
 
 
