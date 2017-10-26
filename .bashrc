@@ -1,6 +1,7 @@
 # include
-[ -f $HOME/.bashrc_local ] && source $HOME/.bashrc_local
-[ -f $HOME/.fzf.bash ]     && source $HOME/.fzf.bash
+[ -f $HOME/.bashrc_local ]   && source $HOME/.bashrc_local
+[ -f $HOME/.fzf.bash ]       && source $HOME/.fzf.bash
+[ -f $HOME/enhancd/init.sh ] && source $HOME/enhancd/init.sh
 
 # env
 export XDG_CONFIG_HOME=$HOME/.config
@@ -8,6 +9,8 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export FZF_DEFAULT_COMMAND='ag --follow --nocolor --nogroup --hidden -g ""'
 export FZF_DEFAULT_OPTS='--reverse --ansi --select-1 --exit-0 --preview "head -100 {}"'
+export FZF_COMPLETION_TRIGGER=',,'
+export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
 
 # bash option
 shopt -s autocd
