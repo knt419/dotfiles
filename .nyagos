@@ -1,0 +1,16 @@
+-- set envs
+set {
+   PROMPT='$e[36;40;1m$p$e[37;1m$_$e[31;1m$$ $e[37;1m'
+}
+
+-- add pathes
+addpath "C:\\app\\OpenSSH-Win64"
+
+-- set aliases
+alias {
+  ll = "ls -la $*",
+  rm = "del $*",
+  mv = "move $*",
+}
+
+nyagos.alias["."] = nyagos.alias.start
