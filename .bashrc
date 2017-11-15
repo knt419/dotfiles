@@ -1,7 +1,10 @@
 # include
-[ -f $HOME/.bashrc_local ]   && source $HOME/.bashrc_local
-[ -f $HOME/.fzf.bash ]       && source $HOME/.fzf.bash
-[ -f $HOME/enhancd/init.sh ] && source $HOME/enhancd/init.sh
+[ -f $HOME/.bashrc_local ]        && source $HOME/.bashrc_local
+[ -f $HOME/.git-completion.bash ] && source $HOME/.git-completion.bash
+[ -f $HOME/.git-prompt.sh ]       && source $HOME/.git-prompt.sh
+[ -f $HOME/.bashrc_local ]        && source $HOME/.bashrc_local
+[ -f $HOME/.fzf.bash ]            && source $HOME/.fzf.bash
+[ -f $HOME/enhancd/init.sh ]      && source $HOME/enhancd/init.sh
 
 # export BASE16_SHELL=$HOME/.config/base16-shell/
 # [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
