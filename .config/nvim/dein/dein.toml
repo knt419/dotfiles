@@ -81,6 +81,7 @@ repo     = 'kannokanno/previm'
 
 [[plugins]]
 repo     = 'scrooloose/syntastic'
+if       = '!has("nvim") && ( !has("job") || !has("channel") || !has("timers") )'
 hook_add = '''
 set statusline+=%#warningmsg#
 set statusline+=%*
@@ -89,6 +90,10 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 '''
+
+[[plugins]]
+repo     = 'w0rp/ale'
+if       = 'has("nvim") || has("job") && has("channel") && has("timers")'
 
 [[plugins]]
 repo     = 'tpope/vim-fugitive'
