@@ -20,6 +20,7 @@ export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
 
 # bash option
 shopt -s autocd
+set -o vi
 
 # alias
 alias ls='ls --show-control-chars -F --color --ignore={NTUSER.*,ntuser.*}'
@@ -37,3 +38,5 @@ fd() {
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
