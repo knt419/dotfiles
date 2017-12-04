@@ -13,6 +13,13 @@ endif
 '''
 
 [[plugins]]
+repo     = 'ap/vim-buftabline'
+hook_add = '''
+nnoremap <C-N> :bnext<CR>
+nnoremap <C-P> :bprev<CR>
+'''
+
+[[plugins]]
 repo     = 'cocopon/vaffle.vim'
 hook_add = '''
 let g:vaffle_auto_cd = 1
