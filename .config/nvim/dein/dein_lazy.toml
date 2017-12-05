@@ -104,6 +104,9 @@ let g:neosnippet#snippets_directory='$HOME/.cache/dein/repos/github.com/honza/vi
 
 [[plugins]]
 repo        = 'Shougo/neomru.vim'
+hook_add    = '''
+let g:neomru#file_mru_ignore_pattern ="^vaffle://.*"
+'''
 
 [[plugins]]
 repo        = 'Shougo/neco-syntax'
