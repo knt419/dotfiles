@@ -39,6 +39,7 @@ nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>
 nnoremap <silent> <Space>y :<C-u>Denite neoyank<CR>
 nnoremap <silent> <Space>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Space>d :<C-u>Denite directory_mru<CR>
+nnoremap <silent> <Space>g :<C-u>Denite grep<CR>
 '''
 hook_post_source   = '''
 call denite#custom#var('file_rec', 'command',
