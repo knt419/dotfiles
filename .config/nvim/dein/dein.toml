@@ -1,49 +1,15 @@
+# plugin util
 [[plugins]]
 repo     = 'Shougo/dein.vim'
 hook_add = '''
 " let g:dein#install_log_filename='$HOME/.cache/dein/install.log'
 '''
-
-[[plugins]]
-repo     = 'editorconfig/editorconfig-vim'
-hook_add = '''
-if has('nvim')
-    let g:EditorConfig_core_mode = 'external_command'
-endif
-'''
-
+# UI
 [[plugins]]
 repo     = 'ap/vim-buftabline'
 hook_add = '''
 nnoremap <C-n> :bnext<CR>
 nnoremap <C-p> :bprev<CR>
-'''
-
-[[plugins]]
-repo     = 'cocopon/vaffle.vim'
-hook_add = '''
-let g:vaffle_auto_cd = 1
-let g:vaffle_show_hidden_files = 1
-nnoremap <Space>v :<C-u>Vaffle<CR>
-'''
-
-[[plugins]]
-repo     = 'cocopon/iceberg.vim'
-hook_add = '''
-autocmd MyAutoCmd ColorScheme * hi! icebergLLNormal ctermfg=234 ctermbg=110 guifg=#161821 guibg=#84a0c6
-autocmd MyAutoCmd ColorScheme * hi! icebergLLInsert ctermfg=234 ctermbg=150 guifg=#161821 guibg=#b4be82
-autocmd MyAutoCmd ColorScheme * hi! icebergLLVisual ctermfg=234 ctermbg=140 guifg=#161821 guibg=#a093c7
-autocmd MyAutoCmd ColorScheme * hi! icebergLLReplace ctermfg=234 ctermbg=109 guifg=#161821 guibg=#89b8c2
-autocmd MyAutoCmd ColorScheme * hi! icebergLLGradient ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
-autocmd MyAutoCmd ColorScheme * hi! icebergLLEdge ctermfg=243 ctermbg=237 guifg=#696d80 guibg=#34394e
-autocmd MyAutoCmd ColorScheme * hi! icebergLLBase ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
-'''
-
-[[plugins]]
-repo     = 'tyru/caw.vim'
-hook_add = '''
-nmap <Space>c <Plug>(caw:hatpos:toggle)
-vmap <Space>c <Plug>(caw:hatpos:toggle)
 '''
 
 [[plugins]]
@@ -103,8 +69,18 @@ let g:lightline.active = { 'right':
 repo     = 'Yggdroot/indentLine'
 
 [[plugins]]
-repo     = 'kannokanno/previm'
+repo     = 'cocopon/iceberg.vim'
+hook_add = '''
+autocmd MyAutoCmd ColorScheme * hi! icebergLLNormal ctermfg=234 ctermbg=110 guifg=#161821 guibg=#84a0c6
+autocmd MyAutoCmd ColorScheme * hi! icebergLLInsert ctermfg=234 ctermbg=150 guifg=#161821 guibg=#b4be82
+autocmd MyAutoCmd ColorScheme * hi! icebergLLVisual ctermfg=234 ctermbg=140 guifg=#161821 guibg=#a093c7
+autocmd MyAutoCmd ColorScheme * hi! icebergLLReplace ctermfg=234 ctermbg=109 guifg=#161821 guibg=#89b8c2
+autocmd MyAutoCmd ColorScheme * hi! icebergLLGradient ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
+autocmd MyAutoCmd ColorScheme * hi! icebergLLEdge ctermfg=243 ctermbg=237 guifg=#696d80 guibg=#34394e
+autocmd MyAutoCmd ColorScheme * hi! icebergLLBase ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
+'''
 
+# code check
 [[plugins]]
 repo     = 'scrooloose/syntastic'
 if       = '!has("nvim") && ( !has("job") || !has("channel") || !has("timers") )'
@@ -117,12 +93,10 @@ let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 '''
 
+#text input
 [[plugins]]
 repo     = 'w0rp/ale'
 if       = 'has("nvim") || has("job") && has("channel") && has("timers")'
-
-[[plugins]]
-repo     = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo     = 'cohama/lexima.vim'
@@ -130,6 +104,50 @@ hook_add = '''
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 '''
 
+[[plugins]]
+repo     = 'junegunn/vim-easy-align'
+hook_add = '''
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
+'''
+
+[[plugins]]
+repo     = 'tyru/caw.vim'
+hook_add = '''
+nmap <Space>c <Plug>(caw:hatpos:toggle)
+vmap <Space>c <Plug>(caw:hatpos:toggle)
+'''
+
+[[plugins]]
+repo     = 'editorconfig/editorconfig-vim'
+hook_add = '''
+if has('nvim')
+    let g:EditorConfig_core_mode = 'external_command'
+endif
+'''
+
+# file util
+[[plugins]]
+repo     = 'cocopon/vaffle.vim'
+hook_add = '''
+let g:vaffle_auto_cd = 1
+let g:vaffle_show_hidden_files = 1
+nnoremap <Space>v :<C-u>Vaffle<CR>
+'''
+
+[[plugins]]
+repo     = 'junegunn/fzf'
+build    = './install --all'
+merged   = 0
+
+[[plugins]]
+repo     = 'junegunn/fzf.vim'
+depends  = ['fzf']
+hook_add = '''
+nnoremap <Space>p :<C-u>History<CR>
+'''
+
+# filetype
 [[plugins]]
 repo     = 'fatih/vim-go'
 on_ft    = 'go'
@@ -151,6 +169,20 @@ let g:go_fmt_command = "goimports"
 repo     = 'cespare/vim-toml'
 on_ft    = 'toml'
 
+# other tools
+[[plugins]]
+repo     = 'kassio/neoterm'
+if       = 'has("nvim")'
+hook_add = '''
+nnoremap <silent> <Space>t :<C-u>Tnew<CR>
+'''
+
+[[plugins]]
+repo     = 'kannokanno/previm'
+
+[[plugins]]
+repo     = 'tpope/vim-fugitive'
+
 [[plugins]]
 repo     = 'fuenor/qfixhowm'
 hook_add = '''
@@ -164,28 +196,3 @@ let QFixHowm_Template = [
   \""]
 '''
 
-[[plugins]]
-repo     = 'kassio/neoterm'
-if       = 'has("nvim")'
-hook_add = '''
-nnoremap <silent> <Space>t :<C-u>Tnew<CR>
-'''
-
-[[plugins]]
-repo     = 'junegunn/vim-easy-align'
-hook_add = '''
-xmap ga <Plug>(EasyAlign)
-nmap ga <Plug>(EasyAlign)
-'''
-
-[[plugins]]
-repo     = 'junegunn/fzf'
-build    = './install --all'
-merged   = 0
-
-[[plugins]]
-repo     = 'junegunn/fzf.vim'
-depends  = ['fzf']
-hook_add = '''
-nnoremap <Space>p :<C-u>History<CR>
-'''
