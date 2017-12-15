@@ -64,6 +64,7 @@ nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
 nnoremap <silent> : ;
 nnoremap <silent> ; :
+inoremap jj <Esc>
 
 inoremap <C-h> <Left>
 inoremap <C-l> <Right>
