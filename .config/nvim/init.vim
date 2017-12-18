@@ -11,13 +11,13 @@ set noswapfile
 set autoread
 set hidden
 set confirm
-set number 
+set number
 set ruler
-set title 
+set title
 
-set showmatch 
+set showmatch
 set matchtime=1
-set tabstop=4 
+set tabstop=4
 set expandtab
 set shiftwidth=4
 set smartindent
@@ -25,7 +25,7 @@ set autoindent
 
 set clipboard=unnamed
 set cursorline
-set list 
+set list
 set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set virtualedit=block
 set backspace=indent,eol,start
@@ -64,6 +64,7 @@ nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
 nnoremap <silent> : ;
 nnoremap <silent> ; :
+nnoremap <silent> <space>q :<C-u>bd<CR>
 inoremap jj <Esc>
 
 inoremap <C-h> <Left>
@@ -78,7 +79,7 @@ nnoremap <C-Right> <C-w>l
 nnoremap <C-Up> <C-w>k
 nnoremap <C-Down> <C-w>j
 
-tnoremap <Esc> <C-\><C-n>
+tnoremap <space>q <C-\><C-n>
 
 " windows
 if has('win32') || has('win64')
