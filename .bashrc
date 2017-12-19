@@ -38,5 +38,3 @@ fd() {
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash

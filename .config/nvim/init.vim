@@ -48,6 +48,7 @@ set iskeyword+=-
 
 if has('nvim')
     set sh=bash
+    set inccommand=split
 endif
 
 filetype plugin indent on
