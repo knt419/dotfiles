@@ -126,6 +126,13 @@ if has('nvim')
 endif
 '''
 
+[[plugins]]
+repo = 'rhysd/accelerated-jk'
+hook_add = '''
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)
+'''
+
 # file util
 [[plugins]]
 repo     = 'cocopon/vaffle.vim'

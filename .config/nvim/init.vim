@@ -10,6 +10,7 @@ set nobackup
 set noswapfile
 set autoread
 set hidden
+set switchbuf=useopen
 set confirm
 set number
 set ruler
@@ -53,6 +54,7 @@ filetype plugin indent on
 
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
 nnoremap <silent> Y y$
+vnoremap <silent> v $h
 nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <silent> x "_x
