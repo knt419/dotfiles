@@ -23,7 +23,11 @@ shopt -s autocd
 set -o vi
 
 # alias
-alias ls='ls --show-control-chars -F --color --ignore={NTUSER.*,ntuser.*}'
+if [ "$(uname)" == 'Darwin' ]; then
+    alias ls='ls -FG'
+else
+    alias ls='ls --show-control-chars -F --color --ignore={NTUSER.*,ntuser.*}'
+fi
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias vi=nvim
@@ -38,3 +42,5 @@ fd() {
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

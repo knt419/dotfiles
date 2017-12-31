@@ -84,11 +84,14 @@ nnoremap <C-Down> <C-w>j
 
 tnoremap <space>q <C-\><C-n>
 
-" windows
+" os specific
 if has('win32') || has('win64')
     set shellslash
     set shell=cmd
     set shellcmdflag=/c
+elseif has('mac')
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
 " reset autocmd
