@@ -40,7 +40,7 @@ set wrapscan
 set hlsearch
 
 set laststatus=2
-" set showtabline=2
+set showtabline=2
 set wildmenu
 set wrap
 set showcmd

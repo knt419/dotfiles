@@ -7,16 +7,15 @@ hook_add = '''
 
 # UI
 [[plugins]]
-repo     = 'mgee/lightline-bufferline'
+repo     = 'taohex/lightline-buffer'
 hook_add = '''
-let g:lightline#bufferline#min_buffer_count = 1
 nnoremap <C-n> :bn<CR>
 nnoremap <C-p> :bp<CR>
 '''
 
 [[plugins]]
 repo     = 'itchyny/lightline.vim'
-depends  = ['iceberg.vim', 'lightline-bufferline']
+depends  = ['iceberg.vim', 'lightline-buffer']
 hook_add = '''
 let g:lightline = {
     \ 'colorscheme': 'iceberg',
@@ -27,21 +26,29 @@ let g:lightline = {
     \    ]
     \ },
     \ 'tabline': {
-    \   'left': [['buffers']],
+    \   'left': [['bufferinfo'],
+    \            ['separator'],
+    \            ['bufferbefore', 'buffercurrent', 'bufferafter']],
     \   'right': [['close']]
     \ },
     \ 'component': {
     \   'lineinfo': "\ue0a1".'%3l:%-2v',
+    \   'separator': "\ue0b0"
     \ },
     \ 'component_function': {
     \    'readonly': 'LightlineReadonly',
     \    'fugitive': 'LightlineFugitive',
+    \    'bufferinfo': 'lightline#buffer#bufferinfo'
     \ },
     \ 'component_expand': {
-    \   'buffers': 'lightline#bufferline#buffers'
+    \   'buffercurrent': 'lightline#buffer#buffercurrent',
+    \   'bufferbefore': 'lightline#buffer#bufferbefore',
+    \   'bufferafter': 'lightline#buffer#bufferafter'
     \ },
     \ 'component_type': {
-    \   'buffers': 'tabsel'
+    \   'buffercurrent': 'tabsel',
+    \   'bufferbefore': 'raw',
+    \   'bufferafter': 'raw'
     \ },
     \ 'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
     \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"},
