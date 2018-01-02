@@ -43,4 +43,3 @@ fd() {
   cd "$dir"
 }
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash

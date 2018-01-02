@@ -40,6 +40,7 @@ set wrapscan
 set hlsearch
 
 set laststatus=2
+" set showtabline=2
 set wildmenu
 set wrap
 set showcmd
@@ -49,6 +50,7 @@ set iskeyword+=-
 if has('nvim')
     set sh=bash
     set inccommand=split
+    tnoremap <space>q <C-\><C-n>
 endif
 
 filetype plugin indent on
@@ -60,6 +62,8 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <silent> x "_x
 nnoremap <silent> X "_X
+nnoremap <silent> + <C-a>
+nnoremap <silent> - <C-x>
 noremap <silent> <C-l> $
 noremap <silent> <C-h> ^
 
@@ -82,7 +86,6 @@ nnoremap <C-Right> <C-w>l
 nnoremap <C-Up> <C-w>k
 nnoremap <C-Down> <C-w>j
 
-tnoremap <space>q <C-\><C-n>
 
 " os specific
 if has('win32') || has('win64')

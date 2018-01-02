@@ -4,17 +4,19 @@ repo     = 'Shougo/dein.vim'
 hook_add = '''
 " let g:dein#install_log_filename='$HOME/.cache/dein/install.log'
 '''
+
 # UI
 [[plugins]]
-repo     = 'ap/vim-buftabline'
+repo     = 'mgee/lightline-bufferline'
 hook_add = '''
-nnoremap <C-n> :bnext<CR>
-nnoremap <C-p> :bprev<CR>
+let g:lightline#bufferline#min_buffer_count = 1
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
 '''
 
 [[plugins]]
 repo     = 'itchyny/lightline.vim'
-depends  = ['iceberg.vim']
+depends  = ['iceberg.vim', 'lightline-bufferline']
 hook_add = '''
 let g:lightline = {
     \ 'colorscheme': 'iceberg',
@@ -24,12 +26,22 @@ let g:lightline = {
     \      [ 'readonly', 'fugitive', 'filename', 'modified' ],
     \    ]
     \ },
+    \ 'tabline': {
+    \   'left': [['buffers']],
+    \   'right': [['close']]
+    \ },
     \ 'component': {
     \   'lineinfo': "\ue0a1".'%3l:%-2v',
     \ },
     \ 'component_function': {
     \    'readonly': 'LightlineReadonly',
     \    'fugitive': 'LightlineFugitive',
+    \ },
+    \ 'component_expand': {
+    \   'buffers': 'lightline#bufferline#buffers'
+    \ },
+    \ 'component_type': {
+    \   'buffers': 'tabsel'
     \ },
     \ 'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
     \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"},
