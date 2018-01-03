@@ -18,7 +18,7 @@ repo     = 'itchyny/lightline.vim'
 depends  = ['iceberg.vim', 'lightline-bufferline', 'lightline-ale']
 hook_add = '''
 let g:lightline = {
-    \ 'colorscheme': 'iceberg',
+    \ 'colorscheme': 'seoul256',
     \ 'active': {
     \    'left': [
     \      [ 'mode', 'paste' ],
@@ -86,6 +86,15 @@ autocmd MyAutoCmd ColorScheme * hi! icebergLLGradient ctermfg=234 ctermbg=245 gu
 autocmd MyAutoCmd ColorScheme * hi! icebergLLEdge ctermfg=243 ctermbg=237 guifg=#696d80 guibg=#34394e
 autocmd MyAutoCmd ColorScheme * hi! icebergLLBase ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
 '''
+
+[[plugins]]
+repo    = 'gilsondev/lizard'
+
+[[plugins]]
+repo    = 'baskerville/bubblegum'
+
+[[plugins]]
+repo    = 'w0ng/vim-hybrid'
 
 # code check
 [[plugins]]

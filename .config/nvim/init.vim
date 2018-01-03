@@ -142,5 +142,5 @@ if dein#check_install()
 endif
 
 set background=dark
-colorscheme iceberg
-syntax on
+colorscheme bubblegum-256-dark
+syntax enable
