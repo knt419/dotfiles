@@ -96,6 +96,9 @@ repo    = 'baskerville/bubblegum'
 [[plugins]]
 repo    = 'w0ng/vim-hybrid'
 
+[[plugins]]
+repo    = 'mhinz/vim-startify'
+
 # code check
 [[plugins]]
 repo     = 'scrooloose/syntastic'
