@@ -65,8 +65,10 @@ nnoremap <silent> x "_x
 nnoremap <silent> X "_X
 nnoremap <silent> + <C-a>
 nnoremap <silent> - <C-x>
-noremap <silent> <C-l> $
-noremap <silent> <C-h> ^
+noremap  <silent> <C-j> }
+noremap  <silent> <C-k> {
+noremap  <silent> <C-l> $
+noremap  <silent> <C-h> ^
 
 nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
@@ -75,17 +77,18 @@ nnoremap <silent> ; :
 nnoremap <silent> <space>q :<C-u>bd<CR>
 inoremap jj <Esc>
 
-inoremap <C-h> <Left>
-inoremap <C-l> <Right>
+inoremap <C-h> <C-g>U<Left>
+inoremap <C-l> <C-g>U<Right>
+inoremap <C-;> <ESC>$a
 
-nnoremap <S-Left> <C-w><
+nnoremap <S-Left>  <C-w><
 nnoremap <S-Right> <C-w>>
-nnoremap <S-Up> <C-w>-
-nnoremap <S-Down> <C-w>+
-nnoremap <C-Left> <C-w>h
+nnoremap <S-Up>    <C-w>-
+nnoremap <S-Down>  <C-w>+
+nnoremap <C-Left>  <C-w>h
 nnoremap <C-Right> <C-w>l
-nnoremap <C-Up> <C-w>k
-nnoremap <C-Down> <C-w>j
+nnoremap <C-Up>    <C-w>k
+nnoremap <C-Down>  <C-w>j
 
 
 " os specific
