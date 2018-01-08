@@ -7,13 +7,6 @@ hook_add = '''
 
 # UI
 [[plugins]]
-repo     = 'mgee/lightline-bufferline'
-hook_add = '''
-nnoremap <C-n> :bn<CR>
-nnoremap <C-p> :bp<CR>
-'''
-
-[[plugins]]
 repo     = 'itchyny/lightline.vim'
 depends  = ['iceberg.vim', 'lightline-bufferline', 'lightline-ale']
 hook_add = '''
@@ -69,12 +62,23 @@ endfunction
 '''
 
 [[plugins]]
+repo     = 'mgee/lightline-bufferline'
+hook_add = '''
+nnoremap <C-n> :bn<CR>
+nnoremap <C-p> :bp<CR>
+'''
+
+[[plugins]]
 repo     = 'maximbaz/lightline-ale'
 depends  = ['ale']
 
 [[plugins]]
 repo     = 'Yggdroot/indentLine'
 
+[[plugins]]
+repo     = 'mhinz/vim-startify'
+
+# colorscheme
 [[plugins]]
 repo     = 'cocopon/iceberg.vim'
 hook_add = '''
@@ -96,9 +100,6 @@ repo     = 'baskerville/bubblegum'
 [[plugins]]
 repo     = 'w0ng/vim-hybrid'
 
-[[plugins]]
-repo     = 'mhinz/vim-startify'
-
 # code check
 [[plugins]]
 repo     = 'scrooloose/syntastic'
@@ -118,6 +119,14 @@ repo     = 'w0rp/ale'
 if       = 'has("nvim") || has("job") && has("channel") && has("timers")'
 
 [[plugins]]
+repo     = 'editorconfig/editorconfig-vim'
+#hook_add = '''
+#if has('nvim')
+#    let g:EditorConfig_core_mode = 'external_command'
+#endif
+#'''
+
+[[plugins]]
 repo     = 'cohama/lexima.vim'
 hook_add = '''
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
@@ -135,14 +144,6 @@ hook_add = '''
 nmap <Space>c <Plug>(caw:hatpos:toggle)
 vmap <Space>c <Plug>(caw:hatpos:toggle)
 '''
-
-[[plugins]]
-repo     = 'editorconfig/editorconfig-vim'
-#hook_add = '''
-#if has('nvim')
-#    let g:EditorConfig_core_mode = 'external_command'
-#endif
-#'''
 
 [[plugins]]
 repo     = 'rhysd/accelerated-jk'
