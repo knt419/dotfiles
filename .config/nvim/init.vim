@@ -52,6 +52,8 @@ if has('nvim')
     set sh=bash
     set inccommand=split
     tnoremap <space>q <C-\><C-n>
+    tnoremap <C-n> <C-\><C-n>:<C-u>bn<CR>
+    tnoremap <C-p> <C-\><C-n>:<C-u>bp<CR>
 endif
 
 filetype plugin indent on
