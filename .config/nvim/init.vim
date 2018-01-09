@@ -51,7 +51,6 @@ set noshowmode
 set iskeyword+=-
 
 if has('nvim')
-    set sh=bash
     set inccommand=split
     tnoremap <space>q <C-\><C-n>
     tnoremap <C-n> <C-\><C-n>:<C-u>bn<CR>
@@ -79,11 +78,13 @@ nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 nnoremap <silent> : ;
 nnoremap <silent> ; :
 nnoremap <silent> <space>q :<C-u>bd<CR>
+nnoremap <silent> <space>w :<C-u>w<CR>:<C-u>bd<CR>
+nnoremap <silent> <space>e :<C-u>enew<CR>
 inoremap jj <Esc>
 
 inoremap <C-h> <C-g>U<Left>
 inoremap <C-l> <C-g>U<Right>
-inoremap <C-;> <ESC>$a
+inoremap <C-;> <C-g>U<C-o>$
 
 nnoremap <S-Left>  <C-w><
 nnoremap <S-Right> <C-w>>
