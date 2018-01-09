@@ -3,8 +3,10 @@ scriptencoding utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
 set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932
-set termguicolors
 set t_Co=256
+if has('termguicolors')
+    set termguicolors
+endif
 
 set nobackup
 set noswapfile
