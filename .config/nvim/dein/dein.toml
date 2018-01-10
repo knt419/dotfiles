@@ -76,6 +76,12 @@ depends  = ['ale']
 repo     = 'Yggdroot/indentLine'
 
 [[plugins]]
+repo     = 'kana/vim-operator-user'
+
+[[plugins]]
+repo     = 'haya14busa/vim-operator-flashy'
+
+[[plugins]]
 repo     = 'mhinz/vim-startify'
 
 # colorscheme
