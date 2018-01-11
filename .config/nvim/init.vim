@@ -66,6 +66,7 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <silent> x "_x
 nnoremap <silent> X "_X
+nnoremap <silent> U <C-r>
 nnoremap <silent> + <C-a>
 nnoremap <silent> - <C-x>
 noremap  <silent> <C-j> }
