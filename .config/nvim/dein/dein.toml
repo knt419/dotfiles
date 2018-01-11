@@ -129,11 +129,11 @@ repo     = 'airblade/vim-gitgutter'
 #text input
 [[plugins]]
 repo     = 'editorconfig/editorconfig-vim'
-#hook_add = '''
-#if has('nvim')
-#    let g:EditorConfig_core_mode = 'external_command'
-#endif
-#'''
+hook_add = '''
+if has('nvim')
+   let g:EditorConfig_core_mode = 'external_command'
+endif
+'''
 
 [[plugins]]
 repo     = 'cohama/lexima.vim'
