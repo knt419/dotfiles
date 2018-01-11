@@ -3,6 +3,7 @@
 repo     = 'Shougo/dein.vim'
 hook_add = '''
 " let g:dein#install_log_filename='$HOME/.cache/dein/install.log'
+let g:dein#install_process_timeout = 600
 '''
 
 # UI
@@ -122,6 +123,9 @@ let g:syntastic_check_on_wq              = 0
 [[plugins]]
 repo     = 'w0rp/ale'
 if       = 'has("nvim") || has("job") && has("channel") && has("timers")'
+hook_add = '''
+let g:ale_lint_on_enter = 0
+'''
 
 [[plugins]]
 repo     = 'airblade/vim-gitgutter'
