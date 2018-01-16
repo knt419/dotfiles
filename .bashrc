@@ -17,6 +17,7 @@ export FZF_DEFAULT_COMMAND='ag --follow --nocolor --nogroup --hidden -g ""'
 export FZF_DEFAULT_OPTS='--reverse --ansi --select-1 --exit-0'
 export FZF_COMPLETION_TRIGGER=',,'
 export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
+export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # bash option
 shopt -s autocd
@@ -42,4 +43,5 @@ fd() {
                   -o -type d -print 2> /dev/null | fzf +m) &&
   cd "$dir"
 }
+
 
