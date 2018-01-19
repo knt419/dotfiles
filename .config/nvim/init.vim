@@ -53,24 +53,25 @@ set iskeyword+=-
 if has('nvim')
     set inccommand=split
     tnoremap <space>q <C-\><C-n>
+    tnoremap jj <C-\><C-n>
     tnoremap <C-n> <C-\><C-n>:<C-u>bn<CR>
     tnoremap <C-p> <C-\><C-n>:<C-u>bp<CR>
-    let g:terminal_color_0 = '#2e3436'
-    let g:terminal_color_1 = '#cc0000'
-    let g:terminal_color_2 = '#4e9a06'
-    let g:terminal_color_3 = '#c4a000'
-    let g:terminal_color_4 = '#3465a4'
-    let g:terminal_color_5 = '#75507b'
-    let g:terminal_color_6 = '#0b939b'
-    let g:terminal_color_7 = '#d3d7cf'
-    let g:terminal_color_8 = '#555753'
-    let g:terminal_color_9 = '#ef2929'
-    let g:terminal_color_10 = '#8ae234'
-    let g:terminal_color_11 = '#fce94f'
-    let g:terminal_color_12 = '#729fcf'
-    let g:terminal_color_13 = '#ad7fa8'
-    let g:terminal_color_14 = '#00f5e9'
-    let g:terminal_color_15 = '#eeeeec'
+    let g:terminal_color_0  = '#0c0c0c' " Black
+    let g:terminal_color_1  = '#d78787' " Red
+    let g:terminal_color_2  = '#afd787' " Green
+    let g:terminal_color_3  = '#f7f7af' " Yellow
+    let g:terminal_color_4  = '#87afd7' " Blue
+    let g:terminal_color_5  = '#d7afd7' " Magenta
+    let g:terminal_color_6  = '#afd7d7' " Cyan
+    let g:terminal_color_7  = '#e6e6e6' " White
+    let g:terminal_color_8  = '#0a0a0a' " BoldBlack
+    let g:terminal_color_9  = '#df8787' " BoldRed
+    let g:terminal_color_10 = '#afdf87' " BoldGreen
+    let g:terminal_color_11 = '#ffffaf' " BoldYellow
+    let g:terminal_color_12 = '#87afdf' " BoldBlue
+    let g:terminal_color_13 = '#dfafdf' " BoldMagenta
+    let g:terminal_color_14 = '#afdfdf' " BoldCyan
+    let g:terminal_color_15 = '#eeeeee' " BoldWhite
 endif
 
 filetype plugin indent on
@@ -169,5 +170,3 @@ endif
 set background=dark
 colorscheme bubblegum-256-dark
 syntax enable
-
-
