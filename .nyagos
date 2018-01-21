@@ -23,10 +23,8 @@ nyagos.prompt = function(this)
 
     local git_branch_name = nyagos.eval('git rev-parse --abbrev-ref HEAD 2>nul')
     if (git_branch_name ~= '') then
-        prompt_message = prompt_message .. ' [' .. git_branch_name .. ']'
+        prompt_message = prompt_message .. '\u{e0b1} \u{e0a0}' .. git_branch_name
     end
 
-    prompt_message = prompt_message .. '$_$$$s'
-
-    return share.org_prompter('$e[36;40;1m'..prompt_message..'$e[37;1m')
+    return share.org_prompter('$e[30;46;1m'..prompt_message..'$e[36;40;1m\u{e0b0}$_$$$s'..'$e[0m')
 end
