@@ -64,14 +64,14 @@ if has('nvim')
     let g:terminal_color_5  = '#d7afd7' " Magenta
     let g:terminal_color_6  = '#afd7d7' " Cyan
     let g:terminal_color_7  = '#e6e6e6' " White
-    let g:terminal_color_8  = '#0a0a0a' " BoldBlack
-    let g:terminal_color_9  = '#df8787' " BoldRed
-    let g:terminal_color_10 = '#afdf87' " BoldGreen
-    let g:terminal_color_11 = '#ffffaf' " BoldYellow
-    let g:terminal_color_12 = '#87afdf' " BoldBlue
-    let g:terminal_color_13 = '#dfafdf' " BoldMagenta
-    let g:terminal_color_14 = '#afdfdf' " BoldCyan
-    let g:terminal_color_15 = '#eeeeee' " BoldWhite
+    let g:terminal_color_8  = '#0a0a0a' " BrightBlack
+    let g:terminal_color_9  = '#df8787' " BrightRed
+    let g:terminal_color_10 = '#afdf87' " BrightGreen
+    let g:terminal_color_11 = '#ffffaf' " BrightYellow
+    let g:terminal_color_12 = '#87afdf' " BrightBlue
+    let g:terminal_color_13 = '#dfafdf' " BrightMagenta
+    let g:terminal_color_14 = '#afdfdf' " BrightCyan
+    let g:terminal_color_15 = '#eeeeee' " BrightWhite
 endif
 
 filetype plugin indent on

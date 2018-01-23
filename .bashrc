@@ -10,7 +10,7 @@
 # [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 # env
-export PS1=$'\e[30;104m\u@\h \e[94;40m\ue0b0 \w \ue0b1 `git rev-parse --abbrev-ref HEAD 2>nul` \e[30;49m\ue0b0\n\e[94;49m$ \e[0m'
+export PS1=$'\e[30;104m\u@\h \e[94;40m\ue0b0 \w \ue0b1 `git rev-parse --abbrev-ref HEAD 2>/dev/null` \e[30;49m\ue0b0\n\e[94;49m$ \e[0m'
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
@@ -45,6 +45,3 @@ fd() {
   cd "$dir"
 }
 
-
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
