@@ -77,6 +77,9 @@ depends  = ['ale']
 repo     = 'Yggdroot/indentLine'
 
 [[plugins]]
+repo     = 'lilydjwg/colorizer'
+
+[[plugins]]
 repo     = 'kana/vim-operator-user'
 
 [[plugins]]
