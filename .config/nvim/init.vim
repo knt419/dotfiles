@@ -1,5 +1,4 @@
 " option {{{
-
 set encoding=utf-8
 scriptencoding utf-8
 set termencoding=utf-8
@@ -18,6 +17,7 @@ set switchbuf=useopen
 set confirm
 set number
 set ruler
+set foldmethod=marker
 set foldenable
 set foldlevelstart=10
 set title
@@ -54,9 +54,8 @@ set wrap
 set showcmd
 set noshowmode
 set iskeyword+=-
-
 " }}}
-
+" nvim {{{
 if has('nvim')
     set inccommand=split
     tnoremap <space>q <C-\><C-n>
@@ -80,11 +79,10 @@ if has('nvim')
     let g:terminal_color_14 = '#afdfdf' " BrightCyan
     let g:terminal_color_15 = '#eeeeee' " BrightWhite
 endif
-
+"}}}
 filetype plugin indent on
 
 " keymap {{{
-
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
 nnoremap <silent> Y y$
 vnoremap <silent> v $h
@@ -121,7 +119,6 @@ nnoremap <C-Left>  <C-w>h
 nnoremap <C-Right> <C-w>l
 nnoremap <C-Up>    <C-w>k
 nnoremap <C-Down>  <C-w>j
-
 " }}}
 
 " os specific
@@ -144,7 +141,7 @@ if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
 endif
 
-" dein
+" dein {{{
 if &compatible
     set  nocompatible
 endif
@@ -176,7 +173,7 @@ endif
 if dein#check_install()
     call dein#install()
 endif
-
+"}}}
 set background=dark
 colorscheme bubblegum-256-dark
 syntax enable
