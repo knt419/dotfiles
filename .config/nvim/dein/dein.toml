@@ -90,6 +90,9 @@ repo     = 'mhinz/vim-startify'
 
 # colorscheme
 [[plugins]]
+repo     = 'rhysd/try-colorscheme.vim'
+
+[[plugins]]
 repo     = 'cocopon/iceberg.vim'
 hook_add = '''
 autocmd MyAutoCmd ColorScheme * hi! icebergLLNormal   ctermfg=234 ctermbg=110 guifg=#161821 guibg=#84a0c6
@@ -109,6 +112,9 @@ repo     = 'baskerville/bubblegum'
 
 [[plugins]]
 repo     = 'w0ng/vim-hybrid'
+
+[[plugins]]
+repo     = 'morhetz/gruvbox'
 
 # code check
 [[plugins]]

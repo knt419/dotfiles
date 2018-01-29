@@ -1,3 +1,5 @@
+" option {{{
+
 set encoding=utf-8
 scriptencoding utf-8
 set termencoding=utf-8
@@ -16,6 +18,8 @@ set switchbuf=useopen
 set confirm
 set number
 set ruler
+set foldenable
+set foldlevelstart=10
 set title
 
 set showmatch
@@ -28,6 +32,7 @@ set autoindent
 
 set clipboard=unnamed
 set cursorline
+set nostartofline
 set list
 set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 set virtualedit=block
@@ -49,6 +54,8 @@ set wrap
 set showcmd
 set noshowmode
 set iskeyword+=-
+
+" }}}
 
 if has('nvim')
     set inccommand=split
@@ -75,6 +82,8 @@ if has('nvim')
 endif
 
 filetype plugin indent on
+
+" keymap {{{
 
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
 nnoremap <silent> Y y$
@@ -113,6 +122,7 @@ nnoremap <C-Right> <C-w>l
 nnoremap <C-Up>    <C-w>k
 nnoremap <C-Down>  <C-w>j
 
+" }}}
 
 " os specific
 if has('win32') || has('win64')

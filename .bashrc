@@ -2,7 +2,6 @@
 [ -f $HOME/.bashrc_local ]        && source $HOME/.bashrc_local
 [ -f $HOME/.git-completion.bash ] && source $HOME/.git-completion.bash
 [ -f $HOME/.git-prompt.sh ]       && source $HOME/.git-prompt.sh
-[ -f $HOME/.bashrc_local ]        && source $HOME/.bashrc_local
 [ -f $HOME/.fzf.bash ]            && source $HOME/.fzf.bash
 [ -f $HOME/enhancd/init.sh ]      && source $HOME/enhancd/init.sh
 
@@ -50,3 +49,5 @@ fd() {
   cd "$dir"
 }
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
