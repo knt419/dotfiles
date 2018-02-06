@@ -191,6 +191,7 @@ hook_add = '''
 let g:vaffle_auto_cd = 1
 let g:vaffle_show_hidden_files = 1
 nnoremap <Space>v :<C-u>Vaffle<CR>
+autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
 '''
 
 [[plugins]]
@@ -249,3 +250,6 @@ repo     = 'kannokanno/previm'
 
 [[plugins]]
 repo     = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo     = 'lambdalisue/gina.vim'
