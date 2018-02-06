@@ -250,3 +250,6 @@ repo     = 'kannokanno/previm'
 
 [[plugins]]
 repo     = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo     = 'lambdalisue/gina.vim'
