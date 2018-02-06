@@ -16,7 +16,7 @@ let g:lightline = {
     \ 'active': {
     \    'left': [
     \      ['mode', 'paste'],
-    \      ['readonly', 'fugitive', 'filename', 'modified']
+    \      ['readonly', 'branch', 'filename', 'modified']
     \    ],
     \    'right': [
     \      ['linter_errors', 'linter_warnings', 'linter_ok'],
@@ -33,7 +33,7 @@ let g:lightline = {
     \ },
     \ 'component_function': {
     \    'readonly': 'LightlineReadonly',
-    \    'fugitive': 'LightlineFugitive',
+    \    'branch': 'LightlineBranch',
     \    'bufferinfo': 'lightline#buffer#bufferinfo'
     \ },
     \ 'component_expand': {
@@ -53,9 +53,9 @@ let g:lightline = {
 function! LightlineReadonly()
     return &readonly ? "\ue0a2" : ''
 endfunction
-function! LightlineFugitive()
-    if exists('*fugitive#head')
-        let branch = fugitive#head()
+function! LightlineBranch()
+    let branch = gina#component#repo#branch()
+    if exists('branch')
         return branch !=# '' ? "\ue0a0".branch : ''
     endif
     return ''
@@ -247,9 +247,6 @@ let $VISUAL = 'nvr --remote-wait'
 
 [[plugins]]
 repo     = 'kannokanno/previm'
-
-[[plugins]]
-repo     = 'tpope/vim-fugitive'
 
 [[plugins]]
 repo     = 'lambdalisue/gina.vim'
