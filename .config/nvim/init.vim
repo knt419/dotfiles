@@ -146,6 +146,7 @@ if &compatible
     set  nocompatible
 endif
 
+let g:vim_indent_cont = &shiftwidth * 3
 let s:dein_dir = expand('$HOME/.cache/dein')
 let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
