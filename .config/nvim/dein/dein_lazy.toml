@@ -148,6 +148,9 @@ repo        = 'thinca/vim-qfreplace'
 repo        = 'brooth/far.vim'
 
 [[plugins]]
+repo        = 'y0za/vim-reading-vimrc'
+
+[[plugins]]
 repo        = 'rhysd/nyaovim-popup-tooltip'
 if          = 'exists("g:nyaovim_version")'
 

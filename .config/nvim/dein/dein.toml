@@ -19,14 +19,13 @@ let g:lightline = {
     \      ['readonly', 'branch', 'filename', 'modified']
     \    ],
     \    'right': [
-    \      ['linter_errors', 'linter_warnings', 'linter_ok'],
     \      ['lineinfo' ,  'percent'],
     \      ['fileformat', 'fileencoding', 'filetype']
     \    ]
     \ },
     \ 'tabline': {
     \   'left': [['buffers']],
-    \   'right': [['close']]
+    \   'right': [['linter_errors', 'linter_warnings', 'linter_ok']]
     \ },
     \ 'component': {
     \   'lineinfo': "\ue0a1".'%3l:%-2v'
