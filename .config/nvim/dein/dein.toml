@@ -16,7 +16,7 @@ let g:lightline = {
     \ 'active': {
     \    'left': [
     \      ['mode', 'paste'],
-    \      ['readonly', 'branch', 'filename', 'modified']
+    \      ['readonly', 'modified', 'linter_errors', 'linter_warnings', 'linter_ok'],
     \    ],
     \    'right': [
     \      ['lineinfo' ,  'percent'],
@@ -25,13 +25,14 @@ let g:lightline = {
     \ },
     \ 'tabline': {
     \   'left': [['buffers']],
-    \   'right': [['linter_errors', 'linter_warnings', 'linter_ok']]
+    \   'right': [['repository','branch']]
     \ },
     \ 'component': {
     \   'lineinfo': "\ue0a1".'%3l:%-2v'
     \ },
     \ 'component_function': {
     \    'readonly': 'LightlineReadonly',
+    \    'repository': 'gina#component#repo#name',
     \    'branch': 'LightlineBranch',
     \    'bufferinfo': 'lightline#buffer#bufferinfo'
     \ },
@@ -54,10 +55,7 @@ function! LightlineReadonly()
 endfunction
 function! LightlineBranch()
     let branch = gina#component#repo#branch()
-    if exists('branch')
-        return branch !=# '' ? "\ue0a0".branch : ''
-    endif
-    return ''
+    return branch !=# '' ? "\ue0a0".branch : ''
 endfunction
 '''
 
@@ -86,6 +84,9 @@ repo     = 'haya14busa/vim-operator-flashy'
 
 [[plugins]]
 repo     = 'mhinz/vim-startify'
+hook_add = '''
+nnoremap <silent> <Space>s :<C-u>Startify<CR>
+'''
 
 # colorscheme
 [[plugins]]
