@@ -9,7 +9,7 @@ let g:dein#install_process_timeout = 600
 # UI
 [[plugins]]
 repo     = 'itchyny/lightline.vim'
-depends  = ['iceberg.vim', 'lightline-bufferline', 'lightline-ale']
+depends  = ['iceberg.vim', 'lightline-bufferline', 'lightline-ale', 'gina.vim']
 hook_add = '''
 let g:lightline = {
     \ 'colorscheme': 'seoul256',
@@ -19,7 +19,7 @@ let g:lightline = {
     \      ['readonly', 'modified', 'linter_errors', 'linter_warnings', 'linter_ok'],
     \    ],
     \    'right': [
-    \      ['lineinfo' ,  'percent'],
+    \      ['lineinfo', 'percent'],
     \      ['fileformat', 'fileencoding', 'filetype']
     \    ]
     \ },
@@ -215,6 +215,7 @@ autocmd MyAutoCmd FileType go nnoremap gr (go-run)
 autocmd MyAutoCmd FileType go nnoremap gt (go-test)
 autocmd MyAutoCmd FileType go :highlight goErr cterm=bold ctermfg=214
 autocmd MyAutoCmd FileType go :match goErr /\<err\>/
+autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 let g:go_hightlight_functions = 1
 let g:go_hightlight_methods = 1
 let g:go_hightlight_structs = 1
