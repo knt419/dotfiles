@@ -136,11 +136,6 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 
-" local
-if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
-    source $HOME/.config/nvim/init.vim.local
-endif
-
 " dein {{{
 if &compatible
     set  nocompatible
@@ -175,6 +170,12 @@ if dein#check_install()
     call dein#install()
 endif
 "}}}
+
+" local
+if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
+    source $HOME/.config/nvim/init.vim.local
+endif
+
 set background=dark
 colorscheme bubblegum-256-dark
 syntax enable
