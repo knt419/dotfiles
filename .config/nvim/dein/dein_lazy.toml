@@ -65,7 +65,7 @@ call denite#custom#map('normal', "v", '<denite:do_action:vsplit>')
 call denite#custom#map('normal', "r", '<denite:do_action:qfreplace>')
 call denite#custom#map('normal', '<ESC>', '<denite:quit>')
 call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
-call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',['//[0-9]/*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
+call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
 if dein#tap('denite.nvim') && dein#tap('vim-qfreplace')
     function! MyDeniteReplace(context)
         let qflist = []
