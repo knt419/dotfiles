@@ -188,11 +188,13 @@ nmap ge <Plug>(smartword-ge)
 [[plugins]]
 repo     = 'cocopon/vaffle.vim'
 hook_add = '''
-let g:vaffle_auto_cd = 1
 let g:vaffle_show_hidden_files = 1
 nnoremap <Space>v :<C-u>Vaffle<CR>
 autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
 '''
+
+[[plugins]]
+repo     = 'airblade/vim-rooter'
 
 [[plugins]]
 repo     = 'junegunn/fzf'
