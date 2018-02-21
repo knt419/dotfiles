@@ -142,6 +142,15 @@ repo        = 'zchee/deoplete-jedi'
 repo        = 'Shougo/neco-vim'
 
 [[plugins]]
+repo        = 'uplus/deoplete-solargraph'
+
+[[plugins]]
+repo        = 'Chiel92/vim-autoformat'
+hook_source = '''
+autocmd MyAutoCmd BufWrite * :Autoformat
+'''
+
+[[plugins]]
 repo        = 'thinca/vim-qfreplace'
 
 [[plugins]]
