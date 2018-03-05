@@ -135,6 +135,15 @@ if       = 'has("nvim") || has("job") && has("channel") && has("timers")'
 hook_add = '''
 nmap <silent> <S-n> <Plug>(ale_next_wrap)
 nmap <silent> <S-p> <Plug>(ale_previous_wrap)
+let g:ale_fixers = {
+    \ 'ruby': [
+    \     'rubocop',
+    \ ],
+    \ 'eruby': [
+    \     'erubi',
+    \     'erubis',
+    \ ],
+    \ }
 '''
 
 [[plugins]]
