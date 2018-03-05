@@ -1,5 +1,4 @@
 # include
-[ -f $HOME/.bashrc_local ]        && source $HOME/.bashrc_local
 [ -f $HOME/.git-completion.bash ] && source $HOME/.git-completion.bash
 [ -f $HOME/.git-prompt.sh ]       && source $HOME/.git-prompt.sh
 [ -f $HOME/.fzf.bash ]            && source $HOME/.fzf.bash
@@ -49,5 +48,5 @@ fd() {
   cd "$dir"
 }
 
-
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# local
+[ -f $HOME/.bashrc_local ]        && source $HOME/.bashrc_local
