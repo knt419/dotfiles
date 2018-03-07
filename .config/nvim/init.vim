@@ -47,6 +47,7 @@ set wrapscan
 set hlsearch
 
 set laststatus=2
+set cmdheight=2
 set showtabline=2
 set guioptions-=e
 set wildmenu
