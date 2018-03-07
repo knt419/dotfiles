@@ -142,6 +142,9 @@ repo        = 'zchee/deoplete-jedi'
 repo        = 'Shougo/neco-vim'
 
 [[plugins]]
+repo        = '5t111111/denite-rails'
+
+[[plugins]]
 repo        = 'uplus/deoplete-solargraph'
 
 [[plugins]]
