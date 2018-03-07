@@ -245,7 +245,6 @@ on_ft    = 'toml'
 repo     = 'kassio/neoterm'
 if       = 'has("nvim")'
 hook_add = '''
-let g:neoterm_split_on_tnew = 0
 let g:neoterm_autoinsert = 1
 silent! nnoremap <unique> <Space>t :<C-u>Tnew<CR>
 '''
