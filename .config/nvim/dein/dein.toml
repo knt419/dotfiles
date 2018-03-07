@@ -246,7 +246,7 @@ repo     = 'kassio/neoterm'
 if       = 'has("nvim")'
 hook_add = '''
 let g:neoterm_autoinsert = 1
-silent! nnoremap <unique> <Space>t :<C-u>Tnew<CR>
+silent! nnoremap <unique> <Space>t :<C-u>enew<CR>:Tnew<CR>
 '''
 
 [[plugins]]
