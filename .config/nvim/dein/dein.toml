@@ -135,6 +135,15 @@ if       = 'has("nvim") || has("job") && has("channel") && has("timers")'
 hook_add = '''
 nmap <silent> <S-n> <Plug>(ale_next_wrap)
 nmap <silent> <S-p> <Plug>(ale_previous_wrap)
+let g:ale_fixers = {
+    \ 'ruby': [
+    \     'rubocop',
+    \ ],
+    \ 'eruby': [
+    \     'erubi',
+    \     'erubis',
+    \ ],
+    \ }
 '''
 
 [[plugins]]
@@ -236,9 +245,8 @@ on_ft    = 'toml'
 repo     = 'kassio/neoterm'
 if       = 'has("nvim")'
 hook_add = '''
-let g:neoterm_split_on_tnew = 0
 let g:neoterm_autoinsert = 1
-silent! nnoremap <unique> <Space>t :<C-u>Tnew<CR>
+silent! nnoremap <unique> <Space>t :<C-u>enew<CR>:Tnew<CR>
 '''
 
 [[plugins]]

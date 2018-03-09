@@ -32,7 +32,7 @@ let g:neocomplcache_enable_smart_case = 0
 
 [[plugins]]
 repo        = 'Shougo/denite.nvim'
-depends     = ['neoyank.vim', 'neomru.vim']
+depends     = ['neoyank.vim', 'neomru.vim', 'denite-rails']
 hook_add    = '''
 nnoremap <silent> <Space>f :<C-u>Denite file_rec<CR>
 nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>
@@ -140,6 +140,18 @@ repo        = 'zchee/deoplete-jedi'
 
 [[plugins]]
 repo        = 'Shougo/neco-vim'
+
+[[plugins]]
+repo        = '5t111111/denite-rails'
+
+[[plugins]]
+repo        = 'uplus/deoplete-solargraph'
+
+[[plugins]]
+repo        = 'Chiel92/vim-autoformat'
+hook_source = '''
+autocmd MyAutoCmd BufWrite * :Autoformat
+'''
 
 [[plugins]]
 repo        = 'thinca/vim-qfreplace'

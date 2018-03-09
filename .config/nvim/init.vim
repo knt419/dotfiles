@@ -47,6 +47,7 @@ set wrapscan
 set hlsearch
 
 set laststatus=2
+set cmdheight=2
 set showtabline=2
 set guioptions-=e
 set wildmenu
@@ -92,6 +93,7 @@ nnoremap <silent> x "_x
 nnoremap <silent> X "_X
 nnoremap <silent> ss :<C-u>%s//
 nnoremap <silent> U <C-r>
+nnoremap <silent> <BS> <C-^>
 nnoremap <silent> + <C-a>
 nnoremap <silent> - <C-x>
 noremap  <silent> <C-j> }
@@ -125,7 +127,7 @@ nnoremap <C-Down>  <C-w>j
 " os specific
 if has('win32') || has('win64')
     set shellslash
-    set shell=cmd
+    set shell=cmd.exe
     set shellcmdflag=/c
 elseif has('mac')
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
