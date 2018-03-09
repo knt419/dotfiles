@@ -1,0 +1,11 @@
+ClassLength:
+    Enabled: false
+
+LineLength:
+    Enabled: false
+
+MethodLength:
+    Enabled: false
+
+CyclomaticComplexity:
+    Enabled: false
