@@ -127,7 +127,7 @@ nnoremap <C-Down>  <C-w>j
 " os specific
 if has('win32') || has('win64')
     set shellslash
-    set shell=cmd
+    set shell=cmd.exe
     set shellcmdflag=/c
 elseif has('mac')
     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
