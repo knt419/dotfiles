@@ -92,29 +92,29 @@ nnoremap <silent> <Space>s :<C-u>Startify<CR>
 [[plugins]]
 repo     = 'rhysd/try-colorscheme.vim'
 
-[[plugins]]
-repo     = 'cocopon/iceberg.vim'
-hook_add = '''
-autocmd MyAutoCmd ColorScheme * hi! icebergLLNormal   ctermfg=234 ctermbg=110 guifg=#161821 guibg=#84a0c6
-autocmd MyAutoCmd ColorScheme * hi! icebergLLInsert   ctermfg=234 ctermbg=150 guifg=#161821 guibg=#b4be82
-autocmd MyAutoCmd ColorScheme * hi! icebergLLVisual   ctermfg=234 ctermbg=140 guifg=#161821 guibg=#a093c7
-autocmd MyAutoCmd ColorScheme * hi! icebergLLReplace  ctermfg=234 ctermbg=109 guifg=#161821 guibg=#89b8c2
-autocmd MyAutoCmd ColorScheme * hi! icebergLLGradient ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
-autocmd MyAutoCmd ColorScheme * hi! icebergLLEdge     ctermfg=243 ctermbg=237 guifg=#696d80 guibg=#34394e
-autocmd MyAutoCmd ColorScheme * hi! icebergLLBase     ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
-'''
-
-[[plugins]]
-repo     = 'gilsondev/lizard'
-
+# [[plugins]]
+# repo     = 'cocopon/iceberg.vim'
+# hook_add = '''
+# autocmd MyAutoCmd ColorScheme * hi! icebergLLNormal   ctermfg=234 ctermbg=110 guifg=#161821 guibg=#84a0c6
+# autocmd MyAutoCmd ColorScheme * hi! icebergLLInsert   ctermfg=234 ctermbg=150 guifg=#161821 guibg=#b4be82
+# autocmd MyAutoCmd ColorScheme * hi! icebergLLVisual   ctermfg=234 ctermbg=140 guifg=#161821 guibg=#a093c7
+# autocmd MyAutoCmd ColorScheme * hi! icebergLLReplace  ctermfg=234 ctermbg=109 guifg=#161821 guibg=#89b8c2
+# autocmd MyAutoCmd ColorScheme * hi! icebergLLGradient ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
+# autocmd MyAutoCmd ColorScheme * hi! icebergLLEdge     ctermfg=243 ctermbg=237 guifg=#696d80 guibg=#34394e
+# autocmd MyAutoCmd ColorScheme * hi! icebergLLBase     ctermfg=234 ctermbg=245 guifg=#17171b guibg=#818596
+# '''
+#
+# [[plugins]]
+# repo     = 'gilsondev/lizard'
+#
 [[plugins]]
 repo     = 'baskerville/bubblegum'
 
-[[plugins]]
-repo     = 'w0ng/vim-hybrid'
-
-[[plugins]]
-repo     = 'morhetz/gruvbox'
+# [[plugins]]
+# repo     = 'w0ng/vim-hybrid'
+#
+# [[plugins]]
+# repo     = 'morhetz/gruvbox'
 
 # code check
 [[plugins]]
