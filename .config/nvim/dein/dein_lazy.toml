@@ -1,7 +1,7 @@
 [[plugins]]
 repo        = 'Shougo/deoplete.nvim'
 depends     = ['neco-vim', 'neco-syntax', 'deoplete-jedi', 'neosnippet']
-on_i        = 1
+on_event    = 'InsertEnter'
 if          = 'has("nvim")'
 hook_add    = '''
 let g:deoplete#enable_at_startup = 1
@@ -12,7 +12,7 @@ let g:deoplete#auto_complete_delay = 0
 [[plugins]]
 repo        = 'Shougo/neocomplete.vim'
 depends     = ['neco-vim', 'neco-syntax', 'neosnippet']
-on_i        = 1
+on_event    = 'InsertEnter'
 if          = '!has("nvim")&&has("lua")'
 hook_add    = '''
 let g:neocomplete#enable_at_startup = 1
@@ -22,7 +22,7 @@ let g:neocomplete#auto_complete_delay = 0
 [[plugins]]
 repo        = 'Shougo/neocomplcache.vim'
 depends     = ['neco-vim', 'neco-syntax', 'neosnippet']
-on_i        = 1
+on_event    = 'InsertEnter'
 if          = '!has("nvim")&&!has("lua")'
 hook_add    = '''
 let g:acp_enableAtStartup = 0
@@ -137,15 +137,19 @@ repo        = 'Shougo/neco-syntax'
 
 [[plugins]]
 repo        = 'zchee/deoplete-jedi'
+on_ft       = 'python'
 
 [[plugins]]
 repo        = 'Shougo/neco-vim'
+on_ft       = 'vim'
 
 [[plugins]]
 repo        = '5t111111/denite-rails'
+on_ft       = 'ruby'
 
 [[plugins]]
 repo        = 'uplus/deoplete-solargraph'
+on_ft       = 'ruby'
 
 [[plugins]]
 repo        = 'Chiel92/vim-autoformat'
