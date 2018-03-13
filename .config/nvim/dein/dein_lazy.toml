@@ -16,16 +16,6 @@ let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#max_list = 10000
 '''
 
-# [[plugins]]
-# repo        = 'Shougo/neocomplete.vim'
-# depends     = ['neco-vim', 'neco-syntax', 'neosnippet']
-# on_event    = 'InsertEnter'
-# if          = '!has("nvim")&&has("lua")'
-# hook_add    = '''
-# let g:neocomplete#enable_at_startup = 1
-# let g:neocomplete#auto_complete_delay = 0
-# '''
-
 [[plugins]]
 repo        = 'Shougo/denite.nvim'
 depends     = ['neoyank.vim', 'neomru.vim', 'denite-rails']
@@ -93,9 +83,7 @@ repo        = 'Shougo/neosnippet'
 depends     = ['vim-snippets']
 on_event    = 'InsertCharPre'
 hook_add    = '''
-let g:neosnippet#disable_runtime_snippets = {
-    \   '_' : 1,
-    \ }
+let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
 let g:neosnippet#enable_snipmate_compatibility = 1
 '''
 hook_source = '''
@@ -122,15 +110,18 @@ endfunction
 
 [[plugins]]
 repo        = 'honza/vim-snippets'
+on_source   = ['neosnippet']
 hook_add    = '''
 let g:neosnippet#snippets_directory='$HOME/.cache/dein/repos/github.com/honza/vim-snippets/snippets'
 '''
 
 [[plugins]]
 repo        = 'Shougo/neomru.vim'
+on_source   = ['denite.nvim']
 
 [[plugins]]
 repo        = 'Shougo/neco-syntax'
+on_source   = ['deoplete.nvim']
 
 [[plugins]]
 repo        = 'zchee/deoplete-jedi'
@@ -159,9 +150,15 @@ repo        = 'thinca/vim-qfreplace'
 
 [[plugins]]
 repo        = 'brooth/far.vim'
+on_cmd      = ['Far', 'Farp']
+
+[[plugins]]
+repo        = 'rhysd/try-colorscheme.vim'
+on_cmd      = ['TryColorSchema']
 
 [[plugins]]
 repo        = 'y0za/vim-reading-vimrc'
+on_cmd      = ['ReadingVimrcList', 'ReadingVimrcLoad', 'ReadingVimrcNext']
 
 [[plugins]]
 repo        = 'rhysd/nyaovim-popup-tooltip'

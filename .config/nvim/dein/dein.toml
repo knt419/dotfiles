@@ -2,7 +2,6 @@
 [[plugins]]
 repo     = 'Shougo/dein.vim'
 hook_add = '''
-" let g:dein#install_log_filename='$HOME/.cache/dein/install.log'
 let g:dein#install_process_timeout = 600
 '''
 
@@ -95,9 +94,6 @@ nnoremap <silent> <Space>s :<C-u>Startify<CR>
 '''
 
 # colorscheme
-[[plugins]]
-repo     = 'rhysd/try-colorscheme.vim'
-
 # [[plugins]]
 # repo     = 'cocopon/iceberg.vim'
 # hook_add = '''
