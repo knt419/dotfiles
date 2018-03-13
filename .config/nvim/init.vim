@@ -179,6 +179,8 @@ if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
 endif
 
+autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
+
 set background=dark
 colorscheme bubblegum-256-dark
 syntax enable
