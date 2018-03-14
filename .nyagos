@@ -1,16 +1,16 @@
 -- set envs
---set {
---   PROMPT='$e[36;40;1m$p$e[37;1m$_$e[31;1m$$ $e[37;1m'
---}
+nyagos.env.GOROOT = "C:\\msys64\\mingw64\\lib\\go"
+nyagos.env.GOPATH = nyagos.env.HOME .. "\\go"
+nyagos.env.GOBIN = nyagos.env.GOPATH .. "\\bin"
 
 -- add pathes
 addpath "C:\\app\\OpenSSH-Win64"
 
 -- set aliases
 alias {
-  ll = "ls -la $*",
-  rm = "del $*",
-  mv = "move $*",
+    ll = "ls -la $*",
+    rm = "del $*",
+    mv = "move $*",
 }
 
 nyagos.env.prompt=nyagos.getenv('USERNAME') .. '@' .. nyagos.getenv('COMPUTERNAME') .. ' \u{e0b1} $P '
@@ -28,3 +28,5 @@ nyagos.prompt = function(this)
 
     return share.org_prompter('$e[30;44;1m'..prompt_message..'$e[34;40;1m\u{e0b0}$_$$$s'..'$e[0m')
 end
+
+-- vim:ft=lua
