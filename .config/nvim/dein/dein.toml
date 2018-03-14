@@ -24,7 +24,7 @@ let g:lightline = {
     \ },
     \ 'tabline': {
     \   'left': [['buffers']],
-    \   'right': [['repository','branch']]
+    \   'right': [['repository','branch','repostatus']]
     \ },
     \ 'component': {
     \   'lineinfo': "\ue0a1".'%3l:%-2v'
@@ -33,7 +33,8 @@ let g:lightline = {
     \    'readonly': 'LightlineReadonly',
     \    'repository': 'gina#component#repo#name',
     \    'branch': 'LightlineBranch',
-    \    'bufferinfo': 'lightline#buffer#bufferinfo'
+    \    'bufferinfo': 'lightline#buffer#bufferinfo',
+    \    'repostatus': 'LightlineRepoStatus'
     \ },
     \ 'component_expand': {
     \   'buffers': 'lightline#bufferline#buffers',
@@ -55,6 +56,14 @@ endfunction
 function! LightlineBranch()
     let branch = gina#component#repo#branch()
     return branch !=# '' ? "\ue0a0".branch : ''
+endfunction
+function! LightlineRepoStatus()
+    let ahead = gina#component#traffic#ahead() > 0 ?
+                \ gina#component#traffic#ahead()."\u2191" : ''
+    let behind = gina#component#traffic#behind() > 0 ?
+                \ gina#component#traffic#behind()."\u2193" : ''
+    let unstaged = gina#component#status#unstaged() > 0 ? ' +' : ''
+    return behind.ahead.unstaged
 endfunction
 '''
 
@@ -167,14 +176,6 @@ inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 repo     = 'junegunn/vim-easy-align'
 hook_add = '''
 vmap <CR> <Plug>(LiveEasyAlign)
-'''
-
-[[plugins]]
-repo     = 'tyru/caw.vim'
-on_map   = ['<Plug>(caw']
-hook_add = '''
-nmap <Space>c <Plug>(caw:hatpos:toggle)
-vmap <Space>c <Plug>(caw:hatpos:toggle)
 '''
 
 [[plugins]]

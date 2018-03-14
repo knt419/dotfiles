@@ -149,6 +149,14 @@ autocmd MyAutoCmd BufWrite * :Autoformat
 repo        = 'thinca/vim-qfreplace'
 
 [[plugins]]
+repo     = 'tyru/caw.vim'
+on_map   = ['<Plug>(caw']
+hook_add = '''
+nmap <Space>c <Plug>(caw:hatpos:toggle)
+vmap <Space>c <Plug>(caw:hatpos:toggle)
+'''
+
+[[plugins]]
 repo        = 'brooth/far.vim'
 on_cmd      = ['Far', 'Farp']
 
