@@ -62,7 +62,7 @@ function! LightlineRepoStatus()
                 \ gina#component#traffic#ahead()."\u2191" : ''
     let behind = gina#component#traffic#behind() > 0 ?
                 \ gina#component#traffic#behind()."\u2193" : ''
-    let unstaged = gina#component#status#unstaged() > 0 ? ' +' : ''
+    let unstaged = gina#component#status#unstaged() > 0 ? '+' : ''
     return behind.ahead.unstaged
 endfunction
 '''

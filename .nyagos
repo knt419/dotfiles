@@ -5,6 +5,7 @@ nyagos.env.GOBIN = nyagos.env.GOPATH .. "\\bin"
 
 -- add pathes
 addpath "C:\\app\\OpenSSH-Win64"
+addpath (nyagos.env.HOME .. "\\.fzf\\bin")
 
 -- set aliases
 alias {
