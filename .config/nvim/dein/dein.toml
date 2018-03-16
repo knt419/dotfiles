@@ -240,6 +240,7 @@ repo     = 'junegunn/fzf.vim'
 depends  = ['fzf']
 hook_add = '''
 nnoremap <Space>p :<C-u>History<CR>
+nnoremap <Space>r :<C-u>GFiles<CR>
 let g:fzf_layout = { 'down': '~70%' }
 '''
 

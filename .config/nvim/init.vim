@@ -56,73 +56,6 @@ set showcmd
 set noshowmode
 set iskeyword+=-
 " }}}
-" nvim {{{
-if has('nvim')
-    set inccommand=split
-    tnoremap <space>q <C-\><C-n>
-    tnoremap jj <C-\><C-n>
-    tnoremap <C-n> <C-\><C-n>:<C-u>bn<CR>
-    tnoremap <C-p> <C-\><C-n>:<C-u>bp<CR>
-    let g:terminal_color_0  = '#0c0c0c' " Black
-    let g:terminal_color_1  = '#d78787' " Red
-    let g:terminal_color_2  = '#afd787' " Green
-    let g:terminal_color_3  = '#f7f7af' " Yellow
-    let g:terminal_color_4  = '#87afd7' " Blue
-    let g:terminal_color_5  = '#d7afd7' " Magenta
-    let g:terminal_color_6  = '#afd7d7' " Cyan
-    let g:terminal_color_7  = '#e6e6e6' " White
-    let g:terminal_color_8  = '#0a0a0a' " BrightBlack
-    let g:terminal_color_9  = '#df8787' " BrightRed
-    let g:terminal_color_10 = '#afdf87' " BrightGreen
-    let g:terminal_color_11 = '#ffffaf' " BrightYellow
-    let g:terminal_color_12 = '#87afdf' " BrightBlue
-    let g:terminal_color_13 = '#dfafdf' " BrightMagenta
-    let g:terminal_color_14 = '#afdfdf' " BrightCyan
-    let g:terminal_color_15 = '#eeeeee' " BrightWhite
-endif
-"}}}
-filetype plugin indent on
-
-" keymap {{{
-nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
-nnoremap <silent> Y y$
-vnoremap <silent> v $h
-nnoremap <silent> j gj
-nnoremap <silent> k gk
-nnoremap <silent> x "_x
-nnoremap <silent> X "_X
-nnoremap <silent> ss :<C-u>%s//
-nnoremap <silent> U <C-r>
-nnoremap <silent> <BS> <C-^>
-nnoremap <silent> + <C-a>
-nnoremap <silent> - <C-x>
-noremap  <silent> <C-j> }
-noremap  <silent> <C-k> {
-noremap  <silent> <C-l> $
-noremap  <silent> <C-h> ^
-
-nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
-
-nnoremap <silent> : ;
-nnoremap <silent> ; :
-nnoremap <silent> <space>q :<C-u>bd<CR>
-nnoremap <silent> <space>w :<C-u>w<CR>:<C-u>bd<CR>
-nnoremap <silent> <space>e :<C-u>enew<CR>
-inoremap jj <Esc>
-
-inoremap <C-h> <C-g>U<Left>
-inoremap <C-l> <C-g>U<Right>
-inoremap <C-;> <C-g>U<C-o>$
-
-nnoremap <S-Left>  <C-w><
-nnoremap <S-Right> <C-w>>
-nnoremap <S-Up>    <C-w>-
-nnoremap <S-Down>  <C-w>+
-nnoremap <C-Left>  <C-w>h
-nnoremap <C-Right> <C-w>l
-nnoremap <C-Up>    <C-w>k
-nnoremap <C-Down>  <C-w>j
-" }}}
 
 " os specific
 if has('win32') || has('win64')
@@ -174,12 +107,81 @@ if dein#check_install()
 endif
 "}}}
 
+" nvim {{{
+if has('nvim')
+    set inccommand=split
+    tnoremap <Space>q <C-\><C-n>
+    tnoremap jj <C-\><C-n>
+    tnoremap <C-n> <C-\><C-n>:<C-u>bn<CR>
+    tnoremap <C-p> <C-\><C-n>:<C-u>bp<CR>
+    let g:terminal_color_0  = '#0c0c0c' " Black
+    let g:terminal_color_1  = '#d78787' " Red
+    let g:terminal_color_2  = '#afd787' " Green
+    let g:terminal_color_3  = '#f7f7af' " Yellow
+    let g:terminal_color_4  = '#87afd7' " Blue
+    let g:terminal_color_5  = '#d7afd7' " Magenta
+    let g:terminal_color_6  = '#afd7d7' " Cyan
+    let g:terminal_color_7  = '#e6e6e6' " White
+    let g:terminal_color_8  = '#0a0a0a' " BrightBlack
+    let g:terminal_color_9  = '#df8787' " BrightRed
+    let g:terminal_color_10 = '#afdf87' " BrightGreen
+    let g:terminal_color_11 = '#ffffaf' " BrightYellow
+    let g:terminal_color_12 = '#87afdf' " BrightBlue
+    let g:terminal_color_13 = '#dfafdf' " BrightMagenta
+    let g:terminal_color_14 = '#afdfdf' " BrightCyan
+    let g:terminal_color_15 = '#eeeeee' " BrightWhite
+endif
+"}}}
+filetype plugin indent on
+
+" keymap {{{
+nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
+nnoremap <silent> Y y$
+vnoremap <silent> v $h
+nnoremap <silent> j gj
+nnoremap <silent> k gk
+nnoremap <silent> x "_x
+nnoremap <silent> X "_X
+nnoremap <silent> ss :<C-u>%s//
+nnoremap <silent> U <C-r>
+nnoremap <silent> <BS> <C-^>
+nnoremap <silent> + <C-a>
+nnoremap <silent> - <C-x>
+noremap  <silent> <C-j> }
+noremap  <silent> <C-k> {
+noremap  <silent> <C-l> $
+noremap  <silent> <C-h> ^
+
+nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
+
+nnoremap <silent> : ;
+nnoremap <silent> ; :
+nnoremap <silent> <Space>q :<C-u>bd<CR>
+nnoremap <silent> <Space>w :<C-u>w<CR>:<C-u>bd<CR>
+nnoremap <silent> <Space>e :<C-u>enew<CR>
+inoremap jj <Esc>
+
+inoremap <C-h> <C-g>U<Left>
+inoremap <C-l> <C-g>U<Right>
+inoremap <C-;> <C-g>U<C-o>$
+
+nnoremap <S-Left>  <C-w><
+nnoremap <S-Right> <C-w>>
+nnoremap <S-Up>    <C-w>-
+nnoremap <S-Down>  <C-w>+
+nnoremap <C-Left>  <C-w>h
+nnoremap <C-Right> <C-w>l
+nnoremap <C-Up>    <C-w>k
+nnoremap <C-Down>  <C-w>j
+" }}}
+
+" autocmd
+autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
+
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
 endif
-
-autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
 
 set background=dark
 colorscheme bubblegum-256-dark
