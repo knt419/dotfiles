@@ -38,6 +38,14 @@ nyagos.alias.fd = function (args)
     end
 end
 
+nyagos.alias.gd = function (args)
+    output, err = nyagos.eval('ghq list --full-path|fzf')
+    if output ~= nil then
+        nyagos.write("cd: " .. output .. "\n")
+        nyagos.chdir(output)
+    end
+end
+
 nyagos.alias["."] = nyagos.alias.start
 
 nyagos.prompt = function(this)
