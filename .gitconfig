@@ -1,0 +1,15 @@
+[user]
+	name = knt419
+	email = knt419@gmail.com
+
+[url "git@github.com:"]
+    InsteadOf = https://github.com/
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[ghq]
+	root = ~/repo
