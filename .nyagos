@@ -1,21 +1,40 @@
 -- set envs
-nyagos.env.GOROOT = "C:\\msys64\\mingw64\\lib\\go"
-nyagos.env.GOPATH = nyagos.env.HOME .. "\\go"
-nyagos.env.GOBIN = nyagos.env.GOPATH .. "\\bin"
+nyagos.env.GOPATH                 = nyagos.env.HOME .. "\\go"
+nyagos.env.GOBIN                  = nyagos.env.GOPATH .. "\\bin"
+nyagos.env.FZF_DEFAULT_COMMAND    = 'ag --follow --nocolor --nogroup --hidden -g ""'
+nyagos.env.FZF_DEFAULT_OPTS       = '--reverse --ansi --select-1 --exit-0'
+nyagos.env.FZF_COMPLETION_TRIGGER = ',,'
+nyagos.env.FZF_CTRL_T_COMMAND     = '$FZF_DEFAULT_COMMAND'
+nyagos.env.XDG_CONFIG_HOME        = nyagos.env.HOME .. "\\.config"
+nyagos.env.XDG_CACHE_HOME         = nyagos.env.HOME .. "\\.cache"
+nyagos.env.XDG_DATA_HOME          = nyagos.env.HOME .. "\\.local\\share"
 
 -- add pathes
 addpath "C:\\app\\OpenSSH-Win64"
 addpath (nyagos.env.HOME .. "\\.fzf\\bin")
+addpath (nyagos.env.HOME .. "\\go\\bin")
 
 -- set aliases
 alias {
     ll = "ls -la $*",
-    rm = "del $*",
-    mv = "move $*",
+    rm = "del $*"
+    mv = "move $*"
+    rmdir = "rmdir /s /q $*"
 }
 
 nyagos.env.prompt=nyagos.getenv('USERNAME') .. '@' .. nyagos.getenv('COMPUTERNAME') .. ' \u{e0b1} $P '
 share.org_prompter=nyagos.prompt
+
+nyagos.alias.fd = function (args)
+    if args[1] then
+        output, err = nyagos.eval('files -a -d -m ' .. args[1] .. '|fzf')
+    else
+        output, err = nyagos.eval('files -a -d |fzf')
+    end
+    if output ~= nil then
+        nyagos.chdir(output)
+    end
+end
 
 nyagos.alias["."] = nyagos.alias.start
 
@@ -30,4 +49,4 @@ nyagos.prompt = function(this)
     return share.org_prompter('$e[30;44;1m'..prompt_message..'$e[34;40;1m\u{e0b0}$_$$$s'..'$e[0m')
 end
 
--- vim:ft=lua
+-- vim:set ft=lua:
