@@ -5,6 +5,7 @@ nyagos.env.FZF_DEFAULT_COMMAND    = 'ag --follow --nocolor --nogroup --hidden -g
 nyagos.env.FZF_DEFAULT_OPTS       = '--reverse --ansi --select-1 --exit-0'
 nyagos.env.FZF_COMPLETION_TRIGGER = ',,'
 nyagos.env.FZF_CTRL_T_COMMAND     = '$FZF_DEFAULT_COMMAND'
+nyagos.env.FILES_IGNORE_DIRECTORY = '^(AppData|.atom|.cache)$'
 nyagos.env.XDG_CONFIG_HOME        = nyagos.env.HOME .. "\\.config"
 nyagos.env.XDG_CACHE_HOME         = nyagos.env.HOME .. "\\.cache"
 nyagos.env.XDG_DATA_HOME          = nyagos.env.HOME .. "\\.local\\share"
@@ -17,8 +18,8 @@ addpath (nyagos.env.HOME .. "\\go\\bin")
 -- set aliases
 alias {
     ll = "ls -la $*",
-    rm = "del $*"
-    mv = "move $*"
+    rm = "del $*",
+    mv = "move $*",
     rmdir = "rmdir /s /q $*"
 }
 
@@ -27,11 +28,12 @@ share.org_prompter=nyagos.prompt
 
 nyagos.alias.fd = function (args)
     if args[1] then
-        output, err = nyagos.eval('files -a -d -m ' .. args[1] .. '|fzf')
+        output, err = nyagos.eval('files -a -d -I FILES_IGNORE_DIRECTORY -m ' .. args[1] .. '|fzf')
     else
-        output, err = nyagos.eval('files -a -d |fzf')
+        output, err = nyagos.eval('files -a -d -I FILES_IGNORE_DIRECTORY |fzf')
     end
     if output ~= nil then
+        nyagos.write("cd: " .. output .. "\n")
         nyagos.chdir(output)
     end
 end
