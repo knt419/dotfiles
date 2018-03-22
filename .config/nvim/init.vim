@@ -39,6 +39,7 @@ set virtualedit=block
 set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 set mouse=a
+set synmaxcol=200
 
 set ignorecase
 set smartcase
@@ -55,6 +56,8 @@ set wrap
 set showcmd
 set noshowmode
 set iskeyword+=-
+set linebreak
+set breakindent
 " }}}
 
 " os specific
