@@ -13,3 +13,5 @@
 
 [ghq]
 	root = ~/repo
+[push]
+	default = current
