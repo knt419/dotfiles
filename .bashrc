@@ -3,6 +3,7 @@
 [ -f $HOME/.git-prompt.sh ]       && source $HOME/.git-prompt.sh
 [ -f $HOME/.fzf.bash ]            && source $HOME/.fzf.bash
 [ -f $HOME/enhancd/init.sh ]      && source $HOME/enhancd/init.sh
+[ -f $HOME/.cargo/env ]           && source $HOME/.cargo/env
 
 # export BASE16_SHELL=$HOME/.config/base16-shell/
 # [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"

@@ -59,9 +59,9 @@ function! LightlineBranch()
 endfunction
 function! LightlineRepoStatus()
     let ahead = gina#component#traffic#ahead() > 0 ?
-                \ gina#component#traffic#ahead()."\u2191" : ''
+                \ "\u2191".gina#component#traffic#ahead() : ''
     let behind = gina#component#traffic#behind() > 0 ?
-                \ gina#component#traffic#behind()."\u2193" : ''
+                \ "\u2193".gina#component#traffic#behind() : ''
     let unstaged = gina#component#status#unstaged() > 0 ? '+' : ''
     return behind.ahead.unstaged
 endfunction
