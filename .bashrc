@@ -18,6 +18,9 @@ fi
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
+export GOPATH=$HOME/go
+export GOBIN=$GOPATH/bin
+export PATH=$PATH:$GOBIN
 export FZF_DEFAULT_COMMAND='ag --follow --nocolor --nogroup --hidden -g ""'
 export FZF_DEFAULT_OPTS='--reverse --ansi --select-1 --exit-0'
 export FZF_COMPLETION_TRIGGER=',,'
