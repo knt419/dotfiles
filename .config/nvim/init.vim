@@ -145,6 +145,7 @@ nnoremap <silent> j gj
 nnoremap <silent> k gk
 nnoremap <silent> x "_x
 nnoremap <silent> X "_X
+nnoremap <silent> cd :<C-u>cd %:h<CR>
 nnoremap <silent> ss :<C-u>%s//
 nnoremap <silent> U <C-r>
 nnoremap <silent> <BS> <C-^>
