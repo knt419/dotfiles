@@ -18,8 +18,8 @@ let g:lightline = {
     \      ['readonly', 'modified', 'linter_errors', 'linter_warnings', 'linter_ok'],
     \    ],
     \    'right': [
-    \      ['lineinfo', 'percent'],
-    \      ['fileformat', 'fileencoding', 'filetype']
+    \      ['lineinfo', 'percentage'],
+    \      ['filetype', 'fileformat', 'fileencoding']
     \    ]
     \ },
     \ 'tabline': {
@@ -27,7 +27,8 @@ let g:lightline = {
     \   'right': [['repository','branch','repostatus']]
     \ },
     \ 'component': {
-    \   'lineinfo': "\ue0a1".'%3l:%-2v'
+    \   'lineinfo': "\ue0a1".'%2l:%-v',
+    \   'percentage': '%p%%'
     \ },
     \ 'component_function': {
     \    'readonly': 'LightlineReadonly',
