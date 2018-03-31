@@ -146,7 +146,8 @@ nnoremap <silent> k gk
 nnoremap <silent> x "_x
 nnoremap <silent> X "_X
 nnoremap <silent> cd :<C-u>cd %:h<CR>
-nnoremap <silent> ss :<C-u>%s//
+nnoremap <silent> ss :<C-u>%s///g<Left><Left>
+xnoremap <expr> p 'pgv"'.v:register.'y`>'
 nnoremap <silent> U <C-r>
 nnoremap <silent> <BS> <C-^>
 nnoremap <silent> + <C-a>
