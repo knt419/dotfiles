@@ -58,6 +58,7 @@ set noshowmode
 set iskeyword+=-
 set linebreak
 set breakindent
+set showbreak=↪
 " }}}
 
 " os specific
