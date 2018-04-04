@@ -21,7 +21,11 @@ export XDG_DATA_HOME=$HOME/.local/share
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
 export PATH=$PATH:$GOBIN
-export FZF_DEFAULT_COMMAND='ag --follow --nocolor --nogroup --hidden -g ""'
+if type rg >/dev/null 2>&1; then
+    export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+else
+    export FZF_DEFAULT_COMMAND='ag --follow --nocolor --nogroup --hidden -g ""'
+fi
 export FZF_DEFAULT_OPTS='--reverse --ansi --select-1 --exit-0'
 export FZF_COMPLETION_TRIGGER=',,'
 export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
