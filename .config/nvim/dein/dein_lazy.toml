@@ -31,8 +31,8 @@ hook_post_source   = '''
 call denite#custom#option('default', 'prompt', '>')
 if executable('rg')
     call denite#custom#var('file_rec', 'command',
-        \ ['rg', '--files', '--glob', '!.git'])
-    call denite#custom#var('grep', 'command', ['rg', '--threads', '1'])
+        \ ['rg', '--files', '--glob', '!.git', '--hidden'])
+    call denite#custom#var('grep', 'command', ['rg', '--threads', '1', '--hidden'])
     call denite#custom#var('grep', 'default_opts',
         \ ['--vimgrep', '--no-heading'])
     call denite#custom#var('grep', 'recursive_opts', [])
