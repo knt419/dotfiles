@@ -124,6 +124,12 @@ repo     = 'Yggdroot/indentLine'
 repo     = 'lilydjwg/colorizer'
 
 [[plugins]]
+repo     = 'itchyny/vim-parenmatch'
+hook_add = '''
+let g:loaded_matchparen = 1
+'''
+
+[[plugins]]
 repo     = 'kana/vim-operator-user'
 
 [[plugins]]
