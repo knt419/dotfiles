@@ -145,8 +145,6 @@ filetype plugin indent on
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
 nnoremap <silent> Y y$
 vnoremap <silent> v $h
-nnoremap <silent> j gj
-nnoremap <silent> k gk
 nnoremap <silent> x "_x
 nnoremap <silent> X "_X
 nnoremap <silent> cd :<C-u>cd %:h<CR>
