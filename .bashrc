@@ -5,15 +5,12 @@
 [ -f $HOME/enhancd/init.sh ]      && source $HOME/enhancd/init.sh
 [ -f $HOME/.cargo/env ]           && source $HOME/.cargo/env
 
-# export BASE16_SHELL=$HOME/.config/base16-shell/
-# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
 # env
-export PS1=$'\[\e[30;104m\]\u@\h \[\e[94;40m\]\ue0b0 \w \ue0b1 `git rev-parse --abbrev-ref HEAD 2>/dev/null` \[\e[30;49m\]\ue0b0\n\[\e[94;49m\]$ \[\e[0m\]'
+export PS1=$'\[\e[30;44m\] \u@\h \[\e[34;47m\]\ue0b0 \[\e[30;47m\]\w \ue0b1 `git rev-parse --abbrev-ref HEAD 2>/dev/null` \[\e[37;40m\]\ue0b0\n\[\e[34;1m\]$ \[\e[0m\]'
 if [ -f $HOME/.git-prompt.sh ]; then
     export GIT_PS1_SHOWCOLORHINTS=true
     export GIT_PS1_SHOWUPSTREAM=true
-    export PS1=$'\[\e[30;104m\]\u@\h \[\e[94;40m\]\ue0b0 \w \ue0b1$(__git_ps1) \[\e[30;49m\]\ue0b0\n\[\e[94;49m\]$ \[\e[0m\]'
+    export PS1=$'\[\e[30;44m\] \u@\h \[\e[34;47m\]\ue0b0\[\e[30;47m\] \w \ue0b1$(__git_ps1) \[\e[37;40m\]\ue0b0\n\[\e[34;1m\]$ \[\e[0m\]'
 fi
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
@@ -36,7 +33,7 @@ shopt -s autocd
 set -o vi
 
 # alias
-if [ "$(uname)" == 'Darwin' ]; then
+if [ "$(uname)" == 'Darwin' ] || [ "$(uname)" == 'Linux' ]; then
     alias ls='ls -FG'
 else
     alias ls='ls --show-control-chars -F --color --ignore={NTUSER.*,ntuser.*}'
