@@ -6,11 +6,11 @@
 [ -f $HOME/.cargo/env ]           && source $HOME/.cargo/env
 
 # env
-export PS1=$'\[\e[30;44m\] \u@\h \[\e[34;47m\]\ue0b0 \[\e[30;47m\]\w \ue0b1 `git rev-parse --abbrev-ref HEAD 2>/dev/null` \[\e[37;40m\]\ue0b0\n\[\e[34;1m\]$ \[\e[0m\]'
+export PS1=$'\[\e[30;44;1m\] \u@\h \[\e[0m\e[34;47m\]\ue0b0 \[\e[30;47m\]\w \ue0b1 `git rev-parse --abbrev-ref HEAD 2>/dev/null` \[\e[0m\e[37m\]\ue0b0\n\[\e[34;1m\]$ \[\e[0m\]'
 if [ -f $HOME/.git-prompt.sh ]; then
     export GIT_PS1_SHOWCOLORHINTS=true
     export GIT_PS1_SHOWUPSTREAM=true
-    export PS1=$'\[\e[30;44m\] \u@\h \[\e[34;47m\]\ue0b0\[\e[30;47m\] \w \ue0b1$(__git_ps1) \[\e[37;40m\]\ue0b0\n\[\e[34;1m\]$ \[\e[0m\]'
+    export PS1=$'\[\e[30;44m\] \u@\h \[\e[0m\e[34;47m\]\ue0b0\[\e[30;47m\] \w \ue0b1$(__git_ps1) \[\e[0m\e[37m\]\ue0b0\n\[\e[34;1m\]$ \[\e[0m\]'
 fi
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
@@ -25,7 +25,7 @@ else
 fi
 export FZF_DEFAULT_OPTS='--reverse --ansi --select-1 --exit-0'
 export FZF_COMPLETION_TRIGGER=',,'
-export FZF_CTRL_T_COMMAND='$FZF_DEFAULT_COMMAND'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export NVIM_TUI_ENABLE_TRUE_COLOR=1
 
 # bash option
