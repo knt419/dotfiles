@@ -6,11 +6,11 @@
 [ -f $HOME/.cargo/env ]           && source $HOME/.cargo/env
 
 # env
-export PS1=$'\[\e[30;44;1m\] \u@\h \[\e[0m\e[34;47m\]\ue0b0 \[\e[30;47m\]\w \ue0b1 `git rev-parse --abbrev-ref HEAD 2>/dev/null` \[\e[0m\e[37m\]\ue0b0\n\[\e[34;1m\]$ \[\e[0m\]'
+export PS1=$'\[\e[30;104;1m\] \u@\h \[\e[0m\e[94;47m\]\ue0b0 \[\e[30;47m\]\w \ue0b1 `git rev-parse --abbrev-ref HEAD 2>/dev/null` \[\e[0m\e[37m\]\ue0b0\n\[\e[94;1m\]$ \[\e[0m\]'
 if [ -f $HOME/.git-prompt.sh ]; then
     export GIT_PS1_SHOWCOLORHINTS=true
     export GIT_PS1_SHOWUPSTREAM=true
-    export PS1=$'\[\e[30;44m\] \u@\h \[\e[0m\e[34;47m\]\ue0b0\[\e[30;47m\] \w \ue0b1$(__git_ps1) \[\e[0m\e[37m\]\ue0b0\n\[\e[34;1m\]$ \[\e[0m\]'
+    export PS1=$'\[\e[30;104m\] \u@\h \[\e[0m\e[94;47m\]\ue0b0\[\e[30;47m\] \w \ue0b1$(__git_ps1) \[\e[0m\e[37m\]\ue0b0\n\[\e[94;1m\]$ \[\e[0m\]'
 fi
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
@@ -41,7 +41,6 @@ fi
 alias ...='cd ../..'
 alias ....='cd ../../..'
 alias vi=nvim
-
 
 # command
 
