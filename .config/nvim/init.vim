@@ -11,16 +11,19 @@ endif
 
 set nobackup
 set noswapfile
+set backupdir-=.
 " set autoread
 set hidden
 set switchbuf=useopen
 set confirm
 set number
 set ruler
+set scrolloff=5
 set foldmethod=marker
 set foldenable
 set foldlevelstart=10
 set title
+set lazyredraw
 
 set showmatch
 set matchtime=1
@@ -46,6 +49,8 @@ set smartcase
 set incsearch
 set wrapscan
 set hlsearch
+
+set diffopt=filler,vertical
 
 set laststatus=2
 set cmdheight=2
