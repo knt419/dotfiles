@@ -10,6 +10,7 @@ if has('termguicolors')
 endif
 
 set nobackup
+set nowritebackup
 set noswapfile
 set backupdir-=.
 " set autoread
@@ -33,7 +34,7 @@ set shiftwidth=4
 set smartindent
 set autoindent
 
-set clipboard=unnamed
+set clipboard=unnamedplus
 set cursorline
 set nostartofline
 set list
@@ -57,6 +58,7 @@ set cmdheight=2
 set showtabline=2
 set guioptions-=e
 set wildmenu
+set wildmode=list:longest
 set wrap
 set showcmd
 set noshowmode
@@ -122,8 +124,8 @@ if has('nvim')
     set inccommand=split
     tnoremap <Space>q <C-\><C-n>
     tnoremap jj <C-\><C-n>
-    tnoremap <C-n> <C-\><C-n>:<C-u>bn<CR>
-    tnoremap <C-p> <C-\><C-n>:<C-u>bp<CR>
+    tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
+    tnoremap <S-t> <C-\><C-n>:<C-u>bp<CR>
     let g:terminal_color_0  = '#0c0c0c' " Black
     let g:terminal_color_1  = '#d78787' " Red
     let g:terminal_color_2  = '#afd787' " Green
@@ -152,7 +154,7 @@ nnoremap <silent> x "_x
 nnoremap <silent> X "_X
 nnoremap <silent> cd :<C-u>cd %:h<CR>
 nnoremap <silent> ss :<C-u>%s///g<Left><Left>
-xnoremap <expr> p 'pgv"'.v:register.'y`>'
+xnoremap <silent> <expr> p 'pgv"'.v:register.'y`>'
 nnoremap <silent> U <C-r>
 nnoremap <silent> <BS> <C-^>
 nnoremap <silent> + <C-a>

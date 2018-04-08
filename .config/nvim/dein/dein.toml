@@ -109,8 +109,10 @@ let g:lightline#colorscheme#seoul256mod#palette = lightline#colorscheme#flatten(
 [[plugins]]
 repo     = 'mgee/lightline-bufferline'
 hook_add = '''
-nnoremap <C-n> :bn<CR>
-nnoremap <C-p> :bp<CR>
+"nnoremap <C-n> :bn<CR>
+"nnoremap <C-p> :bp<CR>
+nnoremap <C-t> :bn<CR>
+nnoremap <S-t> :bp<CR>
 '''
 
 [[plugins]]
@@ -262,6 +264,20 @@ map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
 map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
 map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
 '''
+
+[[plugins]]
+repo     = 'terryma/vim-multiple-cursors'
+# hook_add = '''
+# let g:multi_cursor_use_default_mapping = 0
+# let g:multi_cursor_start_word_key      = '<S-Space>'
+# let g:multi_cursor_select_all_word_key = '<C-Space>'
+# let g:multi_cursor_start_key           = 'g<S-Space>'
+# let g:multi_cursor_select_all_key      = 'g<C-Space>'
+# let g:multi_cursor_next_key            = '<S-l>'
+# let g:multi_cursor_prev_key            = '<S-h>'
+# let g:multi_cursor_skip_key            = '<C-x>'
+# let g:multi_cursor_quit_key            = '<Esc>'
+# '''
 
 # file util
 [[plugins]]
