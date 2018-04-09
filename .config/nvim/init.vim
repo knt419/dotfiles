@@ -58,7 +58,7 @@ set cmdheight=2
 set showtabline=2
 set guioptions-=e
 set wildmenu
-set wildmode=list:longest
+set wildmode=list:full
 set wrap
 set showcmd
 set noshowmode
