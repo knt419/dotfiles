@@ -52,5 +52,12 @@ fd() {
   cd "$dir"
 }
 
+# gd - cd to selected local repository
+gd() {
+    local dir
+    dir=$(ghq list --full-path | fzf +m) &&
+    cd "$dir"
+}
+
 # local
 [ -f $HOME/.bashrc_local ]        && source $HOME/.bashrc_local
