@@ -76,6 +76,7 @@ if has('win32') || has('win64')
     set shell=cmd.exe
     set shellcmdflag=/c
 endif
+
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 let &t_SR = "\<Esc>]50;CursorShape=2\x7"
@@ -191,6 +192,7 @@ nnoremap <C-Down>  <C-w>j
 
 " autocmd
 autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
+autocmd MyAutoCmd VimResized * exe "normal \<C-w>="
 
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
