@@ -13,6 +13,8 @@ set nobackup
 set nowritebackup
 set noswapfile
 set backupdir-=.
+set nofsync
+set swapsync=
 " set autoread
 set hidden
 set switchbuf=useopen
@@ -33,6 +35,7 @@ set expandtab
 set shiftwidth=4
 set smartindent
 set autoindent
+set complete=.,w,b,u
 
 set clipboard=unnamedplus
 set cursorline
@@ -73,10 +76,10 @@ if has('win32') || has('win64')
     set shellslash
     set shell=cmd.exe
     set shellcmdflag=/c
-elseif has('mac')
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 
 " reset autocmd
 augroup MyAutoCmd
