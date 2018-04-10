@@ -14,7 +14,6 @@ set nowritebackup
 set noswapfile
 set backupdir-=.
 set nofsync
-set swapsync=
 " set autoread
 set hidden
 set switchbuf=useopen
