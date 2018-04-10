@@ -273,6 +273,7 @@ repo     = 'terryma/vim-multiple-cursors'
 repo     = 'cocopon/vaffle.vim'
 hook_add = '''
 let g:vaffle_show_hidden_files = 1
+let g:loaded_netrwPlugin = 1
 nnoremap <Space>v :<C-u>Vaffle<CR>
 autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
 '''
@@ -280,7 +281,7 @@ autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
 [[plugins]]
 repo     = 'airblade/vim-rooter'
 hook_add = '''
-let g:rooter_change_directory_for_non_project_files = 'current'
+let g:rooter_change_directory_for_non_project_files = 'home'
 '''
 
 [[plugins]]

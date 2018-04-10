@@ -13,6 +13,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set backupdir-=.
+set nofsync
 " set autoread
 set hidden
 set switchbuf=useopen
@@ -33,6 +34,7 @@ set expandtab
 set shiftwidth=4
 set smartindent
 set autoindent
+set complete=.,w,b,u
 
 set clipboard=unnamedplus
 set cursorline
@@ -58,7 +60,7 @@ set cmdheight=2
 set showtabline=2
 set guioptions-=e
 set wildmenu
-set wildmode=list:longest
+set wildmode=list:full
 set wrap
 set showcmd
 set noshowmode
@@ -73,10 +75,11 @@ if has('win32') || has('win64')
     set shellslash
     set shell=cmd.exe
     set shellcmdflag=/c
-elseif has('mac')
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
+
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
 
 " reset autocmd
 augroup MyAutoCmd
@@ -189,6 +192,7 @@ nnoremap <C-Down>  <C-w>j
 
 " autocmd
 autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
+autocmd MyAutoCmd VimResized * exe "normal \<C-w>="
 
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
