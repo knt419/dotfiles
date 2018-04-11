@@ -23,7 +23,7 @@ alias {
     rmdir = "rmdir /s /q $*"
 }
 
-nyagos.env.prompt=nyagos.getenv('USERNAME') .. '@' .. nyagos.getenv('COMPUTERNAME') .. ' \u{e0b1} $P '
+nyagos.env.prompt=' ' .. nyagos.getenv('USERNAME') .. '@' .. nyagos.getenv('COMPUTERNAME') .. ' $e[94;47m\u{e0b0}$e[30;47m $P '
 share.org_prompter=nyagos.prompt
 
 nyagos.alias.fd = function (args)
@@ -56,7 +56,7 @@ nyagos.prompt = function(this)
         prompt_message = prompt_message .. '\u{e0b1} \u{e0a0}' .. git_branch_name .. ' '
     end
 
-    return share.org_prompter('$e[30;44;1m'..prompt_message..'$e[34;40;1m\u{e0b0}$_$$$s'..'$e[0m')
+    return share.org_prompter('$e[30;104;1m'..prompt_message..'$e[0m$e[37m\u{e0b0}$_$e[94;1m$$$s'..'$e[0m')
 end
 
 -- vim:set ft=lua:
