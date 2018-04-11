@@ -245,19 +245,10 @@ nmap ge <Plug>(smartword-ge)
 [[plugins]]
 repo     = 'haya14busa/vim-asterisk'
 on_map   = ['<Plug>(asterisk-']
-hook_add = '''
-map *   <Plug>(asterisk-*)
-map #   <Plug>(asterisk-#)
-map g*  <Plug>(asterisk-g*)
-map g#  <Plug>(asterisk-g#)
-map z*  <Plug>(asterisk-z*)
-map gz* <Plug>(asterisk-gz*)
-map z#  <Plug>(asterisk-z#)
-map gz# <Plug>(asterisk-gz#)
-'''
 
 [[plugins]]
 repo     = 'haya14busa/is.vim'
+on_map   = ['<Plug>(asterisk-']
 hook_add = '''
 map *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)
 map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
