@@ -109,8 +109,6 @@ endfunction
 [[plugins]]
 repo     = 'mgee/lightline-bufferline'
 hook_add = '''
-"nnoremap <C-n> :bn<CR>
-"nnoremap <C-p> :bp<CR>
 nnoremap <C-t> :bn<CR>
 nnoremap <S-t> :bp<CR>
 '''
@@ -167,7 +165,7 @@ nnoremap <silent> <Space>s :<C-u>Startify<CR>
 #
 # [[plugins]]
 # repo     = 'baskerville/bubblegum'
-
+#
 # [[plugins]]
 # repo     = 'w0ng/vim-hybrid'
 #
