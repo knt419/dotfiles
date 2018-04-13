@@ -169,8 +169,8 @@ nnoremap <silent> <Space>s :<C-u>Startify<CR>
 # [[plugins]]
 # repo     = 'w0ng/vim-hybrid'
 #
-#[[plugins]]
-#repo     = 'morhetz/gruvbox'
+# [[plugins]]
+# repo     = 'morhetz/gruvbox'
 
 [[plugins]]
 repo     = 'shinchu/lightline-gruvbox.vim'
