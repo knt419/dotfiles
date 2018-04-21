@@ -24,7 +24,7 @@ set scrolloff=5
 set foldmethod=marker
 set foldenable
 set foldlevelstart=10
-set title
+" set title
 set lazyredraw
 
 set showmatch
