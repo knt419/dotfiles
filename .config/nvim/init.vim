@@ -125,6 +125,7 @@ endif
 " nvim {{{
 if has('nvim')
     set inccommand=split
+    nnoremap <Space>t :<C-u>terminal<CR>:setlocal nonumber<CR>
     tnoremap <Space>q <C-\><C-n>
     tnoremap jj <C-\><C-n>
     tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>

@@ -18,7 +18,7 @@ let g:deoplete#max_list = 10000
 
 [[plugins]]
 repo        = 'Shougo/denite.nvim'
-depends     = ['neoyank.vim', 'neomru.vim', 'denite-rails']
+depends     = ['neoyank.vim', 'neomru.vim']
 hook_add    = '''
 nnoremap <silent> <Space>f :<C-u>Denite file_rec<CR>
 nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>

@@ -182,17 +182,17 @@ repo     = 'AlessandroYorba/Alduin'
 #repo     = 'mdlerch/tungsten.vim'
 
 # code check
-[[plugins]]
-repo     = 'scrooloose/syntastic'
-if       = '!has("nvim") && ( !has("job") || !has("channel") || !has("timers") )'
-hook_add = '''
-set statusline+=%#warningmsg#
-set statusline+=%*
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list            = 1
-let g:syntastic_check_on_open            = 1
-let g:syntastic_check_on_wq              = 0
-'''
+# [[plugins]]
+# repo     = 'scrooloose/syntastic'
+# if       = '!has("nvim") && ( !has("job") || !has("channel") || !has("timers") )'
+# hook_add = '''
+# set statusline+=%#warningmsg#
+# set statusline+=%*
+# let g:syntastic_always_populate_loc_list = 1
+# let g:syntastic_auto_loc_list            = 1
+# let g:syntastic_check_on_open            = 1
+# let g:syntastic_check_on_wq              = 0
+# '''
 
 [[plugins]]
 repo     = 'w0rp/ale'
@@ -320,13 +320,13 @@ repo     = 'cespare/vim-toml'
 on_ft    = 'toml'
 
 # other tools
-[[plugins]]
-repo     = 'kassio/neoterm'
-if       = 'has("nvim")'
-hook_add = '''
-let g:neoterm_autoinsert = 1
-silent! nnoremap <unique> <Space>t :<C-u>enew<CR>:Tnew<CR>
-'''
+# [[plugins]]
+# repo     = 'kassio/neoterm'
+# if       = 'has("nvim")'
+# hook_add = '''
+# let g:neoterm_autoinsert = 1
+# silent! nnoremap <unique> <Space>t :<C-u>enew<CR>:Tnew<CR>
+# '''
 
 [[plugins]]
 repo     = 'mhinz/neovim-remote'
@@ -334,9 +334,6 @@ if       = 'has("nvim")'
 hook_add = '''
 let $VISUAL = 'nvr --remote-wait'
 '''
-
-[[plugins]]
-repo     = 'kannokanno/previm'
 
 [[plugins]]
 repo     = 'lambdalisue/gina.vim'
