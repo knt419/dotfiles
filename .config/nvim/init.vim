@@ -195,6 +195,12 @@ nnoremap <C-Down>  <C-w>j
 autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd MyAutoCmd VimResized * exe "normal \<C-w>="
 
+augroup AutoCursorline
+  autocmd!
+  autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
+  autocmd CursorHold,CursorHoldI * setlocal cursorline
+augroup END
+
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
