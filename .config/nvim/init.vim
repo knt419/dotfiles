@@ -125,7 +125,7 @@ endif
 " nvim {{{
 if has('nvim')
     set inccommand=split
-    nnoremap <Space>t :<C-u>terminal<CR>:setlocal nonumber<CR>
+    nnoremap <Space>t :<C-u>terminal<CR>
     tnoremap <Space>q <C-\><C-n>
     tnoremap jj <C-\><C-n>
     tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
@@ -195,7 +195,7 @@ nnoremap <C-Down>  <C-w>j
 autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd MyAutoCmd VimResized * exe "normal \<C-w>="
 autocmd MyAutoCmd FileType * execute 'setlocal ' . (search('^\t.*\n\t.*\n\t', 'n') ? 'no' : '') . 'expandtab'
-autocmd MyAutoCmd BufWinEnter * if &buftype == 'terminal' | setlocal nonumber | endif
+autocmd MyAutoCmd TermOpen setlocal nonumber
 
 augroup AutoCursorline
   autocmd!
