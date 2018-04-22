@@ -18,7 +18,7 @@ let g:deoplete#max_list = 10000
 
 [[plugins]]
 repo        = 'Shougo/denite.nvim'
-depends     = ['neoyank.vim', 'neomru.vim', 'denite-rails']
+depends     = ['neoyank.vim', 'neomru.vim']
 hook_add    = '''
 nnoremap <silent> <Space>f :<C-u>Denite file_rec<CR>
 nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>
@@ -143,9 +143,9 @@ on_ft       = 'python'
 repo        = 'Shougo/neco-vim'
 on_ft       = 'vim'
 
-[[plugins]]
-repo        = '5t111111/denite-rails'
-on_ft       = 'ruby'
+# [[plugins]]
+# repo        = '5t111111/denite-rails'
+# on_ft       = 'ruby'
 
 # [[plugins]]
 # repo        = 'uplus/deoplete-solargraph'
@@ -169,12 +169,15 @@ vmap <Space>c <Plug>(caw:hatpos:toggle)
 '''
 
 [[plugins]]
+repo        = 'tpope/vim-surround'
+
+[[plugins]]
 repo        = 'brooth/far.vim'
 on_cmd      = ['Far', 'Farp']
 
 [[plugins]]
 repo        = 'rhysd/try-colorscheme.vim'
-on_cmd      = ['TryColorSchema']
+on_cmd      = ['TryColorscheme']
 
 [[plugins]]
 repo        = 'y0za/vim-reading-vimrc'

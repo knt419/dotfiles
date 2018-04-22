@@ -24,7 +24,7 @@ set scrolloff=5
 set foldmethod=marker
 set foldenable
 set foldlevelstart=10
-set title
+" set title
 set lazyredraw
 
 set showmatch
@@ -125,6 +125,7 @@ endif
 " nvim {{{
 if has('nvim')
     set inccommand=split
+    nnoremap <Space>t :<C-u>terminal<CR>
     tnoremap <Space>q <C-\><C-n>
     tnoremap jj <C-\><C-n>
     tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
@@ -192,8 +193,16 @@ nnoremap <C-Down>  <C-w>j
 
 " autocmd
 autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
-autocmd MyAutoCmd VimResized * exe "normal \<C-w>="
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
+autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
+autocmd MyAutoCmd FileType * execute 'setlocal ' . (search('^\t.*\n\t.*\n\t', 'n') ? 'no' : '') . 'expandtab'
+autocmd MyAutoCmd TermOpen setlocal nonumber
+
+augroup AutoCursorline
+  autocmd!
+  autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
+  autocmd CursorHold,CursorHoldI * setlocal cursorline
+augroup END
 
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
