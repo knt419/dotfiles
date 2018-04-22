@@ -169,6 +169,9 @@ vmap <Space>c <Plug>(caw:hatpos:toggle)
 '''
 
 [[plugins]]
+repo        = 'tpope/vim-surround'
+
+[[plugins]]
 repo        = 'brooth/far.vim'
 on_cmd      = ['Far', 'Farp']
 

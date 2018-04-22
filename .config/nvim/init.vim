@@ -193,7 +193,7 @@ nnoremap <C-Down>  <C-w>j
 
 " autocmd
 autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
-autocmd MyAutoCmd VimResized * exe "normal \<C-w>="
+autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
 autocmd MyAutoCmd FileType * execute 'setlocal ' . (search('^\t.*\n\t.*\n\t', 'n') ? 'no' : '') . 'expandtab'
 autocmd MyAutoCmd TermOpen setlocal nonumber
 
