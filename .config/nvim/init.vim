@@ -193,6 +193,7 @@ nnoremap <C-Down>  <C-w>j
 " autocmd
 autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd MyAutoCmd VimResized * exe "normal \<C-w>="
+autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
