@@ -196,7 +196,7 @@ autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
 autocmd MyAutoCmd FileType * execute 'setlocal ' . (search('^\t.*\n\t.*\n\t', 'n') ? 'no' : '') . 'expandtab'
-autocmd MyAutoCmd TermOpen setlocal nonumber
+autocmd MyAutoCmd TermOpen * setlocal nonumber
 
 augroup AutoCursorline
   autocmd!

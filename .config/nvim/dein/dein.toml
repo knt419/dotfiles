@@ -266,8 +266,8 @@ map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
 [[plugins]]
 repo     = 'terryma/vim-multiple-cursors'
 
-# [[plugins]]
-# repo        = 'tpope/vim-surround'
+[[plugins]]
+repo        = 'tpope/vim-surround'
 
 # file util
 [[plugins]]
