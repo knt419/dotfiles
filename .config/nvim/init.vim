@@ -197,12 +197,8 @@ autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
 autocmd MyAutoCmd FileType * execute 'setlocal ' . (search('^\t.*\n\t.*\n\t', 'n') ? 'no' : '') . 'expandtab'
 autocmd MyAutoCmd TermOpen * setlocal nonumber
-
-augroup AutoCursorline
-  autocmd!
-  autocmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
-  autocmd CursorHold,CursorHoldI * setlocal cursorline
-augroup END
+autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * setlocal nocursorline
+autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline
 
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
