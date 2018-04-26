@@ -189,6 +189,15 @@ nnoremap <C-Left>  <C-w>h
 nnoremap <C-Right> <C-w>l
 nnoremap <C-Up>    <C-w>k
 nnoremap <C-Down>  <C-w>j
+
+" keymap for japanese ime
+nnoremap あ a
+nnoremap い i
+nnoremap う u
+nnoremap お o
+nnoremap っd dd
+nnoremap っy yy
+inoremap っj <ESC>
 " }}}
 
 " autocmd
