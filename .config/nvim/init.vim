@@ -37,7 +37,6 @@ set autoindent
 set complete=.,w,b,u
 
 set clipboard=unnamedplus
-set cursorline
 set nostartofline
 set list
 set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
@@ -201,20 +200,20 @@ inoremap っj <ESC>
 " }}}
 
 " autocmd
-let s:ishold=1
+let g:ishold = 1
 autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
 autocmd MyAutoCmd FileType * execute 'setlocal ' . (search('^\t.*\n\t.*\n\t', 'n') ? 'no' : '') . 'expandtab'
 autocmd MyAutoCmd TermOpen * setlocal nonumber
-autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if s:ishold==1 | call Cursor_moved() | endif
+autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if g:ishold == 1 | call Cursor_moved() | endif
 autocmd MyAutoCmd CursorHold,CursorHoldI * call Cursor_hold()
 function Cursor_moved()
-    let s:ishold=0
+    let g:ishold = 0
     setlocal nocursorline
 endfunction
 function Cursor_hold()
-    let s:ishold=1
+    let g:ishold = 1
     setlocal cursorline
 endfunction
 
