@@ -73,7 +73,7 @@ set showbreak=↪
 if has('win32') || has('win64')
     set shellslash
     set shell=cmd.exe
-    set shellcmdflag=/c
+    set shellcmdflag='/s /c'
 endif
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
