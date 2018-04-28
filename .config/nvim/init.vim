@@ -24,7 +24,6 @@ set scrolloff=5
 set foldmethod=marker
 set foldenable
 set foldlevelstart=10
-" set title
 set lazyredraw
 
 set showmatch
@@ -72,8 +71,6 @@ set showbreak=↪
 " os specific
 if has('win32') || has('win64')
     set shellslash
-    set shell=cmd.exe
-    set shellcmdflag='/s /c'
 endif
 
 let &t_SI = "\<Esc>]50;CursorShape=1\x7"
