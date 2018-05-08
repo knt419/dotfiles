@@ -8,7 +8,7 @@ let g:dein#install_process_timeout = 600
 # UI
 [[plugins]]
 repo     = 'itchyny/lightline.vim'
-depends  = ['iceberg.vim', 'lightline-bufferline', 'lightline-ale', 'gina.vim', 'gruvbox.vim']
+depends  = ['lightline-bufferline', 'lightline-ale', 'gina.vim', 'lightline-gruvbox.vim']
 hook_add = '''
 let g:lightline = {
     \ 'colorscheme': 'gruvbox',
@@ -24,7 +24,7 @@ let g:lightline = {
     \ },
     \ 'tabline': {
     \   'left': [['buffers']],
-    \   'right': [['repository','branch','repostatus']]
+    \   'right': [['repostatus','branch','repository']]
     \ },
     \ 'component': {
     \   'lineinfo': "\ue0a1".'%2l:%-v',
