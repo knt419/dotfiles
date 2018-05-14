@@ -1,2 +1,2 @@
 " Guifont! Cica:h14
-Guifont! Ricty Diminished for Powerline:h14
+Guifont! RictyDiminished NF:h14
