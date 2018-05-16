@@ -128,6 +128,13 @@ repo     = 'itchyny/vim-parenmatch'
 hook_add = '''
 let g:loaded_matchparen = 1
 '''
+[[plugins]]
+repo     = 'ryanoasis/vim-devicons'
+hook_add = '''
+function! StartifyEntryFormat()
+    return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction
+'''
 
 [[plugins]]
 repo     = 'kana/vim-operator-user'
@@ -304,8 +311,8 @@ let g:fzf_layout = { 'down': '~70%' }
 repo     = 'fatih/vim-go'
 on_ft    = 'go'
 hook_add = '''
-autocmd MyAutoCmd FileType go nnoremap gr (go-run)
-autocmd MyAutoCmd FileType go nnoremap gt (go-test)
+autocmd MyAutoCmd FileType go nnoremap <buffer> gr (go-run)
+autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
 autocmd MyAutoCmd FileType go :highlight goErr cterm=bold ctermfg=214
 autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
