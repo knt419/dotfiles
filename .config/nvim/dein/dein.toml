@@ -122,6 +122,11 @@ repo     = 'Yggdroot/indentLine'
 
 [[plugins]]
 repo     = 'ryanoasis/vim-devicons'
+hook_add = '''
+function! StartifyEntryFormat()
+    return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction
+'''
 
 [[plugins]]
 repo     = 'lilydjwg/colorizer'
@@ -133,13 +138,6 @@ repo     = 'junegunn/limelight.vim'
 repo     = 'itchyny/vim-parenmatch'
 hook_add = '''
 let g:loaded_matchparen = 1
-'''
-[[plugins]]
-repo     = 'ryanoasis/vim-devicons'
-hook_add = '''
-function! StartifyEntryFormat()
-    return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
-endfunction
 '''
 
 [[plugins]]
