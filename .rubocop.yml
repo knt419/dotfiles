@@ -9,3 +9,9 @@ MethodLength:
 
 CyclomaticComplexity:
     Enabled: false
+
+Documentation:
+    Enabled: false
+
+Metrics/AbcSize:
+    Max: 20
