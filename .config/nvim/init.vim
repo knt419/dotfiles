@@ -82,39 +82,58 @@ augroup MyAutoCmd
     autocmd!
 augroup END
 
-" dein {{{
 if &compatible
     set  nocompatible
 endif
 
+let g:plugin_mgr = 'dein'
+
 let g:vim_indent_cont = &shiftwidth * 3
 
-let s:dein_dir = expand('$HOME/.cache/dein')
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+" dein {{{
+if g:plugin_mgr == 'dein'
 
-if &runtimepath !~# '/dein.vim'
-    if !isdirectory(s:dein_repo_dir)
-        execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+    let s:dein_dir = expand('$HOME/.cache/dein')
+    let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
+
+    if &runtimepath !~# '/dein.vim'
+        if !isdirectory(s:dein_repo_dir)
+            execute '!git clone https://github.com/Shougo/dein.vim' s:dein_repo_dir
+        endif
+        execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
     endif
-    execute 'set runtimepath^=' . fnamemodify(s:dein_repo_dir, ':p')
+
+    if dein#load_state(s:dein_dir)
+        call dein#begin(s:dein_dir)
+
+        let g:rc_dir    = expand('$HOME/.config/nvim/dein')
+        let s:toml      = g:rc_dir . '/dein.toml'
+        let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+
+        call dein#load_toml(s:toml,      {'lazy': 0})
+        call dein#load_toml(s:lazy_toml, {'lazy': 1})
+        call dein#end()
+        call dein#save_state()
+    endif
+
+    "if there is something not installed, install it
+    if dein#check_install()
+        call dein#install()
+    endif
 endif
+"}}}
 
-if dein#load_state(s:dein_dir)
-    call dein#begin(s:dein_dir)
+" vimplug {{{
+if g:plugin_mgr == 'vimplug'
+    let s:plug_dir = expand('$HOME/.cache/plug')
+    let s:plug_repo_dir = s:plug_dir . '/repos/github.com/junegunn/vim-plug'
 
-    let g:rc_dir    = expand('$HOME/.config/nvim/dein')
-    let s:toml      = g:rc_dir . '/dein.toml'
-    let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
-
-    call dein#load_toml(s:toml,      {'lazy': 0})
-    call dein#load_toml(s:lazy_toml, {'lazy': 1})
-    call dein#end()
-    call dein#save_state()
-endif
-
-"if there is something not installed, install it
-if dein#check_install()
-    call dein#install()
+    if &runtimepath !~# '/vim-plug'
+        if !isdirectory(s:plug_repo_dir)
+            execute '!git clone https://github.com/junegunn/vim-plug' s:plug_repo_dir
+        endif
+        execute 'set runtimepath^=' . fnamemodify(s:plug_repo_dir, ':p')
+    endif
 endif
 "}}}
 
