@@ -7,17 +7,12 @@ Plug 'Shougo/neosnippet'
 Plug 'honza/vim-snippets'
 Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neco-syntax'
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'Chiel92/vim-autoformat'
 Plug 'thinca/vim-qfreplace'
 Plug 'tyru/caw.vim'
 Plug 'brooth/far.vim', { 'on': ['Far','Farp'] }
 Plug 'rhysd/try-colorscheme.vim', { 'on': 'TryColorscheme' }
 Plug 'y0za/vim-reading-vimrc', { 'on': ['ReadingVimrcList', 'ReadingVimrcLoad', 'ReadingVimrcNext'] }
-Plug 'rhysd/nyaovim-popup-tooltip'
-Plug 'rhysd/nyaovim-markdown-preview'
-Plug 'rhysd/nyaovim-mini-browser'
 Plug 'itchyny/lightline.vim'
 Plug 'mgee/lightline-bufferline'
 Plug 'maximbaz/lightline-ale'
@@ -46,11 +41,19 @@ Plug 'cocopon/vaffle.vim'
 Plug 'airblade/vim-rooter'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install -all' }
 Plug 'junegunn/fzf.vim'
-Plug 'fatih/vim-go'
-Plug 'tpope/vim-rails'
-Plug 'cespare/vim-toml'
 Plug 'mhinz/neovim-remote'
 Plug 'lambdalisue/gina.vim'
+Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'Shougo/neco-vim', { 'for': 'vim' }
+Plug 'cespare/vim-toml', { 'for': 'toml' }
+
+if exists('g:nyaovim_version')
+    Plug 'rhysd/nyaovim-popup-tooltip'
+    Plug 'rhysd/nyaovim-markdown-preview'
+    Plug 'rhysd/nyaovim-mini-browser'
+endif
 
 call plug#end()
 
@@ -101,9 +104,9 @@ let g:lightline = {
             \ 'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
             \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
             \ }
-let g:loaded_matchparen = 1
+let g:loaded_matchparen          = 1
 let g:operator#flashy#flash_time = 300
-let g:operator#flashy#group = 'Visual'
+let g:operator#flashy#group      = 'Visual'
 
 let g:ale_linters = {
             \ 'ruby': ['rubocop'],
@@ -113,9 +116,9 @@ let g:ale_fixers = {
             \ }
 
 let g:vaffle_show_hidden_files = 1
-let g:loaded_netrwPlugin = 1
+let g:loaded_netrwPlugin       = 1
+let g:fzf_layout               = { 'down': '~70%' }
 let g:rooter_change_directory_for_non_project_files = 'home'
-let g:fzf_layout = { 'down': '~70%' }
 
 let g:go_hightlight_functions         = 1
 let g:go_hightlight_methods           = 1
@@ -126,16 +129,16 @@ let g:go_hightlight_build_constraints = 1
 let g:go_fmt_command                  = "goimports"
 let $VISUAL = 'nvr --remote-wait'
 
-let g:deoplete#enable_at_startup = 1
+let g:deoplete#enable_at_startup       = 1
 let g:deoplete#source#go#gocode_binary = '$HOME/go/bin/gocode'
-let g:deoplete#auto_complete_delay = 0
-let g:deoplete#enable_camel_case = 0
-let g:deoplete#enable_ignore_case = 0
-let g:deoplete#enable_refresh_always = 0
-let g:deoplete#auto_refresh_delay = 100
-let g:deoplete#enable_smart_case = 1
+let g:deoplete#auto_complete_delay     = 0
+let g:deoplete#enable_camel_case       = 0
+let g:deoplete#enable_ignore_case      = 0
+let g:deoplete#enable_refresh_always   = 0
+let g:deoplete#auto_refresh_delay      = 100
+let g:deoplete#enable_smart_case       = 1
 let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#max_list = 10000
+let g:deoplete#max_list                = 10000
 
 let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -150,6 +153,7 @@ map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
 map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
 map  y <Plug>(operator-flashy)
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
@@ -161,14 +165,16 @@ nmap ge <Plug>(smartword-ge)
 nmap Y <Plug>(operator-flashy)$
 nmap <silent> <S-n> <Plug>(ale_next_wrap)
 nmap <silent> <S-p> <Plug>(ale_previous_wrap)
+nmap <Space>c <Plug>(caw:hatpos:toggle)
+vmap <Space>c <Plug>(caw:hatpos:toggle)
 
 nnoremap <C-t> :bn<CR>
 nnoremap <S-t> :bp<CR>
-nnoremap <silent> <Space>s :<C-u>Startify<CR>
 
-nnoremap <Space>v :<C-u>Vaffle<CR>
-nnoremap <Space>p :<C-u>History<CR>
-nnoremap <Space>r :<C-u>GFiles<CR>
+nnoremap <silent> <Space>s :<C-u>Startify<CR>
+nnoremap <silent> <Space>v :<C-u>Vaffle<CR>
+nnoremap <silent> <Space>p :<C-u>History<CR>
+nnoremap <silent> <Space>r :<C-u>GFiles<CR>
 nnoremap <silent> <Space>f :<C-u>Denite file_rec<CR>
 nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>
 nnoremap <silent> <Space>y :<C-u>Denite neoyank<CR>
@@ -181,14 +187,11 @@ vmap <CR> <Plug>(LiveEasyAlign)
 imap <expr> <C-k> pumvisible()? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-g>U\<C-o>O"
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 imap <expr> <Tab> pumvisible() ? "\<C-n>" :
             \ neosnippet#jumpable() ?
             \ "\<Plug>(neosnippet_jump)" : "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 smap <expr> <Tab> neosnippet#jumpable() ?
             \ "\<Plug>(neosnippet_jump)" : "\<Tab>"
-nmap <Space>c <Plug>(caw:hatpos:toggle)
-vmap <Space>c <Plug>(caw:hatpos:toggle)
 
 " functions
 
@@ -199,10 +202,12 @@ endfunction
 function! LightlineReadonly()
     return &readonly ? "\ue0a2" : ''
 endfunction
+
 function! LightlineBranch()
     let branch = gina#component#repo#branch()
     return branch !=# '' ? "\ue0a0".branch : ''
 endfunction
+
 function! LightlineRepoStatus()
     let ahead = gina#component#traffic#ahead() > 0 ?
                 \ "\u2191 ".gina#component#traffic#ahead() : ''
