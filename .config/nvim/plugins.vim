@@ -54,6 +54,12 @@ Plug 'lambdalisue/gina.vim'
 
 call plug#end()
 
+if has('conceal')
+    set conceallevel=2 concealcursor=i
+endif
+
+" plugin variables
+
 let g:lightline = {
             \ 'colorscheme': 'gruvbox',
             \ 'active': {
@@ -95,57 +101,10 @@ let g:lightline = {
             \ 'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
             \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
             \ }
-function! LightlineReadonly()
-    return &readonly ? "\ue0a2" : ''
-endfunction
-function! LightlineBranch()
-    let branch = gina#component#repo#branch()
-    return branch !=# '' ? "\ue0a0".branch : ''
-endfunction
-function! LightlineRepoStatus()
-    let ahead = gina#component#traffic#ahead() > 0 ?
-                \ "\u2191 ".gina#component#traffic#ahead() : ''
-    let behind = gina#component#traffic#behind() > 0 ?
-                \ "\u2193 ".gina#component#traffic#behind() : ''
-    let unstaged = gina#component#status#unstaged() > 0 ? '+' : ''
-    return behind.ahead.unstaged
-endfunction
-
-
-map *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)
-map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
-map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
-map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
-inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
-
-nmap j <Plug>(accelerated_jk_gj)
-nmap k <Plug>(accelerated_jk_gk)
-
-nmap w <Plug>(smartword-w)
-nmap b <Plug>(smartword-b)
-nmap e <Plug>(smartword-e)
-nmap ge <Plug>(smartword-ge)
-
-nnoremap <C-t> :bn<CR>
-nnoremap <S-t> :bp<CR>
-
-nnoremap <silent> <Space>s :<C-u>Startify<CR>
-
-vmap <CR> <Plug>(LiveEasyAlign)
-
-function! StartifyEntryFormat()
-    return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
-endfunction
-
 let g:loaded_matchparen = 1
-
-map  y <Plug>(operator-flashy)
-nmap Y <Plug>(operator-flashy)$
 let g:operator#flashy#flash_time = 300
 let g:operator#flashy#group = 'Visual'
 
-nmap <silent> <S-n> <Plug>(ale_next_wrap)
-nmap <silent> <S-p> <Plug>(ale_previous_wrap)
 let g:ale_linters = {
             \ 'ruby': ['rubocop'],
             \ }
@@ -155,17 +114,9 @@ let g:ale_fixers = {
 
 let g:vaffle_show_hidden_files = 1
 let g:loaded_netrwPlugin = 1
-nnoremap <Space>v :<C-u>Vaffle<CR>
-autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
 let g:rooter_change_directory_for_non_project_files = 'home'
-nnoremap <Space>p :<C-u>History<CR>
-nnoremap <Space>r :<C-u>GFiles<CR>
 let g:fzf_layout = { 'down': '~70%' }
-autocmd MyAutoCmd FileType go nnoremap <buffer> gr (go-run)
-autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
-autocmd MyAutoCmd FileType go :highlight goErr cterm=bold ctermfg=214
-autocmd MyAutoCmd FileType go :match goErr /\<err\>/
-autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
+
 let g:go_hightlight_functions         = 1
 let g:go_hightlight_methods           = 1
 let g:go_hightlight_structs           = 1
@@ -186,13 +137,115 @@ let g:deoplete#enable_smart_case = 1
 let g:deoplete#file#enable_buffer_path = 1
 let g:deoplete#max_list = 10000
 
+let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+let g:neosnippet#snippets_directory = g:plug_repo_dir . '/github.com/honza/vim-snippets/snippets'
+
+" plugin keymaps
+
+map *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)
+map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
+map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
+map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
+map  y <Plug>(operator-flashy)
+inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
+
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)
+
+nmap w <Plug>(smartword-w)
+nmap b <Plug>(smartword-b)
+nmap e <Plug>(smartword-e)
+nmap ge <Plug>(smartword-ge)
+nmap Y <Plug>(operator-flashy)$
+nmap <silent> <S-n> <Plug>(ale_next_wrap)
+nmap <silent> <S-p> <Plug>(ale_previous_wrap)
+
+nnoremap <C-t> :bn<CR>
+nnoremap <S-t> :bp<CR>
+nnoremap <silent> <Space>s :<C-u>Startify<CR>
+
+nnoremap <Space>v :<C-u>Vaffle<CR>
+nnoremap <Space>p :<C-u>History<CR>
+nnoremap <Space>r :<C-u>GFiles<CR>
 nnoremap <silent> <Space>f :<C-u>Denite file_rec<CR>
 nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>
 nnoremap <silent> <Space>y :<C-u>Denite neoyank<CR>
 nnoremap <silent> <Space>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Space>d :<C-u>Denite directory_mru<CR>
 nnoremap <silent> <Space>g :<C-u>Denite grep<CR>
+
+vmap <CR> <Plug>(LiveEasyAlign)
+
+imap <expr> <C-k> pumvisible()? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-g>U\<C-o>O"
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+imap <expr> <Tab> pumvisible() ? "\<C-n>" :
+            \ neosnippet#jumpable() ?
+            \ "\<Plug>(neosnippet_jump)" : "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
+smap <expr> <Tab> neosnippet#jumpable() ?
+            \ "\<Plug>(neosnippet_jump)" : "\<Tab>"
+nmap <Space>c <Plug>(caw:hatpos:toggle)
+vmap <Space>c <Plug>(caw:hatpos:toggle)
+
+" functions
+
+function! StartifyEntryFormat()
+    return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+endfunction
+
+function! LightlineReadonly()
+    return &readonly ? "\ue0a2" : ''
+endfunction
+function! LightlineBranch()
+    let branch = gina#component#repo#branch()
+    return branch !=# '' ? "\ue0a0".branch : ''
+endfunction
+function! LightlineRepoStatus()
+    let ahead = gina#component#traffic#ahead() > 0 ?
+                \ "\u2191 ".gina#component#traffic#ahead() : ''
+    let behind = gina#component#traffic#behind() > 0 ?
+                \ "\u2193 ".gina#component#traffic#behind() : ''
+    let unstaged = gina#component#status#unstaged() > 0 ? '+' : ''
+    return behind.ahead.unstaged
+endfunction
+
+function! MyDeniteReplace(context)
+    let qflist = []
+    for target in a:context['targets']
+        if !has_key(target, 'action__path') | continue | endif
+        if !has_key(target, 'action__line') | continue | endif
+        if !has_key(target, 'action__text') | continue | endif
+        call add(qflist, {
+                    \ 'filename': target['action__path'],
+                    \ 'lnum': target['action__line'],
+                    \ 'text': target['action__text']
+                    \ })
+    endfor
+    call setqflist(qflist)
+    call qfreplace#start('')
+endfunction
+
+function! s:my_cr_function()
+    return !pumvisible() ?
+                \ lexima#expand('<CR>', 'i') :
+                \ neosnippet#expandable() ?
+                \ neosnippet#mappings#expand_impl() : deoplete#close_popup()
+endfunction
+
+autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
+autocmd MyAutoCmd FileType go nnoremap <buffer> gr (go-run)
+autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
+autocmd MyAutoCmd FileType go :highlight goErr cterm=bold ctermfg=214
+autocmd MyAutoCmd FileType go :match goErr /\<err\>/
+autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
+autocmd MyAutoCmd BufWrite * :Autoformat
+autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+
 call denite#custom#option('default', 'prompt', '>')
+
 if executable('rg')
     call denite#custom#var('file_rec', 'command',
                 \ ['rg', '--files', '--glob', '!.git', '--hidden'])
@@ -215,6 +268,7 @@ else
     call denite#custom#var('grep', 'separator', ['--'])
     call denite#custom#var('grep', 'final_opts', [])
 endif
+
 call denite#custom#map('insert', '<ESC>', '<denite:enter_mode:normal>')
 call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
 call denite#custom#map('insert', '<Tab>', '<denite:move_to_next_line>')
@@ -228,51 +282,5 @@ call denite#custom#map('normal', 'r', '<denite:do_action:qfreplace>')
 call denite#custom#map('normal', '<ESC>', '<denite:quit>')
 call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
 call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
-
-function! MyDeniteReplace(context)
-    let qflist = []
-    for target in a:context['targets']
-        if !has_key(target, 'action__path') | continue | endif
-        if !has_key(target, 'action__line') | continue | endif
-        if !has_key(target, 'action__text') | continue | endif
-        call add(qflist, {
-                    \ 'filename': target['action__path'],
-                    \ 'lnum': target['action__line'],
-                    \ 'text': target['action__text']
-                    \ })
-    endfor
-    call setqflist(qflist)
-    call qfreplace#start('')
-endfunction
-
 call denite#custom#action('file', 'qfreplace', function('MyDeniteReplace'))
 
-" silent autocmd! neoyank CursorHold
-let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
-let g:neosnippet#enable_snipmate_compatibility = 1
-imap <expr> <C-k> pumvisible()? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-g>U\<C-o>O"
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-imap <expr> <Tab> pumvisible() ? "\<C-n>" :
-            \ neosnippet#jumpable() ?
-            \ "\<Plug>(neosnippet_jump)" : "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
-smap <expr> <Tab> neosnippet#jumpable() ?
-            \ "\<Plug>(neosnippet_jump)" : "\<Tab>"
-if has('conceal')
-    set conceallevel=2 concealcursor=i
-endif
-autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-    return !pumvisible() ?
-                \ lexima#expand('<CR>', 'i') :
-                \ neosnippet#expandable() ?
-                \ neosnippet#mappings#expand_impl() : deoplete#close_popup()
-endfunction
-let g:neosnippet#snippets_directory='$HOME/.cache/dein/repos/github.com/honza/vim-snippets/snippets'
-
-
-autocmd MyAutoCmd BufWrite * :Autoformat
-
-nmap <Space>c <Plug>(caw:hatpos:toggle)
-vmap <Space>c <Plug>(caw:hatpos:toggle)
