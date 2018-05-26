@@ -86,7 +86,7 @@ if &compatible
     set  nocompatible
 endif
 
-let g:plugin_mgr = 'dein'
+let g:plugin_mgr = 'vimplug'
 
 let g:vim_indent_cont = &shiftwidth * 3
 
@@ -125,15 +125,69 @@ endif
 
 " vimplug {{{
 if g:plugin_mgr == 'vimplug'
-    let s:plug_dir = expand('$HOME/.cache/plug')
-    let s:plug_repo_dir = s:plug_dir . '/repos/github.com/junegunn/vim-plug'
+    let g:plug_dir = expand('$HOME/.local/share/nvim/site/autoload')
+    let g:plug_repo_dir = expand('$HOME/.local/share/nvim/plugged')
 
-    if &runtimepath !~# '/vim-plug'
-        if !isdirectory(s:plug_repo_dir)
-            execute '!git clone https://github.com/junegunn/vim-plug' s:plug_repo_dir
-        endif
-        execute 'set runtimepath^=' . fnamemodify(s:plug_repo_dir, ':p')
+    if !filereadable(g:plug_dir . '/plug.vim')
+        execute '!curl -fLo $HOME/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     endif
+
+    runtime plugins.vim
+"    call plug#begin(s:plug_repo_dir)
+"
+"    Plug 'Shougo/deoplete.nvim'
+"    Plug 'Shougo/denite.nvim'
+"    Plug 'Shougo/neoyank.vim'
+"    Plug 'Shougo/neosnippet'
+"    Plug 'honza/vim-snippets'
+"    Plug 'Shougo/neomru.vim'
+"    Plug 'Shougo/neco-syntax'
+"    Plug 'zchee/deoplete-jedi'
+"    Plug 'Shougo/neco-vim'
+"    Plug 'Chiel92/vim-autoformat'
+"    Plug 'thinca/vim-qfreplace'
+"    Plug 'tyru/caw.vim'
+"    Plug 'brooth/far.vim'
+"    Plug 'rhysd/try-colorscheme.vim'
+"    Plug 'y0za/vim-reading-vimrc'
+"    Plug 'rhysd/nyaovim-popup-tooltip'
+"    Plug 'rhysd/nyaovim-markdown-preview'
+"    Plug 'rhysd/nyaovim-mini-browser'
+"    Plug 'itchyny/lightline.vim'
+"    Plug 'mgee/lightline-bufferline'
+"    Plug 'maximbaz/lightline-ale'
+"    Plug 'Yggdroot/indentLine'
+"    Plug 'ryanoasis/vim-devicons'
+"    Plug 'lilydjwg/colorizer'
+"    Plug 'junegunn/limelight.vim'
+"    Plug 'itchyny/vim-parenmatch'
+"    Plug 'kana/vim-operator-user'
+"    Plug 'haya14busa/vim-operator-flashy'
+"    Plug 'mhinz/vim-startify'
+"    Plug 'shinchu/lightline-gruvbox.vim'
+"    Plug 'AlessandroYorba/Alduin'
+"    Plug 'w0rp/ale'
+"    Plug 'airblade/vim-gitgutter'
+"    Plug 'editorconfig/editorconfig-vim'
+"    Plug 'cohama/lexima.vim'
+"    Plug 'junegunn/vim-easy-align'
+"    Plug 'rhysd/accelerated-jk'
+"    Plug 'kana/vim-smartword'
+"    Plug 'haya14busa/vim-asterisk'
+"    Plug 'haya14busa/is.vim'
+"    Plug 'terryma/vim-multiple-cursors'
+"    Plug 'tpope/vim-surround'
+"    Plug 'cocopon/vaffle.vim'
+"    Plug 'airblade/vim-rooter'
+"    Plug 'junegunn/fzf'
+"    Plug 'junegunn/fzf.vim'
+"    Plug 'fatih/vim-go'
+"    Plug 'tpope/vim-rails'
+"    Plug 'cespare/vim-toml'
+"    Plug 'mhinz/neovim-remote'
+"    Plug 'lambdalisue/gina.vim'
+"
+"    call plug#end()
 endif
 "}}}
 
@@ -187,6 +241,7 @@ nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
 nnoremap <silent> : ;
 nnoremap <silent> ; :
+nnoremap <silent> <CR> o<ESC>
 nnoremap <silent> <Space>q :<C-u>bd<CR>
 nnoremap <silent> <Space>w :<C-u>w<CR>:<C-u>bd<CR>
 nnoremap <silent> <Space>e :<C-u>enew<CR>
