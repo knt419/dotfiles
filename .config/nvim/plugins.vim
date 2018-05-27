@@ -249,43 +249,44 @@ autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd BufWrite * :Autoformat
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
-call denite#custom#option('default', 'prompt', '>')
+if exists("*denite#custom#option")
+    call denite#custom#option('default', 'prompt', '>')
 
-if executable('rg')
-    call denite#custom#var('file_rec', 'command',
-                \ ['rg', '--files', '--glob', '!.git', '--hidden'])
-    call denite#custom#var('grep', 'command', ['rg', '--threads', '1', '--hidden'])
-    call denite#custom#var('grep', 'default_opts',
-                \ ['--vimgrep', '--no-heading'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'final_opts', [])
-else
-    call denite#custom#var('file_rec', 'command',
-                \ ['ag', '--follow', '--nocolor', '--nogroup',
-                \  '--hidden', '-g', ''])
-    call denite#custom#var('grep', 'command', ['ag'])
-    call denite#custom#var('grep', 'default_opts',
-                \ ['-i', '--vimgrep'])
-    call denite#custom#var('grep', 'recursive_opts', [])
-    call denite#custom#var('grep', 'pattern_opt', [])
-    call denite#custom#var('grep', 'separator', ['--'])
-    call denite#custom#var('grep', 'final_opts', [])
+    if executable('rg')
+        call denite#custom#var('file_rec', 'command',
+                    \ ['rg', '--files', '--glob', '!.git', '--hidden'])
+        call denite#custom#var('grep', 'command', ['rg', '--threads', '1', '--hidden'])
+        call denite#custom#var('grep', 'default_opts',
+                    \ ['--vimgrep', '--no-heading'])
+        call denite#custom#var('grep', 'recursive_opts', [])
+        call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+        call denite#custom#var('grep', 'separator', ['--'])
+        call denite#custom#var('grep', 'final_opts', [])
+    else
+        call denite#custom#var('file_rec', 'command',
+                    \ ['ag', '--follow', '--nocolor', '--nogroup',
+                    \  '--hidden', '-g', ''])
+        call denite#custom#var('grep', 'command', ['ag'])
+        call denite#custom#var('grep', 'default_opts',
+                    \ ['-i', '--vimgrep'])
+        call denite#custom#var('grep', 'recursive_opts', [])
+        call denite#custom#var('grep', 'pattern_opt', [])
+        call denite#custom#var('grep', 'separator', ['--'])
+        call denite#custom#var('grep', 'final_opts', [])
+    endif
+
+    call denite#custom#map('insert', '<ESC>', '<denite:enter_mode:normal>')
+    call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
+    call denite#custom#map('insert', '<Tab>', '<denite:move_to_next_line>')
+    call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>')
+    call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
+    call denite#custom#map('insert', '<S-Tab>', '<denite:move_to_previous_line>')
+    call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
+    call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
+    call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
+    call denite#custom#map('normal', 'r', '<denite:do_action:qfreplace>')
+    call denite#custom#map('normal', '<ESC>', '<denite:quit>')
+    call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
+    call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
+    call denite#custom#action('file', 'qfreplace', function('MyDeniteReplace'))
 endif
-
-call denite#custom#map('insert', '<ESC>', '<denite:enter_mode:normal>')
-call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
-call denite#custom#map('insert', '<Tab>', '<denite:move_to_next_line>')
-call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>')
-call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
-call denite#custom#map('insert', '<S-Tab>', '<denite:move_to_previous_line>')
-call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
-call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
-call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
-call denite#custom#map('normal', 'r', '<denite:do_action:qfreplace>')
-call denite#custom#map('normal', '<ESC>', '<denite:quit>')
-call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
-call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
-call denite#custom#action('file', 'qfreplace', function('MyDeniteReplace'))
-

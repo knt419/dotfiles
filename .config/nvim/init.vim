@@ -133,6 +133,10 @@ if g:plugin_mgr == 'vimplug'
     endif
 
     runtime plugins.vim
+    autocmd VimEnter *
+                \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+                \|   PlugInstall --sync | q
+                \| endif<Paste>
 endif
 "}}}
 
