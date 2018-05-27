@@ -130,13 +130,11 @@ if g:plugin_mgr == 'vimplug'
 
     if !filereadable(g:plug_path)
         execute '!curl -fLo ' . g:plug_path . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        autocmd VimEnter * PlugInstall --sync | source $HOME/.config/nvim/init.vim
     endif
 
     runtime plugins.vim
-    autocmd VimEnter *
-                \  if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
-                \|   PlugInstall --sync | q
-                \| endif<Paste>
+    autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | q | endif
 endif
 "}}}
 
