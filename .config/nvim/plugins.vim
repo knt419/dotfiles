@@ -284,6 +284,7 @@ if &runtimepath =~# '/denite.nvim'
     call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
     call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
     call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
+    call denite#custom#map('normal', '<Space><Space>', '<denite:toggle_select_all>')
     call denite#custom#map('normal', 'r', '<denite:do_action:qfreplace>')
     call denite#custom#map('normal', '<ESC>', '<denite:quit>')
     call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
