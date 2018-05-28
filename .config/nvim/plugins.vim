@@ -249,7 +249,7 @@ autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd BufWrite * :Autoformat
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
-if exists("*denite#custom#option")
+if &runtimepath =~# '/denite.nvim'
     call denite#custom#option('default', 'prompt', '>')
 
     if executable('rg')
