@@ -240,6 +240,7 @@ function! s:my_cr_function()
                 \ neosnippet#mappings#expand_impl() : deoplete#close_popup()
 endfunction
 
+autocmd! neosnippet CursorMoved *
 autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
 autocmd MyAutoCmd FileType go nnoremap <buffer> gr (go-run)
 autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
@@ -249,7 +250,7 @@ autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd BufWrite * :Autoformat
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
-if exists("*denite#custom#option")
+if &runtimepath =~# '/denite.nvim'
     call denite#custom#option('default', 'prompt', '>')
 
     if executable('rg')
@@ -284,6 +285,7 @@ if exists("*denite#custom#option")
     call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
     call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
     call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
+    call denite#custom#map('normal', '<Space><Space>', '<denite:toggle_select_all>')
     call denite#custom#map('normal', 'r', '<denite:do_action:qfreplace>')
     call denite#custom#map('normal', '<ESC>', '<denite:quit>')
     call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
