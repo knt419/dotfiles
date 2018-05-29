@@ -142,7 +142,7 @@ let g:deoplete#max_list                = 10000
 
 let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
 let g:neosnippet#enable_snipmate_compatibility = 1
-
+let g:neosnippet#enable_auto_clear_markers = 0
 let g:neosnippet#snippets_directory = g:plug_repo_dir . '/github.com/honza/vim-snippets/snippets'
 
 " plugin keymaps
@@ -240,7 +240,6 @@ function! s:my_cr_function()
                 \ neosnippet#mappings#expand_impl() : deoplete#close_popup()
 endfunction
 
-autocmd! neosnippet CursorMoved *
 autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
 autocmd MyAutoCmd FileType go nnoremap <buffer> gr (go-run)
 autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
