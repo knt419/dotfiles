@@ -162,6 +162,9 @@ let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
 
+let g:gitgutter_grep = ''
+let g:gitgutter_map_keys = 0
+
 " plugin keymaps
 
 map *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)
