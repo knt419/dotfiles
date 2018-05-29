@@ -144,6 +144,17 @@ let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#enable_auto_clear_markers = 0
 let g:neosnippet#snippets_directory = g:plug_repo_dir . '/github.com/honza/vim-snippets/snippets'
+let g:ale_cache_executable_check_failures = 1
+let g:ale_echo_delay = 20
+let g:ale_history_enabled = 0
+let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
+let g:ale_lint_delay = 10000
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_set_highlights = 0
+let g:ale_sign_warning = "\uf071"
+let g:ale_sign_error = "\ue009"
+let g:ale_warn_about_trailing_whitespace = 0
 
 " plugin keymaps
 
@@ -249,7 +260,7 @@ autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd BufWrite * :Autoformat
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
-if &runtimepath =~# '/denite.nvim'
+if &runtimepath =~# 'denite.nvim'
     call denite#custom#option('default', 'prompt', '>')
 
     if executable('rg')
