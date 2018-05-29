@@ -144,17 +144,23 @@ let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#enable_auto_clear_markers = 0
 let g:neosnippet#snippets_directory = g:plug_repo_dir . '/github.com/honza/vim-snippets/snippets'
+
 let g:ale_cache_executable_check_failures = 1
 let g:ale_echo_delay = 20
 let g:ale_history_enabled = 0
 let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
 let g:ale_lint_delay = 10000
-let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_set_highlights = 0
 let g:ale_sign_warning = "\uf071"
-let g:ale_sign_error = "\ue009"
+let g:ale_sign_error = "\uf05e"
 let g:ale_warn_about_trailing_whitespace = 0
+let g:lightline#ale#warnings = "\uf071"
+let g:lightline#ale#errors = "\uf05e"
+let g:lightline#ale#ok = "\uf00c"
+let g:lightline#ale#indicator_warnings = "\uf071"
+let g:lightline#ale#indicator_errors = "\uf05e"
+let g:lightline#ale#indicator_ok = "\uf00c"
 
 " plugin keymaps
 
