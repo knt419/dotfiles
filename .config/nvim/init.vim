@@ -20,11 +20,12 @@ set switchbuf=useopen
 set confirm
 set number
 set ruler
+set display=uhex,lastline
 set scrolloff=5
 set foldmethod=marker
 set foldenable
 set foldlevelstart=10
-set lazyredraw
+" set lazyredraw
 
 set showmatch
 set matchtime=1
@@ -33,7 +34,7 @@ set expandtab
 set shiftwidth=4
 set smartindent
 set autoindent
-set complete=.,w,b,u
+set complete=.,w,b
 
 set clipboard=unnamedplus
 set nostartofline
@@ -192,7 +193,8 @@ nnoremap <silent> <CR> o<ESC>
 nnoremap <silent> <Space>q :<C-u>bd<CR>
 nnoremap <silent> <Space>w :<C-u>w<CR>:<C-u>bd<CR>
 nnoremap <silent> <Space>e :<C-u>enew<CR>
-inoremap jj <Esc>
+inoremap jj <ESC>:<C-u>set iminsert=0<CR>
+inoremap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
 
 inoremap <C-h> <C-g>U<Left>
 inoremap <C-l> <C-g>U<Right>
