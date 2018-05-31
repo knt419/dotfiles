@@ -9,7 +9,7 @@ Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'Chiel92/vim-autoformat'
 Plug 'thinca/vim-qfreplace'
-Plug 'tyru/caw.vim'
+Plug 'tyru/caw.vim', { 'on': '<Plug>(caw:hatpos:toggle)' }
 Plug 'brooth/far.vim', { 'on': ['Far','Farp'] }
 Plug 'rhysd/try-colorscheme.vim', { 'on': 'TryColorscheme' }
 Plug 'y0za/vim-reading-vimrc', { 'on': ['ReadingVimrcList', 'ReadingVimrcLoad', 'ReadingVimrcNext'] }
@@ -216,7 +216,7 @@ smap <expr> <Tab> neosnippet#jumpable() ?
 " functions
 
 function! StartifyEntryFormat()
-    return 'WebDevIconsGetFileTypeSymbol(absolute_path) ." ". entry_path'
+    return 'WebDevIconsGetFileTypeSymbol(absolute_path) ."  ". entry_path'
 endfunction
 
 function! LightlineReadonly()
@@ -268,6 +268,13 @@ autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd BufWrite * :Autoformat
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+
+if &runtimepath =~# 'deoplete.nvim'
+    call deoplete#custom#option({
+                \ 'ignore_sources': {'file'},
+                \ 'max_list': 20
+    })
+endif
 
 if &runtimepath =~# 'denite.nvim'
     call denite#custom#option('default', 'prompt', '>')
