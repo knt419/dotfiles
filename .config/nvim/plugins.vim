@@ -39,7 +39,7 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'cocopon/vaffle.vim'
 Plug 'airblade/vim-rooter'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install -all' }
+Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
 Plug 'junegunn/fzf.vim'
 Plug 'mhinz/neovim-remote'
 Plug 'lambdalisue/gina.vim'
@@ -271,9 +271,9 @@ autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function
 
 if &runtimepath =~# 'deoplete.nvim'
     call deoplete#custom#option({
-                \ 'ignore_sources': {'file'},
-                \ 'max_list': 20
-    })
+                \ 'ignore_sources': {'_': ['file']},
+                \ 'max_list': 20,
+                \ })
 endif
 
 if &runtimepath =~# 'denite.nvim'
