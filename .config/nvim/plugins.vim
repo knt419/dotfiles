@@ -104,6 +104,7 @@ let g:lightline = {
             \ 'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
             \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
             \ }
+
 let g:loaded_matchparen          = 1
 let g:operator#flashy#flash_time = 300
 let g:operator#flashy#group      = 'Visual'
@@ -132,13 +133,6 @@ let $VISUAL = 'nvr --remote-wait'
 let g:deoplete#enable_at_startup       = 1
 let g:deoplete#source#go#gocode_binary = '$HOME/go/bin/gocode'
 let g:deoplete#auto_complete_delay     = 0
-let g:deoplete#enable_camel_case       = 0
-let g:deoplete#enable_ignore_case      = 0
-let g:deoplete#enable_refresh_always   = 0
-let g:deoplete#auto_refresh_delay      = 100
-let g:deoplete#enable_smart_case       = 1
-let g:deoplete#file#enable_buffer_path = 1
-let g:deoplete#max_list                = 10000
 
 let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -272,7 +266,8 @@ autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function
 if &runtimepath =~# 'deoplete.nvim'
     call deoplete#custom#option({
                 \ 'ignore_sources': {'_': ['file']},
-                \ 'max_list': 20,
+                \ 'ignore_case': v:false,
+                \ 'auto_refresh_delay': 100,
                 \ })
 endif
 
