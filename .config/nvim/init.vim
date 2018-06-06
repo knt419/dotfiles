@@ -236,5 +236,5 @@ if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
 endif
 
 set background=dark
-colorscheme alduin
+silent! colorscheme alduin
 syntax enable
