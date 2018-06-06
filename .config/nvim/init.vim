@@ -201,7 +201,7 @@ nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
 nnoremap <silent> : ;
 nnoremap <silent> ; :
-nnoremap <silent> <CR> o<ESC>
+nnoremap <silent> <CR><CR> o<ESC>
 nnoremap <silent> <Space>q :<C-u>bd<CR>
 nnoremap <silent> <Space>w :<C-u>w<CR>:<C-u>bd<CR>
 nnoremap <silent> <Space>e :<C-u>enew<CR>
@@ -248,5 +248,5 @@ if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
 endif
 
 set background=dark
-silent! colorscheme alduin
+silent! colorscheme nefertiti
 syntax enable
