@@ -23,7 +23,8 @@ alias {
     rmdir = "rmdir /s /q $*"
 }
 
-nyagos.env.prompt=' ' .. nyagos.getenv('USERNAME') .. '@' .. nyagos.getenv('COMPUTERNAME') .. ' $e[94;47m\u{e0b0}$e[30;47m $P '
+nyagos.env.prompt=' ' .. nyagos.getenv('USERNAME') .. '@' .. nyagos.getenv('COMPUTERNAME') .. ' $e[94;47m' .. utf8.char(0xe0b0) .. '$e[30;47m $P '
+-- nyagos.env.prompt=' ' .. nyagos.getenv('USERNAME') .. '@' .. nyagos.getenv('COMPUTERNAME') .. ' $e[94;47m\u{e0b0}$e[30;47m $P '
 share.org_prompter=nyagos.prompt
 
 nyagos.alias.fd = function (args)
@@ -53,10 +54,10 @@ nyagos.prompt = function(this)
 
     local git_branch_name = nyagos.eval('git rev-parse --abbrev-ref HEAD 2>nul')
     if (git_branch_name ~= '') then
-        prompt_message = prompt_message .. '\u{e0b1} \u{e0a0}' .. git_branch_name .. ' '
+        prompt_message = prompt_message .. utf8.char(0xe0b1) .. utf8.char(0xe0a0) .. git_branch_name .. ' '
     end
 
-    return share.org_prompter('$e[30;104;1m'..prompt_message..'$e[0m$e[37m\u{e0b0}$_$e[94;1m$$$s'..'$e[0m')
+    return share.org_prompter('$e[30;104;1m'..prompt_message..'$e[0m$e[37m' .. utf8.char(0xe0b0) .. '$_$e[94;1m$$$s'..'$e[0m')
 end
 
 -- vim:set ft=lua:
