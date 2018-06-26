@@ -181,8 +181,9 @@ filetype plugin indent on
 
 " keymap {{{
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
-" nnoremap <silent> Y y$
+nnoremap <silent> Y y$
 vnoremap <silent> v $h
+xnoremap <silent> Y "+y
 nnoremap <silent> x "_x
 nnoremap <silent> X "_X
 nnoremap <silent> cd :<C-u>cd %:h<CR>

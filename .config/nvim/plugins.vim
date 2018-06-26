@@ -21,8 +21,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'lilydjwg/colorizer'
 Plug 'junegunn/limelight.vim'
 Plug 'itchyny/vim-parenmatch'
-Plug 'kana/vim-operator-user'
-Plug 'haya14busa/vim-operator-flashy'
 Plug 'mhinz/vim-startify'
 Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'AlessandroYorba/Alduin'
@@ -49,6 +47,7 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'justinmk/vim-highlightedyank'
 
 if exists('g:nyaovim_version')
     Plug 'rhysd/nyaovim-popup-tooltip'
@@ -107,8 +106,7 @@ let g:lightline = {
             \ }
 
 let g:loaded_matchparen          = 1
-let g:operator#flashy#flash_time = 300
-let g:operator#flashy#group      = 'Visual'
+
 
 let g:ale_linters = {
             \ 'ruby': ['rubocop'],
@@ -162,13 +160,14 @@ let g:gitgutter_map_keys = 0
 
 let g:nefertiti_base_brightness_level = 14
 
+highlight link HighlightedyankRegion Visual
+
 " plugin keymaps
 
 map *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)
 map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
 map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
 map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
-map  y <Plug>(operator-flashy)
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
@@ -179,7 +178,6 @@ nmap w <Plug>(smartword-w)
 nmap b <Plug>(smartword-b)
 nmap e <Plug>(smartword-e)
 nmap ge <Plug>(smartword-ge)
-nmap Y <Plug>(operator-flashy)$
 nmap <silent> <S-n> <Plug>(ale_next_wrap)
 nmap <silent> <S-p> <Plug>(ale_previous_wrap)
 nmap <Space>c <Plug>(caw:hatpos:toggle)
