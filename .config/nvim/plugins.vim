@@ -107,6 +107,7 @@ let g:lightline = {
 
 let g:loaded_matchparen          = 1
 
+let g:highlightedyank_highlight_duration = 300
 
 let g:ale_linters = {
             \ 'ruby': ['rubocop'],
