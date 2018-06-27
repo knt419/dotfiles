@@ -283,7 +283,7 @@ if &runtimepath =~# 'deoplete.nvim'
 endif
 
 if &runtimepath =~# 'denite.nvim'
-    call denite#custom#option('default', 'prompt', "\uf061")
+    call denite#custom#option('default', 'prompt', "\ue62b")
 
     if executable('rg')
         call denite#custom#var('file_rec', 'command',
