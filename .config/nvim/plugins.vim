@@ -71,8 +71,7 @@ let g:lightline = {
             \      ['readonly', 'modified', 'linter_errors', 'linter_warnings', 'linter_ok'],
             \    ],
             \    'right': [
-            \      ['lineinfo', 'percentage'],
-            \      ['filetype', 'fileformat', 'fileencoding']
+            \      ['filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
             \    ]
             \ },
             \ 'tabline': {
@@ -88,7 +87,9 @@ let g:lightline = {
             \    'repository': 'gina#component#repo#name',
             \    'branch': 'LightlineBranch',
             \    'bufferinfo': 'lightline#buffer#bufferinfo',
-            \    'repostatus': 'LightlineRepoStatus'
+            \    'repostatus': 'LightlineRepoStatus',
+            \    'filetype': 'LightlineFiletype',
+            \    'fileformat': 'LightlineFileformat'
             \ },
             \ 'component_expand': {
             \   'buffers': 'lightline#bufferline#buffers',
@@ -233,6 +234,14 @@ function! LightlineRepoStatus()
     return behind.ahead.unstaged
 endfunction
 
+function! LightlineFiletype()
+    return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . &filetype : 'no ft') : WebDevIconsGetFileTypeSymbol()
+endfunction
+
+function! LightlineFileformat()
+    return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . ' ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
+endfunction
+
 function! MyDeniteReplace(context)
     let qflist = []
     for target in a:context['targets']
@@ -274,7 +283,7 @@ if &runtimepath =~# 'deoplete.nvim'
 endif
 
 if &runtimepath =~# 'denite.nvim'
-    call denite#custom#option('default', 'prompt', '>')
+    call denite#custom#option('default', 'prompt', "\uf061")
 
     if executable('rg')
         call denite#custom#var('file_rec', 'command',
