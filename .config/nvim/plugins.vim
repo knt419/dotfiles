@@ -48,6 +48,7 @@ Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'machakann/vim-highlightedyank'
+Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 if exists('g:nyaovim_version')
     Plug 'rhysd/nyaovim-popup-tooltip'
@@ -274,6 +275,7 @@ autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd BufWrite * :Autoformat
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+autocmd MyAutoCmd InsertLeave * silent! pclose!
 
 if &runtimepath =~# 'deoplete.nvim'
     call deoplete#custom#option({
