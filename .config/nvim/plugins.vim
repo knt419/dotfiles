@@ -47,7 +47,7 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'justinmk/vim-highlightedyank'
+Plug 'machakann/vim-highlightedyank'
 
 if exists('g:nyaovim_version')
     Plug 'rhysd/nyaovim-popup-tooltip'
@@ -115,6 +115,7 @@ let g:ale_linters = {
             \ }
 let g:ale_fixers = {
             \ 'ruby': ['rubocop'],
+            \ 'go': ['gofmt']
             \ }
 
 let g:vaffle_show_hidden_files = 1
