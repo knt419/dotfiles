@@ -115,7 +115,7 @@ let g:ale_linters = {
             \ }
 let g:ale_fixers = {
             \ 'ruby': ['rubocop'],
-            \ 'go': ['gofmt']
+            \ 'go': ['gofmt'],
             \ }
 
 let g:vaffle_show_hidden_files = 1
