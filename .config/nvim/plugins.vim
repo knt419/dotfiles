@@ -49,6 +49,7 @@ Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'machakann/vim-highlightedyank'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'cocopon/colorswatch.vim'
 
 if exists('g:nyaovim_version')
     Plug 'rhysd/nyaovim-popup-tooltip'
@@ -62,10 +63,12 @@ if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
 
+source $HOME/.config/nvim/lightline-themecolor.vim
+
 " plugin variables
 
 let g:lightline = {
-            \ 'colorscheme': 'gruvbox',
+            \ 'colorscheme': 'themecolor',
             \ 'active': {
             \    'left': [
             \      ['mode', 'paste'],
