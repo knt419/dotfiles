@@ -52,6 +52,7 @@ set clipboard=unnamedplus
 set nostartofline
 set list
 set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+silent! set fillchars=eob:\ ,
 set virtualedit=block
 set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
