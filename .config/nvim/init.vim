@@ -177,7 +177,18 @@ if has('nvim')
     let g:terminal_color_15 = '#eeeeee' " BrightWhite
 endif
 "}}}
+
+
 filetype plugin indent on
+
+" oni  {{{
+if exists('g:gui_oni')
+    filetype off
+    set noruler
+    set laststatus=0
+    set noshowcmd
+endif
+" }}}
 
 " keymap {{{
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
