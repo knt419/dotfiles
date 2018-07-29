@@ -13,9 +13,6 @@ Plug 'tyru/caw.vim', { 'on': '<Plug>(caw:hatpos:toggle)' }
 Plug 'brooth/far.vim', { 'on': ['Far','Farp'] }
 Plug 'rhysd/try-colorscheme.vim', { 'on': 'TryColorscheme' }
 Plug 'y0za/vim-reading-vimrc', { 'on': ['ReadingVimrcList', 'ReadingVimrcLoad', 'ReadingVimrcNext'] }
-Plug 'itchyny/lightline.vim'
-Plug 'mgee/lightline-bufferline'
-Plug 'maximbaz/lightline-ale'
 Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
 Plug 'lilydjwg/colorizer'
@@ -53,6 +50,12 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'cocopon/colorswatch.vim'
 
+if !exists('g:gui_oni')
+    Plug 'itchyny/lightline.vim'
+    Plug 'mgee/lightline-bufferline'
+    Plug 'maximbaz/lightline-ale'
+endif
+
 if exists('g:nyaovim_version')
     Plug 'rhysd/nyaovim-popup-tooltip'
     Plug 'rhysd/nyaovim-markdown-preview'
@@ -65,7 +68,9 @@ if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
 
-source $HOME/.config/nvim/lightline-themecolor.vim
+if !exists('g:gui_oni')
+    source $HOME/.config/nvim/lightline-themecolor.vim
+endif
 
 " plugin variables
 
