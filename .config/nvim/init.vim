@@ -52,6 +52,7 @@ set clipboard=unnamedplus
 set nostartofline
 set list
 set listchars=tab:»\ ,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+silent! set fillchars=eob:\ ,
 set virtualedit=block
 set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
@@ -158,7 +159,7 @@ if has('nvim')
     tnoremap <Space>q <C-\><C-n>
     tnoremap jj <C-\><C-n>
     tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
-    tnoremap <S-t> <C-\><C-n>:<C-u>bp<CR>
+    " tnoremap <S-t> <C-\><C-n>:<C-u>bp<CR>
     let g:terminal_color_0  = '#0c0c0c' " Black
     let g:terminal_color_1  = '#d78787' " Red
     let g:terminal_color_2  = '#afd787' " Green

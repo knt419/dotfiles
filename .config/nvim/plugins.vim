@@ -139,6 +139,8 @@ let g:go_hightlight_interfaces        = 1
 let g:go_hightlight_operators         = 1
 let g:go_hightlight_build_constraints = 1
 let g:go_fmt_command                  = "goimports"
+let g:go_def_mapping_enabled          = 0
+let g:go_def_reuse_buffer             = 1
 let $VISUAL = 'nvr --remote-wait'
 
 let g:deoplete#enable_at_startup       = 1
