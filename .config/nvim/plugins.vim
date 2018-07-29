@@ -19,7 +19,6 @@ Plug 'lilydjwg/colorizer'
 Plug 'junegunn/limelight.vim'
 Plug 'itchyny/vim-parenmatch'
 Plug 'mhinz/vim-startify'
-Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'AlessandroYorba/Alduin'
 Plug 'jeetsukumaran/vim-nefertiti'
 Plug 'w0rp/ale'
@@ -35,10 +34,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'cocopon/vaffle.vim'
 Plug 'airblade/vim-rooter'
-" Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
-" Plug 'junegunn/fzf.vim'
-Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
-Plug 'lotabout/skim.vim'
 Plug 'mhinz/neovim-remote'
 Plug 'lambdalisue/gina.vim'
 Plug 'fatih/vim-go', { 'for': 'go' }
@@ -50,10 +45,19 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'cocopon/colorswatch.vim'
 
+if has('win32') || has('win64')
+    Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
+    Plug 'junegunn/fzf.vim'
+else
+    Plug 'lotabout/skim', { 'dir': '$HOME/.skim', 'do': './install' }
+    Plug 'lotabout/skim.vim'
+endif
+
 if !exists('g:gui_oni')
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
     Plug 'maximbaz/lightline-ale'
+    Plug 'shinchu/lightline-gruvbox.vim'
 endif
 
 if exists('g:nyaovim_version')
