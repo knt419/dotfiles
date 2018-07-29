@@ -38,8 +38,10 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'cocopon/vaffle.vim'
 Plug 'airblade/vim-rooter'
-Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
-Plug 'junegunn/fzf.vim'
+" Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
+" Plug 'junegunn/fzf.vim'
+Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
+Plug 'lotabout/skim.vim'
 Plug 'mhinz/neovim-remote'
 Plug 'lambdalisue/gina.vim'
 Plug 'fatih/vim-go', { 'for': 'go' }
