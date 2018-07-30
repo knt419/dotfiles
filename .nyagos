@@ -18,13 +18,13 @@ addpath (nyagos.env.HOME .. "\\go\\bin")
 -- set aliases
 alias {
     ll = "ls -la $*",
-    rm = "del $*",
-    mv = "move $*",
-    rmdir = "rmdir /s /q $*"
+    -- rm = "del $*",
+    -- mv = "move $*",
+    -- rmdir = "rmdir /s /q $*"
 }
 
 nyagos.env.prompt=' ' .. nyagos.getenv('USERNAME') .. '@' .. nyagos.getenv('COMPUTERNAME') .. ' $e[94;47m' .. utf8.char(0xe0b0) .. '$e[30;47m $P '
--- nyagos.env.prompt=' ' .. nyagos.getenv('USERNAME') .. '@' .. nyagos.getenv('COMPUTERNAME') .. ' $e[94;47m\u{e0b0}$e[30;47m $P '
+
 share.org_prompter=nyagos.prompt
 
 nyagos.alias.fd = function (args)
