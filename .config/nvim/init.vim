@@ -37,7 +37,7 @@ set scrolloff=5
 set foldmethod=marker
 set foldenable
 set foldlevelstart=10
-" set lazyredraw
+set lazyredraw
 
 set showmatch
 set matchtime=1
@@ -260,6 +260,15 @@ autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
 endif
+
+function! s:fzf_statusline()
+    " Override statusline as you like
+    highlight fzf1 ctermfg=161 ctermbg=251
+    highlight fzf2 ctermfg=23 ctermbg=251
+    highlight fzf3 ctermfg=237 ctermbg=251
+    setlocal statusline=%#fzf1#\ >\ %#fzf2#fz%#fzf3#f
+endfunction
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 set background=dark
 silent! colorscheme nefertiti

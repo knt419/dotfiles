@@ -2,6 +2,7 @@ call plug#begin(g:plug_repo_dir)
 
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/denite.nvim'
+" Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neosnippet'
 Plug 'honza/vim-snippets'
@@ -48,9 +49,15 @@ Plug 'cocopon/colorswatch.vim'
 if has('win32') || has('win64')
     Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
     Plug 'junegunn/fzf.vim'
+    autocmd! FileType fzf
+    autocmd FileType fzf set laststatus=0 noshowmode noruler
+                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 else
     Plug 'lotabout/skim', { 'dir': '$HOME/.skim', 'do': './install' }
     Plug 'lotabout/skim.vim'
+    autocmd! FileType skim
+    autocmd FileType skim set laststatus=0 noshowmode noruler
+                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 endif
 
 if !exists('g:gui_oni')
@@ -227,6 +234,25 @@ imap <expr> <Tab> pumvisible() ? "\<C-n>" :
             \ "\<Plug>(neosnippet_jump)" : "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 smap <expr> <Tab> neosnippet#jumpable() ?
             \ "\<Plug>(neosnippet_jump)" : "\<Tab>"
+
+" autocmd FileType defx call s:defx_my_settings()
+" function! s:defx_my_settings() abort
+"     " Define mappings
+"     nnoremap <silent><buffer><expr><CR>
+"                 \ defx#do_action('open')
+"     nnoremap <silent><buffer><expr>l
+"                 \ defx#do_action('open')
+"     nnoremap <silent><buffer><expr>o
+"                 \ defx#do_action('new_directory')
+"     nnoremap <silent><buffer><expr>i
+"                 \ defx#do_action('new_file')
+"     nnoremap <silent><buffer><expr>h
+"                 \ defx#do_action('cd', ['..'])
+"     nnoremap <silent><buffer><expr>~
+"                 \ defx#do_action('cd')
+"     nnoremap <silent><buffer><expr><Space>
+"                 \ defx#do_action('toggle_select') . 'j'
+" endfunction
 
 " functions
 
