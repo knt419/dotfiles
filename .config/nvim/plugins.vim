@@ -13,18 +13,12 @@ Plug 'tyru/caw.vim', { 'on': '<Plug>(caw:hatpos:toggle)' }
 Plug 'brooth/far.vim', { 'on': ['Far','Farp'] }
 Plug 'rhysd/try-colorscheme.vim', { 'on': 'TryColorscheme' }
 Plug 'y0za/vim-reading-vimrc', { 'on': ['ReadingVimrcList', 'ReadingVimrcLoad', 'ReadingVimrcNext'] }
-Plug 'itchyny/lightline.vim'
-Plug 'mgee/lightline-bufferline'
-Plug 'maximbaz/lightline-ale'
 Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
 Plug 'lilydjwg/colorizer'
 Plug 'junegunn/limelight.vim'
 Plug 'itchyny/vim-parenmatch'
-Plug 'kana/vim-operator-user'
-Plug 'haya14busa/vim-operator-flashy'
 Plug 'mhinz/vim-startify'
-Plug 'shinchu/lightline-gruvbox.vim'
 Plug 'AlessandroYorba/Alduin'
 Plug 'jeetsukumaran/vim-nefertiti'
 Plug 'w0rp/ale'
@@ -40,8 +34,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'tpope/vim-surround'
 Plug 'cocopon/vaffle.vim'
 Plug 'airblade/vim-rooter'
-Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
-Plug 'junegunn/fzf.vim'
 Plug 'mhinz/neovim-remote'
 Plug 'lambdalisue/gina.vim'
 Plug 'fatih/vim-go', { 'for': 'go' }
@@ -49,6 +41,24 @@ Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
+Plug 'machakann/vim-highlightedyank'
+Plug 'zchee/deoplete-go', { 'do': 'make' }
+Plug 'cocopon/colorswatch.vim'
+
+if has('win32') || has('win64')
+    Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
+    Plug 'junegunn/fzf.vim'
+else
+    Plug 'lotabout/skim', { 'dir': '$HOME/.skim', 'do': './install' }
+    Plug 'lotabout/skim.vim'
+endif
+
+if !exists('g:gui_oni')
+    Plug 'itchyny/lightline.vim'
+    Plug 'mgee/lightline-bufferline'
+    Plug 'maximbaz/lightline-ale'
+    Plug 'shinchu/lightline-gruvbox.vim'
+endif
 
 if exists('g:nyaovim_version')
     Plug 'rhysd/nyaovim-popup-tooltip'
@@ -62,18 +72,21 @@ if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
 
+if !exists('g:gui_oni')
+    source $HOME/.config/nvim/lightline-themecolor.vim
+endif
+
 " plugin variables
 
 let g:lightline = {
-            \ 'colorscheme': 'gruvbox',
+            \ 'colorscheme': 'themecolor',
             \ 'active': {
             \    'left': [
             \      ['mode', 'paste'],
             \      ['readonly', 'modified', 'linter_errors', 'linter_warnings', 'linter_ok'],
             \    ],
             \    'right': [
-            \      ['lineinfo', 'percentage'],
-            \      ['filetype', 'fileformat', 'fileencoding']
+            \      ['filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
             \    ]
             \ },
             \ 'tabline': {
@@ -89,7 +102,9 @@ let g:lightline = {
             \    'repository': 'gina#component#repo#name',
             \    'branch': 'LightlineBranch',
             \    'bufferinfo': 'lightline#buffer#bufferinfo',
-            \    'repostatus': 'LightlineRepoStatus'
+            \    'repostatus': 'LightlineRepoStatus',
+            \    'filetype': 'LightlineFiletype',
+            \    'fileformat': 'LightlineFileformat'
             \ },
             \ 'component_expand': {
             \   'buffers': 'lightline#bufferline#buffers',
@@ -107,14 +122,15 @@ let g:lightline = {
             \ }
 
 let g:loaded_matchparen          = 1
-let g:operator#flashy#flash_time = 300
-let g:operator#flashy#group      = 'Visual'
+
+let g:highlightedyank_highlight_duration = 300
 
 let g:ale_linters = {
             \ 'ruby': ['rubocop'],
             \ }
 let g:ale_fixers = {
             \ 'ruby': ['rubocop'],
+            \ 'go': ['gofmt'],
             \ }
 
 let g:vaffle_show_hidden_files = 1
@@ -129,6 +145,8 @@ let g:go_hightlight_interfaces        = 1
 let g:go_hightlight_operators         = 1
 let g:go_hightlight_build_constraints = 1
 let g:go_fmt_command                  = "goimports"
+let g:go_def_mapping_enabled          = 0
+let g:go_def_reuse_buffer             = 1
 let $VISUAL = 'nvr --remote-wait'
 
 let g:deoplete#enable_at_startup       = 1
@@ -162,13 +180,14 @@ let g:gitgutter_map_keys = 0
 
 let g:nefertiti_base_brightness_level = 14
 
+highlight link HighlightedyankRegion Visual
+
 " plugin keymaps
 
 map *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)
 map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
 map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
 map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
-map  y <Plug>(operator-flashy)
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 
@@ -179,7 +198,6 @@ nmap w <Plug>(smartword-w)
 nmap b <Plug>(smartword-b)
 nmap e <Plug>(smartword-e)
 nmap ge <Plug>(smartword-ge)
-nmap Y <Plug>(operator-flashy)$
 nmap <silent> <S-n> <Plug>(ale_next_wrap)
 nmap <silent> <S-p> <Plug>(ale_previous_wrap)
 nmap <Space>c <Plug>(caw:hatpos:toggle)
@@ -234,6 +252,14 @@ function! LightlineRepoStatus()
     return behind.ahead.unstaged
 endfunction
 
+function! LightlineFiletype()
+    return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . &filetype : 'no ft') : WebDevIconsGetFileTypeSymbol()
+endfunction
+
+function! LightlineFileformat()
+    return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . ' ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
+endfunction
+
 function! MyDeniteReplace(context)
     let qflist = []
     for target in a:context['targets']
@@ -265,6 +291,7 @@ autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd BufWrite * :Autoformat
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+autocmd MyAutoCmd InsertLeave * silent! pclose!
 
 if &runtimepath =~# 'deoplete.nvim'
     call deoplete#custom#option({
@@ -275,7 +302,7 @@ if &runtimepath =~# 'deoplete.nvim'
 endif
 
 if &runtimepath =~# 'denite.nvim'
-    call denite#custom#option('default', 'prompt', '>')
+    call denite#custom#option('default', 'prompt', "\ue62b")
 
     if executable('rg')
         call denite#custom#var('file_rec', 'command',

@@ -17,7 +17,7 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 export GOPATH=$HOME/go
 export GOBIN=$GOPATH/bin
-export PATH=$PATH:$GOBIN
+export PATH=$PATH:$GOBIN:$HOME/.cargo/bin
 if type rg >/dev/null 2>&1; then
     export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
 else
@@ -46,17 +46,17 @@ alias vi=nvim
 
 # fd - cd to selected directory
 fd() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
+    local dir
+    dir=$(find ${1:-.} -path '*/\.*' -prune \
+        -o -type d -print 2> /dev/null | fzf +m) &&
+        cd "$dir"
 }
 
 # gd - cd to selected local repository
 gd() {
     local dir
     dir=$(ghq list --full-path | fzf +m) &&
-    cd "$dir"
+        cd "$dir"
 }
 
 # local
