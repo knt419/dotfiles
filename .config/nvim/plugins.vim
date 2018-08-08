@@ -101,7 +101,7 @@ let g:lightline = {
             \   'right': [['repostatus','branch','repository']]
             \ },
             \ 'component': {
-            \   'lineinfo': "\ue0a1".'%2l:%-v',
+            \   'lineinfo': "\ue0a1".'%2l:%2v',
             \   'percentage': '%p%%'
             \ },
             \ 'component_function': {

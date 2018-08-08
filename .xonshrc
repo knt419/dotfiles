@@ -2,10 +2,16 @@
 xontrib load coreutils free_cwd fzf-widgets
 # XONSH WIZARD END
 
+$VI_MODE = True
+
+# $WIN_UNICODE_CONSOLE = True
+
 $AUTO_CD = True
 
-$PROMPT = "{INTENSE_CYAN}[ {cwd} {curr_branch} ] {INTENSE_GREEN}$ "
+$PATHEXT = [".EXE"]
 
-$RIGHT_PROMPT = "{BACKGROUND_BLACK}{WHITE}{user}@{hostname}"
+$PROMPT = "{BLUE}[ {cwd} {curr_branch} ] {INTENSE_GREEN}$ "
+
+$RIGHT_PROMPT = "{WHITE}{user}@{hostname}"
 
 aliases["ls"] = 'ls -F --color=auto --show-control-chars --ignore={NTUSER.*,ntuser.*}'
