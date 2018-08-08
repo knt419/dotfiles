@@ -1,0 +1,11 @@
+# XONSH WIZARD START
+xontrib load coreutils free_cwd fzf-widgets
+# XONSH WIZARD END
+
+$AUTO_CD = True
+
+$PROMPT = "{INTENSE_CYAN}[ {cwd} {curr_branch} ] {INTENSE_GREEN}$ "
+
+$RIGHT_PROMPT = "{BACKGROUND_BLACK}{WHITE}{user}@{hostname}"
+
+aliases["ls"] = 'ls -F --color=auto --show-control-chars --ignore={NTUSER.*,ntuser.*}'
