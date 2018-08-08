@@ -5,11 +5,11 @@ xontrib load coreutils free_cwd fzf-widgets
 
 $VI_MODE = True
 
-# $WIN_UNICODE_CONSOLE = True
+$WIN_UNICODE_CONSOLE = True
 
 $AUTO_CD = True
 
-$PATHEXT = [".EXE"]
+$PATHEXT = [".COM", ".EXE", ".BAT", ".CMD", ".VBS", ".VBE", ".JS", ".JSE", ".WSF", ".WSH", ".MSC"]
 
 $PROMPT = "{BLUE}[ {cwd} {curr_branch} ] {INTENSE_GREEN}$ "
 
