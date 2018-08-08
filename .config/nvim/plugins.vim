@@ -2,7 +2,6 @@ call plug#begin(g:plug_repo_dir)
 
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/denite.nvim'
-" Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neosnippet'
 Plug 'honza/vim-snippets'
@@ -12,16 +11,11 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'thinca/vim-qfreplace'
 Plug 'tyru/caw.vim', { 'on': '<Plug>(caw:hatpos:toggle)' }
 Plug 'brooth/far.vim', { 'on': ['Far','Farp'] }
-Plug 'rhysd/try-colorscheme.vim', { 'on': 'TryColorscheme' }
-Plug 'y0za/vim-reading-vimrc', { 'on': ['ReadingVimrcList', 'ReadingVimrcLoad', 'ReadingVimrcNext'] }
 Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
 Plug 'lilydjwg/colorizer'
-Plug 'junegunn/limelight.vim'
 Plug 'itchyny/vim-parenmatch'
 Plug 'mhinz/vim-startify'
-Plug 'AlessandroYorba/Alduin'
-Plug 'jeetsukumaran/vim-nefertiti'
 Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
@@ -37,14 +31,20 @@ Plug 'cocopon/vaffle.vim'
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/neovim-remote'
 Plug 'lambdalisue/gina.vim'
+Plug 'machakann/vim-highlightedyank'
 Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'machakann/vim-highlightedyank'
 Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'cocopon/colorswatch.vim'
+Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
+
+" Plug 'rhysd/try-colorscheme.vim', { 'on': 'TryColorscheme' }
+" Plug 'y0za/vim-reading-vimrc', { 'on': ['ReadingVimrcList', 'ReadingVimrcLoad', 'ReadingVimrcNext'] }
+" Plug 'cocopon/colorswatch.vim'
+
+" Plug 'AlessandroYorba/Alduin'
+Plug 'jeetsukumaran/vim-nefertiti'
 
 if has('win32') || has('win64')
     Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
@@ -64,7 +64,7 @@ if !exists('g:gui_oni')
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
     Plug 'maximbaz/lightline-ale'
-    Plug 'shinchu/lightline-gruvbox.vim'
+    " Plug 'shinchu/lightline-gruvbox.vim'
 endif
 
 if exists('g:nyaovim_version')
@@ -234,25 +234,6 @@ imap <expr> <Tab> pumvisible() ? "\<C-n>" :
             \ "\<Plug>(neosnippet_jump)" : "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 smap <expr> <Tab> neosnippet#jumpable() ?
             \ "\<Plug>(neosnippet_jump)" : "\<Tab>"
-
-" autocmd FileType defx call s:defx_my_settings()
-" function! s:defx_my_settings() abort
-"     " Define mappings
-"     nnoremap <silent><buffer><expr><CR>
-"                 \ defx#do_action('open')
-"     nnoremap <silent><buffer><expr>l
-"                 \ defx#do_action('open')
-"     nnoremap <silent><buffer><expr>o
-"                 \ defx#do_action('new_directory')
-"     nnoremap <silent><buffer><expr>i
-"                 \ defx#do_action('new_file')
-"     nnoremap <silent><buffer><expr>h
-"                 \ defx#do_action('cd', ['..'])
-"     nnoremap <silent><buffer><expr>~
-"                 \ defx#do_action('cd')
-"     nnoremap <silent><buffer><expr><Space>
-"                 \ defx#do_action('toggle_select') . 'j'
-" endfunction
 
 " functions
 
