@@ -1,3 +1,4 @@
+from prompt_toolkit.keys import Keys
 # XONSH WIZARD START
 xontrib load coreutils free_cwd fzf-widgets
 # XONSH WIZARD END
@@ -13,5 +14,8 @@ $PATHEXT = [".EXE"]
 $PROMPT = "{BLUE}[ {cwd} {curr_branch} ] {INTENSE_GREEN}$ "
 
 $RIGHT_PROMPT = "{WHITE}{user}@{hostname}"
+
+$fzf_history_binding = Keys.ControlR
+$fzf_ssh_binding = Keys.ControlS
 
 aliases["ls"] = 'ls -F --color=auto --show-control-chars --ignore={NTUSER.*,ntuser.*}'
