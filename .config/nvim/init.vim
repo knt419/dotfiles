@@ -158,7 +158,6 @@ if has('nvim')
     set inccommand=split
     nnoremap <Space>t :<C-u>terminal<CR>
     tnoremap <Space>q <C-\><C-n>
-    tnoremap jj <C-\><C-n>
     tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
     " tnoremap <S-t> <C-\><C-n>:<C-u>bp<CR>
     let g:terminal_color_0  = '#0c0c0c' " Black
@@ -253,6 +252,7 @@ autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
 autocmd MyAutoCmd FileType * execute 'setlocal ' . (search('^\t.*\n\t.*\n\t', 'n') ? 'no' : '') . 'expandtab'
 autocmd MyAutoCmd TermOpen * setlocal nonumber
+autocmd MyAutoCmd TermOpen * IndentLinesDisable
 autocmd MyAutoCmd TermOpen * IndentLinesDisable
 autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif
 autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline
