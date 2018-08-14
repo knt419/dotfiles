@@ -253,7 +253,7 @@ autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
 autocmd MyAutoCmd FileType * execute 'setlocal ' . (search('^\t.*\n\t.*\n\t', 'n') ? 'no' : '') . 'expandtab'
 autocmd MyAutoCmd TermOpen * setlocal nonumber
 autocmd MyAutoCmd TermOpen * IndentLinesDisable
-autocmd MyAutoCmd TermOpen * IndentLinesDisable
+autocmd MyAutoCmd FileType help,startify IndentLinesDisable
 autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif
 autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline
 
