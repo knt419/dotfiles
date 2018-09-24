@@ -1,0 +1,21 @@
+from prompt_toolkit.keys import Keys
+# XONSH WIZARD START
+xontrib load coreutils free_cwd
+# XONSH WIZARD END
+
+$VI_MODE = True
+
+$WIN_UNICODE_CONSOLE = True
+
+$AUTO_CD = True
+
+$PATHEXT = [".COM", ".EXE", ".BAT", ".CMD", ".VBS", ".VBE", ".JS", ".JSE", ".WSF", ".WSH", ".MSC"]
+
+$PROMPT = "{BLUE}[ {cwd} {curr_branch} ] {INTENSE_GREEN}$ "
+
+$RIGHT_PROMPT = "{WHITE}{user}@{hostname}"
+
+$fzf_history_binding = Keys.ControlR
+$fzf_ssh_binding = Keys.ControlS
+
+aliases["ls"] = 'ls -F --color=auto --show-control-chars --ignore={NTUSER.*,ntuser.*}'
