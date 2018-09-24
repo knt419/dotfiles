@@ -38,6 +38,7 @@ Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
 
 " Plug 'rhysd/try-colorscheme.vim', { 'on': 'TryColorscheme' }
 " Plug 'y0za/vim-reading-vimrc', { 'on': ['ReadingVimrcList', 'ReadingVimrcLoad', 'ReadingVimrcNext'] }
