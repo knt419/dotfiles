@@ -1,6 +1,6 @@
 from prompt_toolkit.keys import Keys
 # XONSH WIZARD START
-xontrib load coreutils free_cwd
+xontrib load coreutils free_cwd powerline
 # XONSH WIZARD END
 
 $VI_MODE = True
@@ -11,10 +11,12 @@ $AUTO_CD = True
 
 $PATHEXT = [".COM", ".EXE", ".BAT", ".CMD", ".VBS", ".VBE", ".JS", ".JSE", ".WSF", ".WSH", ".MSC"]
 
-$PROMPT = "{BLUE}[ {cwd} {curr_branch} ] {INTENSE_GREEN}$ "
+# $PROMPT = "{BLUE}[ {cwd} {curr_branch} ] {INTENSE_GREEN}$ "
+$PL_TOOLBAR = 'who>cwd>branch>time'
 
-$RIGHT_PROMPT = "{WHITE}{user}@{hostname}"
-
+$PL_RPROMPT = 'full_proc'
+# $RIGHT_PROMPT = "{WHITE}{user}@{hostname}"
+pl_build_prompt
 $fzf_history_binding = Keys.ControlR
 $fzf_ssh_binding = Keys.ControlS
 
