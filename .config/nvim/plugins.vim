@@ -35,7 +35,7 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
-Plug 'tpope/vim-dadpod'
+Plug 'tpope/vim-dadbod'
 
 " Plug 'rhysd/try-colorscheme.vim', { 'on': 'TryColorscheme' }
 " Plug 'y0za/vim-reading-vimrc', { 'on': ['ReadingVimrcList', 'ReadingVimrcLoad', 'ReadingVimrcNext'] }
