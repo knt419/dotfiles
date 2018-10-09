@@ -2,12 +2,14 @@ call plug#begin(g:plug_repo_dir)
 
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neoyank.vim'
+Plug 'Shougo/neomru.vim'
+Plug 'thinca/vim-qfreplace'
+
 Plug 'Shougo/neosnippet'
 Plug 'honza/vim-snippets'
-Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neco-syntax'
+
 Plug 'Chiel92/vim-autoformat'
-Plug 'thinca/vim-qfreplace'
 Plug 'brooth/far.vim', { 'on': ['Far','Farp'] }
 Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
@@ -33,6 +35,7 @@ Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
+Plug 'tpope/vim-dadpod'
 
 " Plug 'rhysd/try-colorscheme.vim', { 'on': 'TryColorscheme' }
 " Plug 'y0za/vim-reading-vimrc', { 'on': ['ReadingVimrcList', 'ReadingVimrcLoad', 'ReadingVimrcNext'] }
