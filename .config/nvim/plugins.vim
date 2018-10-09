@@ -1,6 +1,5 @@
 call plug#begin(g:plug_repo_dir)
 
-Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neosnippet'
@@ -9,7 +8,6 @@ Plug 'Shougo/neomru.vim'
 Plug 'Shougo/neco-syntax'
 Plug 'Chiel92/vim-autoformat'
 Plug 'thinca/vim-qfreplace'
-Plug 'tyru/caw.vim', { 'on': '<Plug>(caw:hatpos:toggle)' }
 Plug 'brooth/far.vim', { 'on': ['Far','Farp'] }
 Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
@@ -26,17 +24,13 @@ Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
 Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
 Plug 'haya14busa/is.vim', { 'on': '<Plug>(asterisk-' }
 Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-surround'
 Plug 'cocopon/vaffle.vim'
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/neovim-remote'
 Plug 'lambdalisue/gina.vim'
 Plug 'machakann/vim-highlightedyank'
 Plug 'fatih/vim-go', { 'for': 'go' }
-Plug 'Shougo/neco-vim', { 'for': 'vim' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'zchee/deoplete-go', { 'do': 'make' }
-Plug 'zchee/deoplete-jedi', { 'for': 'python' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
 
@@ -66,6 +60,12 @@ if !exists('g:gui_oni')
     Plug 'mgee/lightline-bufferline'
     Plug 'maximbaz/lightline-ale'
     " Plug 'shinchu/lightline-gruvbox.vim'
+    Plug 'tpope/vim-surround'
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'zchee/deoplete-go', { 'do': 'make' }
+    Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+    Plug 'Shougo/neco-vim', { 'for': 'vim' }
+    Plug 'tpope/vim-commentary'
 endif
 
 if exists('g:nyaovim_version')
@@ -208,8 +208,6 @@ nmap e <Plug>(smartword-e)
 nmap ge <Plug>(smartword-ge)
 nmap <silent> <S-n> <Plug>(ale_next_wrap)
 nmap <silent> <S-p> <Plug>(ale_previous_wrap)
-nmap <Space>c <Plug>(caw:hatpos:toggle)
-vmap <Space>c <Plug>(caw:hatpos:toggle)
 
 nnoremap <C-t> :bn<CR>
 nnoremap <S-t> :bp<CR>
