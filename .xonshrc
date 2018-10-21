@@ -4,7 +4,16 @@ xontrib load coreutils free_cwd
 # xontrib load coreutils free_cwd powerline
 # XONSH WIZARD END
 
-$PATH.append("~/go/bin")
+$XDG_CONFIG_HOME = $HOME+'/.config'
+$XDG_CACHE_HOME = $HOME+'/.cache'
+$XDG_DATA_HOME = $HOME+'/.local/share'
+$GOPATH = $HOME+'/go'
+$GOBIN = $HOME+'/go/bin'
+$PATH.append($GOBIN)
+$PATH.append($HOME+'/.fzf/bin')
+$PATH.append($HOME+'/.skim/bin')
+$FZF_DEFAULT_COMMAND='ag --follow --nocolor --nogroup --hidden -g ""'
+$FZF_DEFAULT_OPTS='--reverse --ansi --select-1 --exit-0'
 
 $VI_MODE = True
 
@@ -19,8 +28,10 @@ $PROMPT = "{BACKGROUND_INTENSE_BLUE} {cwd} {curr_branch:\ue0b1 \ue725{}} {BACKGR
 $RIGHT_PROMPT = "{BACKGROUND_BLACK}{INTENSE_BLUE}\ue0b2{BACKGROUND_INTENSE_BLUE}{WHITE}{user}\uf1fa{hostname} "
 
 $DYNAMIC_CWD_WIDTH = "30%"
-
+$XONSH_SHOW_TRACEBACK = True
 $fzf_history_binding = Keys.ControlR
 $fzf_ssh_binding = Keys.ControlS
 
 aliases["ls"] = 'ls -F --color=auto --show-control-chars --ignore={NTUSER.*,ntuser.*}'
+
+# vim:set ft=python sw=0 sts=0
