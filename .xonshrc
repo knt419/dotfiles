@@ -34,4 +34,4 @@ $fzf_ssh_binding = Keys.ControlS
 
 aliases["ls"] = 'ls -F --color=auto --show-control-chars --ignore={NTUSER.*,ntuser.*}'
 
-# vim:set ft=python sw=0 sts=0
+# vim:set ft=python:
