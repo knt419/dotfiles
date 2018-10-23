@@ -23,9 +23,9 @@ $AUTO_CD = True
 
 $PATHEXT = [".COM", ".EXE", ".BAT", ".CMD", ".VBS", ".VBE", ".JS", ".JSE", ".WSF", ".WSH", ".MSC"]
 
-$PROMPT = "{BACKGROUND_INTENSE_BLUE} {cwd} {curr_branch:\ue0b1 \ue725{}} {BACKGROUND_BLACK}{INTENSE_BLUE}\ue0b0 "
+$PROMPT = "{INTENSE_GREEN}{cwd} {curr_branch} {prompt_end} "
 
-$RIGHT_PROMPT = "{BACKGROUND_BLACK}{INTENSE_BLUE}\ue0b2{BACKGROUND_INTENSE_BLUE}{WHITE}{user}\uf1fa{hostname} "
+$RIGHT_PROMPT = "{INTENSE_BLUE}{user}@{hostname} "
 
 $DYNAMIC_CWD_WIDTH = "30%"
 $XONSH_SHOW_TRACEBACK = True

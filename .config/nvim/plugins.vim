@@ -262,11 +262,11 @@ function! LightlineRepoStatus()
 endfunction
 
 function! LightlineFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . ' ' . &filetype : 'no ft') : WebDevIconsGetFileTypeSymbol()
+    return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . '  ' . &filetype : 'no ft') : WebDevIconsGetFileTypeSymbol()
 endfunction
 
 function! LightlineFileformat()
-    return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . ' ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
+    return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . '  ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
 endfunction
 
 function! MyDeniteReplace(context)
