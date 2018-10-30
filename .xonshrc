@@ -1,6 +1,6 @@
 from prompt_toolkit.keys import Keys
 # XONSH WIZARD START
-xontrib load coreutils free_cwd
+xontrib load coreutils free_cwd fzf-widgets
 # xontrib load coreutils free_cwd powerline
 # XONSH WIZARD END
 
