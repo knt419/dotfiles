@@ -38,7 +38,6 @@ Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
 Plug 'tpope/vim-dadbod'
 
 " Plug 'rhysd/try-colorscheme.vim', { 'on': 'TryColorscheme' }
-" Plug 'y0za/vim-reading-vimrc', { 'on': ['ReadingVimrcList', 'ReadingVimrcLoad', 'ReadingVimrcNext'] }
 " Plug 'cocopon/colorswatch.vim'
 
 " Plug 'AlessandroYorba/Alduin'
@@ -58,6 +57,7 @@ else
                 \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 endif
 
+" except oni
 if !exists('g:gui_oni')
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
@@ -71,6 +71,13 @@ if !exists('g:gui_oni')
     Plug 'tpope/vim-commentary'
 endif
 
+" gonvim
+if exists('g:gonvim_version')
+    Plug 'akiyosi/gonvim-fuzzy'
+    Plug 'equalsraf/neovim-gui-shim'
+endif
+
+" nyaovim
 if exists('g:nyaovim_version')
     Plug 'rhysd/nyaovim-popup-tooltip'
     Plug 'rhysd/nyaovim-markdown-preview'
@@ -94,7 +101,7 @@ let g:lightline = {
             \ 'active': {
             \    'left': [
             \      ['mode', 'paste'],
-            \      ['readonly', 'modified', 'linter_errors', 'linter_warnings', 'linter_ok'],
+            \      ['readonly', 'modified','linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
             \    ],
             \    'right': [
             \      ['filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
@@ -119,6 +126,7 @@ let g:lightline = {
             \ },
             \ 'component_expand': {
             \   'buffers': 'lightline#bufferline#buffers',
+            \   'linter_checking': 'lightline#ale#checking',
             \   'linter_warnings': 'lightline#ale#warnings',
             \   'linter_errors': 'lightline#ale#errors',
             \   'linter_ok': 'lightline#ale#ok'
@@ -126,7 +134,9 @@ let g:lightline = {
             \ 'component_type': {
             \   'buffers': 'tabsel',
             \   'linter_warnings': 'warning',
-            \   'linter_errors': 'error'
+            \   'linter_errors': 'error',
+            \   'linter_checking': 'left',
+            \   'linter_ok': 'left'
             \ },
             \ 'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
             \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
@@ -182,6 +192,7 @@ let g:ale_warn_about_trailing_whitespace = 0
 let g:lightline#ale#warnings = "\uf071"
 let g:lightline#ale#errors = "\uf05e"
 let g:lightline#ale#ok = "\uf00c"
+let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = "\uf071"
 let g:lightline#ale#indicator_errors = "\uf05e"
 let g:lightline#ale#indicator_ok = "\uf00c"
