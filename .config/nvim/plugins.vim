@@ -72,7 +72,7 @@ if !exists('g:gui_oni')
 endif
 
 " gonvim
-if exists('g:gonvim_version')
+if exists('g:gonvim_draw_statusline')
     Plug 'akiyosi/gonvim-fuzzy'
     Plug 'equalsraf/neovim-gui-shim'
 endif
