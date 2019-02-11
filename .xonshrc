@@ -1,6 +1,6 @@
 from prompt_toolkit.keys import Keys
 # XONSH WIZARD START
-xontrib load coreutils free_cwd fzf-widgets
+xontrib load coreutils free_cwd
 # xontrib load coreutils free_cwd powerline
 # XONSH WIZARD END
 
@@ -32,6 +32,7 @@ $XONSH_SHOW_TRACEBACK = True
 $fzf_history_binding = Keys.ControlR
 $fzf_ssh_binding = Keys.ControlS
 
-aliases["ls"] = 'ls -F --color=auto --show-control-chars --ignore={NTUSER.*,ntuser.*}'
+aliases["ls"] = 'ls -F --color=auto --show-control-chars'
+# aliases["ls"] = 'ls -F --color=auto --show-control-chars --ignore={NTUSER.*,ntuser.*}'
 
 # vim:set ft=python:
