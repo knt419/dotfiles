@@ -5,8 +5,6 @@ Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
 
-Plug 'Shougo/neosnippet'
-Plug 'honza/vim-snippets'
 Plug 'Shougo/neco-syntax'
 
 Plug 'Chiel92/vim-autoformat'
@@ -64,11 +62,17 @@ if !exists('g:gui_oni')
     Plug 'maximbaz/lightline-ale'
     " Plug 'shinchu/lightline-gruvbox.vim'
     Plug 'tpope/vim-surround'
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'zchee/deoplete-go', { 'do': 'make' }
-    Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-    Plug 'Shougo/neco-vim', { 'for': 'vim' }
     Plug 'tpope/vim-commentary'
+    if !has('win32') && !has('win64')
+        Plug 'Shougo/deoplete.nvim'
+        Plug 'zchee/deoplete-go', { 'do': 'make' }
+        Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+        Plug 'Shougo/neco-vim', { 'for': 'vim' }
+        Plug 'Shougo/deoplete.nvim'
+        Plug 'zchee/deoplete-go', { 'do': 'make' }
+        Plug 'zchee/deoplete-jedi', { 'for': 'python' }
+        Plug 'Shougo/neco-vim', { 'for': 'vim' }
+    endif
 endif
 
 " gonvim
