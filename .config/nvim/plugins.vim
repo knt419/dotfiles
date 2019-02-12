@@ -63,16 +63,11 @@ if !exists('g:gui_oni')
     " Plug 'shinchu/lightline-gruvbox.vim'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
-    if !has('win32') && !has('win64')
-        Plug 'Shougo/deoplete.nvim'
-        Plug 'zchee/deoplete-go', { 'do': 'make' }
-        Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-        Plug 'Shougo/neco-vim', { 'for': 'vim' }
-        Plug 'Shougo/deoplete.nvim'
-        Plug 'zchee/deoplete-go', { 'do': 'make' }
-        Plug 'zchee/deoplete-jedi', { 'for': 'python' }
-        Plug 'Shougo/neco-vim', { 'for': 'vim' }
-    endif
+    Plug 'prabirshrestha/async.vim'
+    Plug 'prabirshrestha/vim-lsp'
+    Plug 'prabirshrestha/asyncomplete.vim'
+    Plug 'prabirshrestha/asyncomplete-lsp.vim'
+    Plug 'natebosch/vim-lsc'
 endif
 
 " gonvim
@@ -174,9 +169,7 @@ let g:go_def_mapping_enabled          = 0
 let g:go_def_reuse_buffer             = 1
 let $VISUAL = 'nvr --remote-wait'
 
-let g:deoplete#enable_at_startup       = 1
-let g:deoplete#source#go#gocode_binary = '$HOME/go/bin/gocode'
-let g:deoplete#auto_complete_delay     = 0
+let g:lsp_async_completion = 1
 
 let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -205,6 +198,62 @@ let g:gitgutter_grep = ''
 let g:gitgutter_map_keys = 0
 
 let g:nefertiti_base_brightness_level = 14
+
+if executable('bingo')
+    augroup LspGo
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'go-lang',
+                    \ 'cmd': {server_info->['bingo', '-mode', 'stdio']},
+                    \ 'whitelist': ['go'],
+                    \ })
+        autocmd FileType go setlocal omnifunc=lsp#complete
+    augroup END
+endif
+
+if executable('pyls')
+    augroup LspPython
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'pyls',
+                    \ 'cmd': {server_info->['pyls']},
+                    \ 'whitelist': ['python'],
+                    \ })
+    augroup END
+endif
+
+if executable('solargraph')
+    " gem install solargraph
+    augroup LspRuby
+        autocmd!
+        autocmd User lsp_setup call lsp#register_server({
+                    \ 'name': 'solargraph',
+                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+                    \ 'initialization_options': {"diagnostics": "true"},
+                    \ 'whitelist': ['ruby'],
+                    \ })
+    augroup END
+endif
+
+" if executable('vint')
+"     augroup LspVim
+"         autocmd!
+"         autocmd User lsp_setup call lsp#register_server({
+"                     \ 'name': 'efm-langserver-vim',
+"                     \ 'cmd': {server_info->['efm-langserver', '-stdin', &shell, &shellcmdflag, 'vint -']},
+"                     \ 'whitelist': ['vim'],
+"                     \ })
+"     augroup END
+" endif
+
+augroup LspEFM
+    autocmd!
+    autocmd User lsp_setup call lsp#register_server({
+                \ 'name': 'efm-langserver-erb',
+                \ 'cmd': {server_info->['efm-langserver', '-c=~/.config/efm-langserver/config.yaml']},
+                \ 'whitelist': ['eruby', 'vim', 'markdown'],
+                \ })
+augroup END
 
 highlight link HighlightedyankRegion Visual
 
