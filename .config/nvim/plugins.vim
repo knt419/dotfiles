@@ -14,7 +14,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'lilydjwg/colorizer'
 Plug 'itchyny/vim-parenmatch'
 Plug 'mhinz/vim-startify'
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'cohama/lexima.vim'
@@ -29,7 +29,7 @@ Plug 'airblade/vim-rooter'
 Plug 'mhinz/neovim-remote'
 Plug 'lambdalisue/gina.vim'
 Plug 'machakann/vim-highlightedyank'
-Plug 'fatih/vim-go', { 'for': 'go' }
+" Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
@@ -59,15 +59,14 @@ endif
 if !exists('g:gui_oni')
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
-    Plug 'maximbaz/lightline-ale'
+    " Plug 'maximbaz/lightline-ale'
     " Plug 'shinchu/lightline-gruvbox.vim'
     Plug 'tpope/vim-surround'
+    Plug 'autozimu/LanguageClient-neovim', {
+                \ 'branch': 'next',
+                \ 'do': 'make release',
+                \ }
     Plug 'tpope/vim-commentary'
-    Plug 'prabirshrestha/async.vim'
-    Plug 'prabirshrestha/vim-lsp'
-    Plug 'prabirshrestha/asyncomplete.vim'
-    Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'natebosch/vim-lsc'
 endif
 
 " gonvim
@@ -101,6 +100,7 @@ let g:lightline = {
             \    'left': [
             \      ['mode', 'paste'],
             \      ['readonly', 'modified','linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+            \      ['readonly', 'modified'],
             \    ],
             \    'right': [
             \      ['filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
@@ -153,6 +153,14 @@ let g:ale_fixers = {
             \ 'go': ['gofmt'],
             \ }
 
+let g:LanguageClient_rootMarkers = {
+            \ 'go': ['.git', 'go.mod'],
+            \ }
+
+let g:LanguageClient_serverCommands = {
+            \ 'go': ['bingo'],
+            \ }
+
 let g:vaffle_show_hidden_files = 1
 let g:loaded_netrwPlugin       = 1
 let g:fzf_layout               = { 'down': '~70%' }
@@ -168,8 +176,6 @@ let g:go_fmt_command                  = "goimports"
 let g:go_def_mapping_enabled          = 0
 let g:go_def_reuse_buffer             = 1
 let $VISUAL = 'nvr --remote-wait'
-
-let g:lsp_async_completion = 1
 
 let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
 let g:neosnippet#enable_snipmate_compatibility = 1
@@ -198,62 +204,6 @@ let g:gitgutter_grep = ''
 let g:gitgutter_map_keys = 0
 
 let g:nefertiti_base_brightness_level = 14
-
-if executable('bingo')
-    augroup LspGo
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'go-lang',
-                    \ 'cmd': {server_info->['bingo', '-mode', 'stdio']},
-                    \ 'whitelist': ['go'],
-                    \ })
-        autocmd FileType go setlocal omnifunc=lsp#complete
-    augroup END
-endif
-
-if executable('pyls')
-    augroup LspPython
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'pyls',
-                    \ 'cmd': {server_info->['pyls']},
-                    \ 'whitelist': ['python'],
-                    \ })
-    augroup END
-endif
-
-if executable('solargraph')
-    " gem install solargraph
-    augroup LspRuby
-        autocmd!
-        autocmd User lsp_setup call lsp#register_server({
-                    \ 'name': 'solargraph',
-                    \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-                    \ 'initialization_options': {"diagnostics": "true"},
-                    \ 'whitelist': ['ruby'],
-                    \ })
-    augroup END
-endif
-
-" if executable('vint')
-"     augroup LspVim
-"         autocmd!
-"         autocmd User lsp_setup call lsp#register_server({
-"                     \ 'name': 'efm-langserver-vim',
-"                     \ 'cmd': {server_info->['efm-langserver', '-stdin', &shell, &shellcmdflag, 'vint -']},
-"                     \ 'whitelist': ['vim'],
-"                     \ })
-"     augroup END
-" endif
-
-augroup LspEFM
-    autocmd!
-    autocmd User lsp_setup call lsp#register_server({
-                \ 'name': 'efm-langserver-erb',
-                \ 'cmd': {server_info->['efm-langserver', '-c=~/.config/efm-langserver/config.yaml']},
-                \ 'whitelist': ['eruby', 'vim', 'markdown'],
-                \ })
-augroup END
 
 highlight link HighlightedyankRegion Visual
 
