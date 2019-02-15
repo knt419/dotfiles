@@ -8,7 +8,6 @@ Plug 'thinca/vim-qfreplace'
 Plug 'Shougo/neco-syntax'
 
 Plug 'Chiel92/vim-autoformat'
-Plug 'brooth/far.vim', { 'on': ['Far','Farp'] }
 Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
 Plug 'lilydjwg/colorizer'
@@ -29,14 +28,10 @@ Plug 'airblade/vim-rooter'
 Plug 'mhinz/neovim-remote'
 Plug 'lambdalisue/gina.vim'
 Plug 'machakann/vim-highlightedyank'
-" Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'cespare/vim-toml', { 'for': 'toml' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
 Plug 'tpope/vim-dadbod'
-
-" Plug 'rhysd/try-colorscheme.vim', { 'on': 'TryColorscheme' }
-" Plug 'cocopon/colorswatch.vim'
 
 " Plug 'AlessandroYorba/Alduin'
 Plug 'jeetsukumaran/vim-nefertiti'
@@ -62,6 +57,7 @@ if !exists('g:gui_oni')
     " Plug 'maximbaz/lightline-ale'
     " Plug 'shinchu/lightline-gruvbox.vim'
     Plug 'tpope/vim-surround'
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'autozimu/LanguageClient-neovim', {
                 \ 'branch': 'next',
                 \ 'do': 'make release',
@@ -166,21 +162,16 @@ let g:loaded_netrwPlugin       = 1
 let g:fzf_layout               = { 'down': '~70%' }
 let g:rooter_change_directory_for_non_project_files = 'home'
 
-let g:go_hightlight_functions         = 1
-let g:go_hightlight_methods           = 1
-let g:go_hightlight_structs           = 1
-let g:go_hightlight_interfaces        = 1
-let g:go_hightlight_operators         = 1
-let g:go_hightlight_build_constraints = 1
-let g:go_fmt_command                  = "goimports"
-let g:go_def_mapping_enabled          = 0
-let g:go_def_reuse_buffer             = 1
 let $VISUAL = 'nvr --remote-wait'
+
+let g:deoplete#enable_at_startup      = 1
+let g:deoplete#auto_complete_delay    = 0
 
 let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
 let g:neosnippet#enable_snipmate_compatibility = 1
 let g:neosnippet#enable_auto_clear_markers = 0
 let g:neosnippet#snippets_directory = g:plug_repo_dir . '/github.com/honza/vim-snippets/snippets'
+let g:neosnippet#enable_complete_done = 1
 
 let g:ale_cache_executable_check_failures = 1
 let g:ale_echo_delay = 20
@@ -322,6 +313,9 @@ if &runtimepath =~# 'deoplete.nvim'
                 \ 'ignore_case': v:false,
                 \ 'auto_refresh_delay': 100,
                 \ })
+    call deoplete#custom#var(
+                \ 'file', 'enable_buffer_path', v:false
+                \ )
 endif
 
 if &runtimepath =~# 'denite.nvim'
