@@ -32,6 +32,7 @@ set switchbuf=useopen
 set confirm
 set number
 set ruler
+set signcolumn=yes
 set display=uhex,lastline
 set scrolloff=5
 set foldmethod=marker

@@ -155,6 +155,7 @@ let g:LanguageClient_rootMarkers = {
 
 let g:LanguageClient_serverCommands = {
             \ 'go': ['bingo'],
+            \ 'vim': ['efm-langserver'],
             \ }
 
 let g:vaffle_show_hidden_files = 1
