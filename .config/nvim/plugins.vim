@@ -57,12 +57,14 @@ if !exists('g:gui_oni')
     " Plug 'maximbaz/lightline-ale'
     " Plug 'shinchu/lightline-gruvbox.vim'
     Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-commentary'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/neosnippet.vim'
+    Plug 'honza/vim-snippets'
     Plug 'autozimu/LanguageClient-neovim', {
                 \ 'branch': 'next',
                 \ 'do': 'make release',
                 \ }
-    Plug 'tpope/vim-commentary'
 endif
 
 " gonvim

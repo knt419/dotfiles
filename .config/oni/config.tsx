@@ -5,16 +5,16 @@ import * as Oni from "oni-api"
 export const activate = (oni: Oni.Plugin.Api) => {
     console.log("config activated")
 
-        // Input
-        //
-        // Add input bindings here:
-        //
-        oni.input.bind("<c-enter>", () => console.log("Control+Enter was pressed"))
+    // Input
+    //
+    // Add input bindings here:
+    //
+    oni.input.bind("<c-enter>", () => console.log("Control+Enter was pressed"))
 
-        //
-        // Or remove the default bindings here by uncommenting the below line:
-        //
-        // oni.input.unbind("<c-p>")
+    //
+    // Or remove the default bindings here by uncommenting the below line:
+    //
+    // oni.input.unbind("<c-p>")
 
 }
 
@@ -29,10 +29,9 @@ export const configuration = {
 
     //"oni.useDefaultConfig": true,
     //"oni.bookmarks": ["~/Documents"],
-    //"oni.loadInitVim": false,
+    "oni.loadInitVim": true,
     "editor.fontSize": "14px",
-    "editor.fontFamily": "RictyDiminished NF",
-    "experimental.markdownPreview.enabled": true,
+    //"editor.fontFamily": "Monaco",
 
     // UI customizations
     "ui.animations.enabled": true,
