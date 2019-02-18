@@ -13,7 +13,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'lilydjwg/colorizer'
 Plug 'itchyny/vim-parenmatch'
 Plug 'mhinz/vim-startify'
-" Plug 'w0rp/ale'
+Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'cohama/lexima.vim'
@@ -54,7 +54,7 @@ endif
 if !exists('g:gui_oni')
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
-    " Plug 'maximbaz/lightline-ale'
+    Plug 'maximbaz/lightline-ale'
     " Plug 'shinchu/lightline-gruvbox.vim'
     Plug 'tpope/vim-surround'
     Plug 'tpope/vim-commentary'
@@ -148,9 +148,8 @@ let g:ale_linters = {
             \ }
 let g:ale_fixers = {
             \ 'ruby': ['rubocop'],
-            \ 'go': ['gofmt'],
             \ }
-
+let g:LanguageClient_autoStart = 1
 let g:LanguageClient_rootMarkers = {
             \ 'go': ['.git', 'go.mod'],
             \ }

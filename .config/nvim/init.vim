@@ -107,7 +107,7 @@ let g:plugin_mgr = 'vimplug'
 let g:vim_indent_cont = &shiftwidth * 3
 
 " dein {{{
-if g:plugin_mgr == 'dein'
+if g:plugin_mgr ==# 'dein'
 
     let s:dein_dir = expand('$HOME/.cache/dein')
     let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
@@ -140,7 +140,7 @@ endif
 "}}}
 
 " vimplug {{{
-if g:plugin_mgr == 'vimplug'
+if g:plugin_mgr ==# 'vimplug'
     let g:plug_path = expand('$HOME/.local/share/nvim/site/autoload/plug.vim')
     let g:plug_repo_dir = expand('$HOME/.local/share/nvim/plugged')
 
