@@ -311,7 +311,7 @@ autocmd MyAutoCmd InsertLeave * silent! pclose!
 
 if &runtimepath =~# 'deoplete.nvim'
     call deoplete#custom#option({
-                \ 'ignore_sources': {'_': ['file']},
+                \ 'ignore_sources': {'_': ['file', 'tag']},
                 \ 'ignore_case': v:false,
                 \ 'auto_refresh_delay': 100,
                 \ })
