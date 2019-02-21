@@ -19,9 +19,12 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'cohama/lexima.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'rhysd/accelerated-jk'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
 Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
 Plug 'haya14busa/is.vim', { 'on': '<Plug>(asterisk-' }
+Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'cocopon/vaffle.vim'
 Plug 'airblade/vim-rooter'
@@ -208,6 +211,8 @@ map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
 map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+vmap v     <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
@@ -222,16 +227,16 @@ nmap <silent> <S-p> <Plug>(ale_previous_wrap)
 nnoremap <C-t> :bn<CR>
 nnoremap <S-t> :bp<CR>
 
-nnoremap <silent> <Space>s :<C-u>Startify<CR>
-nnoremap <silent> <Space>v :<C-u>Vaffle<CR>
-nnoremap <silent> <Space>p :<C-u>History<CR>
-nnoremap <silent> <Space>r :<C-u>GFiles<CR>
-nnoremap <silent> <Space>f :<C-u>Denite file_rec<CR>
-nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>
-nnoremap <silent> <Space>y :<C-u>Denite neoyank<CR>
-nnoremap <silent> <Space>b :<C-u>Denite buffer<CR>
-nnoremap <silent> <Space>d :<C-u>Denite directory_mru<CR>
-nnoremap <silent> <Space>g :<C-u>Denite grep<CR>
+nnoremap <silent> <Leader>s :<C-u>Startify<CR>
+nnoremap <silent> <Leader>v :<C-u>Vaffle<CR>
+nnoremap <silent> <Leader>p :<C-u>History<CR>
+nnoremap <silent> <Leader>r :<C-u>GFiles<CR>
+nnoremap <silent> <Leader>f :<C-u>Denite file_rec<CR>
+nnoremap <silent> <Leader>m :<C-u>Denite file_mru<CR>
+nnoremap <silent> <Leader>y :<C-u>Denite neoyank<CR>
+nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
+nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
+nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 
 vmap <CR> <Plug>(LiveEasyAlign)
 
@@ -355,7 +360,7 @@ if &runtimepath =~# 'denite.nvim'
     call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
     call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
     call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
-    call denite#custom#map('normal', '<Space><Space>', '<denite:toggle_select_all>')
+    call denite#custom#map('normal', '<Leader><Leader>', '<denite:toggle_select_all>')
     call denite#custom#map('normal', 'r', '<denite:do_action:qfreplace>')
     call denite#custom#map('normal', '<ESC>', '<denite:quit>')
     call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])

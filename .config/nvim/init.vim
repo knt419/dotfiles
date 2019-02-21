@@ -89,9 +89,10 @@ if has('win32') || has('win64')
     set shellslash
 endif
 
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_SI     = "\<Esc>]50;CursorShape=1\x7"
+let &t_EI     = "\<Esc>]50;CursorShape=0\x7"
+let &t_SR     = "\<Esc>]50;CursorShape=2\x7"
+let mapleader = "\<Space>"
 
 " reset autocmd
 augroup MyAutoCmd
@@ -157,8 +158,8 @@ endif
 " nvim {{{
 if has('nvim')
     set inccommand=split
-    nnoremap <Space>t :<C-u>terminal<CR>
-    tnoremap <Space>q <C-\><C-n>
+    nnoremap <Leader>t :<C-u>terminal<CR>
+    tnoremap <Leader>q <C-\><C-n>
     tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
     " tnoremap <S-t> <C-\><C-n>:<C-u>bp<CR>
     let g:terminal_color_0  = '#0c0c0c' " Black
@@ -195,7 +196,7 @@ endif
 " keymap {{{
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
 nnoremap <silent> Y y$
-vnoremap <silent> v $h
+" vnoremap <silent> v $h
 xnoremap <silent> Y "+y
 nnoremap <silent> x "_x
 nnoremap <silent> X "_X
@@ -216,9 +217,9 @@ nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 nnoremap <silent> : ;
 nnoremap <silent> ; :
 nnoremap <silent> <CR><CR> o<ESC>
-nnoremap <silent> <Space>q :<C-u>bd<CR>
-nnoremap <silent> <Space>w :<C-u>w<CR>:<C-u>bd<CR>
-nnoremap <silent> <Space>e :<C-u>enew<CR>
+nnoremap <silent> <Leader>q :<C-u>bd<CR>
+nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>
+nnoremap <silent> <Leader>e :<C-u>enew<CR>
 inoremap jj <ESC>:<C-u>set iminsert=0<CR>
 inoremap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
 
