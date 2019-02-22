@@ -171,6 +171,9 @@ let g:startify_change_to_dir = 0
 let g:startify_fortune_use_unicode = 1
 let g:startify_enable_unsafe = 0
 
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+let g:webdevicons_enable_denite = 1
+
 let $VISUAL = 'nvr --remote-wait'
 
 let g:deoplete#enable_at_startup      = 1
@@ -323,6 +326,7 @@ if &runtimepath =~# 'deoplete.nvim'
                 \ 'ignore_sources': {'_': ['file', 'tag']},
                 \ 'ignore_case': v:false,
                 \ 'auto_refresh_delay': 100,
+                \ 'num_processes': 1,
                 \ })
     call deoplete#custom#var(
                 \ 'file', 'enable_buffer_path', v:false
