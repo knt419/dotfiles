@@ -1,24 +1,26 @@
 call plug#begin(g:plug_repo_dir)
 
+" denite
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
 
-Plug 'Shougo/neco-syntax'
-
-Plug 'Chiel92/vim-autoformat'
+" editor display
 Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
 Plug 'lilydjwg/colorizer'
 Plug 'itchyny/vim-parenmatch'
 Plug 'mhinz/vim-startify'
-Plug 'w0rp/ale'
-Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
+
+" text/input manipulation
 Plug 'cohama/lexima.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'machakann/vim-highlightedyank'
 Plug 'rhysd/accelerated-jk'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
@@ -26,16 +28,23 @@ Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
 Plug 'haya14busa/is.vim', { 'on': '<Plug>(asterisk-' }
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
+
+" file/directory
 Plug 'cocopon/vaffle.vim'
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/neovim-remote'
+
+" git
 Plug 'lambdalisue/gina.vim'
-Plug 'machakann/vim-highlightedyank'
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'airblade/vim-gitgutter'
+
+" language support
+Plug 'w0rp/ale'
+Plug 'sheerun/vim-polyglot'
 Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
 Plug 'tpope/vim-dadbod'
 
+" colorscheme
 " Plug 'AlessandroYorba/Alduin'
 Plug 'jeetsukumaran/vim-nefertiti'
 
@@ -53,15 +62,13 @@ else
                 \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 endif
 
-" except oni
-if !exists('g:gui_oni')
+" except oni, veonim ## statusline and completion
+if !exists('g:gui_oni') && !exists('g:veonim')
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
     Plug 'maximbaz/lightline-ale'
-    " Plug 'shinchu/lightline-gruvbox.vim'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-commentary'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'Shougo/neco-syntax'
     Plug 'Shougo/neosnippet.vim'
     Plug 'honza/vim-snippets'
     Plug 'autozimu/LanguageClient-neovim', {
@@ -71,7 +78,7 @@ if !exists('g:gui_oni')
 endif
 
 " gonvim
-if exists('g:gonvim_draw_statusline')
+if exists('g:gonvim_running')
     Plug 'akiyosi/gonvim-fuzzy'
     Plug 'equalsraf/neovim-gui-shim'
 endif
@@ -89,7 +96,7 @@ if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
 
-if !exists('g:gui_oni')
+if !exists('g:gui_oni') && !exists('g:veonim')
     source $HOME/.config/nvim/lightline-themecolor.vim
 endif
 
@@ -255,6 +262,55 @@ imap <expr> <Tab> pumvisible() ? "\<C-n>" :
             \ "\<Plug>(neosnippet_jump)" : "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 smap <expr> <Tab> neosnippet#jumpable() ?
             \ "\<Plug>(neosnippet_jump)" : "\<Tab>"
+
+if exists('veonim')
+
+    set laststatus=0
+    set noshowcmd
+
+    VeonimExt 'veonim/ext-go'
+    VeonimExt 'veonim/ext-json'
+    VeonimExt 'veonim/ext-html'
+    VeonimExt 'vscode:extension/sourcegraph.javascript-typescript'
+
+    " workspace functions
+    nnoremap <silent> <Leader>f :Veonim files<cr>
+    nnoremap <silent> <Leader>v :Veonim explorer<cr>
+    nnoremap <silent> <Leader>b :Veonim buffers<cr>
+
+    " searching text
+    nnoremap <silent> <space>fw :Veonim grep-word<cr>
+    vnoremap <silent> <space>fw :Veonim grep-selection<cr>
+    nnoremap <silent> <space>fa :Veonim grep<cr>
+    nnoremap <silent> <space>ff :Veonim grep-resume<cr>
+    nnoremap <silent> <space>fb :Veonim buffer-search<cr>
+
+    " color picker
+    nnoremap <silent> sc :Veonim pick-color<cr>
+
+    " language server functions
+    nnoremap <silent> sr :Veonim rename<cr>
+    nnoremap <silent> sd :Veonim definition<cr>
+    nnoremap <silent> st :Veonim type-definition<cr>
+    nnoremap <silent> si :Veonim implementation<cr>
+    nnoremap <silent> sf :Veonim references<cr>
+    nnoremap <silent> sh :Veonim hover<cr>
+    nnoremap <silent> sl :Veonim symbols<cr>
+    nnoremap <silent> so :Veonim workspace-symbols<cr>
+    nnoremap <silent> sq :Veonim code-action<cr>
+    nnoremap <silent> sp :Veonim show-problem<cr>
+    nnoremap <silent> sk :Veonim highlight<cr>
+    nnoremap <silent> sK :Veonim highlight-clear<cr>
+    nnoremap <silent> <c-n> :Veonim next-problem<cr>
+    nnoremap <silent> <c-p> :Veonim prev-problem<cr>
+    nnoremap <silent> ,n :Veonim next-usage<cr>
+    nnoremap <silent> ,p :Veonim prev-usage<cr>
+    nnoremap <silent> <space>pt :Veonim problems-toggle<cr>
+    nnoremap <silent> <space>pf :Veonim problems-focus<cr>
+    nnoremap <silent> <d-o> :Veonim buffer-prev<cr>
+    nnoremap <silent> <d-i> :Veonim buffer-next<cr>
+
+endif
 
 " functions
 

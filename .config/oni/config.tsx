@@ -18,16 +18,17 @@ export const activate = (oni: Oni.Plugin.Api) => {
 
 }
 
-export const deactivate = (oni: Oni.Plugin.Api) => {
-    console.log("config deactivated")
-}
+// export const deactivate = (oni: Oni.Plugin.Api) => {
+// console.log("config deactivated")
+// }
 
 export const configuration = {
+    activate,
     //add custom config here, such as
 
     "ui.colorscheme": "nefertiti",
 
-    //"oni.useDefaultConfig": true,
+    "oni.useDefaultConfig": false,
     //"oni.bookmarks": ["~/Documents"],
     "oni.loadInitVim": true,
     "editor.fontSize": "14px",
