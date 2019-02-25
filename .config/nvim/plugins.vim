@@ -88,6 +88,9 @@ endif
 
 if !exists('g:gui_oni')
     source $HOME/.config/nvim/lightline-themecolor.vim
+else
+    set cmdheight=1
+    set laststatus=0
 endif
 
 " plugin variables
