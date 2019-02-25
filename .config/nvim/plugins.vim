@@ -69,8 +69,6 @@ if !exists('g:gui_oni') && !exists('g:veonim')
     Plug 'maximbaz/lightline-ale'
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Shougo/neco-syntax'
-    Plug 'Shougo/neosnippet.vim'
-    Plug 'honza/vim-snippets'
     Plug 'autozimu/LanguageClient-neovim', {
                 \ 'branch': 'next',
                 \ 'do': 'make release',
@@ -189,12 +187,6 @@ let $VISUAL = 'nvr --remote-wait'
 let g:deoplete#enable_at_startup      = 1
 let g:deoplete#auto_complete_delay    = 0
 
-let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#enable_auto_clear_markers = 0
-let g:neosnippet#snippets_directory = g:plug_repo_dir . '/github.com/honza/vim-snippets/snippets'
-let g:neosnippet#enable_complete_done = 1
-
 let g:ale_cache_executable_check_failures = 1
 let g:ale_echo_delay = 20
 let g:ale_history_enabled = 0
@@ -257,14 +249,8 @@ nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 
 vmap <CR> <Plug>(LiveEasyAlign)
 
-imap <expr> <C-k> pumvisible()? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-g>U\<C-o>O"
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
 imap <expr> <Tab> pumvisible() ? "\<C-n>" :
-            \ neosnippet#jumpable() ?
-            \ "\<Plug>(neosnippet_jump)" : "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
-smap <expr> <Tab> neosnippet#jumpable() ?
-            \ "\<Plug>(neosnippet_jump)" : "\<Tab>"
+            \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 
 if exists('veonim')
 
@@ -364,10 +350,13 @@ function! MyDeniteReplace(context)
 endfunction
 
 function! s:my_cr_function()
-    return !pumvisible() ?
-                \ lexima#expand('<CR>', 'i') :
-                \ neosnippet#expandable() ?
-                \ neosnippet#mappings#expand_impl() : deoplete#close_popup()
+    if &runtimepath =~# 'deoplete.nvim'
+        return !pumvisible() ?
+                    \ lexima#expand('<CR>', 'i') :
+                    \ deoplete#close_popup()
+    else
+        return lexima#expand('<CR>', 'i')
+    endif
 endfunction
 
 autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
