@@ -62,11 +62,13 @@ else
                 \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 endif
 
-" except oni, veonim ## statusline and completion
+" except oni, veonim
 if !exists('g:gui_oni') && !exists('g:veonim')
+    " statusline
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
     Plug 'maximbaz/lightline-ale'
+    " lsp/completion
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Shougo/neco-syntax'
     Plug 'autozimu/LanguageClient-neovim', {
@@ -365,7 +367,6 @@ autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
 autocmd MyAutoCmd FileType go :highlight goErr cterm=bold ctermfg=214
 autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
-autocmd MyAutoCmd BufWrite * :Autoformat
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 
