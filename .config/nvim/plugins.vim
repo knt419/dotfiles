@@ -256,9 +256,6 @@ imap <expr> <Tab> pumvisible() ? "\<C-n>" :
 
 if exists('veonim')
 
-    set laststatus=0
-    set noshowcmd
-
     VeonimExt 'veonim/ext-go'
     VeonimExt 'veonim/ext-json'
     VeonimExt 'veonim/ext-html'

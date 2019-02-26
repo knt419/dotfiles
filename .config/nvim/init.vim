@@ -40,8 +40,7 @@ set foldenable
 set foldlevelstart=10
 set lazyredraw
 
-set showmatch
-set matchtime=1
+set noshowmatch
 set tabstop=4
 set expandtab
 set shiftwidth=4
