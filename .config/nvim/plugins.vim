@@ -1,38 +1,50 @@
 call plug#begin(g:plug_repo_dir)
 
+" denite
 Plug 'Shougo/denite.nvim'
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
 
-Plug 'Shougo/neco-syntax'
-
-Plug 'Chiel92/vim-autoformat'
+" editor display
 Plug 'Yggdroot/indentLine'
 Plug 'ryanoasis/vim-devicons'
 Plug 'lilydjwg/colorizer'
 Plug 'itchyny/vim-parenmatch'
 Plug 'mhinz/vim-startify'
-Plug 'w0rp/ale'
-Plug 'airblade/vim-gitgutter'
 Plug 'editorconfig/editorconfig-vim'
+
+" text/input manipulation
 Plug 'cohama/lexima.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'machakann/vim-highlightedyank'
 Plug 'rhysd/accelerated-jk'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'kana/vim-textobj-user'
+Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
 Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
 Plug 'haya14busa/is.vim', { 'on': '<Plug>(asterisk-' }
+Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
+
+" file/directory
 Plug 'cocopon/vaffle.vim'
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/neovim-remote'
+
+" git
 Plug 'lambdalisue/gina.vim'
-Plug 'machakann/vim-highlightedyank'
-Plug 'cespare/vim-toml', { 'for': 'toml' }
-Plug 'tpope/vim-rails', { 'for': 'ruby' }
+Plug 'airblade/vim-gitgutter'
+
+" language support
+Plug 'w0rp/ale'
+Plug 'sheerun/vim-polyglot'
 Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
 Plug 'tpope/vim-dadbod'
 
+" colorscheme
 " Plug 'AlessandroYorba/Alduin'
 Plug 'jeetsukumaran/vim-nefertiti'
 
@@ -50,17 +62,15 @@ else
                 \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 endif
 
-" except oni
-if !exists('g:gui_oni')
+" except oni, veonim
+if !exists('g:gui_oni') && !exists('g:veonim')
+    " statusline
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
     Plug 'maximbaz/lightline-ale'
-    " Plug 'shinchu/lightline-gruvbox.vim'
-    Plug 'tpope/vim-surround'
-    Plug 'tpope/vim-commentary'
+    " lsp/completion
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'Shougo/neosnippet.vim'
-    Plug 'honza/vim-snippets'
+    Plug 'Shougo/neco-syntax'
     Plug 'autozimu/LanguageClient-neovim', {
                 \ 'branch': 'next',
                 \ 'do': 'make release',
@@ -68,7 +78,7 @@ if !exists('g:gui_oni')
 endif
 
 " gonvim
-if exists('g:gonvim_draw_statusline')
+if exists('g:gonvim_running')
     Plug 'akiyosi/gonvim-fuzzy'
     Plug 'equalsraf/neovim-gui-shim'
 endif
@@ -86,7 +96,7 @@ if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
 
-if !exists('g:gui_oni')
+if !exists('g:gui_oni') && !exists('g:veonim')
     source $HOME/.config/nvim/lightline-themecolor.vim
 else
     set cmdheight=1
@@ -166,17 +176,18 @@ let g:vaffle_show_hidden_files = 1
 let g:loaded_netrwPlugin       = 1
 let g:fzf_layout               = { 'down': '~70%' }
 let g:rooter_change_directory_for_non_project_files = 'home'
+let g:startify_change_to_vcs_root = 0
+let g:startify_change_to_dir = 0
+let g:startify_fortune_use_unicode = 1
+let g:startify_enable_unsafe = 0
+
+let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
+let g:webdevicons_enable_denite = 1
 
 let $VISUAL = 'nvr --remote-wait'
 
 let g:deoplete#enable_at_startup      = 1
 let g:deoplete#auto_complete_delay    = 0
-
-let g:neosnippet#disable_runtime_snippets = { '_' : 1, }
-let g:neosnippet#enable_snipmate_compatibility = 1
-let g:neosnippet#enable_auto_clear_markers = 0
-let g:neosnippet#snippets_directory = g:plug_repo_dir . '/github.com/honza/vim-snippets/snippets'
-let g:neosnippet#enable_complete_done = 1
 
 let g:ale_cache_executable_check_failures = 1
 let g:ale_echo_delay = 20
@@ -211,6 +222,8 @@ map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
 map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+vmap v     <Plug>(expand_region_expand)
+vmap <C-v> <Plug>(expand_region_shrink)
 
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
@@ -225,27 +238,67 @@ nmap <silent> <S-p> <Plug>(ale_previous_wrap)
 nnoremap <C-t> :bn<CR>
 nnoremap <S-t> :bp<CR>
 
-nnoremap <silent> <Space>s :<C-u>Startify<CR>
-nnoremap <silent> <Space>v :<C-u>Vaffle<CR>
-nnoremap <silent> <Space>p :<C-u>History<CR>
-nnoremap <silent> <Space>r :<C-u>GFiles<CR>
-nnoremap <silent> <Space>f :<C-u>Denite file_rec<CR>
-nnoremap <silent> <Space>m :<C-u>Denite file_mru<CR>
-nnoremap <silent> <Space>y :<C-u>Denite neoyank<CR>
-nnoremap <silent> <Space>b :<C-u>Denite buffer<CR>
-nnoremap <silent> <Space>d :<C-u>Denite directory_mru<CR>
-nnoremap <silent> <Space>g :<C-u>Denite grep<CR>
+nnoremap <silent> <Leader>s :<C-u>Startify<CR>
+nnoremap <silent> <Leader>v :<C-u>Vaffle<CR>
+nnoremap <silent> <Leader>p :<C-u>History<CR>
+nnoremap <silent> <Leader>r :<C-u>GFiles<CR>
+nnoremap <silent> <Leader>f :<C-u>Denite file_rec<CR>
+nnoremap <silent> <Leader>m :<C-u>Denite file_mru<CR>
+nnoremap <silent> <Leader>y :<C-u>Denite neoyank<CR>
+nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
+nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
+nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 
 vmap <CR> <Plug>(LiveEasyAlign)
 
-imap <expr> <C-k> pumvisible()? "\<Plug>(neosnippet_expand_or_jump)" : "\<C-g>U\<C-o>O"
-smap <C-k> <Plug>(neosnippet_expand_or_jump)
-xmap <C-k> <Plug>(neosnippet_expand_target)
 imap <expr> <Tab> pumvisible() ? "\<C-n>" :
-            \ neosnippet#jumpable() ?
-            \ "\<Plug>(neosnippet_jump)" : "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
-smap <expr> <Tab> neosnippet#jumpable() ?
-            \ "\<Plug>(neosnippet_jump)" : "\<Tab>"
+            \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
+
+if exists('veonim')
+
+    VeonimExt 'veonim/ext-go'
+    VeonimExt 'veonim/ext-json'
+    VeonimExt 'veonim/ext-html'
+    VeonimExt 'vscode:extension/sourcegraph.javascript-typescript'
+
+    " workspace functions
+    nnoremap <silent> <Leader>f :Veonim files<cr>
+    nnoremap <silent> <Leader>v :Veonim explorer<cr>
+    nnoremap <silent> <Leader>b :Veonim buffers<cr>
+
+    " searching text
+    nnoremap <silent> <space>fw :Veonim grep-word<cr>
+    vnoremap <silent> <space>fw :Veonim grep-selection<cr>
+    nnoremap <silent> <space>fa :Veonim grep<cr>
+    nnoremap <silent> <space>ff :Veonim grep-resume<cr>
+    nnoremap <silent> <space>fb :Veonim buffer-search<cr>
+
+    " color picker
+    nnoremap <silent> sc :Veonim pick-color<cr>
+
+    " language server functions
+    nnoremap <silent> sr :Veonim rename<cr>
+    nnoremap <silent> sd :Veonim definition<cr>
+    nnoremap <silent> st :Veonim type-definition<cr>
+    nnoremap <silent> si :Veonim implementation<cr>
+    nnoremap <silent> sf :Veonim references<cr>
+    nnoremap <silent> sh :Veonim hover<cr>
+    nnoremap <silent> sl :Veonim symbols<cr>
+    nnoremap <silent> so :Veonim workspace-symbols<cr>
+    nnoremap <silent> sq :Veonim code-action<cr>
+    nnoremap <silent> sp :Veonim show-problem<cr>
+    nnoremap <silent> sk :Veonim highlight<cr>
+    nnoremap <silent> sK :Veonim highlight-clear<cr>
+    nnoremap <silent> <c-n> :Veonim next-problem<cr>
+    nnoremap <silent> <c-p> :Veonim prev-problem<cr>
+    nnoremap <silent> ,n :Veonim next-usage<cr>
+    nnoremap <silent> ,p :Veonim prev-usage<cr>
+    nnoremap <silent> <space>pt :Veonim problems-toggle<cr>
+    nnoremap <silent> <space>pf :Veonim problems-focus<cr>
+    nnoremap <silent> <d-o> :Veonim buffer-prev<cr>
+    nnoremap <silent> <d-i> :Veonim buffer-next<cr>
+
+endif
 
 " functions
 
@@ -296,10 +349,13 @@ function! MyDeniteReplace(context)
 endfunction
 
 function! s:my_cr_function()
-    return !pumvisible() ?
-                \ lexima#expand('<CR>', 'i') :
-                \ neosnippet#expandable() ?
-                \ neosnippet#mappings#expand_impl() : deoplete#close_popup()
+    if &runtimepath =~# 'deoplete.nvim'
+        return !pumvisible() ?
+                    \ lexima#expand('<CR>', 'i') :
+                    \ deoplete#close_popup()
+    else
+        return lexima#expand('<CR>', 'i')
+    endif
 endfunction
 
 autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
@@ -308,15 +364,15 @@ autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
 autocmd MyAutoCmd FileType go :highlight goErr cterm=bold ctermfg=214
 autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
-autocmd MyAutoCmd BufWrite * :Autoformat
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 
 if &runtimepath =~# 'deoplete.nvim'
     call deoplete#custom#option({
-                \ 'ignore_sources': {'_': ['file']},
+                \ 'ignore_sources': {'_': ['file', 'tag']},
                 \ 'ignore_case': v:false,
                 \ 'auto_refresh_delay': 100,
+                \ 'num_processes': 1,
                 \ })
     call deoplete#custom#var(
                 \ 'file', 'enable_buffer_path', v:false
@@ -358,7 +414,7 @@ if &runtimepath =~# 'denite.nvim'
     call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
     call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
     call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
-    call denite#custom#map('normal', '<Space><Space>', '<denite:toggle_select_all>')
+    call denite#custom#map('normal', '<Leader><Leader>', '<denite:toggle_select_all>')
     call denite#custom#map('normal', 'r', '<denite:do_action:qfreplace>')
     call denite#custom#map('normal', '<ESC>', '<denite:quit>')
     call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
