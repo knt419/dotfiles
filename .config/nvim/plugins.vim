@@ -1,7 +1,7 @@
 call plug#begin(g:plug_repo_dir)
 
 " denite
-Plug 'Shougo/denite.nvim'
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
@@ -30,7 +30,8 @@ Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 
 " file/directory
-Plug 'cocopon/vaffle.vim'
+" Plug 'cocopon/vaffle.vim'
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/neovim-remote'
 
@@ -181,8 +182,10 @@ let g:startify_change_to_dir = 0
 let g:startify_fortune_use_unicode = 1
 let g:startify_enable_unsafe = 0
 
+let g:webdevicons_enable = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_denite = 1
+let g:webdevicons_enable_startify = 1
 
 let $VISUAL = 'nvr --remote-wait'
 
@@ -240,6 +243,7 @@ nnoremap <S-t> :bp<CR>
 
 nnoremap <silent> <Leader>s :<C-u>Startify<CR>
 nnoremap <silent> <Leader>v :<C-u>Vaffle<CR>
+nnoremap <silent> <Leader>e :<C-u>Defx<CR>
 nnoremap <silent> <Leader>p :<C-u>History<CR>
 nnoremap <silent> <Leader>r :<C-u>GFiles<CR>
 nnoremap <silent> <Leader>f :<C-u>Denite file_rec<CR>
@@ -421,3 +425,43 @@ if &runtimepath =~# 'denite.nvim'
     call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
     call denite#custom#action('file', 'qfreplace', function('MyDeniteReplace'))
 endif
+
+autocmd FileType defx call s:defx_my_settings()
+
+function! s:defx_my_settings() abort
+    " Define mappings
+    nnoremap <silent><buffer><expr> <CR>
+                \ defx#do_action('open')
+    nnoremap <silent><buffer><expr> c
+                \ defx#do_action('copy')
+    nnoremap <silent><buffer><expr> m
+                \ defx#do_action('move')
+    nnoremap <silent><buffer><expr> p
+                \ defx#do_action('paste')
+    nnoremap <silent><buffer><expr> l
+                \ defx#do_action('open')
+    nnoremap <silent><buffer><expr> o
+                \ defx#do_action('new_directory')
+    nnoremap <silent><buffer><expr> i
+                \ defx#do_action('new_file')
+    nnoremap <silent><buffer><expr> d
+                \ defx#do_action('remove')
+    nnoremap <silent><buffer><expr> r
+                \ defx#do_action('rename')
+    nnoremap <silent><buffer><expr> x
+                \ defx#do_action('execute_system')
+    nnoremap <silent><buffer><expr> yy
+                \ defx#do_action('yank_path')
+    nnoremap <silent><buffer><expr> .
+                \ defx#do_action('toggle_ignored_files')
+    nnoremap <silent><buffer><expr> h
+                \ defx#do_action('cd', ['..'])
+    nnoremap <silent><buffer><expr> ~
+                \ defx#do_action('cd')
+    nnoremap <silent><buffer><expr> q
+                \ defx#do_action('quit')
+    nnoremap <silent><buffer><expr> <Space>
+                \ defx#do_action('toggle_select') . 'j'
+    nnoremap <silent><buffer><expr> *
+                \ defx#do_action('toggle_select_all')
+endfunction
