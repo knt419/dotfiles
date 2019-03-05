@@ -52,14 +52,14 @@ Plug 'jeetsukumaran/vim-nefertiti'
 if has('win32') || has('win64')
     Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
     Plug 'junegunn/fzf.vim'
-    autocmd! FileType fzf
-    autocmd FileType fzf set laststatus=0 noshowmode noruler
+    autocmd! MyAutoCmd FileType fzf
+    autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
                 \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 else
     Plug 'lotabout/skim', { 'dir': '$HOME/.skim', 'do': './install' }
     Plug 'lotabout/skim.vim'
-    autocmd! FileType skim
-    autocmd FileType skim set laststatus=0 noshowmode noruler
+    autocmd! MyAutoCmd FileType skim
+    autocmd MyAutoCmd FileType skim set laststatus=0 noshowmode noruler
                 \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 endif
 
@@ -362,6 +362,44 @@ function! s:my_cr_function()
     endif
 endfunction
 
+function! s:defx_my_settings() abort
+    " Define mappings
+    nnoremap <silent><buffer><expr> <CR>
+                \ defx#do_action('open')
+    nnoremap <silent><buffer><expr> c
+                \ defx#do_action('copy')
+    nnoremap <silent><buffer><expr> m
+                \ defx#do_action('move')
+    nnoremap <silent><buffer><expr> p
+                \ defx#do_action('paste')
+    nnoremap <silent><buffer><expr> l
+                \ defx#do_action('open')
+    nnoremap <silent><buffer><expr> o
+                \ defx#do_action('new_directory')
+    nnoremap <silent><buffer><expr> i
+                \ defx#do_action('new_file')
+    nnoremap <silent><buffer><expr> d
+                \ defx#do_action('remove')
+    nnoremap <silent><buffer><expr> r
+                \ defx#do_action('rename')
+    nnoremap <silent><buffer><expr> x
+                \ defx#do_action('execute_system')
+    nnoremap <silent><buffer><expr> yy
+                \ defx#do_action('yank_path')
+    nnoremap <silent><buffer><expr> .
+                \ defx#do_action('toggle_ignored_files')
+    nnoremap <silent><buffer><expr> h
+                \ defx#do_action('cd', ['..'])
+    nnoremap <silent><buffer><expr> ~
+                \ defx#do_action('cd')
+    nnoremap <silent><buffer><expr> q
+                \ defx#do_action('quit')
+    nnoremap <silent><buffer><expr> <Space>
+                \ defx#do_action('toggle_select') . 'j'
+    nnoremap <silent><buffer><expr> *
+                \ defx#do_action('toggle_select_all')
+endfunction
+
 autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
 autocmd MyAutoCmd FileType go nnoremap <buffer> gr (go-run)
 autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
@@ -370,6 +408,7 @@ autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
+autocmd MyAutoCmd FileType defx call s:defx_my_settings()
 
 if &runtimepath =~# 'deoplete.nvim'
     call deoplete#custom#option({
@@ -426,42 +465,3 @@ if &runtimepath =~# 'denite.nvim'
     call denite#custom#action('file', 'qfreplace', function('MyDeniteReplace'))
 endif
 
-autocmd FileType defx call s:defx_my_settings()
-
-function! s:defx_my_settings() abort
-    " Define mappings
-    nnoremap <silent><buffer><expr> <CR>
-                \ defx#do_action('open')
-    nnoremap <silent><buffer><expr> c
-                \ defx#do_action('copy')
-    nnoremap <silent><buffer><expr> m
-                \ defx#do_action('move')
-    nnoremap <silent><buffer><expr> p
-                \ defx#do_action('paste')
-    nnoremap <silent><buffer><expr> l
-                \ defx#do_action('open')
-    nnoremap <silent><buffer><expr> o
-                \ defx#do_action('new_directory')
-    nnoremap <silent><buffer><expr> i
-                \ defx#do_action('new_file')
-    nnoremap <silent><buffer><expr> d
-                \ defx#do_action('remove')
-    nnoremap <silent><buffer><expr> r
-                \ defx#do_action('rename')
-    nnoremap <silent><buffer><expr> x
-                \ defx#do_action('execute_system')
-    nnoremap <silent><buffer><expr> yy
-                \ defx#do_action('yank_path')
-    nnoremap <silent><buffer><expr> .
-                \ defx#do_action('toggle_ignored_files')
-    nnoremap <silent><buffer><expr> h
-                \ defx#do_action('cd', ['..'])
-    nnoremap <silent><buffer><expr> ~
-                \ defx#do_action('cd')
-    nnoremap <silent><buffer><expr> q
-                \ defx#do_action('quit')
-    nnoremap <silent><buffer><expr> <Space>
-                \ defx#do_action('toggle_select') . 'j'
-    nnoremap <silent><buffer><expr> *
-                \ defx#do_action('toggle_select_all')
-endfunction
