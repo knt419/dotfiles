@@ -49,19 +49,8 @@ Plug 'tpope/vim-dadbod'
 " Plug 'AlessandroYorba/Alduin'
 Plug 'jeetsukumaran/vim-nefertiti'
 
-if has('win32') || has('win64')
-    Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
-    Plug 'junegunn/fzf.vim'
-    autocmd! MyAutoCmd FileType fzf
-    autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
-                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-else
-    Plug 'lotabout/skim', { 'dir': '$HOME/.skim', 'do': './install' }
-    Plug 'lotabout/skim.vim'
-    autocmd! MyAutoCmd FileType skim
-    autocmd MyAutoCmd FileType skim set laststatus=0 noshowmode noruler
-                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-endif
+Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
+Plug 'junegunn/fzf.vim'
 
 " except oni, veonim
 if !exists('g:gui_oni') && !exists('g:veonim')
@@ -409,6 +398,8 @@ autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd FileType defx call s:defx_my_settings()
+autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
+            \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 if &runtimepath =~# 'deoplete.nvim'
     call deoplete#custom#option({
