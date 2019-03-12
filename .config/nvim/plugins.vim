@@ -59,8 +59,14 @@ if !exists('g:gui_oni') && !exists('g:veonim')
     Plug 'mgee/lightline-bufferline'
     Plug 'maximbaz/lightline-ale'
     " lsp/completion
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Shougo/neco-syntax'
+    Plug 'ncm2/ncm2'
+    Plug 'ncm2/ncm2-bufword'
+    Plug 'ncm2/ncm2-github'
+    Plug 'ncm2/ncm2-syntax'
+    Plug 'ncm2/ncm2-vim'
+    Plug 'ncm2/ncm2-go'
     Plug 'autozimu/LanguageClient-neovim', {
                 \ 'branch': 'next',
                 \ 'do': 'make release',
