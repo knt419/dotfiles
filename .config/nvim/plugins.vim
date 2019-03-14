@@ -1,7 +1,7 @@
 call plug#begin(g:plug_repo_dir)
 
 " denite
-Plug 'Shougo/denite.nvim'
+Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
@@ -30,7 +30,8 @@ Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 
 " file/directory
-Plug 'cocopon/vaffle.vim'
+" Plug 'cocopon/vaffle.vim'
+Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/neovim-remote'
 
@@ -48,19 +49,8 @@ Plug 'tpope/vim-dadbod'
 " Plug 'AlessandroYorba/Alduin'
 Plug 'jeetsukumaran/vim-nefertiti'
 
-if has('win32') || has('win64')
-    Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
-    Plug 'junegunn/fzf.vim'
-    autocmd! FileType fzf
-    autocmd FileType fzf set laststatus=0 noshowmode noruler
-                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-else
-    Plug 'lotabout/skim', { 'dir': '$HOME/.skim', 'do': './install' }
-    Plug 'lotabout/skim.vim'
-    autocmd! FileType skim
-    autocmd FileType skim set laststatus=0 noshowmode noruler
-                \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-endif
+Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
+Plug 'junegunn/fzf.vim'
 
 " except oni, veonim
 if !exists('g:gui_oni') && !exists('g:veonim')
@@ -69,8 +59,14 @@ if !exists('g:gui_oni') && !exists('g:veonim')
     Plug 'mgee/lightline-bufferline'
     Plug 'maximbaz/lightline-ale'
     " lsp/completion
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'Shougo/neco-syntax'
+    Plug 'ncm2/ncm2'
+    Plug 'ncm2/ncm2-bufword'
+    Plug 'ncm2/ncm2-github'
+    Plug 'ncm2/ncm2-syntax'
+    Plug 'ncm2/ncm2-vim'
+    Plug 'ncm2/ncm2-go'
     Plug 'autozimu/LanguageClient-neovim', {
                 \ 'branch': 'next',
                 \ 'do': 'make release',
@@ -181,8 +177,10 @@ let g:startify_change_to_dir = 0
 let g:startify_fortune_use_unicode = 1
 let g:startify_enable_unsafe = 0
 
+let g:webdevicons_enable = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_denite = 1
+let g:webdevicons_enable_startify = 1
 
 let $VISUAL = 'nvr --remote-wait'
 
@@ -240,6 +238,7 @@ nnoremap <S-t> :bp<CR>
 
 nnoremap <silent> <Leader>s :<C-u>Startify<CR>
 nnoremap <silent> <Leader>v :<C-u>Vaffle<CR>
+nnoremap <silent> <Leader>e :<C-u>Defx<CR>
 nnoremap <silent> <Leader>p :<C-u>History<CR>
 nnoremap <silent> <Leader>r :<C-u>GFiles<CR>
 nnoremap <silent> <Leader>f :<C-u>Denite file_rec<CR>
@@ -358,6 +357,44 @@ function! s:my_cr_function()
     endif
 endfunction
 
+function! s:defx_my_settings() abort
+    " Define mappings
+    nnoremap <silent><buffer><expr> <CR>
+                \ defx#do_action('open')
+    nnoremap <silent><buffer><expr> c
+                \ defx#do_action('copy')
+    nnoremap <silent><buffer><expr> m
+                \ defx#do_action('move')
+    nnoremap <silent><buffer><expr> p
+                \ defx#do_action('paste')
+    nnoremap <silent><buffer><expr> l
+                \ defx#do_action('open')
+    nnoremap <silent><buffer><expr> o
+                \ defx#do_action('new_directory')
+    nnoremap <silent><buffer><expr> i
+                \ defx#do_action('new_file')
+    nnoremap <silent><buffer><expr> d
+                \ defx#do_action('remove')
+    nnoremap <silent><buffer><expr> r
+                \ defx#do_action('rename')
+    nnoremap <silent><buffer><expr> x
+                \ defx#do_action('execute_system')
+    nnoremap <silent><buffer><expr> yy
+                \ defx#do_action('yank_path')
+    nnoremap <silent><buffer><expr> .
+                \ defx#do_action('toggle_ignored_files')
+    nnoremap <silent><buffer><expr> h
+                \ defx#do_action('cd', ['..'])
+    nnoremap <silent><buffer><expr> ~
+                \ defx#do_action('cd')
+    nnoremap <silent><buffer><expr> q
+                \ defx#do_action('quit')
+    nnoremap <silent><buffer><expr> <Space>
+                \ defx#do_action('toggle_select') . 'j'
+    nnoremap <silent><buffer><expr> *
+                \ defx#do_action('toggle_select_all')
+endfunction
+
 autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
 autocmd MyAutoCmd FileType go nnoremap <buffer> gr (go-run)
 autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
@@ -366,6 +403,9 @@ autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
+autocmd MyAutoCmd FileType defx call s:defx_my_settings()
+autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
+            \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 if &runtimepath =~# 'deoplete.nvim'
     call deoplete#custom#option({
@@ -421,3 +461,4 @@ if &runtimepath =~# 'denite.nvim'
     call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
     call denite#custom#action('file', 'qfreplace', function('MyDeniteReplace'))
 endif
+
