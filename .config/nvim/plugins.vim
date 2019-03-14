@@ -149,6 +149,7 @@ let g:lightline = {
             \ }
 
 let g:loaded_matchparen          = 1
+let g:indentLine_faster          = 1
 
 let g:highlightedyank_highlight_duration = 300
 

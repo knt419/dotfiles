@@ -39,6 +39,7 @@ set foldmethod=marker
 set foldenable
 set foldlevelstart=10
 set lazyredraw
+set ttyfast
 
 set noshowmatch
 set tabstop=4
@@ -57,7 +58,7 @@ set virtualedit=block
 set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 set mouse=a
-set synmaxcol=200
+set synmaxcol=100
 
 set ignorecase
 set smartcase
@@ -208,6 +209,9 @@ noremap  <silent> <C-j> }
 noremap  <silent> <C-k> {
 noremap  <silent> <C-l> $
 noremap  <silent> <C-h> ^
+noremap  <silent> os :<C-u>e ++enc=shift_jis<CR>
+noremap  <silent> oe :<C-u>e ++enc=euc-jp<CR>
+noremap  <silent> os :<C-u>e ++enc=utf-8<CR>
 
 nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
