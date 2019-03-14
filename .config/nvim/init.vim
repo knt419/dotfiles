@@ -88,13 +88,9 @@ if has('win32') || has('win64')
     set shellslash
 endif
 
-let &t_SI     = "\<Esc>]50;CursorShape=1\x7"
-let &t_EI     = "\<Esc>]50;CursorShape=0\x7"
-let &t_SR     = "\<Esc>]50;CursorShape=2\x7"
 let mapleader = "\<Space>"
 let g:vn_font = 'RictyDiminished NF'
 let g:vn_font_size = 18
-" let g:vn_line_height = '1.5'
 
 " reset autocmd
 augroup MyAutoCmd
@@ -191,7 +187,6 @@ if exists('g:gui_oni')
     filetype off
     set noruler
     set laststatus=0
-    set noshowcmd
 endif
 " }}}
 
