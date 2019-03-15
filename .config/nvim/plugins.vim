@@ -60,17 +60,17 @@ if !exists('g:gui_oni') && !exists('g:veonim')
     Plug 'maximbaz/lightline-ale'
     " lsp/completion
     " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'Shougo/neco-syntax'
     Plug 'ncm2/ncm2'
+    Plug 'roxma/nvim-yarp'
     Plug 'ncm2/ncm2-bufword'
     Plug 'ncm2/ncm2-github'
     Plug 'ncm2/ncm2-syntax'
-    Plug 'ncm2/ncm2-vim'
-    Plug 'ncm2/ncm2-go'
+    Plug 'Shougo/neco-syntax'
     Plug 'autozimu/LanguageClient-neovim', {
                 \ 'branch': 'next',
                 \ 'do': 'make release',
                 \ }
+    set completeopt=noinsert,menuone,noselect
 endif
 
 " gonvim
@@ -407,6 +407,7 @@ autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd FileType defx call s:defx_my_settings()
 autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
+autocmd MyAutoCmd BufEnter  *  call ncm2#enable_for_buffer()
 
 if &runtimepath =~# 'deoplete.nvim'
     call deoplete#custom#option({
