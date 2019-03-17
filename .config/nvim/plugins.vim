@@ -2,7 +2,6 @@ call plug#begin(g:plug_repo_dir)
 
 " denite
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'}
-Plug 'Shougo/neoyank.vim'
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
 
@@ -107,7 +106,6 @@ let g:lightline = {
             \    'left': [
             \      ['mode', 'paste'],
             \      ['readonly', 'modified','linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
-            \      ['readonly', 'modified'],
             \    ],
             \    'right': [
             \      ['filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
@@ -173,15 +171,15 @@ let g:vaffle_show_hidden_files = 1
 let g:loaded_netrwPlugin       = 1
 let g:fzf_layout               = { 'down': '~70%' }
 let g:rooter_change_directory_for_non_project_files = 'home'
-let g:startify_change_to_vcs_root = 0
-let g:startify_change_to_dir = 0
-let g:startify_fortune_use_unicode = 1
-let g:startify_enable_unsafe = 0
+let g:startify_change_to_vcs_root                   = 0
+let g:startify_change_to_dir                        = 0
+let g:startify_fortune_use_unicode                  = 1
+let g:startify_enable_unsafe                        = 0
 
-let g:webdevicons_enable = 1
+let g:webdevicons_enable                 = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-let g:webdevicons_enable_denite = 1
-let g:webdevicons_enable_startify = 1
+let g:webdevicons_enable_denite          = 1
+let g:webdevicons_enable_startify        = 1
 
 let $VISUAL = 'nvr --remote-wait'
 
@@ -189,24 +187,25 @@ let g:deoplete#enable_at_startup      = 1
 let g:deoplete#auto_complete_delay    = 0
 
 let g:ale_cache_executable_check_failures = 1
-let g:ale_echo_delay = 20
-let g:ale_history_enabled = 0
-let g:ale_pattern_options = {'\.min.js$': {'ale_enabled': 0}}
-let g:ale_lint_delay = 10000
-let g:ale_lint_on_insert_leave = 1
-let g:ale_set_highlights = 0
-let g:ale_sign_warning = "\uf071"
-let g:ale_sign_error = "\uf05e"
-let g:ale_warn_about_trailing_whitespace = 0
-let g:lightline#ale#warnings = "\uf071"
-let g:lightline#ale#errors = "\uf05e"
-let g:lightline#ale#ok = "\uf00c"
+let g:ale_echo_delay                      = 20
+let g:ale_history_enabled                 = 0
+let g:ale_pattern_options                 = {'\.min.js$': {'ale_enabled': 0}}
+let g:ale_lint_delay                      = 10000
+let g:ale_lint_on_insert_leave            = 1
+let g:ale_set_highlights                  = 0
+let g:ale_sign_warning                    = "\uf071"
+let g:ale_sign_error                      = "\uf05e"
+let g:ale_warn_about_trailing_whitespace  = 0
+
+let g:lightline#ale#warnings           = "\uf071"
+let g:lightline#ale#errors             = "\uf05e"
+let g:lightline#ale#ok                 = "\uf00c"
 let g:lightline#ale#indicator_checking = "\uf110"
 let g:lightline#ale#indicator_warnings = "\uf071"
-let g:lightline#ale#indicator_errors = "\uf05e"
-let g:lightline#ale#indicator_ok = "\uf00c"
+let g:lightline#ale#indicator_errors   = "\uf05e"
+let g:lightline#ale#indicator_ok       = "\uf00c"
 
-let g:gitgutter_grep = ''
+let g:gitgutter_grep     = ''
 let g:gitgutter_map_keys = 0
 
 let g:nefertiti_base_brightness_level = 14
@@ -238,13 +237,11 @@ nnoremap <C-t> :bn<CR>
 nnoremap <S-t> :bp<CR>
 
 nnoremap <silent> <Leader>s :<C-u>Startify<CR>
-nnoremap <silent> <Leader>v :<C-u>Vaffle<CR>
 nnoremap <silent> <Leader>e :<C-u>Defx<CR>
 nnoremap <silent> <Leader>p :<C-u>History<CR>
 nnoremap <silent> <Leader>r :<C-u>GFiles<CR>
 nnoremap <silent> <Leader>f :<C-u>Denite file_rec<CR>
 nnoremap <silent> <Leader>m :<C-u>Denite file_mru<CR>
-nnoremap <silent> <Leader>y :<C-u>Denite neoyank<CR>
 nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
@@ -263,7 +260,7 @@ if exists('veonim')
 
     " workspace functions
     nnoremap <silent> <Leader>f :Veonim files<cr>
-    nnoremap <silent> <Leader>v :Veonim explorer<cr>
+    nnoremap <silent> <Leader>e :Veonim explorer<cr>
     nnoremap <silent> <Leader>b :Veonim buffers<cr>
 
     " searching text
