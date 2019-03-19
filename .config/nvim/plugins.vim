@@ -70,6 +70,7 @@ if !exists('g:gui_oni') && !exists('g:veonim')
                 \ 'do': 'make release',
                 \ }
     set completeopt=noinsert,menuone,noselect
+    set shortmess+=c
 endif
 
 " gonvim
@@ -150,6 +151,8 @@ let g:loaded_matchparen          = 1
 let g:indentLine_faster          = 1
 
 let g:highlightedyank_highlight_duration = 300
+
+let g:ncm2#popup_delay = 5
 
 let g:ale_linters = {
             \ 'ruby': ['rubocop'],
