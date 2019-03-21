@@ -29,7 +29,6 @@ Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
 
 " file/directory
-" Plug 'cocopon/vaffle.vim'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'airblade/vim-rooter'
 Plug 'mhinz/neovim-remote'
@@ -58,7 +57,6 @@ if !exists('g:gui_oni') && !exists('g:veonim')
     Plug 'mgee/lightline-bufferline'
     Plug 'maximbaz/lightline-ale'
     " lsp/completion
-    " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'ncm2/ncm2'
     Plug 'roxma/nvim-yarp'
     Plug 'ncm2/ncm2-bufword'
@@ -170,7 +168,6 @@ let g:LanguageClient_serverCommands = {
             \ 'vim': ['efm-langserver'],
             \ }
 
-let g:vaffle_show_hidden_files = 1
 let g:loaded_netrwPlugin       = 1
 let g:fzf_layout               = { 'down': '~70%' }
 let g:rooter_change_directory_for_non_project_files = 'home'
@@ -185,9 +182,6 @@ let g:webdevicons_enable_denite          = 1
 let g:webdevicons_enable_startify        = 1
 
 let $VISUAL = 'nvr --remote-wait'
-
-let g:deoplete#enable_at_startup      = 1
-let g:deoplete#auto_complete_delay    = 0
 
 let g:ale_cache_executable_check_failures = 1
 let g:ale_echo_delay                      = 20
@@ -255,11 +249,17 @@ imap <expr> <Tab> pumvisible() ? "\<C-n>" :
             \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 
 if exists('veonim')
-
-    VeonimExt 'veonim/ext-go'
-    VeonimExt 'veonim/ext-json'
-    VeonimExt 'veonim/ext-html'
-    VeonimExt 'vscode:extension/sourcegraph.javascript-typescript'
+    " extensions for web dev
+    let g:vscode_extensions = [
+                \'vscode.typescript-language-features',
+                \'vscode.json-language-features',
+                \'vscode.css-language-features',
+                \'vscode.markdown-language-features',
+                \'vscode.html-language-features',
+                \'rust-lang.rust',
+                \'ms-vscode.go',
+                \'ms-python.python',
+                \]
 
     " workspace functions
     nnoremap <silent> <Leader>f :Veonim files<cr>
@@ -396,7 +396,6 @@ function! s:defx_my_settings() abort
                 \ defx#do_action('toggle_select_all')
 endfunction
 
-autocmd MyAutoCmd FileType vaffle nmap <ESC> <Plug>(vaffle-quit)
 autocmd MyAutoCmd FileType go nnoremap <buffer> gr (go-run)
 autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
 autocmd MyAutoCmd FileType go :highlight goErr cterm=bold ctermfg=214
@@ -407,18 +406,8 @@ autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd FileType defx call s:defx_my_settings()
 autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
-autocmd MyAutoCmd BufEnter  *  call ncm2#enable_for_buffer()
-
-if &runtimepath =~# 'deoplete.nvim'
-    call deoplete#custom#option({
-                \ 'ignore_sources': {'_': ['file', 'tag']},
-                \ 'ignore_case': v:false,
-                \ 'auto_refresh_delay': 100,
-                \ 'num_processes': 1,
-                \ })
-    call deoplete#custom#var(
-                \ 'file', 'enable_buffer_path', v:false
-                \ )
+if &runtimepath =~# 'ncm2'
+    autocmd MyAutoCmd BufEnter  *  call ncm2#enable_for_buffer()
 endif
 
 if &runtimepath =~# 'denite.nvim'

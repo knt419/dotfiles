@@ -41,6 +41,8 @@ set foldlevelstart=10
 set lazyredraw
 set ttyfast
 
+set guifont=RictyDiminished\ NF:h16
+set linespace=0
 set noshowmatch
 set tabstop=4
 set expandtab
@@ -90,9 +92,6 @@ if has('win32') || has('win64')
 endif
 
 let mapleader = "\<Space>"
-let g:vn_font = 'RictyDiminished NF'
-let g:vn_font_size = 18
-let g:vn_line_height = '1.1'
 
 " reset autocmd
 augroup MyAutoCmd
