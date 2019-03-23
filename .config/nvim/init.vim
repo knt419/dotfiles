@@ -42,7 +42,7 @@ set lazyredraw
 set ttyfast
 
 set guifont=RictyDiminished\ NF:h16
-set linespace=0
+set linespace=2
 set noshowmatch
 set tabstop=4
 set expandtab
@@ -84,11 +84,15 @@ set linebreak
 set breakindent
 set breakindentopt=shift:2
 set showbreak=↪
+set tags=
 " }}}
 
 " os specific
 if has('win32') || has('win64')
     set shellslash
+    let g:loaded_gzip      = 1
+    let g:loaded_tarPlugin = 1
+    let g:loaded_zipPlugin = 1
 endif
 
 let mapleader = "\<Space>"
