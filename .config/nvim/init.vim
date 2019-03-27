@@ -41,8 +41,8 @@ set foldlevelstart=10
 set lazyredraw
 set ttyfast
 
-set guifont=RictyDiminished\ NF:h16
-set guifontwide=RictyDiminished\ NF:h16
+set guifont=Ricty:h16
+set guifontwide=Ricty:h16
 set ambiwidth=double
 set linespace=2
 set noshowmatch
