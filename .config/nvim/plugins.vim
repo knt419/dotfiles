@@ -248,7 +248,7 @@ vmap <CR> <Plug>(LiveEasyAlign)
 imap <expr> <Tab> pumvisible() ? "\<C-n>" :
             \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 
-if exists('veonim')
+if exists('g:veonim')
     " extensions for web dev
     let g:vscode_extensions = [
                 \'vscode.typescript-language-features',
