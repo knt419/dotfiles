@@ -43,7 +43,6 @@ set ttyfast
 
 set guifont=Ricty:h16
 set guifontwide=Ricty:h16
-" set ambiwidth=double
 set linespace=2
 set noshowmatch
 set tabstop=4
@@ -62,7 +61,7 @@ set virtualedit=block
 set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 set mouse=a
-set synmaxcol=100
+set synmaxcol=200
 
 set ignorecase
 set smartcase
