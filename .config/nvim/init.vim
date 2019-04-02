@@ -43,7 +43,7 @@ set ttyfast
 
 set guifont=Ricty:h16
 set guifontwide=Ricty:h16
-set ambiwidth=double
+" set ambiwidth=double
 set linespace=2
 set noshowmatch
 set tabstop=4

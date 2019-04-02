@@ -152,6 +152,10 @@ let g:highlightedyank_highlight_duration = 300
 
 let g:ncm2#popup_delay = 5
 
+let g:startify_skiplist = [
+       \ '*\\AppData\\Local\\Temp\\*',
+       \ ]
+
 let g:ale_linters = {
             \ 'ruby': ['rubocop'],
             \ }
@@ -248,7 +252,7 @@ vmap <CR> <Plug>(LiveEasyAlign)
 imap <expr> <Tab> pumvisible() ? "\<C-n>" :
             \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 
-if exists('veonim')
+if exists('g:veonim')
     " extensions for web dev
     let g:vscode_extensions = [
                 \'vscode.typescript-language-features',
@@ -360,45 +364,29 @@ endfunction
 
 function! s:defx_my_settings() abort
     " Define mappings
-    nnoremap <silent><buffer><expr> <CR>
-                \ defx#do_action('open')
-    nnoremap <silent><buffer><expr> c
-                \ defx#do_action('copy')
-    nnoremap <silent><buffer><expr> m
-                \ defx#do_action('move')
-    nnoremap <silent><buffer><expr> p
-                \ defx#do_action('paste')
-    nnoremap <silent><buffer><expr> l
-                \ defx#do_action('open')
-    nnoremap <silent><buffer><expr> o
-                \ defx#do_action('new_directory')
-    nnoremap <silent><buffer><expr> i
-                \ defx#do_action('new_file')
-    nnoremap <silent><buffer><expr> d
-                \ defx#do_action('remove')
-    nnoremap <silent><buffer><expr> r
-                \ defx#do_action('rename')
-    nnoremap <silent><buffer><expr> x
-                \ defx#do_action('execute_system')
-    nnoremap <silent><buffer><expr> yy
-                \ defx#do_action('yank_path')
-    nnoremap <silent><buffer><expr> .
-                \ defx#do_action('toggle_ignored_files')
-    nnoremap <silent><buffer><expr> h
-                \ defx#do_action('cd', ['..'])
-    nnoremap <silent><buffer><expr> ~
-                \ defx#do_action('cd')
-    nnoremap <silent><buffer><expr> q
-                \ defx#do_action('quit')
-    nnoremap <silent><buffer><expr> <Space>
-                \ defx#do_action('toggle_select') . 'j'
-    nnoremap <silent><buffer><expr> *
-                \ defx#do_action('toggle_select_all')
+    nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
+    nnoremap <silent><buffer><expr> c defx#do_action('copy')
+    nnoremap <silent><buffer><expr> m defx#do_action('move')
+    nnoremap <silent><buffer><expr> p defx#do_action('paste')
+    nnoremap <silent><buffer><expr> l defx#do_action('open')
+    nnoremap <silent><buffer><expr> o defx#do_action('new_directory')
+    nnoremap <silent><buffer><expr> i defx#do_action('new_file')
+    nnoremap <silent><buffer><expr> d defx#do_action('remove')
+    nnoremap <silent><buffer><expr> r defx#do_action('rename')
+    nnoremap <silent><buffer><expr> x defx#do_action('execute_system')
+    nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
+    nnoremap <silent><buffer><expr> .  defx#do_action('toggle_ignored_files')
+    nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
+    nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
+    nnoremap <silent><buffer><expr> q defx#do_action('quit')
+    nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
+    nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
 endfunction
 
 autocmd MyAutoCmd FileType go nnoremap <buffer> gr (go-run)
 autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
 autocmd MyAutoCmd FileType go :highlight goErr cterm=bold ctermfg=214
+autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>

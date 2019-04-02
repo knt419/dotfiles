@@ -1,4 +1,4 @@
-// Future versions of Hyper may add additional config options,
+﻿// Future versions of Hyper may add additional config options,
 // which will not automatically be merged into this file.
 // See https://hyper.is#cfg for all currently supported options.
 
@@ -152,7 +152,9 @@ module.exports = {
   //   `project#1.0.1`
   plugins: [
              'hyper-opacity',
-             'hyper-oceans16'],
+             'hyper-oceans16',
+             'hyper-statusline'
+           ],
 
   // in development, you can create a directory under
   // `~/.hyper_plugins/local/` and include it here
