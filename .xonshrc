@@ -27,8 +27,8 @@ $PATHEXT = [".COM", ".EXE", ".BAT", ".CMD", ".VBS", ".VBE", ".JS", ".JSE", ".WSF
 
 $PROMPT = "{prompt_end} "
 
-$RIGHT_PROMPT = "{cwd} {gitstatus} "
-$BOTTOM_TOOLBAR = "{user}@{hostname} "
+$RIGHT_PROMPT = "{user}@{hostname}:{cwd} {gitstatus} "
+# $BOTTOM_TOOLBAR = "{user}@{hostname} "
 
 $DYNAMIC_CWD_WIDTH = "30%"
 $XONSH_SHOW_TRACEBACK = True

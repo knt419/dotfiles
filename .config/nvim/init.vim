@@ -41,7 +41,8 @@ set foldlevelstart=10
 set lazyredraw
 set ttyfast
 
-set guifont=RictyDiminished\ NF:h16
+set guifont=Ricty:h16:cSHIFTJIS
+set guifontwide=Ricty:h16:cSHIFTJIS
 set linespace=2
 set noshowmatch
 set tabstop=4

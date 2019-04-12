@@ -61,20 +61,20 @@ draw_bold_text_with_bright_colors: true
 font:
   # The normal (roman) font face to use.
   normal:
-    family: Ricty Diminished for Powerline # should be "Menlo" or something on macOS.
+    family: Ricty # should be "Menlo" or something on macOS.
     # family: monospace # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
     # style: Regular
 
   # The bold font face
   bold:
-    family: Ricty Diminished for Powerline # should be "Menlo" or something on macOS.
+    family: Ricty # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
     # style: Bold
 
   # The italic font face
   italic:
-    family: Ricty Diminished for Powerline # should be "Menlo" or something on macOS.
+    family: Ricty # should be "Menlo" or something on macOS.
     # Style can be specified to pick a specific face.
     # style: Italic
 
@@ -106,50 +106,79 @@ render_timer: false
 # and cursor.background colors, otherwise invert the colors of the cursor.
 custom_cursor_colors: false
 
-# Colors (Tomorrow Night Bright)
+# # Colors (Tomorrow Night Bright)
+# colors:
+#   # Default colors
+#   primary:
+#     background: '0x000000'
+#     foreground: '0xeaeaea'
+
+#   # Colors the cursor will use if `custom_cursor_colors` is true
+#   cursor:
+#     text: '0x000000'
+#     cursor: '0xffffff'
+
+#   # Normal colors
+#   normal:
+#     black:   '0x0c0c0c'
+#     red:     '0xd78787'
+#     green:   '0xafd787'
+#     yellow:  '0xf7f7af'
+#     blue:    '0x87afd7'
+#     magenta: '0xd7afd7'
+#     cyan:    '0xafd7d7'
+#     white:   '0xe6e6e6'
+
+#   # Bright colors
+#   bright:
+#     black:   '0x0a0a0a'
+#     red:     '0xdf8787'
+#     green:   '0xafdf87'
+#     yellow:  '0xffffaf'
+#     blue:    '0x87afdf'
+#     magenta: '0xdfafdf'
+#     cyan:    '0xafdfdf'
+#     white:   '0xeeeeee'
+
+#   # Dim colors (Optional)
+#   dim:
+#     black:   '0x333333'
+#     red:     '0xf2777a'
+#     green:   '0x99cc99'
+#     yellow:  '0xffcc66'
+#     blue:    '0x6699cc'
+#     magenta: '0xcc99cc'
+#     cyan:    '0x66cccc'
+#     white:   '0xdddddd'
+
+# Colors (Iceberg)
 colors:
   # Default colors
   primary:
-    background: '0x000000'
-    foreground: '0xeaeaea'
-
-  # Colors the cursor will use if `custom_cursor_colors` is true
-  cursor:
-    text: '0x000000'
-    cursor: '0xffffff'
+    background: '0x161821'
+    foreground: '0xd2d4de'
 
   # Normal colors
   normal:
-    black:   '0x0c0c0c'
-    red:     '0xd78787'
-    green:   '0xafd787'
-    yellow:  '0xf7f7af'
-    blue:    '0x87afd7'
-    magenta: '0xd7afd7'
-    cyan:    '0xafd7d7'
-    white:   '0xe6e6e6'
+    black:   '0x161821'
+    red:     '0xe27878'
+    green:   '0xb4be82'
+    yellow:  '0xe2a478'
+    blue:    '0x84a0c6'
+    magenta: '0xa093c7'
+    cyan:    '0x89b8c2'
+    white:   '0xc6c8d1'
 
   # Bright colors
   bright:
-    black:   '0x0a0a0a'
-    red:     '0xdf8787'
-    green:   '0xafdf87'
-    yellow:  '0xffffaf'
-    blue:    '0x87afdf'
-    magenta: '0xdfafdf'
-    cyan:    '0xafdfdf'
-    white:   '0xeeeeee'
-
-  # Dim colors (Optional)
-  dim:
-    black:   '0x333333'
-    red:     '0xf2777a'
-    green:   '0x99cc99'
-    yellow:  '0xffcc66'
-    blue:    '0x6699cc'
-    magenta: '0xcc99cc'
-    cyan:    '0x66cccc'
-    white:   '0xdddddd'
+    black:   '0x6b7089'
+    red:     '0xe98989'
+    green:   '0xc0ca8e'
+    yellow:  '0xe9b189'
+    blue:    '0x91acd1'
+    magenta: '0xada0d3'
+    cyan:    '0x95c4ce'
+    white:   '0xd2d4de'
 
 # Visual Bell
 #
@@ -244,6 +273,11 @@ live_config_reload: true
 #   program: /bin/bash
 #   args:
 #     - --login
+#
+shell:
+  program: C:/app/scoop/shims/python3.exe
+  args:
+      -m xonsh
 
 # Key bindings
 #
