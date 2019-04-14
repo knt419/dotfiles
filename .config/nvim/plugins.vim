@@ -50,14 +50,16 @@ Plug 'jeetsukumaran/vim-nefertiti'
 Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
 Plug 'junegunn/fzf.vim'
 
-" except oni, veonim
+" except oni, veonim, gonvim
+if !exists('g:gui_oni') && !exists('g:veonim') && !exists('g:gonvim_running')
+    " statusline
+    Plug 'itchyny/lightline.vim'
+    Plug 'mgee/lightline-bufferline'
+    Plug 'maximbaz/lightline-ale'
+endif
+
+" except oni, veonim,
 if !exists('g:gui_oni') && !exists('g:veonim')
-    if !exists('g:gonvim_running')
-        " statusline
-        Plug 'itchyny/lightline.vim'
-        Plug 'mgee/lightline-bufferline'
-        Plug 'maximbaz/lightline-ale'
-    endif
     " lsp/completion
     Plug 'ncm2/ncm2'
     Plug 'roxma/nvim-yarp'
