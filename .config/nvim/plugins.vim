@@ -52,10 +52,12 @@ Plug 'junegunn/fzf.vim'
 
 " except oni, veonim
 if !exists('g:gui_oni') && !exists('g:veonim')
-    " statusline
-    Plug 'itchyny/lightline.vim'
-    Plug 'mgee/lightline-bufferline'
-    Plug 'maximbaz/lightline-ale'
+    if !exists('g:gonvim_running')
+        " statusline
+        Plug 'itchyny/lightline.vim'
+        Plug 'mgee/lightline-bufferline'
+        Plug 'maximbaz/lightline-ale'
+    endif
     " lsp/completion
     Plug 'ncm2/ncm2'
     Plug 'roxma/nvim-yarp'
@@ -90,7 +92,7 @@ if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
 
-if !exists('g:gui_oni') && !exists('g:veonim')
+if !exists('g:gui_oni') && !exists('g:veonim') && !exists('g:gonvim_running')
     source $HOME/.config/nvim/lightline-themecolor.vim
 else
     set cmdheight=1

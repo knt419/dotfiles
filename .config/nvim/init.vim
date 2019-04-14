@@ -189,7 +189,7 @@ endif
 filetype plugin indent on
 
 " oni  {{{
-if exists('g:gui_oni')
+if exists('g:gui_oni') || exists('g:gonvim_running')
     filetype off
     set noruler
     set laststatus=0
