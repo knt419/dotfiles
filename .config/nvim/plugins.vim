@@ -181,7 +181,7 @@ let g:fzf_layout               = { 'down': '~70%' }
 let g:rooter_change_directory_for_non_project_files = 'home'
 let g:startify_change_to_vcs_root                   = 0
 let g:startify_change_to_dir                        = 0
-let g:startify_fortune_use_unicode                  = 1
+let g:startify_fortune_use_unicode                  = 0
 let g:startify_enable_unsafe                        = 0
 
 let g:webdevicons_enable                 = 1
