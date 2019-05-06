@@ -154,6 +154,7 @@ if g:plugin_mgr ==# 'vimplug'
         autocmd VimEnter * PlugInstall --sync | source $HOME/.config/nvim/init.vim
     endif
 
+    execute 'set runtimepath^=$HOME/.local/share/nvim/site/'
     runtime plugins.vim
     autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | q | endif
 endif
