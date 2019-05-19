@@ -61,16 +61,17 @@ endif
 " except oni, veonim,
 if !exists('g:gui_oni') && !exists('g:veonim')
     " lsp/completion
-    Plug 'ncm2/ncm2'
-    Plug 'roxma/nvim-yarp'
-    Plug 'ncm2/ncm2-bufword'
-    Plug 'ncm2/ncm2-github'
-    Plug 'ncm2/ncm2-syntax'
-    Plug 'Shougo/neco-syntax'
-    Plug 'autozimu/LanguageClient-neovim', {
-                \ 'branch': 'next',
-                \ 'do': 'make release',
-                \ }
+    " Plug 'ncm2/ncm2'
+    " Plug 'roxma/nvim-yarp'
+    " Plug 'ncm2/ncm2-bufword'
+    " Plug 'ncm2/ncm2-github'
+    " Plug 'ncm2/ncm2-syntax'
+    " Plug 'Shougo/neco-syntax'
+    " Plug 'autozimu/LanguageClient-neovim', {
+    "             \ 'branch': 'next',
+    "             \ 'do': 'make release',
+    "             \ }
+    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     set completeopt=noinsert,menuone,noselect
     set shortmess+=c
 endif
