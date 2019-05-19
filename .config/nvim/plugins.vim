@@ -333,7 +333,8 @@ function! LightlineReadonly()
 endfunction
 
 function! LightlineBranch()
-    let branch = gina#component#repo#branch()
+    " let branch = gina#component#repo#branch()
+    let branch = g:coc_git_status
     return branch !=# '' ? "\ue0a0".branch : ''
 endfunction
 
