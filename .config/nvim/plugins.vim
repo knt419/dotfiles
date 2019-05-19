@@ -71,6 +71,7 @@ if !exists('g:gui_oni') && !exists('g:veonim')
     "             \ 'branch': 'next',
     "             \ 'do': 'make release',
     "             \ }
+    " coc.nvim
     Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     set completeopt=noinsert,menuone,noselect
     set shortmess+=c
@@ -216,6 +217,8 @@ let g:gitgutter_map_keys = 0
 
 let g:nefertiti_base_brightness_level = 14
 
+let g:coc_global_extensions = ['coc-json', 'coc-git']
+
 highlight link HighlightedyankRegion Visual
 
 " plugin keymaps
@@ -333,8 +336,8 @@ function! LightlineReadonly()
 endfunction
 
 function! LightlineBranch()
-    " let branch = gina#component#repo#branch()
-    let branch = g:coc_git_status
+    let branch = gina#component#repo#branch()
+    " let branch = g:coc_git_status
     return branch !=# '' ? "\ue0a0".branch : ''
 endfunction
 
