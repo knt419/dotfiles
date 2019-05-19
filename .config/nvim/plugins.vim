@@ -253,9 +253,19 @@ nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 
 vmap <CR> <Plug>(LiveEasyAlign)
+vmap <Leader>f  <Plug>(coc-format-selected)
 
-imap <expr> <Tab> pumvisible() ? "\<C-n>" :
-            \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+imap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ?
+      \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>" :
+      \ coc#refresh()
+" imap <expr> <Tab> pumvisible() ? "\<C-n>" :
+            " \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 
 if exists('g:veonim')
     " extensions for web dev
@@ -308,6 +318,9 @@ if exists('g:veonim')
     nnoremap <silent> <d-i> :Veonim buffer-next<cr>
 
 endif
+
+" Use `:Format` for format current buffer
+command! -nargs=0 Format :call CocAction('format')
 
 " functions
 
