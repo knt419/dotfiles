@@ -35,7 +35,7 @@ Plug 'mhinz/neovim-remote'
 
 " git
 Plug 'lambdalisue/gina.vim'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 
 " language support
 Plug 'w0rp/ale'
@@ -61,17 +61,6 @@ endif
 " except oni, veonim,
 if !exists('g:gui_oni') && !exists('g:veonim')
     " lsp/completion
-    " Plug 'ncm2/ncm2'
-    " Plug 'roxma/nvim-yarp'
-    " Plug 'ncm2/ncm2-bufword'
-    " Plug 'ncm2/ncm2-github'
-    " Plug 'ncm2/ncm2-syntax'
-    " Plug 'Shougo/neco-syntax'
-    " Plug 'autozimu/LanguageClient-neovim', {
-    "             \ 'branch': 'next',
-    "             \ 'do': 'make release',
-    "             \ }
-    " coc.nvim
     Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     set completeopt=noinsert,menuone,noselect
     set shortmess+=c
@@ -113,7 +102,7 @@ let g:lightline = {
             \      ['readonly', 'modified','linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
             \    ],
             \    'right': [
-            \      ['cocstatus', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
+            \      ['changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
             \    ]
             \ },
             \ 'tabline': {
@@ -122,7 +111,7 @@ let g:lightline = {
             \ },
             \ 'component': {
             \   'lineinfo': "\ue0a1".'%3l:%3v',
-            \   'percentage': '%3p%%'
+            \   'percentage': '%3p%%',
             \ },
             \ 'component_function': {
             \    'readonly': 'LightlineReadonly',
@@ -131,7 +120,7 @@ let g:lightline = {
             \    'repostatus': 'LightlineRepoStatus',
             \    'filetype': 'LightlineFiletype',
             \    'fileformat': 'LightlineFileformat',
-            \    'cocstatus': 'coc#status'
+            \    'changes': 'LightlineChanges'
             \ },
             \ 'component_expand': {
             \   'buffers': 'lightline#bufferline#buffers',
@@ -156,8 +145,6 @@ let g:indentLine_faster          = 1
 
 let g:highlightedyank_highlight_duration = 300
 
-let g:ncm2#popup_delay = 5
-
 let g:startify_skiplist = [
        \ '*\\AppData\\Local\\Temp\\*',
        \ ]
@@ -167,15 +154,6 @@ let g:ale_linters = {
             \ }
 let g:ale_fixers = {
             \ 'ruby': ['rubocop'],
-            \ }
-let g:LanguageClient_autoStart = 1
-let g:LanguageClient_rootMarkers = {
-            \ 'go': ['.git', 'go.mod'],
-            \ }
-
-let g:LanguageClient_serverCommands = {
-            \ 'go': ['bingo'],
-            \ 'vim': ['efm-langserver'],
             \ }
 
 let g:loaded_netrwPlugin       = 1
@@ -217,7 +195,7 @@ let g:gitgutter_map_keys = 0
 
 let g:nefertiti_base_brightness_level = 14
 
-let g:coc_global_extensions = ['coc-json', 'coc-git']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml']
 
 highlight link HighlightedyankRegion Visual
 
@@ -239,8 +217,10 @@ nmap w <Plug>(smartword-w)
 nmap b <Plug>(smartword-b)
 nmap e <Plug>(smartword-e)
 nmap ge <Plug>(smartword-ge)
-nmap <silent> <S-n> <Plug>(ale_next_wrap)
-nmap <silent> <S-p> <Plug>(ale_previous_wrap)
+" nmap <silent> <S-n> <Plug>(ale_next_wrap)
+" nmap <silent> <S-p> <Plug>(ale_previous_wrap)
+nmap <silent> <S-n> <Plug>(coc-git-nextchunk)
+nmap <silent> <S-p> <Plug>(coc-git-prevchunk)
 
 nnoremap <C-t> :bn<CR>
 nnoremap <S-t> :bp<CR>
@@ -258,15 +238,9 @@ nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 vmap <CR> <Plug>(LiveEasyAlign)
 vmap <Leader>f  <Plug>(coc-format-selected)
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 imap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ?
-      \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>" :
-      \ coc#refresh()
+      \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 
 if exists('g:veonim')
     " extensions for web dev
@@ -333,22 +307,16 @@ function! LightlineReadonly()
     return &readonly ? "\ue0a2" : ''
 endfunction
 
-" function! LightlineBranch()
-"     return exists('g:coc_git_status') ? g:coc_git_status : ''
-" endfunction
-
 function! LightlineRepoStatus()
-    " let ahead = gina#component#traffic#ahead() > 0 ?
-    "             \ "\u2191 ".gina#component#traffic#ahead() : ''
-    " let behind = gina#component#traffic#behind() > 0 ?
-    "             \ "\u2193 ".gina#component#traffic#behind() : ''
-    " let unstaged = gina#component#status#unstaged() > 0 ? '+' : ''
-    " return behind.ahead.unstaged
     return exists('g:coc_git_status') ? g:coc_git_status : ''
 endfunction
 
 function! LightlineFiletype()
     return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . '  ' . &filetype : 'no ft') : WebDevIconsGetFileTypeSymbol()
+endfunction
+
+function! LightlineChanges()
+    return exists('b:coc_git_status') ? b:coc_git_status : ''
 endfunction
 
 function! LightlineFileformat()
@@ -372,13 +340,9 @@ function! MyDeniteReplace(context)
 endfunction
 
 function! s:my_cr_function()
-    if &runtimepath =~# 'deoplete.nvim'
-        return !pumvisible() ?
+    return !pumvisible() ?
                     \ lexima#expand('<CR>', 'i') :
-                    \ deoplete#close_popup()
-    else
-        return lexima#expand('<CR>', 'i')
-    endif
+                    \ "\<C-y>"
 endfunction
 
 function! s:defx_my_settings() abort
@@ -402,9 +366,6 @@ function! s:defx_my_settings() abort
     nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
 endfunction
 
-autocmd MyAutoCmd FileType go nnoremap <buffer> gr (go-run)
-autocmd MyAutoCmd FileType go nnoremap <buffer> gt (go-test)
-autocmd MyAutoCmd FileType go :highlight goErr cterm=bold ctermfg=214
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
@@ -413,9 +374,6 @@ autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd FileType defx call s:defx_my_settings()
 autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
-if &runtimepath =~# 'ncm2'
-    autocmd MyAutoCmd BufEnter  *  call ncm2#enable_for_buffer()
-endif
 
 if &runtimepath =~# 'denite.nvim'
     call denite#custom#option('default', 'prompt', "\ue62b")
