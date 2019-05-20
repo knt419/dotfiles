@@ -113,12 +113,12 @@ let g:lightline = {
             \      ['readonly', 'modified','linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
             \    ],
             \    'right': [
-            \      ['filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
+            \      ['cocstatus', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
             \    ]
             \ },
             \ 'tabline': {
             \   'left': [['buffers']],
-            \   'right': [['repostatus','branch','repository']]
+            \   'right': [['repostatus','repository']]
             \ },
             \ 'component': {
             \   'lineinfo': "\ue0a1".'%3l:%3v',
@@ -127,11 +127,11 @@ let g:lightline = {
             \ 'component_function': {
             \    'readonly': 'LightlineReadonly',
             \    'repository': 'gina#component#repo#name',
-            \    'branch': 'LightlineBranch',
             \    'bufferinfo': 'lightline#buffer#bufferinfo',
             \    'repostatus': 'LightlineRepoStatus',
             \    'filetype': 'LightlineFiletype',
-            \    'fileformat': 'LightlineFileformat'
+            \    'fileformat': 'LightlineFileformat',
+            \    'cocstatus': 'coc#status'
             \ },
             \ 'component_expand': {
             \   'buffers': 'lightline#bufferline#buffers',
@@ -267,8 +267,6 @@ imap <silent><expr> <TAB>
       \ <SID>check_back_space() ?
       \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>" :
       \ coc#refresh()
-" imap <expr> <Tab> pumvisible() ? "\<C-n>" :
-            " \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 
 if exists('g:veonim')
     " extensions for web dev
@@ -335,19 +333,18 @@ function! LightlineReadonly()
     return &readonly ? "\ue0a2" : ''
 endfunction
 
-function! LightlineBranch()
-    let branch = gina#component#repo#branch()
-    " let branch = g:coc_git_status
-    return branch !=# '' ? "\ue0a0".branch : ''
-endfunction
+" function! LightlineBranch()
+"     return exists('g:coc_git_status') ? g:coc_git_status : ''
+" endfunction
 
 function! LightlineRepoStatus()
-    let ahead = gina#component#traffic#ahead() > 0 ?
-                \ "\u2191 ".gina#component#traffic#ahead() : ''
-    let behind = gina#component#traffic#behind() > 0 ?
-                \ "\u2193 ".gina#component#traffic#behind() : ''
-    let unstaged = gina#component#status#unstaged() > 0 ? '+' : ''
-    return behind.ahead.unstaged
+    " let ahead = gina#component#traffic#ahead() > 0 ?
+    "             \ "\u2191 ".gina#component#traffic#ahead() : ''
+    " let behind = gina#component#traffic#behind() > 0 ?
+    "             \ "\u2193 ".gina#component#traffic#behind() : ''
+    " let unstaged = gina#component#status#unstaged() > 0 ? '+' : ''
+    " return behind.ahead.unstaged
+    return exists('g:coc_git_status') ? g:coc_git_status : ''
 endfunction
 
 function! LightlineFiletype()
