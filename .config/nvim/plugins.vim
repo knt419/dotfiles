@@ -1,9 +1,11 @@
 call plug#begin(g:plug_repo_dir)
 
-" denite
+" denite/fzf
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
+Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
+Plug 'junegunn/fzf.vim'
 
 " editor display
 Plug 'Yggdroot/indentLine'
@@ -11,7 +13,6 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'lilydjwg/colorizer'
 Plug 'itchyny/vim-parenmatch'
 Plug 'mhinz/vim-startify'
-Plug 'editorconfig/editorconfig-vim'
 
 " text/input manipulation
 Plug 'cohama/lexima.vim'
@@ -35,32 +36,24 @@ Plug 'mhinz/neovim-remote'
 
 " git
 Plug 'lambdalisue/gina.vim'
-" Plug 'airblade/vim-gitgutter'
 
 " language support
-" Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
 Plug 'tpope/vim-dadbod'
+Plug 'editorconfig/editorconfig-vim'
 
 " colorscheme
-" Plug 'AlessandroYorba/Alduin'
 Plug 'jeetsukumaran/vim-nefertiti'
 
-Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
-Plug 'junegunn/fzf.vim'
-
-" except oni, veonim, gonvim
+" statusline, except oni, veonim, gonvim
 if !exists('g:gui_oni') && !exists('g:veonim') && !exists('g:gonvim_running')
-    " statusline
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
-    " Plug 'maximbaz/lightline-ale'
 endif
 
-" except oni, veonim,
+" lsp/completion, except oni, veonim,
 if !exists('g:gui_oni') && !exists('g:veonim')
-    " lsp/completion
     Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     set completeopt=noinsert,menuone,noselect
     set shortmess+=c
@@ -72,19 +65,13 @@ if exists('g:gonvim_running')
     Plug 'equalsraf/neovim-gui-shim'
 endif
 
-" nyaovim
-if exists('g:nyaovim_version')
-    Plug 'rhysd/nyaovim-popup-tooltip'
-    Plug 'rhysd/nyaovim-markdown-preview'
-    Plug 'rhysd/nyaovim-mini-browser'
-endif
-
 call plug#end()
 
 if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
 
+" statusline, except oni, veonim, gonvim
 if !exists('g:gui_oni') && !exists('g:veonim') && !exists('g:gonvim_running')
     source $HOME/.config/nvim/lightline-themecolor.vim
 else
@@ -99,7 +86,7 @@ let g:lightline = {
             \ 'active': {
             \    'left': [
             \      ['mode', 'paste'],
-            \      ['readonly', 'modified'],
+            \      ['readonly', 'cocstatus', 'changes'],
             \    ],
             \    'right': [
             \      ['filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
@@ -107,7 +94,7 @@ let g:lightline = {
             \ },
             \ 'tabline': {
             \   'left': [['buffers']],
-            \   'right': [['changes', 'repostatus','repository']]
+            \   'right': [['repostatus','repository']]
             \ },
             \ 'component': {
             \   'lineinfo': "\ue0a1".'%3l:%3v',
@@ -119,7 +106,8 @@ let g:lightline = {
             \    'repostatus': 'LightlineRepoStatus',
             \    'filetype': 'LightlineFiletype',
             \    'fileformat': 'LightlineFileformat',
-            \    'changes': 'LightlineChanges'
+            \    'changes': 'LightlineChanges',
+            \    'cocstatus': 'coc#status'
             \ },
             \ 'component_expand': {
             \   'buffers': 'lightline#bufferline#buffers',
@@ -131,15 +119,6 @@ let g:lightline = {
             \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
             \ }
 
-            " \      ['readonly', 'modified','linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
-            " \   'linter_checking': 'lightline#ale#checking',
-            " \   'linter_warnings': 'lightline#ale#warnings',
-            " \   'linter_errors': 'lightline#ale#errors',
-            " \   'linter_ok': 'lightline#ale#ok'
-            " \   'linter_warnings': 'warning',
-            " \   'linter_errors': 'error',
-            " \   'linter_checking': 'left',
-            " \   'linter_ok': 'left'
 let g:loaded_matchparen          = 1
 let g:indentLine_faster          = 1
 
@@ -148,13 +127,6 @@ let g:highlightedyank_highlight_duration = 300
 let g:startify_skiplist = [
        \ '*\\AppData\\Local\\Temp\\*',
        \ ]
-
-let g:ale_linters = {
-            \ 'ruby': ['rubocop'],
-            \ }
-let g:ale_fixers = {
-            \ 'ruby': ['rubocop'],
-            \ }
 
 let g:loaded_netrwPlugin       = 1
 let g:fzf_layout               = { 'down': '~70%' }
@@ -170,28 +142,6 @@ let g:webdevicons_enable_denite          = 1
 let g:webdevicons_enable_startify        = 1
 
 let $VISUAL = 'nvr --remote-wait'
-
-let g:ale_cache_executable_check_failures = 1
-let g:ale_echo_delay                      = 20
-let g:ale_history_enabled                 = 0
-let g:ale_pattern_options                 = {'\.min.js$': {'ale_enabled': 0}}
-let g:ale_lint_delay                      = 10000
-let g:ale_lint_on_insert_leave            = 1
-let g:ale_set_highlights                  = 0
-let g:ale_sign_warning                    = "\uf071"
-let g:ale_sign_error                      = "\uf05e"
-let g:ale_warn_about_trailing_whitespace  = 0
-
-let g:lightline#ale#warnings           = "\uf071"
-let g:lightline#ale#errors             = "\uf05e"
-let g:lightline#ale#ok                 = "\uf00c"
-let g:lightline#ale#indicator_checking = "\uf110"
-let g:lightline#ale#indicator_warnings = "\uf071"
-let g:lightline#ale#indicator_errors   = "\uf05e"
-let g:lightline#ale#indicator_ok       = "\uf00c"
-
-let g:gitgutter_grep     = ''
-let g:gitgutter_map_keys = 0
 
 let g:nefertiti_base_brightness_level = 14
 
@@ -217,10 +167,8 @@ nmap w <Plug>(smartword-w)
 nmap b <Plug>(smartword-b)
 nmap e <Plug>(smartword-e)
 nmap ge <Plug>(smartword-ge)
-" nmap <silent> <S-n> <Plug>(ale_next_wrap)
-" nmap <silent> <S-p> <Plug>(ale_previous_wrap)
-nmap <silent> <S-n> <Plug>(coc-git-nextchunk)
-nmap <silent> <S-p> <Plug>(coc-git-prevchunk)
+nmap <silent> <S-n> <Plug>(coc-diagnostic-next)
+nmap <silent> <S-p> <Plug>(coc-diagnostic-prev)
 
 nnoremap <C-t> :bn<CR>
 nnoremap <S-t> :bp<CR>
@@ -236,7 +184,8 @@ nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 
 vmap <CR> <Plug>(LiveEasyAlign)
-vmap <Leader>f  <Plug>(coc-format-selected)
+xmap <Leader>f  <Plug>(coc-format-selected)
+nmap <Leader>f  <Plug>(coc-format-selected)
 
 imap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
