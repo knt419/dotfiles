@@ -182,10 +182,10 @@ nnoremap <silent> <Leader>m :<C-u>Denite file_mru<CR>
 nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
+xnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
+nnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
 
 vmap <CR> <Plug>(LiveEasyAlign)
-xmap <Leader>f  <Plug>(coc-format-selected)
-nmap <Leader>f  <Plug>(coc-format-selected)
 
 imap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
