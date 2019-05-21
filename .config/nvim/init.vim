@@ -62,6 +62,7 @@ set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 set mouse=a
 set synmaxcol=200
+set updatetime=300
 
 set ignorecase
 set smartcase

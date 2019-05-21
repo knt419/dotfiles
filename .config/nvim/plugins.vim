@@ -38,7 +38,7 @@ Plug 'lambdalisue/gina.vim'
 " Plug 'airblade/vim-gitgutter'
 
 " language support
-Plug 'w0rp/ale'
+" Plug 'w0rp/ale'
 Plug 'sheerun/vim-polyglot'
 Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
 Plug 'tpope/vim-dadbod'
@@ -55,7 +55,7 @@ if !exists('g:gui_oni') && !exists('g:veonim') && !exists('g:gonvim_running')
     " statusline
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
-    Plug 'maximbaz/lightline-ale'
+    " Plug 'maximbaz/lightline-ale'
 endif
 
 " except oni, veonim,
@@ -99,15 +99,15 @@ let g:lightline = {
             \ 'active': {
             \    'left': [
             \      ['mode', 'paste'],
-            \      ['readonly', 'modified','linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+            \      ['readonly', 'modified'],
             \    ],
             \    'right': [
-            \      ['changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
+            \      ['filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
             \    ]
             \ },
             \ 'tabline': {
             \   'left': [['buffers']],
-            \   'right': [['repostatus','repository']]
+            \   'right': [['changes', 'repostatus','repository']]
             \ },
             \ 'component': {
             \   'lineinfo': "\ue0a1".'%3l:%3v',
@@ -116,7 +116,6 @@ let g:lightline = {
             \ 'component_function': {
             \    'readonly': 'LightlineReadonly',
             \    'repository': 'gina#component#repo#name',
-            \    'bufferinfo': 'lightline#buffer#bufferinfo',
             \    'repostatus': 'LightlineRepoStatus',
             \    'filetype': 'LightlineFiletype',
             \    'fileformat': 'LightlineFileformat',
@@ -124,22 +123,23 @@ let g:lightline = {
             \ },
             \ 'component_expand': {
             \   'buffers': 'lightline#bufferline#buffers',
-            \   'linter_checking': 'lightline#ale#checking',
-            \   'linter_warnings': 'lightline#ale#warnings',
-            \   'linter_errors': 'lightline#ale#errors',
-            \   'linter_ok': 'lightline#ale#ok'
             \ },
             \ 'component_type': {
             \   'buffers': 'tabsel',
-            \   'linter_warnings': 'warning',
-            \   'linter_errors': 'error',
-            \   'linter_checking': 'left',
-            \   'linter_ok': 'left'
             \ },
             \ 'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
             \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
             \ }
 
+            " \      ['readonly', 'modified','linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok'],
+            " \   'linter_checking': 'lightline#ale#checking',
+            " \   'linter_warnings': 'lightline#ale#warnings',
+            " \   'linter_errors': 'lightline#ale#errors',
+            " \   'linter_ok': 'lightline#ale#ok'
+            " \   'linter_warnings': 'warning',
+            " \   'linter_errors': 'error',
+            " \   'linter_checking': 'left',
+            " \   'linter_ok': 'left'
 let g:loaded_matchparen          = 1
 let g:indentLine_faster          = 1
 
@@ -374,6 +374,7 @@ autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd FileType defx call s:defx_my_settings()
 autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
+autocmd MyAutoCmd CursorHold * silent call CocActionAsync('highlight')
 
 if &runtimepath =~# 'denite.nvim'
     call denite#custom#option('default', 'prompt', "\ue62b")
