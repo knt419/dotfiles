@@ -323,13 +323,15 @@ endfunction
 
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd FileType go :match goErr /\<err\>/
-autocmd MyAutoCmd FileType go set noexpandtab tabstop=4 shiftwidth=4
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd FileType defx call s:defx_my_settings()
 autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
-autocmd MyAutoCmd CursorHold * silent call CocActionAsync('highlight')
+
+if &runtimepath =~# 'coc.nvim'
+    autocmd MyAutoCmd CursorHold * silent call CocActionAsync('highlight')
+endif
 
 if &runtimepath =~# 'denite.nvim'
     call denite#custom#option('default', 'prompt', "\ue62b")
