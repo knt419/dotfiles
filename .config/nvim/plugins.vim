@@ -119,6 +119,12 @@ let g:lightline = {
             \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
             \ }
 
+if has('win32') || has('win64')
+    let g:lightline#bufferline#filename_modifier = ':t'
+endif
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#unicode_symbols = 1
+
 let g:loaded_matchparen          = 1
 let g:indentLine_faster          = 1
 
