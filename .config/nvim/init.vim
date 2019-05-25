@@ -239,5 +239,6 @@ if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
 endif
 
 set background=dark
-silent! colorscheme nefertiti
+silent! colorscheme allomancer
+" silent! colorscheme nefertiti
 syntax enable

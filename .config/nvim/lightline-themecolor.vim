@@ -16,6 +16,27 @@ function! s:rgb_to_256(color)
     return l:r * 36 + l:g * 6 + l:b + 16
 endfunction
 
+" get highlight color
+function! s:getHighlightColor(group)
+  let guiColorFg = synIDattr(hlID(a:group), "fg", "gui")
+  let guiColorBg = synIDattr(hlID(a:group), "bg", "gui")
+  let termColorFg = s:rgb_to_256(guiColorFg)
+  let termColorBg = s:rgb_to_256(guiColorBg)
+  return [ [ guiColorFg, termColorFg ], [ guiColorBg, termColorBg ] ]
+endfunction
+
+function! s:getHighlightFgColor(group)
+  let guiColor = synIDattr(hlID(a:group), "fg", "gui")
+  let termColor = synIDattr(hlID(a:group), "fg", "cterm")
+  return [ guiColor, termColor ]
+endfunction
+
+function! s:getHighlightBgColor(group)
+  let guiColor = synIDattr(hlID(a:group), "bg", "gui")
+  let termColor = synIDattr(hlID(a:group), "bg", "cterm")
+  return [ guiColor, termColor ]
+endfunction
+
 let s:black_gui    = "#000000"
 let s:white_gui    = "#cbba98"
 let s:gray1_gui    = "#a99887"
@@ -46,24 +67,42 @@ let s:cyan    = [s:cyan_gui   , s:rgb_to_256(s:cyan_gui)   ]
 " set lightline.vim's palette {{{
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
-let s:p.normal.left     = [[s:black, s:cyan]    , [s:white, s:gray3]]
-let s:p.normal.middle   = [[s:white, s:gray4]]
-let s:p.normal.right    = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
-let s:p.inactive.left   = [[s:gray1, s:gray4]   , [s:gray1, s:gray4]]
-let s:p.inactive.middle = [[s:black, s:gray4]]
-let s:p.inactive.right  = [[s:gray1, s:gray4]   , [s:gray1, s:gray4]]
-let s:p.insert.left     = [[s:black, s:green]   , [s:white, s:gray3]]
-let s:p.insert.right    = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
-let s:p.replace.left    = [[s:black, s:yellow]  , [s:white, s:gray3]]
-let s:p.replace.right   = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
-let s:p.visual.left     = [[s:white, s:magenta] , [s:white, s:gray3]]
-let s:p.visual.right    = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
-let s:p.tabline.left    = [[s:white, s:gray4]]
-let s:p.tabline.tabsel  = [[s:white, s:black]]
-let s:p.tabline.middle  = [[s:white, s:gray3]]
-let s:p.tabline.right   = [[s:black, s:gray1]]
+let s:p.normal.left     = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
+let s:p.normal.middle   = [s:getHighlightColor("StatusLine")]
+let s:p.normal.right    = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
+let s:p.inactive.left   = [s:getHighlightColor("StatusLineNC")   , s:getHighlightColor("StatusLineNC")]
+let s:p.inactive.middle = [s:getHighlightColor("StatusLineNC")]
+let s:p.inactive.right  = [s:getHighlightColor("StatusLineNC")   , s:getHighlightColor("StatusLineNC")]
+let s:p.insert.left     = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
+let s:p.insert.right    = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
+let s:p.replace.left    = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
+let s:p.replace.right   = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
+let s:p.visual.left     = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
+let s:p.visual.right    = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
+let s:p.tabline.left    = [s:getHighlightColor("TabLine")]
+let s:p.tabline.tabsel  = [s:getHighlightColor("TabLine")]
+let s:p.tabline.middle  = [s:getHighlightColor("TabLine")]
+let s:p.tabline.right   = [s:getHighlightColor("TabLine")]
 let s:p.normal.warning  = [[s:white, s:red]]
 let s:p.normal.error    = [[s:white, s:red]]
+" let s:p.normal.left     = [[s:black, s:cyan]    , [s:white, s:gray3]]
+" let s:p.normal.middle   = [[s:white, s:gray4]]
+" let s:p.normal.right    = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
+" let s:p.inactive.left   = [[s:gray1, s:gray4]   , [s:gray1, s:gray4]]
+" let s:p.inactive.middle = [[s:black, s:gray4]]
+" let s:p.inactive.right  = [[s:gray1, s:gray4]   , [s:gray1, s:gray4]]
+" let s:p.insert.left     = [[s:black, s:green]   , [s:white, s:gray3]]
+" let s:p.insert.right    = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
+" let s:p.replace.left    = [[s:black, s:yellow]  , [s:white, s:gray3]]
+" let s:p.replace.right   = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
+" let s:p.visual.left     = [[s:white, s:magenta] , [s:white, s:gray3]]
+" let s:p.visual.right    = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
+" let s:p.tabline.left    = [[s:white, s:gray4]]
+" let s:p.tabline.tabsel  = [[s:white, s:black]]
+" let s:p.tabline.middle  = [[s:white, s:gray3]]
+" let s:p.tabline.right   = [[s:black, s:gray1]]
+" let s:p.normal.warning  = [[s:white, s:red]]
+" let s:p.normal.error    = [[s:white, s:red]]
 " }}}
 
 " exports palette {{{

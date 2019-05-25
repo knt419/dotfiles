@@ -45,6 +45,9 @@ Plug 'editorconfig/editorconfig-vim'
 
 " colorscheme
 Plug 'jeetsukumaran/vim-nefertiti'
+Plug 'Nequo/vim-allomancer'
+Plug 'rakr/vim-two-firewatch'
+Plug 'cocopon/iceberg.vim'
 
 " statusline, except oni, veonim, gonvim
 if !exists('g:gui_oni') && !exists('g:veonim') && !exists('g:gonvim_running')
