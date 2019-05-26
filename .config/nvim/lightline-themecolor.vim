@@ -25,84 +25,58 @@ function! s:getHighlightColor(group)
   return [ [ guiColorFg, termColorFg ], [ guiColorBg, termColorBg ] ]
 endfunction
 
+function! s:getHighlightReverseColor(group)
+  let guiColorFg = synIDattr(hlID(a:group), "fg", "gui")
+  let guiColorBg = synIDattr(hlID(a:group), "bg", "gui")
+  let termColorFg = s:rgb_to_256(guiColorFg)
+  let termColorBg = s:rgb_to_256(guiColorBg)
+  return [ [ guiColorBg, termColorBg ], [ guiColorFg, termColorFg ] ]
+endfunction
+
 function! s:getHighlightFgColor(group)
   let guiColor = synIDattr(hlID(a:group), "fg", "gui")
-  let termColor = synIDattr(hlID(a:group), "fg", "cterm")
+  let termColor = s:rgb_to_256(guiColor)
   return [ guiColor, termColor ]
 endfunction
 
 function! s:getHighlightBgColor(group)
   let guiColor = synIDattr(hlID(a:group), "bg", "gui")
-  let termColor = synIDattr(hlID(a:group), "bg", "cterm")
+  let termColor = s:rgb_to_256(guiColor)
   return [ guiColor, termColor ]
 endfunction
 
-let s:black_gui    = "#000000"
-let s:white_gui    = "#cbba98"
-let s:gray1_gui    = "#a99887"
-let s:gray2_gui    = "#767056"
-let s:gray3_gui    = "#48403a"
-let s:gray4_gui    = "#2c2824"
-let s:red_gui      = "#cc6644"
-let s:green_gui    = "#81a621"
-let s:yellow_gui   = "#ddaa66"
-let s:magenta_gui  = "#9f7f9f"
-let s:blue_gui     = "#80a0ff"
-let s:cyan_gui     = "#a0aaaf"
+let s:normal_guibg  = "#768791"
+let s:insert_guibg  = "#cbba98"
+let s:visual_guibg  = "#a99887"
+let s:replace_guibg = "#767056"
 
-let s:black   = [s:black_gui  , s:rgb_to_256(s:black_gui)  ]
-let s:white   = [s:white_gui  , s:rgb_to_256(s:white_gui)  ]
-let s:gray1   = [s:gray1_gui  , s:rgb_to_256(s:gray1_gui)  ]
-let s:gray2   = [s:gray2_gui  , s:rgb_to_256(s:gray2_gui)  ]
-let s:gray3   = [s:gray3_gui  , 240                        ]
-let s:gray4   = [s:gray4_gui  , 235                        ]
-let s:red     = [s:red_gui    , s:rgb_to_256(s:red_gui)    ]
-let s:green   = [s:green_gui  , s:rgb_to_256(s:green_gui)  ]
-let s:yellow  = [s:yellow_gui , s:rgb_to_256(s:yellow_gui) ]
-let s:magenta = [s:magenta_gui, s:rgb_to_256(s:magenta_gui)]
-let s:blue    = [s:blue_gui   , s:rgb_to_256(s:blue_gui)   ]
-let s:cyan    = [s:cyan_gui   , s:rgb_to_256(s:cyan_gui)   ]
+let s:normal_bgcolor      = [s:normal_guibg  , s:rgb_to_256(s:normal_guibg)  ]
+let s:insert_bgcolor      = [s:insert_guibg  , s:rgb_to_256(s:insert_guibg)  ]
+let s:visual_bgcolor      = [s:visual_guibg  , s:rgb_to_256(s:visual_guibg)  ]
+let s:replace_bgcolor     = [s:replace_guibg  , s:rgb_to_256(s:replace_guibg)  ]
 " }}}
 
 " set lightline.vim's palette {{{
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
-let s:p.normal.left     = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
-let s:p.normal.middle   = [s:getHighlightColor("StatusLine")]
-let s:p.normal.right    = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
+let s:p.normal.left     = [[s:getHighlightFgColor("StatusLine"), s:normal_bgcolor]    , s:getHighlightColor("StatusLine")]
+let s:p.normal.middle   = [s:getHighlightColor("StatusLineNC")]
+let s:p.normal.right    = [s:getHighlightReverseColor("StatusLine")    , s:getHighlightReverseColor("StatusLine")]
 let s:p.inactive.left   = [s:getHighlightColor("StatusLineNC")   , s:getHighlightColor("StatusLineNC")]
 let s:p.inactive.middle = [s:getHighlightColor("StatusLineNC")]
 let s:p.inactive.right  = [s:getHighlightColor("StatusLineNC")   , s:getHighlightColor("StatusLineNC")]
-let s:p.insert.left     = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
-let s:p.insert.right    = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
-let s:p.replace.left    = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
-let s:p.replace.right   = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
-let s:p.visual.left     = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
-let s:p.visual.right    = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
+let s:p.insert.left     = [[s:getHighlightFgColor("StatusLine"), s:insert_bgcolor]    , s:getHighlightColor("StatusLine")]
+let s:p.insert.right    = [s:getHighlightReverseColor("StatusLine")    , s:getHighlightReverseColor("StatusLine")]
+let s:p.replace.left    = [[s:getHighlightFgColor("StatusLine"), s:replace_bgcolor]    , s:getHighlightColor("StatusLine")]
+let s:p.replace.right   = [s:getHighlightReverseColor("StatusLine")    , s:getHighlightReverseColor("StatusLine")]
+let s:p.visual.left     = [[s:getHighlightFgColor("StatusLine"), s:visual_bgcolor]    , s:getHighlightColor("StatusLine")]
+let s:p.visual.right    = [s:getHighlightReverseColor("StatusLine")    , s:getHighlightReverseColor("StatusLine")]
 let s:p.tabline.left    = [s:getHighlightColor("TabLine")]
-let s:p.tabline.tabsel  = [s:getHighlightColor("TabLine")]
-let s:p.tabline.middle  = [s:getHighlightColor("TabLine")]
-let s:p.tabline.right   = [s:getHighlightColor("TabLine")]
-let s:p.normal.warning  = [[s:white, s:red]]
-let s:p.normal.error    = [[s:white, s:red]]
-" let s:p.normal.left     = [[s:black, s:cyan]    , [s:white, s:gray3]]
-" let s:p.normal.middle   = [[s:white, s:gray4]]
-" let s:p.normal.right    = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
-" let s:p.inactive.left   = [[s:gray1, s:gray4]   , [s:gray1, s:gray4]]
-" let s:p.inactive.middle = [[s:black, s:gray4]]
-" let s:p.inactive.right  = [[s:gray1, s:gray4]   , [s:gray1, s:gray4]]
-" let s:p.insert.left     = [[s:black, s:green]   , [s:white, s:gray3]]
-" let s:p.insert.right    = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
-" let s:p.replace.left    = [[s:black, s:yellow]  , [s:white, s:gray3]]
-" let s:p.replace.right   = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
-" let s:p.visual.left     = [[s:white, s:magenta] , [s:white, s:gray3]]
-" let s:p.visual.right    = [[s:gray2, s:gray4]    , [s:gray2, s:gray4]]
-" let s:p.tabline.left    = [[s:white, s:gray4]]
-" let s:p.tabline.tabsel  = [[s:white, s:black]]
-" let s:p.tabline.middle  = [[s:white, s:gray3]]
-" let s:p.tabline.right   = [[s:black, s:gray1]]
-" let s:p.normal.warning  = [[s:white, s:red]]
-" let s:p.normal.error    = [[s:white, s:red]]
+let s:p.tabline.tabsel  = [s:getHighlightColor("TabLineSel")]
+let s:p.tabline.middle  = [s:getHighlightColor("TabLineFill")]
+let s:p.tabline.right   = [s:getHighlightReverseColor("TabLine")]
+let s:p.normal.warning  = [s:getHighlightColor("WarningMsg")]
+let s:p.normal.error    = [s:getHighlightColor("ErrorMsg")]
 " }}}
 
 " exports palette {{{

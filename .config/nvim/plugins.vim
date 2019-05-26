@@ -76,6 +76,7 @@ endif
 
 " statusline, except oni, veonim, gonvim
 if !exists('g:gui_oni') && !exists('g:veonim') && !exists('g:gonvim_running')
+    silent! colorscheme allomancer
     source $HOME/.config/nvim/lightline-themecolor.vim
 else
     set cmdheight=1

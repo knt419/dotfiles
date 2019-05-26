@@ -240,5 +240,4 @@ endif
 
 set background=dark
 silent! colorscheme allomancer
-" silent! colorscheme nefertiti
 syntax enable
