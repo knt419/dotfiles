@@ -45,6 +45,25 @@ function! s:getHighlightBgColor(group)
   return [ guiColor, termColor ]
 endfunction
 
+function! s:getModeColor(mode)
+    let statusColorBg = synIDattr(hlID('StatusLine'), "bg", "gui")
+endfunction
+
+function! s:rgb_to_hsv(color)
+    let l:r = str2nr(a:color[1:2], 16)
+    let l:g = str2nr(a:color[3:4], 16)
+    let l:b = str2nr(a:color[5:6], 16)
+    let l:v = max(r,g,b)
+    let l:s = 255 * (max(r,g,b)-min(r,g,b)) / max(r,g,b)
+    if r == max(r,g,b)
+        let l:h = 60 * ((l:b-l:g)/(max(r,g,b)-min(r,g,b))
+    elseif g == max(r,g,b)
+        let l:h = 60 * (2+((l:r-l:b)/(max(r,g,b)-min(r,g,b)))
+    elseif b == max(r,g,b)
+        let l:h = 60 * (4+((l:g-l:r)/(max(r,g,b)-min(r,g,b)))
+    endif
+endfunction
+
 let s:normal_guibg  = "#768791"
 let s:insert_guibg  = "#cbba98"
 let s:visual_guibg  = "#a99887"

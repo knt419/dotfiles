@@ -31,11 +31,10 @@ Plug 'terryma/vim-multiple-cursors'
 
 " file/directory
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
-Plug 'airblade/vim-rooter'
 Plug 'mhinz/neovim-remote'
 
 " git
-Plug 'lambdalisue/gina.vim'
+Plug 'tpope/vim-fugitive'
 
 " language support
 Plug 'sheerun/vim-polyglot'
@@ -66,6 +65,10 @@ endif
 if exists('g:gonvim_running')
     Plug 'akiyosi/gonvim-fuzzy'
     Plug 'equalsraf/neovim-gui-shim'
+endif
+
+if !has('win32') && !has('win64')
+    Plug 'airblade/vim-rooter'
 endif
 
 call plug#end()
@@ -106,7 +109,6 @@ let g:lightline = {
             \ },
             \ 'component_function': {
             \    'readonly': 'LightlineReadonly',
-            \    'repository': 'gina#component#repo#name',
             \    'repostatus': 'LightlineRepoStatus',
             \    'filetype': 'LightlineFiletype',
             \    'fileformat': 'LightlineFileformat',
@@ -123,9 +125,6 @@ let g:lightline = {
             \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
             \ }
 
-if has('win32') || has('win64')
-    let g:lightline#bufferline#filename_modifier = ':t'
-endif
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
