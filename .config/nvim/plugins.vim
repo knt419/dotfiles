@@ -281,7 +281,7 @@ function! LightlineFileformat()
     return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . '  ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
 endfunction
 
-function! MyDeniteReplace(context)
+function! s:my_denite_replace(context)
     let qflist = []
     for target in a:context['targets']
         if !has_key(target, 'action__path') | continue | endif
@@ -303,7 +303,7 @@ function! s:my_cr_function()
                     \ "\<C-y>"
 endfunction
 
-function! s:defx_my_settings() abort
+function! s:my_defx_settings() abort
     " Define mappings
     nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
     nnoremap <silent><buffer><expr> c defx#do_action('copy')
@@ -328,7 +328,7 @@ autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
-autocmd MyAutoCmd FileType defx call s:defx_my_settings()
+autocmd MyAutoCmd FileType defx call s:my_defx_settings()
 autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
 
@@ -376,6 +376,6 @@ if &runtimepath =~# 'denite.nvim'
     call denite#custom#map('normal', '<ESC>', '<denite:quit>')
     call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
     call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
-    call denite#custom#action('file', 'qfreplace', function('MyDeniteReplace'))
+    call denite#custom#action('file', 'qfreplace', function('s:my_denite_replace'))
 endif
 
