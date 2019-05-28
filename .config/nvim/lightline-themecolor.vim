@@ -18,58 +18,49 @@ endfunction
 
 " get highlight color
 function! s:getHighlightColor(group)
-  let guiColorFg = synIDattr(hlID(a:group), "fg", "gui")
-  let guiColorBg = synIDattr(hlID(a:group), "bg", "gui")
-  let termColorFg = s:rgb_to_256(guiColorFg)
-  let termColorBg = s:rgb_to_256(guiColorBg)
-  return [ [ guiColorFg, termColorFg ], [ guiColorBg, termColorBg ] ]
+    if synIDattr(hlID(a:group), "reverse") == 1
+        let guiColorFg = synIDattr(hlID(a:group), "bg", "gui")
+        let guiColorBg = synIDattr(hlID(a:group), "fg", "gui")
+        let termColorFg = s:rgb_to_256(guiColorFg)
+        let termColorBg = s:rgb_to_256(guiColorBg)
+    else
+        let guiColorFg = synIDattr(hlID(a:group), "fg", "gui")
+        let guiColorBg = synIDattr(hlID(a:group), "bg", "gui")
+        let termColorFg = s:rgb_to_256(guiColorFg)
+        let termColorBg = s:rgb_to_256(guiColorBg)
+    endif
+    return [ [ guiColorFg, termColorFg ], [ guiColorBg, termColorBg ] ]
 endfunction
 
 function! s:getHighlightReverseColor(group)
-  let guiColorFg = synIDattr(hlID(a:group), "fg", "gui")
-  let guiColorBg = synIDattr(hlID(a:group), "bg", "gui")
-  let termColorFg = s:rgb_to_256(guiColorFg)
-  let termColorBg = s:rgb_to_256(guiColorBg)
-  return [ [ guiColorBg, termColorBg ], [ guiColorFg, termColorFg ] ]
+    if synIDattr(hlID(a:group), "reverse") == 1
+        let guiColorFg = synIDattr(hlID(a:group), "bg", "gui")
+        let guiColorBg = synIDattr(hlID(a:group), "fg", "gui")
+        let termColorFg = s:rgb_to_256(guiColorFg)
+        let termColorBg = s:rgb_to_256(guiColorBg)
+    else
+        let guiColorFg = synIDattr(hlID(a:group), "fg", "gui")
+        let guiColorBg = synIDattr(hlID(a:group), "bg", "gui")
+        let termColorFg = s:rgb_to_256(guiColorFg)
+        let termColorBg = s:rgb_to_256(guiColorBg)
+    endif
+    return [ [ guiColorBg, termColorBg ], [ guiColorFg, termColorFg ] ]
 endfunction
-
-function! s:getHighlightFgColor(group)
-  let guiColor = synIDattr(hlID(a:group), "fg", "gui")
-  let termColor = s:rgb_to_256(guiColor)
-  return [ guiColor, termColor ]
-endfunction
-
-function! s:getHighlightBgColor(group)
-  let guiColor = synIDattr(hlID(a:group), "bg", "gui")
-  let termColor = s:rgb_to_256(guiColor)
-  return [ guiColor, termColor ]
-endfunction
-
-let s:normal_guibg  = "#6e88a6"
-let s:insert_guibg  = "#87af87"
-let s:visual_guibg  = "#875faf"
-let s:replace_guibg = "#ff875f"
-
-let s:normal_bgcolor      = [s:normal_guibg  , s:rgb_to_256(s:normal_guibg)  ]
-let s:insert_bgcolor      = [s:insert_guibg  , s:rgb_to_256(s:insert_guibg)  ]
-let s:visual_bgcolor      = [s:visual_guibg  , s:rgb_to_256(s:visual_guibg)  ]
-let s:replace_bgcolor     = [s:replace_guibg  , s:rgb_to_256(s:replace_guibg)  ]
-" }}}
 
 " set lightline.vim's palette {{{
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
-let s:p.normal.left     = [[s:getHighlightFgColor("StatusLine"), s:normal_bgcolor]    , s:getHighlightColor("StatusLine")]
+let s:p.normal.left     = [s:getHighlightColor("StatusLine")    , s:getHighlightColor("StatusLine")]
 let s:p.normal.middle   = [s:getHighlightColor("StatusLineNC")]
 let s:p.normal.right    = [s:getHighlightReverseColor("StatusLine")    , s:getHighlightReverseColor("StatusLine")]
 let s:p.inactive.left   = [s:getHighlightColor("StatusLineNC")   , s:getHighlightColor("StatusLineNC")]
 let s:p.inactive.middle = [s:getHighlightColor("StatusLineNC")]
 let s:p.inactive.right  = [s:getHighlightColor("StatusLineNC")   , s:getHighlightColor("StatusLineNC")]
-let s:p.insert.left     = [[s:getHighlightFgColor("StatusLine"), s:insert_bgcolor]    , s:getHighlightColor("StatusLine")]
+let s:p.insert.left     = [s:getHighlightColor("DiffAdd")   , s:getHighlightColor("StatusLine")]
 let s:p.insert.right    = [s:getHighlightReverseColor("StatusLine")    , s:getHighlightReverseColor("StatusLine")]
-let s:p.replace.left    = [[s:getHighlightFgColor("StatusLine"), s:replace_bgcolor]    , s:getHighlightColor("StatusLine")]
+let s:p.replace.left    = [s:getHighlightColor("DiffChange")   , s:getHighlightColor("StatusLine")]
 let s:p.replace.right   = [s:getHighlightReverseColor("StatusLine")    , s:getHighlightReverseColor("StatusLine")]
-let s:p.visual.left     = [[s:getHighlightFgColor("StatusLine"), s:visual_bgcolor]    , s:getHighlightColor("StatusLine")]
+let s:p.visual.left     = [s:getHighlightColor("DiffText")    , s:getHighlightColor("StatusLine")]
 let s:p.visual.right    = [s:getHighlightReverseColor("StatusLine")    , s:getHighlightReverseColor("StatusLine")]
 let s:p.tabline.left    = [s:getHighlightColor("TabLine")]
 let s:p.tabline.tabsel  = [s:getHighlightColor("TabLineSel")]
