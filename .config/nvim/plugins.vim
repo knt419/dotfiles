@@ -109,6 +109,7 @@ let g:lightline = {
             \ },
             \ 'component_function': {
             \    'readonly': 'LightlineReadonly',
+            \    'repository': 'LightlineRepository',
             \    'repostatus': 'LightlineRepoStatus',
             \    'filetype': 'LightlineFiletype',
             \    'fileformat': 'LightlineFileformat',
@@ -263,6 +264,10 @@ endfunction
 
 function! LightlineReadonly()
     return &readonly ? "\ue0a2" : ''
+endfunction
+
+function! LightlineRepository()
+    return fnamemodify(FugitiveRemoteUrl(), ":t:r")
 endfunction
 
 function! LightlineRepoStatus()

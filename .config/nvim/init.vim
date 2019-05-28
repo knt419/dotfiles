@@ -61,7 +61,7 @@ set virtualedit=block
 set backspace=indent,eol,start
 set whichwrap=b,s,h,l,<,>,[,]
 set mouse=a
-set synmaxcol=200
+set synmaxcol=300
 set updatetime=300
 
 set ignorecase
