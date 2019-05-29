@@ -45,8 +45,7 @@ Plug 'editorconfig/editorconfig-vim'
 " colorscheme
 Plug 'jeetsukumaran/vim-nefertiti'
 Plug 'Nequo/vim-allomancer'
-Plug 'rakr/vim-two-firewatch'
-Plug 'cocopon/iceberg.vim'
+Plug 'knt419/lightline-colorscheme-themecolor'
 
 " statusline, except oni, veonim, gonvim
 if !exists('g:gui_oni') && !exists('g:veonim') && !exists('g:gonvim_running')
@@ -77,11 +76,7 @@ if has('conceal')
     set conceallevel=2 concealcursor=i
 endif
 
-" statusline, except oni, veonim, gonvim
-if !exists('g:gui_oni') && !exists('g:veonim') && !exists('g:gonvim_running')
-    silent! colorscheme allomancer
-    source $HOME/.config/nvim/lightline-themecolor.vim
-else
+if exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
     set cmdheight=1
     set laststatus=0
 endif
