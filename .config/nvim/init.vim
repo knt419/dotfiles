@@ -51,6 +51,7 @@ set shiftwidth=4
 set smartindent
 set autoindent
 set complete=.,w,b
+set conceallevel=0
 
 set clipboard=unnamedplus
 set nostartofline

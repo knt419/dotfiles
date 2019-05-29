@@ -72,10 +72,6 @@ endif
 
 call plug#end()
 
-if has('conceal')
-    set conceallevel=2 concealcursor=i
-endif
-
 if exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
     set cmdheight=1
     set laststatus=0
