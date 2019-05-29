@@ -51,6 +51,9 @@ Plug 'knt419/lightline-colorscheme-themecolor'
 if !exists('g:gui_oni') && !exists('g:veonim') && !exists('g:gonvim_running')
     Plug 'itchyny/lightline.vim'
     Plug 'mgee/lightline-bufferline'
+else
+    set cmdheight=1
+    set laststatus=0
 endif
 
 " lsp/completion, except oni, veonim,
@@ -71,11 +74,6 @@ if !has('win32') && !has('win64')
 endif
 
 call plug#end()
-
-if exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
-    set cmdheight=1
-    set laststatus=0
-endif
 
 " plugin variables
 
