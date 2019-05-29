@@ -267,7 +267,10 @@ function! LightlineReadonly()
 endfunction
 
 function! LightlineRepository()
-    return fnamemodify(FugitiveRemoteUrl(), ":t:r")
+    if !exists("b:git_dir")
+        return ''
+    endif
+    return fnamemodify(FugitiveGitDir(), ":h:t")
 endfunction
 
 function! LightlineRepoStatus()
