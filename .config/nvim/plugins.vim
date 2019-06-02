@@ -1,3 +1,8 @@
+let g:tab_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
+let g:statusline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
+let g:completion_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
+
+
 call plug#begin(g:plug_repo_dir)
 
 " denite/fzf
@@ -47,17 +52,17 @@ Plug 'jeetsukumaran/vim-nefertiti'
 Plug 'Nequo/vim-allomancer'
 Plug 'knt419/lightline-colorscheme-themecolor'
 
-" statusline, except oni, veonim, gonvim
-if !exists('g:gui_oni') && !exists('g:veonim') && !exists('g:gonvim_running')
-    Plug 'itchyny/lightline.vim'
-    Plug 'mgee/lightline-bufferline'
-else
+" statusline
+if g:statusline_gui
     set cmdheight=1
     set laststatus=0
+else
+    Plug 'itchyny/lightline.vim'
+    Plug 'mgee/lightline-bufferline'
 endif
 
-" lsp/completion, except oni, veonim,
-if !exists('g:gui_oni') && !exists('g:veonim')
+" lsp/completion
+if !g:completion_gui
     Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
     set completeopt=noinsert,menuone,noselect
     set shortmess+=c
