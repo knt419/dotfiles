@@ -58,7 +58,7 @@ if g:statusline_gui
     set laststatus=0
 else
     Plug 'itchyny/lightline.vim'
-    Plug 'mgee/lightline-bufferline'
+    Plug 'mengelbrecht/lightline-bufferline'
 endif
 
 " lsp/completion
@@ -116,9 +116,14 @@ let g:lightline = {
             \ 'component_type': {
             \   'buffers': 'tabsel',
             \ },
-            \ 'separator': {'left': "\ue0b0", 'right': "\ue0b2"},
-            \ 'subseparator': {'left': "\ue0b1", 'right': "\ue0b3"}
             \ }
+
+if winwidth(0) < 100
+    let g:lightline#bufferline#filename_modifier = ':t'
+else
+    let g:lightline.separator = {'left': "\ue0b0", 'right': "\ue0b2"}
+    let g:lightline.subseparator = {'left': "\ue0b1", 'right': "\ue0b3"}
+endif
 
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
@@ -214,11 +219,11 @@ if exists('g:veonim')
     nnoremap <silent> <Leader>b :Veonim buffers<cr>
 
     " searching text
-    nnoremap <silent> <space>fw :Veonim grep-word<cr>
-    vnoremap <silent> <space>fw :Veonim grep-selection<cr>
-    nnoremap <silent> <space>fa :Veonim grep<cr>
-    nnoremap <silent> <space>ff :Veonim grep-resume<cr>
-    nnoremap <silent> <space>fb :Veonim buffer-search<cr>
+    nnoremap <silent> <Leader>fw :Veonim grep-word<cr>
+    vnoremap <silent> <Leader>fw :Veonim grep-selection<cr>
+    nnoremap <silent> <Leader>fa :Veonim grep<cr>
+    nnoremap <silent> <Leader>ff :Veonim grep-resume<cr>
+    nnoremap <silent> <Leader>fb :Veonim buffer-search<cr>
 
     " color picker
     nnoremap <silent> sc :Veonim pick-color<cr>
@@ -240,8 +245,8 @@ if exists('g:veonim')
     nnoremap <silent> <c-p> :Veonim prev-problem<cr>
     nnoremap <silent> ,n :Veonim next-usage<cr>
     nnoremap <silent> ,p :Veonim prev-usage<cr>
-    nnoremap <silent> <space>pt :Veonim problems-toggle<cr>
-    nnoremap <silent> <space>pf :Veonim problems-focus<cr>
+    nnoremap <silent> <Leader>pt :Veonim problems-toggle<cr>
+    nnoremap <silent> <Leader>pf :Veonim problems-focus<cr>
     nnoremap <silent> <d-o> :Veonim buffer-prev<cr>
     nnoremap <silent> <d-i> :Veonim buffer-next<cr>
 
@@ -264,7 +269,7 @@ function! LightlineRepository()
     if !exists("b:git_dir")
         return ''
     endif
-    return fnamemodify(FugitiveGitDir(), ":h:t")
+    return fnamemodify(b:git_dir, ":h:t")
 endfunction
 
 function! LightlineRepoStatus()
@@ -322,7 +327,7 @@ function! s:my_defx_settings() abort
     nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
     nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
     nnoremap <silent><buffer><expr> q defx#do_action('quit')
-    nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
+    nnoremap <silent><buffer><expr> <space> defx#do_action('toggle_select') . 'j'
     nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
 endfunction
 
@@ -373,7 +378,7 @@ if &runtimepath =~# 'denite.nvim'
     call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
     call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
     call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
-    call denite#custom#map('normal', '<Leader><Leader>', '<denite:toggle_select_all>')
+    call denite#custom#map('normal', '<space><space>', '<denite:toggle_select_all>')
     call denite#custom#map('normal', 'r', '<denite:do_action:qfreplace>')
     call denite#custom#map('normal', '<ESC>', '<denite:quit>')
     call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
