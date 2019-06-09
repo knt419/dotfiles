@@ -229,6 +229,7 @@ autocmd MyAutoCmd TermOpen * IndentLinesDisable
 autocmd MyAutoCmd FileType help,startify IndentLinesDisable
 autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif
 autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline
+autocmd MyAutoCmd BufEnter * silent! lcd %:p:h
 augroup syntaxhighlight
     autocmd!
     autocmd Syntax * if 100 < line('$') | syntax sync minlines=100 | endif
