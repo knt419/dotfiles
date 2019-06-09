@@ -154,7 +154,7 @@ let $VISUAL = 'nvr --remote-wait'
 
 let g:nefertiti_base_brightness_level = 14
 
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml']
+let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml', 'coc-prettier']
 
 highlight link HighlightedyankRegion Visual
 
