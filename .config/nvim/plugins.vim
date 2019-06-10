@@ -1,6 +1,6 @@
 let g:tab_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
 let g:statusline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
-let g:completion_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
+let g:completion_gui = exists('g:gui_oni') || exists('g:veonim')
 
 
 call plug#begin(g:plug_repo_dir)

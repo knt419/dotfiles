@@ -99,6 +99,7 @@ if has('win32') || has('win64')
 endif
 
 let mapleader = "\<Space>"
+let $LANG = "ja_JP.UTF-8"
 
 " reset autocmd
 augroup MyAutoCmd
