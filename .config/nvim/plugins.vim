@@ -349,6 +349,32 @@ if &runtimepath =~# 'coc.nvim'
 endif
 
 if &runtimepath =~# 'denite.nvim'
+    autocmd FileType denite call s:denite_my_settings()
+    function! s:denite_my_settings() abort
+	  nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+	  nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+	  nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+	  nnoremap <silent><buffer><expr> r denite#do_map('do_action', 'qfreplace')
+	  nnoremap <silent><buffer><expr> q denite#do_map('quit')
+	  nnoremap <silent><buffer><expr> <ESC> denite#do_map('quit')
+	  nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+	  nnoremap <silent><buffer><expr> v denite#do_map('do_action:vsplit')
+	  nnoremap <silent><buffer><expr> <space> denite#do_map('toggle_select').'j'
+	  nnoremap <silent><buffer><expr> <space><space> denite#do_map('toggle_select_all')
+	  inoremap <silent><buffer><expr> <ESC> denite#do_map('quit')
+    call denite#custom#map('insert', '<ESC>', '<denite:enter_mode:normal>')
+    call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
+    call denite#custom#map('insert', '<Tab>', '<denite:move_to_next_line>')
+    call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>')
+    call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
+    call denite#custom#map('insert', '<S-Tab>', '<denite:move_to_previous_line>')
+    call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
+    call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
+    endfunction
+    autocmd FileType denite-filter call s:denite_filter_my_settings()
+    function! s:denite_filter_my_settings() abort
+        imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+    endfunction
     call denite#custom#option('default', 'prompt', "\ue62b")
 
     if executable('rg')
@@ -374,18 +400,6 @@ if &runtimepath =~# 'denite.nvim'
         call denite#custom#var('grep', 'final_opts', [])
     endif
 
-    call denite#custom#map('insert', '<ESC>', '<denite:enter_mode:normal>')
-    call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
-    call denite#custom#map('insert', '<Tab>', '<denite:move_to_next_line>')
-    call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>')
-    call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
-    call denite#custom#map('insert', '<S-Tab>', '<denite:move_to_previous_line>')
-    call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
-    call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
-    call denite#custom#map('normal', 'v', '<denite:do_action:vsplit>')
-    call denite#custom#map('normal', '<space><space>', '<denite:toggle_select_all>')
-    call denite#custom#map('normal', 'r', '<denite:do_action:qfreplace>')
-    call denite#custom#map('normal', '<ESC>', '<denite:quit>')
     call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
     call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
     call denite#custom#action('file', 'qfreplace', function('s:my_denite_replace'))
