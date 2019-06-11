@@ -186,19 +186,24 @@ nnoremap <silent> <Leader>s :<C-u>Startify<CR>
 nnoremap <silent> <Leader>e :<C-u>Defx<CR>
 nnoremap <silent> <Leader>p :<C-u>History<CR>
 nnoremap <silent> <Leader>r :<C-u>GFiles<CR>
-nnoremap <silent> <Leader>f :<C-u>Denite file_rec<CR>
+nnoremap <silent> <Leader>f :<C-u>Denite file/rec<CR>
 nnoremap <silent> <Leader>m :<C-u>Denite file_mru<CR>
 nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 xnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
-nnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
+" nnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
 
 vmap <CR> <Plug>(LiveEasyAlign)
 
 imap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
+
+if g:tab_gui
+    nnoremap <C-t> :<C-u>tabnext<CR>
+    nnoremap <S-t> :<C-u>tabprevous<CR>
+endif
 
 if exists('g:veonim')
     " extensions for web dev
@@ -347,7 +352,7 @@ if &runtimepath =~# 'denite.nvim'
     call denite#custom#option('default', 'prompt', "\ue62b")
 
     if executable('rg')
-        call denite#custom#var('file_rec', 'command',
+        call denite#custom#var('file/rec', 'command',
                     \ ['rg', '--files', '--glob', '!.git', '--hidden'])
         call denite#custom#var('grep', 'command', ['rg', '--threads', '1', '--hidden'])
         call denite#custom#var('grep', 'default_opts',
@@ -357,7 +362,7 @@ if &runtimepath =~# 'denite.nvim'
         call denite#custom#var('grep', 'separator', ['--'])
         call denite#custom#var('grep', 'final_opts', [])
     else
-        call denite#custom#var('file_rec', 'command',
+        call denite#custom#var('file/rec', 'command',
                     \ ['ag', '--follow', '--nocolor', '--nogroup',
                     \  '--hidden', '-g', ''])
         call denite#custom#var('grep', 'command', ['ag'])
