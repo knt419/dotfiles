@@ -9,6 +9,7 @@ call plug#begin(g:plug_repo_dir)
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
+Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}
 Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
 Plug 'junegunn/fzf.vim'
 
@@ -134,16 +135,16 @@ let g:indentLine_faster          = 1
 let g:highlightedyank_highlight_duration = 300
 
 let g:startify_skiplist = [
-       \ '*\\AppData\\Local\\Temp\\*',
-       \ ]
+            \ '*\\AppData\\Local\\Temp\\*',
+            \ ]
 
-let g:loaded_netrwPlugin       = 1
-let g:fzf_layout               = { 'down': '~70%' }
-let g:rooter_change_directory_for_non_project_files = 'home'
-let g:startify_change_to_vcs_root                   = 0
-let g:startify_change_to_dir                        = 0
-let g:startify_fortune_use_unicode                  = 0
-let g:startify_enable_unsafe                        = 0
+let g:loaded_netrwPlugin           = 1
+let g:fruzzy#usenative             = 1
+let g:fzf_layout                   = { 'down': '~70%' }
+let g:startify_change_to_vcs_root  = 0
+let g:startify_change_to_dir       = 0
+let g:startify_fortune_use_unicode = 0
+let g:startify_enable_unsafe       = 0
 
 let g:webdevicons_enable                 = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
@@ -196,9 +197,9 @@ xnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
 
 vmap <CR> <Plug>(LiveEasyAlign)
 
-imap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
+imap <silent><expr> <Tab>
+            \ pumvisible() ? "\<C-n>" :
+            \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 
 if g:tab_gui
     nnoremap <C-t> :<C-u>tabnext<CR>
@@ -311,8 +312,8 @@ endfunction
 
 function! s:my_cr_function()
     return !pumvisible() ?
-                    \ lexima#expand('<CR>', 'i') :
-                    \ "\<C-y>"
+                \ lexima#expand('<CR>', 'i') :
+                \ "\<C-y>"
 endfunction
 
 function! s:my_defx_settings() abort
@@ -351,31 +352,34 @@ endif
 if &runtimepath =~# 'denite.nvim'
     autocmd FileType denite call s:denite_my_settings()
     function! s:denite_my_settings() abort
-	  nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-	  nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
-	  nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
-	  nnoremap <silent><buffer><expr> r denite#do_map('do_action', 'qfreplace')
-	  nnoremap <silent><buffer><expr> q denite#do_map('quit')
-	  nnoremap <silent><buffer><expr> <ESC> denite#do_map('quit')
-	  nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-	  nnoremap <silent><buffer><expr> v denite#do_map('do_action:vsplit')
-	  nnoremap <silent><buffer><expr> <space> denite#do_map('toggle_select').'j'
-	  nnoremap <silent><buffer><expr> <space><space> denite#do_map('toggle_select_all')
-	  inoremap <silent><buffer><expr> <ESC> denite#do_map('quit')
-    call denite#custom#map('insert', '<ESC>', '<denite:enter_mode:normal>')
-    call denite#custom#map('insert', '<C-j>', '<denite:move_to_next_line>')
-    call denite#custom#map('insert', '<Tab>', '<denite:move_to_next_line>')
-    call denite#custom#map('insert', '<Down>', '<denite:move_to_next_line>')
-    call denite#custom#map('insert', '<C-k>', '<denite:move_to_previous_line>')
-    call denite#custom#map('insert', '<S-Tab>', '<denite:move_to_previous_line>')
-    call denite#custom#map('insert', '<Up>', '<denite:move_to_previous_line>')
-    call denite#custom#map('insert', '<C-v>', '<denite:do_action:vsplit>')
+        nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+        nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+        nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+        nnoremap <silent><buffer><expr> r denite#do_map('do_action', 'qfreplace')
+        nnoremap <silent><buffer><expr> q denite#do_map('quit')
+        nnoremap <silent><buffer><expr> <ESC> denite#do_map('quit')
+        nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+        nnoremap <silent><buffer><expr> v denite#do_map('do_action:vsplit')
+        nnoremap <silent><buffer><expr> <space> denite#do_map('toggle_select').'j'
+        nnoremap <silent><buffer><expr> <space><space> denite#do_map('toggle_select_all')
+        inoremap <silent><buffer><expr> <ESC> denite#do_map('quit')
     endfunction
     autocmd FileType denite-filter call s:denite_filter_my_settings()
     function! s:denite_filter_my_settings() abort
         imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
     endfunction
-    call denite#custom#option('default', 'prompt', "\ue62b")
+    call denite#custom#option('_', {
+                \ 'cached_filter': v:true,
+                \ 'cursor_shape': v:true,
+                \ 'cursor_wrap': v:true,
+                \ 'highlight_filter_background': 'DeniteFilter',
+                \ 'highlight_matched_char': 'Underlined',
+                \ 'matchers': 'matcher/fruzzy',
+                \ 'prompt': "\ue62b",
+                \ 'split': 'floating',
+                \ 'start_filter': v:true,
+                \ 'statusline': v:false,
+                \ })
 
     if executable('rg')
         call denite#custom#var('file/rec', 'command',
@@ -400,8 +404,8 @@ if &runtimepath =~# 'denite.nvim'
         call denite#custom#var('grep', 'final_opts', [])
     endif
 
-    call denite#custom#source('file_mru', 'matchers', ['matcher_fuzzy', 'matcher_ignore_globs'])
-    call denite#custom#filter('matcher_ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
+    call denite#custom#source('file_mru', 'matchers', ['matcher/fruzzy', 'matcher/ignore_globs'])
+    call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
     call denite#custom#action('file', 'qfreplace', function('s:my_denite_replace'))
 endif
 
