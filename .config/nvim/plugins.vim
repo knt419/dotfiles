@@ -180,17 +180,15 @@ nmap ge <Plug>(smartword-ge)
 nmap <silent> <S-n> <Plug>(coc-diagnostic-next)
 nmap <silent> <S-p> <Plug>(coc-diagnostic-prev)
 
-nnoremap <C-t> :bn<CR>
-nnoremap <S-t> :bp<CR>
 
 nnoremap <silent> <Leader>s :<C-u>Startify<CR>
 nnoremap <silent> <Leader>e :<C-u>Defx<CR>
 nnoremap <silent> <Leader>p :<C-u>History<CR>
 nnoremap <silent> <Leader>r :<C-u>GFiles<CR>
-nnoremap <silent> <Leader>f :<C-u>Denite file/rec<CR>
-nnoremap <silent> <Leader>m :<C-u>Denite file_mru<CR>
-nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
-nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
+nnoremap <silent> <Leader>f :<C-u>Denite file/rec -winheight=`40*winheight(0)/100`<CR>
+nnoremap <silent> <Leader>m :<C-u>Denite file_mru -winheight=`40*winheight(0)/100`<CR>
+nnoremap <silent> <Leader>b :<C-u>Denite buffer -winheight=`40*winheight(0)/100`<CR>
+nnoremap <silent> <Leader>d :<C-u>Denite directory_mru -winheight=`40*winheight(0)/100`<CR>
 nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 xnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
 " nnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
@@ -204,6 +202,9 @@ imap <silent><expr> <Tab>
 if g:tab_gui
     nnoremap <C-t> :<C-u>tabnext<CR>
     nnoremap <S-t> :<C-u>tabprevous<CR>
+else
+    nnoremap <C-t> :<C-u>bn<CR>
+    nnoremap <S-t> :<C-u>bp<CR>
 endif
 
 if exists('g:veonim')
@@ -345,9 +346,9 @@ autocmd MyAutoCmd FileType defx call s:my_defx_settings()
 autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-if &runtimepath =~# 'coc.nvim'
-    autocmd MyAutoCmd CursorHold * silent call CocActionAsync('highlight')
-endif
+" if &runtimepath =~# 'coc.nvim'
+"     autocmd MyAutoCmd CursorHold * silent call CocActionAsync('highlight')
+" endif
 
 if &runtimepath =~# 'denite.nvim'
     autocmd FileType denite call s:denite_my_settings()
@@ -357,16 +358,20 @@ if &runtimepath =~# 'denite.nvim'
         nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
         nnoremap <silent><buffer><expr> r denite#do_map('do_action', 'qfreplace')
         nnoremap <silent><buffer><expr> q denite#do_map('quit')
+        nnoremap <silent><buffer><expr> <Tab> denite#do_map('choose_action')
         nnoremap <silent><buffer><expr> <ESC> denite#do_map('quit')
         nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
         nnoremap <silent><buffer><expr> v denite#do_map('do_action:vsplit')
         nnoremap <silent><buffer><expr> <space> denite#do_map('toggle_select').'j'
         nnoremap <silent><buffer><expr> <space><space> denite#do_map('toggle_select_all')
         inoremap <silent><buffer><expr> <ESC> denite#do_map('quit')
+        setlocal cursorline
     endfunction
     autocmd FileType denite-filter call s:denite_filter_my_settings()
     function! s:denite_filter_my_settings() abort
-        imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+        inoremap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+        inoremap <silent><buffer> <C-j> <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+        inoremap <silent><buffer> <C-k> <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
     endfunction
     call denite#custom#option('_', {
                 \ 'cached_filter': v:true,
@@ -378,7 +383,10 @@ if &runtimepath =~# 'denite.nvim'
                 \ 'prompt': "\ue62b",
                 \ 'split': 'floating',
                 \ 'start_filter': v:true,
+                \ 'reverse': v:true,
+                \ 'auto_resize': v:true,
                 \ 'statusline': v:false,
+                \ 'direction': 'dynamicbottom',
                 \ })
 
     if executable('rg')
