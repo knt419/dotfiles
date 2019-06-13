@@ -9,7 +9,7 @@ call plug#begin(g:plug_repo_dir)
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
-Plug 'raghur/fruzzy', {'do': { -> fruzzy#install()}}
+Plug 'raghur/fruzzy', { 'do': { -> fruzzy#install()}}
 Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
 Plug 'junegunn/fzf.vim'
 
@@ -141,7 +141,7 @@ let g:startify_skiplist = [
 let g:loaded_netrwPlugin           = 1
 let g:fruzzy#usenative             = 1
 let g:fzf_layout                   = { 'down': '~70%' }
-let g:startify_change_to_vcs_root  = 0
+let g:startify_change_to_vcs_root  = 1
 let g:startify_change_to_dir       = 0
 let g:startify_fortune_use_unicode = 0
 let g:startify_enable_unsafe       = 0
@@ -366,15 +366,16 @@ if &runtimepath =~# 'denite.nvim'
     endfunction
     autocmd FileType denite-filter call s:denite_filter_my_settings()
     function! s:denite_filter_my_settings() abort
-        imap <silent><buffer> <C-o> <Plug>(denite_filter_quit)
+        inoremap <silent><buffer> <ESC> <Plug>(denite_filter_quit)
     endfunction
     call denite#custom#option('_', {
                 \ 'cached_filter': v:true,
                 \ 'cursor_shape': v:true,
                 \ 'cursor_wrap': v:true,
+                \ 'matchers': 'matcher/fruzzy',
                 \ 'highlight_filter_background': 'DeniteFilter',
                 \ 'highlight_matched_char': 'Underlined',
-                \ 'matchers': 'matcher/fruzzy',
+                \ 'reversed': v:true,
                 \ 'prompt': "\ue62b",
                 \ 'split': 'floating',
                 \ 'start_filter': v:true,
@@ -405,6 +406,7 @@ if &runtimepath =~# 'denite.nvim'
     endif
 
     call denite#custom#source('file_mru', 'matchers', ['matcher/fruzzy', 'matcher/ignore_globs'])
+    call denite#custom#source('file,file/rec,file/mru,file/old,file/point', 'converters', ['devicons_denite_converter'])
     call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
     call denite#custom#action('file', 'qfreplace', function('s:my_denite_replace'))
 endif
