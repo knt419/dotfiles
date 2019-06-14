@@ -118,22 +118,18 @@ let g:vimsyn_embed             = 1
 " os specific
 if has('win32') || has('win64')
     set shellslash
-    let g:loaded_gzip      = 1
-    let g:loaded_tarPlugin = 1
-    let g:loaded_zipPlugin = 1
 endif
 
 let mapleader = "\<Space>"
-let $LANG = "ja_JP.UTF-8"
+let $LANG = 'ja_JP.UTF-8'
 
 " reset autocmd
 augroup MyAutoCmd
     autocmd!
 augroup END
-
-if &compatible
-    set  nocompatible
-endif
+augroup MySetUpCmd
+    autocmd!
+augroup END
 
 let g:vim_indent_cont = &shiftwidth * 3
 
@@ -143,12 +139,12 @@ let g:plug_repo_dir = expand('$HOME/.local/share/nvim/plugged')
 
 if !filereadable(g:plug_path)
     execute '!curl -fLo ' . g:plug_path . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd VimEnter * PlugInstall --sync | source $HOME/.config/nvim/init.vim
+    autocmd MySetUpCmd VimEnter * PlugInstall --sync | source $HOME/.config/nvim/init.vim
 endif
 
 execute 'set runtimepath^=$HOME/.local/share/nvim/site/'
 runtime plugins.vim
-autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | q | endif
+autocmd MySetUpCmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | q | endif
 "}}}
 
 " nvim {{{

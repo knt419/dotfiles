@@ -26,7 +26,7 @@ GinitVim = '''
 StartFullscreen = false
 
 [Statusline]
-Visible = true
+Visible = false
 # textLabel / icon / background / none
 ModeIndicatorType = "icon"
 # Color setting per vim-modes, if you want to change
@@ -42,7 +42,7 @@ TerminalModeColor = "#778899"
 
 
 [Tabline]
-Visible = true
+Visible = false
 
 [Lint]
 Visible = true
@@ -51,15 +51,15 @@ Visible = true
 Visible = true
 
 [ActivityBar]
-Visible = false
-DropShadow = false
+Visible = true
+DropShadow = true
 
 [MiniMap]
 Visible = false
 
 [SideBar]
 Visible = false
-DropShadow = false
+DropShadow = true
 Width = 300
 AccentColor = "#5596ea"
 
