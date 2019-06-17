@@ -351,6 +351,7 @@ autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
 " endif
 
 if &runtimepath =~# 'denite.nvim'
+    nnoremap <silent> / :<C-u>Denite -buffer-name=search -auto-resize line<CR>
     autocmd FileType denite call s:denite_my_settings()
     function! s:denite_my_settings() abort
         nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
