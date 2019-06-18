@@ -185,10 +185,10 @@ nnoremap <silent> <Leader>s :<C-u>Startify<CR>
 nnoremap <silent> <Leader>e :<C-u>Defx<CR>
 nnoremap <silent> <Leader>p :<C-u>History<CR>
 nnoremap <silent> <Leader>r :<C-u>GFiles<CR>
-nnoremap <silent> <Leader>f :<C-u>Denite file/rec -winheight=`70*winheight(0)/100`<CR>
-nnoremap <silent> <Leader>m :<C-u>Denite file_mru -winheight=`70*winheight(0)/100`<CR>
-nnoremap <silent> <Leader>b :<C-u>Denite buffer -winheight=`70*winheight(0)/100`<CR>
-nnoremap <silent> <Leader>d :<C-u>Denite directory_mru -winheight=`70*winheight(0)/100`<CR>
+nnoremap <silent> <Leader>f :<C-u>Denite file/rec<CR>
+nnoremap <silent> <Leader>m :<C-u>Denite file_mru<CR>
+nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
+nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 xnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
 " nnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
@@ -346,12 +346,8 @@ autocmd MyAutoCmd FileType defx call s:my_defx_settings()
 autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-" if &runtimepath =~# 'coc.nvim'
-"     autocmd MyAutoCmd CursorHold * silent call CocActionAsync('highlight')
-" endif
-
 if &runtimepath =~# 'denite.nvim'
-    nnoremap <silent> / :<C-u>Denite -buffer-name=search -auto-resize line<CR>
+    nnoremap <silent> / :<C-u>Denite -buffer-name=search -direction=dynamicbottom -reversed=v:false -auto-resize=v:false line<CR>
     autocmd FileType denite call s:denite_my_settings()
     function! s:denite_my_settings() abort
         nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
@@ -366,28 +362,18 @@ if &runtimepath =~# 'denite.nvim'
         nnoremap <silent><buffer><expr> <space> denite#do_map('toggle_select').'j'
         nnoremap <silent><buffer><expr> <space><space> denite#do_map('toggle_select_all')
         inoremap <silent><buffer><expr> <ESC> denite#do_map('quit')
-        setlocal cursorline
-        autocmd! MyAutoCmd CursorMoved,CursorMovedI,WinLeave <buffer>
     endfunction
     autocmd FileType denite-filter call s:denite_filter_my_settings()
     function! s:denite_filter_my_settings() abort
-        inoremap <silent><buffer> <ESC> <Plug>(denite_filter_quit)
-        inoremap <silent><buffer> <C-j> <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
-        inoremap <silent><buffer> <C-k> <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+        inoremap <silent><buffer> <ESC> <ESC><Plug>(denite_filter_quit)
+        inoremap <silent><buffer> <C-j> <ESC><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+        inoremap <silent><buffer> <C-k> <ESC><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
     endfunction
     call denite#custom#option('_', {
-                \ 'cached_filter': v:true,
-                \ 'cursor_shape': v:true,
-                \ 'cursor_wrap': v:true,
-                \ 'matchers': 'matcher/fruzzy',
-                \ 'highlight_filter_background': 'DeniteFilter',
-                \ 'highlight_matched_char': 'Underlined',
+                \ 'start_filter': v:true,
+                \ 'auto_resize': v:true,
                 \ 'reversed': v:true,
                 \ 'prompt': "\ue62b",
-                \ 'split': 'floating',
-                \ 'start_filter': v:true,
-                \ 'reverse': v:true,
-                \ 'auto_resize': v:true,
                 \ 'statusline': v:false,
                 \ 'direction': 'dynamicbottom',
                 \ })
@@ -415,7 +401,7 @@ if &runtimepath =~# 'denite.nvim'
         call denite#custom#var('grep', 'final_opts', [])
     endif
 
-    call denite#custom#source('file_mru', 'matchers', ['matcher/fruzzy', 'matcher/ignore_globs'])
+    call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/ignore_globs'])
     call denite#custom#source('file,file/rec,file/mru,file/old,file/point', 'converters', ['devicons_denite_converter'])
     call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
     call denite#custom#action('file', 'qfreplace', function('s:my_denite_replace'))
