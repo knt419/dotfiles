@@ -9,7 +9,6 @@ call plug#begin(g:plug_repo_dir)
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
-Plug 'raghur/fruzzy', { 'do': { -> fruzzy#install()}}
 Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
 Plug 'junegunn/fzf.vim'
 
@@ -34,6 +33,7 @@ Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
 Plug 'haya14busa/is.vim', { 'on': '<Plug>(asterisk-' }
 Plug 'terryma/vim-expand-region'
 Plug 'terryma/vim-multiple-cursors'
+Plug 'wincent/ferret'
 
 " file/directory
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
@@ -129,8 +129,13 @@ endif
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
-let g:loaded_matchparen          = 1
-let g:indentLine_faster          = 1
+let g:loaded_matchparen = 1
+let g:indentLine_faster = 1
+let g:FerretExecutable  = 'rg,ag'
+let g:FerretExecutableArguments = {
+  \   'ag': '-i --vimgrep --hidden',
+  \   'rg': '--vimgrep --no-heading --hidden'
+  \ }
 
 let g:highlightedyank_highlight_duration = 300
 
@@ -139,7 +144,6 @@ let g:startify_skiplist = [
             \ ]
 
 let g:loaded_netrwPlugin           = 1
-let g:fruzzy#usenative             = 1
 let g:fzf_layout                   = { 'down': '~70%' }
 let g:startify_change_to_vcs_root  = 1
 let g:startify_change_to_dir       = 0
@@ -347,7 +351,7 @@ autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
             \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 if &runtimepath =~# 'denite.nvim'
-    nnoremap <silent> / :<C-u>Denite -buffer-name=search -direction=dynamicbottom -reversed=v:false -auto-resize=v:false line<CR>
+    nnoremap <silent> <Leader>/ :<C-u>Denite -buffer-name=search -direction=dynamicbottom -reversed=v:false -auto-resize=v:false line<CR>
     autocmd FileType denite call s:denite_my_settings()
     function! s:denite_my_settings() abort
         nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
@@ -365,7 +369,7 @@ if &runtimepath =~# 'denite.nvim'
     endfunction
     autocmd FileType denite-filter call s:denite_filter_my_settings()
     function! s:denite_filter_my_settings() abort
-        inoremap <silent><buffer> <ESC> <ESC><Plug>(denite_filter_quit)
+        imap <silent><buffer> <ESC> <ESC><Plug>(denite_filter_quit)
         inoremap <silent><buffer> <C-j> <ESC><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
         inoremap <silent><buffer> <C-k> <ESC><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
     endfunction
