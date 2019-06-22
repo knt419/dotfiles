@@ -185,6 +185,8 @@ nmap <silent> <S-n> <Plug>(coc-diagnostic-next)
 nmap <silent> <S-p> <Plug>(coc-diagnostic-prev)
 
 
+nnoremap <silent> <Leader>a <Plug>(FerretAck)
+nnoremap <silent> <Leader>l <Plug>(FerretLack)
 nnoremap <silent> <Leader>s :<C-u>Startify<CR>
 nnoremap <silent> <Leader>e :<C-u>Defx<CR>
 nnoremap <silent> <Leader>p :<C-u>History<CR>
@@ -195,7 +197,6 @@ nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 xnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
-" nnoremap <silent> <Leader>f  <Plug>(coc-format-selected)
 
 vmap <CR> <Plug>(LiveEasyAlign)
 
@@ -370,6 +371,7 @@ if &runtimepath =~# 'denite.nvim'
     autocmd FileType denite-filter call s:denite_filter_my_settings()
     function! s:denite_filter_my_settings() abort
         imap <silent><buffer> <ESC> <ESC><Plug>(denite_filter_quit)
+        nmap <silent><buffer> <ESC> <Plug>(denite_filter_quit)
         inoremap <silent><buffer> <C-j> <ESC><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
         inoremap <silent><buffer> <C-k> <ESC><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
     endfunction
