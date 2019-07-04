@@ -226,41 +226,41 @@ if exists('g:veonim')
                 \]
 
     " workspace functions
-    nnoremap <silent> <Leader>f :Veonim files<cr>
-    nnoremap <silent> <Leader>e :Veonim explorer<cr>
-    nnoremap <silent> <Leader>b :Veonim buffers<cr>
+    nnoremap <silent> <Leader>f :Veonim files<CR>
+    nnoremap <silent> <Leader>e :Veonim explorer<CR>
+    nnoremap <silent> <Leader>b :Veonim buffers<CR>
 
     " searching text
-    nnoremap <silent> <Leader>fw :Veonim grep-word<cr>
-    vnoremap <silent> <Leader>fw :Veonim grep-selection<cr>
-    nnoremap <silent> <Leader>fa :Veonim grep<cr>
-    nnoremap <silent> <Leader>ff :Veonim grep-resume<cr>
-    nnoremap <silent> <Leader>fb :Veonim buffer-search<cr>
+    nnoremap <silent> <Leader>fw :Veonim grep-word<CR>
+    vnoremap <silent> <Leader>fw :Veonim grep-selection<CR>
+    nnoremap <silent> <Leader>fa :Veonim grep<CR>
+    nnoremap <silent> <Leader>ff :Veonim grep-resume<CR>
+    nnoremap <silent> <Leader>fb :Veonim buffer-search<CR>
 
     " color picker
-    nnoremap <silent> sc :Veonim pick-color<cr>
+    nnoremap <silent> sc :Veonim pick-color<CR>
 
     " language server functions
-    nnoremap <silent> sr :Veonim rename<cr>
-    nnoremap <silent> sd :Veonim definition<cr>
-    nnoremap <silent> st :Veonim type-definition<cr>
-    nnoremap <silent> si :Veonim implementation<cr>
-    nnoremap <silent> sf :Veonim references<cr>
-    nnoremap <silent> sh :Veonim hover<cr>
-    nnoremap <silent> sl :Veonim symbols<cr>
-    nnoremap <silent> so :Veonim workspace-symbols<cr>
-    nnoremap <silent> sq :Veonim code-action<cr>
-    nnoremap <silent> sp :Veonim show-problem<cr>
-    nnoremap <silent> sk :Veonim highlight<cr>
-    nnoremap <silent> sK :Veonim highlight-clear<cr>
-    nnoremap <silent> <c-n> :Veonim next-problem<cr>
-    nnoremap <silent> <c-p> :Veonim prev-problem<cr>
-    nnoremap <silent> ,n :Veonim next-usage<cr>
-    nnoremap <silent> ,p :Veonim prev-usage<cr>
-    nnoremap <silent> <Leader>pt :Veonim problems-toggle<cr>
-    nnoremap <silent> <Leader>pf :Veonim problems-focus<cr>
-    nnoremap <silent> <d-o> :Veonim buffer-prev<cr>
-    nnoremap <silent> <d-i> :Veonim buffer-next<cr>
+    nnoremap <silent> sr :Veonim rename<CR>
+    nnoremap <silent> sd :Veonim definition<CR>
+    nnoremap <silent> st :Veonim type-definition<CR>
+    nnoremap <silent> si :Veonim implementation<CR>
+    nnoremap <silent> sf :Veonim references<CR>
+    nnoremap <silent> sh :Veonim hover<CR>
+    nnoremap <silent> sl :Veonim symbols<CR>
+    nnoremap <silent> so :Veonim workspace-symbols<CR>
+    nnoremap <silent> sq :Veonim code-action<CR>
+    nnoremap <silent> sp :Veonim show-problem<CR>
+    nnoremap <silent> sk :Veonim highlight<CR>
+    nnoremap <silent> sK :Veonim highlight-clear<CR>
+    nnoremap <silent> <C-n> :Veonim next-problem<CR>
+    nnoremap <silent> <C-p> :Veonim prev-problem<CR>
+    nnoremap <silent> ,n :Veonim next-usage<CR>
+    nnoremap <silent> ,p :Veonim prev-usage<CR>
+    nnoremap <silent> <Leader>pt :Veonim problems-toggle<CR>
+    nnoremap <silent> <Leader>pf :Veonim problems-focus<CR>
+    nnoremap <silent> <d-o> :Veonim buffer-prev<CR>
+    nnoremap <silent> <d-i> :Veonim buffer-next<CR>
 
 endif
 
@@ -339,7 +339,7 @@ function! s:my_defx_settings() abort
     nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
     nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
     nnoremap <silent><buffer><expr> q defx#do_action('quit')
-    nnoremap <silent><buffer><expr> <space> defx#do_action('toggle_select') . 'j'
+    nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
     nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
 endfunction
 
@@ -361,19 +361,19 @@ if &runtimepath =~# 'denite.nvim'
         nnoremap <silent><buffer><expr> r denite#do_map('do_action', 'qfreplace')
         nnoremap <silent><buffer><expr> q denite#do_map('quit')
         nnoremap <silent><buffer><expr> <Tab> denite#do_map('choose_action')
-        nnoremap <silent><buffer><expr> <ESC> denite#do_map('quit')
+        nnoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
         nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
         nnoremap <silent><buffer><expr> v denite#do_map('do_action:vsplit')
-        nnoremap <silent><buffer><expr> <space> denite#do_map('toggle_select').'j'
-        nnoremap <silent><buffer><expr> <space><space> denite#do_map('toggle_select_all')
-        inoremap <silent><buffer><expr> <ESC> denite#do_map('quit')
+        nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+        nnoremap <silent><buffer><expr> <Space><Space> denite#do_map('toggle_select_all')
+        inoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
     endfunction
     autocmd FileType denite-filter call s:denite_filter_my_settings()
     function! s:denite_filter_my_settings() abort
-        imap <silent><buffer> <ESC> <ESC><Plug>(denite_filter_quit)
-        nmap <silent><buffer> <ESC> <Plug>(denite_filter_quit)
-        inoremap <silent><buffer> <C-j> <ESC><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
-        inoremap <silent><buffer> <C-k> <ESC><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+        imap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
+        nmap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
+        inoremap <silent><buffer> <C-j> <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+        inoremap <silent><buffer> <C-k> <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
     endfunction
     call denite#custom#option('_', {
                 \ 'start_filter': v:true,
