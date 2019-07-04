@@ -1,6 +1,7 @@
-let g:tab_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
+let g:tab_gui = exists('g:gui_oni') || exists('g:veonim')
 let g:statusline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
 let g:completion_gui = exists('g:gui_oni') || exists('g:veonim')
+let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
 
 
 call plug#begin(g:plug_repo_dir)
@@ -79,27 +80,20 @@ call plug#end()
 " plugin variables
 
 "tabline
-if g:tab_gui
-    let g:lightline = {
-                \ 'enable': { 'tabline': 0 },
-                \ }
-else
-    let g:lightline = {
-                \ 'enable': { 'tabline': 1 },
-                \ }
+if !g:tab_gui
+    set showtabline=2
+    set guioptions-=e
+    Guitabline 0
 endif
 
 " statusline
 if g:statusline_gui
-    set cmdheight=1
     set laststatus=0
-    let g:lightline = {
-                \ 'enable': { 'statusline': 0 },
-                \ }
-else
-    let g:lightline = {
-                \ 'enable': { 'statusline': 1 },
-                \ }
+endif
+
+" cmdline
+if g:cmdline_gui
+    set cmdheight=1
 endif
 
 let g:lightline = {
@@ -135,6 +129,10 @@ let g:lightline = {
             \ },
             \ 'component_type': {
             \   'buffers': 'tabsel',
+            \ },
+            \ 'enable': {
+            \   'statusline': !g:statusline_gui,
+            \   'tabline': !g:tab_gui
             \ },
             \ }
 
@@ -426,7 +424,6 @@ if &runtimepath =~# 'denite.nvim'
         call denite#custom#var('grep', 'final_opts', [])
     endif
 
-    call denite#custom#option('_', 'statusline', v:false)
     call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/ignore_globs'])
     call denite#custom#source('file,file/rec,file/mru,file/old,file/point', 'converters', ['devicons_denite_converter'])
     call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])

@@ -121,6 +121,7 @@ if has('win32') || has('win64')
 endif
 
 let mapleader = "\<Space>"
+let g:vim_indent_cont = &shiftwidth * 3
 let $LANG = 'ja_JP.UTF-8'
 
 " reset autocmd
@@ -130,8 +131,6 @@ augroup END
 augroup MySetUpCmd
     autocmd!
 augroup END
-
-let g:vim_indent_cont = &shiftwidth * 3
 
 " vimplug {{{
 let g:plug_path = expand('$HOME/.local/share/nvim/site/autoload/plug.vim')
@@ -173,16 +172,7 @@ if has('nvim')
 endif
 "}}}
 
-
 filetype plugin indent on
-
-" oni  {{{
-if exists('g:gui_oni') || exists('g:gonvim_running')
-    filetype off
-    set noruler
-    set laststatus=0
-endif
-" }}}
 
 " keymap {{{
 nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
@@ -209,12 +199,12 @@ nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
 nnoremap <silent> : ;
 nnoremap <silent> ; :
-nnoremap <silent> <CR><CR> o<ESC>
+nnoremap <silent> <CR><CR> o<Esc>
 nnoremap <silent> <Leader>q :<C-u>bd<CR>
 nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>
 nnoremap <silent> <Leader>n :<C-u>enew<CR>
-inoremap jj <ESC>:<C-u>set iminsert=0<CR>
-inoremap <silent> <ESC> <ESC>:<C-u>set iminsert=0<CR>
+inoremap jj <Esc>:<C-u>set iminsert=0<CR>
+" inoremap <silent> <Esc> <Esc>:<C-u>set iminsert=0<CR>
 
 inoremap <C-h> <C-g>U<Left>
 inoremap <C-l> <C-g>U<Right>
@@ -238,7 +228,7 @@ nnoremap う u
 nnoremap お o
 nnoremap っd dd
 nnoremap っy yy
-inoremap っj <ESC>
+inoremap っj <Esc>
 " }}}
 
 " autocmd

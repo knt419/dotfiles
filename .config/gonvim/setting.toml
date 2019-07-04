@@ -5,7 +5,7 @@ Width = 800
 Height = 600
 # Editor font-family, font-size, linespace.
 FontFamily = "Ricty"
-FontSize = 12
+FontSize = 16
 Linespace = 0
 # neovim extend feature
 ExtCmdline = true
@@ -17,10 +17,10 @@ Clipboard = true
 # Editor cursor blink
 CursorBlink = false
 # Disable IME in Normal mode
-DisableImeInNormal = false
+DisableImeInNormal = true
 # load vimscript after setting of g:gonvim_running=1
 GinitVim = '''
-  	set guifont=Ricty:h14
+  	set guifont=Ricty:h16
 '''
 # start fullscreen
 StartFullscreen = false
@@ -42,7 +42,7 @@ TerminalModeColor = "#778899"
 
 
 [Tabline]
-Visible = true
+Visible = false
 
 [Lint]
 Visible = true
@@ -52,14 +52,14 @@ Visible = true
 
 [ActivityBar]
 Visible = true
-DropShadow = true
+DropShadow = false
 
 [MiniMap]
 Visible = false
 
 [SideBar]
 Visible = false
-DropShadow = true
+DropShadow = false
 Width = 300
 AccentColor = "#5596ea"
 
