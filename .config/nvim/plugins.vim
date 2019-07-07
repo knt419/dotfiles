@@ -232,7 +232,6 @@ if exists('g:veonim')
                 \'vscode.markdown-language-features',
                 \'vscode.html-language-features',
                 \'rust-lang.rust',
-                \'ms-vscode.go',
                 \'ms-python.python',
                 \]
 
