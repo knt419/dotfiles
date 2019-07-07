@@ -11,7 +11,7 @@ Linespace = 0
 ExtCmdline = true
 ExtWildmenu = true
 ExtPopupmenu = true
-ExtTabline  = true
+ExtTabline  = false
 # Gonvim copy the yank text to clipboad
 Clipboard = true
 # Editor cursor blink
@@ -71,4 +71,4 @@ PathStyle = "minimum"
 # Restore session-information that was ended without being saved
 RestoreSession = false
 # File open command in gonvim file explorer
-FileExplorerOpenCmd = ":tabnew"
+FileExplorerOpenCmd = ":enew"

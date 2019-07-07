@@ -153,22 +153,22 @@ if has('nvim')
     tnoremap <Leader>q <C-\><C-n>
     tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
     " tnoremap <S-t> <C-\><C-n>:<C-u>bp<CR>
-    let g:terminal_color_0  = '#0c0c0c' " Black
-    let g:terminal_color_1  = '#d78787' " Red
-    let g:terminal_color_2  = '#afd787' " Green
-    let g:terminal_color_3  = '#f7f7af' " Yellow
-    let g:terminal_color_4  = '#87afd7' " Blue
-    let g:terminal_color_5  = '#d7afd7' " Magenta
-    let g:terminal_color_6  = '#afd7d7' " Cyan
-    let g:terminal_color_7  = '#e6e6e6' " White
-    let g:terminal_color_8  = '#0a0a0a' " BrightBlack
-    let g:terminal_color_9  = '#df8787' " BrightRed
-    let g:terminal_color_10 = '#afdf87' " BrightGreen
-    let g:terminal_color_11 = '#ffffaf' " BrightYellow
-    let g:terminal_color_12 = '#87afdf' " BrightBlue
-    let g:terminal_color_13 = '#dfafdf' " BrightMagenta
-    let g:terminal_color_14 = '#afdfdf' " BrightCyan
-    let g:terminal_color_15 = '#eeeeee' " BrightWhite
+    " let g:terminal_color_0  = '#0c0c0c' " Black
+    " let g:terminal_color_1  = '#d78787' " Red
+    " let g:terminal_color_2  = '#afd787' " Green
+    " let g:terminal_color_3  = '#f7f7af' " Yellow
+    " let g:terminal_color_4  = '#87afd7' " Blue
+    " let g:terminal_color_5  = '#d7afd7' " Magenta
+    " let g:terminal_color_6  = '#afd7d7' " Cyan
+    " let g:terminal_color_7  = '#e6e6e6' " White
+    " let g:terminal_color_8  = '#0a0a0a' " BrightBlack
+    " let g:terminal_color_9  = '#df8787' " BrightRed
+    " let g:terminal_color_10 = '#afdf87' " BrightGreen
+    " let g:terminal_color_11 = '#ffffaf' " BrightYellow
+    " let g:terminal_color_12 = '#87afdf' " BrightBlue
+    " let g:terminal_color_13 = '#dfafdf' " BrightMagenta
+    " let g:terminal_color_14 = '#afdfdf' " BrightCyan
+    " let g:terminal_color_15 = '#eeeeee' " BrightWhite
 endif
 "}}}
 
@@ -204,7 +204,6 @@ nnoremap <silent> <Leader>q :<C-u>bd<CR>
 nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>
 nnoremap <silent> <Leader>n :<C-u>enew<CR>
 inoremap jj <Esc>:<C-u>set iminsert=0<CR>
-" inoremap <silent> <Esc> <Esc>:<C-u>set iminsert=0<CR>
 
 inoremap <C-h> <C-g>U<Left>
 inoremap <C-l> <C-g>U<Right>

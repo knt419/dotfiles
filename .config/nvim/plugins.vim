@@ -56,7 +56,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'jeetsukumaran/vim-nefertiti'
 Plug 'Nequo/vim-allomancer'
 Plug 'knt419/lightline-colorscheme-themecolor'
-"
 
 " lsp/completion
 if !g:completion_gui
@@ -83,7 +82,6 @@ call plug#end()
 if !g:tab_gui
     set showtabline=2
     set guioptions-=e
-    Guitabline 0
 endif
 
 " statusline
@@ -146,7 +144,6 @@ endif
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
-let g:loaded_matchparen = 1
 let g:indentLine_faster = 1
 let g:FerretExecutable  = 'rg,ag'
 let g:FerretExecutableArguments = {
@@ -160,7 +157,6 @@ let g:startify_skiplist = [
             \ '*\\AppData\\Local\\Temp\\*',
             \ ]
 
-let g:loaded_netrwPlugin           = 1
 let g:fzf_layout                   = { 'down': '~70%' }
 let g:startify_change_to_vcs_root  = 1
 let g:startify_change_to_dir       = 0
@@ -238,7 +234,6 @@ if exists('g:veonim')
                 \'vscode.markdown-language-features',
                 \'vscode.html-language-features',
                 \'rust-lang.rust',
-                \'ms-vscode.go',
                 \'ms-python.python',
                 \]
 
