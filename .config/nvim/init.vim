@@ -116,9 +116,9 @@ let g:vimsyn_embed             = 1
 " }}}
 
 " os specific
-if has('win32') || has('win64')
-    set shellslash
-endif
+" if has('win32') || has('win64')
+"     set shellslash
+" endif
 
 let mapleader = "\<Space>"
 let g:vim_indent_cont = &shiftwidth * 3
