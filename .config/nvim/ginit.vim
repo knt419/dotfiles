@@ -5,3 +5,7 @@ else
     GuiTabline 0
 endif
 
+" local
+if filereadable(expand('$HOME/.config/nvim/ginit.vim.local'))
+    source $HOME/.config/nvim/ginit.vim.local
+endif

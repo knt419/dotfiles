@@ -15,7 +15,7 @@ set encoding=utf-8
 scriptencoding utf-8
 set termencoding=utf-8
 set fileencoding=utf-8
-set fileencodings=utf-8,euc-jp,iso-2022-jp,cp932
+set fileencodings=iso-2022-jp,cp932,euc-jp,utf-8
 set t_Co=256
 if has('termguicolors')
     set termguicolors
@@ -39,7 +39,6 @@ set foldmethod=marker
 set foldenable
 set foldlevelstart=10
 set lazyredraw
-set ttyfast
 
 set guifont=Ricty:h16
 set guifontwide=Ricty:h16
@@ -76,7 +75,6 @@ set diffopt=filler,vertical
 set laststatus=2
 set cmdheight=2
 set showtabline=2
-set guioptions-=e
 set wildmenu
 set wildmode=list:full
 set wrap
@@ -89,6 +87,18 @@ set breakindentopt=shift:2
 set showbreak=↪
 set tags=
 " }}}
+
+" nvim/vim {{{
+if has('nvim')
+    set inccommand=split
+    nnoremap <Leader>t :<C-u>terminal<CR>
+    tnoremap <Leader>q <C-\><C-n>
+    tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
+else
+    set ttyfast
+    set guioptions-=e
+endif
+"}}}
 
 " disable runtime plugins {{{
 let g:loaded_2html_plugin      = 1
@@ -146,31 +156,6 @@ runtime plugins.vim
 autocmd MySetUpCmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | q | endif
 "}}}
 
-" nvim {{{
-if has('nvim')
-    set inccommand=split
-    nnoremap <Leader>t :<C-u>terminal<CR>
-    tnoremap <Leader>q <C-\><C-n>
-    tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
-    " tnoremap <S-t> <C-\><C-n>:<C-u>bp<CR>
-    " let g:terminal_color_0  = '#0c0c0c' " Black
-    " let g:terminal_color_1  = '#d78787' " Red
-    " let g:terminal_color_2  = '#afd787' " Green
-    " let g:terminal_color_3  = '#f7f7af' " Yellow
-    " let g:terminal_color_4  = '#87afd7' " Blue
-    " let g:terminal_color_5  = '#d7afd7' " Magenta
-    " let g:terminal_color_6  = '#afd7d7' " Cyan
-    " let g:terminal_color_7  = '#e6e6e6' " White
-    " let g:terminal_color_8  = '#0a0a0a' " BrightBlack
-    " let g:terminal_color_9  = '#df8787' " BrightRed
-    " let g:terminal_color_10 = '#afdf87' " BrightGreen
-    " let g:terminal_color_11 = '#ffffaf' " BrightYellow
-    " let g:terminal_color_12 = '#87afdf' " BrightBlue
-    " let g:terminal_color_13 = '#dfafdf' " BrightMagenta
-    " let g:terminal_color_14 = '#afdfdf' " BrightCyan
-    " let g:terminal_color_15 = '#eeeeee' " BrightWhite
-endif
-"}}}
 
 filetype plugin indent on
 
