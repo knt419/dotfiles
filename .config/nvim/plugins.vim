@@ -26,6 +26,7 @@ Plug 'mengelbrecht/lightline-bufferline'
 " text/input manipulation
 Plug 'cohama/lexima.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'godlygeek/tabluar'
 Plug 'machakann/vim-highlightedyank'
 Plug 'rhysd/accelerated-jk'
 Plug 'tpope/vim-surround'
@@ -196,8 +197,8 @@ nmap <silent> <S-n> <Plug>(coc-diagnostic-next)
 nmap <silent> <S-p> <Plug>(coc-diagnostic-prev)
 
 
-nnoremap <silent> <Leader>a <Plug>(FerretAck)
-nnoremap <silent> <Leader>l <Plug>(FerretLack)
+nmap <silent> <Leader>a <Plug>(FerretAck)
+nmap <silent> <Leader>l <Plug>(FerretLack)
 nnoremap <silent> <Leader>s :<C-u>Startify<CR>
 nnoremap <silent> <Leader>e :<C-u>Defx<CR>
 nnoremap <silent> <Leader>p :<C-u>History<CR>
@@ -241,11 +242,11 @@ if exists('g:veonim')
     nnoremap <silent> <Leader>b :Veonim buffers<CR>
 
     " searching text
-    nnoremap <silent> <Leader>fw :Veonim grep-word<CR>
-    vnoremap <silent> <Leader>fw :Veonim grep-selection<CR>
-    nnoremap <silent> <Leader>fa :Veonim grep<CR>
-    nnoremap <silent> <Leader>ff :Veonim grep-resume<CR>
-    nnoremap <silent> <Leader>fb :Veonim buffer-search<CR>
+    nnoremap <silent> <Leader>gw :Veonim grep-word<CR>
+    vnoremap <silent> <Leader>gw :Veonim grep-selection<CR>
+    nnoremap <silent> <Leader>ga :Veonim grep<CR>
+    nnoremap <silent> <Leader>gf :Veonim grep-resume<CR>
+    nnoremap <silent> <Leader>gb :Veonim buffer-search<CR>
 
     " color picker
     nnoremap <silent> sc :Veonim pick-color<CR>
