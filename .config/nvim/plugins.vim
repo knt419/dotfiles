@@ -70,10 +70,6 @@ if exists('g:gonvim_running')
     Plug 'equalsraf/neovim-gui-shim'
 endif
 
-if !has('win32') && !has('win64')
-    Plug 'airblade/vim-rooter'
-endif
-
 call plug#end()
 
 " plugin variables
@@ -158,9 +154,9 @@ let g:startify_skiplist = [
 
 let g:fzf_layout                   = { 'down': '~70%' }
 let g:startify_change_to_vcs_root  = 1
-let g:startify_change_to_dir       = 0
+let g:startify_change_to_dir       = 1
 let g:startify_fortune_use_unicode = 0
-let g:startify_enable_unsafe       = 0
+let g:startify_enable_unsafe       = 1
 
 let g:webdevicons_enable                 = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
