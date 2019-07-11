@@ -26,7 +26,7 @@ Plug 'mengelbrecht/lightline-bufferline'
 " text/input manipulation
 Plug 'cohama/lexima.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'godlygeek/tabluar'
+Plug 'godlygeek/tabular'
 Plug 'machakann/vim-highlightedyank'
 Plug 'rhysd/accelerated-jk'
 Plug 'tpope/vim-surround'
@@ -168,6 +168,7 @@ let g:webdevicons_enable_denite          = 1
 let g:webdevicons_enable_startify        = 1
 
 let $VISUAL = 'nvr --remote-wait'
+let $PATH   = $PATH . ':' . $HOME . '/go/bin'
 
 let g:nefertiti_base_brightness_level = 14
 
