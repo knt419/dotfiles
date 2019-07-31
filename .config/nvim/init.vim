@@ -176,9 +176,9 @@ noremap  <silent> <C-j> }
 noremap  <silent> <C-k> {
 noremap  <silent> <C-l> $
 noremap  <silent> <C-h> ^
-noremap  <silent> os :<C-u>e ++enc=shift_jis<CR>
+noremap  <silent> os :<C-u>e ++enc=cp932<CR>
 noremap  <silent> oe :<C-u>e ++enc=euc-jp<CR>
-noremap  <silent> os :<C-u>e ++enc=utf-8<CR>
+noremap  <silent> ou :<C-u>e ++enc=utf-8<CR>
 
 nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
@@ -219,7 +219,7 @@ inoremap っj <Esc>
 autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
-autocmd MyAutoCmd FileType * execute 'setlocal ' . (search('^\t.*\n\t.*\n\t', 'n') ? 'no' : '') . 'expandtab'
+" autocmd MyAutoCmd FileType * execute 'setlocal ' . (search('^\t.*\n\t.*\n\t', 'n') ? 'no' : '') . 'expandtab'
 autocmd MyAutoCmd TermOpen * setlocal nonumber
 autocmd MyAutoCmd TermOpen * IndentLinesDisable
 autocmd MyAutoCmd FileType help,startify IndentLinesDisable

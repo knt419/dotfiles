@@ -31,6 +31,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'rhysd/accelerated-jk'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-sleuth'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
@@ -42,6 +43,8 @@ Plug 'wincent/ferret'
 
 " file/directory
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
+Plug 'kristijanhusak/defx-icons'
+Plug 'januswel/fencja.vim'
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -309,18 +312,18 @@ function! LightlineFileformat()
 endfunction
 
 function! s:my_denite_replace(context)
-    let qflist = []
-    for target in a:context['targets']
-        if !has_key(target, 'action__path') | continue | endif
-        if !has_key(target, 'action__line') | continue | endif
-        if !has_key(target, 'action__text') | continue | endif
-        call add(qflist, {
-                    \ 'filename': target['action__path'],
-                    \ 'lnum': target['action__line'],
-                    \ 'text': target['action__text']
+    let l:qflist = []
+    for l:target in a:context['targets']
+        if !has_key(l:target, 'action__path') | continue | endif
+        if !has_key(l:target, 'action__line') | continue | endif
+        if !has_key(l:target, 'action__text') | continue | endif
+        call add(l:qflist, {
+                    \ 'filename': l:target['action__path'],
+                    \ 'lnum': l:target['action__line'],
+                    \ 'text': l:target['action__text']
                     \ })
     endfor
-    call setqflist(qflist)
+    call setqflist(l:qflist)
     call qfreplace#start('')
 endfunction
 
@@ -329,6 +332,10 @@ function! s:my_cr_function()
                 \ lexima#expand('<CR>', 'i') :
                 \ "\<C-y>"
 endfunction
+
+call defx#custom#option('_', {
+            \ 'columns': 'mark:indent:icons:filename:type:size',
+            \ })
 
 function! s:my_defx_settings() abort
     " Define mappings
