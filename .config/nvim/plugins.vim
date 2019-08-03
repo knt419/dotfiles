@@ -333,9 +333,11 @@ function! s:my_cr_function()
                 \ "\<C-y>"
 endfunction
 
-call defx#custom#option('_', {
-            \ 'columns': 'mark:indent:icons:filename:type:size',
-            \ })
+if &runtimepath =~# 'defx.nvim'
+    call defx#custom#option('_', {
+                \ 'columns': 'mark:indent:icons:filename:type:size:time',
+                \ })
+endif
 
 function! s:my_defx_settings() abort
     " Define mappings
