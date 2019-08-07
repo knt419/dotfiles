@@ -10,7 +10,7 @@ call plug#begin(g:plug_repo_dir)
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
-Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
+Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " editor display
