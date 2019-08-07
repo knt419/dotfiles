@@ -21,6 +21,7 @@ Plug 'itchyny/vim-parenmatch'
 Plug 'mhinz/vim-startify'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
+Plug 'ntpeters/vim-better-whitespace'
 " Plug 'ap/vim-buftabline'
 
 " text/input manipulation
