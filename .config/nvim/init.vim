@@ -125,11 +125,6 @@ let g:loaded_zipPlugin         = 1
 let g:vimsyn_embed             = 1
 " }}}
 
-" os specific
-" if has('win32') || has('win64')
-"     set shellslash
-" endif
-
 let mapleader = "\<Space>"
 let g:vim_indent_cont = &shiftwidth * 3
 let $LANG = 'ja_JP.UTF-8'
@@ -219,7 +214,6 @@ inoremap っj <Esc>
 autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
-" autocmd MyAutoCmd FileType * execute 'setlocal ' . (search('^\t.*\n\t.*\n\t', 'n') ? 'no' : '') . 'expandtab'
 autocmd MyAutoCmd TermOpen * setlocal nonumber
 autocmd MyAutoCmd TermOpen * IndentLinesDisable
 autocmd MyAutoCmd FileType help,startify IndentLinesDisable
@@ -237,5 +231,5 @@ if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
 endif
 
 set background=dark
-silent! colorscheme allomancer
+silent! colorscheme sierra
 syntax enable
