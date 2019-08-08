@@ -43,7 +43,7 @@ Plug 'wincent/ferret'
 
 " file/directory
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
-Plug 'kristijanhusak/defx-icons'
+Plug 'sh8/defx-icons'
 Plug 'januswel/fencja.vim'
 
 " git
@@ -165,6 +165,8 @@ let g:webdevicons_enable                 = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_denite          = 1
 let g:webdevicons_enable_startify        = 1
+let g:defx_icons_enable_syntax_highlight = 0
+let g:defx_icons_column_length = 2
 
 let $VISUAL = 'nvr --remote-wait'
 let $PATH   = $PATH . ':' . $HOME . '/go/bin'
