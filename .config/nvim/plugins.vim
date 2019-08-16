@@ -10,7 +10,7 @@ call plug#begin(g:plug_repo_dir)
 Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'Shougo/neomru.vim'
 Plug 'thinca/vim-qfreplace'
-Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install -all' }
+Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 " editor display
@@ -21,6 +21,7 @@ Plug 'itchyny/vim-parenmatch'
 Plug 'mhinz/vim-startify'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
+Plug 'ntpeters/vim-better-whitespace'
 " Plug 'ap/vim-buftabline'
 
 " text/input manipulation
@@ -58,6 +59,7 @@ Plug 'editorconfig/editorconfig-vim'
 " colorscheme
 Plug 'jeetsukumaran/vim-nefertiti'
 Plug 'Nequo/vim-allomancer'
+Plug 'AlessandroYorba/Sierra'
 Plug 'knt419/lightline-colorscheme-themecolor'
 
 " lsp/completion
@@ -335,9 +337,11 @@ function! s:my_cr_function()
                 \ "\<C-y>"
 endfunction
 
-call defx#custom#option('_', {
-            \ 'columns': 'mark:indent:icons:filename:type:size',
-            \ })
+if &runtimepath =~# 'defx.nvim'
+    call defx#custom#option('_', {
+                \ 'columns': 'mark:indent:icons:filename:type:size:time',
+                \ })
+endif
 
 function! s:my_defx_settings() abort
     " Define mappings
