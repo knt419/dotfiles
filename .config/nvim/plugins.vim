@@ -146,6 +146,7 @@ let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
 let g:indentLine_faster = 1
+let g:FerretJob=0
 let g:FerretExecutable  = 'rg,ag'
 let g:FerretExecutableArguments = {
   \   'ag': '-i --vimgrep --hidden',
