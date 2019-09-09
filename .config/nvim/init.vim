@@ -231,5 +231,5 @@ if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
 endif
 
 set background=dark
-silent! colorscheme sierra
+silent! colorscheme Sierra
 syntax enable
