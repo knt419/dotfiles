@@ -3,6 +3,8 @@ if exists('g:GtkGuiLoaded')
 else
     Guifont! Ricty:h14
     GuiTabline 0
+    GuiPopupmenu 0
+    call GuiWindowMaximized(1)
 endif
 
 " local
