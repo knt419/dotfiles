@@ -61,6 +61,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'jeetsukumaran/vim-nefertiti'
 Plug 'Nequo/vim-allomancer'
 Plug 'AlessandroYorba/Sierra'
+Plug 'flrnprz/candid.vim'
 Plug 'knt419/lightline-colorscheme-themecolor'
 
 " lsp/completion
