@@ -212,7 +212,7 @@ inoremap っj <Esc>
 " }}}
 
 " autocmd
-autocmd MyAutoCmd FilterWritePre * if &diff | setlocal wrap< | endif
+autocmd MyAutoCmd DiffUpdated,FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
 autocmd MyAutoCmd TermOpen * setlocal nonumber
