@@ -23,7 +23,6 @@ Plug 'mhinz/vim-startify'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'ntpeters/vim-better-whitespace'
-" Plug 'ap/vim-buftabline'
 
 " text/input manipulation
 Plug 'cohama/lexima.vim'
@@ -405,6 +404,7 @@ if &runtimepath =~# 'denite.nvim'
                 \ 'start_filter': v:true,
                 \ 'auto_resize': v:true,
                 \ 'reversed': v:true,
+                \ 'split': 'floating',
                 \ 'prompt': "\ue62b",
                 \ 'statusline': v:false,
                 \ 'direction': 'dynamicbottom',

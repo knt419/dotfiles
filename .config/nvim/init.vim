@@ -70,7 +70,8 @@ set incsearch
 set wrapscan
 set hlsearch
 
-set diffopt=filler,vertical
+set diffopt=filler,vertical,internal,algorithm:patience
+set splitright
 
 set laststatus=2
 set cmdheight=2
@@ -225,11 +226,15 @@ augroup syntaxhighlight
     autocmd Syntax * if 100 < line('$') | syntax sync minlines=100 | endif
 augroup END
 
+" command
+command! DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis | wincmd p | diffthis
+command! -nargs=? -complete=file Diff if '<args>'=='' | browse diffsplit|else| diffsplit <args>|endif
+
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
 endif
 
 set background=dark
-silent! colorscheme candid
+silent! colorscheme allomancer
 syntax enable
