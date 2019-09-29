@@ -66,7 +66,7 @@ Plug 'knt419/lightline-colorscheme-themecolor'
 
 " lsp/completion
 if !g:completion_gui
-    Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
     set completeopt=noinsert,menuone,noselect
     set shortmess+=c
 endif
@@ -404,7 +404,7 @@ if &runtimepath =~# 'denite.nvim'
     endfunction
     call denite#custom#option('_', {
                 \ 'start_filter': v:true,
-                \ 'auto_resize': v:true,
+                \ 'auto_resize': v:false,
                 \ 'reversed': v:true,
                 \ 'split': 'floating',
                 \ 'prompt': "\ue62b",
