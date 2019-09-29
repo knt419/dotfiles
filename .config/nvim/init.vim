@@ -40,8 +40,8 @@ set foldenable
 set foldlevelstart=10
 set lazyredraw
 
-set guifont=Ricty:h16
-set guifontwide=Ricty:h16
+set guifont=Hackgen35Console:h12
+set guifontwide=Hackgen35Console:h12
 set linespace=2
 set noshowmatch
 set tabstop=4
@@ -70,7 +70,7 @@ set incsearch
 set wrapscan
 set hlsearch
 
-set diffopt=filler,vertical,internal,algorithm:patience
+set diffopt=filler,vertical,internal,algorithm:histogram,indent-heuristic
 set splitright
 
 set laststatus=2
@@ -88,18 +88,6 @@ set breakindentopt=shift:2
 set showbreak=↪
 set tags=
 " }}}
-
-" nvim/vim {{{
-if has('nvim')
-    set inccommand=split
-    nnoremap <Leader>t :<C-u>terminal<CR>
-    tnoremap <Leader>q <C-\><C-n>
-    tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
-else
-    set ttyfast
-    set guioptions-=e
-endif
-"}}}
 
 " disable runtime plugins {{{
 let g:loaded_2html_plugin      = 1
@@ -129,6 +117,18 @@ let g:vimsyn_embed             = 1
 let mapleader = "\<Space>"
 let g:vim_indent_cont = &shiftwidth * 3
 let $LANG = 'ja_JP.UTF-8'
+
+" nvim/vim {{{
+if has('nvim')
+    set inccommand=split
+    nnoremap <Leader>t :<C-u>terminal<CR>
+    tnoremap <Leader>q <C-\><C-n>
+    tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
+else
+    set ttyfast
+    set guioptions-=e
+endif
+"}}}
 
 " reset autocmd
 augroup MyAutoCmd

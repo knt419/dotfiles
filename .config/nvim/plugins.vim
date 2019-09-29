@@ -23,6 +23,7 @@ Plug 'mhinz/vim-startify'
 Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'ntpeters/vim-better-whitespace'
+Plug 'rickhowe/diffchar.vim'
 
 " text/input manipulation
 Plug 'cohama/lexima.vim'
@@ -149,6 +150,7 @@ let g:sierra_Sunset = 1
 
 let g:indentLine_faster = 1
 let g:FerretJob=0
+let g:FerretNvim=0
 let g:FerretExecutable  = 'rg,ag'
 let g:FerretExecutableArguments = {
   \   'ag': '-i --vimgrep --hidden',
