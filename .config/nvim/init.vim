@@ -40,8 +40,8 @@ set foldenable
 set foldlevelstart=10
 set lazyredraw
 
-set guifont=Hackgen35Console:h12
-set guifontwide=Hackgen35Console:h12
+set guifont=HackGen35Console:h12
+set guifontwide=HackGen35Console:h12
 set linespace=2
 set noshowmatch
 set tabstop=4
