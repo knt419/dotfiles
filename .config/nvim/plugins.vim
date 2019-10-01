@@ -159,6 +159,7 @@ let g:highlightedyank_highlight_duration = 300
 
 let g:startify_skiplist = [
             \ '*\\AppData\\Local\\Temp\\*',
+            \ '*\\nvim\\runtime\\doc\\*',
             \ ]
 
 let g:fzf_layout                   = { 'down': '~70%' }
@@ -345,12 +346,14 @@ endfunction
 if &runtimepath =~# 'defx.nvim'
     call defx#custom#option('_', {
                 \ 'columns': 'mark:indent:icons:filename:type:size:time',
+                \ 'listed': v:true,
                 \ })
 endif
 
 function! s:my_defx_settings() abort
     " Define mappings
     nnoremap <silent><buffer><expr> <CR> defx#do_action('open')
+    nnoremap <silent><buffer><expr> e defx#do_action('open', 'vsplit')
     nnoremap <silent><buffer><expr> c defx#do_action('copy')
     nnoremap <silent><buffer><expr> m defx#do_action('move')
     nnoremap <silent><buffer><expr> p defx#do_action('paste')
