@@ -152,7 +152,6 @@ runtime plugins.vim
 autocmd MySetUpCmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | q | endif
 "}}}
 
-
 filetype plugin indent on
 
 " keymap {{{

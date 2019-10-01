@@ -1,10 +1,11 @@
+" gui elements
 let g:tab_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gnvim')
 let g:statusline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
 let g:completion_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gnvim')
 let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running') || exists('g:gnvim')
 
 
-
+" plugin install
 call plug#begin(g:plug_repo_dir)
 
 " denite/fzf
@@ -116,13 +117,13 @@ let g:lightline = {
             \   'percentage': '%3p%%',
             \ },
             \ 'component_function': {
-            \    'readonly': 'LightlineReadonly',
-            \    'repository': 'LightlineRepository',
-            \    'repostatus': 'LightlineRepoStatus',
-            \    'filetype': 'LightlineFiletype',
-            \    'fileformat': 'LightlineFileformat',
-            \    'changes': 'LightlineChanges',
-            \    'cocstatus': 'coc#status'
+            \    'readonly'   : 'LightlineReadonly',
+            \    'repository' : 'LightlineRepository',
+            \    'repostatus' : 'LightlineRepoStatus',
+            \    'filetype'   : 'LightlineFiletype',
+            \    'fileformat' : 'LightlineFileformat',
+            \    'changes'    : 'LightlineChanges',
+            \    'cocstatus'  : 'coc#status'
             \ },
             \ 'component_expand': {
             \   'buffers': 'lightline#bufferline#buffers',
@@ -146,12 +147,9 @@ endif
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
-let g:sierra_Sunset = 1
-
-let g:indentLine_faster = 1
-let g:FerretJob=0
-let g:FerretNvim=0
-let g:FerretExecutable  = 'rg,ag'
+let g:indentLine_faster         = 1
+let g:FerretNvim                = 0
+let g:FerretExecutable          = 'rg,ag'
 let g:FerretExecutableArguments = {
   \   'ag': '-i --vimgrep --hidden',
   \   'rg': '--vimgrep --no-heading --hidden'
@@ -180,6 +178,7 @@ let $VISUAL = 'nvr --remote-wait'
 let $PATH   = $PATH . ':' . $HOME . '/go/bin'
 
 let g:nefertiti_base_brightness_level = 14
+let g:sierra_Sunset = 1
 
 let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml', 'coc-prettier']
 
@@ -329,8 +328,8 @@ function! s:my_denite_replace(context)
         if !has_key(l:target, 'action__text') | continue | endif
         call add(l:qflist, {
                     \ 'filename': l:target['action__path'],
-                    \ 'lnum': l:target['action__line'],
-                    \ 'text': l:target['action__text']
+                    \ 'lnum':     l:target['action__line'],
+                    \ 'text':     l:target['action__text']
                     \ })
     endfor
     call setqflist(l:qflist)
