@@ -26,7 +26,7 @@ $AUTO_CD = True
 
 $PATHEXT = [".COM", ".EXE", ".BAT", ".CMD", ".VBS", ".VBE", ".JS", ".JSE", ".WSF", ".WSH", ".MSC"]
 
-$PROMPT = "\uf460\uf460 "
+$PROMPT = "{prompt_end} "
 
 $RIGHT_PROMPT = "{cwd} {gitstatus} "
 $BOTTOM_TOOLBAR = "{user}@{hostname} "

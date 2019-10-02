@@ -174,7 +174,7 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_denite          = 1
 let g:webdevicons_enable_startify        = 1
 let g:defx_icons_enable_syntax_highlight = 0
-let g:defx_icons_column_length = 2
+let g:defx_icons_column_length           = 2
 
 let $VISUAL = 'nvr --remote-wait'
 let $PATH   = $PATH . ':' . $HOME . '/go/bin'
@@ -212,6 +212,7 @@ nmap <silent> <Leader>a <Plug>(FerretAck)
 nmap <silent> <Leader>l <Plug>(FerretLack)
 nnoremap <silent> <Leader>s :<C-u>Startify<CR>
 nnoremap <silent> <Leader>e :<C-u>Defx<CR>
+nnoremap <silent> <Leader>z :<C-u>Defx -resume<CR>
 nnoremap <silent> <Leader>p :<C-u>History<CR>
 nnoremap <silent> <Leader>r :<C-u>GFiles<CR>
 nnoremap <silent> <Leader>f :<C-u>Denite file/rec<CR>
