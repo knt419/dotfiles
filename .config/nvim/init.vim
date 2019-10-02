@@ -185,11 +185,22 @@ nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>
 nnoremap <silent> <Leader>n :<C-u>enew<CR>
 inoremap jj <Esc>:<C-u>set iminsert=0<CR>
 
+inoremap <silent> : '
+inoremap <silent> * "
+inoremap <silent> + :
+inoremap <silent> ' +
+inoremap <silent> " *
 inoremap <C-h> <C-g>U<Left>
 inoremap <C-l> <C-g>U<Right>
 inoremap <C-;> <C-g>U<C-o>$
 inoremap <C-j> <C-g>U<C-o>o
 inoremap <C-k> <C-g>U<C-o>O
+
+cnoremap <silent> : '
+cnoremap <silent> * "
+cnoremap <silent> + :
+cnoremap <silent> ' +
+cnoremap <silent> " *
 
 nnoremap <S-Left>  <C-w><
 nnoremap <S-Right> <C-w>>
