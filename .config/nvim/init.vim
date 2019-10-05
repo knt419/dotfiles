@@ -247,5 +247,5 @@ if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
 endif
 
 set background=dark
-silent! colorscheme allomancer
+silent! colorscheme deus
 syntax enable
