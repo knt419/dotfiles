@@ -194,7 +194,7 @@ map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
 map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
 map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 vmap v     <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
 
@@ -340,7 +340,7 @@ function! s:my_denite_replace(context)
     call qfreplace#start('')
 endfunction
 
-function! s:my_cr_function()
+function! s:my_icr_function()
     return !pumvisible() ?
                 \ lexima#expand('<CR>', 'i') :
                 \ "\<C-y>"
@@ -378,7 +378,7 @@ endfunction
 
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd FileType go :match goErr /\<err\>/
-autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd FileType defx call s:my_defx_settings()
 autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
