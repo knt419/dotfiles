@@ -225,7 +225,7 @@ xmap <silent> <Leader>f  <Plug>(coc-format-selected)
 
 vmap <CR> <Plug>(LiveEasyAlign)
 
-imap <silent><expr> <Tab>
+inoremap <silent><expr> <Tab>
             \ pumvisible() ? "\<C-n>" :
             \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 
