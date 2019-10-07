@@ -25,6 +25,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rickhowe/diffchar.vim'
+Plug 'romainl/vim-qf'
 
 " text/input manipulation
 Plug 'cohama/lexima.vim'
