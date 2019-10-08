@@ -213,6 +213,8 @@ nmap <silent> <S-p> <Plug>(coc-diagnostic-prev)
 
 nmap <silent> <Leader>a <Plug>(FerretAck)
 nmap <silent> <Leader>l <Plug>(FerretLack)
+nmap <silent> <Leader>rf <Plug>(coc-references)
+nmap <silent> <Leader>df <Plug>(coc-definition)
 nnoremap <silent> <Leader>s :<C-u>Startify<CR>
 nnoremap <silent> <Leader>e :<C-u>Defx<CR>
 nnoremap <silent> <Leader>z :<C-u>Defx -resume<CR>
