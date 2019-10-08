@@ -184,7 +184,8 @@ let $PATH   = $PATH . ':' . $HOME . '/go/bin'
 let g:nefertiti_base_brightness_level = 14
 let g:sierra_Sunset = 1
 
-let g:coc_global_extensions = ['coc-json', 'coc-git', 'coc-yaml', 'coc-prettier']
+let g:coc_global_extensions = ['coc-json',
+            \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-lists']
 
 highlight link HighlightedyankRegion Visual
 
@@ -222,6 +223,7 @@ nnoremap <silent> <Leader>m :<C-u>Denite file_mru<CR>
 nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
+nnoremap <silent> <Leader>c :<C-u>CocList<CR>
 xmap <silent> <Leader>f  <Plug>(coc-format-selected)
 
 vmap <CR> <Plug>(LiveEasyAlign)
