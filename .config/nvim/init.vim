@@ -215,14 +215,16 @@ inoremap っj <Esc>
 function! s:my_ntab_function()
     return winnr('$') == 1 ?
                 \ (tabpagewinnr('$') <= 1 ?
-                \ ":\<C-u>bn\<CR>" :
+                \ (bufwinnr('$') <= 1 ?
+                \ ":\<C-u>echo 'no buffer to switch.'\<CR>" :
+                \ ":\<C-u>bn\<CR>" ) :
                 \ ":\<C-u>tabnext\<CR>" ) :
                 \ "\<C-w>w"
 endfunction
 " }}}
 
 " autocmd
-autocmd MyAutoCmd DiffUpdated,FilterWritePre * if &diff | setlocal wrap< | endif
+" autocmd MyAutoCmd DiffUpdated,FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
 autocmd MyAutoCmd TermOpen * setlocal nonumber
