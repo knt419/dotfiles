@@ -80,6 +80,8 @@ if exists('g:gonvim_running')
     Plug 'equalsraf/neovim-gui-shim'
 endif
 
+Plug 'glacambre/firenvim'
+
 call plug#end()
 
 " plugin variables
