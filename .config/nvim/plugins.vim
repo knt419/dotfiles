@@ -49,6 +49,7 @@ Plug 'wincent/ferret'
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'sh8/defx-icons'
 Plug 'januswel/fencja.vim'
+Plug 'voldikss/vim-floaterm'
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -225,8 +226,12 @@ nnoremap <silent> <Leader>m :<C-u>Denite file_mru<CR>
 nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
 nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
 nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
-nnoremap <silent> <Leader>c :<C-u>CocList<CR>
+nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
 xmap <silent> <Leader>f  <Plug>(coc-format-selected)
+
+noremap  <silent> <F12>  :<C-u>FloatermToggle<CR>i
+noremap! <silent> <F12>  <Esc>:<C-u>FloatermToggle<CR>i
+tnoremap <silent> <F12>  <C-\><C-n>:<C-u>FloatermToggle<CR>
 
 vmap <CR> <Plug>(LiveEasyAlign)
 
