@@ -153,6 +153,9 @@ let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
 let g:indentLine_faster         = 1
+let g:indentLine_setColors      = 0
+let g:indentLine_char           = "┆"
+
 let g:FerretNvim                = 0
 let g:FerretJob                 = 0
 let g:FerretExecutable          = 'rg,ag'
@@ -285,18 +288,6 @@ if exists('g:veonim')
     nnoremap <silent> sh :Veonim hover<CR>
     nnoremap <silent> sl :Veonim symbols<CR>
     nnoremap <silent> so :Veonim workspace-symbols<CR>
-    nnoremap <silent> sq :Veonim code-action<CR>
-    nnoremap <silent> sp :Veonim show-problem<CR>
-    nnoremap <silent> sk :Veonim highlight<CR>
-    nnoremap <silent> sK :Veonim highlight-clear<CR>
-    nnoremap <silent> <C-n> :Veonim next-problem<CR>
-    nnoremap <silent> <C-p> :Veonim prev-problem<CR>
-    nnoremap <silent> ,n :Veonim next-usage<CR>
-    nnoremap <silent> ,p :Veonim prev-usage<CR>
-    nnoremap <silent> <Leader>pt :Veonim problems-toggle<CR>
-    nnoremap <silent> <Leader>pf :Veonim problems-focus<CR>
-    nnoremap <silent> <d-o> :Veonim buffer-prev<CR>
-    nnoremap <silent> <d-i> :Veonim buffer-next<CR>
 
 endif
 
