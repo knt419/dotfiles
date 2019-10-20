@@ -26,6 +26,7 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rickhowe/diffchar.vim'
 Plug 'romainl/vim-qf'
+Plug 'blueyed/vim-diminactive'
 
 " text/input manipulation
 Plug 'cohama/lexima.vim'
@@ -176,6 +177,7 @@ let g:startify_change_to_vcs_root  = 1
 let g:startify_change_to_dir       = 1
 let g:startify_fortune_use_unicode = 0
 let g:startify_enable_unsafe       = 1
+let g:floaterm_winblend            = 40
 
 let g:webdevicons_enable                 = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
@@ -234,8 +236,8 @@ nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
 xmap <silent> <Leader>f  <Plug>(coc-format-selected)
 
-noremap  <silent> <F12>  :<C-u>FloatermToggle<CR>i
-noremap! <silent> <F12>  <Esc>:<C-u>FloatermToggle<CR>i
+noremap  <silent> tt  :<C-u>FloatermToggle<CR>i
+noremap! <silent> tt  <Esc>:<C-u>FloatermToggle<CR>i
 tnoremap <silent> <F12>  <C-\><C-n>:<C-u>FloatermToggle<CR>
 
 vmap <CR> <Plug>(LiveEasyAlign)
