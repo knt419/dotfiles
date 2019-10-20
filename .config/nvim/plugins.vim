@@ -154,7 +154,7 @@ let g:lightline#bufferline#unicode_symbols = 1
 
 let g:indentLine_faster         = 1
 let g:indentLine_setColors      = 0
-let g:indentLine_char           = "┆"
+let g:indentLine_char           = '┆'
 
 let g:FerretNvim                = 0
 let g:FerretJob                 = 0

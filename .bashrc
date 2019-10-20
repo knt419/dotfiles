@@ -61,3 +61,5 @@ gd() {
 
 # local
 [ -f $HOME/.bashrc_local ]        && source $HOME/.bashrc_local
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
