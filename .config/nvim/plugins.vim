@@ -41,9 +41,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
 Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
-Plug 'haya14busa/is.vim', { 'on': '<Plug>(asterisk-' }
 Plug 'terryma/vim-expand-region'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'wincent/ferret'
 
 " file/directory
@@ -150,6 +148,11 @@ else
     let g:lightline.subseparator = {'left': "\ue0b1", 'right': "\ue0b3"}
 endif
 
+if has('win32') || has('win64')
+    let g:FerretNvim                = 0
+    let g:FerretJob                 = 0
+endif
+
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
@@ -157,8 +160,6 @@ let g:indentLine_faster         = 1
 let g:indentLine_setColors      = 0
 let g:indentLine_char           = '┆'
 
-let g:FerretNvim                = 0
-let g:FerretJob                 = 0
 let g:FerretExecutable          = 'rg,ag'
 let g:FerretExecutableArguments = {
   \   'ag': '-i --vimgrep --hidden',
@@ -199,10 +200,10 @@ highlight link HighlightedyankRegion Visual
 
 " plugin keymaps
 
-map *  <Plug>(asterisk-z*)<Plug>(is-nohl-1)
-map g* <Plug>(asterisk-gz*)<Plug>(is-nohl-1)
-map #  <Plug>(asterisk-z#)<Plug>(is-nohl-1)
-map g# <Plug>(asterisk-gz#)<Plug>(is-nohl-1)
+map *  <Plug>(asterisk-z*)
+map g* <Plug>(asterisk-gz*)
+map #  <Plug>(asterisk-z#)
+map g# <Plug>(asterisk-gz#)
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 vmap v     <Plug>(expand_region_expand)
