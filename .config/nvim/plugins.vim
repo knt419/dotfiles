@@ -43,6 +43,8 @@ Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
 Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
 Plug 'terryma/vim-expand-region'
 Plug 'wincent/ferret'
+Plug 'kana/vim-operator-user'
+Plug 'kana/vim-operator-replace'
 
 " file/directory
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
@@ -218,6 +220,7 @@ nmap e <Plug>(smartword-e)
 nmap ge <Plug>(smartword-ge)
 nmap <silent> <S-n> <Plug>(coc-diagnostic-next)
 nmap <silent> <S-p> <Plug>(coc-diagnostic-prev)
+nmap s <Plug>(operator-replace)
 
 
 nmap <silent> <Leader>a <Plug>(FerretAck)
