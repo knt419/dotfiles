@@ -196,7 +196,7 @@ let g:nefertiti_base_brightness_level = 14
 let g:sierra_Sunset = 1
 
 let g:coc_global_extensions = ['coc-json',
-            \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-lists']
+            \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-lists', 'coc-go']
 
 highlight link HighlightedyankRegion Visual
 
