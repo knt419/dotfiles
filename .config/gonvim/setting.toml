@@ -4,14 +4,14 @@ Width = 800
 # Editor minimum height (>= 600)
 Height = 600
 # Editor font-family, font-size, linespace.
-FontFamily = "Ricty"
+FontFamily = "HackGen35Console"
 FontSize = 16
 Linespace = 0
 # neovim extend feature
 ExtCmdline = true
 ExtWildmenu = true
 ExtPopupmenu = true
-ExtTabline  = false
+ExtTabline  = true
 # Gonvim copy the yank text to clipboad
 Clipboard = true
 # Editor cursor blink
@@ -20,10 +20,12 @@ CursorBlink = false
 DisableImeInNormal = true
 # load vimscript after setting of g:gonvim_running=1
 GinitVim = '''
-  	set guifont=Ricty:h16
+  	set guifont=HackGen35Console:h16
 '''
 # start fullscreen
 StartFullscreen = false
+Transparent = 0.6
+IndentGuide = true
 
 [Statusline]
 Visible = true
@@ -58,7 +60,7 @@ DropShadow = false
 Visible = false
 
 [SideBar]
-Visible = false
+Visible = true
 DropShadow = false
 Width = 300
 AccentColor = "#5596ea"
