@@ -1,5 +1,5 @@
 " gui elements
-let g:tab_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gnvim')
+let g:tab_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gnvim') || exists('g:gonvim_running')
 let g:statusline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
 let g:completion_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gnvim')
 let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running') || exists('g:gnvim')
@@ -240,8 +240,8 @@ nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
 nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
 xmap <silent> <Leader>f  <Plug>(coc-format-selected)
 
-noremap  <silent> tt  :<C-u>FloatermToggle<CR>i
-noremap! <silent> tt  <Esc>:<C-u>FloatermToggle<CR>i
+nnoremap  <silent> tt  :<C-u>FloatermToggle<CR>i
+inoremap <silent> tt  <Esc>:<C-u>FloatermToggle<CR>i
 tnoremap <silent> <F12>  <C-\><C-n>:<C-u>FloatermToggle<CR>
 
 vmap <CR> <Plug>(LiveEasyAlign)
@@ -386,6 +386,11 @@ function! s:my_defx_settings() abort
 endfunction
 
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
+<<<<<<< HEAD
+=======
+autocmd MyAutoCmd FileType go :match goErr /\<err\>/
+autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
+>>>>>>> 514121c6577a973aedcbec12b7d2643d1eb40ceb
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd FileType defx call s:my_defx_settings()
