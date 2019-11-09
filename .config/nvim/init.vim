@@ -215,7 +215,7 @@ inoremap っj <Esc>
 " function {{{
 function! s:my_ntab_function()
     return winnr('$') == 1 ?
-                \ (tabpagewinnr('$') <= 1 ?
+                \ (tabpagenr('$') <= 1 ?
                 \ (len(getbufinfo({'buflisted':1})) <= 1 ?
                 \ ":\<C-u>echo 'no buffer to switch.'\<CR>" :
                 \ ":\<C-u>bn\<CR>" ) :

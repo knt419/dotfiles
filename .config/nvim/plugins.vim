@@ -386,7 +386,7 @@ function! s:my_defx_settings() abort
 endfunction
 
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
-autocmd MyAutoCmd FileType go :match goErr /\<err\>/
+" autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
