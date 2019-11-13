@@ -231,6 +231,7 @@ autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
 autocmd MyAutoCmd TermOpen * setlocal nonumber
 autocmd MyAutoCmd TermOpen * IndentLinesDisable
 autocmd MyAutoCmd FileType help,startify IndentLinesDisable
+autocmd MyAutoCmd FileType go setlocal noexpandtab
 autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif
 autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline
 autocmd MyAutoCmd BufEnter * silent! lcd %:p:h

@@ -60,6 +60,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
 Plug 'tpope/vim-dadbod'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'honza/vim-snippets'
 
 " colorscheme
 Plug 'jeetsukumaran/vim-nefertiti'
@@ -196,7 +197,7 @@ let g:nefertiti_base_brightness_level = 14
 let g:sierra_Sunset = 1
 
 let g:coc_global_extensions = ['coc-json',
-            \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-lists', 'coc-go']
+            \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-lists', 'coc-go', 'coc-snippets']
 
 highlight link HighlightedyankRegion Visual
 
@@ -386,11 +387,7 @@ function! s:my_defx_settings() abort
 endfunction
 
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
-<<<<<<< HEAD
-=======
-autocmd MyAutoCmd FileType go :match goErr /\<err\>/
 autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
->>>>>>> 514121c6577a973aedcbec12b7d2643d1eb40ceb
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd FileType defx call s:my_defx_settings()
