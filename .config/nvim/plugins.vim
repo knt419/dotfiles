@@ -26,7 +26,7 @@ Plug 'mengelbrecht/lightline-bufferline'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'rickhowe/diffchar.vim'
 Plug 'romainl/vim-qf'
-Plug 'blueyed/vim-diminactive'
+Plug 'TaDaa/vimade'
 
 " text/input manipulation
 Plug 'cohama/lexima.vim'
