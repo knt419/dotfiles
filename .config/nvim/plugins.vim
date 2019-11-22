@@ -9,11 +9,11 @@ let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvi
 call plug#begin(g:plug_repo_dir)
 
 " denite/fzf
-Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'}
-Plug 'Shougo/neomru.vim'
-Plug 'thinca/vim-qfreplace'
-Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
+" Plug 'Shougo/denite.nvim', { 'do': ':UpdateRemotePlugins'}
+" Plug 'Shougo/neomru.vim'
+" Plug 'thinca/vim-qfreplace'
+" Plug 'junegunn/fzf', { 'dir': '$HOME/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf.vim'
 
 " editor display
 Plug 'Yggdroot/indentLine'
@@ -176,7 +176,7 @@ let g:startify_skiplist = [
             \ '*\\nvim\\runtime\\doc\\*',
             \ ]
 
-let g:fzf_layout                   = { 'down': '~70%' }
+" let g:fzf_layout                   = { 'down': '~70%' }
 let g:startify_change_to_vcs_root  = 1
 let g:startify_change_to_dir       = 1
 let g:startify_fortune_use_unicode = 0
@@ -185,7 +185,7 @@ let g:floaterm_winblend            = 40
 
 let g:webdevicons_enable                 = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-let g:webdevicons_enable_denite          = 1
+" let g:webdevicons_enable_denite          = 1
 let g:webdevicons_enable_startify        = 1
 let g:defx_icons_enable_syntax_highlight = 0
 let g:defx_icons_column_length           = 2
@@ -227,17 +227,24 @@ nmap s <Plug>(operator-replace)
 nmap <silent> <Leader>a <Plug>(FerretAck)
 nmap <silent> <Leader>l <Plug>(FerretLack)
 nmap <silent> <Leader>rf <Plug>(coc-references)
+nmap <silent> <Leader>rn <Plug>(coc-rename)
 nmap <silent> <Leader>df <Plug>(coc-definition)
+nmap <silent> <Leader>h :<C-u>call CocAction('doHover')<CR>
 nnoremap <silent> <Leader>s :<C-u>Startify<CR>
 nnoremap <silent> <Leader>e :<C-u>Defx<CR>
 nnoremap <silent> <Leader>z :<C-u>Defx -resume<CR>
-nnoremap <silent> <Leader>p :<C-u>History<CR>
+" nnoremap <silent> <Leader>p :<C-u>History<CR>
 nnoremap <silent> <Leader>r :<C-u>GFiles<CR>
-nnoremap <silent> <Leader>f :<C-u>Denite file/rec<CR>
-nnoremap <silent> <Leader>m :<C-u>Denite file_mru<CR>
-nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
-nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
-nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
+" nnoremap <silent> <Leader>f :<C-u>Denite file/rec<CR>
+" nnoremap <silent> <Leader>m :<C-u>Denite file_mru<CR>
+" nnoremap <silent> <Leader>b :<C-u>Denite buffer<CR>
+" nnoremap <silent> <Leader>d :<C-u>Denite directory_mru<CR>
+" nnoremap <silent> <Leader>g :<C-u>Denite grep<CR>
+nnoremap <silent> <Leader>f :<C-u>CocList files<CR>
+nnoremap <silent> <Leader>m :<C-u>CocList mru<CR>
+nnoremap <silent> <Leader>b :<C-u>CocList buffers<CR>
+nnoremap <silent> <Leader>l :<C-u>CocList lines<CR>
+nnoremap <silent> <Leader>g :<C-u>CocList grep<CR>
 nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
 xmap <silent> <Leader>f  <Plug>(coc-format-selected)
 
@@ -334,21 +341,21 @@ function! LightlineFileformat()
     return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . '  ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
 endfunction
 
-function! s:my_denite_replace(context)
-    let l:qflist = []
-    for l:target in a:context['targets']
-        if !has_key(l:target, 'action__path') | continue | endif
-        if !has_key(l:target, 'action__line') | continue | endif
-        if !has_key(l:target, 'action__text') | continue | endif
-        call add(l:qflist, {
-                    \ 'filename': l:target['action__path'],
-                    \ 'lnum':     l:target['action__line'],
-                    \ 'text':     l:target['action__text']
-                    \ })
-    endfor
-    call setqflist(l:qflist)
-    call qfreplace#start('')
-endfunction
+" function! s:my_denite_replace(context)
+"     let l:qflist = []
+"     for l:target in a:context['targets']
+"         if !has_key(l:target, 'action__path') | continue | endif
+"         if !has_key(l:target, 'action__line') | continue | endif
+"         if !has_key(l:target, 'action__text') | continue | endif
+"         call add(l:qflist, {
+"                     \ 'filename': l:target['action__path'],
+"                     \ 'lnum':     l:target['action__line'],
+"                     \ 'text':     l:target['action__text']
+"                     \ })
+"     endfor
+"     call setqflist(l:qflist)
+"     call qfreplace#start('')
+" endfunction
 
 function! s:my_icr_function()
     return !pumvisible() ?
@@ -391,69 +398,70 @@ autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd FileType defx call s:my_defx_settings()
-autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
-            \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
+" autocmd MyAutoCmd FileType fzf set laststatus=0 noshowmode noruler
+            " \| autocmd MyAutoCmd BufLeave <buffer> set laststatus=2 showmode ruler
+autocmd MyAutoCmd CursorHold * silent call CocActionAsync('highlight')
 
-if &runtimepath =~# 'denite.nvim'
-    nnoremap <silent> <Leader>/ :<C-u>Denite -buffer-name=search -direction=dynamicbottom -reversed=v:false -auto-resize=v:false line<CR>
-    autocmd FileType denite call s:denite_my_settings()
-    function! s:denite_my_settings() abort
-        nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
-        nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
-        nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
-        nnoremap <silent><buffer><expr> r denite#do_map('do_action', 'qfreplace')
-        nnoremap <silent><buffer><expr> q denite#do_map('quit')
-        nnoremap <silent><buffer><expr> <Tab> denite#do_map('choose_action')
-        nnoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
-        nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
-        nnoremap <silent><buffer><expr> v denite#do_map('do_action:vsplit')
-        nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
-        nnoremap <silent><buffer><expr> <Space><Space> denite#do_map('toggle_select_all')
-        inoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
-    endfunction
-    autocmd FileType denite-filter call s:denite_filter_my_settings()
-    function! s:denite_filter_my_settings() abort
-        imap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
-        nmap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
-        inoremap <silent><buffer> <C-j> <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
-        inoremap <silent><buffer> <C-k> <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
-    endfunction
-    call denite#custom#option('_', {
-                \ 'start_filter': v:true,
-                \ 'auto_resize': v:false,
-                \ 'reversed': v:true,
-                \ 'split': 'floating',
-                \ 'prompt': "\ue62b",
-                \ 'statusline': v:false,
-                \ 'direction': 'dynamicbottom',
-                \ })
+" if &runtimepath =~# 'denite.nvim'
+"     nnoremap <silent> <Leader>/ :<C-u>Denite -buffer-name=search -direction=dynamicbottom -reversed=v:false -auto-resize=v:false line<CR>
+"     autocmd FileType denite call s:denite_my_settings()
+"     function! s:denite_my_settings() abort
+"         nnoremap <silent><buffer><expr> <CR> denite#do_map('do_action')
+"         nnoremap <silent><buffer><expr> d denite#do_map('do_action', 'delete')
+"         nnoremap <silent><buffer><expr> p denite#do_map('do_action', 'preview')
+"         nnoremap <silent><buffer><expr> r denite#do_map('do_action', 'qfreplace')
+"         nnoremap <silent><buffer><expr> q denite#do_map('quit')
+"         nnoremap <silent><buffer><expr> <Tab> denite#do_map('choose_action')
+"         nnoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
+"         nnoremap <silent><buffer><expr> i denite#do_map('open_filter_buffer')
+"         nnoremap <silent><buffer><expr> v denite#do_map('do_action:vsplit')
+"         nnoremap <silent><buffer><expr> <Space> denite#do_map('toggle_select').'j'
+"         nnoremap <silent><buffer><expr> <Space><Space> denite#do_map('toggle_select_all')
+"         inoremap <silent><buffer><expr> <Esc> denite#do_map('quit')
+"     endfunction
+"     autocmd FileType denite-filter call s:denite_filter_my_settings()
+"     function! s:denite_filter_my_settings() abort
+"         imap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
+"         nmap <silent><buffer> <Esc> <Plug>(denite_filter_quit)
+"         inoremap <silent><buffer> <C-j> <Esc><C-w>p:call cursor(line('.')+1,0)<CR><C-w>pA
+"         inoremap <silent><buffer> <C-k> <Esc><C-w>p:call cursor(line('.')-1,0)<CR><C-w>pA
+"     endfunction
+"     call denite#custom#option('_', {
+"                 \ 'start_filter': v:true,
+"                 \ 'auto_resize': v:false,
+"                 \ 'reversed': v:true,
+"                 \ 'split': 'floating',
+"                 \ 'prompt': "\ue62b",
+"                 \ 'statusline': v:false,
+"                 \ 'direction': 'dynamicbottom',
+"                 \ })
 
-    if executable('rg')
-        call denite#custom#var('file/rec', 'command',
-                    \ ['rg', '--files', '--glob', '!.git', '--hidden'])
-        call denite#custom#var('grep', 'command', ['rg', '--threads', '1', '--hidden'])
-        call denite#custom#var('grep', 'default_opts',
-                    \ ['--vimgrep', '--no-heading'])
-        call denite#custom#var('grep', 'recursive_opts', [])
-        call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
-        call denite#custom#var('grep', 'separator', ['--'])
-        call denite#custom#var('grep', 'final_opts', [])
-    else
-        call denite#custom#var('file/rec', 'command',
-                    \ ['ag', '--follow', '--nocolor', '--nogroup',
-                    \  '--hidden', '-g', ''])
-        call denite#custom#var('grep', 'command', ['ag'])
-        call denite#custom#var('grep', 'default_opts',
-                    \ ['-i', '--vimgrep'])
-        call denite#custom#var('grep', 'recursive_opts', [])
-        call denite#custom#var('grep', 'pattern_opt', [])
-        call denite#custom#var('grep', 'separator', ['--'])
-        call denite#custom#var('grep', 'final_opts', [])
-    endif
+"     if executable('rg')
+"         call denite#custom#var('file/rec', 'command',
+"                     \ ['rg', '--files', '--glob', '!.git', '--hidden'])
+"         call denite#custom#var('grep', 'command', ['rg', '--threads', '1', '--hidden'])
+"         call denite#custom#var('grep', 'default_opts',
+"                     \ ['--vimgrep', '--no-heading'])
+"         call denite#custom#var('grep', 'recursive_opts', [])
+"         call denite#custom#var('grep', 'pattern_opt', ['--regexp'])
+"         call denite#custom#var('grep', 'separator', ['--'])
+"         call denite#custom#var('grep', 'final_opts', [])
+"     else
+"         call denite#custom#var('file/rec', 'command',
+"                     \ ['ag', '--follow', '--nocolor', '--nogroup',
+"                     \  '--hidden', '-g', ''])
+"         call denite#custom#var('grep', 'command', ['ag'])
+"         call denite#custom#var('grep', 'default_opts',
+"                     \ ['-i', '--vimgrep'])
+"         call denite#custom#var('grep', 'recursive_opts', [])
+"         call denite#custom#var('grep', 'pattern_opt', [])
+"         call denite#custom#var('grep', 'separator', ['--'])
+"         call denite#custom#var('grep', 'final_opts', [])
+"     endif
 
-    call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/ignore_globs'])
-    call denite#custom#source('file,file/rec,file/mru,file/old,file/point', 'converters', ['devicons_denite_converter'])
-    call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
-    call denite#custom#action('file', 'qfreplace', function('s:my_denite_replace'))
-endif
+"     call denite#custom#source('file_mru', 'matchers', ['matcher/fuzzy', 'matcher/ignore_globs'])
+"     call denite#custom#source('file,file/rec,file/mru,file/old,file/point', 'converters', ['devicons_denite_converter'])
+"     call denite#custom#filter('matcher/ignore_globs', 'ignore_globs',['*://*', '*~', '*.(o|exe|bak|pyc|sw[po]|class)'])
+"     call denite#custom#action('file', 'qfreplace', function('s:my_denite_replace'))
+" endif
 
