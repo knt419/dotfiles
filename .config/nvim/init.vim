@@ -184,6 +184,8 @@ nnoremap <silent> <CR><CR> o<Esc>
 nnoremap <silent> <Leader>q :<C-u>bd<CR>
 nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>
 nnoremap <silent> <Leader>n :<C-u>enew<CR>
+lnoremap <silent> <C-g> <Esc>
+cnoremap <silent> <C-v> <C-r>"
 inoremap jj <Esc>:<C-u>set iminsert=0<CR>
 
 inoremap <C-h> <C-g>U<Left>

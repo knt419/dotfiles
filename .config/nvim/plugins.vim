@@ -188,9 +188,11 @@ let g:nefertiti_base_brightness_level = 14
 let g:sierra_Sunset = 1
 
 let g:coc_global_extensions = ['coc-json',
-            \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-lists', 'coc-go', 'coc-snippets']
+            \ 'coc-git', 'coc-yaml', 'coc-prettier',
+            \ 'coc-lists', 'coc-go', 'coc-snippets']
 
 highlight link HighlightedyankRegion Visual
+
 " plugin keymaps
 
 map *  <Plug>(asterisk-z*)
@@ -226,14 +228,12 @@ nnoremap <silent> <Leader>z :<C-u>Defx -resume<CR>
 nnoremap <silent> <Leader>f :<C-u>CocList files<CR>
 nnoremap <silent> <Leader>m :<C-u>CocList mru<CR>
 nnoremap <silent> <Leader>b :<C-u>CocList buffers<CR>
-nnoremap <silent> <Leader>l :<C-u>CocList lines<CR>
 nnoremap <silent> <Leader>g :<C-u>CocList grep<CR>
 nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
 xmap <silent> <Leader>f  <Plug>(coc-format-selected)
 
 nnoremap <silent> tt  :<C-u>FloatermToggle<CR>i
 inoremap <silent> tt  <Esc>:<C-u>FloatermToggle<CR>i
-tnoremap <silent> <F12>  <C-\><C-n>:<C-u>FloatermToggle<CR>
 
 vmap <CR> <Plug>(LiveEasyAlign)
 
