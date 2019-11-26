@@ -180,6 +180,7 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_startify        = 1
 let g:defx_icons_enable_syntax_highlight = 0
 let g:defx_icons_column_length           = 2
+let g:coc_snippet_next = '<tab>'
 
 let $VISUAL = 'nvr --remote-wait'
 let $PATH   = $PATH . ':' . $HOME . '/go/bin'
@@ -200,6 +201,7 @@ map g* <Plug>(asterisk-gz*)
 map #  <Plug>(asterisk-z#)
 map g# <Plug>(asterisk-gz#)
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
+inoremap <silent> <Tab> <C-r>=<SID>my_itab_function()<CR>
 inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 vmap v     <Plug>(expand_region_expand)
 vmap <C-v> <Plug>(expand_region_shrink)
@@ -236,10 +238,6 @@ nnoremap <silent> tt  :<C-u>FloatermToggle<CR>i
 inoremap <silent> tt  <Esc>:<C-u>FloatermToggle<CR>i
 
 vmap <CR> <Plug>(LiveEasyAlign)
-
-inoremap <silent><expr> <Tab>
-            \ pumvisible() ? "\<C-n>" :
-            \ "\<C-r>=lexima#insmode#leave(1, '<LT>Tab>')\<CR>"
 
 if g:tab_gui
     nnoremap <C-t> :<C-u>tabnext<CR>
@@ -325,9 +323,19 @@ function! LightlineFileformat()
 endfunction
 
 function! s:my_icr_function()
-    return !pumvisible() ?
-                \ lexima#expand('<CR>', 'i') :
-                \ "\<C-y>"
+    return pumvisible() ?
+                \ coc#expandable() ?
+                \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand', ''] )\<CR>" :
+                \  "\<C-y>" :
+                \ lexima#expand('<CR>', 'i')
+endfunction
+
+function! s:my_itab_function()
+    return pumvisible() ?
+                \ "\<C-n>" :
+                \ coc#jumpable() ?
+                \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-jump', ''] )\<CR>" :
+                \ lexima#insmode#leave(1, '<Tab>')
 endfunction
 
 if &runtimepath =~# 'defx.nvim'
