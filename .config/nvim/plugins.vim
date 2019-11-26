@@ -190,7 +190,7 @@ let g:sierra_Sunset = 1
 
 let g:coc_global_extensions = ['coc-json',
             \ 'coc-git', 'coc-yaml', 'coc-prettier',
-            \ 'coc-lists', 'coc-go', 'coc-snippets']
+            \ 'coc-lists', 'coc-go', 'coc-snippets', 'coc-highlight']
 
 highlight link HighlightedyankRegion Visual
 
