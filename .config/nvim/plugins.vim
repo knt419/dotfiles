@@ -371,6 +371,7 @@ endfunction
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0
 autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0
+autocmd MyAutoCmd ColorScheme * :highlight! link CocHighlightText Search
 autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
