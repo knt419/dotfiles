@@ -101,11 +101,10 @@ let g:lightline = {
             \ 'colorscheme': 'themecolor',
             \ 'active': {
             \    'left': [
-            \      ['mode', 'paste'],
-            \      ['readonly', 'cocstatus', 'changes'],
+            \      ['mode', 'paste', 'cocstatus'],
             \    ],
             \    'right': [
-            \      ['filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage']
+            \      ['readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage'],
             \    ]
             \ },
             \ 'tabline': {
@@ -135,13 +134,18 @@ let g:lightline = {
             \   'statusline': !g:statusline_gui,
             \   'tabline': !g:tab_gui
             \ },
+            \ 'separator': {
+            \   'left': "│",
+            \   'right': "│"
+            \ },
+            \ 'subseparator': {
+            \   'left': "│",
+            \   'right': "│"
+            \ },
             \ }
 
 if winwidth(0) < 100
     let g:lightline#bufferline#filename_modifier = ':t'
-else
-    let g:lightline.separator = {'left': "\ue0b0", 'right': "\ue0b2"}
-    let g:lightline.subseparator = {'left': "\ue0b1", 'right': "\ue0b3"}
 endif
 
 if has('win32') || has('win64')
@@ -154,7 +158,6 @@ let g:lightline#bufferline#unicode_symbols = 1
 
 let g:indentLine_faster         = 1
 let g:indentLine_setColors      = 0
-let g:indentLine_char           = '┆'
 
 let g:FerretExecutable          = 'rg,ag'
 let g:FerretExecutableArguments = {
@@ -315,7 +318,7 @@ function! LightlineFiletype()
 endfunction
 
 function! LightlineChanges()
-    return exists('b:coc_git_status') ? b:coc_git_status : ''
+    return exists('b:coc_git_status') ? "\uf47f" . b:coc_git_status : ''
 endfunction
 
 function! LightlineFileformat()
