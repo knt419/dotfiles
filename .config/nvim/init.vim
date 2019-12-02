@@ -39,6 +39,8 @@ set foldmethod=marker
 set foldenable
 set foldlevelstart=10
 set lazyredraw
+set pumblend=10
+set winblend=10
 
 set guifont=HackGen35Console:h12
 set guifontwide=HackGen35Console:h12
