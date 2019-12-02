@@ -39,8 +39,6 @@ set foldmethod=marker
 set foldenable
 set foldlevelstart=10
 set lazyredraw
-set pumblend=10
-set winblend=10
 
 set guifont=HackGen35Console:h12
 set guifontwide=HackGen35Console:h12
@@ -124,6 +122,8 @@ let $LANG = 'ja_JP.UTF-8'
 " nvim/vim {{{
 if has('nvim')
     set inccommand=split
+    set pumblend=10
+    set winblend=10
     nnoremap <Leader>t :<C-u>terminal<CR>
     tnoremap <Leader>q <C-\><C-n>
     tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
