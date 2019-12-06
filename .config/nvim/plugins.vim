@@ -38,6 +38,7 @@ Plug 'terryma/vim-expand-region'
 Plug 'wincent/ferret'
 Plug 'kana/vim-operator-user'
 Plug 'kana/vim-operator-replace'
+Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins'}
 
 " file/directory
 Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
@@ -66,7 +67,7 @@ Plug 'knt419/lightline-colorscheme-themecolor'
 " lsp/completion
 if !g:completion_gui
     Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-    set completeopt=noinsert,menuone,noselect
+    set completeopt=noinsert,menuone,noselect,preview
     set shortmess+=c
 endif
 
@@ -177,6 +178,7 @@ let g:startify_change_to_dir       = 1
 let g:startify_fortune_use_unicode = 0
 let g:startify_enable_unsafe       = 1
 let g:floaterm_winblend            = 40
+let g:floaterm_position            = 'center'
 
 let g:webdevicons_enable                 = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
@@ -226,6 +228,7 @@ nmap <silent> <Leader>l <Plug>(FerretLack)
 nmap <silent> <Leader>rf <Plug>(coc-references)
 nmap <silent> <Leader>rn <Plug>(coc-rename)
 nmap <silent> <Leader>df <Plug>(coc-definition)
+nmap <silent> <Leader>j <Plug>(AerojumpBolt)
 nnoremap <silent> <Leader>h :<C-u>call CocAction('doHover')<CR>
 nnoremap <silent> <Leader>s :<C-u>Startify<CR>
 nnoremap <silent> <Leader>e :<C-u>Defx<CR>
@@ -237,8 +240,8 @@ nnoremap <silent> <Leader>g :<C-u>CocList grep<CR>
 nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
 xmap <silent> <Leader>f  <Plug>(coc-format-selected)
 
-nnoremap <silent> tt  :<C-u>FloatermToggle<CR>i
-inoremap <silent> tt  <Esc>:<C-u>FloatermToggle<CR>i
+nnoremap <silent> tt  :<C-u>FloatermToggle<CR>
+inoremap <silent> tt  <Esc>:<C-u>FloatermToggle<CR>
 
 vmap <CR> <Plug>(LiveEasyAlign)
 

@@ -52,6 +52,7 @@ set smartindent
 set autoindent
 set complete=.,w,b
 set conceallevel=0
+set pumblend=10
 
 set clipboard=unnamedplus
 set nostartofline
