@@ -52,7 +52,6 @@ set smartindent
 set autoindent
 set complete=.,w,b
 set conceallevel=0
-set pumblend=10
 
 set clipboard=unnamedplus
 set nostartofline
@@ -159,7 +158,8 @@ autocmd MySetUpCmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val
 filetype plugin indent on
 
 " keymap {{{
-nnoremap <silent> <Esc><Esc> :<C-u>nohlsearch<CR><Esc>
+nnoremap <silent> <Esc> <Esc>:<C-u>nohlsearch<CR><Esc>
+nnoremap <silent> <Esc><Esc> :<C-u>bdelete<CR>
 nnoremap <silent> Y y$
 xnoremap <silent> Y "+y
 nnoremap <silent> x "_x
@@ -187,9 +187,9 @@ nnoremap <silent> <CR><CR> o<Esc>
 nnoremap <silent> <Leader>q :<C-u>bd<CR>
 nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>
 nnoremap <silent> <Leader>n :<C-u>enew<CR>
-lnoremap <silent> <C-g> <Esc>
 cnoremap <silent> <C-v> <C-r>"
-inoremap jj <Esc>:<C-u>set iminsert=0<CR>
+inoremap <silent> <Esc> <Esc>:<C-u>set iminsert=0<CR>
+inoremap <silent> jj <Esc>:<C-u>set iminsert=0<CR>
 
 inoremap <C-h> <C-g>U<Left>
 inoremap <C-l> <C-g>U<Right>
@@ -230,12 +230,9 @@ endfunction
 " }}}
 
 " autocmd
-" autocmd MyAutoCmd DiffUpdated,FilterWritePre * if &diff | setlocal wrap< | endif
 autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow
 autocmd MyAutoCmd VimResized * execute "normal \<C-w>="
 autocmd MyAutoCmd TermOpen * setlocal nonumber
-autocmd MyAutoCmd TermOpen * IndentLinesDisable
-autocmd MyAutoCmd FileType help,startify IndentLinesDisable
 autocmd MyAutoCmd FileType go setlocal noexpandtab
 autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif
 autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline

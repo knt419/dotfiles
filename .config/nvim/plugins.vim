@@ -62,6 +62,7 @@ Plug 'Nequo/vim-allomancer'
 Plug 'AlessandroYorba/Sierra'
 Plug 'flrnprz/candid.vim'
 Plug 'ajmwagar/vim-deus'
+Plug 'cocopon/iceberg.vim'
 Plug 'knt419/lightline-colorscheme-themecolor'
 
 " lsp/completion
@@ -157,8 +158,9 @@ endif
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
-let g:indentLine_faster         = 1
 let g:indentLine_setColors      = 0
+let g:indentLine_bufTypeExclude = ['help', 'terminal']
+let g:indentLine_fileTypeExclude = ['startify']
 
 let g:FerretExecutable          = 'rg,ag'
 let g:FerretExecutableArguments = {
