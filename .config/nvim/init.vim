@@ -174,6 +174,7 @@ nnoremap <silent> - <C-x>
 noremap  <silent> <C-j> }
 noremap  <silent> <C-k> {
 noremap  <silent> <C-l> $
+noremap  <silent> <C-;> $
 noremap  <silent> <C-h> ^
 noremap  <silent> os :<C-u>e ++enc=cp932<CR>
 noremap  <silent> oe :<C-u>e ++enc=euc-jp<CR>
@@ -191,7 +192,6 @@ cnoremap <silent> <C-v> <C-r>"
 inoremap <silent> <Esc> <Esc>:<C-u>set iminsert=0<CR>
 inoremap <silent> jj <Esc>:<C-u>set iminsert=0<CR>
 
-inoremap <C-h> <C-g>U<Left>
 inoremap <C-l> <C-g>U<Right>
 inoremap <C-;> <C-g>U<C-o>$
 inoremap <C-j> <C-g>U<C-o>o
