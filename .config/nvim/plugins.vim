@@ -311,7 +311,7 @@ function! LightlineRepository()
     if !exists("b:git_dir")
         return ''
     endif
-    return fnamemodify(b:git_dir, ":h:t")
+    return "\uf401 " . fnamemodify(b:git_dir, ":h:t")
 endfunction
 
 function! LightlineRepoStatus()
