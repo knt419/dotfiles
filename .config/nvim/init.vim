@@ -48,6 +48,7 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 set shiftround
+set smarttab
 set smartindent
 set autoindent
 set complete=.,w,b
@@ -70,6 +71,7 @@ set smartcase
 set incsearch
 set wrapscan
 set hlsearch
+set infercase
 
 set diffopt=filler,vertical,internal,algorithm:histogram,indent-heuristic
 set splitright
@@ -174,10 +176,12 @@ nnoremap <silent> - <C-x>
 noremap  <silent> <C-j> }
 noremap  <silent> <C-k> {
 noremap  <silent> <C-l> $
+noremap  <silent> <C-;> $
 noremap  <silent> <C-h> ^
 noremap  <silent> os :<C-u>e ++enc=cp932<CR>
 noremap  <silent> oe :<C-u>e ++enc=euc-jp<CR>
 noremap  <silent> ou :<C-u>e ++enc=utf-8<CR>
+noremap  q; :q
 
 nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
@@ -187,11 +191,13 @@ nnoremap <silent> <CR><CR> o<Esc>
 nnoremap <silent> <Leader>q :<C-u>bd<CR>
 nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>
 nnoremap <silent> <Leader>n :<C-u>enew<CR>
+nnoremap <silent> vv V
+nmap <silent> <C-n> *
+nmap <silent> <C-p> #
 cnoremap <silent> <C-v> <C-r>"
 inoremap <silent> <Esc> <Esc>:<C-u>set iminsert=0<CR>
 inoremap <silent> jj <Esc>:<C-u>set iminsert=0<CR>
 
-inoremap <C-h> <C-g>U<Left>
 inoremap <C-l> <C-g>U<Right>
 inoremap <C-;> <C-g>U<C-o>$
 inoremap <C-j> <C-g>U<C-o>o
@@ -252,5 +258,5 @@ if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
 endif
 
 set background=dark
-silent! colorscheme deus
+silent! colorscheme allomancer
 syntax enable
