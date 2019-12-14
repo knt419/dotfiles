@@ -315,7 +315,7 @@ function! LightlineRepository()
 endfunction
 
 function! LightlineRepoStatus()
-    return exists('g:coc_git_status') ? g:coc_git_status : ''
+    return exists("b:git_dir") && exists('g:coc_git_status') ? g:coc_git_status : ''
 endfunction
 
 function! LightlineFiletype()
