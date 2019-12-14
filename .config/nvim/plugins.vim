@@ -132,6 +132,19 @@ let g:lightline = {
             \ 'component_type': {
             \   'buffers': 'tabsel',
             \ },
+            \ 'mode_map': {
+            \   'n' : "\ue62b",
+            \   'i' : "\uf040",
+            \   'R' : "\uf45a",
+            \   'v' : "\uf988",
+            \   'V' : "\uf988".'LINE',
+            \   "\<C-v>": "\uf988".'BLOCK',
+            \   'c' : "\uf120",
+            \   's' : "\uf044",
+            \   'S' : "\uf044 ".'LINE',
+            \   "\<C-s>": "\uf044 ".'BLOCK',
+            \   't': "\uf489",
+            \ },
             \ 'enable': {
             \   'statusline': !g:statusline_gui,
             \   'tabline': !g:tab_gui
