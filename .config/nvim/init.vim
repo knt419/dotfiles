@@ -90,6 +90,13 @@ set breakindent
 set breakindentopt=shift:2
 set showbreak=↪
 set tags=
+
+if executable("xonsh")
+    set shell=xonsh
+    set shellcmdflag=-c
+    set shellpipe=|
+    set shellredir=>
+endif
 " }}}
 
 " disable runtime plugins {{{
