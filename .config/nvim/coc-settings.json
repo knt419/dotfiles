@@ -1,11 +1,4 @@
 {
-  "languageserver": {
-    "efm": {
-      "command": "efm-langserver",
-      "args": [],
-      "filetypes": ["vim", "eruby"]
-    }
-  },
   "suggest.echodocSupport": true,
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",

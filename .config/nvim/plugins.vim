@@ -61,7 +61,6 @@ Plug 'honza/vim-snippets'
 Plug 'jeetsukumaran/vim-nefertiti'
 Plug 'Nequo/vim-allomancer'
 Plug 'AlessandroYorba/Sierra'
-Plug 'flrnprz/candid.vim'
 Plug 'ajmwagar/vim-deus'
 Plug 'cocopon/iceberg.vim'
 Plug 'knt419/lightline-colorscheme-themecolor'
@@ -210,13 +209,15 @@ let g:nefertiti_base_brightness_level = 14
 let g:sierra_Sunset = 1
 
 let g:coc_global_extensions = ['coc-json',
-            \ 'coc-git', 'coc-yaml', 'coc-prettier',
+            \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-vimlsp',
             \ 'coc-lists', 'coc-go', 'coc-snippets', 'coc-highlight']
 
 let g:echodoc#enable_at_startup = 1
 let g:echodoc#type = 'floating'
-highlight link EchoDocFloat Pmenu
-highlight link HighlightedyankRegion Visual
+let g:markdown_fenced_languages = [
+            \ 'vim',
+            \ 'help'
+            \]
 
 " plugin keymaps
 
