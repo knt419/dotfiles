@@ -20,6 +20,7 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'rickhowe/diffchar.vim'
 Plug 'romainl/vim-qf'
 Plug 'TaDaa/vimade'
+Plug 'Shougo/echodoc.vim'
 
 " text/input manipulation
 Plug 'cohama/lexima.vim'
@@ -212,6 +213,9 @@ let g:coc_global_extensions = ['coc-json',
             \ 'coc-git', 'coc-yaml', 'coc-prettier',
             \ 'coc-lists', 'coc-go', 'coc-snippets', 'coc-highlight']
 
+let g:echodoc#enable_at_startup = 1
+let g:echodoc#type = 'floating'
+highlight link EchoDocFloat Pmenu
 highlight link HighlightedyankRegion Visual
 
 " plugin keymaps

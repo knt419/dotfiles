@@ -91,12 +91,14 @@ set breakindentopt=shift:2
 set showbreak=↪
 set tags=
 
-if executable("xonsh")
-    set shell=xonsh
-    set shellcmdflag=-c
-    set shellpipe=|
-    set shellredir=>
-endif
+" if executable("xonsh")
+"     set shell=python\ -m\ xonsh
+"     set shellcmdflag=-c
+"     set shellquote=
+"     set shellxquote=\'
+"     set shellpipe=|
+"     set shellredir=>
+" endif
 " }}}
 
 " disable runtime plugins {{{
