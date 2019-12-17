@@ -35,6 +35,7 @@ Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
 Plug 'kana/vim-smartchr'
+Plug 'kana/vim-niceblock'
 Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
 Plug 'terryma/vim-expand-region'
 Plug 'wincent/ferret'
