@@ -34,6 +34,7 @@ Plug 'tpope/vim-sleuth'
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-line'
 Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
+Plug 'kana/vim-smartchr'
 Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
 Plug 'terryma/vim-expand-region'
 Plug 'wincent/ferret'
@@ -272,6 +273,12 @@ else
     nnoremap <C-t> :<C-u>bn<CR>
     nnoremap <S-t> :<C-u>bp<CR>
 endif
+
+inoremap <expr> ;  smartchr#one_of(';', '"')
+inoremap <expr> :  smartchr#one_of(':', '''')
+inoremap <expr> -  smartchr#one_of('-', '=')
+inoremap <expr> ,  smartchr#one_of(',', '(')
+inoremap <expr> .  smartchr#one_of('.', ')')
 
 if exists('g:veonim')
     " extensions for web dev
