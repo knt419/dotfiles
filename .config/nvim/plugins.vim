@@ -65,6 +65,7 @@ Plug 'Nequo/vim-allomancer'
 Plug 'AlessandroYorba/Sierra'
 Plug 'ajmwagar/vim-deus'
 Plug 'cocopon/iceberg.vim'
+Plug 'sainnhe/edge'
 Plug 'knt419/lightline-colorscheme-themecolor'
 
 " lsp/completion
@@ -137,15 +138,15 @@ let g:lightline = {
             \ 'mode_map': {
             \   'n' : "\ue62b",
             \   'i' : "\uf040",
-            \   'R' : "\uf45a",
+            \   'R' : "\uf954",
             \   'v' : "\uf988",
             \   'V' : "\uf988".'LINE',
             \   "\<C-v>": "\uf988".'BLOCK',
-            \   'c' : "\uf120",
+            \   'c' : "\ufcb5",
             \   's' : "\uf044",
             \   'S' : "\uf044 ".'LINE',
             \   "\<C-s>": "\uf044 ".'BLOCK',
-            \   't': "\uf489",
+            \   't': "\uf68c",
             \ },
             \ 'enable': {
             \   'statusline': !g:statusline_gui,
@@ -202,20 +203,22 @@ let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_startify        = 1
 let g:defx_icons_enable_syntax_highlight = 0
 let g:defx_icons_column_length           = 2
-let g:coc_snippet_next = '<tab>'
+let g:coc_snippet_next                   = '<tab>'
 
 let $VISUAL = 'nvr --remote-wait'
 let $PATH   = $PATH . ':' . $HOME . '/go/bin'
 
 let g:nefertiti_base_brightness_level = 14
 let g:sierra_Sunset = 1
+let g:edge_style = 'neon'
+let g:edge_disable_italic_comment = 1
 
 let g:coc_global_extensions = ['coc-json',
             \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-vimlsp',
             \ 'coc-lists', 'coc-go', 'coc-snippets', 'coc-highlight']
 
 let g:echodoc#enable_at_startup = 1
-let g:echodoc#type = 'floating'
+let g:echodoc#type              = 'floating'
 let g:markdown_fenced_languages = [
             \ 'vim',
             \ 'help'
@@ -280,6 +283,7 @@ inoremap <expr> :  smartchr#one_of(':', '''')
 inoremap <expr> -  smartchr#one_of('-', '=')
 inoremap <expr> ,  smartchr#one_of(',', '(')
 inoremap <expr> .  smartchr#one_of('.', ')')
+inoremap <expr> @  smartchr#one_of('@', '''', '"')
 
 if exists('g:veonim')
     " extensions for web dev

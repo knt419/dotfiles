@@ -201,6 +201,7 @@ nnoremap <silent> <Leader>q :<C-u>bd<CR>
 nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>
 nnoremap <silent> <Leader>n :<C-u>enew<CR>
 nnoremap <silent> vv V
+nnoremap <silent> vvv <C-v>
 nmap <silent> <C-n> *
 nmap <silent> <C-p> #
 cnoremap <silent> <C-v> <C-r>"
