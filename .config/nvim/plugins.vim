@@ -136,7 +136,7 @@ let g:lightline = {
             \   'buffers': 'tabsel',
             \ },
             \ 'mode_map': {
-            \   'n' : "\ue62b",
+            \   'n' : "\ufc44",
             \   'i' : "\uf040",
             \   'R' : "\uf954",
             \   'v' : "\uf988",
@@ -345,7 +345,7 @@ function! LightlineRepository()
 endfunction
 
 function! LightlineRepoStatus()
-    return exists("b:git_dir") && exists('g:coc_git_status') ? g:coc_git_status : ''
+    return exists("b:git_dir") && exists('g:coc_git_status') ? substitute(g:coc_git_status, "\ue0a0", "\ue725", "g")  : ''
 endfunction
 
 function! LightlineFiletype()
