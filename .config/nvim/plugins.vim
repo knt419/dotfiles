@@ -177,6 +177,7 @@ let g:lightline#bufferline#unicode_symbols = 1
 let g:indentLine_setColors      = 0
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
+let g:lexima_ctrlh_as_backspace = 1
 
 let g:FerretExecutable          = 'rg,ag'
 let g:FerretExecutableArguments = {
