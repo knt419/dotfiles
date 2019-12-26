@@ -355,7 +355,7 @@ function! LightlineFiletype()
 endfunction
 
 function! LightlineChanges()
-    return exists('b:coc_git_status') ? "\uf47f" . b:coc_git_status : ''
+    return exists('b:coc_git_status') ? "\uf440" . b:coc_git_status : ''
 endfunction
 
 function! LightlineFileformat()
