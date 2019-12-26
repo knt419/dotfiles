@@ -153,15 +153,16 @@ let g:lightline = {
             \   'tabline': !g:tab_gui
             \ },
             \ 'separator': {
-            \   'left': "│",
-            \   'right': "│"
+            \   'left': "\ue0b8",
+            \   'right': "\ue0ba"
             \ },
             \ 'subseparator': {
-            \   'left': "│",
-            \   'right': "│"
+            \   'left': "\ue0b9",
+            \   'right': "\ue0bb"
             \ },
             \ }
 
+            " \   'right': "│"
 if winwidth(0) < 100
     let g:lightline#bufferline#filename_modifier = ':t'
 endif
