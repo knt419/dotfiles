@@ -160,6 +160,14 @@ let g:lightline = {
             \   'left': "\ue0b9",
             \   'right': "\ue0bb"
             \ },
+            \ 'tabline_separator': {
+            \   'left': "\ue0bc",
+            \   'right': "\ue0be"
+            \ },
+            \ 'tabline_subseparator': {
+            \   'left': "\ue0bb",
+            \   'right': "\ue0b9"
+            \ },
             \ }
 
             " \   'right': "│"
