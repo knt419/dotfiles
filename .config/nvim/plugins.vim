@@ -51,6 +51,7 @@ Plug 'voldikss/vim-floaterm'
 
 " git
 Plug 'tpope/vim-fugitive'
+Plug 'int3/vim-extradite'
 
 " language support
 Plug 'sheerun/vim-polyglot'
@@ -178,6 +179,10 @@ let g:indentLine_setColors      = 0
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
+
+
+let g:extradite_showhash = 1
+let g:extradite_diff_split = 'belowright vertical split'
 
 let g:FerretExecutable          = 'rg,ag'
 let g:FerretExecutableArguments = {
