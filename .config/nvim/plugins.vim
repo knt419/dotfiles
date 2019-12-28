@@ -67,6 +67,7 @@ Plug 'AlessandroYorba/Sierra'
 Plug 'ajmwagar/vim-deus'
 Plug 'cocopon/iceberg.vim'
 Plug 'sainnhe/edge'
+Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'knt419/lightline-colorscheme-themecolor'
 
 " lsp/completion
@@ -104,7 +105,7 @@ if g:cmdline_gui
 endif
 
 let g:lightline = {
-            \ 'colorscheme': 'themecolor',
+            \ 'colorscheme': 'quamtum',
             \ 'active': {
             \    'left': [
             \      ['mode', 'paste', 'cocstatus'],
@@ -158,16 +159,16 @@ let g:lightline = {
             \   'right': "\ue0ba"
             \ },
             \ 'subseparator': {
-            \   'left': "\ue0b9",
-            \   'right': "\ue0bb"
+            \   'left': "│",
+            \   'right': "│"
             \ },
             \ 'tabline_separator': {
             \   'left': "\ue0bc",
             \   'right': "\ue0be"
             \ },
             \ 'tabline_subseparator': {
-            \   'left': "\ue0bb",
-            \   'right': "\ue0b9"
+            \   'left': "│",
+            \   'right': "│"
             \ },
             \ }
 
