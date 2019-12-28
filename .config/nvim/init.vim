@@ -268,5 +268,5 @@ if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
 endif
 
 set background=dark
-silent! colorscheme quantum
+silent! colorscheme deep-space
 syntax enable

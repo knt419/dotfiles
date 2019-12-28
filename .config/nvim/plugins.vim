@@ -68,6 +68,7 @@ Plug 'ajmwagar/vim-deus'
 Plug 'cocopon/iceberg.vim'
 Plug 'sainnhe/edge'
 Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'knt419/lightline-colorscheme-themecolor'
 
 " lsp/completion
@@ -105,7 +106,7 @@ if g:cmdline_gui
 endif
 
 let g:lightline = {
-            \ 'colorscheme': 'quamtum',
+            \ 'colorscheme': 'deepspace',
             \ 'active': {
             \    'left': [
             \      ['mode', 'paste', 'cocstatus'],
