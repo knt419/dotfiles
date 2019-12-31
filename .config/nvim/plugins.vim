@@ -63,9 +63,7 @@ Plug 'honza/vim-snippets'
 " colorscheme
 Plug 'jeetsukumaran/vim-nefertiti'
 Plug 'Nequo/vim-allomancer'
-Plug 'AlessandroYorba/Sierra'
 Plug 'ajmwagar/vim-deus'
-Plug 'cocopon/iceberg.vim'
 Plug 'sainnhe/edge'
 Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'tyrannicaltoucan/vim-deep-space'
@@ -186,7 +184,7 @@ endif
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
-let g:indentLine_setColors      = 0
+" let g:indentLine_setColors      = 0
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
