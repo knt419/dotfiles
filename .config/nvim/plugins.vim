@@ -245,45 +245,48 @@ map *  <Plug>(asterisk-z*)
 map g* <Plug>(asterisk-gz*)
 map #  <Plug>(asterisk-z#)
 map g# <Plug>(asterisk-gz#)
+
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 inoremap <silent> <Tab> <C-r>=<SID>my_itab_function()<CR>
 inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
-vmap v     <Plug>(expand_region_expand)
-vmap <C-v> <Plug>(expand_region_shrink)
+inoremap <expr> ;  smartchr#one_of(';', '"')
+inoremap <expr> :  smartchr#one_of(':', '''')
+inoremap <expr> -  smartchr#one_of('-', '=')
+inoremap <expr> ,  smartchr#one_of(',', '(')
+inoremap <expr> .  smartchr#one_of('.', ')')
+inoremap <expr> @  smartchr#one_of('@', '''', '"')
 
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
-
 nmap w <Plug>(smartword-w)
 nmap b <Plug>(smartword-b)
 nmap e <Plug>(smartword-e)
 nmap ge <Plug>(smartword-ge)
-nmap <silent> <S-n> <Plug>(coc-diagnostic-next)
-nmap <silent> <S-p> <Plug>(coc-diagnostic-prev)
+nmap <silent> dn <Plug>(coc-diagnostic-next)
+nmap <silent> dp <Plug>(coc-diagnostic-prev)
 nmap s <Plug>(operator-replace)
-
-
-nmap <silent> <Leader>a <Plug>(FerretAck)
-nmap <silent> <Leader>l <Plug>(FerretLack)
-nmap <silent> <Leader>rf <Plug>(coc-references)
-nmap <silent> <Leader>rn <Plug>(coc-rename)
-nmap <silent> <Leader>df <Plug>(coc-definition)
-nmap <silent> <Leader>j <Plug>(AerojumpBolt)
-nnoremap <silent> <Leader>h :<C-u>call CocAction('doHover')<CR>
-nnoremap <silent> <Leader>s :<C-u>Startify<CR>
-nnoremap <silent> <Leader>e :<C-u>Defx<CR>
-nnoremap <silent> <Leader>z :<C-u>Defx -resume<CR>
-nnoremap <silent> <Leader>f :<C-u>CocList files<CR>
-nnoremap <silent> <Leader>m :<C-u>CocList mru<CR>
-nnoremap <silent> <Leader>b :<C-u>CocList buffers<CR>
-nnoremap <silent> <Leader>g :<C-u>CocList grep<CR>
-nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
-xmap <silent> <Leader>f  <Plug>(coc-format-selected)
-
 nnoremap <silent> tt  :<C-u>FloatermToggle<CR>
-inoremap <silent> tt  <Esc>:<C-u>FloatermToggle<CR>
 
-vmap <CR> <Plug>(LiveEasyAlign)
+nnoremap <silent> <Leader>e        :<C-u>Defx<CR>
+nmap     <silent> <Leader>rf       <Plug>(coc-references)
+nmap     <silent> <Leader>rn       <Plug>(coc-rename)
+nmap     <silent> <Leader>a        <Plug>(FerretAck)
+nnoremap <silent> <Leader>s        :<C-u>Startify<CR>
+nmap     <silent> <Leader>df       <Plug>(coc-definition)
+nnoremap <silent> <Leader>f        :<C-u>CocList files<CR>
+nnoremap <silent> <Leader>g        :<C-u>CocList grep<CR>
+nnoremap <silent> <Leader>h        :<C-u>call CocAction('doHover')<CR>
+nmap     <silent> <Leader>j        <Plug>(AerojumpBolt)
+nmap     <silent> <Leader>l        <Plug>(FerretLack)
+nnoremap <silent> <Leader>z        :<C-u>Defx -resume<CR>
+nnoremap <silent> <Leader>b        :<C-u>CocList buffers<CR>
+nnoremap <silent> <Leader>m        :<C-u>CocList mru<CR>
+nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
+
+xmap v                  <Plug>(expand_region_expand)
+xmap <C-v>              <Plug>(expand_region_shrink)
+xmap <silent> <Leader>f <Plug>(coc-format-selected)
+xmap <CR>               <Plug>(LiveEasyAlign)
 
 if g:tab_gui
     nnoremap <C-t> :<C-u>tabnext<CR>
@@ -293,12 +296,6 @@ else
     nnoremap <S-t> :<C-u>bp<CR>
 endif
 
-inoremap <expr> ;  smartchr#one_of(';', '"')
-inoremap <expr> :  smartchr#one_of(':', '''')
-inoremap <expr> -  smartchr#one_of('-', '=')
-inoremap <expr> ,  smartchr#one_of(',', '(')
-inoremap <expr> .  smartchr#one_of('.', ')')
-inoremap <expr> @  smartchr#one_of('@', '''', '"')
 
 if exists('g:veonim')
     " extensions for web dev
