@@ -88,7 +88,7 @@ call plug#end()
 
 " plugin variables
 
-"tabline
+" tabline
 if !g:tab_gui
     set showtabline=2
 endif
@@ -107,7 +107,7 @@ let g:lightline = {
             \ 'colorscheme': 'deepspace',
             \ 'active': {
             \    'left': [
-            \      ['mode', 'paste', 'cocstatus'],
+            \      ['mode', 'paste', 'winfo', 'cocstatus'],
             \    ],
             \    'right': [
             \      ['readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage'],
@@ -128,7 +128,8 @@ let g:lightline = {
             \    'filetype'   : 'LightlineFiletype',
             \    'fileformat' : 'LightlineFileformat',
             \    'changes'    : 'LightlineChanges',
-            \    'cocstatus'  : 'coc#status'
+            \    'cocstatus'  : 'coc#status',
+            \    'winfo'      : 'LightlineWinfo'
             \ },
             \ 'component_expand': {
             \   'buffers': 'lightline#bufferline#buffers',
@@ -372,6 +373,9 @@ function! LightlineFileformat()
     return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . '  ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
 endfunction
 
+function! LightlineWinfo()
+    return "\ufab1" . winnr() . ' ' . "\uf4a5" . bufnr('%')
+endfunction
 function! s:my_icr_function()
     return pumvisible() ?
                 \ coc#expandable() ?
