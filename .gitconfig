@@ -21,3 +21,7 @@
     autoCRLF = false
 [credential]
 	helper = manager
+[merge]
+  tool = nvim
+[mergetool "nvim"]
+  cmd = nvim -c '2wincmd w | diffthis | 3wincmd w | diffthis | 1wincmd w | wincmd J' -O $MERGED $LOCAL $REMOTE

@@ -107,14 +107,15 @@ let g:lightline = {
             \ 'colorscheme': 'deepspace',
             \ 'active': {
             \    'left': [
-            \      ['mode', 'paste', 'winfo', 'cocstatus'],
+            \      ['mode', 'paste'],
+            \      ['cocstatus']
             \    ],
             \    'right': [
             \      ['readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage'],
             \    ]
             \ },
             \ 'tabline': {
-            \   'left': [['buffers']],
+            \   'left': [['winfo', 'buffers']],
             \   'right': [['repostatus','repository']]
             \ },
             \ 'component': {
@@ -155,18 +156,10 @@ let g:lightline = {
             \   'tabline': !g:tab_gui
             \ },
             \ 'separator': {
-            \   'left': "\ue0b8",
-            \   'right': "\ue0ba"
-            \ },
-            \ 'subseparator': {
             \   'left': "│",
             \   'right': "│"
             \ },
-            \ 'tabline_separator': {
-            \   'left': "\ue0bc",
-            \   'right': "\ue0be"
-            \ },
-            \ 'tabline_subseparator': {
+            \ 'subseparator': {
             \   'left': "│",
             \   'right': "│"
             \ },
@@ -366,7 +359,7 @@ function! LightlineFiletype()
 endfunction
 
 function! LightlineChanges()
-    return exists('b:coc_git_status') ? "\uf440" . b:coc_git_status : ''
+    return exists('b:coc_git_status') ? "\uf440 " . substitute(substitute(substitute(b:coc_git_status, "+", "\uf457 ", ""), "-", "\uf458 ", ""), '\~', "\uf459 ", "") : ''
 endfunction
 
 function! LightlineFileformat()
@@ -374,7 +367,7 @@ function! LightlineFileformat()
 endfunction
 
 function! LightlineWinfo()
-    return "\ufab1" . winnr() . ' ' . "\uf4a5" . bufnr('%')
+    return "\ufab1" . winnr() . ' ' . "\uf4a5 " . bufnr('%')
 endfunction
 function! s:my_icr_function()
     return pumvisible() ?
