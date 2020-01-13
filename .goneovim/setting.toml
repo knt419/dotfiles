@@ -1,0 +1,108 @@
+[Editor]
+# Editor minimum window width (>= 800)
+Width = 800
+# Editor minimum window height (>= 600)
+Height = 600
+
+# Start maximized window
+StartMaximizedWindow = true
+
+# Start fullscreen
+StartFullscreen = false
+
+# Editor external font-family, font-size, and linespace.
+FontFamily = "HackGen35Console"
+FontSize = 14
+Linespace = 0
+
+# Neovim external UI features
+ExtCmdline = true
+ExtPopupmenu = true
+ExtTabline  = true
+ExtMessages = true
+
+# Drawing window border instead of vertical split, statusline
+DrawBorder = true
+
+# Copy yanked text to clipboard
+Clipboard = true
+
+# Disable IME in Normal mode
+DisableImeInNormal = true
+
+# Transparent window alpha
+# Note: This setting also implicitly enables the Drawborder setting
+Transparent = 0.95
+
+# Draw indent guide
+IndentGuide = true
+
+ginitvim = '''
+'''
+
+[Statusline]
+Visible = true
+
+# Options: “textLabel” / “icon” / “background” / “none”
+ModeIndicatorType = "icon"
+
+# Optional setting colors per Neovim editing modes
+NormalModeColor = "#3cabeb"
+CommandModeColor = "#5285b8"
+InsertModeColor = "#2abcb4"
+ReplaceModeColor = "#ff8c0a"
+VisualModeColor = "#9932cc"
+TerminalModeColor = "#778899"
+
+# Statusline components
+Left = [ "mode", "filepath", "filename" ]
+Right = [ "message", "git", "filetype", "fileformat", "fileencoding", "curpos", "lint" ]
+
+[Palette]
+Transparent = 0.9
+
+[Message]
+Transparent = 0.9
+
+[Popupmenu]
+# show detail column
+ShowDetail = true
+# total number to display item
+Total = 20
+# width of `menu` column
+MenuWidth = 400
+# width of `info` column
+InfoWidth = 1
+# width of `detail` column
+DetailWidth = 250
+
+
+[Tabline]
+Visible = true
+
+[Lint]
+Visible = true
+
+[ScrollBar]
+Visible = true
+
+[MiniMap]
+Visible = true
+
+[SideBar]
+Visible = true
+DropShadow = true
+Width = 200
+AccentColor = "#5596ea"
+
+[Workspace]
+# This setting sets the format of the path string of CWD in the sidebar.
+#  name: directoryname
+#  full: /path/to/directoryname
+#  minimum: /p/t/directoryname
+PathStyle = "minimum"
+
+# Restore session — information that was ended without being saved
+RestoreSession = false
+
+# File open command in gonvim file explorer

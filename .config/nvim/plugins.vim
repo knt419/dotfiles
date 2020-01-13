@@ -1,6 +1,6 @@
 " gui elements
-let g:tab_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gnvim') || exists('g:gonvim_running')
-let g:statusline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running')
+let g:tab_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gnvim')
+let g:statusline_gui = exists('g:gui_oni') || exists('g:veonim')
 let g:completion_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gnvim')
 let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running') || exists('g:gnvim')
 
@@ -48,6 +48,7 @@ Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
 Plug 'sh8/defx-icons'
 Plug 'januswel/fencja.vim'
 Plug 'voldikss/vim-floaterm'
+Plug 'Yggdroot/LeaderF'
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -178,6 +179,7 @@ endif
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
+let g:Lf_StlSeparator = { 'left': '', 'right': '' }
 " let g:indentLine_setColors      = 0
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
