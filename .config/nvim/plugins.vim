@@ -44,8 +44,6 @@ Plug 'kana/vim-operator-replace'
 Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins'}
 
 " file/directory
-Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins'}
-Plug 'sh8/defx-icons'
 Plug 'januswel/fencja.vim'
 Plug 'voldikss/vim-floaterm'
 Plug 'Yggdroot/LeaderF'
@@ -172,7 +170,7 @@ if winwidth(0) < 100
 endif
 
 if has('win32') || has('win64')
-    let g:FerretNvim                = 0
+    " let g:FerretNvim                = 0
     let g:FerretJob                 = 0
 endif
 
@@ -189,11 +187,12 @@ let g:lexima_ctrlh_as_backspace = 1
 let g:extradite_showhash = 1
 let g:extradite_diff_split = 'belowright vertical split'
 
-let g:FerretExecutable          = 'rg,ag'
-let g:FerretExecutableArguments = {
-  \   'ag': '-i --vimgrep --hidden',
-  \   'rg': '--vimgrep --no-heading --hidden'
-  \ }
+" let g:FerretExecutable          = 'rg,ag'
+" let g:FerretExecutable          = 'rg.exe,ag.exe'
+" let g:FerretExecutableArguments = {
+"   \   'ag.exe': '-i --vimgrep --hidden',
+"   \   'rg.exe': '--vimgrep --no-heading --hidden'
+"   \ }
 
 let g:highlightedyank_highlight_duration = 300
 
@@ -212,8 +211,6 @@ let g:floaterm_position            = 'center'
 let g:webdevicons_enable                 = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_startify        = 1
-let g:defx_icons_enable_syntax_highlight = 0
-let g:defx_icons_column_length           = 2
 let g:coc_snippet_next                   = '<tab>'
 
 let $VISUAL = 'nvr --remote-wait'
@@ -224,7 +221,7 @@ let g:sierra_Sunset = 1
 let g:edge_style = 'neon'
 let g:edge_disable_italic_comment = 1
 
-let g:coc_global_extensions = ['coc-json',
+let g:coc_global_extensions = ['coc-json', 'coc-explorer',
             \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-vimlsp',
             \ 'coc-lists', 'coc-go', 'coc-snippets', 'coc-highlight']
 
@@ -263,7 +260,7 @@ nmap <silent> dp <Plug>(coc-diagnostic-prev)
 nmap s <Plug>(operator-replace)
 nnoremap <silent> tt  :<C-u>FloatermToggle<CR>
 
-nnoremap <silent> <Leader>e        :<C-u>Defx<CR>
+nnoremap <silent> <Leader>e        :<C-u>CocCommand explorer<CR>
 nmap     <silent> <Leader>rf       <Plug>(coc-references)
 nmap     <silent> <Leader>rn       <Plug>(coc-rename)
 nmap     <silent> <Leader>a        <Plug>(FerretAck)
@@ -274,7 +271,6 @@ nnoremap <silent> <Leader>g        :<C-u>CocList grep<CR>
 nnoremap <silent> <Leader>h        :<C-u>call CocAction('doHover')<CR>
 nmap     <silent> <Leader>j        <Plug>(AerojumpBolt)
 nmap     <silent> <Leader>l        <Plug>(FerretLack)
-nnoremap <silent> <Leader>z        :<C-u>Defx -resume<CR>
 nnoremap <silent> <Leader>b        :<C-u>CocList buffers<CR>
 nnoremap <silent> <Leader>m        :<C-u>CocList mru<CR>
 nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
@@ -387,42 +383,11 @@ function! s:my_itab_function()
                 \ lexima#insmode#leave(1, '<Tab>')
 endfunction
 
-if &runtimepath =~# 'defx.nvim'
-    call defx#custom#option('_', {
-                \ 'columns': 'mark:indent:icons:filename:type:size:time',
-                \ 'listed': v:true,
-                \ 'show_ignored_files': v:true,
-                \ })
-endif
-
-function! s:my_defx_settings() abort
-    " Define mappings
-    nnoremap <silent><buffer><expr> <CR> defx#do_action('drop')
-    nnoremap <silent><buffer><expr> e defx#do_action('open')
-    nnoremap <silent><buffer><expr> c defx#do_action('copy')
-    nnoremap <silent><buffer><expr> m defx#do_action('move')
-    nnoremap <silent><buffer><expr> p defx#do_action('paste')
-    nnoremap <silent><buffer><expr> l defx#do_action('open')
-    nnoremap <silent><buffer><expr> o defx#do_action('new_directory')
-    nnoremap <silent><buffer><expr> i defx#do_action('new_file')
-    nnoremap <silent><buffer><expr> d defx#do_action('remove')
-    nnoremap <silent><buffer><expr> r defx#do_action('rename')
-    nnoremap <silent><buffer><expr> x defx#do_action('execute_system')
-    nnoremap <silent><buffer><expr> yy defx#do_action('yank_path')
-    nnoremap <silent><buffer><expr> .  defx#do_action('toggle_ignored_files')
-    nnoremap <silent><buffer><expr> h defx#do_action('cd', ['..'])
-    nnoremap <silent><buffer><expr> ~ defx#do_action('cd')
-    nnoremap <silent><buffer><expr> q defx#do_action('quit')
-    nnoremap <silent><buffer><expr> <Space> defx#do_action('toggle_select') . 'j'
-    nnoremap <silent><buffer><expr> * defx#do_action('toggle_select_all')
-endfunction
-
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0
 autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
-autocmd MyAutoCmd FileType defx call s:my_defx_settings()
 if !g:completion_gui
     autocmd MyAutoCmd CursorHold * silent call CocActionAsync('highlight')
     autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport

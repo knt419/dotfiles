@@ -1,5 +1,5 @@
 if exists('g:GtkGuiLoaded')
-    call rpcnotify(1, 'Gui', 'Font', 'Ricty 14')
+    call rpcnotify(1, 'Gui', 'Font', 'HackGen35Console 14')
 else
     GuiTabline 0
     GuiPopupmenu 0
