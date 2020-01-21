@@ -20,7 +20,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'rickhowe/diffchar.vim'
 Plug 'romainl/vim-qf'
 Plug 'TaDaa/vimade'
-Plug 'Shougo/echodoc.vim'
 
 " text/input manipulation
 Plug 'cohama/lexima.vim'
@@ -164,13 +163,12 @@ let g:lightline = {
             \ },
             \ }
 
-            " \   'right': "│"
 if winwidth(0) < 100
     let g:lightline#bufferline#filename_modifier = ':t'
 endif
 
 if has('win32') || has('win64')
-    " let g:FerretNvim                = 0
+    let g:FerretNvim                = 0
     let g:FerretJob                 = 0
 endif
 
@@ -178,7 +176,6 @@ let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
 let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-" let g:indentLine_setColors      = 0
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
@@ -187,12 +184,12 @@ let g:lexima_ctrlh_as_backspace = 1
 let g:extradite_showhash = 1
 let g:extradite_diff_split = 'belowright vertical split'
 
-" let g:FerretExecutable          = 'rg,ag'
-" let g:FerretExecutable          = 'rg.exe,ag.exe'
-" let g:FerretExecutableArguments = {
-"   \   'ag.exe': '-i --vimgrep --hidden',
-"   \   'rg.exe': '--vimgrep --no-heading --hidden'
-"   \ }
+let g:FerretExecutable          = 'rg,ag'
+let g:FerretExecutable          = 'rg.exe,ag.exe'
+let g:FerretExecutableArguments = {
+  \   'ag.exe': '-i --vimgrep --hidden',
+  \   'rg.exe': '--vimgrep --no-heading --hidden'
+  \ }
 
 let g:highlightedyank_highlight_duration = 300
 
@@ -225,8 +222,6 @@ let g:coc_global_extensions = ['coc-json', 'coc-explorer',
             \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-vimlsp',
             \ 'coc-lists', 'coc-go', 'coc-snippets', 'coc-highlight']
 
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type              = 'floating'
 let g:markdown_fenced_languages = [
             \ 'vim',
             \ 'help'
