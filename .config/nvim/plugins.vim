@@ -41,6 +41,7 @@ Plug 'wincent/ferret'
 Plug 'kana/vim-operator-user'
 Plug 'kana/vim-operator-replace'
 Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins'}
+Plug 'tyru/capture.vim'
 
 " file/directory
 Plug 'januswel/fencja.vim'
@@ -209,6 +210,8 @@ let g:webdevicons_enable                 = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_startify        = 1
 let g:coc_snippet_next                   = '<tab>'
+let g:capture_open_command = ''
+let g:capture_override_buffer = 'newbufwin'
 
 let $VISUAL = 'nvr --remote-wait'
 let $PATH   = $PATH . ':' . $HOME . '/go/bin'
