@@ -73,6 +73,17 @@ if !g:completion_gui
     Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
     set completeopt=noinsert,menuone,noselect,preview
     set shortmess+=c
+    Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
+    Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
 endif
 
 " gonvim
@@ -170,7 +181,7 @@ if winwidth(0) < 100
 endif
 
 if has('win32') || has('win64')
-    " let g:FerretNvim                = 0
+    let g:FerretNvim                = 0
     let g:FerretJob                 = 0
 endif
 
@@ -187,12 +198,12 @@ let g:lexima_ctrlh_as_backspace = 1
 let g:extradite_showhash = 1
 let g:extradite_diff_split = 'belowright vertical split'
 
-" let g:FerretExecutable          = 'rg,ag'
-" let g:FerretExecutable          = 'rg.exe,ag.exe'
-" let g:FerretExecutableArguments = {
-"   \   'ag.exe': '-i --vimgrep --hidden',
-"   \   'rg.exe': '--vimgrep --no-heading --hidden'
-"   \ }
+let g:FerretExecutable          = 'rg,ag'
+let g:FerretExecutable          = 'rg.exe,ag.exe'
+let g:FerretExecutableArguments = {
+  \   'ag.exe': '-i --vimgrep --hidden',
+  \   'rg.exe': '--vimgrep --no-heading --hidden'
+  \ }
 
 let g:highlightedyank_highlight_duration = 300
 
@@ -221,12 +232,12 @@ let g:sierra_Sunset = 1
 let g:edge_style = 'neon'
 let g:edge_disable_italic_comment = 1
 
-let g:coc_global_extensions = ['coc-json', 'coc-explorer',
-            \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-vimlsp',
-            \ 'coc-lists', 'coc-go', 'coc-snippets', 'coc-highlight']
+" let g:coc_global_extensions = ['coc-json', 'coc-explorer', 'coc-java',
+"             \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-vimlsp',
+"             \ 'coc-lists', 'coc-go', 'coc-snippets', 'coc-highlight']
 
 let g:echodoc#enable_at_startup = 1
-let g:echodoc#type              = 'floating'
+let g:echodoc#type              = 'virtual'
 let g:markdown_fenced_languages = [
             \ 'vim',
             \ 'help'
@@ -295,10 +306,6 @@ if exists('g:veonim')
                 \'vscode.typescript-language-features',
                 \'vscode.json-language-features',
                 \'vscode.css-language-features',
-                \'vscode.markdown-language-features',
-                \'vscode.html-language-features',
-                \'rust-lang.rust',
-                \'ms-python.python',
                 \]
 
     " workspace functions
