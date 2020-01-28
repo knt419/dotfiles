@@ -20,7 +20,6 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'rickhowe/diffchar.vim'
 Plug 'romainl/vim-qf'
 Plug 'TaDaa/vimade'
-Plug 'Shougo/echodoc.vim'
 
 " text/input manipulation
 Plug 'cohama/lexima.vim'
@@ -42,6 +41,7 @@ Plug 'wincent/ferret'
 Plug 'kana/vim-operator-user'
 Plug 'kana/vim-operator-replace'
 Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins'}
+Plug 'tyru/capture.vim'
 
 " file/directory
 Plug 'januswel/fencja.vim'
@@ -175,7 +175,6 @@ let g:lightline = {
             \ },
             \ }
 
-            " \   'right': "│"
 if winwidth(0) < 100
     let g:lightline#bufferline#filename_modifier = ':t'
 endif
@@ -189,7 +188,6 @@ let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
 let g:Lf_StlSeparator = { 'left': '', 'right': '' }
-" let g:indentLine_setColors      = 0
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
@@ -223,6 +221,8 @@ let g:webdevicons_enable                 = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_startify        = 1
 let g:coc_snippet_next                   = '<tab>'
+let g:capture_open_command = ''
+let g:capture_override_buffer = 'newbufwin'
 
 let $VISUAL = 'nvr --remote-wait'
 let $PATH   = $PATH . ':' . $HOME . '/go/bin'
@@ -236,8 +236,6 @@ let g:edge_disable_italic_comment = 1
 "             \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-vimlsp',
 "             \ 'coc-lists', 'coc-go', 'coc-snippets', 'coc-highlight']
 
-let g:echodoc#enable_at_startup = 1
-let g:echodoc#type              = 'virtual'
 let g:markdown_fenced_languages = [
             \ 'vim',
             \ 'help'
