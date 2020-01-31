@@ -1,5 +1,5 @@
 {
-  "suggest.echodocSupport": true,
+  "git.branchCharacter": "\ue725",
   "suggest.completionItemKindLabels": {
     "keyword": "\uf1de",
     "variable": "\ue79b",

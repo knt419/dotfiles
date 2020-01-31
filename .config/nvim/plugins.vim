@@ -354,7 +354,7 @@ function! LightlineRepository()
 endfunction
 
 function! LightlineRepoStatus()
-    return exists("b:git_dir") && exists('g:coc_git_status') ? substitute(g:coc_git_status, "\ue0a0", "\ue725", "g")  : ''
+    return exists("b:git_dir") && exists('g:coc_git_status') ? g:coc_git_status : ''
 endfunction
 
 function! LightlineFiletype()
