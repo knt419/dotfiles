@@ -35,7 +35,7 @@
     "*": "toggleSelection",
     "a": "actionMenu",
 
-    "h": "collapse",
+    "h": "gotoParent",
     "l": "expand",
     "J": ["toggleSelection", "normal:j"],
     "K": ["toggleSelection", "normal:k"],
