@@ -197,10 +197,9 @@ let g:extradite_showhash = 1
 let g:extradite_diff_split = 'belowright vertical split'
 
 let g:FerretExecutable          = 'rg,ag'
-let g:FerretExecutable          = 'rg.exe,ag.exe'
 let g:FerretExecutableArguments = {
-  \   'ag.exe': '-i --vimgrep --hidden',
-  \   'rg.exe': '--vimgrep --no-heading --hidden'
+  \   'ag': '-i --vimgrep --hidden',
+  \   'rg': '--vimgrep --no-heading --hidden'
   \ }
 
 let g:highlightedyank_highlight_duration = 300
