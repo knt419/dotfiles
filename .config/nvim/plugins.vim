@@ -269,6 +269,11 @@ nmap <silent> dp <Plug>(coc-diagnostic-prev)
 nmap s <Plug>(operator-replace)
 nnoremap <silent> tt  :<C-u>FloatermToggle<CR>
 
+nnoremap <Up>    :<C-u>Gpush
+nnoremap <Down>  :<C-u>Gpull
+nnoremap <Right> :<C-u>Gcommit -am ''<Left>
+nnoremap <Left>  :<C-u>CocCommand explorer<CR>
+
 nnoremap <silent> <Leader>e        :<C-u>CocCommand explorer<CR>
 nmap     <silent> <Leader>rf       <Plug>(coc-references)
 nmap     <silent> <Leader>rn       <Plug>(coc-rename)

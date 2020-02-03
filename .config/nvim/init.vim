@@ -194,6 +194,9 @@ noremap  q; :q
 
 nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
+vnoremap < <gv
+vnoremap > >gv
+
 nnoremap <silent> : ;
 nnoremap <silent> ; :
 nnoremap <silent> <CR><CR> o<Esc>
