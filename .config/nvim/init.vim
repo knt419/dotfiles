@@ -176,7 +176,7 @@ xnoremap <silent> Y "+y
 nnoremap <silent> x "_x
 nnoremap <silent> X "_X
 nnoremap <silent> cd :<C-u>cd %:h<CR>
-nnoremap <silent> ss :<C-u>%s///g<Left><Left>
+nnoremap ss :<C-u>%s///g<Left><Left>
 xnoremap <silent> <expr> p 'pgv"'.v:register.'y`>'
 nnoremap <silent> U <C-r>
 nnoremap <silent> <BS> <C-^>
@@ -192,7 +192,7 @@ noremap  <silent> oe :<C-u>e ++enc=euc-jp<CR>
 noremap  <silent> ou :<C-u>e ++enc=utf-8<CR>
 noremap  q; :q
 
-nnoremap <silent> SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
+nnoremap SS :<C-u>source $HOME/.config/nvim/init.vim<CR>
 
 vnoremap < <gv
 vnoremap > >gv
@@ -221,6 +221,7 @@ nnoremap <S-Right> <C-w>>
 nnoremap <S-Up>    <C-w>-
 nnoremap <S-Down>  <C-w>+
 nnoremap <expr><Tab> <SID>my_ntab_function()
+nnoremap <expr><S-Tab> <SID>my_ntab_r_function()
 nnoremap <C-Left>  <C-w>h
 nnoremap <C-Right> <C-w>l
 nnoremap <C-Up>    <C-w>k
@@ -245,6 +246,16 @@ function! s:my_ntab_function()
                 \ ":\<C-u>bn\<CR>" ) :
                 \ ":\<C-u>tabnext\<CR>" ) :
                 \ "\<C-w>w"
+endfunction
+
+function! s:my_ntab_r_function()
+    return winnr('$') == 1 ?
+                \ (tabpagenr('$') <= 1 ?
+                \ (len(getbufinfo({'buflisted':1})) <= 1 ?
+                \ ":\<C-u>echo 'no buffer to switch.'\<CR>" :
+                \ ":\<C-u>bp\<CR>" ) :
+                \ ":\<C-u>tabp\<CR>" ) :
+                \ "\<C-w>W"
 endfunction
 " }}}
 

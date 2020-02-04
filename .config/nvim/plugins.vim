@@ -366,7 +366,7 @@ function! LightlineFiletype()
 endfunction
 
 function! LightlineChanges()
-    return exists('b:coc_git_status') ? "\uf440 " . substitute(substitute(substitute(b:coc_git_status, "+", "\uf457 ", ""), "-", "\uf458 ", ""), '\~', "\uf459 ", "") : ''
+    return exists('b:coc_git_status') && b:coc_git_status != '' ? "\uf440 " . substitute(substitute(substitute(b:coc_git_status, "+", "\uf457 ", ""), "-", "\uf458 ", ""), '\~', "\uf459 ", "") : ''
 endfunction
 
 function! LightlineFileformat()
