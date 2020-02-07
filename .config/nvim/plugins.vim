@@ -6,95 +6,189 @@ let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvi
 
 
 " plugin install
-call plug#begin(g:plug_repo_dir)
+if g:plugin_manager == 'vim-plug'
+    call plug#begin(g:plug_repo_dir)
 
-" editor display
-Plug 'Yggdroot/indentLine'
-Plug 'ryanoasis/vim-devicons'
-Plug 'lilydjwg/colorizer'
-Plug 'itchyny/vim-parenmatch'
-Plug 'mhinz/vim-startify'
-Plug 'itchyny/lightline.vim'
-Plug 'mengelbrecht/lightline-bufferline'
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'rickhowe/diffchar.vim'
-Plug 'romainl/vim-qf'
-Plug 'TaDaa/vimade'
+    " editor display
+    Plug 'Yggdroot/indentLine'
+    Plug 'ryanoasis/vim-devicons'
+    Plug 'lilydjwg/colorizer'
+    Plug 'itchyny/vim-parenmatch'
+    Plug 'mhinz/vim-startify'
+    Plug 'itchyny/lightline.vim'
+    Plug 'mengelbrecht/lightline-bufferline'
+    Plug 'ntpeters/vim-better-whitespace'
+    Plug 'rickhowe/diffchar.vim'
+    Plug 'romainl/vim-qf'
+    Plug 'TaDaa/vimade'
 
-" text/input manipulation
-Plug 'cohama/lexima.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'godlygeek/tabular'
-Plug 'machakann/vim-highlightedyank'
-Plug 'rhysd/accelerated-jk'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-sleuth'
-Plug 'kana/vim-textobj-user'
-Plug 'kana/vim-textobj-line'
-Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
-Plug 'kana/vim-smartchr'
-Plug 'kana/vim-niceblock'
-Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
-Plug 'terryma/vim-expand-region'
-Plug 'wincent/ferret'
-Plug 'kana/vim-operator-user'
-Plug 'kana/vim-operator-replace'
-Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins'}
-Plug 'tyru/capture.vim'
+    " text/input manipulation
+    Plug 'cohama/lexima.vim'
+    Plug 'junegunn/vim-easy-align'
+    Plug 'godlygeek/tabular'
+    Plug 'machakann/vim-highlightedyank'
+    Plug 'rhysd/accelerated-jk'
+    Plug 'tpope/vim-surround'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-sleuth'
+    Plug 'kana/vim-textobj-user'
+    Plug 'kana/vim-textobj-line'
+    Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
+    Plug 'kana/vim-smartchr'
+    Plug 'kana/vim-niceblock'
+    Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
+    Plug 'terryma/vim-expand-region'
+    Plug 'wincent/ferret'
+    Plug 'kana/vim-operator-user'
+    Plug 'kana/vim-operator-replace'
+    Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins'}
+    Plug 'tyru/capture.vim'
 
-" file/directory
-Plug 'januswel/fencja.vim'
-Plug 'voldikss/vim-floaterm'
-Plug 'Yggdroot/LeaderF'
+    " file/directory
+    Plug 'januswel/fencja.vim'
+    Plug 'voldikss/vim-floaterm'
+    Plug 'Yggdroot/LeaderF'
 
-" git
-Plug 'tpope/vim-fugitive'
-Plug 'int3/vim-extradite'
+    " git
+    Plug 'tpope/vim-fugitive'
+    Plug 'int3/vim-extradite'
 
-" language support
-Plug 'sheerun/vim-polyglot'
-Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
-Plug 'tpope/vim-dadbod'
-Plug 'editorconfig/editorconfig-vim'
-Plug 'honza/vim-snippets'
+    " language support
+    Plug 'sheerun/vim-polyglot'
+    Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
+    Plug 'tpope/vim-dadbod'
+    Plug 'editorconfig/editorconfig-vim'
+    Plug 'honza/vim-snippets'
 
-" colorscheme
-Plug 'jeetsukumaran/vim-nefertiti'
-Plug 'Nequo/vim-allomancer'
-Plug 'ajmwagar/vim-deus'
-Plug 'sainnhe/edge'
-Plug 'tyrannicaltoucan/vim-quantum'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'knt419/lightline-colorscheme-themecolor'
+    " colorscheme
+    Plug 'jeetsukumaran/vim-nefertiti'
+    Plug 'Nequo/vim-allomancer'
+    Plug 'ajmwagar/vim-deus'
+    Plug 'sainnhe/edge'
+    Plug 'tyrannicaltoucan/vim-quantum'
+    Plug 'tyrannicaltoucan/vim-deep-space'
+    Plug 'knt419/lightline-colorscheme-themecolor'
 
-" lsp/completion
-if !g:completion_gui
-    Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-    set completeopt=noinsert,menuone,noselect,preview
-    set shortmess+=c
-    Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
-    Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
+    " lsp/completion
+    if !g:completion_gui
+        Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+        set completeopt=noinsert,menuone,noselect,preview
+        set shortmess+=c
+        Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
+    endif
+
+    " gonvim
+    if exists('g:gonvim_running')
+        Plug 'akiyosi/gonvim-fuzzy'
+        Plug 'equalsraf/neovim-gui-shim'
+    endif
+
+    Plug 'glacambre/firenvim'
+
+    call plug#end()
+
+elseif g:plugin_manager == 'plugpack'
+    call plugpac#begin()
+
+    Pack 'k-tanaka/minpac', {'type': 'opt'}
+    " editor display
+    Pack 'Yggdroot/indentLine'
+    Pack 'ryanoasis/vim-devicons'
+    Pack 'lilydjwg/colorizer'
+    Pack 'itchyny/vim-parenmatch'
+    Pack 'mhinz/vim-startify'
+    Pack 'itchyny/lightline.vim'
+    Pack 'mengelbrecht/lightline-bufferline'
+    Pack 'ntpeters/vim-better-whitespace'
+    Pack 'rickhowe/diffchar.vim'
+    Pack 'romainl/vim-qf'
+    Pack 'TaDaa/vimade'
+
+    " text/input manipulation
+    Pack 'cohama/lexima.vim'
+    Pack 'junegunn/vim-easy-align'
+    Pack 'godlygeek/tabular'
+    Pack 'machakann/vim-highlightedyank'
+    Pack 'rhysd/accelerated-jk'
+    Pack 'tpope/vim-surround'
+    Pack 'tpope/vim-commentary'
+    Pack 'tpope/vim-sleuth'
+    Pack 'kana/vim-textobj-user'
+    Pack 'kana/vim-textobj-line'
+    Pack 'kana/vim-smartword'
+    Pack 'kana/vim-smartchr'
+    Pack 'kana/vim-niceblock'
+    Pack 'haya14busa/vim-asterisk'
+    Pack 'terryma/vim-expand-region'
+    Pack 'wincent/ferret'
+    Pack 'kana/vim-operator-user'
+    Pack 'kana/vim-operator-replace'
+    Pack 'ripxorip/aerojump.nvim', { 'do': 'UpdateRemotePlugins'}
+    Pack 'tyru/capture.vim'
+
+    " file/directory
+    Pack 'januswel/fencja.vim'
+    Pack 'voldikss/vim-floaterm'
+    Pack 'Yggdroot/LeaderF'
+
+    " git
+    Pack 'tpope/vim-fugitive'
+    Pack 'int3/vim-extradite'
+
+    " language support
+    Pack 'sheerun/vim-polyglot'
+    Pack 'mechatroner/rainbow_csv', { 'for': 'csv' }
+    Pack 'tpope/vim-dadbod'
+    Pack 'editorconfig/editorconfig-vim'
+    Pack 'honza/vim-snippets'
+
+    " colorscheme
+    Pack 'jeetsukumaran/vim-nefertiti'
+    Pack 'Nequo/vim-allomancer'
+    Pack 'ajmwagar/vim-deus'
+    Pack 'sainnhe/edge'
+    Pack 'tyrannicaltoucan/vim-quantum'
+    Pack 'tyrannicaltoucan/vim-deep-space'
+    Pack 'knt419/lightline-colorscheme-themecolor'
+
+    " lsp/completion
+    if !g:completion_gui
+        Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
+        set completeopt=noinsert,menuone,noselect,preview
+        set shortmess+=c
+        Pack 'neoclide/coc-git',  {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-json',  {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-yaml',  {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-lists', {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-snippets', {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-java', {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-highlight', {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'josa42/coc-go', {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'iamcco/coc-vimlsp', {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'weirongxu/coc-explorer', {'do': {-> system('yarn install --frozen-lockfile')}}
+    endif
+
+    " gonvim
+    if exists('g:gonvim_running')
+        Pack 'akiyosi/gonvim-fuzzy'
+        Pack 'equalsraf/neovim-gui-shim'
+    endif
+
+    Pack 'glacambre/firenvim'
+
+    call plugpac#end()
 endif
-
-" gonvim
-if exists('g:gonvim_running')
-    Plug 'akiyosi/gonvim-fuzzy'
-    Plug 'equalsraf/neovim-gui-shim'
-endif
-
-Plug 'glacambre/firenvim'
-
-call plug#end()
 
 " plugin variables
 
@@ -271,7 +365,7 @@ nnoremap <silent> tt  :<C-u>FloatermToggle<CR>
 nnoremap <Up>    :<C-u>Gpush
 nnoremap <Down>  :<C-u>Gpull
 nnoremap <Right> :<C-u>Gcommit -am ''<Left>
-nnoremap <Left>  :<C-u>CocCommand explorer<CR>
+nnoremap <silent> <Left>  :<C-u>CocCommand explorer<CR>
 
 nnoremap <silent> <Leader>e        :<C-u>CocCommand explorer<CR>
 nmap     <silent> <Leader>rf       <Plug>(coc-references)

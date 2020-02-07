@@ -129,6 +129,7 @@ let g:vimsyn_embed             = 1
 let mapleader = "\<Space>"
 let g:vim_indent_cont = &shiftwidth * 3
 let $LANG = 'ja_JP.UTF-8'
+let g:plugin_manager = 'plugpack'
 
 " nvim/vim {{{
 if has('nvim')
@@ -152,19 +153,31 @@ augroup MySetUpCmd
     autocmd!
 augroup END
 
-" vimplug {{{
-let g:plug_path = expand('$HOME/.local/share/nvim/site/autoload/plug.vim')
-let g:plug_repo_dir = expand('$HOME/.local/share/nvim/plugged')
+if g:plugin_manager == 'vim-plug'
+    " vimplug {{{
+    let g:plug_path = expand('$HOME/.local/share/nvim/site/autoload/plug.vim')
+    let g:plug_repo_dir = expand('$HOME/.local/share/nvim/plugged')
 
-if !filereadable(g:plug_path)
-    execute '!curl -fLo ' . g:plug_path . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    autocmd MySetUpCmd VimEnter * PlugInstall --sync | source $HOME/.config/nvim/init.vim
+    if !filereadable(g:plug_path)
+        execute '!curl -fLo ' . g:plug_path . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+        autocmd MySetUpCmd VimEnter * PlugInstall --sync | source $HOME/.config/nvim/init.vim
+    endif
+
+    execute 'set runtimepath^=$HOME/.local/share/nvim/site/'
+    runtime plugins.vim
+    autocmd MySetUpCmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | q | endif
+    "}}}
+elseif g:plugin_manager == 'plugpack'
+    " plugpac & minpac {{{
+    let g:plugpack_path = expand('$HOME/.config/nvim/autoload/plugpac.vim')
+    if !filereadable(g:plugpack_path)
+        execute '!git clone https://github.com/k-takata/minpac.git ' . '$HOME/.config/nvim/pack/minpac/opt/minpac'
+        execute '!curl -fLo ' . g:plugpack_path . ' --create-dirs https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim'
+        autocmd MySetUpCmd VimEnter * PackInstall | source $HOME/.config/nvim/init.vim
+    endif
+    runtime plugins.vim
+    "}}}
 endif
-
-execute 'set runtimepath^=$HOME/.local/share/nvim/site/'
-runtime plugins.vim
-autocmd MySetUpCmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | q | endif
-"}}}
 
 filetype plugin indent on
 
