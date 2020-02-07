@@ -33,15 +33,15 @@ if g:plugin_manager == 'vim-plug'
     Plug 'tpope/vim-sleuth'
     Plug 'kana/vim-textobj-user'
     Plug 'kana/vim-textobj-line'
-    Plug 'kana/vim-smartword', { 'on': '<Plug>(smartword-' }
+    Plug 'kana/vim-smartword', { 'on' : '<Plug>(smartword-' }
     Plug 'kana/vim-smartchr'
     Plug 'kana/vim-niceblock'
-    Plug 'haya14busa/vim-asterisk', { 'on': '<Plug>(asterisk-' }
+    Plug 'haya14busa/vim-asterisk', { 'on' : '<Plug>(asterisk-' }
     Plug 'terryma/vim-expand-region'
     Plug 'wincent/ferret'
     Plug 'kana/vim-operator-user'
     Plug 'kana/vim-operator-replace'
-    Plug 'ripxorip/aerojump.nvim', { 'do': ':UpdateRemotePlugins'}
+    Plug 'ripxorip/aerojump.nvim', { 'do' : ':UpdateRemotePlugins' }
     Plug 'tyru/capture.vim'
 
     " file/directory
@@ -55,7 +55,7 @@ if g:plugin_manager == 'vim-plug'
 
     " language support
     Plug 'sheerun/vim-polyglot'
-    Plug 'mechatroner/rainbow_csv', { 'for': 'csv' }
+    Plug 'mechatroner/rainbow_csv', { 'for' : 'csv' }
     Plug 'tpope/vim-dadbod'
     Plug 'editorconfig/editorconfig-vim'
     Plug 'honza/vim-snippets'
@@ -71,20 +71,20 @@ if g:plugin_manager == 'vim-plug'
 
     " lsp/completion
     if !g:completion_gui
-        Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'neoclide/coc.nvim', { 'do' : 'yarn install --frozen-lockfile' }
         set completeopt=noinsert,menuone,noselect,preview
         set shortmess+=c
-        Plug 'neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'}
-        Plug 'neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'}
-        Plug 'neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'}
-        Plug 'neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'}
-        Plug 'neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'}
-        Plug 'neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'}
-        Plug 'neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'}
-        Plug 'neoclide/coc-highlight', {'do': 'yarn install --frozen-lockfile'}
-        Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
-        Plug 'iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'}
-        Plug 'weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'}
+        Plug 'neoclide/coc-git', { 'do' : 'yarn install --frozen-lockfile' }
+        Plug 'neoclide/coc-json', { 'do' : 'yarn install --frozen-lockfile' }
+        Plug 'neoclide/coc-yaml', { 'do' : 'yarn install --frozen-lockfile' }
+        Plug 'neoclide/coc-lists', { 'do' : 'yarn install --frozen-lockfile' }
+        Plug 'neoclide/coc-snippets', { 'do' : 'yarn install --frozen-lockfile' }
+        Plug 'neoclide/coc-java', { 'do' : 'yarn install --frozen-lockfile' }
+        Plug 'neoclide/coc-prettier', { 'do' : 'yarn install --frozen-lockfile' }
+        Plug 'neoclide/coc-highlight', { 'do' : 'yarn install --frozen-lockfile' }
+        Plug 'josa42/coc-go', { 'do' : 'yarn install --frozen-lockfile' }
+        Plug 'iamcco/coc-vimlsp', { 'do' : 'yarn install --frozen-lockfile' }
+        Plug 'weirongxu/coc-explorer', { 'do' : 'yarn install --frozen-lockfile' }
     endif
 
     " gonvim
@@ -100,83 +100,83 @@ if g:plugin_manager == 'vim-plug'
 elseif g:plugin_manager == 'plugpack'
     call plugpac#begin()
 
-    Pack 'k-tanaka/minpac', {'type': 'opt'}
+    Pack 'k-takata/minpac', { 'type' : 'opt' }
     " editor display
     Pack 'Yggdroot/indentLine'
     Pack 'ryanoasis/vim-devicons'
-    Pack 'lilydjwg/colorizer'
-    Pack 'itchyny/vim-parenmatch'
+    Pack 'lilydjwg/colorizer', { 'type' : 'lazy' }
     Pack 'mhinz/vim-startify'
     Pack 'itchyny/lightline.vim'
     Pack 'mengelbrecht/lightline-bufferline'
     Pack 'ntpeters/vim-better-whitespace'
-    Pack 'rickhowe/diffchar.vim'
+    Pack 'rickhowe/diffchar.vim', { 'type' : 'lazy' }
     Pack 'romainl/vim-qf'
     Pack 'TaDaa/vimade'
+    Pack 'andymass/vim-matchup', { 'type' : 'lazy' }
 
     " text/input manipulation
-    Pack 'cohama/lexima.vim'
-    Pack 'junegunn/vim-easy-align'
-    Pack 'godlygeek/tabular'
-    Pack 'machakann/vim-highlightedyank'
+    Pack 'cohama/lexima.vim', { 'type' : 'lazy' }
+    Pack 'junegunn/vim-easy-align', { 'type' : 'opt', 'on' : '<Plug>(EasyAlign)' }
+    Pack 'godlygeek/tabular', { 'type' : 'lazy' }
+    Pack 'machakann/vim-highlightedyank', { 'type' : 'lazy' }
     Pack 'rhysd/accelerated-jk'
-    Pack 'tpope/vim-surround'
-    Pack 'tpope/vim-commentary'
-    Pack 'tpope/vim-sleuth'
-    Pack 'kana/vim-textobj-user'
-    Pack 'kana/vim-textobj-line'
-    Pack 'kana/vim-smartword'
-    Pack 'kana/vim-smartchr'
-    Pack 'kana/vim-niceblock'
-    Pack 'haya14busa/vim-asterisk'
+    Pack 'tpope/vim-surround', { 'type' : 'lazy' }
+    Pack 'tpope/vim-commentary', { 'type' : 'lazy' }
+    Pack 'tpope/vim-sleuth', { 'type' : 'lazy' }
+    Pack 'kana/vim-textobj-user', { 'type' : 'lazy' }
+    Pack 'kana/vim-textobj-line', { 'type' : 'lazy' }
+    Pack 'kana/vim-smartword', { 'type' : 'lazy' }
+    Pack 'kana/vim-smartchr', { 'type' : 'lazy' }
+    Pack 'kana/vim-niceblock', { 'type' : 'lazy' }
+    Pack 'haya14busa/vim-asterisk', { 'type' : 'lazy' }
     Pack 'terryma/vim-expand-region'
     Pack 'wincent/ferret'
-    Pack 'kana/vim-operator-user'
-    Pack 'kana/vim-operator-replace'
-    Pack 'ripxorip/aerojump.nvim', { 'do': 'UpdateRemotePlugins'}
-    Pack 'tyru/capture.vim'
+    Pack 'kana/vim-operator-user', { 'type' : 'lazy' }
+    Pack 'kana/vim-operator-replace', { 'type' : 'lazy' }
+    Pack 'ripxorip/aerojump.nvim', { 'do' : 'UpdateRemotePlugins' }
+    Pack 'tyru/capture.vim', { 'type' : 'lazy' }
 
     " file/directory
-    Pack 'januswel/fencja.vim'
-    Pack 'voldikss/vim-floaterm'
-    Pack 'Yggdroot/LeaderF'
+    Pack 'januswel/fencja.vim', { 'type' : 'lazy' }
+    Pack 'voldikss/vim-floaterm', { 'type' : 'lazy' }
+    Pack 'Yggdroot/LeaderF', { 'type' : 'lazy' }
 
     " git
-    Pack 'tpope/vim-fugitive'
-    Pack 'int3/vim-extradite'
+    Pack 'tpope/vim-fugitive', { 'type' : 'lazy' }
+    Pack 'int3/vim-extradite', { 'type' : 'lazy' }
 
     " language support
     Pack 'sheerun/vim-polyglot'
-    Pack 'mechatroner/rainbow_csv', { 'for': 'csv' }
-    Pack 'tpope/vim-dadbod'
+    Pack 'mechatroner/rainbow_csv', { 'for' : 'csv' }
+    Pack 'tpope/vim-dadbod', { 'type' : 'lazy' }
     Pack 'editorconfig/editorconfig-vim'
     Pack 'honza/vim-snippets'
 
     " colorscheme
-    Pack 'jeetsukumaran/vim-nefertiti'
-    Pack 'Nequo/vim-allomancer'
-    Pack 'ajmwagar/vim-deus'
-    Pack 'sainnhe/edge'
-    Pack 'tyrannicaltoucan/vim-quantum'
+    Pack 'jeetsukumaran/vim-nefertiti', { 'type' : 'opt' }
+    Pack 'Nequo/vim-allomancer', { 'type' : 'opt' }
+    Pack 'ajmwagar/vim-deus', { 'type' : 'opt' }
+    Pack 'sainnhe/edge', { 'type' : 'opt' }
+    Pack 'tyrannicaltoucan/vim-quantum', { 'type' : 'opt' }
     Pack 'tyrannicaltoucan/vim-deep-space'
     Pack 'knt419/lightline-colorscheme-themecolor'
 
     " lsp/completion
     if !g:completion_gui
-        Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc.nvim', { 'do' : {-> system('yarn install --frozen-lockfile')}}
         set completeopt=noinsert,menuone,noselect,preview
         set shortmess+=c
-        Pack 'neoclide/coc-git',  {'do': {-> system('yarn install --frozen-lockfile')}}
-        Pack 'neoclide/coc-json',  {'do': {-> system('yarn install --frozen-lockfile')}}
-        Pack 'neoclide/coc-yaml',  {'do': {-> system('yarn install --frozen-lockfile')}}
-        Pack 'neoclide/coc-lists', {'do': {-> system('yarn install --frozen-lockfile')}}
-        Pack 'neoclide/coc-snippets', {'do': {-> system('yarn install --frozen-lockfile')}}
-        Pack 'neoclide/coc-java', {'do': {-> system('yarn install --frozen-lockfile')}}
-        Pack 'neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}}
-        Pack 'neoclide/coc-highlight', {'do': {-> system('yarn install --frozen-lockfile')}}
-        Pack 'josa42/coc-go', {'do': {-> system('yarn install --frozen-lockfile')}}
-        Pack 'iamcco/coc-vimlsp', {'do': {-> system('yarn install --frozen-lockfile')}}
-        Pack 'weirongxu/coc-explorer', {'do': {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-git',  { 'do' : {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-json',  { 'do' : {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-yaml',  { 'do' : {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-lists', { 'do' : {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-snippets', { 'do' : {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-java', { 'do' : {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-prettier', { 'do' : {-> system('yarn install --frozen-lockfile')}}
+        Pack 'neoclide/coc-highlight', { 'do' : {-> system('yarn install --frozen-lockfile')}}
+        Pack 'josa42/coc-go', { 'do' : {-> system('yarn install --frozen-lockfile')}}
+        Pack 'iamcco/coc-vimlsp', { 'do' : {-> system('yarn install --frozen-lockfile')}}
+        Pack 'weirongxu/coc-explorer', { 'do' : {-> system('yarn install --frozen-lockfile')}}
     endif
 
     " gonvim
@@ -185,7 +185,7 @@ elseif g:plugin_manager == 'plugpack'
         Pack 'equalsraf/neovim-gui-shim'
     endif
 
-    Pack 'glacambre/firenvim'
+    Pack 'glacambre/firenvim', { 'type' : 'opt' }
 
     call plugpac#end()
 endif
@@ -208,25 +208,25 @@ if g:cmdline_gui
 endif
 
 let g:lightline = {
-            \ 'colorscheme': 'deepspace',
-            \ 'active': {
-            \    'left': [
+            \ 'colorscheme' : 'deepspace',
+            \ 'active' : {
+            \    'left' : [
             \      ['mode', 'paste'],
             \      ['cocstatus']
             \    ],
-            \    'right': [
+            \    'right' : [
             \      ['readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage'],
             \    ]
             \ },
-            \ 'tabline': {
-            \   'left': [['winfo', 'buffers']],
-            \   'right': [['repostatus','repository']]
+            \ 'tabline' : {
+            \   'left' : [['winfo', 'buffers']],
+            \   'right' : [['repostatus','repository']]
             \ },
-            \ 'component': {
-            \   'lineinfo': "\ue0a1".'%3l:%3v',
-            \   'percentage': '%3p%%',
+            \ 'component' : {
+            \   'lineinfo' : "\ue0a1".'%3l:%3v',
+            \   'percentage' : '%3p%%',
             \ },
-            \ 'component_function': {
+            \ 'component_function' : {
             \    'readonly'   : 'LightlineReadonly',
             \    'repository' : 'LightlineRepository',
             \    'repostatus' : 'LightlineRepoStatus',
@@ -236,13 +236,13 @@ let g:lightline = {
             \    'cocstatus'  : 'coc#status',
             \    'winfo'      : 'LightlineWinfo'
             \ },
-            \ 'component_expand': {
-            \   'buffers': 'lightline#bufferline#buffers',
+            \ 'component_expand' : {
+            \   'buffers' : 'lightline#bufferline#buffers',
             \ },
-            \ 'component_type': {
-            \   'buffers': 'tabsel',
+            \ 'component_type' : {
+            \   'buffers' : 'tabsel',
             \ },
-            \ 'mode_map': {
+            \ 'mode_map' : {
             \   'n' : "\ufc44",
             \   'i' : "\uf040",
             \   'R' : "\uf954",
@@ -253,19 +253,19 @@ let g:lightline = {
             \   's' : "\uf044",
             \   'S' : "\uf044 ".'LINE',
             \   "\<C-s>": "\uf044 ".'BLOCK',
-            \   't': "\uf68c",
+            \   't' : "\uf68c",
             \ },
-            \ 'enable': {
-            \   'statusline': !g:statusline_gui,
-            \   'tabline': !g:tab_gui
+            \ 'enable' : {
+            \   'statusline' : !g:statusline_gui,
+            \   'tabline' : !g:tab_gui
             \ },
-            \ 'separator': {
-            \   'left': "│",
-            \   'right': "│"
+            \ 'separator' : {
+            \   'left' : "│",
+            \   'right' : "│"
             \ },
-            \ 'subseparator': {
-            \   'left': "│",
-            \   'right': "│"
+            \ 'subseparator' : {
+            \   'left' : "│",
+            \   'right' : "│"
             \ },
             \ }
 
@@ -281,7 +281,7 @@ endif
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
-let g:Lf_StlSeparator = { 'left': '', 'right': '' }
+let g:Lf_StlSeparator = { 'left' : '', 'right' : '' }
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
@@ -292,8 +292,8 @@ let g:extradite_diff_split = 'belowright vertical split'
 
 let g:FerretExecutable          = 'rg,ag'
 let g:FerretExecutableArguments = {
-  \   'ag': '-i --vimgrep --hidden',
-  \   'rg': '--vimgrep --no-heading --hidden'
+  \   'ag' : '-i --vimgrep --hidden',
+  \   'rg' : '--vimgrep --no-heading --hidden'
   \ }
 
 let g:highlightedyank_highlight_duration = 300

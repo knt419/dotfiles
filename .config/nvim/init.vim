@@ -130,6 +130,10 @@ let mapleader = "\<Space>"
 let g:vim_indent_cont = &shiftwidth * 3
 let $LANG = 'ja_JP.UTF-8'
 let g:plugin_manager = 'plugpack'
+let g:is_windows = has('win16') || has('win32') || has('win64')
+let g:is_cygwin = has('win32unix')
+let g:is_darwin = has('mac') || has('macunix') || has('gui_macvim')
+let g:is_linux = !g:is_windows && !g:is_cygwin && !g:is_darwin
 
 " nvim/vim {{{
 if has('nvim')
@@ -170,9 +174,10 @@ if g:plugin_manager == 'vim-plug'
 elseif g:plugin_manager == 'plugpack'
     " plugpac & minpac {{{
     let g:plugpack_path = expand('$HOME/.config/nvim/autoload/plugpac.vim')
+    let g:minpack_path = expand('$HOME/.config/nvim/pack/minpac/opt/minpac')
     if !filereadable(g:plugpack_path)
-        execute '!git clone https://github.com/k-takata/minpac.git ' . '$HOME/.config/nvim/pack/minpac/opt/minpac'
-        execute '!curl -fLo ' . g:plugpack_path . ' --create-dirs https://raw.githubusercontent.com/bennyyip/plugpac.vim/master/plugpac.vim'
+        execute '!git clone https://github.com/k-takata/minpac.git ' . g:minpack_path
+        execute '!curl -fLo ' . g:plugpack_path . ' --create-dirs https://raw.githubusercontent.com/yukimemi/plugpac.vim/master/plugpac.vim'
         autocmd MySetUpCmd VimEnter * PackInstall | source $HOME/.config/nvim/init.vim
     endif
     runtime plugins.vim
