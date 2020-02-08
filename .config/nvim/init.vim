@@ -129,7 +129,7 @@ let g:vimsyn_embed             = 1
 let mapleader = "\<Space>"
 let g:vim_indent_cont = &shiftwidth * 3
 let $LANG = 'ja_JP.UTF-8'
-let g:plugin_manager = 'plugpack'
+let g:plugin_manager = 'plugpac'
 let g:is_windows = has('win16') || has('win32') || has('win64')
 let g:is_cygwin = has('win32unix')
 let g:is_darwin = has('mac') || has('macunix') || has('gui_macvim')
@@ -171,15 +171,20 @@ if g:plugin_manager == 'vim-plug'
     runtime plugins.vim
     autocmd MySetUpCmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)')) | PlugInstall --sync | q | endif
     "}}}
-elseif g:plugin_manager == 'plugpack'
+elseif g:plugin_manager == 'plugpac'
     " plugpac & minpac {{{
-    let g:plugpack_path = expand('$HOME/.config/nvim/autoload/plugpac.vim')
-    let g:minpack_path = expand('$HOME/.config/nvim/pack/minpac/opt/minpac')
-    if !filereadable(g:plugpack_path)
-        execute '!git clone https://github.com/k-takata/minpac.git ' . g:minpack_path
-        execute '!curl -fLo ' . g:plugpack_path . ' --create-dirs https://raw.githubusercontent.com/yukimemi/plugpac.vim/master/plugpac.vim'
+    let g:pack_dir = expand('$HOME/.local/share/nvim/site')
+    let g:plugpac_path = g:pack_dir . '/autoload/plugpac.vim'
+    let g:minpac_path = g:pack_dir . '/pack/minpac/opt/minpac'
+    if !isdirectory(expand(g:minpac_path))
+        execute '!git clone https://github.com/k-takata/minpac.git ' . g:minpac_path
+    endif
+    if !filereadable(g:plugpac_path)
+        execute '!curl -fLo ' . g:plugpac_path . ' --create-dirs https://raw.githubusercontent.com/yukimemi/plugpac.vim/master/plugpac.vim'
         autocmd MySetUpCmd VimEnter * PackInstall | source $HOME/.config/nvim/init.vim
     endif
+    execute 'set packpath^=' . g:pack_dir
+    execute 'set runtimepath^=' . g:pack_dir
     runtime plugins.vim
     "}}}
 endif
@@ -297,6 +302,13 @@ command! -nargs=? -complete=file Diff if '<args>'=='' | browse diffsplit|else| d
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
+endif
+
+" Echo startup time on start.
+if has('vim_starting') && has('reltime')
+  let s:startuptime = reltime()
+  au MyAutoCmd VimEnter * let s:startuptime = reltime(s:startuptime) | redraw
+        \ | echomsg 'startuptime: ' . reltimestr(s:startuptime)
 endif
 
 set background=dark
