@@ -10,6 +10,21 @@
 "____________________________________________________________________________\
 "____________________________________________________________________________|
 
+" reset autocmd
+augroup MyAutoCmd
+    autocmd!
+augroup END
+augroup MySetUpCmd
+    autocmd!
+augroup END
+
+" Echo startup time on start.
+if has('vim_starting') && has('reltime')
+  let s:startuptime = reltime()
+  au MyAutoCmd VimEnter * let s:startuptime = reltime(s:startuptime) | redraw
+        \ | echomsg 'startuptime: ' . reltimestr(s:startuptime)
+endif
+
 " option {{{
 set encoding=utf-8
 scriptencoding utf-8
@@ -149,14 +164,6 @@ else
 endif
 "}}}
 
-" reset autocmd
-augroup MyAutoCmd
-    autocmd!
-augroup END
-augroup MySetUpCmd
-    autocmd!
-augroup END
-
 if g:plugin_manager == 'vim-plug'
     " vimplug {{{
     let g:plug_path = expand('$HOME/.local/share/nvim/site/autoload/plug.vim')
@@ -230,7 +237,7 @@ nnoremap <silent> vv V
 nnoremap <silent> vvv <C-v>
 nmap <silent> <C-n> *
 nmap <silent> <C-p> #
-cnoremap <silent> <C-v> <C-r>+
+cnoremap <C-v> <C-r>+
 inoremap <silent> <Esc> <Esc>:<C-u>set iminsert=0<CR>
 inoremap <silent> jj <Esc>:<C-u>set iminsert=0<CR>
 
@@ -302,13 +309,6 @@ command! -nargs=? -complete=file Diff if '<args>'=='' | browse diffsplit|else| d
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
-endif
-
-" Echo startup time on start.
-if has('vim_starting') && has('reltime')
-  let s:startuptime = reltime()
-  au MyAutoCmd VimEnter * let s:startuptime = reltime(s:startuptime) | redraw
-        \ | echomsg 'startuptime: ' . reltimestr(s:startuptime)
 endif
 
 set background=dark
