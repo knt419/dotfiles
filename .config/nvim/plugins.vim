@@ -273,7 +273,7 @@ if winwidth(0) < 100
     let g:lightline#bufferline#filename_modifier = ':t'
 endif
 
-if has('win32') || has('win64')
+if g:is_windows
     let g:FerretNvim                = 0
     let g:FerretJob                 = 0
 endif
@@ -285,6 +285,7 @@ let g:Lf_StlSeparator = {'left': '', 'right': ''}
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
+let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'qf', 'help', 'markdown']
 
 
 let g:extradite_showhash = 1
@@ -324,10 +325,6 @@ let g:nefertiti_base_brightness_level = 14
 let g:sierra_Sunset = 1
 let g:edge_style = 'neon'
 let g:edge_disable_italic_comment = 1
-
-" let g:coc_global_extensions = ['coc-json', 'coc-explorer', 'coc-java',
-"             \ 'coc-git', 'coc-yaml', 'coc-prettier', 'coc-vimlsp',
-"             \ 'coc-lists', 'coc-go', 'coc-snippets', 'coc-highlight']
 
 let g:markdown_fenced_languages = [
             \ 'vim',
