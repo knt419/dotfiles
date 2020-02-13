@@ -10,6 +10,21 @@
 "____________________________________________________________________________\
 "____________________________________________________________________________|
 
+" reset autocmd
+augroup MyAutoCmd
+    autocmd!
+augroup END
+augroup MySetUpCmd
+    autocmd!
+augroup END
+
+" Echo startup time on start.
+if has('vim_starting') && has('reltime')
+  let s:startuptime = reltime()
+  au MyAutoCmd VimEnter * let s:startuptime = reltime(s:startuptime) | redraw
+        \ | echomsg 'startuptime: ' . reltimestr(s:startuptime)
+endif
+
 " option {{{
 set encoding=utf-8
 scriptencoding utf-8
@@ -141,21 +156,13 @@ if has('nvim')
     set pumblend=10
     set winblend=10
     nnoremap <Leader>t :<C-u>terminal<CR>
-    tnoremap <Leader>q <C-\><C-n>
+    tnoremap <Esc><Esc> <C-\><C-n>
     tnoremap <C-t> <C-\><C-n>:<C-u>bn<CR>
 else
     set ttyfast
     set guioptions-=e
 endif
 "}}}
-
-" reset autocmd
-augroup MyAutoCmd
-    autocmd!
-augroup END
-augroup MySetUpCmd
-    autocmd!
-augroup END
 
 if g:plugin_manager == 'vim-plug'
     " vimplug {{{
@@ -302,13 +309,6 @@ command! -nargs=? -complete=file Diff if '<args>'=='' | browse diffsplit|else| d
 " local
 if filereadable(expand('$HOME/.config/nvim/init.vim.local'))
     source $HOME/.config/nvim/init.vim.local
-endif
-
-" Echo startup time on start.
-if has('vim_starting') && has('reltime')
-  let s:startuptime = reltime()
-  au MyAutoCmd VimEnter * let s:startuptime = reltime(s:startuptime) | redraw
-        \ | echomsg 'startuptime: ' . reltimestr(s:startuptime)
 endif
 
 set background=dark
