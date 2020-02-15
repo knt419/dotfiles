@@ -106,16 +106,6 @@ set breakindentopt=shift:2
 set showbreak=↪
 set tags=
 
-" if executable("xonsh")
-"     set shell=python\ -m\ xonsh
-"     set shellcmdflag=-c
-"     set shellquote=
-"     set shellxquote=\'
-"     set shellpipe=|
-"     set shellredir=>
-" endif
-" }}}
-
 " disable runtime plugins {{{
 let g:loaded_2html_plugin      = 1
 let g:loaded_getscript         = 1

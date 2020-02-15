@@ -483,11 +483,22 @@ function! s:my_itab_function()
                 \ lexima#insmode#leave(1, '<Tab>')
 endfunction
 
+function! s:my_diffenter_function()
+    :DisableWhitespace
+endfunction
+
+function! s:my_diffexit_function()
+    :EnableWhitespace
+    diffoff
+endfunction
+
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0
 autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 autocmd MyAutoCmd InsertLeave * silent! pclose!
+autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif
+autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif
 if !g:completion_gui
     autocmd MyAutoCmd CursorHold * silent call CocActionAsync('highlight')
     autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
