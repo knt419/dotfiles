@@ -137,8 +137,8 @@ let $LANG = 'ja_JP.UTF-8'
 let g:plugin_manager = 'plugpac'
 let g:is_windows = has('win16') || has('win32') || has('win64')
 let g:is_cygwin = has('win32unix')
-let g:is_darwin = has('mac') || has('macunix') || has('gui_macvim')
-let g:is_linux = !g:is_windows && !g:is_cygwin && !g:is_darwin
+let g:is_mac = has('mac') || has('macunix') || has('gui_macvim')
+let g:is_linux = !g:is_windows && !g:is_cygwin && !g:is_mac
 
 " nvim/vim {{{
 if has('nvim')

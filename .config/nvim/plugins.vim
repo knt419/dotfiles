@@ -116,7 +116,7 @@ elseif g:plugin_manager == 'plugpac'
 
     " text/input manipulation
     Pack 'cohama/lexima.vim', {'type': 'lazy'}
-    Pack 'junegunn/vim-easy-align', {'type': 'opt', 'on': '<Plug>(EasyAlign)'}
+    Pack 'junegunn/vim-easy-align', {'type': 'opt', 'on': '<Plug>(LiveEasyAlign)'}
     Pack 'godlygeek/tabular', {'type': 'lazy'}
     Pack 'machakann/vim-highlightedyank', {'type': 'lazy'}
     Pack 'rhysd/accelerated-jk'
