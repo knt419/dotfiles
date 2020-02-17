@@ -108,10 +108,10 @@ elseif g:plugin_manager == 'plugpac'
     Pack 'mhinz/vim-startify'
     Pack 'itchyny/lightline.vim'
     Pack 'mengelbrecht/lightline-bufferline'
-    Pack 'ntpeters/vim-better-whitespace'
+    Pack 'ntpeters/vim-better-whitespace', {'type': 'lazy'}
     Pack 'rickhowe/diffchar.vim', {'type': 'lazy'}
-    Pack 'romainl/vim-qf'
-    Pack 'TaDaa/vimade'
+    Pack 'romainl/vim-qf', {'type': 'lazy'}
+    Pack 'TaDaa/vimade', {'type': 'lazy'}
     Pack 'andymass/vim-matchup', {'type': 'lazy'}
 
     " text/input manipulation
@@ -129,8 +129,8 @@ elseif g:plugin_manager == 'plugpac'
     Pack 'kana/vim-smartchr', {'type': 'lazy'}
     Pack 'kana/vim-niceblock', {'type': 'lazy'}
     Pack 'haya14busa/vim-asterisk', {'type': 'lazy'}
-    Pack 'terryma/vim-expand-region'
-    Pack 'wincent/ferret'
+    Pack 'terryma/vim-expand-region', {'type': 'lazy'}
+    Pack 'wincent/ferret', {'type': 'lazy'}
     Pack 'kana/vim-operator-user', {'type': 'lazy'}
     Pack 'kana/vim-operator-replace', {'type': 'lazy'}
     Pack 'ripxorip/aerojump.nvim', {'do': 'UpdateRemotePlugins'}
@@ -149,8 +149,8 @@ elseif g:plugin_manager == 'plugpac'
     Pack 'sheerun/vim-polyglot'
     Pack 'mechatroner/rainbow_csv', {'for': 'csv'}
     Pack 'tpope/vim-dadbod', {'type': 'lazy'}
-    Pack 'editorconfig/editorconfig-vim'
-    Pack 'honza/vim-snippets'
+    Pack 'editorconfig/editorconfig-vim', {'type': 'lazy'}
+    Pack 'honza/vim-snippets', {'type': 'lazy'}
 
     " colorscheme
     Pack 'jeetsukumaran/vim-nefertiti', {'type': 'opt'}
