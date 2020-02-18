@@ -274,14 +274,14 @@ nnoremap <silent> <Left>  :<C-u>CocCommand explorer<CR>
 nnoremap <silent> <Leader>e        :<C-u>CocCommand explorer<CR>
 nmap     <silent> <Leader>rf       <Plug>(coc-references)
 nmap     <silent> <Leader>rn       <Plug>(coc-rename)
-nmap     <silent> <Leader>a        <Plug>(FerretAck)
+nmap     <Leader>a        <Plug>(FerretAck)
 nnoremap <silent> <Leader>s        :<C-u>Startify<CR>
 nmap     <silent> <Leader>df       <Plug>(coc-definition)
 nnoremap <silent> <Leader>f        :<C-u>CocList files<CR>
 nnoremap <silent> <Leader>g        :<C-u>CocList grep<CR>
 nnoremap <silent> <Leader>h        :<C-u>call CocAction('doHover')<CR>
 nmap     <silent> <Leader>j        <Plug>(AerojumpBolt)
-nmap     <silent> <Leader>l        <Plug>(FerretLack)
+nmap     <Leader>l        <Plug>(FerretLack)
 nnoremap <silent> <Leader>b        :<C-u>CocList buffers<CR>
 nnoremap <silent> <Leader>m        :<C-u>CocList mru<CR>
 nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
