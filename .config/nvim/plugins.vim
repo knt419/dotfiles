@@ -399,6 +399,20 @@ function! s:my_diffexit_function()
     diffoff
 endfunction
 
+function! s:my_cwordinfo_function()
+    let s:cursor_word = expand('<cword>')
+    if len(s:cursor_word) < 3
+        return
+    endif
+    let s:save_pos = getpos(".") |
+    :redir => s:wordcount
+    :silent execute ':%s/' . s:cursor_word . '//gn'
+    :redir END
+    call setpos('.', s:save_pos)
+    call CocActionAsync('highlight')
+    echo 'cursor_word : ' . s:cursor_word . ' : ' . substitute(s:wordcount, '\n', '', '')
+endfunction
+
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0
 autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0
@@ -407,7 +421,7 @@ autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif
 autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif
 if !g:completion_gui
-    autocmd MyAutoCmd CursorHold * silent call CocActionAsync('highlight')
+    autocmd MyAutoCmd CursorHold * call <SID>my_cwordinfo_function()
     autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
     autocmd MyAutoCmd ColorScheme * :highlight! link CocHighlightText Search
 endif
