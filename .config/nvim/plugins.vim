@@ -9,6 +9,7 @@ let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvi
 call plugpac#begin()
 
 Pack 'k-takata/minpac', {'type': 'opt'}
+
 " editor display
 Pack 'Yggdroot/indentLine'
 Pack 'ryanoasis/vim-devicons'
@@ -41,13 +42,12 @@ Pack 'terryma/vim-expand-region', {'type': 'lazy'}
 Pack 'wincent/ferret', {'type': 'lazy'}
 Pack 'kana/vim-operator-user', {'type': 'lazy'}
 Pack 'kana/vim-operator-replace', {'type': 'lazy'}
-Pack 'ripxorip/aerojump.nvim', {'do': 'UpdateRemotePlugins'}
+Pack 'ripxorip/aerojump.nvim', {'type': 'opt', 'do': 'UpdateRemotePlugins'}
 Pack 'tyru/capture.vim', {'type': 'lazy'}
 
 " file/directory
 Pack 'januswel/fencja.vim', {'type': 'lazy'}
 Pack 'voldikss/vim-floaterm', {'type': 'lazy'}
-Pack 'Yggdroot/LeaderF', {'type': 'lazy'}
 
 " git
 Pack 'tpope/vim-fugitive', {'type': 'lazy'}
@@ -67,7 +67,7 @@ Pack 'ajmwagar/vim-deus', {'type': 'opt'}
 Pack 'sainnhe/edge', {'type': 'opt'}
 Pack 'tyrannicaltoucan/vim-quantum', {'type': 'opt'}
 Pack 'tyrannicaltoucan/vim-deep-space'
-Pack 'knt419/lightline-colorscheme-themecolor'
+Pack 'knt419/lightline-colorscheme-themecolor', {'type': 'opt'}
 
 " lsp/completion
 if !g:completion_gui
@@ -188,7 +188,6 @@ endif
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
-let g:Lf_StlSeparator = {'left': '', 'right': ''}
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
