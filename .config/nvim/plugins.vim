@@ -9,6 +9,7 @@ let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvi
 call plugpac#begin()
 
 Pack 'k-takata/minpac', {'type': 'opt'}
+
 " editor display
 Pack 'Yggdroot/indentLine'
 Pack 'ryanoasis/vim-devicons'
@@ -41,13 +42,12 @@ Pack 'terryma/vim-expand-region', {'type': 'lazy'}
 Pack 'wincent/ferret', {'type': 'lazy'}
 Pack 'kana/vim-operator-user', {'type': 'lazy'}
 Pack 'kana/vim-operator-replace', {'type': 'lazy'}
-Pack 'ripxorip/aerojump.nvim', {'do': 'UpdateRemotePlugins'}
+Pack 'ripxorip/aerojump.nvim', {'type': 'opt', 'do': 'UpdateRemotePlugins'}
 Pack 'tyru/capture.vim', {'type': 'lazy'}
 
 " file/directory
 Pack 'januswel/fencja.vim', {'type': 'lazy'}
 Pack 'voldikss/vim-floaterm', {'type': 'lazy'}
-Pack 'Yggdroot/LeaderF', {'type': 'lazy'}
 
 " git
 Pack 'tpope/vim-fugitive', {'type': 'lazy'}
@@ -67,7 +67,7 @@ Pack 'ajmwagar/vim-deus', {'type': 'opt'}
 Pack 'sainnhe/edge', {'type': 'opt'}
 Pack 'tyrannicaltoucan/vim-quantum', {'type': 'opt'}
 Pack 'tyrannicaltoucan/vim-deep-space'
-Pack 'knt419/lightline-colorscheme-themecolor'
+Pack 'knt419/lightline-colorscheme-themecolor', {'type': 'opt'}
 
 " lsp/completion
 if !g:completion_gui
@@ -188,7 +188,6 @@ endif
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
-let g:Lf_StlSeparator = {'left': '', 'right': ''}
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
@@ -274,14 +273,14 @@ nnoremap <silent> <Left>  :<C-u>CocCommand explorer<CR>
 nnoremap <silent> <Leader>e        :<C-u>CocCommand explorer<CR>
 nmap     <silent> <Leader>rf       <Plug>(coc-references)
 nmap     <silent> <Leader>rn       <Plug>(coc-rename)
-nmap     <silent> <Leader>a        <Plug>(FerretAck)
+nmap     <Leader>a        <Plug>(FerretAck)
 nnoremap <silent> <Leader>s        :<C-u>Startify<CR>
 nmap     <silent> <Leader>df       <Plug>(coc-definition)
 nnoremap <silent> <Leader>f        :<C-u>CocList files<CR>
 nnoremap <silent> <Leader>g        :<C-u>CocList grep<CR>
 nnoremap <silent> <Leader>h        :<C-u>call CocAction('doHover')<CR>
 nmap     <silent> <Leader>j        <Plug>(AerojumpBolt)
-nmap     <silent> <Leader>l        <Plug>(FerretLack)
+nmap     <Leader>l        <Plug>(FerretLack)
 nnoremap <silent> <Leader>b        :<C-u>CocList buffers<CR>
 nnoremap <silent> <Leader>m        :<C-u>CocList mru<CR>
 nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
@@ -399,6 +398,20 @@ function! s:my_diffexit_function()
     diffoff
 endfunction
 
+function! s:my_cwordinfo_function()
+    let s:cursor_word = expand('<cword>')
+    if len(s:cursor_word) < 3
+        return
+    endif
+    let s:save_pos = getpos(".") |
+    :redir => s:wordcount
+    :silent execute ':%s/' . s:cursor_word . '//gn'
+    :redir END
+    call setpos('.', s:save_pos)
+    call CocActionAsync('highlight')
+    echo 'cursor_word : ' . s:cursor_word . ' : ' . substitute(s:wordcount, '\n', '', '')
+endfunction
+
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0
 autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0
@@ -407,7 +420,7 @@ autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif
 autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif
 if !g:completion_gui
-    autocmd MyAutoCmd CursorHold * silent call CocActionAsync('highlight')
+    autocmd MyAutoCmd CursorHold * call <SID>my_cwordinfo_function()
     autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
     autocmd MyAutoCmd ColorScheme * :highlight! link CocHighlightText Search
 endif
