@@ -211,6 +211,7 @@ nnoremap <silent> vvv <C-v>
 nmap <silent> <C-n> *
 nmap <silent> <C-p> #
 cnoremap <C-v> <C-r>+
+cnoremap <C-c> <C-r><C-w>
 inoremap <silent> <Esc> <Esc>:<C-u>set iminsert=0<CR>
 inoremap <silent> jj <Esc>:<C-u>set iminsert=0<CR>
 
