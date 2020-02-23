@@ -22,6 +22,9 @@ Pack 'rickhowe/diffchar.vim', {'type': 'lazy'}
 Pack 'romainl/vim-qf', {'type': 'lazy'}
 Pack 'TaDaa/vimade', {'type': 'lazy'}
 Pack 'andymass/vim-matchup', {'type': 'lazy'}
+Pack 'camspiers/animate.vim'
+Pack 'camspiers/lens.vim'
+Pack 'itchyny/vim-cursorword'
 
 " text/input manipulation
 Pack 'cohama/lexima.vim', {'type': 'lazy'}
@@ -79,7 +82,6 @@ if !g:completion_gui
     Pack 'neoclide/coc-snippets', {'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'neoclide/coc-java', {'for': 'java', 'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-highlight', {'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'josa42/coc-go', {'for': 'go', 'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'iamcco/coc-vimlsp', {'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'weirongxu/coc-explorer', {'do': {-> system('yarn install --frozen-lockfile')}}
@@ -396,11 +398,10 @@ function! s:my_cwordinfo_function()
         return
     endif
     let s:save_pos = getpos(".") |
-    :redir => s:wordcount
-    :silent execute ':%s/' . s:cursor_word . '//gn'
-    :redir END
+    redir => s:wordcount
+    silent execute ':%s/' . s:cursor_word . '//gn'
+    redir END
     call setpos('.', s:save_pos)
-    call CocActionAsync('highlight')
     echo 'word on cursor : "' . s:cursor_word . '" : ' . substitute(s:wordcount, '\n', '', '')
 endfunction
 
@@ -414,5 +415,4 @@ autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&d
 if !g:completion_gui
     autocmd MyAutoCmd CursorHold * call <SID>my_cwordinfo_function()
     autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
-    autocmd MyAutoCmd ColorScheme * :highlight! link CocHighlightText Search
 endif
