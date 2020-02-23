@@ -8,7 +8,7 @@ let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvi
 " plugin install
 call plugpac#begin()
 
-Pack 'k-takata/minpac', {'type': 'opt'}
+Pack 'k-takata/minpac', {'type': 'opt', 'branch': 'devel'}
 
 " editor display
 Pack 'Yggdroot/indentLine'
@@ -35,14 +35,12 @@ Pack 'tpope/vim-sleuth', {'type': 'lazy'}
 Pack 'kana/vim-textobj-user', {'type': 'lazy'}
 Pack 'kana/vim-textobj-line', {'type': 'lazy'}
 Pack 'kana/vim-smartword', {'type': 'lazy'}
-Pack 'kana/vim-smartchr', {'type': 'lazy'}
 Pack 'kana/vim-niceblock', {'type': 'lazy'}
 Pack 'haya14busa/vim-asterisk', {'type': 'lazy'}
 Pack 'terryma/vim-expand-region', {'type': 'lazy'}
 Pack 'wincent/ferret', {'type': 'lazy'}
 Pack 'kana/vim-operator-user', {'type': 'lazy'}
 Pack 'kana/vim-operator-replace', {'type': 'lazy'}
-Pack 'ripxorip/aerojump.nvim', {'type': 'opt', 'do': 'UpdateRemotePlugins'}
 Pack 'tyru/capture.vim', {'type': 'lazy'}
 
 " file/directory
@@ -75,14 +73,14 @@ if !g:completion_gui
     set completeopt=noinsert,menuone,noselect,preview
     set shortmess+=c
     Pack 'neoclide/coc-git',  {'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-json',  {'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-yaml',  {'do': {-> system('yarn install --frozen-lockfile')}}
+    Pack 'neoclide/coc-json',  {'for': 'json', 'do': {-> system('yarn install --frozen-lockfile')}}
+    Pack 'neoclide/coc-yaml',  {'for': 'yaml', 'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'neoclide/coc-lists', {'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'neoclide/coc-snippets', {'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-java', {'do': {-> system('yarn install --frozen-lockfile')}}
+    Pack 'neoclide/coc-java', {'for': 'java', 'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'neoclide/coc-highlight', {'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'josa42/coc-go', {'do': {-> system('yarn install --frozen-lockfile')}}
+    Pack 'josa42/coc-go', {'for': 'go', 'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'iamcco/coc-vimlsp', {'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'weirongxu/coc-explorer', {'do': {-> system('yarn install --frozen-lockfile')}}
 endif
@@ -247,12 +245,6 @@ map g# <Plug>(asterisk-gz#)
 inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>
 inoremap <silent> <Tab> <C-r>=<SID>my_itab_function()<CR>
 inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
-inoremap <expr> ;  smartchr#one_of(';', '"')
-inoremap <expr> :  smartchr#one_of(':', '''')
-inoremap <expr> -  smartchr#one_of('-', '=')
-inoremap <expr> ,  smartchr#one_of(',', '(')
-inoremap <expr> .  smartchr#one_of('.', ')')
-inoremap <expr> @  smartchr#one_of('@', '''', '"')
 
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
@@ -409,7 +401,7 @@ function! s:my_cwordinfo_function()
     :redir END
     call setpos('.', s:save_pos)
     call CocActionAsync('highlight')
-    echo 'cursor_word : ' . s:cursor_word . ' : ' . substitute(s:wordcount, '\n', '', '')
+    echo 'word on cursor : "' . s:cursor_word . '" : ' . substitute(s:wordcount, '\n', '', '')
 endfunction
 
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none

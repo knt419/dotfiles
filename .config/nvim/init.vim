@@ -158,7 +158,7 @@ let g:pack_dir = expand('$HOME/.local/share/nvim/site')
 let g:plugpac_path = g:pack_dir . '/autoload/plugpac.vim'
 let g:minpac_path = g:pack_dir . '/pack/minpac/opt/minpac'
 if !isdirectory(expand(g:minpac_path))
-    execute '!git clone https://github.com/k-takata/minpac.git ' . g:minpac_path
+    execute '!git clone -b devel https://github.com/k-takata/minpac.git ' . g:minpac_path
 endif
 if !filereadable(g:plugpac_path)
     execute '!curl -fLo ' . g:plugpac_path . ' --create-dirs https://raw.githubusercontent.com/yukimemi/plugpac.vim/master/plugpac.vim'
@@ -201,7 +201,7 @@ vnoremap < <gv
 vnoremap > >gv
 
 nnoremap <silent> : ;
-nnoremap <silent> ; :
+nnoremap ; :
 nnoremap <silent> <CR><CR> o<Esc>
 nnoremap <silent> <Leader>q :<C-u>bd<CR>
 nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>
