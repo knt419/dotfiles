@@ -193,6 +193,7 @@ let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
 let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'qf', 'help', 'markdown']
 
+let g:lens#disabled_filetypes = ['coc-explorer']
 
 let g:extradite_showhash = 1
 let g:extradite_diff_split = 'belowright vertical split'
