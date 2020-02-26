@@ -122,7 +122,7 @@ let g:lightline = {
             \      ['cocstatus']
             \    ],
             \    'right': [
-            \      ['readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage'],
+            \      ['readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'linfo', 'percentage'],
             \    ]
             \ },
             \ 'tabline': {
@@ -131,7 +131,7 @@ let g:lightline = {
             \ },
             \ 'component': {
             \   'lineinfo': "\ue0a1".'%3l:%3v',
-            \   'percentage': '%3p%%',
+            \   'percentage': '%2p%%',
             \ },
             \ 'component_function': {
             \    'readonly'   : 'LightlineReadonly',
@@ -141,7 +141,8 @@ let g:lightline = {
             \    'fileformat': 'LightlineFileformat',
             \    'changes'    : 'LightlineChanges',
             \    'cocstatus'  : 'coc#status',
-            \    'winfo'      : 'LightlineWinfo'
+            \    'winfo'      : 'LightlineWInfo',
+            \    'linfo'      : 'LightlineLInfo'
             \ },
             \ 'component_expand': {
             \   'buffers': 'lightline#bufferline#buffers',
@@ -365,9 +366,14 @@ function! LightlineFileformat()
     return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . '  ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
 endfunction
 
-function! LightlineWinfo()
-    return "\ufab1" . winnr() . ' ' . "\uf4a5 " . bufnr('%')
+function! LightlineLInfo()
+    return winwidth(0) > 70 ? "\ue0a1".'%3l:%3v' : ''
 endfunction
+
+function! LightlineWInfo()
+    return winwidth(0) > 70 ? "\ufab1" . winnr() . ' ' . "\uf4a5 " . bufnr('%') : ''
+endfunction
+
 function! s:my_icr_function()
     return pumvisible() ?
                 \ coc#expandable() ?
@@ -403,7 +409,7 @@ function! s:my_cwordinfo_function()
     silent execute ':%s/' . s:cursor_word . '//gn'
     redir END
     call setpos('.', s:save_pos)
-    echo 'word on cursor : "' . s:cursor_word . '" : ' . substitute(s:wordcount, '\n', '', '')
+    echo 'word on cursor "' . s:cursor_word . '" : ' . substitute(s:wordcount, '\n', '', '')
 endfunction
 
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
