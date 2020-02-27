@@ -122,7 +122,7 @@ let g:lightline = {
             \      ['cocstatus']
             \    ],
             \    'right': [
-            \      ['readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'linfo', 'percentage'],
+            \      ['readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage'],
             \    ]
             \ },
             \ 'tabline': {
@@ -132,6 +132,9 @@ let g:lightline = {
             \ 'component': {
             \   'lineinfo': "\ue0a1".'%3l:%3v',
             \   'percentage': '%2p%%',
+            \ },
+            \ 'component_visible_condition': {
+            \   'lineinfo': '1'
             \ },
             \ 'component_function': {
             \    'readonly'   : 'LightlineReadonly',
@@ -365,10 +368,6 @@ function! LightlineFileformat()
     return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . '  ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
 endfunction
 
-function! LightlineLInfo()
-    return winwidth(0) > 70 ? "\ue0a1".'%3l:%3v' : ''
-endfunction
-
 function! LightlineWInfo()
     return winwidth(0) > 70 ? "\ufab1" . winnr() . ' ' . "\uf4a5 " . bufnr('%') : ''
 endfunction
@@ -390,11 +389,11 @@ function! s:my_itab_function()
 endfunction
 
 function! s:my_diffenter_function()
-    :DisableWhitespace
+    DisableWhitespace
 endfunction
 
 function! s:my_diffexit_function()
-    :EnableWhitespace
+    EnableWhitespace
     diffoff
 endfunction
 
