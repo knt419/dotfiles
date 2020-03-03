@@ -404,11 +404,8 @@ function! s:my_cwordinfo_function()
         return
     endif
     let s:save_pos = getpos(".") |
-    redir => s:wordcount
-    silent execute ':%s/' . s:cursor_word . '//gn'
-    redir END
+    echo 'word on cursor "' . s:cursor_word . '" : ' . substitute(execute('%s/'.s:cursor_word.'//gn'), '\n', '', '')
     call setpos('.', s:save_pos)
-    echo 'word on cursor "' . s:cursor_word . '" : ' . substitute(s:wordcount, '\n', '', '')
 endfunction
 
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
