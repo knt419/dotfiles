@@ -195,6 +195,7 @@ let g:lightline#bufferline#unicode_symbols = 1
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
+let g:lexima_map_escape = '<Esc>:<C-u>set iminsert=0<CR>'
 let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'qf', 'help', 'markdown']
 
 let g:lens#disabled_filetypes = ['coc-explorer']
