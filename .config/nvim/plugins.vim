@@ -122,7 +122,7 @@ let g:lightline = {
             \      ['cocstatus']
             \    ],
             \    'right': [
-            \      ['readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'linfo', 'percentage'],
+            \      ['readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage'],
             \    ]
             \ },
             \ 'tabline': {
@@ -141,8 +141,7 @@ let g:lightline = {
             \    'fileformat': 'LightlineFileformat',
             \    'changes'    : 'LightlineChanges',
             \    'cocstatus'  : 'coc#status',
-            \    'winfo'      : 'LightlineWInfo',
-            \    'linfo'      : 'LightlineLInfo'
+            \    'winfo'      : 'LightlineWInfo'
             \ },
             \ 'component_expand': {
             \   'buffers': 'lightline#bufferline#buffers',
@@ -363,10 +362,6 @@ endfunction
 
 function! LightlineFileformat()
     return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . '  ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
-endfunction
-
-function! LightlineLInfo()
-    return winwidth(0) > 70 ? "\ue0a1".'%3l:%3v' : ''
 endfunction
 
 function! LightlineWInfo()

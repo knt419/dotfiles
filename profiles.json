@@ -91,6 +91,7 @@
             },
             {
                 "commandline" : "nvim.exe",
+                "padding" : "0 0 0 0",
                 "hidden" : false,
                 "name": "neovim"
             }
