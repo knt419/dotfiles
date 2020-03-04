@@ -4,7 +4,6 @@ let g:statusline_gui = exists('g:gui_oni') || exists('g:veonim')
 let g:completion_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gnvim')
 let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running') || exists('g:gnvim')
 
-
 " plugin install
 call plugpac#begin()
 
@@ -27,7 +26,7 @@ Pack 'camspiers/lens.vim'
 Pack 'itchyny/vim-cursorword'
 
 " text/input manipulation
-Pack 'cohama/lexima.vim', {'type': 'lazy'}
+Pack 'cohama/lexima.vim'
 Pack 'junegunn/vim-easy-align', {'type': 'opt', 'on': '<Plug>(LiveEasyAlign)'}
 Pack 'godlygeek/tabular', {'type': 'lazy'}
 Pack 'machakann/vim-highlightedyank', {'type': 'lazy'}
@@ -75,9 +74,9 @@ if !g:completion_gui
     Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
     set completeopt=noinsert,menuone,noselect,preview
     set shortmess+=c
-    Pack 'neoclide/coc-git',  {'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-json',  {'for': 'json', 'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-yaml',  {'for': 'yaml', 'do': {-> system('yarn install --frozen-lockfile')}}
+    Pack 'neoclide/coc-git', {'do': {-> system('yarn install --frozen-lockfile')}}
+    Pack 'neoclide/coc-json', {'for': 'json', 'do': {-> system('yarn install --frozen-lockfile')}}
+    Pack 'neoclide/coc-yaml', {'for': 'yaml', 'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'neoclide/coc-lists', {'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'neoclide/coc-snippets', {'do': {-> system('yarn install --frozen-lockfile')}}
     Pack 'neoclide/coc-java', {'for': 'java', 'do': {-> system('yarn install --frozen-lockfile')}}
@@ -242,6 +241,7 @@ let g:markdown_fenced_languages = [
             \ 'help'
             \]
 
+
 " plugin keymaps
 
 map *  <Plug>(asterisk-z*)
@@ -373,6 +373,10 @@ function! LightlineWInfo()
     return winwidth(0) > 70 ? "\ufab1" . winnr() . ' ' . "\uf4a5 " . bufnr('%') : ''
 endfunction
 
+function! s:my_lexima_setup()
+    call lexima#add_rule({'at': '(\%#)', 'char': '-', 'delete' : ')', 'input': '<Esc>ea)'})
+endfunction
+
 function! s:my_icr_function()
     return pumvisible() ?
                 \ coc#expandable() ?
@@ -415,6 +419,7 @@ autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_functio
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif
 autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif
+autocmd MyAutoCmd WinEnter * call s:my_lexima_setup()
 if !g:completion_gui
     autocmd MyAutoCmd CursorHold * call <SID>my_cwordinfo_function()
     autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport

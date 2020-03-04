@@ -139,6 +139,10 @@ let g:is_cygwin = has('win32unix')
 let g:is_mac = has('mac') || has('macunix') || has('gui_macvim')
 let g:is_linux = !g:is_windows && !g:is_cygwin && !g:is_mac
 
+if g:is_windows
+    set shellslash
+endif
+
 " nvim/vim {{{
 if has('nvim')
     set inccommand=split
