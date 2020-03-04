@@ -133,6 +133,9 @@ let g:lightline = {
             \   'lineinfo': "\ue0a1".'%3l:%3v',
             \   'percentage': '%2p%%',
             \ },
+            \ 'component_visible_condition': {
+            \   'lineinfo': '1'
+            \ },
             \ 'component_function': {
             \    'readonly'   : 'LightlineReadonly',
             \    'repository': 'LightlineRepository',
@@ -191,8 +194,10 @@ let g:lightline#bufferline#unicode_symbols = 1
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
+let g:lexima_map_escape = '<Esc>:<C-u>set iminsert=0<CR>'
 let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'qf', 'help', 'markdown']
 
+let g:lens#disabled_filetypes = ['coc-explorer']
 
 let g:extradite_showhash = 1
 let g:extradite_diff_split = 'belowright vertical split'
@@ -385,11 +390,11 @@ function! s:my_itab_function()
 endfunction
 
 function! s:my_diffenter_function()
-    :DisableWhitespace
+    DisableWhitespace
 endfunction
 
 function! s:my_diffexit_function()
-    :EnableWhitespace
+    EnableWhitespace
     diffoff
 endfunction
 
@@ -399,11 +404,8 @@ function! s:my_cwordinfo_function()
         return
     endif
     let s:save_pos = getpos(".") |
-    redir => s:wordcount
-    silent execute ':%s/' . s:cursor_word . '//gn'
-    redir END
+    echo 'word on cursor "' . s:cursor_word . '" : ' . substitute(execute('%s/'.s:cursor_word.'//gn'), '\n', '', '')
     call setpos('.', s:save_pos)
-    echo 'word on cursor "' . s:cursor_word . '" : ' . substitute(s:wordcount, '\n', '', '')
 endfunction
 
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none

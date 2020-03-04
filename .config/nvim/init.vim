@@ -181,6 +181,7 @@ nnoremap <silent> X "_X
 nnoremap <silent> cd :<C-u>cd %:h<CR>
 nnoremap ss :<C-u>%s///g<Left><Left>
 xnoremap <silent> <expr> p 'pgv"'.v:register.'y`>'
+xnoremap . :normal .<CR>
 nnoremap <silent> U <C-r>
 nnoremap <silent> <BS> <C-^>
 nnoremap <silent> + <C-a>
@@ -206,8 +207,6 @@ nnoremap <silent> <CR><CR> o<Esc>
 nnoremap <silent> <Leader>q :<C-u>bd<CR>
 nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>
 nnoremap <silent> <Leader>n :<C-u>enew<CR>
-nnoremap <silent> vv V
-nnoremap <silent> vvv <C-v>
 nmap <silent> <C-n> *
 nmap <silent> <C-p> #
 cnoremap <C-v> <C-r>+
