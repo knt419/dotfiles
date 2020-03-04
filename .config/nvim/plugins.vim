@@ -5,6 +5,8 @@ let g:completion_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gn
 let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running') || exists('g:gnvim')
 
 " plugin install
+packadd minpac
+
 call plugpac#begin()
 
 Pack 'k-takata/minpac', {'type': 'opt', 'branch': 'devel'}
@@ -268,18 +270,17 @@ nnoremap <Up>    :<C-u>Gpush
 nnoremap <Down>  :<C-u>Gpull
 nnoremap <Right> :<C-u>Gcommit -am ''<Left>
 nnoremap <silent> <Left>  :<C-u>CocCommand explorer<CR>
-
+nnoremap <silent> <Leader>         :call <SID>my_cwordinfo_function()<CR>
 nnoremap <silent> <Leader>e        :<C-u>CocCommand explorer<CR>
 nmap     <silent> <Leader>rf       <Plug>(coc-references)
 nmap     <silent> <Leader>rn       <Plug>(coc-rename)
-nmap     <Leader>a        <Plug>(FerretAck)
+nmap              <Leader>a        <Plug>(FerretAck)
 nnoremap <silent> <Leader>s        :<C-u>Startify<CR>
 nmap     <silent> <Leader>df       <Plug>(coc-definition)
 nnoremap <silent> <Leader>f        :<C-u>CocList files<CR>
 nnoremap <silent> <Leader>g        :<C-u>CocList grep<CR>
 nnoremap <silent> <Leader>h        :<C-u>call CocAction('doHover')<CR>
-nmap     <silent> <Leader>j        <Plug>(AerojumpBolt)
-nmap     <Leader>l        <Plug>(FerretLack)
+nmap              <Leader>l        <Plug>(FerretLack)
 nnoremap <silent> <Leader>b        :<C-u>CocList buffers<CR>
 nnoremap <silent> <Leader>m        :<C-u>CocList mru<CR>
 nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>
@@ -369,12 +370,15 @@ function! LightlineFileformat()
     return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . '  ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
 endfunction
 
-function! LightlineWInfo()
-    return winwidth(0) > 70 ? "\ufab1" . winnr() . ' ' . "\uf4a5 " . bufnr('%') : ''
-endfunction
-
 function! s:my_lexima_setup()
     call lexima#add_rule({'at': '(\%#)', 'char': '-', 'delete' : ')', 'input': '<Esc>ea)'})
+    call lexima#add_rule({'at': '{\%#}', 'char': '-', 'delete' : '}', 'input': '<Esc>ea}'})
+    call lexima#add_rule({'at': '"\%#"', 'char': '-', 'delete' : '"', 'input': '<Esc>ea"'})
+    call lexima#add_rule({'at': '''\%#''', 'char': '-', 'delete' : '''', 'input': '<Esc>ea'''})
+endfunction
+
+function! LightlineWInfo()
+    return winwidth(0) > 70 ? "\ufab1" . winnr() . ' ' . "\uf4a5 " . bufnr('%') : ''
 endfunction
 
 function! s:my_icr_function()
@@ -416,11 +420,10 @@ autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0
 autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
+autocmd MyAutoCmd InsertEnter * call <SID>my_lexima_setup()
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif
 autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif
-autocmd MyAutoCmd WinEnter * call s:my_lexima_setup()
 if !g:completion_gui
-    autocmd MyAutoCmd CursorHold * call <SID>my_cwordinfo_function()
     autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
 endif
