@@ -28,7 +28,7 @@ Pack 'camspiers/lens.vim'
 Pack 'itchyny/vim-cursorword'
 
 " text/input manipulation
-Pack 'cohama/lexima.vim'
+Pack 'cohama/lexima.vim', {'do': 'call s:my_lexima_setup()'}
 Pack 'junegunn/vim-easy-align', {'type': 'opt', 'on': '<Plug>(LiveEasyAlign)'}
 Pack 'godlygeek/tabular', {'type': 'lazy'}
 Pack 'machakann/vim-highlightedyank', {'type': 'lazy'}
@@ -370,15 +370,15 @@ function! LightlineFileformat()
     return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . '  ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
 endfunction
 
+function! LightlineWInfo()
+    return winwidth(0) > 70 ? "\ufab1" . winnr() . ' ' . "\uf4a5 " . bufnr('%') : ''
+endfunction
+
 function! s:my_lexima_setup()
     call lexima#add_rule({'at': '(\%#)', 'char': '-', 'delete' : ')', 'input': '<Esc>ea)'})
     call lexima#add_rule({'at': '{\%#}', 'char': '-', 'delete' : '}', 'input': '<Esc>ea}'})
     call lexima#add_rule({'at': '"\%#"', 'char': '-', 'delete' : '"', 'input': '<Esc>ea"'})
     call lexima#add_rule({'at': '''\%#''', 'char': '-', 'delete' : '''', 'input': '<Esc>ea'''})
-endfunction
-
-function! LightlineWInfo()
-    return winwidth(0) > 70 ? "\ufab1" . winnr() . ' ' . "\uf4a5 " . bufnr('%') : ''
 endfunction
 
 function! s:my_icr_function()
