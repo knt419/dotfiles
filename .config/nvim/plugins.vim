@@ -74,16 +74,16 @@ if !g:completion_gui
     call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
     set completeopt=noinsert,menuone,noselect,preview
     set shortmess+=c
-    call minpac#add('neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'})
-    call minpac#add('josa42/coc-go', {'do': 'yarn install --frozen-lockfile'})
-    call minpac#add('iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'})
-    call minpac#add('weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-git', {'do': '!yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-json', {'do': '!yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-yaml', {'do': '!yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-lists', {'do': '!yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-snippets', {'do': '!yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-java', {'do': '!yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-prettier', {'do': '!yarn install --frozen-lockfile'})
+    call minpac#add('josa42/coc-go', {'do': '!yarn install --frozen-lockfile'})
+    call minpac#add('iamcco/coc-vimlsp', {'do': '!yarn install --frozen-lockfile'})
+    call minpac#add('weirongxu/coc-explorer', {'do': '!yarn install --frozen-lockfile'})
 endif
 
 " gonvim
