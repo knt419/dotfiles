@@ -6,7 +6,6 @@ let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvi
 
 " plugin install
 
-" call plugpac#begin()
 call minpac#init({'verbose': 3})
 call minpac#add('k-takata/minpac', {'type': 'opt', 'branch': 'devel'})
 
@@ -72,19 +71,19 @@ call minpac#add('knt419/lightline-colorscheme-themecolor', {'type': 'opt'})
 
 " lsp/completion
 if !g:completion_gui
-    call minpac#add('neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}})
+    call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
     set completeopt=noinsert,menuone,noselect,preview
     set shortmess+=c
-    call minpac#add('neoclide/coc-git', {'do': {-> system('yarn install --frozen-lockfile')}})
-    call minpac#add('neoclide/coc-json', {'do': {-> system('yarn install --frozen-lockfile')}})
-    call minpac#add('neoclide/coc-yaml', {'do': {-> system('yarn install --frozen-lockfile')}})
-    call minpac#add('neoclide/coc-lists', {'do': {-> system('yarn install --frozen-lockfile')}})
-    call minpac#add('neoclide/coc-snippets', {'do': {-> system('yarn install --frozen-lockfile')}})
-    call minpac#add('neoclide/coc-java', {'do': {-> system('yarn install --frozen-lockfile')}})
-    call minpac#add('neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}})
-    call minpac#add('josa42/coc-go', {'do': {-> system('yarn install --frozen-lockfile')}})
-    call minpac#add('iamcco/coc-vimlsp', {'do': {-> system('yarn install --frozen-lockfile')}})
-    call minpac#add('weirongxu/coc-explorer', {'do': {-> system('yarn install --frozen-lockfile')}})
+    call minpac#add('neoclide/coc-git', {'do': 'yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-json', {'do': 'yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-yaml', {'do': 'yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-lists', {'do': 'yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-snippets', {'do': 'yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-java', {'do': 'yarn install --frozen-lockfile'})
+    call minpac#add('neoclide/coc-prettier', {'do': 'yarn install --frozen-lockfile'})
+    call minpac#add('josa42/coc-go', {'do': 'yarn install --frozen-lockfile'})
+    call minpac#add('iamcco/coc-vimlsp', {'do': 'yarn install --frozen-lockfile'})
+    call minpac#add('weirongxu/coc-explorer', {'do': 'yarn install --frozen-lockfile'})
 endif
 
 " gonvim
@@ -95,7 +94,9 @@ endif
 
 call minpac#add('glacambre/firenvim', {'type': 'opt'})
 
-" call plugpac#end()
+if exists('g:minpac_has_installed')
+    call minpac#update()
+endif
 
 " plugin variables
 
@@ -241,7 +242,6 @@ let g:markdown_fenced_languages = [
             \ 'vim',
             \ 'help'
             \]
-
 
 " plugin keymaps
 
@@ -409,6 +409,9 @@ function! s:my_diffexit_function()
 endfunction
 
 function! s:my_cwordinfo_function()
+    if exists('s:cursor_word') && s:cursor_word == expand('<cword>')
+        return
+    endif
     let s:cursor_word = expand('<cword>')
     if len(s:cursor_word) < 3
         return
@@ -426,6 +429,7 @@ autocmd MyAutoCmd InsertEnter * call <SID>my_lexima_setup()
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif
 autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif
+autocmd MyAutoCmd CursorHold * call <SID>my_cwordinfo_function()
 if !g:completion_gui
     autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
 endif
