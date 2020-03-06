@@ -159,18 +159,23 @@ endif
 
 " plugpac & minpac {{{
 let g:pack_dir = expand('$HOME/.local/share/nvim/site')
-let g:plugpac_path = g:pack_dir . '/autoload/plugpac.vim'
+" let g:plugpac_path = g:pack_dir . '/autoload/plugpac.vim'
 let g:minpac_path = g:pack_dir . '/pack/minpac/opt/minpac'
 if !isdirectory(expand(g:minpac_path))
     execute '!git clone -b devel https://github.com/k-takata/minpac.git ' . g:minpac_path
 endif
-if !filereadable(g:plugpac_path)
-    execute '!curl -fLo ' . g:plugpac_path . ' --create-dirs https://raw.githubusercontent.com/yukimemi/plugpac.vim/master/plugpac.vim'
-    autocmd MySetUpCmd VimEnter * PackInstall | source $HOME/.config/nvim/init.vim
-endif
+" if !filereadable(g:plugpac_path)
+"     execute '!curl -fLo ' . g:plugpac_path . ' --create-dirs https://raw.githubusercontent.com/yukimemi/plugpac.vim/master/plugpac.vim'
+"     autocmd MySetUpCmd VimEnter * PackInstall | source $HOME/.config/nvim/init.vim
+" endif
 execute 'set packpath^=' . g:pack_dir
-execute 'set runtimepath^=' . g:pack_dir
-runtime plugins.vim
+" execute 'set runtimepath^=' . g:pack_dir
+packadd minpac
+
+if exists('*minpac#init')
+    runtime plugins.vim
+endif
+
 "}}}
 
 filetype plugin indent on

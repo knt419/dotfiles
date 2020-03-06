@@ -5,98 +5,97 @@ let g:completion_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gn
 let g:cmdline_gui = exists('g:gui_oni') || exists('g:veonim') || exists('g:gonvim_running') || exists('g:gnvim')
 
 " plugin install
-packadd minpac
 
-call plugpac#begin()
-
-Pack 'k-takata/minpac', {'type': 'opt', 'branch': 'devel'}
+" call plugpac#begin()
+call minpac#init({'verbose': 3})
+call minpac#add('k-takata/minpac', {'type': 'opt', 'branch': 'devel'})
 
 " editor display
-Pack 'Yggdroot/indentLine'
-Pack 'ryanoasis/vim-devicons'
-Pack 'lilydjwg/colorizer', {'type': 'lazy'}
-Pack 'mhinz/vim-startify'
-Pack 'itchyny/lightline.vim'
-Pack 'mengelbrecht/lightline-bufferline'
-Pack 'ntpeters/vim-better-whitespace', {'type': 'lazy'}
-Pack 'rickhowe/diffchar.vim', {'type': 'lazy'}
-Pack 'romainl/vim-qf', {'type': 'lazy'}
-Pack 'TaDaa/vimade', {'type': 'lazy'}
-Pack 'andymass/vim-matchup', {'type': 'lazy'}
-Pack 'camspiers/animate.vim'
-Pack 'camspiers/lens.vim'
-Pack 'itchyny/vim-cursorword'
+call minpac#add('Yggdroot/indentLine')
+call minpac#add('ryanoasis/vim-devicons')
+call minpac#add('lilydjwg/colorizer')
+call minpac#add('mhinz/vim-startify')
+call minpac#add('itchyny/lightline.vim')
+call minpac#add('mengelbrecht/lightline-bufferline')
+call minpac#add('ntpeters/vim-better-whitespace')
+call minpac#add('rickhowe/diffchar.vim')
+call minpac#add('romainl/vim-qf')
+call minpac#add('TaDaa/vimade')
+call minpac#add('andymass/vim-matchup')
+call minpac#add('camspiers/animate.vim')
+call minpac#add('camspiers/lens.vim')
+call minpac#add('itchyny/vim-cursorword')
 
 " text/input manipulation
-Pack 'cohama/lexima.vim', {'do': 'call s:my_lexima_setup()'}
-Pack 'junegunn/vim-easy-align', {'type': 'opt', 'on': '<Plug>(LiveEasyAlign)'}
-Pack 'godlygeek/tabular', {'type': 'lazy'}
-Pack 'machakann/vim-highlightedyank', {'type': 'lazy'}
-Pack 'rhysd/accelerated-jk'
-Pack 'tpope/vim-surround', {'type': 'lazy'}
-Pack 'tpope/vim-commentary', {'type': 'lazy'}
-Pack 'tpope/vim-sleuth', {'type': 'lazy'}
-Pack 'kana/vim-textobj-user', {'type': 'lazy'}
-Pack 'kana/vim-textobj-line', {'type': 'lazy'}
-Pack 'kana/vim-smartword', {'type': 'lazy'}
-Pack 'kana/vim-niceblock', {'type': 'lazy'}
-Pack 'haya14busa/vim-asterisk', {'type': 'lazy'}
-Pack 'terryma/vim-expand-region', {'type': 'lazy'}
-Pack 'wincent/ferret', {'type': 'lazy'}
-Pack 'kana/vim-operator-user', {'type': 'lazy'}
-Pack 'kana/vim-operator-replace', {'type': 'lazy'}
-Pack 'tyru/capture.vim', {'type': 'lazy'}
+call minpac#add('cohama/lexima.vim')
+call minpac#add('junegunn/vim-easy-align', {'type': 'opt', 'on': '<Plug>(LiveEasyAlign)'})
+call minpac#add('godlygeek/tabular')
+call minpac#add('machakann/vim-highlightedyank')
+call minpac#add('rhysd/accelerated-jk')
+call minpac#add('tpope/vim-surround')
+call minpac#add('tpope/vim-commentary')
+call minpac#add('tpope/vim-sleuth')
+call minpac#add('kana/vim-textobj-user')
+call minpac#add('kana/vim-textobj-line')
+call minpac#add('kana/vim-smartword')
+call minpac#add('kana/vim-niceblock')
+call minpac#add('haya14busa/vim-asterisk')
+call minpac#add('terryma/vim-expand-region')
+call minpac#add('wincent/ferret', {'type': 'opt', 'on': '<Plug>(FerretAck)'})
+call minpac#add('kana/vim-operator-user')
+call minpac#add('kana/vim-operator-replace')
+call minpac#add('tyru/capture.vim', {'type': 'opt', 'on': 'Capture'})
 
 " file/directory
-Pack 'januswel/fencja.vim', {'type': 'lazy'}
-Pack 'voldikss/vim-floaterm', {'type': 'lazy'}
+call minpac#add('januswel/fencja.vim')
+call minpac#add('voldikss/vim-floaterm')
 
 " git
-Pack 'tpope/vim-fugitive', {'type': 'lazy'}
-Pack 'int3/vim-extradite', {'type': 'lazy'}
+call minpac#add('tpope/vim-fugitive')
+call minpac#add('int3/vim-extradite')
 
 " language support
-Pack 'sheerun/vim-polyglot'
-Pack 'mechatroner/rainbow_csv', {'for': 'csv'}
-Pack 'tpope/vim-dadbod', {'type': 'lazy'}
-Pack 'editorconfig/editorconfig-vim', {'type': 'lazy'}
-Pack 'honza/vim-snippets', {'type': 'lazy'}
+call minpac#add('sheerun/vim-polyglot')
+call minpac#add('mechatroner/rainbow_csv')
+call minpac#add('tpope/vim-dadbod')
+call minpac#add('editorconfig/editorconfig-vim')
+call minpac#add('honza/vim-snippets')
 
 " colorscheme
-Pack 'jeetsukumaran/vim-nefertiti', {'type': 'opt'}
-Pack 'Nequo/vim-allomancer', {'type': 'opt'}
-Pack 'ajmwagar/vim-deus', {'type': 'opt'}
-Pack 'sainnhe/edge', {'type': 'opt'}
-Pack 'tyrannicaltoucan/vim-quantum', {'type': 'opt'}
-Pack 'tyrannicaltoucan/vim-deep-space'
-Pack 'knt419/lightline-colorscheme-themecolor', {'type': 'opt'}
+call minpac#add('jeetsukumaran/vim-nefertiti', {'type': 'opt'})
+call minpac#add('Nequo/vim-allomancer', {'type': 'opt'})
+call minpac#add('ajmwagar/vim-deus', {'type': 'opt'})
+call minpac#add('sainnhe/edge', {'type': 'opt'})
+call minpac#add('tyrannicaltoucan/vim-quantum', {'type': 'opt'})
+call minpac#add('tyrannicaltoucan/vim-deep-space')
+call minpac#add('knt419/lightline-colorscheme-themecolor', {'type': 'opt'})
 
 " lsp/completion
 if !g:completion_gui
-    Pack 'neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}}
+    call minpac#add('neoclide/coc.nvim', {'do': {-> system('yarn install --frozen-lockfile')}})
     set completeopt=noinsert,menuone,noselect,preview
     set shortmess+=c
-    Pack 'neoclide/coc-git', {'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-json', {'for': 'json', 'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-yaml', {'for': 'yaml', 'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-lists', {'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-snippets', {'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-java', {'for': 'java', 'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'josa42/coc-go', {'for': 'go', 'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'iamcco/coc-vimlsp', {'do': {-> system('yarn install --frozen-lockfile')}}
-    Pack 'weirongxu/coc-explorer', {'do': {-> system('yarn install --frozen-lockfile')}}
+    call minpac#add('neoclide/coc-git', {'do': {-> system('yarn install --frozen-lockfile')}})
+    call minpac#add('neoclide/coc-json', {'do': {-> system('yarn install --frozen-lockfile')}})
+    call minpac#add('neoclide/coc-yaml', {'do': {-> system('yarn install --frozen-lockfile')}})
+    call minpac#add('neoclide/coc-lists', {'do': {-> system('yarn install --frozen-lockfile')}})
+    call minpac#add('neoclide/coc-snippets', {'do': {-> system('yarn install --frozen-lockfile')}})
+    call minpac#add('neoclide/coc-java', {'do': {-> system('yarn install --frozen-lockfile')}})
+    call minpac#add('neoclide/coc-prettier', {'do': {-> system('yarn install --frozen-lockfile')}})
+    call minpac#add('josa42/coc-go', {'do': {-> system('yarn install --frozen-lockfile')}})
+    call minpac#add('iamcco/coc-vimlsp', {'do': {-> system('yarn install --frozen-lockfile')}})
+    call minpac#add('weirongxu/coc-explorer', {'do': {-> system('yarn install --frozen-lockfile')}})
 endif
 
 " gonvim
 if exists('g:gonvim_running')
-    Pack 'akiyosi/gonvim-fuzzy'
-    Pack 'equalsraf/neovim-gui-shim'
+    call minpac#add('akiyosi/gonvim-fuzzy')
+    call minpac#add('equalsraf/neovim-gui-shim')
 endif
 
-Pack 'glacambre/firenvim', {'type': 'opt'}
+call minpac#add('glacambre/firenvim', {'type': 'opt'})
 
-call plugpac#end()
+" call plugpac#end()
 
 " plugin variables
 
@@ -336,6 +335,9 @@ endif
 
 " Use `:Format` for format current buffer
 command! -nargs=0 Format :call CocAction('format')
+command! PackUpdate :call minpac#update()
+command! PackClean :call minpac#clean()
+command! PackStatus :call minpac#status()
 
 " functions
 

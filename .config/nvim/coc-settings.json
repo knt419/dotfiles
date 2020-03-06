@@ -89,7 +89,7 @@
   "explorer.openAction.changeDirectory": false,
   "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
-  "explorer.icon.enableVimDevions": true,
+  "explorer.icon.enableVimDevicons": true,
   "explorer.previewAction.onHover": true,
   "explorer.sources": [
       {
