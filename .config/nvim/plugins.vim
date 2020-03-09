@@ -27,7 +27,6 @@ call minpac#add('itchyny/vim-cursorword')
 
 " text/input manipulation
 call minpac#add('cohama/lexima.vim')
-call minpac#add('junegunn/vim-easy-align', {'type': 'opt', 'on': '<Plug>(LiveEasyAlign)'})
 call minpac#add('godlygeek/tabular')
 call minpac#add('machakann/vim-highlightedyank')
 call minpac#add('rhysd/accelerated-jk')
@@ -425,7 +424,7 @@ autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0
 autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
-autocmd MyAutoCmd InsertEnter * call <SID>my_lexima_setup()
+autocmd MyAutoCmd VimEnter * call <SID>my_lexima_setup()
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif
 autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif
