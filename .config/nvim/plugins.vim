@@ -43,6 +43,7 @@ call minpac#add('wincent/ferret', {'type': 'opt', 'on': '<Plug>(FerretAck)'})
 call minpac#add('kana/vim-operator-user')
 call minpac#add('kana/vim-operator-replace')
 call minpac#add('tyru/capture.vim', {'type': 'opt', 'on': 'Capture'})
+call minpac#add('junegunn/vim-easy-align')
 
 " file/directory
 call minpac#add('januswel/fencja.vim')
@@ -267,7 +268,7 @@ nnoremap <Up>    :<C-u>Gpush
 nnoremap <Down>  :<C-u>Gpull
 nnoremap <Right> :<C-u>Gcommit -am ''<Left>
 nnoremap <silent> <Left>  :<C-u>CocCommand explorer<CR>
-nnoremap <silent> <Leader>         :call <SID>my_cwordinfo_function()<CR>
+nmap     <silent> <Leader>         <Plug>(asterisk-z*)
 nnoremap <silent> <Leader>e        :<C-u>CocCommand explorer<CR>
 nmap     <silent> <Leader>rf       <Plug>(coc-references)
 nmap     <silent> <Leader>rn       <Plug>(coc-rename)
