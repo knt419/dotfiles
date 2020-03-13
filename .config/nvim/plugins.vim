@@ -195,7 +195,6 @@ let g:lightline#bufferline#unicode_symbols = 1
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
-let g:lexima_map_escape = '<Esc>:<C-u>set iminsert=0<CR>'
 let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'qf', 'help', 'markdown']
 
 let g:lens#disabled_filetypes = ['coc-explorer']
@@ -215,7 +214,7 @@ let g:startify_skiplist = [
             \ '*\\AppData\\Local\\Temp\\*',
             \ '*\\nvim\\runtime\\doc\\*',
             \ ]
-
+let g:lens#disabled_filetypes = ['coc-explorer']
 let g:startify_change_to_vcs_root  = 1
 let g:startify_change_to_dir       = 1
 let g:startify_fortune_use_unicode = 0
@@ -377,10 +376,10 @@ function! LightlineWInfo()
 endfunction
 
 function! s:my_lexima_setup()
-    call lexima#add_rule({'at': '(\%#)', 'char': '-', 'delete' : ')', 'input': '<Esc>ea)'})
-    call lexima#add_rule({'at': '{\%#}', 'char': '-', 'delete' : '}', 'input': '<Esc>ea}'})
-    call lexima#add_rule({'at': '"\%#"', 'char': '-', 'delete' : '"', 'input': '<Esc>ea"'})
-    call lexima#add_rule({'at': '''\%#''', 'char': '-', 'delete' : '''', 'input': '<Esc>ea'''})
+    call lexima#add_rule({'at': '\%#)', 'char': '-', 'input': '<Del><Right><Esc>ea)<Left>'})
+    call lexima#add_rule({'at': '\%#}', 'char': '-', 'input': '<Del><Right><Esc>ea)<Left>'})
+    call lexima#add_rule({'at': '\%#"', 'char': '-', 'input': '<Del><Right><Esc>ea)<Left>'})
+    call lexima#add_rule({'at': '\%#''', 'char': '-', 'input': '<Del><Right><Esc>ea)<Left>'})
 endfunction
 
 function! s:my_icr_function()
