@@ -425,6 +425,7 @@ autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0
 autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0
 autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>
 autocmd MyAutoCmd VimEnter * call <SID>my_lexima_setup()
+autocmd MyAutoCmd BufEnter * :Sleuth
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif
 autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif
