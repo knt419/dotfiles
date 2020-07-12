@@ -429,7 +429,8 @@ autocmd MyAutoCmd BufEnter * :Sleuth
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif
 autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif
-autocmd MyAutoCmd CursorHold * call <SID>my_cwordinfo_function()
+autocmd MyAutoCmd CursorHold * if &modifiable | call <SID>my_cwordinfo_function() | endif
+
 if !g:completion_gui
     autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
 endif
