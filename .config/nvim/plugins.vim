@@ -59,6 +59,7 @@ call minpac#add('mechatroner/rainbow_csv')
 call minpac#add('tpope/vim-dadbod')
 call minpac#add('editorconfig/editorconfig-vim')
 call minpac#add('honza/vim-snippets')
+call minpac#add('pechorin/any-jump.vim')
 
 " colorscheme
 call minpac#add('jeetsukumaran/vim-nefertiti', {'type': 'opt'})
