@@ -28,7 +28,7 @@
     "default": "\uf29c"
   },
   "explorer.keyMappingMode": "none",
-  "explorer.keyMappings": {
+  "explorer.keyMappings.global": {
     "k": "nodePrev",
     "j": "nodeNext",
 
@@ -86,11 +86,11 @@
     ">>": "gitUnstage"
   },
   "explorer.quitOnOpen": true,
-  "explorer.openAction.changeDirectory": false,
+  "explorer.openAction.for.directory": "expandOrCollapse",
   "explorer.file.showHiddenFiles": true,
   "explorer.icon.enableNerdfont": true,
   "explorer.icon.enableVimDevicons": true,
-  "explorer.previewAction.onHover": true,
+  "explorer.previewAction.onHover": "labeling",
   "explorer.sources": [
       {
           "name": "buffer",

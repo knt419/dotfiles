@@ -167,9 +167,7 @@ endif
 execute 'set packpath^=' . g:pack_dir
 packadd minpac
 
-if exists('*minpac#init')
-    runtime plugins.vim
-endif
+runtime plugins.vim
 
 "}}}
 
