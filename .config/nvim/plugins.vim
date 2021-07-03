@@ -194,7 +194,9 @@ endif
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
 
-let g:coc_global_extensions = ['coc-git', 'coc-json', 'coc-yaml', 'coc-lists', 'coc-snippets', 'coc-java', 'coc-prettier', 'coc-go', 'coc-vimlsp', 'coc-explorer']
+let g:coc_global_extensions = ['coc-git', 'coc-json', 'coc-yaml',
+            \ 'coc-lists', 'coc-snippets', 'coc-java',
+            \ 'coc-prettier', 'coc-go', 'coc-vimlsp', 'coc-explorer']
 
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
