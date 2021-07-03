@@ -218,7 +218,6 @@ let g:startify_skiplist = [
             \ '*\\AppData\\Local\\Temp\\*',
             \ '*\\nvim\\runtime\\doc\\*',
             \ ]
-let g:lens#disabled_filetypes = ['coc-explorer']
 let g:startify_change_to_vcs_root  = 1
 let g:startify_change_to_dir       = 1
 let g:startify_fortune_use_unicode = 0
@@ -268,9 +267,9 @@ nmap <silent> dp <Plug>(coc-diagnostic-prev)
 nmap s <Plug>(operator-replace)
 nnoremap <silent> tt  :<C-u>FloatermToggle<CR>
 
-nnoremap <Up>    :<C-u>Gpush
-nnoremap <Down>  :<C-u>Gpull
-nnoremap <Right> :<C-u>Gcommit -am ''<Left>
+nnoremap <Up>    :<C-u>Git push
+nnoremap <Down>  :<C-u>Git pull
+nnoremap <Right> :<C-u>Git commit -am ''<Left>
 nnoremap <silent> <Left>  :<C-u>CocCommand explorer<CR>
 nmap     <silent> <Leader>         <Plug>(asterisk-z*)
 nnoremap <silent> <Leader>e        :<C-u>CocCommand explorer<CR>
