@@ -11,6 +11,7 @@ call minpac#add('k-takata/minpac', {'type': 'opt', 'branch': 'devel'})
 
 " editor display
 call minpac#add('Yggdroot/indentLine')
+call minpac#add('lukas-reineke/indent-blankline.nvim')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('lilydjwg/colorizer')
 call minpac#add('mhinz/vim-startify')
@@ -75,16 +76,16 @@ if !g:completion_gui
     call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
     set completeopt=noinsert,menuone,noselect,preview
     set shortmess+=c
-    call minpac#add('neoclide/coc-git', {'do': '!yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-json', {'do': '!yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-yaml', {'do': '!yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-lists', {'do': '!yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-snippets', {'do': '!yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-java', {'do': '!yarn install --frozen-lockfile'})
-    call minpac#add('neoclide/coc-prettier', {'do': '!yarn install --frozen-lockfile'})
-    call minpac#add('josa42/coc-go', {'do': '!yarn install --frozen-lockfile'})
-    call minpac#add('iamcco/coc-vimlsp', {'do': '!yarn install --frozen-lockfile'})
-    call minpac#add('weirongxu/coc-explorer', {'do': '!yarn install --frozen-lockfile'})
+    " call minpac#add('neoclide/coc-git', {'do': '!yarn install --frozen-lockfile'})
+    " call minpac#add('neoclide/coc-json', {'do': '!yarn install --frozen-lockfile'})
+    " call minpac#add('neoclide/coc-yaml', {'do': '!yarn install --frozen-lockfile'})
+    " call minpac#add('neoclide/coc-lists', {'do': '!yarn install --frozen-lockfile'})
+    " call minpac#add('neoclide/coc-snippets', {'do': '!yarn install --frozen-lockfile'})
+    " call minpac#add('neoclide/coc-java', {'do': '!yarn install --frozen-lockfile'})
+    " call minpac#add('neoclide/coc-prettier', {'do': '!yarn install --frozen-lockfile'})
+    " call minpac#add('josa42/coc-go', {'do': '!yarn install --frozen-lockfile'})
+    " call minpac#add('iamcco/coc-vimlsp', {'do': '!yarn install --frozen-lockfile'})
+    " call minpac#add('weirongxu/coc-explorer', {'do': '!yarn install --frozen-lockfile'})
 endif
 
 " gonvim
@@ -192,6 +193,8 @@ endif
 
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
+
+let g:coc_global_extensions = ['coc-git', 'coc-json', 'coc-yaml', 'coc-lists', 'coc-snippets', 'coc-java', 'coc-prettier', 'coc-go', 'coc-vimlsp', 'coc-explorer']
 
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
