@@ -25,6 +25,7 @@ call minpac#add('andymass/vim-matchup')
 call minpac#add('camspiers/animate.vim')
 call minpac#add('camspiers/lens.vim')
 call minpac#add('itchyny/vim-cursorword')
+call minpac#add('nvim-treesitter/nvim-treesitter')
 
 " text/input manipulation
 call minpac#add('cohama/lexima.vim')
@@ -102,7 +103,15 @@ endif
 
 " plugin variables
 
-" tabline
+lua <<EOF
+require 'nvim-treesitter.configs'.setup {
+    highlight = {
+        enable = true
+        }
+    }
+EOF
+
+" tabline)
 if !g:tab_gui
     set showtabline=2
 endif
