@@ -412,18 +412,18 @@ function! s:my_diffexit_function()
     diffoff
 endfunction
 
-function! s:my_cwordinfo_function()
-    if exists('s:cursor_word') && s:cursor_word == expand('<cword>')
-        return
-    endif
-    let s:cursor_word = expand('<cword>')
-    if len(s:cursor_word) < 3
-        return
-    endif
-    let s:save_pos = getpos(".") |
-    echo 'word on cursor "' . s:cursor_word . '" : ' . substitute(execute('%s/'.s:cursor_word.'//gn'), '\n', '', '')
-    call setpos('.', s:save_pos)
-endfunction
+" function! s:my_cwordinfo_function()
+"     if exists('s:cursor_word') && s:cursor_word == expand('<cword>')
+"         return
+"     endif
+"     let s:cursor_word = expand('<cword>')
+"     if len(s:cursor_word) < 3
+"         return
+"     endif
+"     let s:save_pos = getpos(".") |
+"     echo 'word on cursor "' . s:cursor_word . '" : ' . substitute(execute('%s/'.s:cursor_word.'//gn'), '\n', '', '')
+"     call setpos('.', s:save_pos)
+" endfunction
 
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0
@@ -434,7 +434,7 @@ autocmd MyAutoCmd BufEnter * :Sleuth
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif
 autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif
-autocmd MyAutoCmd CursorHold * if &modifiable | call <SID>my_cwordinfo_function() | endif
+" autocmd MyAutoCmd CursorHold * if &modifiable | call <SID>my_cwordinfo_function() | endif
 
 if !g:completion_gui
     autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
