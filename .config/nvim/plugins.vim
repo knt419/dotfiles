@@ -10,7 +10,7 @@ call minpac#init({'verbose': 3})
 call minpac#add('k-takata/minpac', {'type': 'opt', 'branch': 'devel'})
 
 " editor display
-call minpac#add('Yggdroot/indentLine')
+" call minpac#add('Yggdroot/indentLine')
 call minpac#add('lukas-reineke/indent-blankline.nvim')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('lilydjwg/colorizer')
