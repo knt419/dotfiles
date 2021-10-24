@@ -22,8 +22,10 @@ call minpac#add('rickhowe/diffchar.vim')
 call minpac#add('romainl/vim-qf')
 call minpac#add('TaDaa/vimade')
 call minpac#add('andymass/vim-matchup')
-call minpac#add('camspiers/animate.vim')
-call minpac#add('camspiers/lens.vim')
+if !exists('g:nvui')
+    call minpac#add('camspiers/animate.vim')
+    call minpac#add('camspiers/lens.vim')
+endif
 call minpac#add('itchyny/vim-cursorword')
 call minpac#add('nvim-treesitter/nvim-treesitter')
 
