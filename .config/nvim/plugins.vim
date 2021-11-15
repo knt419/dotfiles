@@ -80,14 +80,6 @@ if !g:completion_gui
     set shortmess+=c
 endif
 
-" gonvim
-if exists('g:gonvim_running')
-    call minpac#add('akiyosi/gonvim-fuzzy')
-    call minpac#add('equalsraf/neovim-gui-shim')
-endif
-
-" call minpac#add('glacambre/firenvim', {'type': 'opt'})
-
 if exists('g:minpac_has_installed')
     call minpac#update()
 endif
@@ -107,7 +99,7 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 
-" tabline)
+" tabline
 if !g:tab_gui
     set showtabline=2
 endif
@@ -304,42 +296,6 @@ if g:tab_gui
 else
     nnoremap <C-t> :<C-u>bn<CR>
     nnoremap <S-t> :<C-u>bp<CR>
-endif
-
-
-if exists('g:veonim')
-    " extensions for web dev
-    let g:vscode_extensions = [
-                \'vscode.typescript-language-features',
-                \'vscode.json-language-features',
-                \'vscode.css-language-features',
-                \]
-
-    " workspace functions
-    nnoremap <silent> <Leader>f :Veonim files<CR>
-    nnoremap <silent> <Leader>e :Veonim explorer<CR>
-    nnoremap <silent> <Leader>b :Veonim buffers<CR>
-
-    " searching text
-    nnoremap <silent> <Leader>gw :Veonim grep-word<CR>
-    vnoremap <silent> <Leader>gw :Veonim grep-selection<CR>
-    nnoremap <silent> <Leader>ga :Veonim grep<CR>
-    nnoremap <silent> <Leader>gf :Veonim grep-resume<CR>
-    nnoremap <silent> <Leader>gb :Veonim buffer-search<CR>
-
-    " color picker
-    nnoremap <silent> sc :Veonim pick-color<CR>
-
-    " language server functions
-    nnoremap <silent> sr :Veonim rename<CR>
-    nnoremap <silent> sd :Veonim definition<CR>
-    nnoremap <silent> st :Veonim type-definition<CR>
-    nnoremap <silent> si :Veonim implementation<CR>
-    nnoremap <silent> sf :Veonim references<CR>
-    nnoremap <silent> sh :Veonim hover<CR>
-    nnoremap <silent> sl :Veonim symbols<CR>
-    nnoremap <silent> so :Veonim workspace-symbols<CR>
-
 endif
 
 " Use `:Format` for format current buffer
