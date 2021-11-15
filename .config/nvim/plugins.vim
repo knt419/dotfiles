@@ -10,10 +10,10 @@ call minpac#init({'verbose': 3})
 call minpac#add('k-takata/minpac', {'type': 'opt', 'branch': 'devel'})
 
 " editor display
-" call minpac#add('Yggdroot/indentLine')
 call minpac#add('lukas-reineke/indent-blankline.nvim')
 call minpac#add('ryanoasis/vim-devicons')
 call minpac#add('lilydjwg/colorizer')
+call minpac#add('tweekmonster/startuptime.vim')
 call minpac#add('mhinz/vim-startify')
 call minpac#add('itchyny/lightline.vim')
 call minpac#add('mengelbrecht/lightline-bufferline')
@@ -58,7 +58,6 @@ call minpac#add('tpope/vim-fugitive')
 call minpac#add('int3/vim-extradite')
 
 " language support
-call minpac#add('sheerun/vim-polyglot')
 call minpac#add('mechatroner/rainbow_csv')
 call minpac#add('tpope/vim-dadbod')
 call minpac#add('editorconfig/editorconfig-vim')
@@ -79,16 +78,6 @@ if !g:completion_gui
     call minpac#add('neoclide/coc.nvim', {'branch': 'release'})
     set completeopt=noinsert,menuone,noselect,preview
     set shortmess+=c
-    " call minpac#add('neoclide/coc-git', {'do': '!yarn install --frozen-lockfile'})
-    " call minpac#add('neoclide/coc-json', {'do': '!yarn install --frozen-lockfile'})
-    " call minpac#add('neoclide/coc-yaml', {'do': '!yarn install --frozen-lockfile'})
-    " call minpac#add('neoclide/coc-lists', {'do': '!yarn install --frozen-lockfile'})
-    " call minpac#add('neoclide/coc-snippets', {'do': '!yarn install --frozen-lockfile'})
-    " call minpac#add('neoclide/coc-java', {'do': '!yarn install --frozen-lockfile'})
-    " call minpac#add('neoclide/coc-prettier', {'do': '!yarn install --frozen-lockfile'})
-    " call minpac#add('josa42/coc-go', {'do': '!yarn install --frozen-lockfile'})
-    " call minpac#add('iamcco/coc-vimlsp', {'do': '!yarn install --frozen-lockfile'})
-    " call minpac#add('weirongxu/coc-explorer', {'do': '!yarn install --frozen-lockfile'})
 endif
 
 " gonvim
@@ -97,7 +86,7 @@ if exists('g:gonvim_running')
     call minpac#add('equalsraf/neovim-gui-shim')
 endif
 
-call minpac#add('glacambre/firenvim', {'type': 'opt'})
+" call minpac#add('glacambre/firenvim', {'type': 'opt'})
 
 if exists('g:minpac_has_installed')
     call minpac#update()
@@ -111,6 +100,11 @@ require 'nvim-treesitter.configs'.setup {
         enable = true
         }
     }
+require'nvim-treesitter.configs'.setup {
+  matchup = {
+    enable = true
+  },
+}
 EOF
 
 " tabline)
@@ -423,19 +417,6 @@ function! s:my_diffexit_function()
     diffoff
 endfunction
 
-" function! s:my_cwordinfo_function()
-"     if exists('s:cursor_word') && s:cursor_word == expand('<cword>')
-"         return
-"     endif
-"     let s:cursor_word = expand('<cword>')
-"     if len(s:cursor_word) < 3
-"         return
-"     endif
-"     let s:save_pos = getpos(".") |
-"     echo 'word on cursor "' . s:cursor_word . '" : ' . substitute(execute('%s/'.s:cursor_word.'//gn'), '\n', '', '')
-"     call setpos('.', s:save_pos)
-" endfunction
-
 autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none
 autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0
 autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0
@@ -445,7 +426,6 @@ autocmd MyAutoCmd BufEnter * :Sleuth
 autocmd MyAutoCmd InsertLeave * silent! pclose!
 autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif
 autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif
-" autocmd MyAutoCmd CursorHold * if &modifiable | call <SID>my_cwordinfo_function() | endif
 
 if !g:completion_gui
     autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
