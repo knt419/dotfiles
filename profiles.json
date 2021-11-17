@@ -21,7 +21,11 @@
             {
                 "action": "openSettings"
             },
-            "keys": "ctrl+,"
+            "keys": "ctrl+comma"
+        },
+        {
+            "command": "scrollDownPage",
+            "keys": "ctrl+shift+pgdn"
         },
         {
             "command": "unbound",
@@ -121,10 +125,6 @@
             "keys": "ctrl+shift+down"
         },
         {
-            "command": "scrollDownPage",
-            "keys": "ctrl+shift+pgdn"
-        },
-        {
             "command": 
             {
                 "action": "scrollUp"
@@ -138,7 +138,7 @@
     ],
     "alwaysShowTabs": true,
     "copyOnSelect": true,
-    "defaultProfile": "{b3e399a7-85d1-4e5f-8ea7-d58e9772bd91}",
+    "defaultProfile": "{aea0e0c1-26dd-59f3-9319-0bb40f5ce43c}",
     "initialCols": 120,
     "initialRows": 30,
     "profiles": 

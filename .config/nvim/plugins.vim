@@ -213,10 +213,17 @@ let g:FerretExecutableArguments = {
 
 let g:highlightedyank_highlight_duration = 300
 
+let g:startify_lists = [
+          \ { 'type': 'files',     'header': ['   MRU']            },
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+          \ ]
+
 let g:startify_skiplist = [
             \ '*\\AppData\\Local\\Temp\\*',
             \ '*\\nvim\\runtime\\doc\\*',
             \ ]
+
+let g:startify_bookmarks = [ {'i': '~/.config/nvim/init.vim'}, {'p': '~/.config/nvim/plugins.vim'}, ]
 let g:startify_change_to_vcs_root  = 1
 let g:startify_change_to_dir       = 1
 let g:startify_fortune_use_unicode = 0
