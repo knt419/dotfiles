@@ -24,9 +24,30 @@ cmd[[augroup MySetUpCmd]]
 cmd[[autocmd!]]
 cmd[[augroup END]]
 
+-- disable plugins
+local disabled_built_ins = {
+  'gzip',
+  'man',
+  'matchit',
+  'matchparen',
+  'shada_plugin',
+  'tarPlugin',
+  'tar',
+  'zipPlugin',
+  'zip',
+  'netrwPlugin',
+  '2html_plugin',
+  'getscript',
+  'getscriptPlugin',
+  'logipat',
+}
+
+for i = 1, 14 do
+    g['loaded_' .. disabled_built_ins[i]] = 1
+end
+
 -- option
 opt.encoding="utf-8"
---opt.termencoding="utf-8"
 opt.fileencoding="utf-8"
 opt.fileencodings="iso-2022-jp,cp932,euc-jp,utf-8"
 
@@ -67,11 +88,12 @@ opt.conceallevel=0
 opt.clipboard="unnamedplus"
 opt.startofline=false
 opt.list=true
+--opt.listchars = { tab = 'ÔæÇÔΩª' , trail = '-', eol = 'Á´äÔΩ≤', extends = 'ÔæÇÔΩª', precedes = 'ÔæÇÔΩ´', nbsp = '%' }
 --opt.listchars = { tab = '¬ª' , trail = '-', eol = '‚Ü≤', extends = '¬ª', precedes = '¬´', nbsp = '%' }
 --opt.fillchars= {eob= ' '}
 opt.virtualedit="block"
 --opt.backspace={ 'indent','eol','start' }
---opt.whichwrap={ 'b','s','h','l','<','>','[',']' }
+opt.whichwrap="b,s,h,l,<,>,[,]"
 opt.mouse="a"
 opt.synmaxcol=300
 opt.updatetime=300
@@ -99,6 +121,7 @@ opt.linebreak=true
 opt.breakindent=true
 opt.breakindentopt= { shift = 2 }
 opt.showbreak='‚Ü™'
+--opt.showbreak='Á´äÔΩ™'
 opt.tags=''
 
 opt.inccommand="split"
@@ -165,13 +188,13 @@ cmd[[nnoremap <C-Up>    <C-w>k]]
 cmd[[nnoremap <C-Down>  <C-w>j]]
 
 -- keymap for japanese ime
-cmd[[nnoremap Ç† a]]
-cmd[[nnoremap Ç¢ i]]
-cmd[[nnoremap Ç§ u]]
-cmd[[nnoremap Ç® o]]
-cmd[[nnoremap Ç¡d dd]]
-cmd[[nnoremap Ç¡y yy]]
-cmd[[inoremap Ç¡j <Esc>]]
+--cmd[[nnoremap „ÅÇ a]]
+--cmd[[nnoremap „ÅÑ i]]
+--cmd[[nnoremap „ÅÜ u]]
+--cmd[[nnoremap „Åä o]]
+--cmd[[nnoremap „Å£d dd]]
+--cmd[[nnoremap „Å£y yy]]
+--cmd[[inoremap „Å£j <Esc>]]
 
 require'plugins'
 
@@ -184,10 +207,11 @@ cmd[[autocmd MyAutoCmd TermOpen * setlocal nonumber]]
 cmd[[autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif]]
 cmd[[autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline]]
 cmd[[autocmd MyAutoCmd BufEnter * silent! lcd %:p:h]]
+cmd[[autocmd MyAutoCmd BufWritePost plugins.lua PackerCompile]]
 cmd[[augroup syntaxhighlight]]
 cmd[[autocmd!]]
 cmd[[autocmd Syntax * if 100 < line("$") | syntax sync minlines=100 | endif]]
 cmd[[augroup END]]
 
 opt.background='dark'
-vim.colorscheme='deep-space'
+cmd[[colorscheme deep-space]]

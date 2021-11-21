@@ -5,10 +5,10 @@ local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
 
-
 cmd[[packadd packer.nvim]]
 
 require'packer'.startup(function()
+    use{'wbthomason/packer.nvim', opt = true, cmd = {'PackerUpdate'}}
 
     -- editor display
     use'lukas-reineke/indent-blankline.nvim'
@@ -71,23 +71,62 @@ require'packer'.startup(function()
     use{'tyrannicaltoucan/vim-quantum', opt = true}
     use'tyrannicaltoucan/vim-deep-space'
     use{'knt419/lightline-colorscheme-themecolor', opt = true}
+
+    -- lsp/completion
+    use'neovim/nvim-lspconfig'
+    use'hrsh7th/cmp-nvim-lsp'
+    use'hrsh7th/cmp-buffer'
+    use'hrsh7th/cmp-path'
+    use'hrsh7th/cmp-cmdline'
+    use'hrsh7th/cmp-vsnip'
+    use'hrsh7th/vim-vsnip'
+    use'hrsh7th/nvim-cmp'
+    opt.completeopt="menu,menuone,noselect"
 end)
 
--- lsp/completion
 
 -- plugin variables
 
---require'nvim-treesitter.configs'.setup {
---    highlight = {
---        enable = true
---        }
---    }
---require'nvim-treesitter.configs'.setup {
---  matchup = {
---    enable = true
---  }
---}
+require'nvim-treesitter.configs'.setup {
+    highlight = {
+        enable = true
+    },
+    matchup = {
+        enable = true
+    },
+}
 
+local cmp = require'cmp'
+
+cmp.setup {
+    snippet = {
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+        end,
+    },
+    mapping = {
+        ['<CR>'] = cmp.mapping.confirm(),
+    },
+    sources = cmp.config.sources({
+        { name = 'nvim_lsp' },
+        { name = 'vsnip' },
+    },{
+        { name = 'buffer' },
+    }),
+}
+
+cmp.setup.cmdline('/', {
+    sources = {
+        { name = 'buffer'}
+    },
+})
+cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+        { name = 'path' }
+    }, {
+        { name = 'cmdline' }
+    }),
+})
 -- tabline
 --if !g:tab_gui
 --    set showtabline=2
