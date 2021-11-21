@@ -127,22 +127,8 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' }
     }),
 })
--- tabline
---if !g:tab_gui
---    set showtabline=2
---endif
 
--- statusline
---if g:statusline_gui
---    set laststatus=0
---endif
-
--- cmdline
---if g:cmdline_gui
---    set cmdheight=1
---endif
-
---[[
+cmd[[
 let g:lightline = {
             \ 'colorscheme': 'deepspace',
             \ 'active': {
@@ -194,10 +180,6 @@ let g:lightline = {
             \   "\<C-s>": "\uf044 ".'BLOCK',
             \   't': "\uf68c",
             \ },
-            \ 'enable': {
-            \   'statusline': !g:statusline_gui,
-            \   'tabline': !g:tab_gui
-            \ },
             \ 'separator': {
             \   'left': "│",
             \   'right': "│"
@@ -212,24 +194,18 @@ if winwidth(0) < 100
     let g:lightline#bufferline#filename_modifier = ':t'
 endif
 
-if g:is_windows
+" if g:is_windows
     let g:FerretNvim                = 0
     let g:FerretJob                 = 0
-endif
+" endif
 
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unicode_symbols = 1
-
-let g:coc_global_extensions = ['coc-git', 'coc-json', 'coc-yaml',
-            \ 'coc-lists', 'coc-snippets', 'coc-java',
-            \ 'coc-prettier', 'coc-go', 'coc-vimlsp', 'coc-explorer']
 
 let g:indentLine_bufTypeExclude = ['help', 'terminal']
 let g:indentLine_fileTypeExclude = ['startify']
 let g:lexima_ctrlh_as_backspace = 1
 let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'qf', 'help', 'markdown']
-
-let g:lens#disabled_filetypes = ['coc-explorer']
 
 let g:extradite_showhash = 1
 let g:extradite_diff_split = 'belowright vertical split'
@@ -252,7 +228,7 @@ let g:startify_skiplist = [
             \ '*\\nvim\\runtime\\doc\\*',
             \ ]
 
-let g:startify_bookmarks = [ {'i': '~/.config/nvim/init.vim'}, {'p': '~/.config/nvim/plugins.vim'}, ]
+let g:startify_bookmarks = [ {'i': '~/.config/nvim/init.lua'}, {'p': '~/.config/nvim/lua/plugins.lua'}, ]
 let g:startify_change_to_vcs_root  = 1
 let g:startify_change_to_dir       = 1
 let g:startify_fortune_use_unicode = 0
@@ -263,7 +239,6 @@ let g:floaterm_position            = 'center'
 let g:webdevicons_enable                 = 1
 let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
 let g:webdevicons_enable_startify        = 1
-let g:coc_snippet_next                   = '<tab>'
 let g:capture_open_command = ''
 let g:capture_override_buffer = 'newbufwin'
 
@@ -279,7 +254,7 @@ let g:markdown_fenced_languages = [
             \ 'vim',
             \ 'help'
             \]
-            ]]
+]]
 -- plugin keymaps
 
 cmd[[map *  <Plug>(asterisk-z*)]]
@@ -342,25 +317,25 @@ cmd[[xmap <CR>               <Plug>(LiveEasyAlign)]]
 
 -- functions
 
---[[
+cmd[[
 function! StartifyEntryFormat()
     return 'WebDevIconsGetFileTypeSymbol(absolute_path) ."  ". entry_path'
-end
+endfunction
 
 function! LightlineReadonly()
     return &readonly ? "\ue0a2" : ''
-end
+endfunction
 
 function! LightlineRepository()
     if !exists("b:git_dir")
         return ''
     endif
     return "\uf401 " . fnamemodify(b:git_dir, ":h:t")
-end
+endfunction
 
 function! LightlineRepoStatus()
     return exists("b:git_dir") && exists('g:coc_git_status') ? g:coc_git_status : ''
-end
+endfunction
 
 function! LightlineFiletype()
     return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . '  ' . &filetype : 'no ft') : WebDevIconsGetFileTypeSymbol()
@@ -377,7 +352,8 @@ endfunction
 function! LightlineWInfo()
     return winwidth(0) > 70 ? "\ufab1" . winnr() . ' ' . "\uf4a5 " . bufnr('%') : ''
 endfunction
-
+]]
+--[[
 function! s:my_lexima_setup()
     call lexima#add_rule({'at': '\%#)', 'char': '-', 'input': '<Del><Right><Esc>ea)<Left>'})
     call lexima#add_rule({'at': '\%#}', 'char': '-', 'input': '<Del><Right><Esc>ea)<Left>'})
@@ -410,12 +386,12 @@ function! s:my_diffexit_function()
     diffoff
 endfunction
 ]]
---cmd[[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
---cmd[[autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0]]
---cmd[[autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0]]
+cmd[[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
+cmd[[autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0]]
+cmd[[autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0]]
 --cmd[[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>]]
 --cmd[[autocmd MyAutoCmd VimEnter * call <SID>my_lexima_setup()]]
---cmd[[autocmd MyAutoCmd BufEnter * :Sleuth]]
+cmd[[autocmd MyAutoCmd BufEnter * :Sleuth]]
 cmd[[autocmd MyAutoCmd InsertLeave * silent! pclose!]]
 --cmd[[autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif]]
 --cmd[[autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif]]
