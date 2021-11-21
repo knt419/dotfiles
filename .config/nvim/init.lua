@@ -17,12 +17,12 @@ local g = vim.g
 local opt = vim.opt
 
 -- reset autocmd
-cmd('augroup MyAutoCmd')
-cmd('autocmd!')
-cmd('augroup END')
-cmd('augroup MySetUpCmd')
-cmd('autocmd!')
-cmd('augroup END')
+cmd[[augroup MyAutoCmd]]
+cmd[[autocmd!]]
+cmd[[augroup END]]
+cmd[[augroup MySetUpCmd]]
+cmd[[autocmd!]]
+cmd[[augroup END]]
 
 -- option
 opt.encoding="utf-8"
@@ -108,86 +108,86 @@ opt.winblend=10
 g.mapleader = " "
 
 -- keymap {{{
-cmd('nnoremap <silent> <Esc> <Esc>:<C-u>nohlsearch<CR><Esc>')
-cmd('nnoremap <silent> <Esc><Esc> :<C-u>bdelete<CR>')
-cmd('nnoremap <silent> Y y$')
-cmd('xnoremap <silent> Y "+y')
-cmd('nnoremap <silent> x "_x')
-cmd('nnoremap <silent> X "_X')
-cmd('nnoremap <silent> cd :<C-u>cd %:h<CR>')
-cmd('nnoremap ss :<C-u>%s///g<Left><Left>')
---cmd('xnoremap <silent> <expr> p 'pgv"'.v:register.'y`>')
-cmd('xnoremap . :normal .<CR>')
-cmd('nnoremap <silent> U <C-r>')
-cmd('nnoremap <silent> <BS> <C-^>')
-cmd('nnoremap <silent> + <C-a>')
-cmd('nnoremap <silent> - <C-x>')
-cmd('noremap  <silent> <C-j> }')
-cmd('noremap  <silent> <C-k> {')
-cmd('noremap  <silent> <C-l> $')
-cmd('noremap  <silent> <C-;> $')
-cmd('noremap  <silent> <C-h> ^')
-cmd('noremap  <silent> os :<C-u>e ++enc=cp932<CR>')
-cmd('noremap  <silent> oe :<C-u>e ++enc=euc-jp<CR>')
-cmd('noremap  <silent> ou :<C-u>e ++enc=utf-8<CR>')
-cmd('noremap  q; :q')
+cmd[[nnoremap <silent> <Esc> <Esc>:<C-u>nohlsearch<CR><Esc>]]
+cmd[[nnoremap <silent> <Esc><Esc> :<C-u>bdelete<CR>]]
+cmd[[nnoremap <silent> Y y$]]
+cmd[[xnoremap <silent> Y "+y]]
+cmd[[nnoremap <silent> x "_x]]
+cmd[[nnoremap <silent> X "_X]]
+cmd[[nnoremap <silent> cd :<C-u>cd %:h<CR>]]
+cmd[[nnoremap ss :<C-u>%s///g<Left><Left>]]
+cmd[[xnoremap <silent> <expr> p 'pgv"'.v:register.'y`>']]
+cmd[[xnoremap . :normal .<CR>]]
+cmd[[nnoremap <silent> U <C-r>]]
+cmd[[nnoremap <silent> <BS> <C-^>]]
+cmd[[nnoremap <silent> + <C-a>]]
+cmd[[nnoremap <silent> - <C-x>]]
+cmd[[noremap  <silent> <C-j> }]]
+cmd[[noremap  <silent> <C-k> {]]
+cmd[[noremap  <silent> <C-l> $]]
+cmd[[noremap  <silent> <C-;> $]]
+cmd[[noremap  <silent> <C-h> ^]]
+cmd[[noremap  <silent> os :<C-u>e ++enc=cp932<CR>]]
+cmd[[noremap  <silent> oe :<C-u>e ++enc=euc-jp<CR>]]
+cmd[[noremap  <silent> ou :<C-u>e ++enc=utf-8<CR>]]
+cmd[[noremap  q; :q]]
 
-cmd('vnoremap < <gv')
-cmd('vnoremap > >gv')
+cmd[[vnoremap < <gv]]
+cmd[[vnoremap > >gv]]
 
-cmd('nnoremap <silent> : ;')
+cmd[[nnoremap <silent> : ;]]
 api.nvim_set_keymap("n", ";", ":", { noremap =true })
-cmd('nnoremap <silent> <CR><CR> o<Esc>')
-cmd('nnoremap <silent> <Leader>q :<C-u>bd<CR>')
-cmd('nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>')
-cmd('nnoremap <silent> <Leader>n :<C-u>enew<CR>')
-cmd('nmap <silent> <C-n> *')
-cmd('nmap <silent> <C-p> #')
-cmd('cnoremap <C-v> <C-r>+')
-cmd('cnoremap <C-c> <C-r><C-w>')
-cmd('inoremap <silent> <Esc> <Esc>:<C-u>set iminsert=0<CR>')
-cmd('inoremap <silent> jj <Esc>:<C-u>set iminsert=0<CR>')
+cmd[[nnoremap <silent> <CR><CR> o<Esc>]]
+cmd[[nnoremap <silent> <Leader>q :<C-u>bd<CR>]]
+cmd[[nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>]]
+cmd[[nnoremap <silent> <Leader>n :<C-u>enew<CR>]]
+cmd[[nmap <silent> <C-n> *]]
+cmd[[nmap <silent> <C-p> #]]
+cmd[[cnoremap <C-v> <C-r>+]]
+cmd[[cnoremap <C-c> <C-r><C-w>]]
+cmd[[inoremap <silent> <Esc> <Esc>:<C-u>set iminsert=0<CR>]]
+cmd[[inoremap <silent> jj <Esc>:<C-u>set iminsert=0<CR>]]
 
-cmd('inoremap <C-l> <C-g>U<Right>')
-cmd('inoremap <C-;> <C-g>U<C-o>$')
-cmd('inoremap <C-j> <C-g>U<C-o>o')
-cmd('inoremap <C-k> <C-g>U<C-o>O')
+cmd[[inoremap <C-l> <C-g>U<Right>]]
+cmd[[inoremap <C-;> <C-g>U<C-o>$]]
+cmd[[inoremap <C-j> <C-g>U<C-o>o]]
+cmd[[inoremap <C-k> <C-g>U<C-o>O]]
 
-cmd('nnoremap <S-Left>  <C-w><')
-cmd('nnoremap <S-Right> <C-w>>')
-cmd('nnoremap <S-Up>    <C-w>-')
-cmd('nnoremap <S-Down>  <C-w>+')
---cmd('nnoremap <expr><Tab> <SID>my_ntab_function()
---cmd('nnoremap <expr><S-Tab> <SID>my_ntab_r_function()
-cmd('nnoremap <C-Left>  <C-w>h')
-cmd('nnoremap <C-Right> <C-w>l')
-cmd('nnoremap <C-Up>    <C-w>k')
-cmd('nnoremap <C-Down>  <C-w>j')
+cmd[[nnoremap <S-Left>  <C-w><]]
+cmd[[nnoremap <S-Right> <C-w>>]]
+cmd[[nnoremap <S-Up>    <C-w>-]]
+cmd[[nnoremap <S-Down>  <C-w>+]]
+--cmd[[nnoremap <expr><Tab> <SID>my_ntab_function()
+--cmd[[nnoremap <expr><S-Tab> <SID>my_ntab_r_function()
+cmd[[nnoremap <C-Left>  <C-w>h]]
+cmd[[nnoremap <C-Right> <C-w>l]]
+cmd[[nnoremap <C-Up>    <C-w>k]]
+cmd[[nnoremap <C-Down>  <C-w>j]]
 
 -- keymap for japanese ime
-cmd('nnoremap ‚  a')
-cmd('nnoremap ‚¢ i')
-cmd('nnoremap ‚¤ u')
-cmd('nnoremap ‚¨ o')
-cmd('nnoremap ‚Ád dd')
-cmd('nnoremap ‚Áy yy')
-cmd('inoremap ‚Áj <Esc>')
+cmd[[nnoremap ‚  a]]
+cmd[[nnoremap ‚¢ i]]
+cmd[[nnoremap ‚¤ u]]
+cmd[[nnoremap ‚¨ o]]
+cmd[[nnoremap ‚Ád dd]]
+cmd[[nnoremap ‚Áy yy]]
+cmd[[inoremap ‚Áj <Esc>]]
 
---require('plugins')
+require'plugins'
 
-cmd('filetype plugin indent on')
+cmd[[filetype plugin indent on]]
 
 -- autocmd
-cmd('autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow')
-cmd('autocmd MyAutoCmd VimResized * execute "normal <C-w>="')
-cmd('autocmd MyAutoCmd TermOpen * setlocal nonumber')
-cmd('autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif')
-cmd('autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline')
-cmd('autocmd MyAutoCmd BufEnter * silent! lcd %:p:h')
-cmd('augroup syntaxhighlight')
-cmd('autocmd!')
-cmd('autocmd Syntax * if 100 < line("$") | syntax sync minlines=100 | endif')
-cmd('augroup END')
+cmd[[autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow]]
+cmd[[autocmd MyAutoCmd VimResized * execute "normal <C-w>="]]
+cmd[[autocmd MyAutoCmd TermOpen * setlocal nonumber]]
+cmd[[autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif]]
+cmd[[autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline]]
+cmd[[autocmd MyAutoCmd BufEnter * silent! lcd %:p:h]]
+cmd[[augroup syntaxhighlight]]
+cmd[[autocmd!]]
+cmd[[autocmd Syntax * if 100 < line("$") | syntax sync minlines=100 | endif]]
+cmd[[augroup END]]
 
 opt.background='dark'
 vim.colorscheme='deep-space'
