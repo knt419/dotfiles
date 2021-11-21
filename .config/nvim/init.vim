@@ -113,6 +113,7 @@ let g:loaded_getscriptPlugin   = 1
 let g:loaded_gzip              = 1
 let g:loaded_logipat           = 1
 let g:loaded_logiPat           = 1
+let g:loaded_matchit           = 1
 let g:loaded_matchparen        = 1
 let g:loaded_netrw             = 1
 let g:loaded_netrwFileHandlers = 1
