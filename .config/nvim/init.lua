@@ -130,7 +130,7 @@ opt.winblend=10
 
 g.mapleader = " "
 -- g.vim_indent_cont = g.shiftwidth * 3
--- g.is_windows = 
+-- g.is_windows =
 
 
 -- keymap {{{
@@ -184,6 +184,7 @@ api.nvim_set_keymap("n", "<S-Right>", "<C-w>>", { noremap =true })
 api.nvim_set_keymap("n", "<S-Up>", "<C-w>-", { noremap =true })
 api.nvim_set_keymap("n", "<S-Down>", "<C-w>+", { noremap =true })
 --cmd[[nnoremap <expr><Tab> <SID>my_ntab_function()
+api.nvim_set_keymap("n", "<Tab>", [[winnr('$') == 1 ? (tabpagenr('$') <= 1 ? (len(getbufinfo({'buflisted':1})) <= 1 ? ":<C-u>echo 'no buffer to switch.'<CR>" : ":<C-u>bn<CR>" ) : ":<C-u>tabnext<CR>" ) : "<C-w>w")]], { noremap =false, expr = true })
 --cmd[[nnoremap <expr><S-Tab> <SID>my_ntab_r_function()
 api.nvim_set_keymap("n", "<C-Left>", "<C-w>h", { noremap =true })
 api.nvim_set_keymap("n", "<C-Right>", "<C-w>l", { noremap =true })
@@ -200,6 +201,22 @@ api.nvim_set_keymap("n", "っy", "yy", { noremap =true })
 api.nvim_set_keymap("i", "っ", "<Esc>", { noremap =true })
 
 require'plugins'
+
+local function my_ntab_function()
+  if fn.winnr('$') == 1 then
+    if fn.tabpageenr('$') <= 1 then
+      if fn.len(fn.getbufinfo({ buflisted = 1 })) <= 1 then
+        return ":<C-u>echo 'no buffer to switch.'<CR>"
+      else
+        return ":<C-u>bn<CR>"
+      end
+    else
+      return ":<C-u>tabnext<CR>"
+    end
+  else
+    return "<C-w>w"
+  end
+end
 
 cmd[[filetype plugin indent on]]
 
