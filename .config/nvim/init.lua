@@ -129,72 +129,75 @@ opt.pumblend=10
 opt.winblend=10
 
 g.mapleader = " "
+-- g.vim_indent_cont = g.shiftwidth * 3
+-- g.is_windows = 
+
 
 -- keymap {{{
-cmd[[nnoremap <silent> <Esc> <Esc>:<C-u>nohlsearch<CR><Esc>]]
-cmd[[nnoremap <silent> <Esc><Esc> :<C-u>bdelete<CR>]]
-cmd[[nnoremap <silent> Y y$]]
-cmd[[xnoremap <silent> Y "+y]]
-cmd[[nnoremap <silent> x "_x]]
-cmd[[nnoremap <silent> X "_X]]
-cmd[[nnoremap <silent> cd :<C-u>cd %:h<CR>]]
-cmd[[nnoremap ss :<C-u>%s///g<Left><Left>]]
+api.nvim_set_keymap('n', '<Esc>', '<Esc>:<C-u>nohlsearch<CR><Esc>', { noremap = true, silent = true})
+api.nvim_set_keymap('n', '<Esc><Esc>', ':<C-u>bdelete<CR>', { noremap = true, silent = true})
+api.nvim_set_keymap('n', 'Y', 'y$', { noremap = true, silent = true})
+api.nvim_set_keymap('x', 'Y', '"+y', { noremap = true, silent = true})
+api.nvim_set_keymap('n', 'x', '"_x', { noremap = true, silent = true})
+api.nvim_set_keymap('n', 'X', '"_X', { noremap = true, silent = true})
+api.nvim_set_keymap('n', 'cd', ':<C-u>cd %:h<CR>', { noremap = true, silent = true})
+api.nvim_set_keymap('n', 'ss', ':<C-u>%s///g<Left><Left>', { noremap = true, silent = true})
 cmd[[xnoremap <silent> <expr> p 'pgv"'.v:register.'y`>']]
-cmd[[xnoremap . :normal .<CR>]]
-cmd[[nnoremap <silent> U <C-r>]]
-cmd[[nnoremap <silent> <BS> <C-^>]]
-cmd[[nnoremap <silent> + <C-a>]]
-cmd[[nnoremap <silent> - <C-x>]]
-cmd[[noremap  <silent> <C-j> }]]
-cmd[[noremap  <silent> <C-k> {]]
-cmd[[noremap  <silent> <C-l> $]]
-cmd[[noremap  <silent> <C-;> $]]
-cmd[[noremap  <silent> <C-h> ^]]
-cmd[[noremap  <silent> os :<C-u>e ++enc=cp932<CR>]]
-cmd[[noremap  <silent> oe :<C-u>e ++enc=euc-jp<CR>]]
-cmd[[noremap  <silent> ou :<C-u>e ++enc=utf-8<CR>]]
-cmd[[noremap  q; :q]]
+-- api.nvim_set_keymap('x', 'p', 'pgv"' .. vim.v.register .. 'y`>', { noremap = true, silent = true})
+api.nvim_set_keymap('x', '.', ':normal .<CR>', { noremap = true, silent = true})
+api.nvim_set_keymap('n', 'U', '<C-r>', { noremap = true, silent = true})
+api.nvim_set_keymap('n', '<BS>', '<C-^>', { noremap = true, silent = true})
+api.nvim_set_keymap('n', '+', '<C-a>', { noremap = true, silent = true})
+api.nvim_set_keymap('n', '-', '<C-x>', { noremap = true, silent = true})
+api.nvim_set_keymap('', '<C-j>', '}', { noremap = true, silent = true})
+api.nvim_set_keymap('', '<C-k>', '{', { noremap = true, silent = true})
+api.nvim_set_keymap('', '<C-l>', '$', { noremap = true, silent = true})
+api.nvim_set_keymap('', '<C-;>', '$', { noremap = true, silent = true})
+api.nvim_set_keymap('', '<C-h>', '^', { noremap = true, silent = true})
+api.nvim_set_keymap('', 'os', ':<C-u>e ++enc=cp932<CR>', { noremap = true, silent = true})
+api.nvim_set_keymap('', 'oe', ':<C-u>e ++enc=euc-jp<CR>', { noremap = true, silent = true})
+api.nvim_set_keymap('', 'ou', ':<C-u>e ++enc=utf-8<CR>', { noremap = true, silent = true})
+api.nvim_set_keymap('', 'q;', ':q', { noremap = true })
 
-cmd[[vnoremap < <gv]]
-cmd[[vnoremap > >gv]]
+api.nvim_set_keymap('v', '<', '<gv', { noremap = true })
+api.nvim_set_keymap('v', '>', '>gv', { noremap = true })
 
-cmd[[nnoremap <silent> : ;]]
 api.nvim_set_keymap("n", ";", ":", { noremap =true })
-cmd[[nnoremap <silent> <CR><CR> o<Esc>]]
-cmd[[nnoremap <silent> <Leader>q :<C-u>bd<CR>]]
-cmd[[nnoremap <silent> <Leader>w :<C-u>w<CR>:<C-u>bd<CR>]]
-cmd[[nnoremap <silent> <Leader>n :<C-u>enew<CR>]]
-cmd[[nmap <silent> <C-n> *]]
-cmd[[nmap <silent> <C-p> #]]
-cmd[[cnoremap <C-v> <C-r>+]]
-cmd[[cnoremap <C-c> <C-r><C-w>]]
-cmd[[inoremap <silent> <Esc> <Esc>:<C-u>set iminsert=0<CR>]]
-cmd[[inoremap <silent> jj <Esc>:<C-u>set iminsert=0<CR>]]
+api.nvim_set_keymap("n", "<CR><CR>", "o<Esc>", { noremap =true, silent = true })
+api.nvim_set_keymap("n", "<Leader>q", ":<C-u>bd<CR>", { noremap =true, silent = true })
+api.nvim_set_keymap("n", "<Leader>w", ":<C-u>w<CR>:<C-u>bd<CR>", { noremap =true, silent = true })
+api.nvim_set_keymap("n", "<Leader>n", ":<C-u>enew<CR>", { noremap =true, silent = true })
+api.nvim_set_keymap("n", "<C-n>", "*", { silent = true })
+api.nvim_set_keymap("n", "<C-p>", "#", { silent = true })
+api.nvim_set_keymap("c", "<C-v>", "<C-r>+", { noremap =true, silent = true })
+api.nvim_set_keymap("c", "<C-c>", "<C-r><C-w>", { noremap =true })
+api.nvim_set_keymap("i", "<Esc>", "<Esc>:<C-u>set iminsert=0<CR>", { noremap =true, silent = true })
+api.nvim_set_keymap("i", "jj", "<Esc>:<C-u>set iminsert=0<CR>", { noremap =true, silent = true })
 
-cmd[[inoremap <C-l> <C-g>U<Right>]]
-cmd[[inoremap <C-;> <C-g>U<C-o>$]]
-cmd[[inoremap <C-j> <C-g>U<C-o>o]]
-cmd[[inoremap <C-k> <C-g>U<C-o>O]]
+api.nvim_set_keymap("i", "<C-l>", "<C-g>U<Right>", { noremap =true })
+api.nvim_set_keymap("i", "<C-;>", "<C-g>U<C-o>$", { noremap =true })
+api.nvim_set_keymap("i", "<C-j>", "<C-g>U<C-o>o", { noremap =true })
+api.nvim_set_keymap("i", "<C-k>", "<C-g>U<C-o>O", { noremap =true })
 
-cmd[[nnoremap <S-Left>  <C-w><]]
-cmd[[nnoremap <S-Right> <C-w>>]]
-cmd[[nnoremap <S-Up>    <C-w>-]]
-cmd[[nnoremap <S-Down>  <C-w>+]]
+api.nvim_set_keymap("n", "<S-Left>", "<C-w><", { noremap =true })
+api.nvim_set_keymap("n", "<S-Right>", "<C-w>>", { noremap =true })
+api.nvim_set_keymap("n", "<S-Up>", "<C-w>-", { noremap =true })
+api.nvim_set_keymap("n", "<S-Down>", "<C-w>+", { noremap =true })
 --cmd[[nnoremap <expr><Tab> <SID>my_ntab_function()
 --cmd[[nnoremap <expr><S-Tab> <SID>my_ntab_r_function()
-cmd[[nnoremap <C-Left>  <C-w>h]]
-cmd[[nnoremap <C-Right> <C-w>l]]
-cmd[[nnoremap <C-Up>    <C-w>k]]
-cmd[[nnoremap <C-Down>  <C-w>j]]
+api.nvim_set_keymap("n", "<C-Left>", "<C-w>h", { noremap =true })
+api.nvim_set_keymap("n", "<C-Right>", "<C-w>l", { noremap =true })
+api.nvim_set_keymap("n", "<C-Up>", "<C-w>k", { noremap =true })
+api.nvim_set_keymap("n", "<C-Down>", "<C-w>j", { noremap =true })
 
 -- keymap for japanese ime
---cmd[[nnoremap あ a]]
---cmd[[nnoremap い i]]
---cmd[[nnoremap う u]]
---cmd[[nnoremap お o]]
---cmd[[nnoremap っd dd]]
---cmd[[nnoremap っy yy]]
---cmd[[inoremap っj <Esc>]]
+api.nvim_set_keymap("n", "あ", "a", { noremap =true })
+api.nvim_set_keymap("n", "い", "i", { noremap =true })
+api.nvim_set_keymap("n", "う", "u", { noremap =true })
+api.nvim_set_keymap("n", "お", "o", { noremap =true })
+api.nvim_set_keymap("n", "っd", "dd", { noremap =true })
+api.nvim_set_keymap("n", "っy", "yy", { noremap =true })
+api.nvim_set_keymap("i", "っ", "<Esc>", { noremap =true })
 
 require'plugins'
 
