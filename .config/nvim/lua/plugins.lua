@@ -27,6 +27,12 @@ require'packer'.startup(function()
     use'camspiers/lens.vim'
     use'itchyny/vim-cursorword'
     use'nvim-treesitter/nvim-treesitter'
+    use {
+        'lewis6991/gitsigns.nvim',
+        requires = {
+            'nvim-lua/plenary.nvim'
+        }
+    }
 
     -- text/input manipulation
     use'cohama/lexima.vim'
@@ -34,7 +40,8 @@ require'packer'.startup(function()
     use'machakann/vim-highlightedyank'
     use'rhysd/accelerated-jk'
     use'tpope/vim-surround'
-    use'tpope/vim-commentary'
+    -- use'tpope/vim-commentary'
+    use'b3nj5m1n/kommentary'
     use'tpope/vim-sleuth'
     use'kana/vim-textobj-user'
     use'kana/vim-textobj-line'
@@ -128,133 +135,135 @@ cmp.setup.cmdline(':', {
     }),
 })
 
-cmd[[
-let g:lightline = {
-            \ 'colorscheme': 'deepspace',
-            \ 'active': {
-            \    'left': [
-            \      ['mode', 'paste'],
-            \      ['cocstatus']
-            \    ],
-            \    'right': [
-            \      ['readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage'],
-            \    ]
-            \ },
-            \ 'tabline': {
-            \   'left': [['winfo', 'buffers'] ],
-            \   'right': [['repostatus','repository'] ]
-            \ },
-            \ 'component': {
-            \   'lineinfo': "\ue0a1".'%3l:%3v',
-            \   'percentage': '%2p%%',
-            \ },
-            \ 'component_visible_condition': {
-            \   'lineinfo': '1'
-            \ },
-            \ 'component_function': {
-            \    'readonly'   : 'LightlineReadonly',
-            \    'repository': 'LightlineRepository',
-            \    'repostatus': 'LightlineRepoStatus',
-            \    'filetype'   : 'LightlineFiletype',
-            \    'fileformat': 'LightlineFileformat',
-            \    'changes'    : 'LightlineChanges',
-            \    'cocstatus'  : 'coc#status',
-            \    'winfo'      : 'LightlineWInfo'
-            \ },
-            \ 'component_expand': {
-            \   'buffers': 'lightline#bufferline#buffers',
-            \ },
-            \ 'component_type': {
-            \   'buffers': 'tabsel',
-            \ },
-            \ 'mode_map': {
-            \   'n': "\ufc44",
-            \   'i': "\uf040",
-            \   'R': "\uf954",
-            \   'v': "\uf988",
-            \   'V': "\uf988".'LINE',
-            \   "\<C-v>": "\uf988".'BLOCK',
-            \   'c': "\ufcb5",
-            \   's': "\uf044",
-            \   'S': "\uf044 ".'LINE',
-            \   "\<C-s>": "\uf044 ".'BLOCK',
-            \   't': "\uf68c",
-            \ },
-            \ 'separator': {
-            \   'left': "│",
-            \   'right': "│"
-            \ },
-            \ 'subseparator': {
-            \   'left': "│",
-            \   'right': "│"
-            \ },
-            \ }
+g.lightline = {
+            colorscheme = 'deepspace',
+            active = {
+               left = {
+                   {'mode', 'paste'},
+                   { 'cocstatus'},
+               },
+               right = {
+                 {'readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage'},
+               }
+            },
+            tabline = {
+              left = {{'winfo', 'buffers'}},
+              right = {{'repostatus','repository'}},
+            },
+            component = {
+              lineinfo = "\u{e0a1}"..'%3l:%3v',
+              percentage = '%2p%%',
+            },
+            component_visible_condition = {
+              lineinfo = '1'
+            },
+            component_function = {
+               readonly = 'LightlineReadonly',
+               repository = 'LightlineRepository',
+               repostatus = 'LightlineRepoStatus',
+               filetype = 'LightlineFiletype',
+               fileformat = 'LightlineFileformat',
+               changes = 'LightlineChanges',
+               cocstatus = 'coc#status',
+               winfo = 'LightlineWInfo'
+            },
+            component_expand = {
+              buffers = 'lightline#bufferline#buffers',
+            },
+            component_type = {
+              buffers = 'tabsel',
+            },
+            mode_map = {
+              n = "\u{fc44}",
+              i = "\u{f040}",
+              R = "\u{f954}",
+              v = "\u{f988}",
+              V = "\u{f988}"..'LINE',
+              --<C-v> = "\u{f988}"..'BLOCK',
+              c = "\u{fcb5}",
+              s = "\u{f044}",
+              S = "\u{f044} "..'LINE',
+              --<C-s> = "\u{f044} "..'BLOCK',
+              t = "\u{f68c}",
+            },
+            separator = {
+              left = "│",
+              right = "│"
+            },
+            subseparator = {
+              left = "│",
+              right = "│"
+            },
+        }
 
-if winwidth(0) < 100
-    let g:lightline#bufferline#filename_modifier = ':t'
-endif
+if fn.winwidth(0) < 100 then
+    g['lightline#bufferline#filename_modifier'] = ':t'
+end
 
-" if g:is_windows
-    let g:FerretNvim                = 0
-    let g:FerretJob                 = 0
-" endif
+if g.is_windows then
+    g.FerretNvim = 0
+    g.FerretJob  = 0
+end
 
-let g:lightline#bufferline#enable_devicons = 1
-let g:lightline#bufferline#unicode_symbols = 1
+g['lightline#bufferline#enable_devicons'] = 1
+g['lightline#bufferline#unicode_symbols'] = 1
 
-let g:indentLine_bufTypeExclude = ['help', 'terminal']
-let g:indentLine_fileTypeExclude = ['startify']
-let g:lexima_ctrlh_as_backspace = 1
-let g:better_whitespace_filetypes_blacklist=['diff', 'gitcommit', 'qf', 'help', 'markdown']
+g.indentLine_bufTypeExclude = {'help', 'terminal',}
+g.indentLine_fileTypeExclude = {'startify'}
+g.lexima_ctrlh_as_backspace = 1
+g.better_whitespace_filetypes_blacklist = {'diff', 'gitcommit', 'qf', 'help', 'markdown',}
 
-let g:extradite_showhash = 1
-let g:extradite_diff_split = 'belowright vertical split'
+g.extradite_showhash = 1
+g.extradite_diff_split = 'belowright vertical split'
 
-let g:FerretExecutable          = 'rg,ag'
-let g:FerretExecutableArguments = {
-            \   'ag': '-i --vimgrep --hidden',
-            \   'rg': '--vimgrep --no-heading --hidden'
-            \ }
+g.FerretExecutable          = 'rg,ag'
+g.FerretExecutableArguments = {
+            ag = '-i --vimgrep --hidden',
+            rg = '--vimgrep --no-heading --hidden',
+        }
 
-let g:highlightedyank_highlight_duration = 300
+g.highlightedyank_highlight_duration = 300
 
-let g:startify_lists = [
-          \ { 'type': 'files',     'header': ['   MRU']            },
-          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-          \ ]
+g.startify_lists = {
+          { type = 'files',     header = {'   MRU',}            },
+          { type = 'bookmarks', header = {'   Bookmarks',}      },
+      }
 
-let g:startify_skiplist = [
-            \ '*\\AppData\\Local\\Temp\\*',
-            \ '*\\nvim\\runtime\\doc\\*',
-            \ ]
+g.startify_skiplist = {
+            '*\\AppData\\Local\\Temp\\*',
+            '*\\nvim\\runtime\\doc\\*',
+        }
 
-let g:startify_bookmarks = [ {'i': '~/.config/nvim/init.lua'}, {'p': '~/.config/nvim/lua/plugins.lua'}, ]
-let g:startify_change_to_vcs_root  = 1
-let g:startify_change_to_dir       = 1
-let g:startify_fortune_use_unicode = 0
-let g:startify_enable_unsafe       = 1
-let g:floaterm_winblend            = 40
-let g:floaterm_position            = 'center'
+g.startify_bookmarks = {
+    { i = '~/.config/nvim/init.lua'},
+    { p = '~/.config/nvim/lua/plugins.lua'},
+}
+g.startify_change_to_vcs_root  = 1
+g.startify_change_to_dir       = 1
+g.startify_fortune_use_unicode = 0
+g.startify_enable_unsafe       = 1
+g.floaterm_winblend            = 40
+g.floaterm_position            = 'center'
 
-let g:webdevicons_enable                 = 1
-let g:WebDevIconsUnicodeGlyphDoubleWidth = 1
-let g:webdevicons_enable_startify        = 1
-let g:capture_open_command = ''
-let g:capture_override_buffer = 'newbufwin'
+g.webdevicons_enable                 = 1
+g.WebDevIconsUnicodeGlyphDoubleWidth = 1
+g.webdevicons_enable_startify        = 1
+g.capture_open_command = ''
+g.capture_override_buffer = 'newbufwin'
 
-let $VISUAL = 'nvr --remote-wait'
-let $PATH   = $PATH . ':' . $HOME . '/go/bin'
+vim.env.VISUAL = 'nvr --remote-wait'
+vim.env.PATH   = vim.env.PATH .. ':' .. vim.env.HOME .. '/go/bin'
 
-let g:nefertiti_base_brightness_level = 14
-let g:sierra_Sunset = 1
-let g:edge_style = 'neon'
-let g:edge_disable_italic_comment = 1
+g.nefertiti_base_brightness_level = 14
+g.sierra_Sunset = 1
+g.edge_style = 'neon'
+g.edge_disable_italic_comment = 1
 
-let g:markdown_fenced_languages = [
-            \ 'vim',
-            \ 'help'
-            \]
-]]
+g.markdown_fenced_languages = {
+            'vim',
+            'help',
+        }
+
 -- plugin keymaps
 
 cmd[[map *  <Plug>(asterisk-z*)]]
@@ -317,41 +326,73 @@ cmd[[xmap <CR>               <Plug>(LiveEasyAlign)]]
 
 -- functions
 
-cmd[[
-function! StartifyEntryFormat()
-    return 'WebDevIconsGetFileTypeSymbol(absolute_path) ."  ". entry_path'
-endfunction
+local function StartifyEntryFormat()
+    return fn.WebDevIconsGetFileTypeSymbol(absolute_path) .. "  " .. entry_path
+end
 
-function! LightlineReadonly()
-    return &readonly ? "\ue0a2" : ''
-endfunction
-
-function! LightlineRepository()
-    if !exists("b:git_dir")
+local function LightlineReadonly()
+    if g.readonly then
+        return "\u{e0a2}"
+    else
         return ''
-    endif
-    return "\uf401 " . fnamemodify(b:git_dir, ":h:t")
-endfunction
+    end
+end
 
-function! LightlineRepoStatus()
-    return exists("b:git_dir") && exists('g:coc_git_status') ? g:coc_git_status : ''
-endfunction
+local function LightlineRepository()
+    if not fn.exists("b:git_dir") then
+        return ''
+    end
+    return "\u{f401} " .. fn.fnamemodify(vim.bo.git_dir, ":h:t")
+end
 
-function! LightlineFiletype()
-    return winwidth(0) > 70 ? (strlen(&filetype) ? WebDevIconsGetFileTypeSymbol() . '  ' . &filetype : 'no ft') : WebDevIconsGetFileTypeSymbol()
-endfunction
+local function LightlineRepoStatus()
+    if fn.exists("b:git_dir") and fn.exists('g:coc_git_status') then
+        return g.coc_git_status
+    else
+        return ''
+    end
+end
 
-function! LightlineChanges()
-    return exists('b:coc_git_status') && b:coc_git_status != '' ? "\uf440 " . substitute(substitute(substitute(b:coc_git_status, "+", "\uf457 ", ""), "-", "\uf458 ", ""), '\~', "\uf459 ", "") : ''
-endfunction
+local function LightlineFiletype()
+    if fn.winwidth(0) > 70 then
+        if fn.strlen(vim.bo.filetype) >= 1 then
+            return fn.WebDevIconsGetFileTypeSymbol() .. '  ' .. vim.bo.filetype
+        else
+            return 'no ft'
+        end
+    else
+        return fn.WebDevIconsGetFileTypeSymbol()
+    end
+end
 
-function! LightlineFileformat()
-    return winwidth(0) > 70 ? (WebDevIconsGetFileFormatSymbol() . '  ' . &fileformat) : WebDevIconsGetFileFormatSymbol()
-endfunction
+local function LightlineChanges()
+    if fn.exists('b:coc_git_status') and vim.bo.coc_git_status ~= '' then
+        return "\u{f440} " .. fn.substitute(fn.substitute(fn.substitute(vim.bo.coc_git_status, "+", "\u{f457} ", ""), "-", "\u{f458} ", ""), '~', "\u{f459} ", "")
+    else
+        return ''
+    end
+end
 
-function! LightlineWInfo()
-    return winwidth(0) > 70 ? "\ufab1" . winnr() . ' ' . "\uf4a5 " . bufnr('%') : ''
-endfunction
+local function LightlineFileformat()
+    if fn.winwidth(0) > 70 then
+        return fn.WebDevIconsGetFileFormatSymbol() .. '  ' .. vim.bo.fileformat
+    else
+        fn.WebDevIconsGetFileFormatSymbol()
+    end
+end
+
+local function LightlineWInfo()
+    if fn.winwidth(0) > 70 then
+        return "\u{fab1}" .. fn.winnr() .. ' ' .. "\u{f4a5} " .. fn.bufnr('%')
+    else
+        return''
+    end
+end
+cmd[[
+
+
+
+
 ]]
 --[[
 function! s:my_lexima_setup()

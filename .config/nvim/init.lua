@@ -54,7 +54,7 @@ opt.fileencodings="iso-2022-jp,cp932,euc-jp,utf-8"
 opt.backup=false
 opt.writebackup=false
 opt.swapfile=false
---opt.backupdir-=.
+opt.backupdir:remove('.')
 
 opt.fsync=false
 opt.autoread=false
@@ -88,11 +88,11 @@ opt.conceallevel=0
 opt.clipboard="unnamedplus"
 opt.startofline=false
 opt.list=true
---opt.listchars = { tab = 'ﾂｻ' , trail = '-', eol = '竊ｲ', extends = 'ﾂｻ', precedes = 'ﾂｫ', nbsp = '%' }
---opt.listchars = { tab = '»' , trail = '-', eol = '↲', extends = '»', precedes = '«', nbsp = '%' }
---opt.fillchars= {eob= ' '}
+--opt.listchars = { tab = '»', trail = '-', eol = '↲', extends = '»', precedes = '«', nbsp = '%' }
+-- opt.listchars = { tab = "\u{00BB}", trail = "\u{0020}", eol = "\u{21B2}", extends = "\u{00BB}", precedes = "\u{00AB}", nbsp = "\u{0025}" }
+opt.fillchars = { eob = "\u{0020}"}
 opt.virtualedit="block"
---opt.backspace={ 'indent','eol','start' }
+opt.backspace = { 'indent','eol','start' }
 opt.whichwrap="b,s,h,l,<,>,[,]"
 opt.mouse="a"
 opt.synmaxcol=300
@@ -116,12 +116,11 @@ opt.wildmode= { list = 'full' }
 opt.wrap=true
 opt.showcmd=true
 opt.showmode=false
---opt.iskeyword+=-
+opt.iskeyword:append('-')
 opt.linebreak=true
 opt.breakindent=true
 opt.breakindentopt= { shift = 2 }
 opt.showbreak='↪'
---opt.showbreak='竊ｪ'
 opt.tags=''
 
 opt.inccommand="split"
@@ -129,8 +128,7 @@ opt.pumblend=10
 opt.winblend=10
 
 g.mapleader = " "
--- g.vim_indent_cont = g.shiftwidth * 3
--- g.is_windows =
+g.is_windows = fn.has('win16') or fn.has('win32') or fn.has('win64')
 
 
 -- keymap {{{
@@ -142,8 +140,8 @@ api.nvim_set_keymap('n', 'x', '"_x', { noremap = true, silent = true})
 api.nvim_set_keymap('n', 'X', '"_X', { noremap = true, silent = true})
 api.nvim_set_keymap('n', 'cd', ':<C-u>cd %:h<CR>', { noremap = true, silent = true})
 api.nvim_set_keymap('n', 'ss', ':<C-u>%s///g<Left><Left>', { noremap = true, silent = true})
-cmd[[xnoremap <silent> <expr> p 'pgv"'.v:register.'y`>']]
--- api.nvim_set_keymap('x', 'p', 'pgv"' .. vim.v.register .. 'y`>', { noremap = true, silent = true})
+-- cmd[[xnoremap <silent> <expr> p 'pgv"'.v:register.'y`>']]
+api.nvim_set_keymap('x', 'p', 'pgv"' .. vim.v.register .. 'y`>', { noremap = true, silent = true, expr = true})
 api.nvim_set_keymap('x', '.', ':normal .<CR>', { noremap = true, silent = true})
 api.nvim_set_keymap('n', 'U', '<C-r>', { noremap = true, silent = true})
 api.nvim_set_keymap('n', '<BS>', '<C-^>', { noremap = true, silent = true})
@@ -183,9 +181,8 @@ api.nvim_set_keymap("n", "<S-Left>", "<C-w><", { noremap =true })
 api.nvim_set_keymap("n", "<S-Right>", "<C-w>>", { noremap =true })
 api.nvim_set_keymap("n", "<S-Up>", "<C-w>-", { noremap =true })
 api.nvim_set_keymap("n", "<S-Down>", "<C-w>+", { noremap =true })
---cmd[[nnoremap <expr><Tab> <SID>my_ntab_function()
-api.nvim_set_keymap("n", "<Tab>", [[winnr('$') == 1 ? (tabpagenr('$') <= 1 ? (len(getbufinfo({'buflisted':1})) <= 1 ? ":<C-u>echo 'no buffer to switch.'<CR>" : ":<C-u>bn<CR>" ) : ":<C-u>tabnext<CR>" ) : "<C-w>w")]], { noremap =false, expr = true })
---cmd[[nnoremap <expr><S-Tab> <SID>my_ntab_r_function()
+api.nvim_set_keymap("n", "<Tab>", 'v:lua.my_ntab_function()', { noremap =false, expr = true })
+api.nvim_set_keymap("n", "<S-Tab>", 'v:lua.my_ntab_r_function()', { noremap =false, expr = true })
 api.nvim_set_keymap("n", "<C-Left>", "<C-w>h", { noremap =true })
 api.nvim_set_keymap("n", "<C-Right>", "<C-w>l", { noremap =true })
 api.nvim_set_keymap("n", "<C-Up>", "<C-w>k", { noremap =true })
@@ -202,19 +199,39 @@ api.nvim_set_keymap("i", "っ", "<Esc>", { noremap =true })
 
 require'plugins'
 
-local function my_ntab_function()
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
+end
+
+_G.my_ntab_function = function()
   if fn.winnr('$') == 1 then
-    if fn.tabpageenr('$') <= 1 then
+    if fn.tabpagenr('$') <= 1 then
       if fn.len(fn.getbufinfo({ buflisted = 1 })) <= 1 then
-        return ":<C-u>echo 'no buffer to switch.'<CR>"
+        return t":<C-u>echo 'no buffer to switch.'<CR>"
       else
-        return ":<C-u>bn<CR>"
+        return t":<C-u>bn<CR>"
       end
     else
-      return ":<C-u>tabnext<CR>"
+      return t":<C-u>tabnext<CR>"
     end
   else
-    return "<C-w>w"
+    return t"<C-w>w"
+  end
+end
+
+_G.my_ntab_r_function = function()
+  if fn.winnr('$') == 1 then
+    if fn.tabpagenr('$') <= 1 then
+      if fn.len(fn.getbufinfo({ buflisted = 1 })) <= 1 then
+        return t":<C-u>echo 'no buffer to switch.'<CR>"
+      else
+        return t":<C-u>bp<CR>"
+      end
+    else
+      return t":<C-u>tabp<CR>"
+    end
+  else
+    return t"<C-w>W"
   end
 end
 
