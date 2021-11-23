@@ -272,7 +272,7 @@ cmd[[map #  <Plug>(asterisk-z#)]]
 cmd[[map g# <Plug>(asterisk-gz#)]]
 
 cmd[[inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>]]
---cmd[[inoremap <silent> <Tab> <C-r>=<SID>my_itab_function()<CR>]]
+-- cmd[[inoremap <silent> <Tab> <C-r>=v:lua.my_itab_function()]]
 --cmd[[inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>]]
 
 cmd[[nmap j <Plug>(accelerated_jk_gj)]]
@@ -388,6 +388,15 @@ local function LightlineWInfo()
         return''
     end
 end
+
+_G.my_itab_function = function()
+    if fn.pumvisible() then
+        return t'<C-n>'
+    else
+        return fn["lexima#insmode#leave"](1, '<Tab>')
+    end
+end
+
 cmd[[
 
 
