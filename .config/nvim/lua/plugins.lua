@@ -288,39 +288,61 @@ api.nvim_set_keymap('n', 'e', '<Plug>(smartword-e)', {})
 api.nvim_set_keymap('n', 'ge', '<Plug>(smartword-ge)', {})
 -- cmd[[nmap s <Plug>(operator-replace)]]
 api.nvim_set_keymap('n', 's', '<Plug>(operator-replace)', {})
--- cmd[[nnoremap <silent> tt  :<C-u>FloatermToggle<CR>]]
-api.nvim_set_keymap('n', 'tt', ':<C-u>FloatermToggle<CR>', { noremap = true, silent = true })
+-- cmd[[nnoremap <silent> tt  <Cmd>FloatermToggle<CR>]]
+api.nvim_set_keymap('n', 'tt', '<Cmd>FloatermToggle<CR>', { noremap = true, silent = true })
 
-cmd[[nnoremap <Up>    :<C-u>Git push]]
-cmd[[nnoremap <Down>  :<C-u>Git pull]]
-cmd[[nnoremap <Right> :<C-u>Git commit -am ''<Left>]]
-cmd[[nnoremap <silent> <Left>  :<C-u>CocCommand explorer<CR>]]
-cmd[[nmap     <silent> <Leader>         <Plug>(asterisk-z*)]]
-cmd[[nnoremap <silent> <Leader>e        :<C-u>CocCommand explorer<CR>]]
-cmd[[nmap     <silent> <Leader>rf       <Plug>(coc-references)]]
-cmd[[nmap     <silent> <Leader>rn       <Plug>(coc-rename)]]
-cmd[[nmap              <Leader>a        <Plug>(FerretAck)]]
-cmd[[nnoremap <silent> <Leader>s        :<C-u>Startify<CR>]]
-cmd[[nmap     <silent> <Leader>df       <Plug>(coc-definition)]]
-cmd[[nnoremap <silent> <Leader>f        :<C-u>CocList files<CR>]]
-cmd[[nnoremap <silent> <Leader>g        :<C-u>CocList grep<CR>]]
-cmd[[nnoremap <silent> <Leader>h        :<C-u>call CocAction('doHover')<CR>]]
-cmd[[nmap              <Leader>l        <Plug>(FerretLack)]]
-cmd[[nnoremap <silent> <Leader>b        :<C-u>CocList buffers<CR>]]
-cmd[[nnoremap <silent> <Leader>m        :<C-u>CocList mru<CR>]]
-cmd[[nnoremap <silent> <Leader><Leader> :<C-u>CocList<CR>]]
+-- cmd[[nnoremap <Up>    <Cmd>Git push]]
+api.nvim_set_keymap('n', '<Up>', '<Cmd>Git push', { noremap = true })
+-- cmd[[nnoremap <Down>  :<C-u>Git pull]]
+api.nvim_set_keymap('n', '<Down>', '<Cmd>Git pull', { noremap = true })
+-- cmd[[nnoremap <Right> :<C-u>Git commit -am ''<Left>]]
+api.nvim_set_keymap('n', '<Right>', "<Cmd>Git commit -am ''<Left>", { noremap = true })
+-- cmd[[nnoremap <silent> <Left>  <Cmd>CocCommand explorer<CR>]]
+api.nvim_set_keymap('n', '<Left>', "<Cmd>CocCommand explorer<CR>", { noremap = true , silent = true })
+-- cmd[[nmap     <silent> <Leader>         <Plug>(asterisk-z*)]]
+api.nvim_set_keymap('n', '<Leader>', '<Plug>(asterisk-z*)', { silent = true })
+-- cmd[[nnoremap <silent> <Leader>e        <Cmd>CocCommand explorer<CR>]]
+api.nvim_set_keymap('n', '<Leader>e', "<Cmd>CocCommand explorer<CR>", { noremap = true, silent = true })
+-- cmd[[nmap     <silent> <Leader>rf       <Plug>(coc-references)]]
+api.nvim_set_keymap('n', '<Leader>rf', '<Plug>(coc-references'), { silent = true })
+-- cmd[[nmap     <silent> <Leader>rn       <Plug>(coc-rename)]]
+api.nvim_set_keymap('n', '<Leader>rn', '<Plug>(coc-rename)'), { silent = true })
+-- cmd[[nmap              <Leader>a        <Plug>(FerretAck)]]
+api.nvim_set_keymap('n', '<Leader>a', '<Plug>(FerretAck)'), { silent = true })
+-- cmd[[nnoremap <silent> <Leader>s        <Cmd>Startify<CR>]]
+api.nvim_set_keymap('n', '<Leader>s', '<Cmd>Startify<CR>', { noremap = true, silent = true })
+-- cmd[[nmap     <silent> <Leader>df       <Plug>(coc-definition)]]
+api.nvim_set_keymap('n', '<Leader>df', '<Plug>(coc-definition)', { silent = true })
+-- cmd[[nnoremap <silent> <Leader>f        <Cmd>CocList files<CR>]]
+api.nvim_set_keymap('n', '<Leader>f', '<Cmd>CocList files<CR>', { noremap = true, silent = true })
+-- cmd[[nnoremap <silent> <Leader>g        <Cmd>CocList grep<CR>]]
+api.nvim_set_keymap('n', '<Leader>g', '<Cmd>CocList grep<CR>', { noremap = true, silent = true })
+-- cmd[[nnoremap <silent> <Leader>h        <Cmd>call CocAction('doHover')<CR>]]
+api.nvim_set_keymap('n', '<Leader>h', '<Cmd>call CocAction('doHover')<CR>', { noremap = true, silent = true })
+-- cmd[[nmap              <Leader>l        <Plug>(FerretLack)]]
+api.nvim_set_keymap('n', '<Leader>l', '<Plug>(FerretLack)', {})
+-- cmd[[nnoremap <silent> <Leader>b        <Cmd>CocList buffers<CR>]]
+api.nvim_set_keymap('n', '<Leader>b', '<Cmd>CocList buffers<CR>', { noremap = true, silent = true })
+-- cmd[[nnoremap <silent> <Leader>m        <Cmd>CocList mru<CR>]]
+api.nvim_set_keymap('n', '<Leader>m', '<Cmd>CocList mru<CR>', { noremap = true, silent = true })
+-- cmd[[nnoremap <silent> <Leader><Leader> <Cmd>CocList<CR>]]
+api.nvim_set_keymap('n', '<Leader><Leader>', '<Cmd>CocList<CR>', { noremap = true, silent = true })
 
-cmd[[xmap v                  <Plug>(expand_region_expand)]]
-cmd[[xmap <C-v>              <Plug>(expand_region_shrink)]]
-cmd[[xmap <silent> <Leader>f <Plug>(coc-format-selected)]]
-cmd[[xmap <CR>               <Plug>(LiveEasyAlign)]]
+-- cmd[[xmap v                  <Plug>(expand_region_expand)]]
+api.nvim_set_keymap('x', 'v', '<Plug>(expand_region_expand)', {})
+-- cmd[[xmap <C-v>              <Plug>(expand_region_shrink)]]
+api.nvim_set_keymap('x', '<C-v>', '<Plug>(expand_region_shrink)', {})
+-- cmd[[xmap <silent> <Leader>f <Plug>(coc-format-selected)]]
+api.nvim_set_keymap('x', '<Leader>f', '<Plug>(coc-format-selected)', { silent = true })
+-- cmd[[xmap <CR>               <Plug>(LiveEasyAlign)]]
+api.nvim_set_keymap('x', '<CR>', '<Plug>(LiveEasyAlign)', {})
 
 --if g:tab_gui
---    nnoremap <C-t> :<C-u>tabnext<CR>
---    nnoremap <S-t> :<C-u>tabprevous<CR>
+--    nnoremap <C-t> <Cmd>tabnext<CR>
+--    nnoremap <S-t> <Cmd>tabprevous<CR>
 --else
---    nnoremap <C-t> :<C-u>bn<CR>
---    nnoremap <S-t> :<C-u>bp<CR>
+--    nnoremap <C-t> <Cmd>bn<CR>
+--    nnoremap <S-t> <Cmd>bp<CR>
 --endif
 
 -- Use `:Format` for format current buffer
