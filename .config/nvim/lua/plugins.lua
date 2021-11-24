@@ -266,25 +266,30 @@ g.markdown_fenced_languages = {
 
 -- plugin keymaps
 
-cmd[[map *  <Plug>(asterisk-z*)]]
-cmd[[map g* <Plug>(asterisk-gz*)]]
-cmd[[map #  <Plug>(asterisk-z#)]]
-cmd[[map g# <Plug>(asterisk-gz#)]]
+api.nvim_set_keymap('', '*', '<Plug>(asterisk-z*)', {})
+api.nvim_set_keymap('', 'g*', '<Plug>(asterisk-gz*)', {})
+api.nvim_set_keymap('', '#', '<Plug>(asterisk-#)', {})
+api.nvim_set_keymap('', 'g#', '<Plug>(asterisk-g#)', {})
 
-cmd[[inoremap <silent> <C-l> <C-r>=lexima#insmode#leave(1, '<LT>C-g>U<LT>Right>')<CR>]]
--- cmd[[inoremap <silent> <Tab> <C-r>=v:lua.my_itab_function()]]
---cmd[[inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>]]
+api.nvim_set_keymap('i', '<C-l>', "<C-r>=lexima#insmode#leave(1, '<C-g>U<Right>')<CR>", { noremap = true, silent = true })
+api.nvim_set_keymap('i', '<Tab>', "<C-r>=v:lua.my_itab_function()<CR>", { noremap = true })
 
-cmd[[nmap j <Plug>(accelerated_jk_gj)]]
-cmd[[nmap k <Plug>(accelerated_jk_gk)]]
-cmd[[nmap w <Plug>(smartword-w)]]
-cmd[[nmap b <Plug>(smartword-b)]]
-cmd[[nmap e <Plug>(smartword-e)]]
-cmd[[nmap ge <Plug>(smartword-ge)]]
-cmd[[nmap <silent> dn <Plug>(coc-diagnostic-next)]]
-cmd[[nmap <silent> dp <Plug>(coc-diagnostic-prev)]]
-cmd[[nmap s <Plug>(operator-replace)]]
-cmd[[nnoremap <silent> tt  :<C-u>FloatermToggle<CR>]]
+-- cmd[[nmap j <Plug>(accelerated_jk_gj)]]
+api.nvim_set_keymap('n', 'j', '<Plug>(accelerated_jk_gj)', {})
+-- cmd[[nmap k <Plug>(accelerated_jk_gk)]]
+api.nvim_set_keymap('n', 'k', '<Plug>(accelerated_jk_gk)', {})
+-- cmd[[nmap w <Plug>(smartword-w)]]
+api.nvim_set_keymap('n', 'w', '<Plug>(smartword-w)', {})
+-- cmd[[nmap b <Plug>(smartword-b)]]
+api.nvim_set_keymap('n', 'b', '<Plug>(smartword-b)', {})
+-- cmd[[nmap e <Plug>(smartword-e)]]
+api.nvim_set_keymap('n', 'e', '<Plug>(smartword-e)', {})
+-- cmd[[nmap ge <Plug>(smartword-ge)]]
+api.nvim_set_keymap('n', 'ge', '<Plug>(smartword-ge)', {})
+-- cmd[[nmap s <Plug>(operator-replace)]]
+api.nvim_set_keymap('n', 's', '<Plug>(operator-replace)', {})
+-- cmd[[nnoremap <silent> tt  :<C-u>FloatermToggle<CR>]]
+api.nvim_set_keymap('n', 'tt', ':<C-u>FloatermToggle<CR>', { noremap = true, silent = true })
 
 cmd[[nnoremap <Up>    :<C-u>Git push]]
 cmd[[nnoremap <Down>  :<C-u>Git pull]]
@@ -375,9 +380,9 @@ end
 
 local function LightlineFileformat()
     if fn.winwidth(0) > 70 then
-        return fn.WebDevIconsGetFileFormatSymbol() .. '  ' .. vim.bo.fileformat
+        return WebDevIconsGetFileFormatSymbol() .. '  ' .. vim.bo.fileformat
     else
-        fn.WebDevIconsGetFileFormatSymbol()
+        return WebDevIconsGetFileFormatSymbol()
     end
 end
 
@@ -393,7 +398,8 @@ _G.my_itab_function = function()
     if fn.pumvisible() then
         return t'<C-n>'
     else
-        return fn["lexima#insmode#leave"](1, '<Tab>')
+        return t'<Tab>'
+        -- return fn["lexima#insmode#leave"](1, '<Tab>')
     end
 end
 

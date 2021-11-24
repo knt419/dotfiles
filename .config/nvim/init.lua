@@ -89,7 +89,7 @@ opt.clipboard="unnamedplus"
 opt.startofline=false
 opt.list=true
 --opt.listchars = { tab = '»', trail = '-', eol = '↲', extends = '»', precedes = '«', nbsp = '%' }
--- opt.listchars = { tab = "\u{00BB}", trail = "\u{0020}", eol = "\u{21B2}", extends = "\u{00BB}", precedes = "\u{00AB}", nbsp = "\u{0025}" }
+--opt.listchars = { tab = "\u{00BB}", trail = "\u{0020}", eol = "\u{21B2}", extends = "\u{00BB}", precedes = "\u{00AB}", nbsp = "\u{0025}" }
 opt.fillchars = { eob = "\u{0020}"}
 opt.virtualedit="block"
 opt.backspace = { 'indent','eol','start' }
