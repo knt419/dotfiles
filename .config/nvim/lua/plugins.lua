@@ -12,12 +12,23 @@ require'packer'.startup(function()
 
     -- editor display
     use'lukas-reineke/indent-blankline.nvim'
-    use'ryanoasis/vim-devicons'
+    use {
+      'akinsho/bufferline.nvim',
+      requires = 'kyazdani42/nvim-web-devicons'
+    }
+    use'kyazdani42/nvim-web-devicons'
     use'lilydjwg/colorizer'
     use'tweekmonster/startuptime.vim'
     use'mhinz/vim-startify'
-    use'itchyny/lightline.vim'
-    use'mengelbrecht/lightline-bufferline'
+    use {
+        'glepnir/galaxyline.nvim',
+        branch = 'main',
+        requires = {'kyazdani42/nvim-web-devicons', opt = true },
+        config = function()
+          local theme = vim.fn.stdpath('data') .. '/site/pack/packer/start/galaxyline.nvim/example/eviline.lua'
+          vim.cmd('luafile ' .. theme)
+        end
+    }
     use'ntpeters/vim-better-whitespace'
     use'rickhowe/diffchar.vim'
     use'romainl/vim-qf'
@@ -40,7 +51,6 @@ require'packer'.startup(function()
     use'machakann/vim-highlightedyank'
     use'rhysd/accelerated-jk'
     use'tpope/vim-surround'
-    -- use'tpope/vim-commentary'
     use'b3nj5m1n/kommentary'
     use'tpope/vim-sleuth'
     use'kana/vim-textobj-user'
@@ -56,12 +66,17 @@ require'packer'.startup(function()
     use'junegunn/vim-easy-align'
 
     -- file/directory
+    use {
+      'nvim-telescope/telescope.nvim',
+      requires = { {'nvim-lua/plenary.nvim'} }
+    }
     use'januswel/fencja.vim'
     use'voldikss/vim-floaterm'
 
     -- git
     use'tpope/vim-fugitive'
     use'int3/vim-extradite'
+    use'nvim-lua/plenary.nvim'
 
     -- language support
     use'mechatroner/rainbow_csv'
@@ -93,6 +108,17 @@ end)
 
 
 -- plugin variables
+
+require'bufferline'.setup{
+  options = {
+    diagnostics = "nvim_lsp"
+  },
+  highlights = {
+    buffer_selected = {
+      gui = "bold"
+    }
+  }
+}
 
 require'nvim-treesitter.configs'.setup {
     highlight = {
@@ -135,78 +161,10 @@ cmp.setup.cmdline(':', {
     }),
 })
 
-g.lightline = {
-            colorscheme = 'deepspace',
-            active = {
-               left = {
-                   {'mode', 'paste'},
-                   { 'cocstatus'},
-               },
-               right = {
-                 {'readonly', 'changes', 'filetype', 'fileformat', 'fileencoding', 'lineinfo', 'percentage'},
-               }
-            },
-            tabline = {
-              left = {{'winfo', 'buffers'}},
-              right = {{'repostatus','repository'}},
-            },
-            component = {
-              lineinfo = "\u{e0a1}"..'%3l:%3v',
-              percentage = '%2p%%',
-            },
-            component_visible_condition = {
-              lineinfo = '1'
-            },
-            component_function = {
-               readonly = 'LightlineReadonly',
-               repository = 'LightlineRepository',
-               repostatus = 'LightlineRepoStatus',
-               filetype = 'LightlineFiletype',
-               fileformat = 'LightlineFileformat',
-               changes = 'LightlineChanges',
-               cocstatus = 'coc#status',
-               winfo = 'LightlineWInfo'
-            },
-            component_expand = {
-              buffers = 'lightline#bufferline#buffers',
-            },
-            component_type = {
-              buffers = 'tabsel',
-            },
-            mode_map = {
-              n = "\u{fc44}",
-              i = "\u{f040}",
-              R = "\u{f954}",
-              v = "\u{f988}",
-              V = "\u{f988}"..'LINE',
-              --<C-v> = "\u{f988}"..'BLOCK',
-              c = "\u{fcb5}",
-              s = "\u{f044}",
-              S = "\u{f044} "..'LINE',
-              --<C-s> = "\u{f044} "..'BLOCK',
-              t = "\u{f68c}",
-            },
-            separator = {
-              left = "│",
-              right = "│"
-            },
-            subseparator = {
-              left = "│",
-              right = "│"
-            },
-        }
-
-if fn.winwidth(0) < 100 then
-    g['lightline#bufferline#filename_modifier'] = ':t'
-end
-
 if g.is_windows then
     g.FerretNvim = 0
     g.FerretJob  = 0
 end
-
-g['lightline#bufferline#enable_devicons'] = 1
-g['lightline#bufferline#unicode_symbols'] = 1
 
 g.indentLine_bufTypeExclude = {'help', 'terminal',}
 g.indentLine_fileTypeExclude = {'startify'}
@@ -273,68 +231,37 @@ api.nvim_set_keymap('', 'g#', '<Plug>(asterisk-g#)', {})
 
 api.nvim_set_keymap('i', '<C-l>', "<C-r>=lexima#insmode#leave(1, '<C-g>U<Right>')<CR>", { noremap = true, silent = true })
 api.nvim_set_keymap('i', '<Tab>', "<C-r>=v:lua.my_itab_function()<CR>", { noremap = true })
-
--- cmd[[nmap j <Plug>(accelerated_jk_gj)]]
 api.nvim_set_keymap('n', 'j', '<Plug>(accelerated_jk_gj)', {})
--- cmd[[nmap k <Plug>(accelerated_jk_gk)]]
 api.nvim_set_keymap('n', 'k', '<Plug>(accelerated_jk_gk)', {})
--- cmd[[nmap w <Plug>(smartword-w)]]
 api.nvim_set_keymap('n', 'w', '<Plug>(smartword-w)', {})
--- cmd[[nmap b <Plug>(smartword-b)]]
 api.nvim_set_keymap('n', 'b', '<Plug>(smartword-b)', {})
--- cmd[[nmap e <Plug>(smartword-e)]]
 api.nvim_set_keymap('n', 'e', '<Plug>(smartword-e)', {})
--- cmd[[nmap ge <Plug>(smartword-ge)]]
 api.nvim_set_keymap('n', 'ge', '<Plug>(smartword-ge)', {})
--- cmd[[nmap s <Plug>(operator-replace)]]
 api.nvim_set_keymap('n', 's', '<Plug>(operator-replace)', {})
--- cmd[[nnoremap <silent> tt  <Cmd>FloatermToggle<CR>]]
 api.nvim_set_keymap('n', 'tt', '<Cmd>FloatermToggle<CR>', { noremap = true, silent = true })
 
--- cmd[[nnoremap <Up>    <Cmd>Git push]]
 api.nvim_set_keymap('n', '<Up>', '<Cmd>Git push', { noremap = true })
--- cmd[[nnoremap <Down>  :<C-u>Git pull]]
 api.nvim_set_keymap('n', '<Down>', '<Cmd>Git pull', { noremap = true })
--- cmd[[nnoremap <Right> :<C-u>Git commit -am ''<Left>]]
-api.nvim_set_keymap('n', '<Right>', "<Cmd>Git commit -am ''<Left>", { noremap = true })
--- cmd[[nnoremap <silent> <Left>  <Cmd>CocCommand explorer<CR>]]
-api.nvim_set_keymap('n', '<Left>', "<Cmd>CocCommand explorer<CR>", { noremap = true , silent = true })
--- cmd[[nmap     <silent> <Leader>         <Plug>(asterisk-z*)]]
+api.nvim_set_keymap('n', '<Right>', ":<C-u>Git commit -am ''<Left>", { noremap = true })
+api.nvim_set_keymap('n', '<Left>', "<Cmd>Telescope find_files<CR>", { noremap = true , silent = true })
 api.nvim_set_keymap('n', '<Leader>', '<Plug>(asterisk-z*)', { silent = true })
--- cmd[[nnoremap <silent> <Leader>e        <Cmd>CocCommand explorer<CR>]]
 api.nvim_set_keymap('n', '<Leader>e', "<Cmd>CocCommand explorer<CR>", { noremap = true, silent = true })
--- cmd[[nmap     <silent> <Leader>rf       <Plug>(coc-references)]]
-api.nvim_set_keymap('n', '<Leader>rf', '<Plug>(coc-references'), { silent = true })
--- cmd[[nmap     <silent> <Leader>rn       <Plug>(coc-rename)]]
-api.nvim_set_keymap('n', '<Leader>rn', '<Plug>(coc-rename)'), { silent = true })
--- cmd[[nmap              <Leader>a        <Plug>(FerretAck)]]
-api.nvim_set_keymap('n', '<Leader>a', '<Plug>(FerretAck)'), { silent = true })
--- cmd[[nnoremap <silent> <Leader>s        <Cmd>Startify<CR>]]
+api.nvim_set_keymap('n', '<Leader>rf', '<Plug>(coc-references)', { silent = true })
+api.nvim_set_keymap('n', '<Leader>rn', '<Plug>(coc-rename)', { silent = true })
+api.nvim_set_keymap('n', '<Leader>a', '<Plug>(FerretAck)', { silent = true })
 api.nvim_set_keymap('n', '<Leader>s', '<Cmd>Startify<CR>', { noremap = true, silent = true })
--- cmd[[nmap     <silent> <Leader>df       <Plug>(coc-definition)]]
 api.nvim_set_keymap('n', '<Leader>df', '<Plug>(coc-definition)', { silent = true })
--- cmd[[nnoremap <silent> <Leader>f        <Cmd>CocList files<CR>]]
 api.nvim_set_keymap('n', '<Leader>f', '<Cmd>CocList files<CR>', { noremap = true, silent = true })
--- cmd[[nnoremap <silent> <Leader>g        <Cmd>CocList grep<CR>]]
-api.nvim_set_keymap('n', '<Leader>g', '<Cmd>CocList grep<CR>', { noremap = true, silent = true })
--- cmd[[nnoremap <silent> <Leader>h        <Cmd>call CocAction('doHover')<CR>]]
-api.nvim_set_keymap('n', '<Leader>h', '<Cmd>call CocAction('doHover')<CR>', { noremap = true, silent = true })
--- cmd[[nmap              <Leader>l        <Plug>(FerretLack)]]
+api.nvim_set_keymap('n', '<Leader>g', '<Cmd>Telescope live_grep<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>h', "<Cmd>call CocAction('doHover')<CR>", { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<Leader>l', '<Plug>(FerretLack)', {})
--- cmd[[nnoremap <silent> <Leader>b        <Cmd>CocList buffers<CR>]]
 api.nvim_set_keymap('n', '<Leader>b', '<Cmd>CocList buffers<CR>', { noremap = true, silent = true })
--- cmd[[nnoremap <silent> <Leader>m        <Cmd>CocList mru<CR>]]
 api.nvim_set_keymap('n', '<Leader>m', '<Cmd>CocList mru<CR>', { noremap = true, silent = true })
--- cmd[[nnoremap <silent> <Leader><Leader> <Cmd>CocList<CR>]]
 api.nvim_set_keymap('n', '<Leader><Leader>', '<Cmd>CocList<CR>', { noremap = true, silent = true })
 
--- cmd[[xmap v                  <Plug>(expand_region_expand)]]
 api.nvim_set_keymap('x', 'v', '<Plug>(expand_region_expand)', {})
--- cmd[[xmap <C-v>              <Plug>(expand_region_shrink)]]
 api.nvim_set_keymap('x', '<C-v>', '<Plug>(expand_region_shrink)', {})
--- cmd[[xmap <silent> <Leader>f <Plug>(coc-format-selected)]]
 api.nvim_set_keymap('x', '<Leader>f', '<Plug>(coc-format-selected)', { silent = true })
--- cmd[[xmap <CR>               <Plug>(LiveEasyAlign)]]
 api.nvim_set_keymap('x', '<CR>', '<Plug>(LiveEasyAlign)', {})
 
 --if g:tab_gui
@@ -354,66 +281,11 @@ api.nvim_set_keymap('x', '<CR>', '<Plug>(LiveEasyAlign)', {})
 -- functions
 
 local function StartifyEntryFormat()
-    return fn.WebDevIconsGetFileTypeSymbol(absolute_path) .. "  " .. entry_path
+    return require'nvim-web-devicons'.get_icon(absolute_path) .. "  " .. entry_path
 end
 
-local function LightlineReadonly()
-    if g.readonly then
-        return "\u{e0a2}"
-    else
-        return ''
-    end
-end
-
-local function LightlineRepository()
-    if not fn.exists("b:git_dir") then
-        return ''
-    end
-    return "\u{f401} " .. fn.fnamemodify(vim.bo.git_dir, ":h:t")
-end
-
-local function LightlineRepoStatus()
-    if fn.exists("b:git_dir") and fn.exists('g:coc_git_status') then
-        return g.coc_git_status
-    else
-        return ''
-    end
-end
-
-local function LightlineFiletype()
-    if fn.winwidth(0) > 70 then
-        if fn.strlen(vim.bo.filetype) >= 1 then
-            return fn.WebDevIconsGetFileTypeSymbol() .. '  ' .. vim.bo.filetype
-        else
-            return 'no ft'
-        end
-    else
-        return fn.WebDevIconsGetFileTypeSymbol()
-    end
-end
-
-local function LightlineChanges()
-    if fn.exists('b:coc_git_status') and vim.bo.coc_git_status ~= '' then
-        return "\u{f440} " .. fn.substitute(fn.substitute(fn.substitute(vim.bo.coc_git_status, "+", "\u{f457} ", ""), "-", "\u{f458} ", ""), '~', "\u{f459} ", "")
-    else
-        return ''
-    end
-end
-
-local function LightlineFileformat()
-    if fn.winwidth(0) > 70 then
-        return WebDevIconsGetFileFormatSymbol() .. '  ' .. vim.bo.fileformat
-    else
-        return WebDevIconsGetFileFormatSymbol()
-    end
-end
-
-local function LightlineWInfo()
-    if fn.winwidth(0) > 70 then
-        return "\u{fab1}" .. fn.winnr() .. ' ' .. "\u{f4a5} " .. fn.bufnr('%')
-    else
-        return''
-    end
+local t = function(str)
+  return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 _G.my_itab_function = function()
