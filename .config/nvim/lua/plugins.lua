@@ -33,7 +33,7 @@ require'packer'.startup(function()
           vim.cmd('luafile ' .. theme)
         end
     }
-    use'ntpeters/vim-better-whitespace'
+    -- use'ntpeters/vim-better-whitespace'
     use'rickhowe/diffchar.vim'
     use'romainl/vim-qf'
     use'TaDaa/vimade'
@@ -42,6 +42,7 @@ require'packer'.startup(function()
     use'camspiers/lens.vim'
     use'yamatsum/nvim-cursorline'
     use'nvim-treesitter/nvim-treesitter'
+    use'nvim-treesitter/nvim-treesitter-textobjects'
     use {
         'lewis6991/gitsigns.nvim',
         requires = {
@@ -55,12 +56,13 @@ require'packer'.startup(function()
     use'machakann/vim-highlightedyank'
     use'rhysd/accelerated-jk'
     -- use'tpope/vim-surround'
-    use {
-       'blackCaudron7/surround.nvim',
-       config = function()
-        require'surround'.setup {mappings_style = "sandwich"}
-       end
-    }
+use {
+  "blackCauldron7/surround.nvim",
+  config = function()
+    require"surround".setup {mappings_style = "sandwich"}
+  end
+}
+
     use'b3nj5m1n/kommentary'
     use'tpope/vim-sleuth'
     use'kana/vim-textobj-user'
@@ -97,8 +99,6 @@ require'packer'.startup(function()
     use'pechorin/any-jump.vim'
 
     -- colorscheme
-    use{'jeetsukumaran/vim-nefertiti', opt = true}
-    use{'Nequo/vim-allomancer', opt = true}
     use{'ajmwagar/vim-deus', opt = true}
     use{'sainnhe/edge', opt = true}
     use{'tyrannicaltoucan/vim-quantum', opt = true}
@@ -114,7 +114,7 @@ require'packer'.startup(function()
     use'hrsh7th/cmp-vsnip'
     use'hrsh7th/vim-vsnip'
     use'hrsh7th/nvim-cmp'
-    use'hrsh7th/cmd-nvim-lua'
+    use'hrsh7th/cmp-nvim-lua'
     opt.completeopt="menu,menuone,noselect"
 end)
 
@@ -185,6 +185,8 @@ if g.is_windows then
     g.FerretNvim = 0
     g.FerretJob  = 0
 end
+
+g.did_load_filetypes = 1
 
 g.indentLine_bufTypeExclude = {'help', 'terminal'}
 g.indentLine_fileTypeExclude = {'startify', 'dashboard'}
