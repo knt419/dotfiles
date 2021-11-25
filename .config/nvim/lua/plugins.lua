@@ -19,7 +19,6 @@ require'packer'.startup(function()
     use'kyazdani42/nvim-web-devicons'
     use'norcalli/nvim-colorizer.lua'
     use'tweekmonster/startuptime.vim'
-    -- use'mhinz/vim-startify'
     use {
       'glepnir/dashboard-nvim',
       requires = {'nvim-telescope/telescope.nvim'},
@@ -33,7 +32,6 @@ require'packer'.startup(function()
           vim.cmd('luafile ' .. theme)
         end
     }
-    -- use'ntpeters/vim-better-whitespace'
     use'rickhowe/diffchar.vim'
     use'romainl/vim-qf'
     use'TaDaa/vimade'
@@ -55,7 +53,6 @@ require'packer'.startup(function()
     use'godlygeek/tabular'
     use'machakann/vim-highlightedyank'
     use'rhysd/accelerated-jk'
-    -- use'tpope/vim-surround'
 use {
   "blackCauldron7/surround.nvim",
   config = function()
@@ -84,7 +81,6 @@ use {
     }
     use'januswel/fencja.vim'
     use'voldikss/vim-floaterm'
-    use'nathom/filetype.nvim'
 
     -- git
     use'tpope/vim-fugitive'
@@ -185,8 +181,6 @@ if g.is_windows then
     g.FerretNvim = 0
     g.FerretJob  = 0
 end
-
-g.did_load_filetypes = 1
 
 g.indentLine_bufTypeExclude = {'help', 'terminal'}
 g.indentLine_fileTypeExclude = {'startify', 'dashboard'}

@@ -40,10 +40,9 @@ local disabled_built_ins = {
   'getscript',
   'getscriptPlugin',
   'logipat',
-  'filetypes',
 }
 
-for i = 1, 15 do
+for i = 1, 14 do
     g['loaded_' .. disabled_built_ins[i]] = 1
 end
 
