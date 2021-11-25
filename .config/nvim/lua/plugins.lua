@@ -17,9 +17,13 @@ require'packer'.startup(function()
       requires = 'kyazdani42/nvim-web-devicons'
     }
     use'kyazdani42/nvim-web-devicons'
-    use'lilydjwg/colorizer'
+    use'norcalli/nvim-colorizer.lua'
     use'tweekmonster/startuptime.vim'
-    use'mhinz/vim-startify'
+    -- use'mhinz/vim-startify'
+    use {
+      'glepnir/dashboard-nvim',
+      requires = {'nvim-telescope/telescope.nvim'},
+    }
     use {
         'glepnir/galaxyline.nvim',
         branch = 'main',
@@ -36,7 +40,7 @@ require'packer'.startup(function()
     use'andymass/vim-matchup'
     use'camspiers/animate.vim'
     use'camspiers/lens.vim'
-    use'itchyny/vim-cursorword'
+    use'yamatsum/nvim-cursorline'
     use'nvim-treesitter/nvim-treesitter'
     use {
         'lewis6991/gitsigns.nvim',
@@ -50,7 +54,13 @@ require'packer'.startup(function()
     use'godlygeek/tabular'
     use'machakann/vim-highlightedyank'
     use'rhysd/accelerated-jk'
-    use'tpope/vim-surround'
+    -- use'tpope/vim-surround'
+    use {
+       'blackCaudron7/surround.nvim',
+       config = function()
+        require'surround'.setup {mappings_style = "sandwich"}
+       end
+    }
     use'b3nj5m1n/kommentary'
     use'tpope/vim-sleuth'
     use'kana/vim-textobj-user'
@@ -72,6 +82,7 @@ require'packer'.startup(function()
     }
     use'januswel/fencja.vim'
     use'voldikss/vim-floaterm'
+    use'nathom/filetype.nvim'
 
     -- git
     use'tpope/vim-fugitive'
@@ -103,6 +114,7 @@ require'packer'.startup(function()
     use'hrsh7th/cmp-vsnip'
     use'hrsh7th/vim-vsnip'
     use'hrsh7th/nvim-cmp'
+    use'hrsh7th/cmd-nvim-lua'
     opt.completeopt="menu,menuone,noselect"
 end)
 
@@ -120,6 +132,11 @@ require'bufferline'.setup{
   }
 }
 
+require("indent_blankline").setup {
+    show_current_context = true,
+    show_current_context_start = true,
+}
+
 require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true
@@ -128,6 +145,8 @@ require'nvim-treesitter.configs'.setup {
         enable = true
     },
 }
+
+g.dashboard_default_executive = 'telescope'
 
 local cmp = require'cmp'
 
@@ -142,6 +161,7 @@ cmp.setup {
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
+        { name = 'nvim_lua' },
         { name = 'vsnip' },
     },{
         { name = 'buffer' },
@@ -166,8 +186,8 @@ if g.is_windows then
     g.FerretJob  = 0
 end
 
-g.indentLine_bufTypeExclude = {'help', 'terminal',}
-g.indentLine_fileTypeExclude = {'startify'}
+g.indentLine_bufTypeExclude = {'help', 'terminal'}
+g.indentLine_fileTypeExclude = {'startify', 'dashboard'}
 g.lexima_ctrlh_as_backspace = 1
 g.better_whitespace_filetypes_blacklist = {'diff', 'gitcommit', 'qf', 'help', 'markdown',}
 
@@ -258,6 +278,11 @@ api.nvim_set_keymap('n', '<Leader>l', '<Plug>(FerretLack)', {})
 api.nvim_set_keymap('n', '<Leader>b', '<Cmd>CocList buffers<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<Leader>m', '<Cmd>CocList mru<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<Leader><Leader>', '<Cmd>CocList<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>fh', '<Cmd>DashboardFindHistory<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>ff', '<Cmd>DashboardFindFile<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>fa', '<Cmd>DashboardFindWord<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>fb', '<Cmd>DashboardJumpMark<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>fb', '<Cmd>DashboardNewFile<CR>', { noremap = true, silent = true })
 
 api.nvim_set_keymap('x', 'v', '<Plug>(expand_region_expand)', {})
 api.nvim_set_keymap('x', '<C-v>', '<Plug>(expand_region_shrink)', {})
