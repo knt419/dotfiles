@@ -248,6 +248,10 @@ cmd[[augroup syntaxhighlight]]
 cmd[[autocmd!]]
 cmd[[autocmd Syntax * if 100 < line("$") | syntax sync minlines=100 | endif]]
 cmd[[augroup END]]
+cmd[[augroup highlight_yank]]
+cmd[[autocmd!]]
+cmd[[autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 1000)]]
+cmd[[augroup END]]
 
 opt.background='dark'
 cmd[[colorscheme deep-space]]

@@ -18,10 +18,12 @@ require'packer'.startup(function()
     }
     use'kyazdani42/nvim-web-devicons'
     use'norcalli/nvim-colorizer.lua'
-    use'tweekmonster/startuptime.vim'
     use {
-      'glepnir/dashboard-nvim',
-      requires = {'nvim-telescope/telescope.nvim'},
+      'goolord/alpha-nvim',
+      requires = { 'kyazdani42/nvim-web-devicons' },
+      config = function()
+        require'alpha'.setup(require'alpha.themes.startify'.opts)
+      end
     }
     use {
         'glepnir/galaxyline.nvim',
@@ -34,13 +36,13 @@ require'packer'.startup(function()
     }
     use'rickhowe/diffchar.vim'
     use'romainl/vim-qf'
-    use'TaDaa/vimade'
     use'andymass/vim-matchup'
     use'camspiers/animate.vim'
     use'camspiers/lens.vim'
     use'yamatsum/nvim-cursorline'
     use'nvim-treesitter/nvim-treesitter'
     use'nvim-treesitter/nvim-treesitter-textobjects'
+    use'romgrk/nvim-treesitter-context'
     use {
         'lewis6991/gitsigns.nvim',
         requires = {
@@ -51,7 +53,6 @@ require'packer'.startup(function()
     -- text/input manipulation
     use'cohama/lexima.vim'
     use'godlygeek/tabular'
-    use'machakann/vim-highlightedyank'
     use'rhysd/accelerated-jk'
 use {
   "blackCauldron7/surround.nvim",
@@ -59,7 +60,6 @@ use {
     require"surround".setup {mappings_style = "sandwich"}
   end
 }
-
     use'b3nj5m1n/kommentary'
     use'tpope/vim-sleuth'
     use'kana/vim-textobj-user'
@@ -84,20 +84,12 @@ use {
 
     -- git
     use'tpope/vim-fugitive'
-    use'int3/vim-extradite'
+    use'sunjon/shade.nvim'
     use'nvim-lua/plenary.nvim'
 
     -- language support
     use'mechatroner/rainbow_csv'
     use'tpope/vim-dadbod'
-    use'editorconfig/editorconfig-vim'
-    use'honza/vim-snippets'
-    use'pechorin/any-jump.vim'
-
-    -- colorscheme
-    use{'ajmwagar/vim-deus', opt = true}
-    use{'sainnhe/edge', opt = true}
-    use{'tyrannicaltoucan/vim-quantum', opt = true}
     use'tyrannicaltoucan/vim-deep-space'
     use{'knt419/lightline-colorscheme-themecolor', opt = true}
 
