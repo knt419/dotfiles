@@ -90,6 +90,7 @@ use {
     -- language support
     use'mechatroner/rainbow_csv'
     use'tpope/vim-dadbod'
+    use'editorconfig/editorconfig-vim'
     use'tyrannicaltoucan/vim-deep-space'
     use{'knt419/lightline-colorscheme-themecolor', opt = true}
 
