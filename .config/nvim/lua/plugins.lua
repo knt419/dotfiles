@@ -5,10 +5,8 @@ local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
 
-cmd[[packadd packer.nvim]]
-
 require'packer'.startup(function()
-    use{'wbthomason/packer.nvim', opt = true, cmd = {'PackerUpdate'}}
+    use'wbthomason/packer.nvim'
 
     -- editor display
     use'lukas-reineke/indent-blankline.nvim'
@@ -76,8 +74,12 @@ use {
 
     -- file/directory
     use {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      run = 'make',
+    }
+    use {
       'nvim-telescope/telescope.nvim',
-      requires = { {'nvim-lua/plenary.nvim'} }
+      requires = { {'nvim-lua/plenary.nvim'} },
     }
     use'januswel/fencja.vim'
     use'voldikss/vim-floaterm'
@@ -135,7 +137,24 @@ require'nvim-treesitter.configs'.setup {
     },
 }
 
-g.dashboard_default_executive = 'telescope'
+require'telescope'.setup {
+  defaults = {
+    winblend = 30,
+    cache_picker = { limit_entries = 100 },
+    preview = { filesize_limit = 5, treesitter = true },
+    mappings = { i = { ["<Esc>"] = require'telescope.actions'.close, }, },
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    },
+  },
+}
+
+require'telescope'.load_extension('fzf')
 
 local cmp = require'cmp'
 
@@ -175,8 +194,9 @@ if g.is_windows then
     g.FerretJob  = 0
 end
 
-g.indentLine_bufTypeExclude = {'help', 'terminal'}
-g.indentLine_fileTypeExclude = {'startify', 'dashboard'}
+g.indent_blankline_buftype_exclude = {'help', 'terminal'}
+g.indent_blankline_filetype_exclude = {'startify', 'dashboard', 'alpha'}
+g.indent_blankline_use_treesitter = true
 g.lexima_ctrlh_as_backspace = 1
 g.better_whitespace_filetypes_blacklist = {'diff', 'gitcommit', 'qf', 'help', 'markdown',}
 
