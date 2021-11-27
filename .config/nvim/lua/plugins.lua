@@ -16,13 +16,14 @@ require'packer'.startup(function()
     }
     use'kyazdani42/nvim-web-devicons'
     use'norcalli/nvim-colorizer.lua'
-    use {
+    --[[ use {
       'goolord/alpha-nvim',
       requires = { 'kyazdani42/nvim-web-devicons' },
       config = function()
         require'alpha'.setup(require'alpha.themes.startify'.opts)
       end
-    }
+    } ]]
+    use'glepnir/dashboard-nvim'
     use {
         'glepnir/galaxyline.nvim',
         branch = 'main',
@@ -83,6 +84,7 @@ use {
     }
     use'januswel/fencja.vim'
     use'voldikss/vim-floaterm'
+    -- use'nathom/filetype.nvim'
 
     -- git
     use'tpope/vim-fugitive'
@@ -106,7 +108,7 @@ use {
     use'hrsh7th/vim-vsnip'
     use'hrsh7th/nvim-cmp'
     use'hrsh7th/cmp-nvim-lua'
-    opt.completeopt="menu,menuone,noselect"
+    opt.completeopt="menu,menuone,longest,preview"
 end)
 
 
@@ -194,6 +196,8 @@ if g.is_windows then
     g.FerretJob  = 0
 end
 
+g.dashboard_default_executive = 'telescope'
+
 g.indent_blankline_buftype_exclude = {'help', 'terminal'}
 g.indent_blankline_filetype_exclude = {'startify', 'dashboard', 'alpha'}
 g.indent_blankline_use_treesitter = true
@@ -211,30 +215,9 @@ g.FerretExecutableArguments = {
 
 g.highlightedyank_highlight_duration = 300
 
-g.startify_lists = {
-          { type = 'files',     header = {'   MRU',}            },
-          { type = 'bookmarks', header = {'   Bookmarks',}      },
-      }
-
-g.startify_skiplist = {
-            '*\\AppData\\Local\\Temp\\*',
-            '*\\nvim\\runtime\\doc\\*',
-        }
-
-g.startify_bookmarks = {
-    { i = '~/.config/nvim/init.lua'},
-    { p = '~/.config/nvim/lua/plugins.lua'},
-}
-g.startify_change_to_vcs_root  = 1
-g.startify_change_to_dir       = 1
-g.startify_fortune_use_unicode = 0
-g.startify_enable_unsafe       = 1
 g.floaterm_winblend            = 40
 g.floaterm_position            = 'center'
 
-g.webdevicons_enable                 = 1
-g.WebDevIconsUnicodeGlyphDoubleWidth = 1
-g.webdevicons_enable_startify        = 1
 g.capture_open_command = ''
 g.capture_override_buffer = 'newbufwin'
 

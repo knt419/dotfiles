@@ -40,6 +40,7 @@ local disabled_built_ins = {
   'getscript',
   'getscriptPlugin',
   'logipat',
+--  'filetype',
 }
 
 for i = 1, 14 do
