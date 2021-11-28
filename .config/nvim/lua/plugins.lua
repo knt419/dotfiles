@@ -304,8 +304,7 @@ api.nvim_set_keymap('', '#', '<Plug>(asterisk-#)', {})
 api.nvim_set_keymap('', 'g#', '<Plug>(asterisk-g#)', {})
 
 api.nvim_set_keymap('i', '<C-l>', "<C-r>=lexima#insmode#leave(1, '<C-g>U<Right>')<CR>", { noremap = true, silent = true })
--- api.nvim_set_keymap('i', '<Tab>', "v:lua.my_itab_function()", { expr = true,noremap = true, silent = true })
-cmd[[inoremap <expr> <Tab> <Cmd>call v:lua.my_itab_function()<CR>]]
+api.nvim_set_keymap('i', '<Tab>', "v:lua.my_itab_function()", { expr = true,noremap = true, silent = true })
 api.nvim_set_keymap('n', 'j', '<Plug>(accelerated_jk_gj)', {})
 api.nvim_set_keymap('n', 'k', '<Plug>(accelerated_jk_gk)', {})
 api.nvim_set_keymap('n', 'w', '<Plug>(smartword-w)', {})
