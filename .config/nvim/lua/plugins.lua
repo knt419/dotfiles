@@ -156,7 +156,7 @@ require'telescope'.setup {
     winblend = 30,
     cache_picker = { limit_entries = 100 },
     preview = { filesize_limit = 5, treesitter = true },
-    mappings = { i = { ["<Esc>"] = require'telescope.actions'.close, }, },
+    mappings = { i = { ['<Esc>'] = require'telescope.actions'.close, }, },
   },
   extensions = {
     fzf = {
@@ -175,6 +175,15 @@ require'shade'.setup {
 
 require'telescope'.load_extension('fzf')
 
+local has_words_before = function()
+  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
+end
+
+local feedkey = function(key, mode)
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+end
+
 local cmp = require'cmp'
 
 cmp.setup {
@@ -185,6 +194,25 @@ cmp.setup {
     },
     mapping = {
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      elseif vim.fn["vsnip#available"](1) == 1 then
+        feedkey("<Plug>(vsnip-expand-or-jump)", "")
+      elseif has_words_before() then
+        cmp.complete()
+      else
+        fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+      end
+    end, { "i", "s" }),
+
+    ["<S-Tab>"] = cmp.mapping(function()
+      if cmp.visible() then
+        cmp.select_prev_item()
+      elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+        feedkey("<Plug>(vsnip-jump-prev)", "")
+      end
+    end, { "i", "s" }),
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -304,7 +332,8 @@ api.nvim_set_keymap('', '#', '<Plug>(asterisk-#)', {})
 api.nvim_set_keymap('', 'g#', '<Plug>(asterisk-g#)', {})
 
 api.nvim_set_keymap('i', '<C-l>', "<C-r>=lexima#insmode#leave(1, '<C-g>U<Right>')<CR>", { noremap = true, silent = true })
-api.nvim_set_keymap('i', '<Tab>', "v:lua.my_itab_function()", { expr = true,noremap = true, silent = true })
+api.nvim_set_keymap('i', '<Tab>', "v:lua.my_itab_function()", { expr = true, silent = true })
+api.nvim_set_keymap('i', '<S-Tab>', '<C-p>', { silent = true })
 api.nvim_set_keymap('n', 'j', '<Plug>(accelerated_jk_gj)', {})
 api.nvim_set_keymap('n', 'k', '<Plug>(accelerated_jk_gk)', {})
 api.nvim_set_keymap('n', 'w', '<Plug>(smartword-w)', {})
@@ -351,17 +380,11 @@ local t = function(str)
 end
 
 _G.my_itab_function = function()
-    if fn.pumvisible() ~= 0 then
-      return t'<C-n>'
-    else
-      return t'<Tab>'
-    end
-    -- fn["lexima#insmode#leave"](1, '<Tab>')
+    return fn.pumvisible() == 1 and t'<C-n>' or fn["lexima#insmode#leave"](1, '<Tab>')
 end
 
 _G.my_icr_function = function()
-    return fn.pumvisible() ~= 0 and t'<C-y>' or t'<CR>'
-    -- fn['lexima#expand']('<CR>', 'i' )
+    return fn.pumvisible() == 1 and t'<C-y>' or fn['lexima#expand']('<CR>', 'i' )
 end
 
 _G.my_lexima_setup = function()
