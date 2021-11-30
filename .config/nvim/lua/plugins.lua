@@ -49,7 +49,8 @@ require'packer'.startup(function(use)
     use'yamatsum/nvim-cursorline'
     use'nvim-treesitter/nvim-treesitter'
     use'nvim-treesitter/nvim-treesitter-textobjects'
-    use'romgrk/nvim-treesitter-context'
+    -- use'romgrk/nvim-treesitter-context'
+    use'vigoux/treesitter-context.nvim'
     use {
         'lewis6991/gitsigns.nvim',
         requires = {
