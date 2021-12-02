@@ -5,10 +5,15 @@ local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
 
-cmd[[packadd packer.nvim]]
 
-require'packer'.startup(function()
-    use{'wbthomason/packer.nvim', opt = true, cmd = {'PackerUpdate'}}
+local install_path = vim.fn.stdpath("data").."/site/pack/packer/start/packer.nvim"
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  Packer_bootstrap = vim.fn.system({"git", "clone", "https://github.com/wbthomason/packer.nvim", install_path})
+end
+
+
+require'packer'.startup(function(use)
+    use'wbthomason/packer.nvim'
 
     -- editor display
     use'lukas-reineke/indent-blankline.nvim'
@@ -18,12 +23,14 @@ require'packer'.startup(function()
     }
     use'kyazdani42/nvim-web-devicons'
     use'norcalli/nvim-colorizer.lua'
-    use'tweekmonster/startuptime.vim'
-    -- use'mhinz/vim-startify'
-    use {
-      'glepnir/dashboard-nvim',
-      requires = {'nvim-telescope/telescope.nvim'},
-    }
+    --[[ use {
+      'goolord/alpha-nvim',
+      requires = { 'kyazdani42/nvim-web-devicons' },
+      config = function()
+        require'alpha'.setup(require'alpha.themes.startify'.opts)
+      end
+    } ]]
+    use'glepnir/dashboard-nvim'
     use {
         'glepnir/galaxyline.nvim',
         branch = 'main',
@@ -33,15 +40,16 @@ require'packer'.startup(function()
           vim.cmd('luafile ' .. theme)
         end
     }
-    use'ntpeters/vim-better-whitespace'
+    use'sunjon/shade.nvim'
     use'rickhowe/diffchar.vim'
     use'romainl/vim-qf'
-    use'TaDaa/vimade'
     use'andymass/vim-matchup'
     use'camspiers/animate.vim'
     use'camspiers/lens.vim'
     use'yamatsum/nvim-cursorline'
     use'nvim-treesitter/nvim-treesitter'
+    use'nvim-treesitter/nvim-treesitter-textobjects'
+    use'romgrk/nvim-treesitter-context'
     use {
         'lewis6991/gitsigns.nvim',
         requires = {
@@ -52,15 +60,13 @@ require'packer'.startup(function()
     -- text/input manipulation
     use'cohama/lexima.vim'
     use'godlygeek/tabular'
-    use'machakann/vim-highlightedyank'
     use'rhysd/accelerated-jk'
-    -- use'tpope/vim-surround'
     use {
-       'blackCaudron7/surround.nvim',
-       config = function()
-        require'surround'.setup {mappings_style = "sandwich"}
-       end
-    }
+    'blackCauldron7/surround.nvim',
+    config = function()
+      require"surround".setup { mappings_style = "sandwich"}
+    end
+}
     use'b3nj5m1n/kommentary'
     use'tpope/vim-sleuth'
     use'kana/vim-textobj-user'
@@ -77,35 +83,30 @@ require'packer'.startup(function()
 
     -- file/directory
     use {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      run = 'make',
+    }
+    use {
       'nvim-telescope/telescope.nvim',
-      requires = { {'nvim-lua/plenary.nvim'} }
+      requires = { {'nvim-lua/plenary.nvim'} },
     }
     use'januswel/fencja.vim'
     use'voldikss/vim-floaterm'
-    use'nathom/filetype.nvim'
+    -- use'nathom/filetype.nvim'
 
     -- git
     use'tpope/vim-fugitive'
-    use'int3/vim-extradite'
     use'nvim-lua/plenary.nvim'
 
     -- language support
     use'mechatroner/rainbow_csv'
     use'tpope/vim-dadbod'
     use'editorconfig/editorconfig-vim'
-    use'honza/vim-snippets'
-    use'pechorin/any-jump.vim'
-
-    -- colorscheme
-    use{'jeetsukumaran/vim-nefertiti', opt = true}
-    use{'Nequo/vim-allomancer', opt = true}
-    use{'ajmwagar/vim-deus', opt = true}
-    use{'sainnhe/edge', opt = true}
-    use{'tyrannicaltoucan/vim-quantum', opt = true}
     use'tyrannicaltoucan/vim-deep-space'
     use{'knt419/lightline-colorscheme-themecolor', opt = true}
 
     -- lsp/completion
+    use'williamboman/nvim-lsp-installer'
     use'neovim/nvim-lspconfig'
     use'hrsh7th/cmp-nvim-lsp'
     use'hrsh7th/cmp-buffer'
@@ -114,8 +115,12 @@ require'packer'.startup(function()
     use'hrsh7th/cmp-vsnip'
     use'hrsh7th/vim-vsnip'
     use'hrsh7th/nvim-cmp'
-    use'hrsh7th/cmd-nvim-lua'
-    opt.completeopt="menu,menuone,noselect"
+    use'hrsh7th/cmp-nvim-lua'
+    opt.completeopt="menu,menuone,longest,preview"
+
+    if Packer_bootstrap then
+      require'packer'.sync()
+    end
 end)
 
 
@@ -132,7 +137,7 @@ require'bufferline'.setup{
   }
 }
 
-require("indent_blankline").setup {
+require'indent_blankline'.setup {
     show_current_context = true,
     show_current_context_start = true,
 }
@@ -146,7 +151,29 @@ require'nvim-treesitter.configs'.setup {
     },
 }
 
-g.dashboard_default_executive = 'telescope'
+require'telescope'.setup {
+  defaults = {
+    winblend = 30,
+    cache_picker = { limit_entries = 100 },
+    preview = { filesize_limit = 5, treesitter = true },
+    mappings = { i = { ["<Esc>"] = require'telescope.actions'.close, }, },
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = "smart_case",
+    },
+  },
+}
+
+require'shade'.setup {
+  overlay_opacity = 50,
+  opacity_step = 1,
+}
+
+require'telescope'.load_extension('fzf')
 
 local cmp = require'cmp'
 
@@ -157,7 +184,7 @@ cmp.setup {
         end,
     },
     mapping = {
-        ['<CR>'] = cmp.mapping.confirm(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
     },
     sources = cmp.config.sources({
         { name = 'nvim_lsp' },
@@ -181,13 +208,61 @@ cmp.setup.cmdline(':', {
     }),
 })
 
+local system_name
+if vim.fn.has("mac") == 1 then
+  system_name = "macOS"
+elseif vim.fn.has("unix") == 1 then
+  system_name = "Linux"
+elseif vim.fn.has('win32') == 1 then
+  system_name = "Windows"
+else
+  print("Unsupported system for sumneko")
+end
+
+-- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
+local sumneko_root_path = vim.fn.stdpath('data')..'/lsp_servers/sumneko_lua/extension/server'
+local sumneko_binary = sumneko_root_path.."/bin/"..system_name.."/lua-language-server"
+
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
+require'lspconfig'.sumneko_lua.setup {
+  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+        -- Setup your lua path
+        path = runtime_path,
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {'vim'},
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
+
 if g.is_windows then
     g.FerretNvim = 0
     g.FerretJob  = 0
 end
 
-g.indentLine_bufTypeExclude = {'help', 'terminal'}
-g.indentLine_fileTypeExclude = {'startify', 'dashboard'}
+g.dashboard_default_executive = 'telescope'
+
+g.indent_blankline_buftype_exclude = {'help', 'terminal'}
+g.indent_blankline_filetype_exclude = {'startify', 'dashboard', 'alpha'}
+g.indent_blankline_use_treesitter = true
 g.lexima_ctrlh_as_backspace = 1
 g.better_whitespace_filetypes_blacklist = {'diff', 'gitcommit', 'qf', 'help', 'markdown',}
 
@@ -202,30 +277,9 @@ g.FerretExecutableArguments = {
 
 g.highlightedyank_highlight_duration = 300
 
-g.startify_lists = {
-          { type = 'files',     header = {'   MRU',}            },
-          { type = 'bookmarks', header = {'   Bookmarks',}      },
-      }
-
-g.startify_skiplist = {
-            '*\\AppData\\Local\\Temp\\*',
-            '*\\nvim\\runtime\\doc\\*',
-        }
-
-g.startify_bookmarks = {
-    { i = '~/.config/nvim/init.lua'},
-    { p = '~/.config/nvim/lua/plugins.lua'},
-}
-g.startify_change_to_vcs_root  = 1
-g.startify_change_to_dir       = 1
-g.startify_fortune_use_unicode = 0
-g.startify_enable_unsafe       = 1
 g.floaterm_winblend            = 40
 g.floaterm_position            = 'center'
 
-g.webdevicons_enable                 = 1
-g.WebDevIconsUnicodeGlyphDoubleWidth = 1
-g.webdevicons_enable_startify        = 1
 g.capture_open_command = ''
 g.capture_override_buffer = 'newbufwin'
 
@@ -250,7 +304,7 @@ api.nvim_set_keymap('', '#', '<Plug>(asterisk-#)', {})
 api.nvim_set_keymap('', 'g#', '<Plug>(asterisk-g#)', {})
 
 api.nvim_set_keymap('i', '<C-l>', "<C-r>=lexima#insmode#leave(1, '<C-g>U<Right>')<CR>", { noremap = true, silent = true })
-api.nvim_set_keymap('i', '<Tab>', "<C-r>=v:lua.my_itab_function()<CR>", { noremap = true })
+api.nvim_set_keymap('i', '<Tab>', "v:lua.my_itab_function()", { expr = true,noremap = true, silent = true })
 api.nvim_set_keymap('n', 'j', '<Plug>(accelerated_jk_gj)', {})
 api.nvim_set_keymap('n', 'k', '<Plug>(accelerated_jk_gk)', {})
 api.nvim_set_keymap('n', 'w', '<Plug>(smartword-w)', {})
@@ -263,113 +317,78 @@ api.nvim_set_keymap('n', 'tt', '<Cmd>FloatermToggle<CR>', { noremap = true, sile
 api.nvim_set_keymap('n', '<Up>', ':<C-u>Git push', { noremap = true })
 api.nvim_set_keymap('n', '<Down>', ':<C-u>Git pull', { noremap = true })
 api.nvim_set_keymap('n', '<Right>', ":<C-u>Git commit -am ''<Left>", { noremap = true })
-api.nvim_set_keymap('n', '<Left>', "<Cmd>Telescope find_files<CR>", { noremap = true , silent = true })
+api.nvim_set_keymap('n', '<Left>', '<Cmd>Telescope find_files<CR>', { noremap = true , silent = true })
 api.nvim_set_keymap('n', '<Leader>', '<Plug>(asterisk-z*)', { silent = true })
 api.nvim_set_keymap('n', '<Leader>e', "<Cmd>CocCommand explorer<CR>", { noremap = true, silent = true })
-api.nvim_set_keymap('n', '<Leader>rf', '<Plug>(coc-references)', { silent = true })
-api.nvim_set_keymap('n', '<Leader>rn', '<Plug>(coc-rename)', { silent = true })
+api.nvim_set_keymap('n', '<Leader>rf', '<Cmd>lua vim.lsp.buf.references()<CR>', { silent = true })
+api.nvim_set_keymap('n', '<Leader>rn', '<Cmd>lua vim.lsp.buf.rename()<CR>', { silent = true })
 api.nvim_set_keymap('n', '<Leader>a', '<Plug>(FerretAck)', { silent = true })
-api.nvim_set_keymap('n', '<Leader>s', '<Cmd>Startify<CR>', { noremap = true, silent = true })
-api.nvim_set_keymap('n', '<Leader>df', '<Plug>(coc-definition)', { silent = true })
-api.nvim_set_keymap('n', '<Leader>f', '<Cmd>CocList files<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>d', '<Cmd>Dashboard<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>df', '<Cmd>lua vim.lsp.buf.definition()<CR>', { silent = true })
+api.nvim_set_keymap('n', '<Leader>f', '<Cmd>Telescope find_files<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<Leader>g', '<Cmd>Telescope live_grep<CR>', { noremap = true, silent = true })
-api.nvim_set_keymap('n', '<Leader>h', "<Cmd>call CocAction('doHover')<CR>", { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>h', '<cmd>lua vim.lsp.buf.hover()<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<Leader>l', '<Plug>(FerretLack)', {})
 api.nvim_set_keymap('n', '<Leader>b', '<Cmd>CocList buffers<CR>', { noremap = true, silent = true })
-api.nvim_set_keymap('n', '<Leader>m', '<Cmd>CocList mru<CR>', { noremap = true, silent = true })
-api.nvim_set_keymap('n', '<Leader><Leader>', '<Cmd>CocList<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>m', '<Cmd>DashboardFindHistory<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader><Leader>', '<Cmd>Telescope<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<Leader>fh', '<Cmd>DashboardFindHistory<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<Leader>ff', '<Cmd>DashboardFindFile<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<Leader>fa', '<Cmd>DashboardFindWord<CR>', { noremap = true, silent = true })
 api.nvim_set_keymap('n', '<Leader>fb', '<Cmd>DashboardJumpMark<CR>', { noremap = true, silent = true })
-api.nvim_set_keymap('n', '<Leader>fb', '<Cmd>DashboardNewFile<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>cn', '<Cmd>DashboardNewFile<CR>', { noremap = true, silent = true })
+api.nvim_set_keymap('n', '<Leader>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', { silent = true })
 
 api.nvim_set_keymap('x', 'v', '<Plug>(expand_region_expand)', {})
 api.nvim_set_keymap('x', '<C-v>', '<Plug>(expand_region_shrink)', {})
-api.nvim_set_keymap('x', '<Leader>f', '<Plug>(coc-format-selected)', { silent = true })
+api.nvim_set_keymap('x', '<Leader>f', '<Cmd>lua vim.lsp.buf.formatting()<CR>', { silent = true })
 api.nvim_set_keymap('x', '<CR>', '<Plug>(LiveEasyAlign)', {})
 
---if g:tab_gui
---    nnoremap <C-t> <Cmd>tabnext<CR>
---    nnoremap <S-t> <Cmd>tabprevous<CR>
---else
---    nnoremap <C-t> <Cmd>bn<CR>
---    nnoremap <S-t> <Cmd>bp<CR>
---endif
-
--- Use `:Format` for format current buffer
---command! -nargs=0 Format :call CocAction('format'
---command! PackUpdate :call minpac#update()
---command! PackClean :call minpac#clean()
---command! PackStatus :call minpac#status()
-
 -- functions
-
-local function StartifyEntryFormat()
-    return require'nvim-web-devicons'.get_icon(absolute_path) .. "  " .. entry_path
-end
 
 local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 _G.my_itab_function = function()
-    if fn.pumvisible() then
-        return t'<C-n>'
+    if fn.pumvisible() ~= 0 then
+      return t'<C-n>'
     else
-        return t'<Tab>'
-        -- return fn["lexima#insmode#leave"](1, '<Tab>')
+      return t'<Tab>'
     end
+    -- fn["lexima#insmode#leave"](1, '<Tab>')
 end
 
-cmd[[
+_G.my_icr_function = function()
+    return fn.pumvisible() ~= 0 and t'<C-y>' or t'<CR>'
+    -- fn['lexima#expand']('<CR>', 'i' )
+end
 
+_G.my_lexima_setup = function()
+    fn['lexima#add_rule']({ at = '%#)', char = '-', input = '<Del><Right><Esc>ea)<Left>' })
+    fn['lexima#add_rule']({ at = '%#}', char = '-', input = '<Del><Right><Esc>ea)<Left>' })
+    fn['lexima#add_rule']({ at = '%#"', char = '-', input = '<Del><Right><Esc>ea)<Left>' })
+    fn['lexima#add_rule']({ at = "%#'", char = '-', input = '<Del><Right><Esc>ea)<Left>' })
+end
 
+_G.my_diffenter_function = function()
+    cmd[[DisableWhitespace]]
+end
 
+_G.my_diffexit_function = function()
+    cmd[[EnableWhitespace]]
+    cmd[[diffoff]]
+end
 
-]]
---[[
-function! s:my_lexima_setup()
-    call lexima#add_rule({'at': '\%#)', 'char': '-', 'input': '<Del><Right><Esc>ea)<Left>'})
-    call lexima#add_rule({'at': '\%#}', 'char': '-', 'input': '<Del><Right><Esc>ea)<Left>'})
-    call lexima#add_rule({'at': '\%#"', 'char': '-', 'input': '<Del><Right><Esc>ea)<Left>'})
-    call lexima#add_rule({'at': '\%#''', 'char': '-', 'input': '<Del><Right><Esc>ea)<Left>'})
-endfunction
-
-function! s:my_icr_function()
-    return pumvisible() ?
-                \ coc#expandable() ?
-                \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand', ''] )\<CR>" :
-                \  "\<C-y>" :
-                \ lexima#expand('<CR>', 'i'
-endfunction
-
-function! s:my_itab_function()
-    return pumvisible() ?
-                \ "\<C-n>" :
-                \ coc#jumpable() ?
-                \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-jump', ''] )\<CR>" :
-                \ lexima#insmode#leave(1, '<Tab>'
-endfunction
-
-function! s:my_diffenter_function()
-    DisableWhitespace
-endfunction
-
-function! s:my_diffexit_function()
-    EnableWhitespace
-    diffoff
-endfunction
-]]
 cmd[[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
 cmd[[autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0]]
 cmd[[autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0]]
---cmd[[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=<SID>my_icr_function()<CR>]]
---cmd[[autocmd MyAutoCmd VimEnter * call <SID>my_lexima_setup()]]
+cmd[[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> v:lua.my_icr_function()<CR>]]
+cmd[[autocmd MyAutoCmd VimEnter * call v:lua.my_lexima_setup()]]
 cmd[[autocmd MyAutoCmd BufEnter * :Sleuth]]
 cmd[[autocmd MyAutoCmd InsertLeave * silent! pclose!]]
---cmd[[autocmd MyAutoCmd OptionSet diff if &diff | call <SID>my_diffenter_function() | endif]]
---cmd[[autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call <SID>my_diffexit_function() | endif]]
+cmd[[autocmd MyAutoCmd OptionSet diff if &diff | call v:lua.my_diffenter_function() | endif]]
+cmd[[autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call v:lua.my_diffexit_function() | endif]]
 
 --if !g:completion_gui
 --    autocmd MyAutoCmd BufWritePre *.go :CocCommand editor.action.organizeImport
