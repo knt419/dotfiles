@@ -67,7 +67,7 @@ require'packer'.startup(function(use)
     config = function()
       require"surround".setup { mappings_style = "sandwich"}
     end
-}
+    }
     use'b3nj5m1n/kommentary'
     use'tpope/vim-sleuth'
     use'kana/vim-textobj-user'
@@ -147,6 +147,9 @@ require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true
     },
+    indent = {
+        enable = true
+      },
     matchup = {
         enable = true
     },
@@ -161,10 +164,10 @@ require'telescope'.setup {
   },
   extensions = {
     fzf = {
-      fuzzy = true,
+      fuzzy                   = true,
       override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case",
+      override_file_sorter    = true,
+      case_mode               = "smart_case",
     },
   },
 }
@@ -194,7 +197,7 @@ cmp.setup {
         end,
     },
     mapping = {
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+        ['<CR>']  = cmp.mapping.confirm({ select = true }),
         ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
@@ -407,7 +410,7 @@ end
 cmd[[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
 cmd[[autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0]]
 cmd[[autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0]]
-cmd[[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> v:lua.my_icr_function()<CR>]]
+cmd[[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=v:lua.my_icr_function()<CR>]]
 cmd[[autocmd MyAutoCmd VimEnter * call v:lua.my_lexima_setup()]]
 cmd[[autocmd MyAutoCmd BufEnter * :Sleuth]]
 cmd[[autocmd MyAutoCmd InsertLeave * silent! pclose!]]
