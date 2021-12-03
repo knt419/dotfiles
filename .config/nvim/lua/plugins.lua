@@ -117,6 +117,7 @@ require'packer'.startup(function(use)
     use'hrsh7th/vim-vsnip'
     use'hrsh7th/nvim-cmp'
     use'hrsh7th/cmp-nvim-lua'
+    use'mhartington/formatter.nvim'
     opt.completeopt="menu,menuone,longest,preview"
 
     if Packer_bootstrap then
@@ -239,6 +240,21 @@ cmp.setup.cmdline(':', {
         { name = 'cmdline' }
     }),
 })
+
+require'formatter'.setup{
+  filetype = {
+    lua = {
+        -- luafmt
+        function()
+          return {
+            exe = "luafmt",
+            args = {"--indent-count", 2, "--stdin"},
+            stdin = true
+          }
+        end
+    },
+  }
+}
 
 local system_name
 if vim.fn.has("mac") == 1 then
@@ -392,19 +408,19 @@ _G.my_icr_function = function()
 end
 
 _G.my_lexima_setup = function()
-    fn['lexima#add_rule']({ at = '%#)', char = '-', input = '<Del><Right><Esc>ea)<Left>' })
-    fn['lexima#add_rule']({ at = '%#}', char = '-', input = '<Del><Right><Esc>ea)<Left>' })
-    fn['lexima#add_rule']({ at = '%#"', char = '-', input = '<Del><Right><Esc>ea)<Left>' })
-    fn['lexima#add_rule']({ at = "%#'", char = '-', input = '<Del><Right><Esc>ea)<Left>' })
+  fn['lexima#add_rule']({ at = '%#)', char = '-', input = '<Del><Right><Esc>ea)<Left>' })
+  fn['lexima#add_rule']({ at = '%#}', char = '-', input = '<Del><Right><Esc>ea)<Left>' })
+  fn['lexima#add_rule']({ at = '%#"', char = '-', input = '<Del><Right><Esc>ea)<Left>' })
+  fn['lexima#add_rule']({ at = "%#'", char = '-', input = '<Del><Right><Esc>ea)<Left>' })
 end
 
 _G.my_diffenter_function = function()
-    cmd[[DisableWhitespace]]
+  cmd[[DisableWhitespace]]
 end
 
 _G.my_diffexit_function = function()
-    cmd[[EnableWhitespace]]
-    cmd[[diffoff]]
+  cmd[[EnableWhitespace]]
+  cmd[[diffoff]]
 end
 
 cmd[[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
