@@ -10,7 +10,7 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   Packer_bootstrap = vim.fn.system({"git", "clone", "https://github.com/wbthomason/packer.nvim", install_path})
 end
 
-g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g").."/sqlite3.dll"
+g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
 
 require "packer".startup(
   function(use)
@@ -333,6 +333,15 @@ if g.is_windows then
   g.FerretJob = 0
 end
 
+g.dashboard_custom_header = {
+ ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
+ ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
+ ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
+ ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
+ ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
+ ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+}
+
 g.dashboard_default_executive = "telescope"
 
 g.indent_blankline_buftype_exclude = {"help", "terminal"}
@@ -400,13 +409,18 @@ api.nvim_set_keymap(
   {noremap = true}
 )
 api.nvim_set_keymap("n", "<Leader>", "<Plug>(asterisk-z*)", {silent = true})
-api.nvim_set_keymap("n", "<Leader>e", "<Cmd>CocCommand explorer<CR>", {noremap = true, silent = true})
+api.nvim_set_keymap(
+  "n",
+  "<Leader>e",
+  "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>",
+  {noremap = true, silent = true}
+)
 api.nvim_set_keymap("n", "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>", {silent = true})
 api.nvim_set_keymap("n", "<Leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", {silent = true})
 api.nvim_set_keymap("n", "<Leader>a", "<Plug>(FerretAck)", {silent = true})
 api.nvim_set_keymap("n", "<Leader>d", "<Cmd>Dashboard<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>df", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent = true})
-api.nvim_set_keymap("n", "<Leader>f", "<Cmd>Telescope find_files<CR>", {noremap = true, silent = true})
+api.nvim_set_keymap("n", "<Leader>f", "<Cmd>Telescope frecency<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>g", "<Cmd>Telescope live_grep<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>h", "<cmd>lua vim.lsp.buf.hover()<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>l", "<Plug>(FerretLack)", {})

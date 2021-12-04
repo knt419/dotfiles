@@ -10,7 +10,7 @@
 --____________________________________________________________________________\
 --____________________________________________________________________________|
 
-require"impatient"
+-- require"impatient"
 
 local api = vim.api
 local cmd = vim.cmd
@@ -25,6 +25,8 @@ cmd [[augroup END]]
 cmd [[augroup MySetUpCmd]]
 cmd [[autocmd!]]
 cmd [[augroup END]]
+
+cmd [[cd ~]]
 
 -- disable plugins
 local disabled_built_ins = {
