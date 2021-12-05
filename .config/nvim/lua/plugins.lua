@@ -25,13 +25,6 @@ require "packer".startup(
     }
     use "kyazdani42/nvim-web-devicons"
     use "norcalli/nvim-colorizer.lua"
-    --[[ use {
-      'goolord/alpha-nvim',
-      requires = { 'kyazdani42/nvim-web-devicons' },
-      config = function()
-        require'alpha'.setup(require'alpha.themes.startify'.opts)
-      end
-    } ]]
     use "glepnir/dashboard-nvim"
     use {
       "glepnir/galaxyline.nvim",
@@ -455,7 +448,7 @@ api.nvim_set_keymap("n", "<Leader>ff", "<Cmd>DashboardFindFile<CR>", {noremap = 
 api.nvim_set_keymap("n", "<Leader>fa", "<Cmd>DashboardFindWord<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>fb", "<Cmd>DashboardJumpMark<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>cn", "<Cmd>DashboardNewFile<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", {silent = true})
+-- api.nvim_set_keymap("n", "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", {silent = true})
 api.nvim_set_keymap("n", "<Leader>fm", "<Cmd>Format<CR>", {noremap = true})
 
 api.nvim_set_keymap("x", "v", "<Plug>(expand_region_expand)", {})
