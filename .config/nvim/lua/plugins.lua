@@ -52,6 +52,7 @@ require "packer".startup(
     use "nvim-treesitter/nvim-treesitter"
     use "nvim-treesitter/nvim-treesitter-textobjects"
     use "vigoux/treesitter-context.nvim"
+    use "theHamsta/nvim-treesitter-pairs"
     use {
       "lewis6991/gitsigns.nvim",
       requires = {
@@ -158,6 +159,17 @@ require "nvim-treesitter.configs".setup {
   },
   matchup = {
     enable = true
+  },
+  pairs = {
+    enable = true,
+    keymaps = {
+      goto_partner = "<leader>%",
+      delete_balanced = "X",
+    },
+    delete_balanced = {
+      only_on_first_char = false,
+      longest_partner = false,
+    }
   }
 }
 
@@ -334,16 +346,27 @@ if g.is_windows then
 end
 
 g.dashboard_custom_header = {
- ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗',
- ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║',
- ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║',
- ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║',
- ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║',
- ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝',
+  " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+  " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
+  " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+  " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+  " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+  " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
 }
 
 g.dashboard_default_executive = "telescope"
 
+g.dashboard_custom_section = {
+  a = {description = {"  Frecent Files      "}, command = "Telescope frecency"},
+  b = {description = {"  Find File          "}, command = "Telescope find_files"},
+  c = {description = {"  Recently Used Files"}, command = "Telescope oldfiles"},
+  d = {description = {"  New File           "}, command = ":DashboardNewFile"},
+  e = {description = {"  Sessions           "}, command = "Telescope sessions"},
+  f = {description = {"  Find Word          "}, command = "Telescope live_grep"},
+  g = {description = {"  Plugin Settings    "}, command = ":e ~/.config/nvim/lua/plugins.lua"},
+  h = {description = {"  Init Settings      "}, command = ":e ~/.config/nvim/init.lua"},
+  i = {description = {"  Marks              "}, command = "Telescope marks"}
+}
 g.indent_blankline_buftype_exclude = {"help", "terminal"}
 g.indent_blankline_filetype_exclude = {"startify", "dashboard", "alpha"}
 g.indent_blankline_use_treesitter = true
@@ -447,11 +470,13 @@ local t = function(str)
 end
 
 _G.my_itab_function = function()
-  return fn.pumvisible() == 1 and t "<C-n>" or fn["lexima#insmode#leave"](1, "<Tab>")
+  return fn.pumvisible() == 1 and t "<C-n>" or t "<Tab>"
+  -- return fn.pumvisible() == 1 and t "<C-n>" or fn["lexima#insmode#leave"](1, "<Tab>")
 end
 
 _G.my_icr_function = function()
-  return fn.pumvisible() == 1 and t "<C-y>" or fn["lexima#expand"]("<CR>", "i")
+  return fn.pumvisible() == 1 and t "<C-y>" or t "<CR>"
+  -- return fn.pumvisible() == 1 and t "<C-y>" or fn["lexima#expand"]("<CR>", "i")
 end
 
 _G.my_lexima_setup = function()
