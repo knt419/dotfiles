@@ -196,6 +196,11 @@
                 "guid": "{552f0178-146e-426b-aed9-245a536205b3}",
                 "name": "neovim (\u8a2d\u5b9a\u30d5\u30a1\u30a4\u30eb\u306a\u3057)",
                 "padding": "0 0 0 0"
+            },
+            {
+                "guid": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
+                "name": "PowerShell",
+                "source": "Windows.Terminal.PowershellCore"
             }
         ]
     },
