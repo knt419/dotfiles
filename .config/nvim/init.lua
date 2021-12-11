@@ -94,9 +94,7 @@ opt.clipboard = "unnamedplus"
 opt.startofline = false
 opt.list = true
 opt.listchars = { tab = '» ', trail = '·', eol = '↲', nbsp = '%' }
--- opt.listchars = {eol = '↲', tab = '▸ ', trail = '·'}
---opt.listchars = { tab = "\u{00BB}", trail = "\u{0020}", eol = "\u{21B2}", extends = "\u{00BB}", precedes = "\u{00AB}", nbsp = "\u{0025}" }
-opt.fillchars = {eob = "\u{0020}"}
+opt.fillchars = { eob = "\u{0020}"}
 opt.virtualedit = "block"
 opt.backspace = {"indent", "eol", "start"}
 opt.whichwrap = "b,s,h,l,<,>,[,]"
@@ -216,7 +214,7 @@ _G.my_ntab_function = function()
         return t "<Cmd>bn<CR>"
       end
     else
-      return t "<Cmd>tabnext<CR>"
+      return t "<Cmd>bn<CR>"
     end
   else
     return t "<C-w>w"
@@ -232,7 +230,7 @@ _G.my_ntab_r_function = function()
         return t "<Cmd>bp<CR>"
       end
     else
-      return t "<Cmd>tabp<CR>"
+      return t "<Cmd>bp<CR>"
     end
   else
     return t "<C-w>W"
