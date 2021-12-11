@@ -78,6 +78,7 @@ opt.lazyredraw = true
 
 opt.guifont = "HackGen35Nerd Console:h12"
 opt.guifontwide = "HackGen35Nerd Console:h12"
+opt.emoji = true
 opt.linespace = 2
 opt.showmatch = false
 opt.tabstop = 4
@@ -93,7 +94,7 @@ opt.conceallevel = 0
 opt.clipboard = "unnamedplus"
 opt.startofline = false
 opt.list = true
-opt.listchars = { tab = '» ', trail = '·', eol = '↲', nbsp = '%' }
+opt.listchars = { tab = '» ', trail = '·', eol = '↲', extends = '»', precedes = '«', nbsp = '%' }
 opt.fillchars = { eob = "\u{0020}"}
 opt.virtualedit = "block"
 opt.backspace = {"indent", "eol", "start"}
