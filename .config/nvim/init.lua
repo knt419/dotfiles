@@ -10,7 +10,7 @@
 --____________________________________________________________________________\
 --____________________________________________________________________________|
 
-require"impatient"
+require "impatient"
 
 local api = vim.api
 local cmd = vim.cmd
@@ -44,7 +44,7 @@ local disabled_built_ins = {
   "getscript",
   "getscriptPlugin",
   "logipat",
-  "filetype",
+  "filetype"
 }
 
 for i = 1, 14 do
@@ -93,7 +93,8 @@ opt.conceallevel = 0
 opt.clipboard = "unnamedplus"
 opt.startofline = false
 opt.list = true
---opt.listchars = { tab = '»', trail = '-', eol = '↲', extends = '»', precedes = '«', nbsp = '%' }
+opt.listchars = { tab = '» ', trail = '·', eol = '↲', nbsp = '%' }
+-- opt.listchars = {eol = '↲', tab = '▸ ', trail = '·'}
 --opt.listchars = { tab = "\u{00BB}", trail = "\u{0020}", eol = "\u{21B2}", extends = "\u{00BB}", precedes = "\u{00AB}", nbsp = "\u{0025}" }
 opt.fillchars = {eob = "\u{0020}"}
 opt.virtualedit = "block"
@@ -143,7 +144,7 @@ api.nvim_set_keymap("x", "Y", '"+y', {noremap = true, silent = true})
 api.nvim_set_keymap("n", "x", '"_x', {noremap = true, silent = true})
 api.nvim_set_keymap("n", "X", '"_X', {noremap = true, silent = true})
 api.nvim_set_keymap("n", "cd", "<Cmd>cd %:h<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "ss", ":<C-u>%s///g<Left><Left>", {noremap = true, silent = true})
+api.nvim_set_keymap("n", "rr", ":<C-u>%s///g<Left><Left>", {noremap = true, silent = true})
 api.nvim_set_keymap("x", "p", '"_xP', {noremap = true, silent = true})
 api.nvim_set_keymap("x", ".", ":normal .<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "U", "<C-r>", {noremap = true, silent = true})
@@ -241,17 +242,17 @@ end
 cmd [[filetype plugin indent on]]
 
 -- autocmd
-cmd[[autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow]]
-cmd[[autocmd MyAutoCmd VimResized * execute "normal <C-w>="]]
-cmd[[autocmd MyAutoCmd TermOpen * setlocal nonumber]]
-cmd[[autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif]]
-cmd[[autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline]]
-cmd[[autocmd MyAutoCmd BufEnter * silent! lcd %:p:h]]
-cmd[[autocmd MyAutoCmd BufWritePost plugins.lua PackerCompile]]
-cmd[[augroup highlighted_yank]]
-cmd[[autocmd!]]
-cmd[[autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 1000)]]
-cmd[[augroup END]]
+cmd [[autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow]]
+cmd [[autocmd MyAutoCmd VimResized * execute "normal <C-w>="]]
+cmd [[autocmd MyAutoCmd TermOpen * setlocal nonumber]]
+cmd [[autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif]]
+cmd [[autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline]]
+cmd [[autocmd MyAutoCmd BufEnter * silent! lcd %:p:h]]
+cmd [[autocmd MyAutoCmd BufWritePost plugins.lua PackerCompile]]
+cmd [[augroup highlighted_yank]]
+cmd [[autocmd!]]
+cmd [[autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 1000)]]
+cmd [[augroup END]]
 
 opt.background = "dark"
 cmd [[colorscheme deep-space]]
