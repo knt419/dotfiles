@@ -45,7 +45,6 @@ require "packer".startup(
     use "nvim-treesitter/nvim-treesitter"
     use "nvim-treesitter/nvim-treesitter-textobjects"
     use "vigoux/treesitter-context.nvim"
-    -- use "theHamsta/nvim-treesitter-pairs"
     use {
       "lewis6991/gitsigns.nvim",
       requires = {
@@ -54,7 +53,6 @@ require "packer".startup(
     }
 
     -- text/input manipulation
-    -- use "cohama/lexima.vim"
     use "windwp/nvim-autopairs"
     use "godlygeek/tabular"
     use "rhysd/accelerated-jk"
@@ -444,7 +442,6 @@ api.nvim_set_keymap("n", "<Leader>ff", "<Cmd>DashboardFindFile<CR>", {noremap = 
 api.nvim_set_keymap("n", "<Leader>fa", "<Cmd>DashboardFindWord<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>fb", "<Cmd>DashboardJumpMark<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>cn", "<Cmd>DashboardNewFile<CR>", {noremap = true, silent = true})
--- api.nvim_set_keymap("n", "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", {silent = true})
 api.nvim_set_keymap("n", "<Leader>fm", "<Cmd>Format<CR>", {noremap = true})
 
 api.nvim_set_keymap("x", "v", "<Plug>(expand_region_expand)", {})
@@ -460,20 +457,12 @@ end
 
 _G.my_itab_function = function()
   return fn.pumvisible() == 1 and t "<C-n>" or t "<Tab>"
-  -- return fn.pumvisible() == 1 and t "<C-n>" or fn["lexima#insmode#leave"](1, "<Tab>")
 end
 
 _G.my_icr_function = function()
   return fn.pumvisible() == 1 and t "<C-y>" or t "<CR>"
-  -- return fn.pumvisible() == 1 and t "<C-y>" or fn["lexima#expand"]("<CR>", "i")
 end
 
---[[ _G.my_lexima_setup = function()
-  fn["lexima#add_rule"]({at = "%#)", char = "-", input = "<Del><Right><Esc>ea)<Left>"})
-  fn["lexima#add_rule"]({at = "%#}", char = "-", input = "<Del><Right><Esc>ea)<Left>"})
-  fn["lexima#add_rule"]({at = '%#"', char = "-", input = "<Del><Right><Esc>ea)<Left>"})
-  fn["lexima#add_rule"]({at = "%#'", char = "-", input = "<Del><Right><Esc>ea)<Left>"})
-end ]]
 _G.my_diffenter_function = function()
   cmd [[DisableWhitespace]]
 end
@@ -487,7 +476,6 @@ cmd [[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
 cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0]]
 cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0]]
 cmd [[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=v:lua.my_icr_function()<CR>]]
--- cmd [[autocmd MyAutoCmd VimEnter * call v:lua.my_lexima_setup()]]
 cmd [[autocmd MyAutoCmd BufEnter * :Sleuth]]
 cmd [[autocmd MyAutoCmd InsertLeave * silent! pclose!]]
 cmd [[autocmd MyAutoCmd OptionSet diff if &diff | call v:lua.my_diffenter_function() | endif]]
