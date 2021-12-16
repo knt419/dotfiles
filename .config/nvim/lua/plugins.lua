@@ -12,6 +12,7 @@ end
 
 g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
 
+
 require "packer".startup(
   function(use)
     use "wbthomason/packer.nvim"
@@ -53,8 +54,20 @@ require "packer".startup(
     }
 
     -- text/input manipulation
-    use "windwp/nvim-autopairs"
+    use "cohama/lexima.vim"
     use "godlygeek/tabular"
+    use {
+      "abecodes/tabout.nvim",
+      config = function()
+        require("tabout").setup {
+          tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
+          backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
+          ignore_beginning = false,
+        }
+      end,
+      wants = {"nvim-treesitter"}, -- or require if not used so far
+      -- after = {"nvim-cmp"} -- if a completion plugin is using tabs load it before
+    }
     use "rhysd/accelerated-jk"
     use {
       "blackCauldron7/surround.nvim",
@@ -219,8 +232,8 @@ cmp.setup {
           cmp.select_next_item()
         elseif vim.fn["vsnip#available"](1) == 1 then
           feedkey("<Plug>(vsnip-expand-or-jump)", "")
-        elseif has_words_before() then
-          cmp.complete()
+        --[[ elseif has_words_before() then
+          cmp.complete() ]]
         else
           fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
         end
@@ -398,8 +411,8 @@ api.nvim_set_keymap("", "#", "<Plug>(asterisk-#)", {})
 api.nvim_set_keymap("", "g#", "<Plug>(asterisk-g#)", {})
 
 api.nvim_set_keymap("i", "<C-l>", "<C-r>=lexima#insmode#leave(1, '<C-g>U<Right>')<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("i", "<Tab>", "v:lua.my_itab_function()", {expr = true, silent = true})
-api.nvim_set_keymap("i", "<S-Tab>", "<C-p>", {silent = true})
+--[[ api.nvim_set_keymap("i", "<Tab>", "v:lua.my_itab_function()", {expr = true, silent = true})
+api.nvim_set_keymap("i", "<S-Tab>", "v:lua.my_istab_function()", {expr = true, silent = true}) ]]
 api.nvim_set_keymap("n", "j", "<Plug>(accelerated_jk_gj)", {})
 api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})
 api.nvim_set_keymap("n", "w", "<Plug>(smartword-w)", {})
@@ -455,9 +468,25 @@ local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
-_G.my_itab_function = function()
-  return fn.pumvisible() == 1 and t "<C-n>" or t "<Tab>"
+--[[ _G.my_itab_function = function()
+  if fn.pumvisible() ~= 0 then
+    return t "<C-n>"
+  elseif fn["vsnip#available"](1) ~= 0 then
+    return t "<Plug>(vsnip-expand-or-jump)"
+  else
+    return t "<Plug>(Tabout)"
+  end
 end
+
+_G.my_istab_function = function()
+  if fn.pumvisible() ~= 0 then
+    return t "<C-p>"
+  elseif fn["vsnip#available"](-1) ~= 0 then
+    return t "<Plug>(vsnip-jump-prev)"
+  else
+    return t "<Plug>(TaboutBack)"
+  end
+end ]]
 
 _G.my_icr_function = function()
   return fn.pumvisible() == 1 and t "<C-y>" or t "<CR>"
