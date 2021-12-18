@@ -12,7 +12,6 @@ end
 
 g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
 
-
 require "packer".startup(
   function(use)
     use "wbthomason/packer.nvim"
@@ -54,7 +53,7 @@ require "packer".startup(
     }
 
     -- text/input manipulation
-    use "cohama/lexima.vim"
+    use "windwp/nvim-autopairs"
     use "godlygeek/tabular"
     use {
       "abecodes/tabout.nvim",
@@ -66,6 +65,7 @@ require "packer".startup(
         }
       end,
       wants = {"nvim-treesitter"}, -- or require if not used so far
+      after = {"nvim-autopairs"}
     }
     use "rhysd/accelerated-jk"
     use {
@@ -230,9 +230,9 @@ cmp.setup {
         if cmp.visible() then
           cmp.select_next_item()
         elseif vim.fn["vsnip#available"](1) == 1 then
-          feedkey("<Plug>(vsnip-expand-or-jump)", "")
-        --[[ elseif has_words_before() then
+          --[[ elseif has_words_before() then
           cmp.complete() ]]
+          feedkey("<Plug>(vsnip-expand-or-jump)", "")
         else
           fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
         end
@@ -343,6 +343,8 @@ require "lspconfig".sumneko_lua.setup {
     }
   }
 }
+
+require "nvim-autopairs".setup {}
 
 if g.is_windows then
   g.FerretNvim = 0
@@ -486,7 +488,6 @@ _G.my_istab_function = function()
     return t "<Plug>(TaboutBack)"
   end
 end ]]
-
 _G.my_icr_function = function()
   return fn.pumvisible() == 1 and t "<C-y>" or t "<CR>"
 end
