@@ -431,8 +431,6 @@ api.nvim_set_keymap("", "#", "<Plug>(asterisk-#)", {})
 api.nvim_set_keymap("", "g#", "<Plug>(asterisk-g#)", {})
 
 api.nvim_set_keymap("i", "<C-l>", "<C-r>=lexima#insmode#leave(1, '<C-g>U<Right>')<CR>", {noremap = true, silent = true})
---[[ api.nvim_set_keymap("i", "<Tab>", "v:lua.my_itab_function()", {expr = true, silent = true})
-api.nvim_set_keymap("i", "<S-Tab>", "v:lua.my_istab_function()", {expr = true, silent = true}) ]]
 api.nvim_set_keymap("n", "j", "<Plug>(accelerated_jk_gj)", {})
 api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})
 api.nvim_set_keymap("n", "w", "<Plug>(smartword-w)", {})
@@ -451,7 +449,7 @@ api.nvim_set_keymap(
   "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>",
   {noremap = true}
 )
-api.nvim_set_keymap("n", "<Leader>", "<Plug>(asterisk-z*)", {silent = true})
+-- api.nvim_set_keymap("n", "<Leader>", "<Plug>(asterisk-z*)", {silent = true})
 api.nvim_set_keymap(
   "n",
   "<Leader>e",
@@ -488,25 +486,6 @@ local t = function(str)
   return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
---[[ _G.my_itab_function = function()
-  if fn.pumvisible() ~= 0 then
-    return t "<C-n>"
-  elseif fn["vsnip#available"](1) ~= 0 then
-    return t "<Plug>(vsnip-expand-or-jump)"
-  else
-    return t "<Plug>(Tabout)"
-  end
-end
-
-_G.my_istab_function = function()
-  if fn.pumvisible() ~= 0 then
-    return t "<C-p>"
-  elseif fn["vsnip#available"](-1) ~= 0 then
-    return t "<Plug>(vsnip-jump-prev)"
-  else
-    return t "<Plug>(TaboutBack)"
-  end
-end ]]
 _G.my_icr_function = function()
   return fn.pumvisible() == 1 and t "<C-y>" or t "<CR>"
 end
