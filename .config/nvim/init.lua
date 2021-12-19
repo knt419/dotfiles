@@ -250,7 +250,7 @@ cmd [[autocmd MyAutoCmd BufEnter * silent! lcd %:p:h]]
 cmd [[autocmd MyAutoCmd BufWritePost plugins.lua PackerCompile]]
 cmd [[augroup highlighted_yank]]
 cmd [[autocmd!]]
-cmd [[autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSearch", 1000)]]
+cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}]]
 cmd [[augroup END]]
 
 opt.background = "dark"
