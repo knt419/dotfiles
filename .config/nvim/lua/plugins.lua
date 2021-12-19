@@ -211,11 +211,6 @@ require "telescope".setup {
   }
 }
 
---[[ require "shade".setup {
-  overlay_opacity = 50,
-  opacity_step = 1
-} ]]
-
 require "telescope".load_extension("fzf")
 require "telescope".load_extension("file_browser")
 require "telescope".load_extension("frecency")
@@ -360,7 +355,10 @@ require "lspconfig".sumneko_lua.setup {
 
 require "nvim-autopairs".setup {}
 
-require "neogit".setup {}
+require "neogit".setup {
+  disable_insert_on_commit = false,
+  disable_commit_confirmation = true
+}
 
 g.material_style = "darker"
 
@@ -389,7 +387,6 @@ g.dashboard_custom_section = {
 g.indent_blankline_buftype_exclude = {"help", "terminal"}
 g.indent_blankline_filetype_exclude = {"startify", "dashboard", "alpha"}
 g.indent_blankline_use_treesitter = true
-g.lexima_ctrlh_as_backspace = 1
 g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "markdown"}
 
 g.extradite_showhash = 1
@@ -439,11 +436,8 @@ api.nvim_set_keymap("n", "ge", "<Plug>(smartword-ge)", {})
 api.nvim_set_keymap("n", "s", "<Plug>(operator-replace)", {})
 api.nvim_set_keymap("n", "tt", "<Cmd>FloatermToggle<CR>", {noremap = true, silent = true})
 
--- api.nvim_set_keymap("n", "<Up>", ":<C-u>Git push", {noremap = true})
-api.nvim_set_keymap("n", "<Up>", "<Cmd>Neogit<CR>P", {noremap = true})
--- api.nvim_set_keymap("n", "<Down>", ":<C-u>Git pull", {noremap = true})
-api.nvim_set_keymap("n", "<Down>", "<Cmd>Neogit<CR>p", {noremap = true})
--- api.nvim_set_keymap("n", "<Right>", ":<C-u>Git commit -am ''<Left>", {noremap = true})
+api.nvim_set_keymap("n", "<Up>", "<Cmd>Neogit push<CR>", {noremap = true})
+api.nvim_set_keymap("n", "<Down>", "<Cmd>Neogit pull<CR>", {noremap = true})
 api.nvim_set_keymap("n", "<Right>", "<Cmd>Neogit commit<CR>", {noremap = true})
 api.nvim_set_keymap(
   "n",
@@ -451,7 +445,6 @@ api.nvim_set_keymap(
   "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>",
   {noremap = true}
 )
--- api.nvim_set_keymap("n", "<Leader>", "<Plug>(asterisk-z*)", {silent = true})
 api.nvim_set_keymap(
   "n",
   "<Leader>e",
