@@ -17,6 +17,10 @@ require "packer".startup(
     use "wbthomason/packer.nvim"
     use "lewis6991/impatient.nvim"
 
+    -- colorscheme
+    use "tyrannicaltoucan/vim-deep-space"
+    use "marko-cerovac/material.nvim"
+
     -- editor display
     use "lukas-reineke/indent-blankline.nvim"
     use {
@@ -35,7 +39,8 @@ require "packer".startup(
         vim.cmd("luafile " .. theme)
       end
     }
-    use "sunjon/shade.nvim"
+    -- use "sunjon/shade.nvim"
+    use "jamestrew/dimmer.nvim"
     use "rickhowe/diffchar.vim"
     use "romainl/vim-qf"
     use "andymass/vim-matchup"
@@ -51,6 +56,12 @@ require "packer".startup(
         "nvim-lua/plenary.nvim"
       }
     }
+    use {
+      "folke/which-key.nvim",
+      config = function()
+        require"which-key".setup {}
+        end
+        }
 
     -- text/input manipulation
     use "windwp/nvim-autopairs"
@@ -107,13 +118,15 @@ require "packer".startup(
 
     -- git
     use "tpope/vim-fugitive"
+    use {
+      "TimUntersberger/neogit",
+      requires = {"nvim-lua/plenary.nvim"}
+      }
     use "nvim-lua/plenary.nvim"
 
     -- language support
     use "mechatroner/rainbow_csv"
-    use "tpope/vim-dadbod"
     use "editorconfig/editorconfig-vim"
-    use "tyrannicaltoucan/vim-deep-space"
 
     -- lsp/completion
     use "williamboman/nvim-lsp-installer"
@@ -137,6 +150,8 @@ require "packer".startup(
 )
 
 -- plugin variables
+
+require "dimmer".setup {}
 
 require "bufferline".setup {
   options = {
@@ -197,10 +212,10 @@ require "telescope".setup {
   }
 }
 
-require "shade".setup {
+--[[ require "shade".setup {
   overlay_opacity = 50,
   opacity_step = 1
-}
+} ]]
 
 require "telescope".load_extension("fzf")
 require "telescope".load_extension("file_browser")
@@ -345,6 +360,10 @@ require "lspconfig".sumneko_lua.setup {
 }
 
 require "nvim-autopairs".setup {}
+
+require "neogit".setup {}
+
+g.material_style = "darker"
 
 if g.is_windows then
   g.FerretNvim = 0

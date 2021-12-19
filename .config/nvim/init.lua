@@ -254,4 +254,4 @@ cmd [[autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank("IncSear
 cmd [[augroup END]]
 
 opt.background = "dark"
-cmd [[colorscheme deep-space]]
+cmd [[colorscheme material]]
