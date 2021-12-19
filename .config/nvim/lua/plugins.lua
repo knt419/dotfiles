@@ -18,7 +18,7 @@ require "packer".startup(
     use "lewis6991/impatient.nvim"
 
     -- colorscheme
-    use "tyrannicaltoucan/vim-deep-space"
+    -- use "tyrannicaltoucan/vim-deep-space"
     use "marko-cerovac/material.nvim"
 
     -- editor display
@@ -39,7 +39,6 @@ require "packer".startup(
         vim.cmd("luafile " .. theme)
       end
     }
-    -- use "sunjon/shade.nvim"
     use "jamestrew/dimmer.nvim"
     use "rickhowe/diffchar.vim"
     use "romainl/vim-qf"
@@ -440,9 +439,12 @@ api.nvim_set_keymap("n", "ge", "<Plug>(smartword-ge)", {})
 api.nvim_set_keymap("n", "s", "<Plug>(operator-replace)", {})
 api.nvim_set_keymap("n", "tt", "<Cmd>FloatermToggle<CR>", {noremap = true, silent = true})
 
-api.nvim_set_keymap("n", "<Up>", ":<C-u>Git push", {noremap = true})
-api.nvim_set_keymap("n", "<Down>", ":<C-u>Git pull", {noremap = true})
-api.nvim_set_keymap("n", "<Right>", ":<C-u>Git commit -am ''<Left>", {noremap = true})
+-- api.nvim_set_keymap("n", "<Up>", ":<C-u>Git push", {noremap = true})
+api.nvim_set_keymap("n", "<Up>", "<Cmd>Neogit<CR>P", {noremap = true})
+-- api.nvim_set_keymap("n", "<Down>", ":<C-u>Git pull", {noremap = true})
+api.nvim_set_keymap("n", "<Down>", "<Cmd>Neogit<CR>p", {noremap = true})
+-- api.nvim_set_keymap("n", "<Right>", ":<C-u>Git commit -am ''<Left>", {noremap = true})
+api.nvim_set_keymap("n", "<Right>", "<Cmd>Neogit commit<CR>", {noremap = true})
 api.nvim_set_keymap(
   "n",
   "<Left>",
