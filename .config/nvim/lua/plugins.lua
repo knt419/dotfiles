@@ -23,10 +23,11 @@ require "packer".startup(
 
     -- editor display
     use "lukas-reineke/indent-blankline.nvim"
-    use {
+    --[[ use {
       "akinsho/bufferline.nvim",
       requires = "kyazdani42/nvim-web-devicons"
-    }
+    } ]]
+    use "ojroques/nvim-bufbar"
     use "kyazdani42/nvim-web-devicons"
     use "norcalli/nvim-colorizer.lua"
     use "glepnir/dashboard-nvim"
@@ -152,7 +153,9 @@ require "packer".startup(
 
 require "dimmer".setup {}
 
-require "bufferline".setup {
+require "bufbar".setup {}
+
+--[[ require "bufferline".setup {
   options = {
     diagnostics = "nvim_lsp"
   },
@@ -161,7 +164,7 @@ require "bufferline".setup {
       gui = "bold"
     }
   }
-}
+} ]]
 
 require "indent_blankline".setup {
   show_current_context = true,
@@ -360,6 +363,8 @@ require "neogit".setup {
   disable_commit_confirmation = true
 }
 
+g.cursorword_highlight = false
+
 g.material_style = "darker"
 
 if g.is_windows then
@@ -498,6 +503,7 @@ cmd [[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
 cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0]]
 cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0]]
 cmd [[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=v:lua.my_icr_function()<CR>]]
+cmd [[autocmd MyAutoCmd VimEnter * highlight link CursorWord DiagnosticUnderlineInfo]]
 cmd [[autocmd MyAutoCmd BufEnter * :Sleuth]]
 cmd [[autocmd MyAutoCmd InsertLeave * silent! pclose!]]
 cmd [[autocmd MyAutoCmd OptionSet diff if &diff | call v:lua.my_diffenter_function() | endif]]
