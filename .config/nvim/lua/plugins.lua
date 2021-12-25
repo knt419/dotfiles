@@ -22,6 +22,15 @@ require "packer".startup(
     use "marko-cerovac/material.nvim"
 
     -- editor display
+    use {
+      "luukvbaal/stabilize.nvim",
+      config = function() require("stabilize").setup() end
+    }
+    use "MunifTanjim/nui.nvim"
+    use {
+      "VonHeikemen/fine-cmdline.nvim",
+      requires = "MunifTanjim/nui.nvim"
+      }
     use "lukas-reineke/indent-blankline.nvim"
     --[[ use {
       "akinsho/bufferline.nvim",
@@ -474,6 +483,7 @@ api.nvim_set_keymap("n", "<Leader>fa", "<Cmd>DashboardFindWord<CR>", {noremap = 
 api.nvim_set_keymap("n", "<Leader>fb", "<Cmd>DashboardJumpMark<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>cn", "<Cmd>DashboardNewFile<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>fm", "<Cmd>Format<CR>", {noremap = true})
+api.nvim_set_keymap("n", ";", "<Cmd>FineCmdline<CR>", {noremap = true, silent = true})
 
 api.nvim_set_keymap("x", "v", "<Plug>(expand_region_expand)", {})
 api.nvim_set_keymap("x", "<C-v>", "<Plug>(expand_region_shrink)", {})
