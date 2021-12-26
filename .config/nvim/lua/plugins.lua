@@ -15,17 +15,22 @@ g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g") .
 require "packer".startup(
   function(use)
     use "wbthomason/packer.nvim"
+
+    -- performance improve
     use "lewis6991/impatient.nvim"
+    use {
+      "luukvbaal/stabilize.nvim",
+      config = function() require("stabilize").setup() end
+    }
+    use "andymass/vim-matchup"
+    use "nathom/filetype.nvim"
+    use "antoinemadec/FixCursorHold.nvim"
 
     -- colorscheme
     -- use "tyrannicaltoucan/vim-deep-space"
     use "marko-cerovac/material.nvim"
 
     -- editor display
-    use {
-      "luukvbaal/stabilize.nvim",
-      config = function() require("stabilize").setup() end
-    }
     use "MunifTanjim/nui.nvim"
     use {
       "VonHeikemen/fine-cmdline.nvim",
@@ -52,7 +57,6 @@ require "packer".startup(
     use "jamestrew/dimmer.nvim"
     use "rickhowe/diffchar.vim"
     use "romainl/vim-qf"
-    use "andymass/vim-matchup"
     use "camspiers/animate.vim"
     use "camspiers/lens.vim"
     use "yamatsum/nvim-cursorline"
@@ -123,7 +127,6 @@ require "packer".startup(
     }
     use "januswel/fencja.vim"
     use "voldikss/vim-floaterm"
-    use "nathom/filetype.nvim"
 
     -- git
     use "tpope/vim-fugitive"
@@ -149,6 +152,7 @@ require "packer".startup(
     use "hrsh7th/nvim-cmp"
     use "hrsh7th/cmp-nvim-lua"
     use "mhartington/formatter.nvim"
+    use "onsails/lspkind-nvim"
     opt.completeopt = "menu,menuone,longest,preview"
 
     compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua"
@@ -237,8 +241,15 @@ local feedkey = function(key, mode)
 end
 
 local cmp = require "cmp"
+local lspkind = require "lspkind"
 
 cmp.setup {
+  formatting = {
+    format = lspkind.cmp_format({
+      with_text = false,
+      maxwidth = 50,
+    })
+  },
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
@@ -452,7 +463,7 @@ api.nvim_set_keymap("n", "tt", "<Cmd>FloatermToggle<CR>", {noremap = true, silen
 
 api.nvim_set_keymap("n", "<Up>", "<Cmd>Neogit push<CR>", {noremap = true})
 api.nvim_set_keymap("n", "<Down>", "<Cmd>Neogit pull<CR>", {noremap = true})
-api.nvim_set_keymap("n", "<Right>", "<Cmd>Neogit commit<CR>", {noremap = true})
+api.nvim_set_keymap("n", "<Right>", "<Cmd>Neogit<CR>", {noremap = true})
 api.nvim_set_keymap(
   "n",
   "<Left>",
