@@ -383,8 +383,6 @@ require "neogit".setup {
   disable_commit_confirmation = true
 }
 
-g.cursorword_highlight = false
-
 g.material_style = "darker"
 
 if g.is_windows then
@@ -524,7 +522,6 @@ cmd [[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
 cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0]]
 cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0]]
 cmd [[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=v:lua.my_icr_function()<CR>]]
-cmd [[autocmd MyAutoCmd VimEnter * highlight link CursorWord DiagnosticUnderlineInfo]]
 cmd [[autocmd MyAutoCmd BufEnter * :Sleuth]]
 cmd [[autocmd MyAutoCmd InsertLeave * silent! pclose!]]
 cmd [[autocmd MyAutoCmd OptionSet diff if &diff | call v:lua.my_diffenter_function() | endif]]
