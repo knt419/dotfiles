@@ -12,11 +12,13 @@ end
 
 g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
 
+require "packer".init { max_jobs = 9 , git = { clone_timeout = 180, }, }
+
 require "packer".startup(
   function(use)
     use "wbthomason/packer.nvim"
 
-    -- performance improve
+    -- performance aimprove
     use "lewis6991/impatient.nvim"
     use {
       "luukvbaal/stabilize.nvim",
@@ -93,13 +95,12 @@ require "packer".startup(
     }
     use "rhysd/accelerated-jk"
     use {
-      "blackCauldron7/surround.nvim",
+      "ur4ltz/surround.nvim",
       config = function()
         require "surround".setup {mappings_style = "sandwich"}
       end
     }
     use "b3nj5m1n/kommentary"
-    use "tpope/vim-sleuth"
     use "kana/vim-smartword"
     use "kana/vim-niceblock"
     use "haya14busa/vim-asterisk"
@@ -163,6 +164,7 @@ require "packer".startup(
 )
 
 -- plugin variables
+
 
 require "dimmer".setup {}
 
@@ -522,7 +524,7 @@ cmd [[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
 cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0]]
 cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0]]
 cmd [[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=v:lua.my_icr_function()<CR>]]
-cmd [[autocmd MyAutoCmd BufEnter * :Sleuth]]
+-- cmd [[autocmd MyAutoCmd BufEnter * :Sleuth]]
 cmd [[autocmd MyAutoCmd InsertLeave * silent! pclose!]]
 cmd [[autocmd MyAutoCmd OptionSet diff if &diff | call v:lua.my_diffenter_function() | endif]]
 cmd [[autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call v:lua.my_diffexit_function() | endif]]
