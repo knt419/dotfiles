@@ -33,7 +33,7 @@ local disabled_built_ins = {
   "gzip",
   "man",
   "matchit",
-  "matchparen",
+  -- "matchparen",
   "shada_plugin",
   "tarPlugin",
   "tar",

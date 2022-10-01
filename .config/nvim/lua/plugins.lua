@@ -24,8 +24,8 @@ require "packer".startup(
       "luukvbaal/stabilize.nvim",
       config = function() require("stabilize").setup() end
     }
-    use "andymass/vim-matchup"
-    use "nathom/filetype.nvim"
+    -- use "andymass/vim-matchup"
+    -- use "nathom/filetype.nvim"
     use "antoinemadec/FixCursorHold.nvim"
 
     -- colorscheme
@@ -39,11 +39,11 @@ require "packer".startup(
       requires = "MunifTanjim/nui.nvim"
       }
     use "lukas-reineke/indent-blankline.nvim"
-    --[[ use {
+    use {
       "akinsho/bufferline.nvim",
       requires = "kyazdani42/nvim-web-devicons"
-    } ]]
-    use "ojroques/nvim-bufbar"
+    }
+    -- use "ojroques/nvim-bufbar"
     use "kyazdani42/nvim-web-devicons"
     use "norcalli/nvim-colorizer.lua"
     use "glepnir/dashboard-nvim"
@@ -71,12 +71,12 @@ require "packer".startup(
         "nvim-lua/plenary.nvim"
       }
     }
-    use {
+    --[[ use {
       "folke/which-key.nvim",
       config = function()
         require"which-key".setup {}
         end
-        }
+        } ]]
 
     -- text/input manipulation
     use "windwp/nvim-autopairs"
@@ -168,7 +168,7 @@ require "packer".startup(
 
 require "dimmer".setup {}
 
-require "bufbar".setup {}
+-- require "bufbar".setup {}
 
 --[[ require "bufferline".setup {
   options = {
