@@ -25,12 +25,12 @@ require "packer".startup(
       config = function() require("stabilize").setup() end
     }
     -- use "andymass/vim-matchup"
-    -- use "nathom/filetype.nvim"
+    use "nathom/filetype.nvim"
     use "antoinemadec/FixCursorHold.nvim"
 
     -- colorscheme
-    -- use "tyrannicaltoucan/vim-deep-space"
-    use "marko-cerovac/material.nvim"
+    use "tyrannicaltoucan/vim-deep-space"
+    -- use "marko-cerovac/material.nvim"
 
     -- editor display
     use "MunifTanjim/nui.nvim"
@@ -46,7 +46,7 @@ require "packer".startup(
     -- use "ojroques/nvim-bufbar"
     use "kyazdani42/nvim-web-devicons"
     use "norcalli/nvim-colorizer.lua"
-    use "glepnir/dashboard-nvim"
+    use {'glepnir/dashboard-nvim'}
     use {
       "glepnir/galaxyline.nvim",
       branch = "main",
@@ -64,7 +64,7 @@ require "packer".startup(
     use "yamatsum/nvim-cursorline"
     use "nvim-treesitter/nvim-treesitter"
     use "nvim-treesitter/nvim-treesitter-textobjects"
-    use "vigoux/treesitter-context.nvim"
+    -- use "vigoux/treesitter-context.nvim"
     use {
       "lewis6991/gitsigns.nvim",
       requires = {
@@ -170,16 +170,16 @@ require "dimmer".setup {}
 
 -- require "bufbar".setup {}
 
---[[ require "bufferline".setup {
+require "bufferline".setup {
   options = {
     diagnostics = "nvim_lsp"
   },
   highlights = {
     buffer_selected = {
-      gui = "bold"
+      bold = true
     }
   }
-} ]]
+}
 
 require "indent_blankline".setup {
   show_current_context = true,
@@ -187,6 +187,7 @@ require "indent_blankline".setup {
 }
 
 require "nvim-treesitter.configs".setup {
+  auto_install = true,
   highlight = {
     enable = true
   },
@@ -233,11 +234,6 @@ require "telescope".load_extension("fzf")
 require "telescope".load_extension("file_browser")
 require "telescope".load_extension("frecency")
 
-local has_words_before = function()
-  local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-end
-
 local feedkey = function(key, mode)
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
@@ -264,8 +260,6 @@ cmp.setup {
         if cmp.visible() then
           cmp.select_next_item()
         elseif vim.fn["vsnip#available"](1) == 1 then
-          --[[ elseif has_words_before() then
-          cmp.complete() ]]
           feedkey("<Plug>(vsnip-expand-or-jump)", "")
         else
           fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
@@ -333,50 +327,6 @@ require "formatter".setup {
   }
 }
 
-local system_name
-if vim.fn.has("mac") == 1 then
-  system_name = "macOS"
-elseif vim.fn.has("unix") == 1 then
-  system_name = "Linux"
-elseif vim.fn.has("win32") == 1 then
-  system_name = "Windows"
-else
-  print("Unsupported system for sumneko")
-end
-
--- set the path to the sumneko installation; if you previously installed via the now deprecated :LspInstall, use
-local sumneko_root_path = vim.fn.stdpath("data") .. "/lsp_servers/sumneko_lua/extension/server"
-local sumneko_binary = sumneko_root_path .. "/bin/" .. system_name .. "/lua-language-server"
-
-local runtime_path = vim.split(package.path, ";")
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-
-require "lspconfig".sumneko_lua.setup {
-  cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"},
-  settings = {
-    Lua = {
-      runtime = {
-        -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-        version = "LuaJIT",
-        -- Setup your lua path
-        path = runtime_path
-      },
-      diagnostics = {
-        -- Get the language server to recognize the `vim` global
-        globals = {"vim"}
-      },
-      workspace = {
-        -- Make the server aware of Neovim runtime files
-        library = vim.api.nvim_get_runtime_file("", true)
-      },
-      -- Do not send telemetry data containing a randomized but unique identifier
-      telemetry = {
-        enable = false
-      }
-    }
-  }
-}
 
 require "nvim-autopairs".setup {}
 
@@ -392,23 +342,24 @@ if g.is_windows then
   g.FerretJob = 0
 end
 
-g.dashboard_custom_header = {
+local db = require('dashboard')
+
+db.custom_header = {
   " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
   " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
   " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
   " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
   " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
   " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
-}
+  }
 
-g.dashboard_default_executive = "telescope"
+db.custom_center = {
+    { icon = " ", desc = "Frecent Files", action = "Telescope frecency" },
+    { icon = " ", desc = "Find File", action = "Telescope find_files" },
+    { icon = " ", desc = "Plugin Settings", action = ":e ~/.config/nvim/lua/plugins.lua" },
+    { icon = " ", desc = "Init Settings", action = ":e ~/.config/nvim/init.lua" },
+  }
 
-g.dashboard_custom_section = {
-  a = {description = {"  Frecent Files      "}, command = "Telescope frecency"},
-  b = {description = {"  Find File          "}, command = "Telescope find_files"},
-  c = {description = {"  Plugin Settings    "}, command = ":e ~/.config/nvim/lua/plugins.lua"},
-  d = {description = {"  Init Settings      "}, command = ":e ~/.config/nvim/init.lua"}
-}
 g.indent_blankline_buftype_exclude = {"help", "terminal"}
 g.indent_blankline_filetype_exclude = {"startify", "dashboard", "alpha"}
 g.indent_blankline_use_treesitter = true

@@ -33,7 +33,7 @@ local disabled_built_ins = {
   "gzip",
   "man",
   "matchit",
-  -- "matchparen",
+  "matchparen",
   "shada_plugin",
   "tarPlugin",
   "tar",
@@ -47,7 +47,7 @@ local disabled_built_ins = {
   "filetype"
 }
 
-for i = 1, 14 do
+for i = 1, 15 do
   g["loaded_" .. disabled_built_ins[i]] = 1
 end
 
@@ -134,6 +134,7 @@ opt.winblend = 10
 
 g.mapleader = " "
 g.is_windows = fn.has("win16") or fn.has("win32") or fn.has("win64")
+g.do_filetype_lua = 1
 
 -- keymap {{{
 api.nvim_set_keymap("n", "<Esc>", "<Esc><Cmd>nohlsearch<CR><Esc>", {noremap = true, silent = true})
@@ -254,4 +255,4 @@ cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearc
 cmd [[augroup END]]
 
 opt.background = "dark"
-cmd [[colorscheme material]]
+cmd [[colorscheme deep-space]]
