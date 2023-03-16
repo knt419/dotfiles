@@ -56,11 +56,11 @@ require "packer".startup(
         vim.cmd("luafile " .. theme)
       end
     }
-    use "jamestrew/dimmer.nvim"
+    -- use "jamestrew/dimmer.nvim"
     use "rickhowe/diffchar.vim"
-    use "romainl/vim-qf"
-    use "camspiers/animate.vim"
-    use "camspiers/lens.vim"
+    -- use "romainl/vim-qf"
+    -- use "camspiers/animate.vim"
+    -- use "camspiers/lens.vim"
     use "yamatsum/nvim-cursorline"
     use "nvim-treesitter/nvim-treesitter"
     use "nvim-treesitter/nvim-treesitter-textobjects"
@@ -105,10 +105,10 @@ require "packer".startup(
     use "kana/vim-niceblock"
     use "haya14busa/vim-asterisk"
     use "terryma/vim-expand-region"
-    use {"wincent/ferret", opt = true, cmd = {"Ack"}}
-    use "kana/vim-operator-user"
-    use "kana/vim-operator-replace"
-    use {"tyru/capture.vim", opt = true, cmd = {"Capture"}}
+    -- use {"wincent/ferret", opt = true, cmd = {"Ack"}}
+    -- use "kana/vim-operator-user"
+    -- use "kana/vim-operator-replace"
+    -- use {"tyru/capture.vim", opt = true, cmd = {"Capture"}}
     use "junegunn/vim-easy-align"
 
     -- file/directory
@@ -127,7 +127,7 @@ require "packer".startup(
       requires = {"nvim-lua/plenary.nvim"}
     }
     use "januswel/fencja.vim"
-    use "voldikss/vim-floaterm"
+    -- use "voldikss/vim-floaterm"
 
     -- git
     use "tpope/vim-fugitive"
@@ -166,7 +166,7 @@ require "packer".startup(
 -- plugin variables
 
 
-require "dimmer".setup {}
+-- require "dimmer".setup {}
 
 -- require "bufbar".setup {}
 
