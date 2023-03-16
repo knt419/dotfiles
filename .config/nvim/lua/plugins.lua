@@ -46,7 +46,7 @@ require "packer".startup(
     -- use "ojroques/nvim-bufbar"
     use "kyazdani42/nvim-web-devicons"
     use "norcalli/nvim-colorizer.lua"
-    use {'glepnir/dashboard-nvim'}
+    -- use {'glepnir/dashboard-nvim'}
     use {
       "glepnir/galaxyline.nvim",
       branch = "main",
@@ -342,9 +342,9 @@ if g.is_windows then
   g.FerretJob = 0
 end
 
-local db = require('dashboard')
+-- local db = require('dashboard')
 
-db.custom_header = {
+--[[ db.custom_header = {
   " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
   " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
   " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
@@ -358,7 +358,7 @@ db.custom_center = {
     { icon = " ", desc = "Find File", action = "Telescope find_files" },
     { icon = " ", desc = "Plugin Settings", action = ":e ~/.config/nvim/lua/plugins.lua" },
     { icon = " ", desc = "Init Settings", action = ":e ~/.config/nvim/init.lua" },
-  }
+  } ]]
 
 g.indent_blankline_buftype_exclude = {"help", "terminal"}
 g.indent_blankline_filetype_exclude = {"startify", "dashboard", "alpha"}
