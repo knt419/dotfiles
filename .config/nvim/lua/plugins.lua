@@ -12,7 +12,7 @@ end
 
 g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
 
-require "packer".init { max_jobs = 9 , git = { clone_timeout = 180, }, }
+require "packer".init {max_jobs = 9, git = {clone_timeout = 180}}
 
 require "packer".startup(
   function(use)
@@ -22,7 +22,9 @@ require "packer".startup(
     use "lewis6991/impatient.nvim"
     use {
       "luukvbaal/stabilize.nvim",
-      config = function() require("stabilize").setup() end
+      config = function()
+        require("stabilize").setup()
+      end
     }
     -- use "andymass/vim-matchup"
     use "nathom/filetype.nvim"
@@ -42,12 +44,11 @@ require "packer".startup(
     use {
       "folke/noice.nvim",
       config = function()
-        require("noice").setup({
-        })
+        require("noice").setup({})
       end,
       requires = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
+        "MunifTanjim/nui.nvim",
+        "rcarriga/nvim-notify"
       }
     }
     use "lukas-reineke/indent-blankline.nvim"
@@ -58,7 +59,14 @@ require "packer".startup(
     -- use "ojroques/nvim-bufbar"
     use "kyazdani42/nvim-web-devicons"
     use "norcalli/nvim-colorizer.lua"
-    -- use {'glepnir/dashboard-nvim'}
+    use {
+        "glepnir/dashboard-nvim",
+        event = "VimEnter",
+        config = function()
+            require("dashboard").setup({})
+        end,
+        requires = {'nvim-tree/nvim-web-devicons'}
+    }
     use {
       "glepnir/galaxyline.nvim",
       branch = "main",
@@ -89,7 +97,6 @@ require "packer".startup(
         require"which-key".setup {}
         end
         } ]]
-
     -- text/input manipulation
     use "windwp/nvim-autopairs"
     use "godlygeek/tabular"
@@ -99,7 +106,7 @@ require "packer".startup(
         require("tabout").setup {
           tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
           backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
-          ignore_beginning = false,
+          ignore_beginning = false
         }
       end,
       wants = {"nvim-treesitter"}, -- or require if not used so far
@@ -146,7 +153,7 @@ require "packer".startup(
     use {
       "TimUntersberger/neogit",
       requires = {"nvim-lua/plenary.nvim"}
-      }
+    }
     use "nvim-lua/plenary.nvim"
 
     -- language support
@@ -154,7 +161,8 @@ require "packer".startup(
     use "editorconfig/editorconfig-vim"
 
     -- lsp/completion
-    use "williamboman/nvim-lsp-installer"
+    -- use "williamboman/nvim-lsp-installer"
+    use "williamboman/mason.nvim"
     use "neovim/nvim-lspconfig"
     use "hrsh7th/cmp-nvim-lsp"
     use "hrsh7th/cmp-buffer"
@@ -177,7 +185,6 @@ require "packer".startup(
 
 -- plugin variables
 
-
 -- require "dimmer".setup {}
 
 -- require "bufbar".setup {}
@@ -197,6 +204,8 @@ require "indent_blankline".setup {
   show_current_context = true,
   show_current_context_start = true
 }
+
+require "mason".setup {}
 
 require "nvim-treesitter.configs".setup {
   auto_install = true,
@@ -255,10 +264,12 @@ local lspkind = require "lspkind"
 
 cmp.setup {
   formatting = {
-    format = lspkind.cmp_format({
-      with_text = false,
-      maxwidth = 50,
-    })
+    format = lspkind.cmp_format(
+      {
+        with_text = false,
+        maxwidth = 50
+      }
+    )
   },
   snippet = {
     expand = function(args)
@@ -339,7 +350,6 @@ require "formatter".setup {
   }
 }
 
-
 require "nvim-autopairs".setup {}
 
 require "neogit".setup {
@@ -354,23 +364,23 @@ if g.is_windows then
   g.FerretJob = 0
 end
 
--- local db = require('dashboard')
+--[[ local db = require "dashboard"
 
---[[ db.custom_header = {
-  " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-  " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-  " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-  " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-  " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-  " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
-  }
+db.custom_header = {
+" ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+" ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
+" ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+" ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+" ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+" ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
+}
 
 db.custom_center = {
     { icon = " ", desc = "Frecent Files", action = "Telescope frecency" },
     { icon = " ", desc = "Find File", action = "Telescope find_files" },
     { icon = " ", desc = "Plugin Settings", action = ":e ~/.config/nvim/lua/plugins.lua" },
     { icon = " ", desc = "Init Settings", action = ":e ~/.config/nvim/init.lua" },
-  } ]]
+} ]]
 
 g.indent_blankline_buftype_exclude = {"help", "terminal"}
 g.indent_blankline_filetype_exclude = {"startify", "dashboard", "alpha"}
@@ -380,19 +390,19 @@ g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "m
 g.extradite_showhash = 1
 g.extradite_diff_split = "belowright vertical split"
 
-g.FerretExecutable = "rg,ag"
-g.FerretExecutableArguments = {
-  ag = "-i --vimgrep --hidden",
-  rg = "--vimgrep --no-heading --hidden"
-}
+-- g.FerretExecutable = "rg,ag"
+-- g.FerretExecutableArguments = {
+  -- ag = "-i --vimgrep --hidden",
+  -- rg = "--vimgrep --no-heading --hidden"
+-- }
 
 g.highlightedyank_highlight_duration = 300
 
-g.floaterm_winblend = 40
-g.floaterm_position = "center"
+-- g.floaterm_winblend = 40
+-- g.floaterm_position = "center"
 
-g.capture_open_command = ""
-g.capture_override_buffer = "newbufwin"
+-- g.capture_open_command = ""
+-- g.capture_override_buffer = "newbufwin"
 
 vim.env.VISUAL = "nvr --remote-wait"
 vim.env.PATH = vim.env.PATH .. ":" .. vim.env.HOME .. "/go/bin"
@@ -441,21 +451,21 @@ api.nvim_set_keymap(
 )
 api.nvim_set_keymap("n", "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>", {silent = true})
 api.nvim_set_keymap("n", "<Leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", {silent = true})
-api.nvim_set_keymap("n", "<Leader>a", "<Plug>(FerretAck)", {silent = true})
-api.nvim_set_keymap("n", "<Leader>d", "<Cmd>Dashboard<CR>", {noremap = true, silent = true})
+-- api.nvim_set_keymap("n", "<Leader>a", "<Plug>(FerretAck)", {silent = true})
+-- api.nvim_set_keymap("n", "<Leader>d", "<Cmd>Dashboard<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>df", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent = true})
 api.nvim_set_keymap("n", "<Leader>f", "<Cmd>Telescope frecency<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>g", "<Cmd>Telescope live_grep<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>h", "<cmd>lua vim.lsp.buf.hover()<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader>l", "<Plug>(FerretLack)", {})
-api.nvim_set_keymap("n", "<Leader>b", "<Cmd>CocList buffers<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader>m", "<Cmd>DashboardFindHistory<CR>", {noremap = true, silent = true})
+-- api.nvim_set_keymap("n", "<Leader>l", "<Plug>(FerretLack)", {})
+-- api.nvim_set_keymap("n", "<Leader>b", "<Cmd>CocList buffers<CR>", {noremap = true, silent = true})
+-- api.nvim_set_keymap("n", "<Leader>m", "<Cmd>DashboardFindHistory<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader><Leader>", "<Cmd>Telescope<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader>fh", "<Cmd>DashboardFindHistory<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader>ff", "<Cmd>DashboardFindFile<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader>fa", "<Cmd>DashboardFindWord<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader>fb", "<Cmd>DashboardJumpMark<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader>cn", "<Cmd>DashboardNewFile<CR>", {noremap = true, silent = true})
+-- api.nvim_set_keymap("n", "<Leader>fh", "<Cmd>DashboardFindHistory<CR>", {noremap = true, silent = true})
+-- api.nvim_set_keymap("n", "<Leader>ff", "<Cmd>DashboardFindFile<CR>", {noremap = true, silent = true})
+-- api.nvim_set_keymap("n", "<Leader>fa", "<Cmd>DashboardFindWord<CR>", {noremap = true, silent = true})
+-- api.nvim_set_keymap("n", "<Leader>fb", "<Cmd>DashboardJumpMark<CR>", {noremap = true, silent = true})
+-- api.nvim_set_keymap("n", "<Leader>cn", "<Cmd>DashboardNewFile<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>fm", "<Cmd>Format<CR>", {noremap = true})
 -- api.nvim_set_keymap("n", ";", "<Cmd>FineCmdline<CR>", {noremap = true, silent = true})
 
@@ -484,8 +494,8 @@ _G.my_diffexit_function = function()
 end
 
 cmd [[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
-cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0]]
-cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0]]
+-- cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0]]
+-- cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0]]
 cmd [[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=v:lua.my_icr_function()<CR>]]
 -- cmd [[autocmd MyAutoCmd BufEnter * :Sleuth]]
 cmd [[autocmd MyAutoCmd InsertLeave * silent! pclose!]]
