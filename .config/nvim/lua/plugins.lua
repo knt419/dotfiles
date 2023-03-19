@@ -10,6 +10,15 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   Packer_bootstrap = vim.fn.system({"git", "clone", "https://github.com/wbthomason/packer.nvim", install_path})
 end
 
+g.dashboard_custom_header = table.concat({
+" ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+" ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
+" ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+" ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+" ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+" ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
+}, "\n")
+
 g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
 
 require "packer".init {max_jobs = 9, git = {clone_timeout = 180}}
@@ -26,7 +35,6 @@ require "packer".startup(
         require("stabilize").setup()
       end
     }
-    -- use "andymass/vim-matchup"
     use "nathom/filetype.nvim"
     use "antoinemadec/FixCursorHold.nvim"
 
@@ -37,10 +45,6 @@ require "packer".startup(
     -- editor display
     use "MunifTanjim/nui.nvim"
     use "rcarriga/nvim-notify"
-    --[[ use {
-      "VonHeikemen/fine-cmdline.nvim",
-      requires = "MunifTanjim/nui.nvim"
-      } ]]
     use {
       "folke/noice.nvim",
       config = function()
@@ -56,14 +60,17 @@ require "packer".startup(
       "akinsho/bufferline.nvim",
       requires = "kyazdani42/nvim-web-devicons"
     }
-    -- use "ojroques/nvim-bufbar"
     use "kyazdani42/nvim-web-devicons"
     use "norcalli/nvim-colorizer.lua"
     use {
         "glepnir/dashboard-nvim",
         event = "VimEnter",
         config = function()
-            require("dashboard").setup({})
+            require("dashboard").setup {
+                config = {
+                    header = g.dashboard_custom_header
+                }
+            }
         end,
         requires = {'nvim-tree/nvim-web-devicons'}
     }
@@ -76,28 +83,16 @@ require "packer".startup(
         vim.cmd("luafile " .. theme)
       end
     }
-    -- use "jamestrew/dimmer.nvim"
     use "rickhowe/diffchar.vim"
-    -- use "romainl/vim-qf"
-    -- use "camspiers/animate.vim"
-    -- use "camspiers/lens.vim"
     use "yamatsum/nvim-cursorline"
     use "nvim-treesitter/nvim-treesitter"
     use "nvim-treesitter/nvim-treesitter-textobjects"
-    -- use "vigoux/treesitter-context.nvim"
     use {
       "lewis6991/gitsigns.nvim",
       requires = {
         "nvim-lua/plenary.nvim"
       }
     }
-    --[[ use {
-      "folke/which-key.nvim",
-      config = function()
-        require"which-key".setup {}
-        end
-        } ]]
-    -- text/input manipulation
     use "windwp/nvim-autopairs"
     use "godlygeek/tabular"
     use {
@@ -124,10 +119,6 @@ require "packer".startup(
     use "kana/vim-niceblock"
     use "haya14busa/vim-asterisk"
     use "terryma/vim-expand-region"
-    -- use {"wincent/ferret", opt = true, cmd = {"Ack"}}
-    -- use "kana/vim-operator-user"
-    -- use "kana/vim-operator-replace"
-    -- use {"tyru/capture.vim", opt = true, cmd = {"Capture"}}
     use "junegunn/vim-easy-align"
 
     -- file/directory
@@ -146,7 +137,6 @@ require "packer".startup(
       requires = {"nvim-lua/plenary.nvim"}
     }
     use "januswel/fencja.vim"
-    -- use "voldikss/vim-floaterm"
 
     -- git
     use "tpope/vim-fugitive"
@@ -161,7 +151,6 @@ require "packer".startup(
     use "editorconfig/editorconfig-vim"
 
     -- lsp/completion
-    -- use "williamboman/nvim-lsp-installer"
     use "williamboman/mason.nvim"
     use "neovim/nvim-lspconfig"
     use "hrsh7th/cmp-nvim-lsp"
@@ -184,10 +173,6 @@ require "packer".startup(
 )
 
 -- plugin variables
-
--- require "dimmer".setup {}
-
--- require "bufbar".setup {}
 
 require "bufferline".setup {
   options = {
@@ -364,18 +349,7 @@ if g.is_windows then
   g.FerretJob = 0
 end
 
---[[ local db = require "dashboard"
-
-db.custom_header = {
-" ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-" ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-" ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-" ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-" ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-" ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
-}
-
-db.custom_center = {
+--[[ db.custom_center = {
     { icon = " ", desc = "Frecent Files", action = "Telescope frecency" },
     { icon = " ", desc = "Find File", action = "Telescope find_files" },
     { icon = " ", desc = "Plugin Settings", action = ":e ~/.config/nvim/lua/plugins.lua" },
