@@ -344,39 +344,12 @@ require "neogit".setup {
 
 g.material_style = "darker"
 
-if g.is_windows then
-  g.FerretNvim = 0
-  g.FerretJob = 0
-end
-
---[[ db.custom_center = {
-    { icon = " ", desc = "Frecent Files", action = "Telescope frecency" },
-    { icon = " ", desc = "Find File", action = "Telescope find_files" },
-    { icon = " ", desc = "Plugin Settings", action = ":e ~/.config/nvim/lua/plugins.lua" },
-    { icon = " ", desc = "Init Settings", action = ":e ~/.config/nvim/init.lua" },
-} ]]
-
 g.indent_blankline_buftype_exclude = {"help", "terminal"}
 g.indent_blankline_filetype_exclude = {"startify", "dashboard", "alpha"}
 g.indent_blankline_use_treesitter = true
 g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "markdown"}
 
-g.extradite_showhash = 1
-g.extradite_diff_split = "belowright vertical split"
-
--- g.FerretExecutable = "rg,ag"
--- g.FerretExecutableArguments = {
-  -- ag = "-i --vimgrep --hidden",
-  -- rg = "--vimgrep --no-heading --hidden"
--- }
-
 g.highlightedyank_highlight_duration = 300
-
--- g.floaterm_winblend = 40
--- g.floaterm_position = "center"
-
--- g.capture_open_command = ""
--- g.capture_override_buffer = "newbufwin"
 
 vim.env.VISUAL = "nvr --remote-wait"
 vim.env.PATH = vim.env.PATH .. ":" .. vim.env.HOME .. "/go/bin"
@@ -425,23 +398,13 @@ api.nvim_set_keymap(
 )
 api.nvim_set_keymap("n", "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>", {silent = true})
 api.nvim_set_keymap("n", "<Leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", {silent = true})
--- api.nvim_set_keymap("n", "<Leader>a", "<Plug>(FerretAck)", {silent = true})
--- api.nvim_set_keymap("n", "<Leader>d", "<Cmd>Dashboard<CR>", {noremap = true, silent = true})
+api.nvim_set_keymap("n", "<Leader>d", "<Cmd>Dashboard<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>df", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent = true})
 api.nvim_set_keymap("n", "<Leader>f", "<Cmd>Telescope frecency<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>g", "<Cmd>Telescope live_grep<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>h", "<cmd>lua vim.lsp.buf.hover()<CR>", {noremap = true, silent = true})
--- api.nvim_set_keymap("n", "<Leader>l", "<Plug>(FerretLack)", {})
--- api.nvim_set_keymap("n", "<Leader>b", "<Cmd>CocList buffers<CR>", {noremap = true, silent = true})
--- api.nvim_set_keymap("n", "<Leader>m", "<Cmd>DashboardFindHistory<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader><Leader>", "<Cmd>Telescope<CR>", {noremap = true, silent = true})
--- api.nvim_set_keymap("n", "<Leader>fh", "<Cmd>DashboardFindHistory<CR>", {noremap = true, silent = true})
--- api.nvim_set_keymap("n", "<Leader>ff", "<Cmd>DashboardFindFile<CR>", {noremap = true, silent = true})
--- api.nvim_set_keymap("n", "<Leader>fa", "<Cmd>DashboardFindWord<CR>", {noremap = true, silent = true})
--- api.nvim_set_keymap("n", "<Leader>fb", "<Cmd>DashboardJumpMark<CR>", {noremap = true, silent = true})
--- api.nvim_set_keymap("n", "<Leader>cn", "<Cmd>DashboardNewFile<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>fm", "<Cmd>Format<CR>", {noremap = true})
--- api.nvim_set_keymap("n", ";", "<Cmd>FineCmdline<CR>", {noremap = true, silent = true})
 
 api.nvim_set_keymap("x", "v", "<Plug>(expand_region_expand)", {})
 api.nvim_set_keymap("x", "<C-v>", "<Plug>(expand_region_shrink)", {})
@@ -468,10 +431,7 @@ _G.my_diffexit_function = function()
 end
 
 cmd [[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
--- cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link NonText vimade_0]]
--- cmd [[autocmd MyAutoCmd ColorScheme * :highlight! link SpecialKey vimade_0]]
 cmd [[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=v:lua.my_icr_function()<CR>]]
--- cmd [[autocmd MyAutoCmd BufEnter * :Sleuth]]
 cmd [[autocmd MyAutoCmd InsertLeave * silent! pclose!]]
 cmd [[autocmd MyAutoCmd OptionSet diff if &diff | call v:lua.my_diffenter_function() | endif]]
 cmd [[autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call v:lua.my_diffexit_function() | endif]]

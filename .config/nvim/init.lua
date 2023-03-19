@@ -75,6 +75,7 @@ opt.foldmethod = "marker"
 opt.foldenable = true
 opt.foldlevelstart = 10
 opt.lazyredraw = false
+opt.termguicolors = true
 
 opt.guifont = "HackGen35Nerd Console:h12"
 opt.guifontwide = "HackGen35Nerd Console:h12"
