@@ -5,349 +5,375 @@ local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
 
-local install_path = vim.fn.stdpath("data") .. "/site/pack/packer/start/packer.nvim"
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  Packer_bootstrap = vim.fn.system({"git", "clone", "https://github.com/wbthomason/packer.nvim", install_path})
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+    vim.fn.system(
+        {
+            "git",
+            "clone",
+            "--filter=blob:none",
+            "https://github.com/folke/lazy.nvim.git",
+            "--branch=stable", -- latest stable release
+            lazypath
+        }
+    )
 end
 
-g.dashboard_custom_header = table.concat({
-" ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-" ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-" ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-" ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-" ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-" ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
-}, "\n")
+vim.opt.rtp:prepend(lazypath)
 
 g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
 
-require "packer".init {max_jobs = 9, git = {clone_timeout = 180}}
-
-require "packer".startup(
-  function(use)
-    use "wbthomason/packer.nvim"
-
-    -- performance aimprove
-    use "lewis6991/impatient.nvim"
-    use {
-      "luukvbaal/stabilize.nvim",
-      config = function()
-        require("stabilize").setup()
-      end
-    }
-    use "nathom/filetype.nvim"
-    use "antoinemadec/FixCursorHold.nvim"
-
+plugins = {
+    -- performance improve
+    {
+        "lewis6991/impatient.nvim"
+    },
+    {
+        {
+            "luukvbaal/stabilize.nvim",
+            config = function()
+                require("stabilize").setup()
+            end
+        }
+    },
+    {"nathom/filetype.nvim"},
+    {"antoinemadec/FixCursorHold.nvim"},
     -- colorscheme
-    use "tyrannicaltoucan/vim-deep-space"
-    -- use "marko-cerovac/material.nvim"
-
+    {"tyrannicaltoucan/vim-deep-space"},
+    {"marko-cerovac/material.nvim"},
     -- editor display
-    use "MunifTanjim/nui.nvim"
-    use "rcarriga/nvim-notify"
-    use {
-      "folke/noice.nvim",
-      config = function()
-        require("noice").setup({})
-      end,
-      requires = {
-        "MunifTanjim/nui.nvim",
-        "rcarriga/nvim-notify"
-      }
-    }
-    use "lukas-reineke/indent-blankline.nvim"
-    use {
-      "akinsho/bufferline.nvim",
-      requires = "kyazdani42/nvim-web-devicons"
-    }
-    use "kyazdani42/nvim-web-devicons"
-    use "norcalli/nvim-colorizer.lua"
-    use {
+    {"MunifTanjim/nui.nvim"},
+    {"rcarriga/nvim-notify"},
+    {
+        "folke/noice.nvim",
+        config = function()
+            require("noice").setup({})
+        end,
+        dependencies = {
+            "MunifTanjim/nui.nvim",
+            "rcarriga/nvim-notify"
+        }
+    },
+    {
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require "indent_blankline".setup {
+                show_current_context = true,
+                show_current_context_start = true,
+                buftype_exclude = {"help", "terminal"},
+                filetype_exclude = {"startify", "dashboard", "alpha"},
+                use_treesitter = true
+            }
+        end
+    },
+    {
+        "akinsho/bufferline.nvim",
+        config = function()
+            require "bufferline".setup {
+                options = {
+                    diagnostics = "nvim_lsp"
+                },
+                highlights = {
+                    buffer_selected = {
+                        bold = true
+                    }
+                }
+            }
+        end,
+        dependencies = "nvim-tree/nvim-web-devicons"
+    },
+    {"nvim-tree/nvim-web-devicons"},
+    {"norcalli/nvim-colorizer.lua"},
+    {
         "glepnir/dashboard-nvim",
         event = "VimEnter",
         config = function()
             require("dashboard").setup {
                 config = {
-                    header = g.dashboard_custom_header
+                    header = {
+                        " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+                        " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
+                        " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+                        " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+                        " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+                        " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
+                    }
                 }
             }
         end,
-        requires = {"nvim-tree/nvim-web-devicons"}
-    }
-    use {
-      "glepnir/galaxyline.nvim",
-      branch = "main",
-      requires = {"kyazdani42/nvim-web-devicons", opt = true},
-      config = function()
-        local theme = vim.fn.stdpath("data") .. "/site/pack/packer/start/galaxyline.nvim/example/eviline.lua"
-        vim.cmd("luafile " .. theme)
-      end
-    }
-    use "rickhowe/diffchar.vim"
-    use "yamatsum/nvim-cursorline"
-    use "nvim-treesitter/nvim-treesitter"
-    use "nvim-treesitter/nvim-treesitter-textobjects"
-    use {
-      "lewis6991/gitsigns.nvim",
-      requires = {
-        "nvim-lua/plenary.nvim"
-      }
-    }
-    use "windwp/nvim-autopairs"
-    use "godlygeek/tabular"
-    use {
-      "abecodes/tabout.nvim",
-      config = function()
-        require("tabout").setup {
-          tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
-          backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
-          ignore_beginning = false
+        dependencies = {"nvim-tree/nvim-web-devicons"}
+    },
+    {
+        "glepnir/galaxyline.nvim",
+        branch = "main",
+        dependencies = {"nvim-tree/nvim-web-devicons"},
+        config = function()
+            local theme = vim.fn.stdpath("data") .. "/lazy/galaxyline.nvim/example/eviline.lua"
+            vim.cmd("luafile " .. theme)
+        end
+    },
+    {"rickhowe/diffchar.vim"},
+    {"yamatsum/nvim-cursorline"},
+    {
+        "nvim-treesitter/nvim-treesitter",
+        config = function()
+            require "nvim-treesitter.configs".setup {
+                auto_install = true,
+                highlight = {
+                    enable = true
+                },
+                indent = {
+                    enable = true
+                },
+                matchup = {
+                    enable = true
+                },
+                pairs = {
+                    enable = true,
+                    keymaps = {
+                        goto_partner = "<leader>%",
+                        delete_balanced = "X"
+                    },
+                    delete_balanced = {
+                        only_on_first_char = false,
+                        longest_partner = false
+                    }
+                }
+            }
+        end
+    },
+    {"nvim-treesitter/nvim-treesitter-textobjects"},
+    {
+        "lewis6991/gitsigns.nvim",
+        dependencies = {
+            "nvim-lua/plenary.nvim"
         }
-      end,
-      wants = {"nvim-treesitter"}, -- or require if not used so far
-      after = {"nvim-autopairs"}
-    }
-    use "rhysd/accelerated-jk"
-    use {
-      "ur4ltz/surround.nvim",
-      config = function()
-        require "surround".setup {mappings_style = "sandwich"}
-      end
-    }
-    use "b3nj5m1n/kommentary"
-    use "kana/vim-smartword"
-    use "kana/vim-niceblock"
-    use "haya14busa/vim-asterisk"
-    use "terryma/vim-expand-region"
-    use "junegunn/vim-easy-align"
-
+    },
+    {
+        "windwp/nvim-autopairs",
+        config = function()
+            require "nvim-autopairs".setup {}
+        end
+    },
+    {"godlygeek/tabular"},
+    {
+        "abecodes/tabout.nvim",
+        config = function()
+            require("tabout").setup {
+                tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
+                backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
+                ignore_beginning = false
+            }
+        end
+        --[[ wants = {"nvim-treesitter"}, -- or require if not used so far
+      after = {"nvim-autopairs"} ]]
+    },
+    {"rhysd/accelerated-jk"},
+    {
+        "ur4ltz/surround.nvim",
+        config = function()
+            require "surround".setup {mappings_style = "sandwich"}
+        end
+    },
+    {"b3nj5m1n/kommentary"},
+    {"kana/vim-smartword"},
+    {"kana/vim-niceblock"},
+    {"haya14busa/vim-asterisk"},
+    {"terryma/vim-expand-region"},
+    {"junegunn/vim-easy-align"},
     -- file/directory
-    use "tami5/sqlite.lua"
-    use {
-      "nvim-telescope/telescope-fzf-native.nvim",
-      run = "make"
-    }
-    use "nvim-telescope/telescope-file-browser.nvim"
-    use {
-      "nvim-telescope/telescope-frecency.nvim",
-      requires = {"tami5/sqlite.lua"}
-    }
-    use {
-      "nvim-telescope/telescope.nvim",
-      requires = {"nvim-lua/plenary.nvim"}
-    }
-    use "januswel/fencja.vim"
-
+    {"tami5/sqlite.lua"},
+    {
+        "nvim-telescope/telescope-fzf-native.nvim",
+        build = "make"
+    },
+    {"nvim-telescope/telescope-file-browser.nvim"},
+    {
+        "nvim-telescope/telescope-frecency.nvim",
+        dependencies = {"tami5/sqlite.lua"}
+    },
+    {
+        "nvim-telescope/telescope.nvim",
+        config = function()
+            local telescope = require "telescope"
+            telescope.setup {
+                defaults = {
+                    winblend = 30,
+                    cache_picker = {limit_entries = 100},
+                    preview = {filesize_limit = 5, treesitter = true},
+                    mappings = {i = {["<Esc>"] = require "telescope.actions".close}}
+                },
+                extensions = {
+                    file_browser = {
+                        theme = "ivy",
+                        hidden = true
+                    },
+                    fzf = {
+                        fuzzy = true,
+                        override_generic_sorter = true,
+                        override_file_sorter = true,
+                        case_mode = "smart_case"
+                    }
+                }
+            }
+            telescope.load_extension("fzf")
+            telescope.load_extension("file_browser")
+            telescope.load_extension("frecency")
+        end,
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-fzf-native.nvim",
+            "nvim-telescope/telescope-file-browser.nvim",
+            "nvim-telescope/telescope-frecency.nvim"
+        }
+    },
+    {"januswel/fencja.vim"},
     -- git
-    use "tpope/vim-fugitive"
-    use {
-      "TimUntersberger/neogit",
-      requires = {"nvim-lua/plenary.nvim"}
-    }
-    use "nvim-lua/plenary.nvim"
-
+    {"tpope/vim-fugitive"},
+    {
+        "TimUntersberger/neogit",
+        config = function()
+            require "neogit".setup {
+                disable_insert_on_commit = false,
+                disable_commit_confirmation = true
+            }
+        end,
+        dependencies = {"nvim-lua/plenary.nvim"}
+    },
+    {"nvim-lua/plenary.nvim"},
     -- language support
-    use "mechatroner/rainbow_csv"
-    use "editorconfig/editorconfig-vim"
-
+    {"mechatroner/rainbow_csv"},
+    {"editorconfig/editorconfig-vim"},
     -- lsp/completion
-    use "williamboman/mason.nvim"
-    use "neovim/nvim-lspconfig"
-    use "hrsh7th/cmp-nvim-lsp"
-    use "hrsh7th/cmp-buffer"
-    use "hrsh7th/cmp-path"
-    use "hrsh7th/cmp-cmdline"
-    use "hrsh7th/cmp-vsnip"
-    use "hrsh7th/vim-vsnip"
-    use "hrsh7th/nvim-cmp"
-    use "hrsh7th/cmp-nvim-lua"
-    use "mhartington/formatter.nvim"
-    use "onsails/lspkind-nvim"
-    opt.completeopt = "menu,menuone,longest,preview"
+    {
+        "williamboman/mason.nvim",
+        config = function()
+            require "mason".setup {}
+        end
+    },
+    {"neovim/nvim-lspconfig"},
+    {"hrsh7th/cmp-nvim-lsp"},
+    {"hrsh7th/cmp-buffer"},
+    {"hrsh7th/cmp-path"},
+    {"hrsh7th/cmp-cmdline"},
+    {"hrsh7th/cmp-vsnip"},
+    {"hrsh7th/vim-vsnip"},
+    {
+        "hrsh7th/nvim-cmp",
+        config = function()
+            local cmp = require "cmp"
+            local lspkind = require "lspkind"
 
-    compile_path = vim.fn.stdpath("config") .. "/lua/packer_compiled.lua"
-    if Packer_bootstrap then
-      require "packer".sync()
-    end
-  end
-)
+            require "cmp".setup {
+                formatting = {
+                    format = lspkind.cmp_format(
+                        {
+                            with_text = false,
+                            maxwidth = 50
+                        }
+                    )
+                },
+                snippet = {
+                    expand = function(args)
+                        vim.fn["vsnip#anonymous"](args.body)
+                    end
+                },
+                mapping = {
+                    ["<CR>"] = cmp.mapping.confirm({select = true}),
+                    ["<Tab>"] = cmp.mapping(
+                        function(fallback)
+                            if cmp.visible() then
+                                cmp.select_next_item()
+                            elseif vim.fn["vsnip#available"](1) == 1 then
+                                feedkey("<Plug>(vsnip-expand-or-jump)", "")
+                            else
+                                fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
+                            end
+                        end,
+                        {"i", "s"}
+                    ),
+                    ["<S-Tab>"] = cmp.mapping(
+                        function()
+                            if cmp.visible() then
+                                cmp.select_prev_item()
+                            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+                                feedkey("<Plug>(vsnip-jump-prev)", "")
+                            end
+                        end,
+                        {"i", "s"}
+                    )
+                },
+                sources = cmp.config.sources(
+                    {
+                        {name = "nvim_lsp"},
+                        {name = "nvim_lua"},
+                        {name = "vsnip"}
+                    },
+                    {
+                        {name = "buffer"}
+                    }
+                )
+            }
+
+            cmp.setup.cmdline(
+                "/",
+                {
+                    sources = {
+                        {name = "buffer"}
+                    }
+                }
+            )
+            cmp.setup.cmdline(
+                ":",
+                {
+                    sources = cmp.config.sources(
+                        {
+                            {name = "path"}
+                        },
+                        {
+                            {name = "cmdline"}
+                        }
+                    )
+                }
+            )
+        end,
+        dependencies = {"onsails/lspkind-nvim"}
+    },
+    {"hrsh7th/cmp-nvim-lua"},
+    {
+        "mhartington/formatter.nvim",
+        config = function()
+            require "formatter".setup {
+                filetype = {
+                    lua = {
+                        -- luafmt
+                        function()
+                            return {
+                                exe = "luafmt",
+                                args = {"--indent-count", 4, "--stdin"},
+                                stdin = true
+                            }
+                        end
+                    }
+                }
+            }
+        end
+    },
+    {"onsails/lspkind-nvim"}
+}
+
+require("lazy").setup(plugins)
+
+opt.completeopt = "menu,menuone,longest,preview"
 
 -- plugin variables
 
-require "bufferline".setup {
-  options = {
-    diagnostics = "nvim_lsp"
-  },
-  highlights = {
-    buffer_selected = {
-      bold = true
-    }
-  }
-}
-
-require "indent_blankline".setup {
-  show_current_context = true,
-  show_current_context_start = true
-}
-
-require "mason".setup {}
-
-require "nvim-treesitter.configs".setup {
-  auto_install = true,
-  highlight = {
-    enable = true
-  },
-  indent = {
-    enable = true
-  },
-  matchup = {
-    enable = true
-  },
-  pairs = {
-    enable = true,
-    keymaps = {
-      goto_partner = "<leader>%",
-      delete_balanced = "X"
-    },
-    delete_balanced = {
-      only_on_first_char = false,
-      longest_partner = false
-    }
-  }
-}
-
-require "telescope".setup {
-  defaults = {
-    winblend = 30,
-    cache_picker = {limit_entries = 100},
-    preview = {filesize_limit = 5, treesitter = true},
-    mappings = {i = {["<Esc>"] = require "telescope.actions".close}}
-  },
-  extensions = {
-    file_browser = {
-      theme = "ivy",
-      hidden = true
-    },
-    fzf = {
-      fuzzy = true,
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case"
-    }
-  }
-}
-
-require "telescope".load_extension("fzf")
-require "telescope".load_extension("file_browser")
-require "telescope".load_extension("frecency")
-
 local feedkey = function(key, mode)
-  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
+    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
-
-local cmp = require "cmp"
-local lspkind = require "lspkind"
-
-cmp.setup {
-  formatting = {
-    format = lspkind.cmp_format(
-      {
-        with_text = false,
-        maxwidth = 50
-      }
-    )
-  },
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end
-  },
-  mapping = {
-    ["<CR>"] = cmp.mapping.confirm({select = true}),
-    ["<Tab>"] = cmp.mapping(
-      function(fallback)
-        if cmp.visible() then
-          cmp.select_next_item()
-        elseif vim.fn["vsnip#available"](1) == 1 then
-          feedkey("<Plug>(vsnip-expand-or-jump)", "")
-        else
-          fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-        end
-      end,
-      {"i", "s"}
-    ),
-    ["<S-Tab>"] = cmp.mapping(
-      function()
-        if cmp.visible() then
-          cmp.select_prev_item()
-        elseif vim.fn["vsnip#jumpable"](-1) == 1 then
-          feedkey("<Plug>(vsnip-jump-prev)", "")
-        end
-      end,
-      {"i", "s"}
-    )
-  },
-  sources = cmp.config.sources(
-    {
-      {name = "nvim_lsp"},
-      {name = "nvim_lua"},
-      {name = "vsnip"}
-    },
-    {
-      {name = "buffer"}
-    }
-  )
-}
-
-cmp.setup.cmdline(
-  "/",
-  {
-    sources = {
-      {name = "buffer"}
-    }
-  }
-)
-cmp.setup.cmdline(
-  ":",
-  {
-    sources = cmp.config.sources(
-      {
-        {name = "path"}
-      },
-      {
-        {name = "cmdline"}
-      }
-    )
-  }
-)
-
-require "formatter".setup {
-  filetype = {
-    lua = {
-      -- luafmt
-      function()
-        return {
-          exe = "luafmt",
-          args = {"--indent-count", 2, "--stdin"},
-          stdin = true
-        }
-      end
-    }
-  }
-}
-
-require "nvim-autopairs".setup {}
-
-require "neogit".setup {
-  disable_insert_on_commit = false,
-  disable_commit_confirmation = true
-}
 
 g.material_style = "darker"
 
-g.indent_blankline_buftype_exclude = {"help", "terminal"}
-g.indent_blankline_filetype_exclude = {"startify", "dashboard", "alpha"}
-g.indent_blankline_use_treesitter = true
 g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "markdown"}
 
 g.highlightedyank_highlight_duration = 300
@@ -361,8 +387,8 @@ g.edge_style = "neon"
 g.edge_disable_italic_comment = 1
 
 g.markdown_fenced_languages = {
-  "vim",
-  "help"
+    "vim",
+    "help"
 }
 
 -- plugin keymaps
@@ -386,16 +412,16 @@ api.nvim_set_keymap("n", "<Up>", "<Cmd>Neogit push<CR>", {noremap = true})
 api.nvim_set_keymap("n", "<Down>", "<Cmd>Neogit pull<CR>", {noremap = true})
 api.nvim_set_keymap("n", "<Right>", "<Cmd>Neogit<CR>", {noremap = true})
 api.nvim_set_keymap(
-  "n",
-  "<Left>",
-  "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>",
-  {noremap = true}
+    "n",
+    "<Left>",
+    "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>",
+    {noremap = true}
 )
 api.nvim_set_keymap(
-  "n",
-  "<Leader>e",
-  "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>",
-  {noremap = true, silent = true}
+    "n",
+    "<Leader>e",
+    "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>",
+    {noremap = true, silent = true}
 )
 api.nvim_set_keymap("n", "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>", {silent = true})
 api.nvim_set_keymap("n", "<Leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", {silent = true})
@@ -415,20 +441,20 @@ api.nvim_set_keymap("x", "<CR>", "<Plug>(LiveEasyAlign)", {})
 -- functions
 
 local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 _G.my_icr_function = function()
-  return fn.pumvisible() == 1 and t "<C-y>" or t "<CR>"
+    return fn.pumvisible() == 1 and t "<C-y>" or t "<CR>"
 end
 
 _G.my_diffenter_function = function()
-  cmd [[DisableWhitespace]]
+    cmd [[DisableWhitespace]]
 end
 
 _G.my_diffexit_function = function()
-  cmd [[EnableWhitespace]]
-  cmd [[diffoff]]
+    cmd [[EnableWhitespace]]
+    cmd [[diffoff]]
 end
 
 cmd [[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]

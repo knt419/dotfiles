@@ -10,7 +10,7 @@
 --____________________________________________________________________________\
 --____________________________________________________________________________|
 
-require "impatient"
+--require "impatient"
 
 local api = vim.api
 local cmd = vim.cmd
@@ -249,7 +249,6 @@ cmd [[autocmd MyAutoCmd TermOpen * setlocal nonumber]]
 cmd [[autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif]]
 cmd [[autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline]]
 cmd [[autocmd MyAutoCmd BufEnter * silent! lcd %:p:h]]
-cmd [[autocmd MyAutoCmd BufWritePost plugins.lua PackerCompile]]
 cmd [[augroup highlighted_yank]]
 cmd [[autocmd!]]
 cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}]]
