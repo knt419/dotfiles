@@ -26,15 +26,10 @@ g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g") .
 plugins = {
     -- performance improve
     {
-        "lewis6991/impatient.nvim"
-    },
-    {
-        {
-            "luukvbaal/stabilize.nvim",
-            config = function()
-                require("stabilize").setup()
-            end
-        }
+        "luukvbaal/stabilize.nvim",
+        config = function()
+            require("stabilize").setup()
+        end
     },
     {"nathom/filetype.nvim"},
     {"antoinemadec/FixCursorHold.nvim"},
@@ -241,9 +236,11 @@ plugins = {
         dependencies = {"nvim-lua/plenary.nvim"}
     },
     {"nvim-lua/plenary.nvim"},
+
     -- language support
     {"mechatroner/rainbow_csv"},
     {"editorconfig/editorconfig-vim"},
+
     -- lsp/completion
     {
         "williamboman/mason.nvim",
