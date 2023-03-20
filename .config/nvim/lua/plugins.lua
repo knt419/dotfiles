@@ -72,7 +72,7 @@ require "packer".startup(
                 }
             }
         end,
-        requires = {'nvim-tree/nvim-web-devicons'}
+        requires = {"nvim-tree/nvim-web-devicons"}
     }
     use {
       "glepnir/galaxyline.nvim",
@@ -225,7 +225,8 @@ require "telescope".setup {
   },
   extensions = {
     file_browser = {
-      theme = "ivy"
+      theme = "ivy",
+      hidden = true
     },
     fzf = {
       fuzzy = true,
