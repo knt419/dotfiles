@@ -24,6 +24,7 @@ vim.opt.rtp:prepend(lazypath)
 g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
 
 plugins = {
+
     -- performance improve
     {
         "luukvbaal/stabilize.nvim",
@@ -33,9 +34,14 @@ plugins = {
     },
     {"nathom/filetype.nvim"},
     {"antoinemadec/FixCursorHold.nvim"},
+
     -- colorscheme
     {"tyrannicaltoucan/vim-deep-space"},
-    {"marko-cerovac/material.nvim"},
+    {
+        "marko-cerovac/material.nvim",
+        lazy = true
+    },
+
     -- editor display
     {"MunifTanjim/nui.nvim"},
     {"rcarriga/nvim-notify"},
@@ -96,7 +102,10 @@ plugins = {
                 }
             }
         end,
-        dependencies = {"nvim-tree/nvim-web-devicons"}
+        dependencies = {"nvim-tree/nvim-web-devicons"},
+        keys = {
+            { "<Leader>d", "<Cmd>Dashboard<CR>", noremap = true, silent = true }
+        }
     },
     {
         "glepnir/galaxyline.nvim",
@@ -159,11 +168,16 @@ plugins = {
                 backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
                 ignore_beginning = false
             }
-        end
-        --[[ wants = {"nvim-treesitter"}, -- or require if not used so far
-      after = {"nvim-autopairs"} ]]
+        end,
+        dependencies = {"nvim-treesitter/nvim-treesitter"}
     },
-    {"rhysd/accelerated-jk"},
+    {
+        "rhysd/accelerated-jk",
+        keys = {
+            { "j", "<Plug>(accelerated_jk_gj)" },
+            { "k", "<Plug>(accelerated_jk_gk)" }
+        }
+    },
     {
         "ur4ltz/surround.nvim",
         config = function()
@@ -171,11 +185,39 @@ plugins = {
         end
     },
     {"b3nj5m1n/kommentary"},
-    {"kana/vim-smartword"},
+    {
+        "kana/vim-smartword",
+        keys = {
+            { "w", "<Plug>(smartword-w)" },
+            { "b", "<Plug>(smartword-b)" },
+            { "e", "<Plug>(smartword-e)" },
+            { "ge", "<Plug>(smartword-ge)" }
+        }
+    },
     {"kana/vim-niceblock"},
-    {"haya14busa/vim-asterisk"},
-    {"terryma/vim-expand-region"},
-    {"junegunn/vim-easy-align"},
+    {
+        "haya14busa/vim-asterisk",
+        keys = {
+            { "*", "<Plug>(asterisk-z*)" },
+            { "g*", "<Plug>(asterisk-gz*)" },
+            { "#", "<Plug>(asterisk-#)" },
+            { "g#", "<Plug>(asterisk-g#)" }
+        }
+    },
+    {
+        "terryma/vim-expand-region",
+        keys = {
+            { "v", "<Plug>(expand_region_expand)", mode = "x" },
+            { "<C-v>", "<Plug>(expand_region_shrink)", mode = "x" }
+        }
+    },
+    {
+        "junegunn/vim-easy-align",
+        keys = {
+            { "<CR>", "<Plug>(LiveEasyAlign)", mode = "x" }
+        }
+    },
+
     -- file/directory
     {"tami5/sqlite.lua"},
     {
@@ -220,9 +262,17 @@ plugins = {
             "nvim-telescope/telescope-fzf-native.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
             "nvim-telescope/telescope-frecency.nvim"
+        },
+        keys = {
+            { "<Leader>f", "<Cmd>Telescope frecency<CR>", noremap = true, silent = true },
+            { "<Leader>g", "<Cmd>Telescope live_grep<CR>", noremap = true, silent = true },
+            { "<Leader><Leader>", "<Cmd>Telescope<CR>", noremap = true, silent = true },
+            { "<Left>", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>", noremap = true },
+            { "<Leader>e", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>", noremap = true, silent = true }
         }
     },
     {"januswel/fencja.vim"},
+
     -- git
     {"tpope/vim-fugitive"},
     {
@@ -233,7 +283,12 @@ plugins = {
                 disable_commit_confirmation = true
             }
         end,
-        dependencies = {"nvim-lua/plenary.nvim"}
+        dependencies = {"nvim-lua/plenary.nvim"},
+        keys = {
+            { "<Up>", "<Cmd>Neogit push<CR>", noremap = true },
+            { "<Down>", "<Cmd>Neogit pull<CR>", noremap = true },
+            { "<Right>", "<Cmd>Neogit<CR>", noremap = true }
+        }
     },
     {"nvim-lua/plenary.nvim"},
 
@@ -257,6 +312,7 @@ plugins = {
     {"hrsh7th/vim-vsnip"},
     {
         "hrsh7th/nvim-cmp",
+        event = "InsertEnter",
         config = function()
             local cmp = require "cmp"
             local lspkind = require "lspkind"
@@ -311,7 +367,6 @@ plugins = {
                     }
                 )
             }
-
             cmp.setup.cmdline(
                 "/",
                 {
@@ -354,7 +409,10 @@ plugins = {
                     }
                 }
             }
-        end
+        end,
+        keys = {
+            { "<Leader>fm", "<Cmd>Format<CR>", noremap = true }
+        }
     },
     {"onsails/lspkind-nvim"}
 }
@@ -390,50 +448,11 @@ g.markdown_fenced_languages = {
 
 -- plugin keymaps
 
-api.nvim_set_keymap("", "*", "<Plug>(asterisk-z*)", {})
-api.nvim_set_keymap("", "g*", "<Plug>(asterisk-gz*)", {})
-api.nvim_set_keymap("", "#", "<Plug>(asterisk-#)", {})
-api.nvim_set_keymap("", "g#", "<Plug>(asterisk-g#)", {})
-
-api.nvim_set_keymap("i", "<C-l>", "<C-r>=lexima#insmode#leave(1, '<C-g>U<Right>')<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "j", "<Plug>(accelerated_jk_gj)", {})
-api.nvim_set_keymap("n", "k", "<Plug>(accelerated_jk_gk)", {})
-api.nvim_set_keymap("n", "w", "<Plug>(smartword-w)", {})
-api.nvim_set_keymap("n", "b", "<Plug>(smartword-b)", {})
-api.nvim_set_keymap("n", "e", "<Plug>(smartword-e)", {})
-api.nvim_set_keymap("n", "ge", "<Plug>(smartword-ge)", {})
-api.nvim_set_keymap("n", "s", "<Plug>(operator-replace)", {})
-api.nvim_set_keymap("n", "tt", "<Cmd>FloatermToggle<CR>", {noremap = true, silent = true})
-
-api.nvim_set_keymap("n", "<Up>", "<Cmd>Neogit push<CR>", {noremap = true})
-api.nvim_set_keymap("n", "<Down>", "<Cmd>Neogit pull<CR>", {noremap = true})
-api.nvim_set_keymap("n", "<Right>", "<Cmd>Neogit<CR>", {noremap = true})
-api.nvim_set_keymap(
-    "n",
-    "<Left>",
-    "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>",
-    {noremap = true}
-)
-api.nvim_set_keymap(
-    "n",
-    "<Leader>e",
-    "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>",
-    {noremap = true, silent = true}
-)
 api.nvim_set_keymap("n", "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>", {silent = true})
 api.nvim_set_keymap("n", "<Leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", {silent = true})
-api.nvim_set_keymap("n", "<Leader>d", "<Cmd>Dashboard<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("n", "<Leader>df", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent = true})
-api.nvim_set_keymap("n", "<Leader>f", "<Cmd>Telescope frecency<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader>g", "<Cmd>Telescope live_grep<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader>h", "<cmd>lua vim.lsp.buf.hover()<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader><Leader>", "<Cmd>Telescope<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("n", "<Leader>fm", "<Cmd>Format<CR>", {noremap = true})
-
-api.nvim_set_keymap("x", "v", "<Plug>(expand_region_expand)", {})
-api.nvim_set_keymap("x", "<C-v>", "<Plug>(expand_region_shrink)", {})
+api.nvim_set_keymap("n", "<Leader>h", "<Cmd>lua vim.lsp.buf.hover()<CR>", {noremap = true, silent = true})
 api.nvim_set_keymap("x", "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", {silent = true})
-api.nvim_set_keymap("x", "<CR>", "<Plug>(LiveEasyAlign)", {})
 
 -- functions
 
