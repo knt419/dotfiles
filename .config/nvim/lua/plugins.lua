@@ -4,10 +4,11 @@ local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
+local env = vim.env
 
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-    vim.fn.system(
+    fn.system(
         {
             "git",
             "clone",
@@ -19,11 +20,11 @@ if not vim.loop.fs_stat(lazypath) then
     )
 end
 
-vim.opt.rtp:prepend(lazypath)
+opt.rtp:prepend(lazypath)
 
-g.sqlite_clib_path = vim.fn.substitute(vim.fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
+g.sqlite_clib_path = fn.substitute(fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
 
-plugins = {
+local plugins = {
 
     -- performance improve
     {
@@ -39,7 +40,10 @@ plugins = {
     {"tyrannicaltoucan/vim-deep-space"},
     {
         "marko-cerovac/material.nvim",
-        lazy = true
+        lazy = true,
+        config = function()
+            g.material_style = "darker"
+        end
     },
 
     -- editor display
@@ -112,8 +116,8 @@ plugins = {
         branch = "main",
         dependencies = {"nvim-tree/nvim-web-devicons"},
         config = function()
-            local theme = vim.fn.stdpath("data") .. "/lazy/galaxyline.nvim/example/eviline.lua"
-            vim.cmd("luafile " .. theme)
+            local theme = fn.stdpath("data") .. "/lazy/galaxyline.nvim/example/eviline.lua"
+            cmd("luafile " .. theme)
         end
     },
     {"rickhowe/diffchar.vim"},
@@ -217,6 +221,12 @@ plugins = {
             { "<CR>", "<Plug>(LiveEasyAlign)", mode = "x" }
         }
     },
+    {
+        "ntpeters/vim-better-whitespace",
+        config = function()
+            g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "markdown", "dashboard"}
+        end
+    },
 
     -- file/directory
     {"tami5/sqlite.lua"},
@@ -303,7 +313,21 @@ plugins = {
             require "mason".setup {}
         end
     },
-    {"neovim/nvim-lspconfig"},
+    {
+        "williamboman/mason-lspconfig.nvim",
+        config = function()
+            require "mason-lspconfig".setup()
+        end
+    },
+    {
+        "neovim/nvim-lspconfig",
+        config = function()
+            local lspconfig = require "lspconfig"
+            lspconfig.lua_ls.setup{}
+            lspconfig.sqls.setup{}
+            lspconfig.bashls.setup{}
+        end
+    },
     {"hrsh7th/cmp-nvim-lsp"},
     {"hrsh7th/cmp-buffer"},
     {"hrsh7th/cmp-path"},
@@ -317,6 +341,9 @@ plugins = {
             local cmp = require "cmp"
             local lspkind = require "lspkind"
 
+            local feedkey = function(key, mode)
+                api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), mode, true)
+            end
             require "cmp".setup {
                 formatting = {
                     format = lspkind.cmp_format(
@@ -328,7 +355,7 @@ plugins = {
                 },
                 snippet = {
                     expand = function(args)
-                        vim.fn["vsnip#anonymous"](args.body)
+                        fn["vsnip#anonymous"](args.body)
                     end
                 },
                 mapping = {
@@ -337,7 +364,7 @@ plugins = {
                         function(fallback)
                             if cmp.visible() then
                                 cmp.select_next_item()
-                            elseif vim.fn["vsnip#available"](1) == 1 then
+                            elseif fn["vsnip#available"](1) == 1 then
                                 feedkey("<Plug>(vsnip-expand-or-jump)", "")
                             else
                                 fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
@@ -349,7 +376,7 @@ plugins = {
                         function()
                             if cmp.visible() then
                                 cmp.select_prev_item()
-                            elseif vim.fn["vsnip#jumpable"](-1) == 1 then
+                            elseif fn["vsnip#jumpable"](-1) == 1 then
                                 feedkey("<Plug>(vsnip-jump-prev)", "")
                             end
                         end,
@@ -419,32 +446,11 @@ plugins = {
 
 require("lazy").setup(plugins)
 
-opt.completeopt = "menu,menuone,longest,preview"
-
 -- plugin variables
 
-local feedkey = function(key, mode)
-    vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
-end
 
-g.material_style = "darker"
-
-g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "markdown"}
-
-g.highlightedyank_highlight_duration = 300
-
-vim.env.VISUAL = "nvr --remote-wait"
-vim.env.PATH = vim.env.PATH .. ":" .. vim.env.HOME .. "/go/bin"
-
-g.nefertiti_base_brightness_level = 14
-g.sierra_Sunset = 1
-g.edge_style = "neon"
-g.edge_disable_italic_comment = 1
-
-g.markdown_fenced_languages = {
-    "vim",
-    "help"
-}
+env.VISUAL = "nvr --remote-wait"
+env.PATH = env.PATH .. ":" .. env.HOME .. "/go/bin"
 
 -- plugin keymaps
 
@@ -457,7 +463,7 @@ api.nvim_set_keymap("x", "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", {
 -- functions
 
 local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
+    return api.nvim_replace_termcodes(str, true, true, true)
 end
 
 _G.my_icr_function = function()
