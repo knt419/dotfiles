@@ -66,7 +66,7 @@ local plugins = {
                 show_current_context = true,
                 show_current_context_start = true,
                 buftype_exclude = {"help", "terminal"},
-                filetype_exclude = {"startify", "dashboard", "alpha"},
+                filetype_exclude = {"startify", "dashboard", "alpha", "mason"},
                 use_treesitter = true
             }
         end
@@ -153,6 +153,9 @@ local plugins = {
     {"nvim-treesitter/nvim-treesitter-textobjects"},
     {
         "lewis6991/gitsigns.nvim",
+        config = function ()
+            require "gitsigns".setup {}
+        end,
         dependencies = {
             "nvim-lua/plenary.nvim"
         }
@@ -324,7 +327,7 @@ local plugins = {
         config = function()
             local lspconfig = require "lspconfig"
             lspconfig.lua_ls.setup{}
-            lspconfig.sqls.setup{}
+            lspconfig.sqlls.setup{}
             lspconfig.bashls.setup{}
         end
     },
@@ -444,7 +447,14 @@ local plugins = {
     {"onsails/lspkind-nvim"}
 }
 
-require("lazy").setup(plugins)
+local lazyopt = {
+    concurrency = 8,
+    git = {
+        timeout = 300
+    }
+}
+
+require("lazy").setup(plugins, lazyopt)
 
 -- plugin variables
 
