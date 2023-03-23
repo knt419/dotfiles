@@ -4,7 +4,6 @@ local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
-local env = vim.env
 
 local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -52,7 +51,18 @@ local plugins = {
     {
         "folke/noice.nvim",
         config = function()
-            require("noice").setup({})
+            require("noice").setup({
+                lsp = {
+                    override = {
+                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+                        ["vim.lsp.util.stylize_markdown"] = true,
+                        ["cmp.entry.get_documentation"] = true
+                    }
+                },
+                presets = {
+                    inc_rename = true
+                }
+            })
         end,
         dependencies = {
             "MunifTanjim/nui.nvim",
@@ -102,6 +112,20 @@ local plugins = {
                         " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
                         " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
                         " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
+                    },
+                    shortcut = {
+                        {
+                            desc = 'init.lua',
+                            group = 'Number',
+                            action = ':e ~/.config/nvim/init.lua',
+                            key = 'i'
+                        },
+                        {
+                            desc = 'plugins.lua',
+                            group = 'Number',
+                            action = ':e ~/.config/nvim/lua/plugins.lua',
+                            key = 'p'
+                        }
                     },
                     project = { enable = false }
                 }
@@ -231,6 +255,17 @@ local plugins = {
             g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "markdown", "dashboard"}
         end
     },
+    {
+        "smjonas/inc-rename.nvim",
+        config = function ()
+            require "inc_rename".setup{}
+        end,
+        keys = {
+            { "<Leader>rn", function()
+                                return ":IncRename " .. fn.expand("<cword>")
+                            end, expr = true, silent = true },
+        }
+    },
 
     -- file/directory
     {"tami5/sqlite.lua"},
@@ -331,7 +366,13 @@ local plugins = {
             lspconfig.sqlls.setup{}
             lspconfig.bashls.setup{}
             lspconfig.clangd.setup{}
-        end
+        end,
+        keys = {
+            { "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>", silent = true },
+            { "<Leader>df", "<Cmd>lua vim.lsp.buf.definition()<CR>", silent = true },
+            { "<Leader>h", "<Cmd>lua vim.lsp.buf.hover()<CR>", noremap = true, silent = true },
+            { "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", mode = "x", silent = true }
+        }
     },
     {"hrsh7th/cmp-nvim-lsp"},
     {"hrsh7th/cmp-buffer"},
@@ -457,20 +498,6 @@ local lazyopt = {
 }
 
 require("lazy").setup(plugins, lazyopt)
-
--- plugin variables
-
-
-env.VISUAL = "nvr --remote-wait"
-env.PATH = env.PATH .. ":" .. env.HOME .. "/go/bin"
-
--- plugin keymaps
-
-api.nvim_set_keymap("n", "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>", {silent = true})
-api.nvim_set_keymap("n", "<Leader>rn", "<Cmd>lua vim.lsp.buf.rename()<CR>", {silent = true})
-api.nvim_set_keymap("n", "<Leader>df", "<Cmd>lua vim.lsp.buf.definition()<CR>", {silent = true})
-api.nvim_set_keymap("n", "<Leader>h", "<Cmd>lua vim.lsp.buf.hover()<CR>", {noremap = true, silent = true})
-api.nvim_set_keymap("x", "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", {silent = true})
 
 -- functions
 

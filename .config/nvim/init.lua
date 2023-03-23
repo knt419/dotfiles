@@ -15,12 +15,10 @@ local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
+local env = vim.env
 
 -- reset autocmd
 cmd [[augroup MyAutoCmd]]
-cmd [[autocmd!]]
-cmd [[augroup END]]
-cmd [[augroup MySetUpCmd]]
 cmd [[autocmd!]]
 cmd [[augroup END]]
 
@@ -45,7 +43,7 @@ local disabled_built_ins = {
   "filetype"
 }
 
-for i = 1, 15 do
+for i in pairs(disabled_built_ins) do
   g["loaded_" .. disabled_built_ins[i]] = 1
 end
 
@@ -134,6 +132,9 @@ opt.winblend = 10
 g.mapleader = " "
 g.is_windows = fn.has("win16") or fn.has("win32") or fn.has("win64")
 g.do_filetype_lua = 1
+
+env.VISUAL = "nvr --remote-wait"
+env.PATH = env.PATH .. ":" .. env.HOME .. "/go/bin"
 
 -- keymap {{{
 api.nvim_set_keymap("n", "<Esc>", "<Esc><Cmd>nohlsearch<CR><Esc>", {noremap = true, silent = true})
