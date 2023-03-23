@@ -102,7 +102,8 @@ local plugins = {
                         " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
                         " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
                         " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
-                    }
+                    },
+                    project = { enable = false }
                 }
             }
         end,
@@ -329,6 +330,7 @@ local plugins = {
             lspconfig.lua_ls.setup{}
             lspconfig.sqlls.setup{}
             lspconfig.bashls.setup{}
+            lspconfig.clangd.setup{}
         end
     },
     {"hrsh7th/cmp-nvim-lsp"},
