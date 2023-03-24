@@ -115,14 +115,26 @@ local plugins = {
                     },
                     shortcut = {
                         {
-                            desc = 'init.lua',
-                            group = 'Number',
+                            desc = ' Update',
+                            group = 'column0',
+                            action = 'Lazy update',
+                            key = 'u'
+                        },
+                        {
+                            desc = ' Files',
+                            group = 'column1',
+                            action = 'Telescope find_files theme=ivy',
+                            key = 'f',
+                        },
+                        {
+                            desc = ' init.lua',
+                            group = 'column2',
                             action = ':e ~/.config/nvim/init.lua',
                             key = 'i'
                         },
                         {
-                            desc = 'plugins.lua',
-                            group = 'Number',
+                            desc = ' plugins.lua',
+                            group = 'column3',
                             action = ':e ~/.config/nvim/lua/plugins.lua',
                             key = 'p'
                         }
@@ -287,7 +299,7 @@ local plugins = {
                     winblend = 30,
                     cache_picker = {limit_entries = 100},
                     preview = {filesize_limit = 5, treesitter = true},
-                    mappings = {i = {["<Esc>"] = require "telescope.actions".close}}
+                    mappings = {i = {["<Esc>"] = require "telescope.actions".close}},
                 },
                 extensions = {
                     file_browser = {
@@ -306,6 +318,7 @@ local plugins = {
             telescope.load_extension("file_browser")
             telescope.load_extension("frecency")
         end,
+        lazy = false,
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-fzf-native.nvim",
@@ -313,9 +326,9 @@ local plugins = {
             "nvim-telescope/telescope-frecency.nvim"
         },
         keys = {
-            { "<Leader>f", "<Cmd>Telescope frecency<CR>", noremap = true, silent = true },
-            { "<Leader>g", "<Cmd>Telescope live_grep<CR>", noremap = true, silent = true },
-            { "<Leader><Leader>", "<Cmd>Telescope<CR>", noremap = true, silent = true },
+            { "<Leader>f", "<Cmd>Telescope frecency theme=ivy<CR>", noremap = true, silent = true },
+            { "<Leader>g", "<Cmd>Telescope live_grep theme=ivy<CR>", noremap = true, silent = true },
+            { "<Leader><Leader>", "<Cmd>Telescope builtin theme=ivy<CR>", noremap = true, silent = true },
             { "<Left>", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>", noremap = true },
             { "<Leader>e", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>", noremap = true, silent = true }
         }

@@ -73,8 +73,8 @@ opt.foldlevelstart = 10
 opt.lazyredraw = false
 opt.termguicolors = true
 
-opt.guifont = "HackGen35Nerd Console:h12"
-opt.guifontwide = "HackGen35Nerd Console:h12"
+opt.guifont = "HackGen35 Console NF:h12"
+opt.guifontwide = "HackGen35Nerd Console NF:h12"
 opt.emoji = true
 opt.linespace = 2
 opt.showmatch = false
