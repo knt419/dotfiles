@@ -424,6 +424,10 @@ local plugins = {
                         fn["vsnip#anonymous"](args.body)
                     end
                 },
+                window = {
+                    completion = cmp.config.window.bordered(),
+                    documentation = cmp.config.window.bordered(),
+                },
                 mapping = {
                     ["<CR>"] = cmp.mapping.confirm({select = true}),
                     ["<Tab>"] = cmp.mapping(
