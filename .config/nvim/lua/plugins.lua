@@ -152,7 +152,7 @@ local plugins = {
         end,
         dependencies = {"nvim-tree/nvim-web-devicons"},
         keys = {
-            { "<Leader>d", "<Cmd>Dashboard<CR>", noremap = true, silent = true }
+            { "<Leader>d", "<Cmd>Dashboard<CR>", silent = true }
         }
     },
     {
@@ -333,11 +333,11 @@ local plugins = {
             "nvim-telescope/telescope-frecency.nvim"
         },
         keys = {
-            { "<Leader>f", "<Cmd>Telescope frecency theme=ivy<CR>", noremap = true, silent = true },
-            { "<Leader>g", "<Cmd>Telescope live_grep theme=ivy<CR>", noremap = true, silent = true },
-            { "<Leader><Leader>", "<Cmd>Telescope builtin theme=ivy<CR>", noremap = true, silent = true },
-            { "<Left>", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>", noremap = true },
-            { "<Leader>e", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>", noremap = true, silent = true }
+            { "<Leader>f", "<Cmd>Telescope frecency theme=ivy<CR>", silent = true },
+            { "<Leader>g", "<Cmd>Telescope live_grep theme=ivy<CR>", silent = true },
+            { "<Leader><Leader>", "<Cmd>Telescope builtin theme=ivy<CR>", silent = true },
+            { "<Left>", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>" },
+            { "<Leader>e", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>", silent = true }
         }
     },
     {"januswel/fencja.vim"},
@@ -390,7 +390,7 @@ local plugins = {
         keys = {
             { "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>", silent = true },
             { "<Leader>df", "<Cmd>lua vim.lsp.buf.definition()<CR>", silent = true },
-            { "<Leader>h", "<Cmd>lua vim.lsp.buf.hover()<CR>", noremap = true, silent = true },
+            { "<Leader>h", "<Cmd>lua vim.lsp.buf.hover()<CR>", silent = true },
             { "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", mode = "x", silent = true }
         }
     },
@@ -508,7 +508,7 @@ local plugins = {
             }
         end,
         keys = {
-            { "<Leader>fm", "<Cmd>Format<CR>", noremap = true }
+            { "<Leader>fm", "<Cmd>Format<CR>" }
         }
     },
     {"onsails/lspkind-nvim"}
