@@ -111,7 +111,8 @@ local plugins = {
                         " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
                         " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
                         " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-                        " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝"
+                        " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
+                        ""
                     },
                     shortcut = {
                         {
@@ -121,20 +122,26 @@ local plugins = {
                             key = 'u'
                         },
                         {
-                            desc = ' Files',
+                            desc = ' Files',
                             group = 'column1',
-                            action = 'Telescope find_files theme=ivy',
+                            action = 'Telescope frecency theme=ivy',
                             key = 'f',
                         },
                         {
-                            desc = ' init.lua',
+                            desc = ' Directory',
                             group = 'column2',
+                            action = 'Telescope file_browser theme=ivy',
+                            key = 'd',
+                        },
+                        {
+                            desc = ' init.lua',
+                            group = 'column3',
                             action = ':e ~/.config/nvim/init.lua',
                             key = 'i'
                         },
                         {
                             desc = ' plugins.lua',
-                            group = 'column3',
+                            group = 'column4',
                             action = ':e ~/.config/nvim/lua/plugins.lua',
                             key = 'p'
                         }
@@ -337,7 +344,7 @@ local plugins = {
 
     -- git
     {"tpope/vim-fugitive"},
-    {
+    --[[ {
         "TimUntersberger/neogit",
         config = function()
             require "neogit".setup {
@@ -351,7 +358,7 @@ local plugins = {
             { "<Down>", "<Cmd>Neogit pull<CR>", noremap = true },
             { "<Right>", "<Cmd>Neogit<CR>", noremap = true }
         }
-    },
+    }, ]]
     {"nvim-lua/plenary.nvim"},
 
     -- language support
