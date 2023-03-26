@@ -76,7 +76,7 @@ local plugins = {
                 show_current_context = true,
                 show_current_context_start = true,
                 buftype_exclude = {"help", "terminal"},
-                filetype_exclude = {"startify", "dashboard", "alpha", "mason"},
+                filetype_exclude = {"startify", "dashboard", "alpha", "mason", "lazy"},
                 use_treesitter = true
             }
         end
@@ -363,7 +363,7 @@ local plugins = {
 
     -- language support
     {"mechatroner/rainbow_csv"},
-    {"editorconfig/editorconfig-vim"},
+    -- {"editorconfig/editorconfig-vim"},
 
     -- lsp/completion
     {

@@ -9,6 +9,7 @@
 --       \|__| \|__|\|_______|\|_______|\|__|/       \|__|\|__|     \|__|    \
 --____________________________________________________________________________\
 --____________________________________________________________________________|
+vim.scriptencoding = "utf-8"
 
 local cmd = vim.cmd
 local fn = vim.fn
@@ -26,25 +27,25 @@ cmd [[cd ~]]
 
 -- disable plugins
 local disabled_built_ins = {
-  "gzip",
-  "man",
-  "matchit",
-  "matchparen",
-  "shada_plugin",
-  "tarPlugin",
-  "tar",
-  "zipPlugin",
-  "zip",
-  "netrwPlugin",
-  "2html_plugin",
-  "getscript",
-  "getscriptPlugin",
-  "logipat",
-  "filetype"
+    "gzip",
+    "man",
+    "matchit",
+    "matchparen",
+    "shada_plugin",
+    "tarPlugin",
+    "tar",
+    "zipPlugin",
+    "zip",
+    "netrwPlugin",
+    "2html_plugin",
+    "getscript",
+    "getscriptPlugin",
+    "logipat",
+    "filetype"
 }
 
 for i in pairs(disabled_built_ins) do
-  g["loaded_" .. disabled_built_ins[i]] = 1
+    g["loaded_" .. disabled_built_ins[i]] = 1
 end
 
 -- option
@@ -91,8 +92,8 @@ opt.conceallevel = 0
 opt.clipboard = "unnamedplus"
 opt.startofline = false
 opt.list = true
-opt.listchars = { tab = '» ', trail = '·', eol = '↲', extends = '»', precedes = '«', nbsp = '%' }
-opt.fillchars = { eob = "\u{0020}"}
+opt.listchars = {tab = "» ", trail = "·", eol = "↲", extends = "»", precedes = "«", nbsp = "%"}
+opt.fillchars = {eob = "\u{0020}"}
 opt.virtualedit = "block"
 opt.backspace = {"indent", "eol", "start"}
 opt.whichwrap = "b,s,h,l,<,>,[,]"
@@ -169,7 +170,7 @@ keymap.set("n", "<CR><CR>", "o<Esc>", {silent = true})
 keymap.set("n", "<Leader>q", "<Cmd>bd<CR>", {silent = true})
 keymap.set("n", "<Leader>w", "<Cmd>w<CR><Cmd>bd<CR>", {silent = true})
 keymap.set("n", "<Leader>n", "<Cmd>enew<CR>", {silent = true})
-keymap.set("n", "<Leader><CR>", "<Cmd>lua ReloadConfig()<CR>", {  silent = false })
+keymap.set("n", "<Leader><CR>", "<Cmd>lua ReloadConfig()<CR>", {silent = false})
 keymap.set("n", "<C-n>", "*", {silent = true})
 keymap.set("n", "<C-p>", "#", {silent = true})
 keymap.set("c", "<C-v>", "<C-r>+", {silent = true})
@@ -205,44 +206,44 @@ keymap.set("i", "っ", "<Esc>")
 require "plugins"
 
 local t = function(str)
-  return vim.api.nvim_replace_termcodes(str, true, true, true)
+    return vim.api.nvim_replace_termcodes(str, true, true, true)
 end
 
 _G.my_ntab_function = function()
-  if fn.winnr("$") == 1 then
-    if fn.tabpagenr("$") <= 1 then
-      if fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
-        return t "<Cmd>echo 'no buffer to switch.'<CR>"
-      else
-        return t "<Cmd>bn<CR>"
-      end
+    if fn.winnr("$") == 1 then
+        if fn.tabpagenr("$") <= 1 then
+            if fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
+                return t "<Cmd>echo 'no buffer to switch.'<CR>"
+            else
+                return t "<Cmd>bn<CR>"
+            end
+        else
+            return t "<Cmd>bn<CR>"
+        end
     else
-      return t "<Cmd>bn<CR>"
+        return t "<C-w>w"
     end
-  else
-    return t "<C-w>w"
-  end
 end
 
 _G.my_ntab_r_function = function()
-  if fn.winnr("$") == 1 then
-    if fn.tabpagenr("$") <= 1 then
-      if fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
-        return t "<Cmd>echo 'no buffer to switch.'<CR>"
-      else
-        return t "<Cmd>bp<CR>"
-      end
+    if fn.winnr("$") == 1 then
+        if fn.tabpagenr("$") <= 1 then
+            if fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
+                return t "<Cmd>echo 'no buffer to switch.'<CR>"
+            else
+                return t "<Cmd>bp<CR>"
+            end
+        else
+            return t "<Cmd>bp<CR>"
+        end
     else
-      return t "<Cmd>bp<CR>"
+        return t "<C-w>W"
     end
-  else
-    return t "<C-w>W"
-  end
 end
 
-_G.ReloadConfig = function ()
-    for name,_ in pairs(package.loaded) do
-        if name:match('^user') and not name:match('nvim-tree') then
+_G.ReloadConfig = function()
+    for name, _ in pairs(package.loaded) do
+        if name:match("^user") and not name:match("nvim-tree") then
             package.loaded[name] = nil
         end
     end
@@ -266,4 +267,4 @@ cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearc
 cmd [[augroup END]]
 
 opt.background = "dark"
-cmd [[colorscheme deep-space]]
+cmd.colorscheme("deep-space")
