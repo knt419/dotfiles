@@ -287,6 +287,7 @@ local plugins = {
     },
 
     -- file/directory
+    -- {"aymericbeaumet/vim-symlink"},
     {"tami5/sqlite.lua"},
     {
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -343,22 +344,21 @@ local plugins = {
     {"januswel/fencja.vim"},
 
     -- git
-    {"tpope/vim-fugitive"},
-    --[[ {
-        "TimUntersberger/neogit",
-        config = function()
-            require "neogit".setup {
-                disable_insert_on_commit = false,
-                disable_commit_confirmation = true
-            }
-        end,
-        dependencies = {"nvim-lua/plenary.nvim"},
+    {
+        "tpope/vim-fugitive",
         keys = {
-            { "<Up>", "<Cmd>Neogit push<CR>", noremap = true },
-            { "<Down>", "<Cmd>Neogit pull<CR>", noremap = true },
-            { "<Right>", "<Cmd>Neogit<CR>", noremap = true }
+            { "<Up>", "<Cmd>Git push<CR>" },
+            { "<Down>", "<Cmd>Git pull<CR>" },
+            -- { "<Right>", "<Cmd>Git commit -a<CR>" }
         }
-    }, ]]
+    },
+    {
+        "tanvirtin/vgit.nvim",
+        config = function ()
+            require "vgit".setup {}
+        end,
+        version = "*"
+    },
     {"nvim-lua/plenary.nvim"},
 
     -- language support
@@ -522,6 +522,8 @@ local lazyopt = {
 }
 
 require("lazy").setup(plugins, lazyopt)
+
+vim.keymap.set("n", "<Right>", ":terminal lazygit")
 
 -- functions
 
