@@ -352,12 +352,18 @@ local plugins = {
             -- { "<Right>", "<Cmd>Git commit -a<CR>" }
         }
     },
-    {
+    --[[ {
         "tanvirtin/vgit.nvim",
         config = function ()
             require "vgit".setup {}
         end,
         version = "*"
+    }, ]]
+    {
+        "aspeddro/gitui.nvim",
+        config = function ()
+            require "gitui".setup {}
+        end
     },
     {"nvim-lua/plenary.nvim"},
 
