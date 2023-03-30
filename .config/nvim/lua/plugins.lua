@@ -47,6 +47,7 @@ local plugins = {
 
     -- editor display
     {"MunifTanjim/nui.nvim"},
+    {"unblevable/quick-scope"},
     {"rcarriga/nvim-notify"},
     {
         "folke/noice.nvim",
@@ -152,7 +153,8 @@ local plugins = {
         end,
         dependencies = {"nvim-tree/nvim-web-devicons"},
         keys = {
-            { "<Leader>d", "<Cmd>Dashboard<CR>", silent = true }
+            { "<Leader>d", "<Cmd>Dashboard<CR>", silent = true },
+            { "<Up>", "<Cmd>Dashboard<CR>" },
         }
     },
     {
@@ -194,7 +196,7 @@ local plugins = {
             }
         end
     },
-    {"nvim-treesitter/nvim-treesitter-textobjects"},
+    -- {"nvim-treesitter/nvim-treesitter-textobjects"},
     {
         "lewis6991/gitsigns.nvim",
         config = function ()
@@ -347,7 +349,7 @@ local plugins = {
     {
         "tpope/vim-fugitive",
         keys = {
-            { "<Up>", "<Cmd>Git push<CR>" },
+            -- { "<Up>", "<Cmd>Git push<CR>" },
             { "<Down>", "<Cmd>Git pull<CR>" },
             -- { "<Right>", "<Cmd>Git commit -a<CR>" }
         }
