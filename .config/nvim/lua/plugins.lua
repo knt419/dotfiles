@@ -289,7 +289,7 @@ local plugins = {
     },
 
     -- file/directory
-    -- {"aymericbeaumet/vim-symlink"},
+    {"aymericbeaumet/vim-symlink"},
     {"tami5/sqlite.lua"},
     {
         "nvim-telescope/telescope-fzf-native.nvim",
