@@ -57,13 +57,19 @@ local plugins = {
     {
         "kevinhwang91/nvim-hlslens",
         config = function ()
-            require "scrollbar.handlers.search".setup {}
+            require "scrollbar.handlers.search".setup({
+                override_lens = function () end,
+            })
         end
     },
     {
         "petertriho/nvim-scrollbar",
         config = function ()
-            require "scrollbar".setup {}
+            require "scrollbar".setup {
+                marks = {
+                    Search = { color = 'orange' },
+                }
+            }
         end
     },
     {
