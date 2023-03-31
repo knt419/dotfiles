@@ -48,6 +48,30 @@ local plugins = {
     -- editor display
     {"MunifTanjim/nui.nvim"},
     {"unblevable/quick-scope"},
+    {
+        "nvim-zh/colorful-winsep.nvim",
+        config = function ()
+            require "colorful-winsep".setup {}
+        end
+    },
+    {
+        "kevinhwang91/nvim-hlslens",
+        config = function ()
+            require "scrollbar.handlers.search".setup {}
+        end
+    },
+    {
+        "petertriho/nvim-scrollbar",
+        config = function ()
+            require "scrollbar".setup {}
+        end
+    },
+    {
+        "levouh/tint.nvim",
+        config = function ()
+            require "tint".setup {}
+        end
+    },
     {"rcarriga/nvim-notify"},
     {
         "folke/noice.nvim",
@@ -201,6 +225,7 @@ local plugins = {
         "lewis6991/gitsigns.nvim",
         config = function ()
             require "gitsigns".setup {}
+            require "scrollbar.handlers.gitsigns".setup {}
         end,
         dependencies = {
             "nvim-lua/plenary.nvim"
