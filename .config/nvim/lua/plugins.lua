@@ -38,6 +38,15 @@ local plugins = {
     -- colorscheme
     {"tyrannicaltoucan/vim-deep-space"},
     {
+        "ramojus/mellifluous.nvim",
+        dependencies = { "rktjmp/lush.nvim" },
+        config = function()
+            require"mellifruous".setup({ --[[...]] }) -- optional, see configuration section.
+        end
+    },
+    { "rktjmp/lush.nvim" },
+    {"JoosepAlviste/palenightfall.nvim"},
+    {
         "marko-cerovac/material.nvim",
         lazy = true,
         config = function()
