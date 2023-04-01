@@ -41,7 +41,7 @@ local plugins = {
         "ramojus/mellifluous.nvim",
         dependencies = { "rktjmp/lush.nvim" },
         config = function()
-            require"mellifruous".setup({ --[[...]] }) -- optional, see configuration section.
+            require"mellifluous".setup({ --[[...]] }) -- optional, see configuration section.
         end
     },
     { "rktjmp/lush.nvim" },
