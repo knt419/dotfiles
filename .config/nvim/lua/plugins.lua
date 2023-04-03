@@ -45,13 +45,28 @@ local plugins = {
         end
     },
     { "rktjmp/lush.nvim" },
-    {"JoosepAlviste/palenightfall.nvim"},
     {
         "marko-cerovac/material.nvim",
-        lazy = true,
         config = function()
             g.material_style = "darker"
-        end
+            require "material".setup {
+                contrast = {
+                    floating_windows = true,
+                    non_current_windows = true
+                },
+                plugins = {
+                    "dashboard",
+                    "gitsigns",
+                    "indent-blankline",
+                    "nvim-cmp",
+                    "nvim-web-devicons",
+                    "telescope"
+                }
+            }
+        end,
+        keys = {
+            { "<Leader>m", "<Cmd>lua require'material.functions'.find_style()<CR>", silent = true },
+        }
     },
 
     -- editor display

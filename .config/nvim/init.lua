@@ -210,7 +210,7 @@ local t = function(str)
 end
 
 _G.my_ntab_function = function()
-    if fn.winnr("$") == 1 then
+    if fn.winnr() == 1 then
         if fn.tabpagenr("$") <= 1 then
             if fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
                 return t "<Cmd>echo 'no buffer to switch.'<CR>"
@@ -226,7 +226,7 @@ _G.my_ntab_function = function()
 end
 
 _G.my_ntab_r_function = function()
-    if fn.winnr("$") == 1 then
+    if fn.winnr() == 1 then
         if fn.tabpagenr("$") <= 1 then
             if fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
                 return t "<Cmd>echo 'no buffer to switch.'<CR>"
@@ -267,4 +267,4 @@ cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearc
 cmd [[augroup END]]
 
 opt.background = "dark"
-cmd.colorscheme("deep-space")
+cmd.colorscheme("material")
