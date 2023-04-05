@@ -236,6 +236,14 @@ local plugins = {
                 matchup = {
                     enable = true
                 },
+                --[[ incremental_selection = {
+                    enable = true,
+                    keymaps = {
+                        init_selection = "v",
+                        node_incremental = "v",
+                        node_decremental = "<C-v>",
+                    },
+                }, ]]
                 pairs = {
                     enable = true,
                     keymaps = {
