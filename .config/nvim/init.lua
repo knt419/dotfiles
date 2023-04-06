@@ -187,10 +187,8 @@ keymap.set("n", "<S-Left>", "<C-w><")
 keymap.set("n", "<S-Right>", "<C-w>>")
 keymap.set("n", "<S-Up>", "<C-w>-")
 keymap.set("n", "<S-Down>", "<C-w>+")
--- keymap.set("n", "<Tab>", "<Cmd>bn<CR>")
-keymap.set("n", "<Tab>", "v:lua.my_ntab_function()", {remap = true, expr = true})
--- keymap.set("n", "<S-Tab>", "<Cmd>bp<CR>")
-keymap.set("n", "<S-Tab>", "v:lua.my_ntab_r_function()", {remap = true, expr = true})
+keymap.set("n", "<Tab>", "v:lua.my_ntab_function()", {expr = true})
+keymap.set("n", "<S-Tab>", "v:lua.my_ntab_r_function()", {expr = true})
 keymap.set("n", "<C-Left>", "<C-w>h")
 keymap.set("n", "<C-Right>", "<C-w>l")
 keymap.set("n", "<C-Up>", "<C-w>k")
@@ -207,46 +205,35 @@ keymap.set("i", "っ", "<Esc>")
 
 require "plugins"
 
-local t = function(str)
-    return vim.api.nvim_replace_termcodes(str, true, true, true)
-end
-
 _G.my_ntab_function = function()
-    if fn.winlayout()[0] == "leaf" then
+    if fn.winlayout()[1] == "leaf" then
         if fn.tabpagenr("$") <= 1 then
             if fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
-                return t "<Cmd>echo 'no buffer to switch.'<CR>"
+                return "<Cmd>echo 'no buffer to switch.'<CR>"
             else
-                vim.notify("bn", vim.log.levels.INFO)
-                return t "<Cmd>bn<CR>"
+                return "<Cmd>bn<CR>"
             end
         else
-            vim.notify("bn", vim.log.levels.INFO)
-            return t "<Cmd>bn<CR>"
+            return "<Cmd>bn<CR>"
         end
     else
-        vim.notify("<C-w>w", vim.log.levels.INFO)
-        return t "<C-w>w"
+        return "<C-w>w"
     end
 end
 
 _G.my_ntab_r_function = function()
-    if fn.winlayout()[0] == "leaf" then
+    if fn.winlayout()[1] == "leaf" then
         if fn.tabpagenr("$") <= 1 then
             if fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
-                return t "<Cmd>echo 'no buffer to switch.'<CR>"
+                return "<Cmd>echo 'no buffer to switch.'<CR>"
             else
-                vim.notify("bp", vim.log.levels.INFO)
-                return t "<Cmd>bp<CR>"
+                return "<Cmd>bp<CR>"
             end
         else
-            vim.notify("bp", vim.log.levels.INFO)
-            return t "<Cmd>bp<CR>"
+            return "<Cmd>bp<CR>"
         end
     else
-        vim.notify(fn.winlayout()[0], vim.log.levels.INFO)
-        vim.notify("<C-w>W", vim.log.levels.INFO)
-        return t "<C-w>W"
+        return "<C-w>W"
     end
 end
 
