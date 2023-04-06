@@ -37,6 +37,7 @@ local disabled_built_ins = {
     "zipPlugin",
     "zip",
     "netrwPlugin",
+    "netrw",
     "2html_plugin",
     "getscript",
     "getscriptPlugin",
@@ -74,8 +75,8 @@ opt.foldlevelstart = 10
 opt.lazyredraw = false
 opt.termguicolors = true
 
-opt.guifont = "HackGen35 Console NF:h12"
-opt.guifontwide = "HackGen35Nerd Console NF:h12"
+opt.guifont = "HackGen Console NF:h12"
+opt.guifontwide = "HackGen Console NF:h12"
 opt.emoji = true
 opt.linespace = 2
 opt.showmatch = false
@@ -203,7 +204,7 @@ keymap.set("n", "っd", "dd")
 keymap.set("n", "っy", "yy")
 keymap.set("i", "っ", "<Esc>")
 
-require "plugins"
+require"plugins"
 
 _G.my_ntab_function = function()
     if fn.winlayout()[1] == "leaf" then

@@ -49,7 +49,7 @@ local plugins = {
         "marko-cerovac/material.nvim",
         config = function()
             g.material_style = "darker"
-            require "material".setup {
+            require"material".setup {
                 contrast = {
                     floating_windows = true,
                     non_current_windows = true
@@ -75,13 +75,13 @@ local plugins = {
     {
         "nvim-zh/colorful-winsep.nvim",
         config = function ()
-            require "colorful-winsep".setup {}
+            require"colorful-winsep".setup {}
         end
     },
     {
         "kevinhwang91/nvim-hlslens",
         config = function ()
-            require "scrollbar.handlers.search".setup({
+            require"scrollbar.handlers.search".setup({
                 override_lens = function () end,
             })
         end
@@ -89,7 +89,7 @@ local plugins = {
     {
         "petertriho/nvim-scrollbar",
         config = function ()
-            require "scrollbar".setup {
+            require"scrollbar".setup {
                 marks = {
                     Search = { color = 'orange' },
                 }
@@ -99,7 +99,7 @@ local plugins = {
     {
         "levouh/tint.nvim",
         config = function ()
-            require "tint".setup {}
+            require"tint".setup {}
         end
     },
     {"rcarriga/nvim-notify"},
@@ -127,7 +127,7 @@ local plugins = {
     {
         "lukas-reineke/indent-blankline.nvim",
         config = function()
-            require "indent_blankline".setup {
+            require"indent_blankline".setup {
                 show_current_context = true,
                 show_current_context_start = true,
                 buftype_exclude = {"help", "terminal"},
@@ -139,7 +139,7 @@ local plugins = {
     {
         "akinsho/bufferline.nvim",
         config = function()
-            require "bufferline".setup {
+            require"bufferline".setup {
                 options = {
                     diagnostics = "nvim_lsp"
                 },
@@ -152,7 +152,13 @@ local plugins = {
         end,
         dependencies = "nvim-tree/nvim-web-devicons"
     },
-    {"nvim-tree/nvim-web-devicons"},
+    {
+        "nvim-tree/nvim-web-devicons",
+        config = function ()
+            require"nvim-web-devicons".setup {
+                color_icons = true}
+        end
+    },
     {"norcalli/nvim-colorizer.lua"},
     {
         "glepnir/dashboard-nvim",
@@ -225,7 +231,7 @@ local plugins = {
     {
         "nvim-treesitter/nvim-treesitter",
         config = function()
-            require "nvim-treesitter.configs".setup {
+            require"nvim-treesitter.configs".setup {
                 auto_install = true,
                 highlight = {
                     enable = true
@@ -262,8 +268,8 @@ local plugins = {
     {
         "lewis6991/gitsigns.nvim",
         config = function ()
-            require "gitsigns".setup {}
-            require "scrollbar.handlers.gitsigns".setup {}
+            require"gitsigns".setup {}
+            require"scrollbar.handlers.gitsigns".setup {}
         end,
         dependencies = {
             "nvim-lua/plenary.nvim"
@@ -272,7 +278,7 @@ local plugins = {
     {
         "windwp/nvim-autopairs",
         config = function()
-            require "nvim-autopairs".setup {}
+            require"nvim-autopairs".setup {}
         end
     },
     {"godlygeek/tabular"},
@@ -297,7 +303,7 @@ local plugins = {
     {
         "ur4ltz/surround.nvim",
         config = function()
-            require "surround".setup {mappings_style = "sandwich"}
+            require"surround".setup {mappings_style = "sandwich"}
         end
     },
     {"b3nj5m1n/kommentary"},
@@ -342,7 +348,7 @@ local plugins = {
     {
         "smjonas/inc-rename.nvim",
         config = function ()
-            require "inc_rename".setup{}
+            require"inc_rename".setup{}
         end,
         keys = {
             { "<Leader>rn", function()
@@ -366,13 +372,13 @@ local plugins = {
     {
         "nvim-telescope/telescope.nvim",
         config = function()
-            local telescope = require "telescope"
+            local telescope = require"telescope"
             telescope.setup {
                 defaults = {
                     winblend = 30,
                     cache_picker = {limit_entries = 100},
                     preview = {filesize_limit = 5, treesitter = true},
-                    mappings = {i = {["<Esc>"] = require "telescope.actions".close}},
+                    mappings = {i = {["<Esc>"] = require"telescope.actions".close}},
                 },
                 extensions = {
                     file_browser = {
@@ -439,19 +445,19 @@ local plugins = {
     {
         "williamboman/mason.nvim",
         config = function()
-            require "mason".setup {}
+            require"mason".setup {}
         end
     },
     {
         "williamboman/mason-lspconfig.nvim",
         config = function()
-            require "mason-lspconfig".setup()
+            require"mason-lspconfig".setup()
         end
     },
     {
         "neovim/nvim-lspconfig",
         config = function()
-            local lspconfig = require "lspconfig"
+            local lspconfig = require"lspconfig"
             lspconfig.lua_ls.setup{}
             lspconfig.sqlls.setup{}
             lspconfig.bashls.setup{}
@@ -474,13 +480,13 @@ local plugins = {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         config = function()
-            local cmp = require "cmp"
-            local lspkind = require "lspkind"
+            local cmp = require"cmp"
+            local lspkind = require"lspkind"
 
             local feedkey = function(key, mode)
                 api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), mode, true)
             end
-            require "cmp".setup {
+            require"cmp".setup {
                 formatting = {
                     format = lspkind.cmp_format(
                         {
@@ -562,7 +568,7 @@ local plugins = {
     {
         "mhartington/formatter.nvim",
         config = function()
-            require "formatter".setup {
+            require"formatter".setup {
                 filetype = {
                     lua = {
                         -- luafmt
