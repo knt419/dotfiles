@@ -38,13 +38,15 @@ local plugins = {
     -- colorscheme
     {"tyrannicaltoucan/vim-deep-space"},
     {
-        "ramojus/mellifluous.nvim",
-        dependencies = { "rktjmp/lush.nvim" },
-        config = function()
-            require"mellifluous".setup({ --[[...]] }) -- optional, see configuration section.
+        "rebelot/kanagawa.nvim",
+        config = function ()
+            require"kanagawa".setup{
+                commentStyle = { italic = false },
+                keywordStyle = { italic = false },
+                dimInactive = true
+            }
         end
     },
-    { "rktjmp/lush.nvim" },
     {
         "marko-cerovac/material.nvim",
         config = function()
@@ -242,14 +244,6 @@ local plugins = {
                 matchup = {
                     enable = true
                 },
-                --[[ incremental_selection = {
-                    enable = true,
-                    keymaps = {
-                        init_selection = "v",
-                        node_incremental = "v",
-                        node_decremental = "<C-v>",
-                    },
-                }, ]]
                 pairs = {
                     enable = true,
                     keymaps = {
@@ -282,7 +276,7 @@ local plugins = {
         end
     },
     {"godlygeek/tabular"},
-    {
+    --[[ {
         "abecodes/tabout.nvim",
         config = function()
             require("tabout").setup {
@@ -292,6 +286,12 @@ local plugins = {
             }
         end,
         dependencies = {"nvim-treesitter/nvim-treesitter"}
+    }, ]]
+    {
+        "lilibyte/tabhula.nvim",
+        config = function ()
+            require"tabhula".setup{}
+        end
     },
     {
         "rhysd/accelerated-jk",
@@ -418,9 +418,7 @@ local plugins = {
     {
         "tpope/vim-fugitive",
         keys = {
-            -- { "<Up>", "<Cmd>Git push<CR>" },
             { "<Down>", "<Cmd>Git pull<CR>" },
-            -- { "<Right>", "<Cmd>Git commit -a<CR>" }
         }
     },
     {
@@ -439,7 +437,6 @@ local plugins = {
 
     -- language support
     {"mechatroner/rainbow_csv"},
-    -- {"editorconfig/editorconfig-vim"},
 
     -- lsp/completion
     {
@@ -486,12 +483,6 @@ local plugins = {
             local cmp = require"cmp"
             local lspkind = require"lspkind"
 
-            local has_words_before = function()
-                unpack = unpack or table.unpack
-                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-            end
-
             local feedkey = function(key, mode)
                 api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), mode, true)
             end
@@ -521,8 +512,6 @@ local plugins = {
                                 cmp.select_next_item()
                             elseif fn["vsnip#available"](1) == 1 then
                                 feedkey("<Plug>(vsnip-expand-or-jump)", "")
-                            elseif has_words_before() then
-                                cmp.complete()
                             else
                                 fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
                             end
@@ -612,14 +601,6 @@ require("lazy").setup(plugins, lazyopt)
 
 -- functions
 
-local t = function(str)
-    return api.nvim_replace_termcodes(str, true, true, true)
-end
-
-_G.my_icr_function = function()
-    return fn.pumvisible() == 1 and t "<C-y>" or t "<CR>"
-end
-
 _G.my_diffenter_function = function()
     cmd [[DisableWhitespace]]
 end
@@ -629,8 +610,6 @@ _G.my_diffexit_function = function()
     cmd [[diffoff]]
 end
 
-cmd [[autocmd MyAutoCmd ColorScheme * :highlight Comment gui=none]]
-cmd [[autocmd MyAutoCmd InsertEnter * inoremap <silent> <CR> <C-r>=v:lua.my_icr_function()<CR>]]
 cmd [[autocmd MyAutoCmd InsertLeave * silent! pclose!]]
 cmd [[autocmd MyAutoCmd OptionSet diff if &diff | call v:lua.my_diffenter_function() | endif]]
 cmd [[autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call v:lua.my_diffexit_function() | endif]]
