@@ -359,7 +359,19 @@ local plugins = {
 
     -- file/directory
     {"aymericbeaumet/vim-symlink"},
+    --[[ {
+        "notjedi/nvim-rooter.lua",
+        config = function ()
+            require"nvim-rooter".setup{}
+        end
+    }, ]]
     {"tami5/sqlite.lua"},
+    {
+        "ahmedkhalf/project.nvim",
+        config = function ()
+            require"project_nvim".setup{}
+        end
+    },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make"
@@ -390,12 +402,16 @@ local plugins = {
                         override_generic_sorter = true,
                         override_file_sorter = true,
                         case_mode = "smart_case"
+                    },
+                    project = {
+                        hidden_files = true
                     }
                 }
             }
             telescope.load_extension("fzf")
             telescope.load_extension("file_browser")
             telescope.load_extension("frecency")
+            telescope.load_extension("projects")
         end,
         lazy = false,
         dependencies = {
@@ -455,9 +471,19 @@ local plugins = {
         "neovim/nvim-lspconfig",
         config = function()
             local lspconfig = require"lspconfig"
-		local capabilities = require"cmp_nvim_lsp".default_capabilities()
+            local capabilities = require"cmp_nvim_lsp".default_capabilities()
 
-            lspconfig.lua_ls.setup{ capabilities = capabilities }
+            lspconfig.lua_ls.setup{
+                root_dir = lspconfig.util.root_pattern('.git'),
+                capabilities = capabilities,
+                settings = {
+                    Lua = {
+                        diagnostics = {
+                            globals = {'vim'}
+                        }
+                    }
+                }
+            }
             lspconfig.sqlls.setup{ capabilities = capabilities }
             lspconfig.bashls.setup{ capabilities = capabilities }
             lspconfig.clangd.setup{ capabilities = capabilities }
