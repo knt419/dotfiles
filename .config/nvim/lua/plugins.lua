@@ -471,10 +471,11 @@ local plugins = {
         "neovim/nvim-lspconfig",
         config = function()
             local lspconfig = require"lspconfig"
+            local util = require"lspconfig/util"
             local capabilities = require"cmp_nvim_lsp".default_capabilities()
 
             lspconfig.lua_ls.setup{
-                root_dir = lspconfig.util.root_pattern('.git'),
+                root_dir =  util.find_git_ancestor,
                 capabilities = capabilities,
                 settings = {
                     Lua = {
