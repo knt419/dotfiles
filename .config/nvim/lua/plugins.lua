@@ -276,17 +276,6 @@ local plugins = {
         end
     },
     {"godlygeek/tabular"},
-    --[[ {
-        "abecodes/tabout.nvim",
-        config = function()
-            require("tabout").setup {
-                tabkey = "<Tab>", -- key to trigger tabout, set to an empty string to disable
-                backwards_tabkey = "<S-Tab>", -- key to trigger backwards tabout, set to an empty string to disable
-                ignore_beginning = false
-            }
-        end,
-        dependencies = {"nvim-treesitter/nvim-treesitter"}
-    }, ]]
     {
         "lilibyte/tabhula.nvim",
         config = function ()
@@ -359,12 +348,6 @@ local plugins = {
 
     -- file/directory
     {"aymericbeaumet/vim-symlink"},
-    --[[ {
-        "notjedi/nvim-rooter.lua",
-        config = function ()
-            require"nvim-rooter".setup{}
-        end
-    }, ]]
     {"tami5/sqlite.lua"},
     {
         "ahmedkhalf/project.nvim",
@@ -442,7 +425,7 @@ local plugins = {
         config = function ()
             g.lazygit_floating_window_winblend = 0
             g.lazygit_floating_window_scaling_factor = 0.9
-            g.lazygit_floating_window_corner_chars = {"╭", "╮", "╰", "╯" }
+            g.lazygit_floating_window_corner_chars = {'╭', '╮', '╰', '╯' }
             g.lazygit_floating_window_use_plenary = 0
         end,
         keys = {
@@ -452,7 +435,13 @@ local plugins = {
     {"nvim-lua/plenary.nvim"},
 
     -- language support
-    {"mechatroner/rainbow_csv"},
+    -- {"mechatroner/rainbow_csv"},
+    {
+        "Decodetalkers/csv-tools.lua",
+        config = function ()
+            require"csvtools".setup {}
+        end
+    },
 
     -- lsp/completion
     {
