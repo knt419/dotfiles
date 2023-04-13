@@ -75,8 +75,8 @@ opt.foldlevelstart = 10
 opt.lazyredraw = false
 opt.termguicolors = true
 
-opt.guifont = "HackGen Console NF:h12"
-opt.guifontwide = "HackGen Console NF:h12"
+opt.guifont = "HackGen Console NF:h13"
+opt.guifontwide = "HackGen Console NF:h13"
 opt.emoji = true
 opt.linespace = 2
 opt.showmatch = false
@@ -89,6 +89,7 @@ opt.smartindent = true
 opt.autoindent = true
 opt.complete = {".", "w", "b"}
 opt.conceallevel = 0
+opt.helplang = "ja,en"
 
 opt.clipboard = "unnamedplus"
 opt.startofline = false
@@ -264,4 +265,4 @@ cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearc
 cmd [[augroup END]]
 
 opt.background = "dark"
-cmd.colorscheme("kanagawa")
+cmd.colorscheme("edge")

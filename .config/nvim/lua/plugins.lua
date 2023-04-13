@@ -70,6 +70,15 @@ local plugins = {
             { "<Leader>m", "<Cmd>lua require'material.functions'.find_style()<CR>", silent = true },
         }
     },
+    {
+        "sainnhe/edge",
+        config = function ()
+            g.edge_style = 'aura'
+            g.edge_disable_italic_comment = 1
+            g.edge_transparent_background = 0
+            g.edge_dim_inactive_windows = 1
+        end
+    },
 
     -- editor display
     {"MunifTanjim/nui.nvim"},
