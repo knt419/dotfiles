@@ -79,6 +79,7 @@ local plugins = {
             g.edge_dim_inactive_windows = 1
         end
     },
+    {"alexeyneu/blue-moon"},
 
     -- editor display
     {"MunifTanjim/nui.nvim"},
