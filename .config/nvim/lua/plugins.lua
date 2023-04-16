@@ -366,6 +366,17 @@ local plugins = {
         end
     },
     {
+        "jemag/telescope-diff.nvim",
+        keys = {
+            { "<Leader>di", function ()
+                                require"telescope".extensions.diff.diff_files({ hidden = true})
+                            end },
+            { "<Leader>dc", function ()
+                                require"telescope".extensions.diff.diff_current({ hidden = true})
+                            end }
+        }
+    },
+    {
         "nvim-telescope/telescope-fzf-native.nvim",
         build = "make"
     },
@@ -405,6 +416,7 @@ local plugins = {
             telescope.load_extension("file_browser")
             telescope.load_extension("frecency")
             telescope.load_extension("projects")
+            telescope.load_extension("diff")
         end,
         lazy = false,
         dependencies = {
