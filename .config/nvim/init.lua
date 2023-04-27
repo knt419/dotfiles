@@ -265,4 +265,4 @@ cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearc
 cmd [[augroup END]]
 
 opt.background = "dark"
-cmd.colorscheme("blue-moon-night")
+cmd.colorscheme("edge")
