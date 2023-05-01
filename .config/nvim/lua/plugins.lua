@@ -36,9 +36,13 @@ local plugins = {
     {"antoinemadec/FixCursorHold.nvim"},
 
     -- colorscheme
-    {"tyrannicaltoucan/vim-deep-space"},
+    {
+        "tyrannicaltoucan/vim-deep-space",
+        lazy = true
+    },
     {
         "rebelot/kanagawa.nvim",
+        lazy = true,
         config = function ()
             require"kanagawa".setup{
                 commentStyle = { italic = false },
@@ -49,6 +53,7 @@ local plugins = {
     },
     {
         "marko-cerovac/material.nvim",
+        lazy = true,
         config = function()
             g.material_style = "darker"
             require"material".setup {
@@ -72,6 +77,7 @@ local plugins = {
     },
     {
         "sainnhe/edge",
+        lazy = true,
         config = function ()
             g.edge_style = 'aura'
             g.edge_disable_italic_comment = 1
@@ -79,11 +85,17 @@ local plugins = {
             g.edge_dim_inactive_windows = 1
         end
     },
-    {"alexeyneu/blue-moon"},
+    {
+        "alexeyneu/blue-moon",
+        lazy = true
+    },
 
     -- editor display
     {"MunifTanjim/nui.nvim"},
-    {"unblevable/quick-scope"},
+    {
+        "unblevable/quick-scope",
+        event = "BufEnter"
+    },
     {
         "nvim-zh/colorful-winsep.nvim",
         config = function ()
@@ -92,6 +104,7 @@ local plugins = {
     },
     {
         "kevinhwang91/nvim-hlslens",
+        event = "BufNewFile, BufRead",
         config = function ()
             require"scrollbar.handlers.search".setup({
                 override_lens = function () end,
@@ -171,7 +184,10 @@ local plugins = {
                 color_icons = true}
         end
     },
-    {"norcalli/nvim-colorizer.lua"},
+    {
+        "norcalli/nvim-colorizer.lua",
+        event = "BufNewFile, BufRead"
+    },
     {
         "glepnir/dashboard-nvim",
         event = "VimEnter",
@@ -229,7 +245,7 @@ local plugins = {
             { "<Up>", "<Cmd>Dashboard<CR>" },
         }
     },
-    {
+    --[[ {
         "glepnir/galaxyline.nvim",
         branch = "main",
         dependencies = {"nvim-tree/nvim-web-devicons"},
@@ -237,8 +253,21 @@ local plugins = {
             local theme = fn.stdpath("data") .. "/lazy/galaxyline.nvim/example/eviline.lua"
             cmd("luafile " .. theme)
         end
+    }, ]]
+    {
+        "nvimdev/whiskyline.nvim",
+        dependencies = {"nvim-tree/nvim-web-devicons"},
+        config = function()
+            require"whiskyline".setup {
+                bg = '#3B3E48'
+                -- bg = '#363944'
+            }
+        end
     },
-    {"rickhowe/diffchar.vim"},
+    {
+        "rickhowe/diffchar.vim",
+        event = "BufNewFile, BufRead",
+    },
     {"yamatsum/nvim-cursorline"},
     {
         "nvim-treesitter/nvim-treesitter",
@@ -271,6 +300,7 @@ local plugins = {
     -- {"nvim-treesitter/nvim-treesitter-textobjects"},
     {
         "lewis6991/gitsigns.nvim",
+        event = "BufNewFile, BufRead",
         config = function ()
             require"gitsigns".setup {}
             require"scrollbar.handlers.gitsigns".setup {}
@@ -281,13 +311,18 @@ local plugins = {
     },
     {
         "windwp/nvim-autopairs",
+        event = "InsertEnter",
         config = function()
             require"nvim-autopairs".setup {}
         end
     },
-    {"godlygeek/tabular"},
+    {
+        "godlygeek/tabular",
+        cmd = "Tabularize"
+    },
     {
         "lilibyte/tabhula.nvim",
+        event = "InsertEnter",
         config = function ()
             require"tabhula".setup{}
         end
@@ -308,6 +343,7 @@ local plugins = {
     {"b3nj5m1n/kommentary"},
     {
         "kana/vim-smartword",
+        event = "BufNewFile, BufRead",
         keys = {
             { "w", "<Plug>(smartword-w)" },
             { "b", "<Plug>(smartword-b)" },
@@ -318,6 +354,7 @@ local plugins = {
     {"kana/vim-niceblock"},
     {
         "haya14busa/vim-asterisk",
+        event = "BufNewFile, BufRead",
         keys = {
             { "*", "<Plug>(asterisk-z*)" },
             { "g*", "<Plug>(asterisk-gz*)" },
@@ -327,6 +364,7 @@ local plugins = {
     },
     {
         "terryma/vim-expand-region",
+        event = "BufNewFile, BufRead",
         keys = {
             { "v", "<Plug>(expand_region_expand)", mode = "x" },
             { "<C-v>", "<Plug>(expand_region_shrink)", mode = "x" }
@@ -334,18 +372,21 @@ local plugins = {
     },
     {
         "junegunn/vim-easy-align",
+        event = "BufNewFile, BufRead",
         keys = {
             { "<CR>", "<Plug>(LiveEasyAlign)", mode = "x" }
         }
     },
     {
         "ntpeters/vim-better-whitespace",
+        event = "BufNewFile, BufRead",
         config = function()
             g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "markdown", "dashboard"}
         end
     },
     {
         "smjonas/inc-rename.nvim",
+        event = "BufNewFile, BufRead",
         config = function ()
             require"inc_rename".setup{}
         end,
@@ -387,6 +428,7 @@ local plugins = {
     },
     {
         "nvim-telescope/telescope.nvim",
+        cmd = "Telescope",
         config = function()
             local telescope = require"telescope"
             telescope.setup {
@@ -438,6 +480,7 @@ local plugins = {
     -- git
     {
         "tpope/vim-fugitive",
+        cmd = "Git",
         keys = {
             { "<Down>", "<Cmd>Git pull<CR>" },
         }
@@ -457,9 +500,9 @@ local plugins = {
     {"nvim-lua/plenary.nvim"},
 
     -- language support
-    -- {"mechatroner/rainbow_csv"},
     {
         "Decodetalkers/csv-tools.lua",
+        ft = "csv",
         config = function ()
             require"csvtools".setup {}
         end
@@ -468,12 +511,14 @@ local plugins = {
     -- lsp/completion
     {
         "williamboman/mason.nvim",
+        cmd = "Mason",
         config = function()
             require"mason".setup {}
         end
     },
     {
         "williamboman/mason-lspconfig.nvim",
+        cmd = "Mason",
         config = function()
             require"mason-lspconfig".setup()
         end
@@ -506,7 +551,7 @@ local plugins = {
             { "<Leader>h", "<Cmd>lua vim.lsp.buf.hover()<CR>", silent = true },
             { "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", mode = "x", silent = true }
         },
-	  dependencies = {"hrsh7th/cmp-nvim-lsp"}
+        dependencies = {"hrsh7th/cmp-nvim-lsp"}
     },
     {"hrsh7th/cmp-nvim-lsp"},
     {"hrsh7th/cmp-buffer"},
@@ -605,6 +650,7 @@ local plugins = {
     {"hrsh7th/cmp-nvim-lua"},
     {
         "mhartington/formatter.nvim",
+        cmd = "Format",
         config = function()
             require"formatter".setup {
                 filetype = {

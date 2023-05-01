@@ -91,7 +91,7 @@ opt.complete = {".", "w", "b"}
 opt.conceallevel = 0
 opt.helplang = "ja,en"
 
-opt.clipboard = "unnamedplus"
+opt.clipboard:append{'unnamedplus'}
 opt.startofline = false
 opt.list = true
 opt.listchars = {tab = "» ", trail = "·", eol = "↲", extends = "»", precedes = "«", nbsp = "%"}
