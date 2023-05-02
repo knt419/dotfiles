@@ -98,6 +98,7 @@ local plugins = {
     },
     {
         "nvim-zh/colorful-winsep.nvim",
+        event = "BufEnter",
         config = function ()
             require"colorful-winsep".setup {}
         end
@@ -123,6 +124,7 @@ local plugins = {
     },
     {
         "levouh/tint.nvim",
+        event = "BufEnter",
         config = function ()
             require"tint".setup {}
         end
@@ -130,6 +132,7 @@ local plugins = {
     {"rcarriga/nvim-notify"},
     {
         "folke/noice.nvim",
+        event = "BufEnter",
         config = function()
             require("noice").setup({
                 lsp = {
@@ -151,6 +154,7 @@ local plugins = {
     },
     {
         "lukas-reineke/indent-blankline.nvim",
+        event = "BufEnter",
         config = function()
             require"indent_blankline".setup {
                 show_current_context = true,
@@ -268,9 +272,13 @@ local plugins = {
         "rickhowe/diffchar.vim",
         event = "BufNewFile, BufRead",
     },
-    {"yamatsum/nvim-cursorline"},
+    {
+        "yamatsum/nvim-cursorline",
+        event = "BufEnter",
+    },
     {
         "nvim-treesitter/nvim-treesitter",
+        event = "BufEnter",
         config = function()
             require"nvim-treesitter.configs".setup {
                 auto_install = true,
@@ -329,6 +337,7 @@ local plugins = {
     },
     {
         "rhysd/accelerated-jk",
+        event = "BufEnter",
         keys = {
             { "j", "<Plug>(accelerated_jk_gj)" },
             { "k", "<Plug>(accelerated_jk_gk)" }
@@ -336,11 +345,15 @@ local plugins = {
     },
     {
         "ur4ltz/surround.nvim",
+        event = "BufEnter",
         config = function()
             require"surround".setup {mappings_style = "sandwich"}
         end
     },
-    {"b3nj5m1n/kommentary"},
+    {
+        "b3nj5m1n/kommentary",
+        event = "BufEnter"
+    },
     {
         "kana/vim-smartword",
         event = "BufNewFile, BufRead",
@@ -351,7 +364,10 @@ local plugins = {
             { "ge", "<Plug>(smartword-ge)" }
         }
     },
-    {"kana/vim-niceblock"},
+    {
+        "kana/vim-niceblock",
+        event = "BufNewFile, BufRead",
+    },
     {
         "haya14busa/vim-asterisk",
         event = "BufNewFile, BufRead",
@@ -398,16 +414,21 @@ local plugins = {
     },
 
     -- file/directory
-    {"aymericbeaumet/vim-symlink"},
+    {
+        "aymericbeaumet/vim-symlink",
+        event = "BufReadPre",
+    },
     {"tami5/sqlite.lua"},
     {
         "ahmedkhalf/project.nvim",
+        event = "BufEnter",
         config = function ()
             require"project_nvim".setup{}
         end
     },
     {
         "jemag/telescope-diff.nvim",
+        event = "BufEnter",
         keys = {
             { "<Leader>di", function ()
                                 require"telescope".extensions.diff.diff_files({ hidden = true})
@@ -419,11 +440,16 @@ local plugins = {
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
+        cmd = "Telescope",
         build = "make"
     },
-    {"nvim-telescope/telescope-file-browser.nvim"},
+    {
+        "nvim-telescope/telescope-file-browser.nvim",
+        cmd = "Telescope",
+    },
     {
         "nvim-telescope/telescope-frecency.nvim",
+        cmd = "Telescope",
         dependencies = {"tami5/sqlite.lua"}
     },
     {
@@ -460,12 +486,8 @@ local plugins = {
             telescope.load_extension("projects")
             telescope.load_extension("diff")
         end,
-        lazy = false,
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope-fzf-native.nvim",
-            "nvim-telescope/telescope-file-browser.nvim",
-            "nvim-telescope/telescope-frecency.nvim"
         },
         keys = {
             { "<Leader>f", "<Cmd>Telescope frecency theme=ivy<CR>", silent = true },
@@ -487,6 +509,7 @@ local plugins = {
     },
     {
         "kdheepak/lazygit.nvim",
+        event = "BufRead,BufNewFile",
         config = function ()
             g.lazygit_floating_window_winblend = 0
             g.lazygit_floating_window_scaling_factor = 0.9
@@ -525,6 +548,7 @@ local plugins = {
     },
     {
         "neovim/nvim-lspconfig",
+        event = "LspAttach",
         config = function()
             local lspconfig = require"lspconfig"
             local util = require"lspconfig/util"
@@ -553,12 +577,30 @@ local plugins = {
         },
         dependencies = {"hrsh7th/cmp-nvim-lsp"}
     },
-    {"hrsh7th/cmp-nvim-lsp"},
-    {"hrsh7th/cmp-buffer"},
-    {"hrsh7th/cmp-path"},
-    {"hrsh7th/cmp-cmdline"},
-    {"hrsh7th/cmp-vsnip"},
-    {"hrsh7th/vim-vsnip"},
+    {
+        "hrsh7th/cmp-nvim-lsp",
+        event = "LspAttach",
+    },
+    {
+        "hrsh7th/cmp-buffer",
+        event = "InsertEnter",
+    },
+    {
+        "hrsh7th/cmp-path",
+        event = "InsertEnter",
+    },
+    {
+        "hrsh7th/cmp-cmdline",
+        event = "InsertEnter",
+    },
+    {
+        "hrsh7th/cmp-vsnip",
+        event = "InsertEnter",
+    },
+    {
+        "hrsh7th/vim-vsnip",
+        event = "InsertEnter",
+    },
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -647,7 +689,10 @@ local plugins = {
         end,
         dependencies = {"onsails/lspkind-nvim"}
     },
-    {"hrsh7th/cmp-nvim-lua"},
+    {
+        "hrsh7th/cmp-nvim-lua",
+        event = "InsertEnter",
+    },
     {
         "mhartington/formatter.nvim",
         cmd = "Format",
@@ -671,7 +716,10 @@ local plugins = {
             { "<Leader>fm", "<Cmd>Format<CR>" }
         }
     },
-    {"onsails/lspkind-nvim"}
+    {
+        "onsails/lspkind-nvim",
+        event = "InsertEnter",
+    }
 }
 
 local lazyopt = {
