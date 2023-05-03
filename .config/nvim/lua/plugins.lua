@@ -27,13 +27,9 @@ local plugins = {
 
     -- performance improve
     {
-        "luukvbaal/stabilize.nvim",
-        config = function()
-            require("stabilize").setup()
-        end
+        "nathom/filetype.nvim",
+        event = "BufNew"
     },
-    {"nathom/filetype.nvim"},
-    {"antoinemadec/FixCursorHold.nvim"},
 
     -- colorscheme
     {
@@ -91,7 +87,10 @@ local plugins = {
     },
 
     -- editor display
-    {"MunifTanjim/nui.nvim"},
+    {
+        "MunifTanjim/nui.nvim",
+        lazy = true
+    },
     {
         "unblevable/quick-scope",
         event = "BufEnter"
@@ -114,6 +113,7 @@ local plugins = {
     },
     {
         "petertriho/nvim-scrollbar",
+        event = "BufNew",
         config = function ()
             require"scrollbar".setup {
                 marks = {
@@ -129,10 +129,13 @@ local plugins = {
             require"tint".setup {}
         end
     },
-    {"rcarriga/nvim-notify"},
+    {
+        "rcarriga/nvim-notify",
+        lazy = true
+    },
     {
         "folke/noice.nvim",
-        event = "BufEnter",
+        event = "CmdlineEnter",
         config = function()
             require("noice").setup({
                 lsp = {
@@ -183,6 +186,7 @@ local plugins = {
     },
     {
         "nvim-tree/nvim-web-devicons",
+        lazy = true,
         config = function ()
             require"nvim-web-devicons".setup {
                 color_icons = true}
@@ -249,22 +253,12 @@ local plugins = {
             { "<Up>", "<Cmd>Dashboard<CR>" },
         }
     },
-    --[[ {
-        "glepnir/galaxyline.nvim",
-        branch = "main",
-        dependencies = {"nvim-tree/nvim-web-devicons"},
-        config = function()
-            local theme = fn.stdpath("data") .. "/lazy/galaxyline.nvim/example/eviline.lua"
-            cmd("luafile " .. theme)
-        end
-    }, ]]
     {
         "nvimdev/whiskyline.nvim",
         dependencies = {"nvim-tree/nvim-web-devicons"},
         config = function()
             require"whiskyline".setup {
                 bg = '#3B3E48'
-                -- bg = '#363944'
             }
         end
     },
@@ -274,7 +268,7 @@ local plugins = {
     },
     {
         "yamatsum/nvim-cursorline",
-        event = "BufEnter",
+        event = "BufNewFile, BufRead",
     },
     {
         "nvim-treesitter/nvim-treesitter",
@@ -308,7 +302,7 @@ local plugins = {
     -- {"nvim-treesitter/nvim-treesitter-textobjects"},
     {
         "lewis6991/gitsigns.nvim",
-        event = "BufNewFile, BufRead",
+        event = "BufReadPre",
         config = function ()
             require"gitsigns".setup {}
             require"scrollbar.handlers.gitsigns".setup {}
@@ -337,7 +331,6 @@ local plugins = {
     },
     {
         "rhysd/accelerated-jk",
-        event = "BufEnter",
         keys = {
             { "j", "<Plug>(accelerated_jk_gj)" },
             { "k", "<Plug>(accelerated_jk_gk)" }
@@ -356,7 +349,6 @@ local plugins = {
     },
     {
         "kana/vim-smartword",
-        event = "BufNewFile, BufRead",
         keys = {
             { "w", "<Plug>(smartword-w)" },
             { "b", "<Plug>(smartword-b)" },
@@ -370,7 +362,6 @@ local plugins = {
     },
     {
         "haya14busa/vim-asterisk",
-        event = "BufNewFile, BufRead",
         keys = {
             { "*", "<Plug>(asterisk-z*)" },
             { "g*", "<Plug>(asterisk-gz*)" },
@@ -380,7 +371,6 @@ local plugins = {
     },
     {
         "terryma/vim-expand-region",
-        event = "BufNewFile, BufRead",
         keys = {
             { "v", "<Plug>(expand_region_expand)", mode = "x" },
             { "<C-v>", "<Plug>(expand_region_shrink)", mode = "x" }
@@ -388,7 +378,6 @@ local plugins = {
     },
     {
         "junegunn/vim-easy-align",
-        event = "BufNewFile, BufRead",
         keys = {
             { "<CR>", "<Plug>(LiveEasyAlign)", mode = "x" }
         }
@@ -402,7 +391,6 @@ local plugins = {
     },
     {
         "smjonas/inc-rename.nvim",
-        event = "BufNewFile, BufRead",
         config = function ()
             require"inc_rename".setup{}
         end,
@@ -418,17 +406,19 @@ local plugins = {
         "aymericbeaumet/vim-symlink",
         event = "BufReadPre",
     },
-    {"tami5/sqlite.lua"},
+    {
+        "tami5/sqlite.lua",
+        lazy = true
+    },
     {
         "ahmedkhalf/project.nvim",
-        event = "BufEnter",
+        lazy = true,
         config = function ()
             require"project_nvim".setup{}
         end
     },
     {
         "jemag/telescope-diff.nvim",
-        event = "BufEnter",
         keys = {
             { "<Leader>di", function ()
                                 require"telescope".extensions.diff.diff_files({ hidden = true})
@@ -440,21 +430,20 @@ local plugins = {
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
-        cmd = "Telescope",
+        lazy = true,
         build = "make"
     },
     {
         "nvim-telescope/telescope-file-browser.nvim",
-        cmd = "Telescope",
+        lazy = true,
     },
     {
         "nvim-telescope/telescope-frecency.nvim",
-        cmd = "Telescope",
+        lazy = true,
         dependencies = {"tami5/sqlite.lua"}
     },
     {
         "nvim-telescope/telescope.nvim",
-        cmd = "Telescope",
         config = function()
             local telescope = require"telescope"
             telescope.setup {
@@ -497,7 +486,10 @@ local plugins = {
             { "<Leader>e", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>", silent = true }
         }
     },
-    {"januswel/fencja.vim"},
+    {
+        "januswel/fencja.vim",
+        event = "BufReadPre"
+    },
 
     -- git
     {
@@ -509,7 +501,6 @@ local plugins = {
     },
     {
         "kdheepak/lazygit.nvim",
-        event = "BufRead,BufNewFile",
         config = function ()
             g.lazygit_floating_window_winblend = 0
             g.lazygit_floating_window_scaling_factor = 0.9
@@ -520,7 +511,10 @@ local plugins = {
             { "<Right>", "<Cmd>LazyGit<CR>" }
         }
     },
-    {"nvim-lua/plenary.nvim"},
+    {
+        "nvim-lua/plenary.nvim",
+        lazy = true,
+    },
 
     -- language support
     {
@@ -548,7 +542,7 @@ local plugins = {
     },
     {
         "neovim/nvim-lspconfig",
-        event = "LspAttach",
+        event = "BufReadPre",
         config = function()
             local lspconfig = require"lspconfig"
             local util = require"lspconfig/util"
@@ -579,7 +573,7 @@ local plugins = {
     },
     {
         "hrsh7th/cmp-nvim-lsp",
-        event = "LspAttach",
+        lazy = true
     },
     {
         "hrsh7th/cmp-buffer",
@@ -591,7 +585,7 @@ local plugins = {
     },
     {
         "hrsh7th/cmp-cmdline",
-        event = "InsertEnter",
+        lazy = true
     },
     {
         "hrsh7th/cmp-vsnip",
@@ -695,7 +689,6 @@ local plugins = {
     },
     {
         "mhartington/formatter.nvim",
-        cmd = "Format",
         config = function()
             require"formatter".setup {
                 filetype = {
@@ -718,7 +711,7 @@ local plugins = {
     },
     {
         "onsails/lspkind-nvim",
-        event = "InsertEnter",
+        lazy = true
     }
 }
 

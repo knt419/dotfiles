@@ -131,6 +131,7 @@ opt.tags = ""
 opt.inccommand = "split"
 opt.pumblend = 10
 opt.winblend = 10
+opt.splitkeep = "screen"
 
 g.mapleader = " "
 g.is_windows = fn.has("win16") or fn.has("win32") or fn.has("win64")
@@ -254,7 +255,7 @@ cmd [[filetype plugin indent on]]
 
 -- autocmd
 cmd [[autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow]]
-cmd [[autocmd MyAutoCmd VimResized * execute "normal <C-w>="]]
+cmd [[autocmd MyAutoCmd VimEnter,VimResized * execute "normal <C-w>="]]
 cmd [[autocmd MyAutoCmd TermOpen * setlocal nonumber]]
 cmd [[autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif]]
 cmd [[autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline]]
