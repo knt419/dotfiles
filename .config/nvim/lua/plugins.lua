@@ -585,7 +585,7 @@ local plugins = {
     },
     {
         "hrsh7th/cmp-cmdline",
-        lazy = true
+        event = "CmdlineEnter",
     },
     {
         "hrsh7th/cmp-vsnip",
