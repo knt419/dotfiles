@@ -528,6 +528,7 @@ local plugins = {
     -- lsp/completion
     {
         "williamboman/mason.nvim",
+        build = "<Cmd>MasonUpdate",
         cmd = "Mason",
         config = function()
             require"mason".setup {}
@@ -535,9 +536,11 @@ local plugins = {
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        cmd = "Mason",
+        lazy = true,
         config = function()
-            require"mason-lspconfig".setup()
+            require"mason-lspconfig".setup{
+                ensure_installed = { "lua_ls", "sqlls", "bashls", "clangd", "vimls"}
+            }
         end
     },
     {
@@ -547,9 +550,28 @@ local plugins = {
             local lspconfig = require"lspconfig"
             local util = require"lspconfig/util"
             local capabilities = require"cmp_nvim_lsp".default_capabilities()
+            local on_attach = function(client, bufnr)
+                local keymap = vim.keymap
+                keymap.set("n", "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>")
+                keymap.set("n", "<Leader>df", "<Cmd>lua vim.lsp.buf.definition()<CR>")
+                keymap.set("n", "<Leader>wa", "<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
+                keymap.set("n", "<Leader>wr", "<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
+                keymap.set("n", "<Leader>wl", "<Cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
+                keymap.set("n", "<Leader>h", "<Cmd>lua vim.lsp.buf.hover()<CR>")
+                keymap.set("x", "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>")
+            end
+            require"mason-lspconfig".setup_handlers{
+                function (server_name)
+                    lspconfig[server_name].setup{
+                        on_attach = on_attach,
+                        capabilities = capabilities,
+                    }
+                end,
+            }
 
             lspconfig.lua_ls.setup{
                 root_dir =  util.find_git_ancestor,
+                on_attach = on_attach,
                 capabilities = capabilities,
                 settings = {
                     Lua = {
@@ -559,15 +581,11 @@ local plugins = {
                     }
                 }
             }
-            lspconfig.sqlls.setup{ capabilities = capabilities }
+            --[[ lspconfig.sqlls.setup{ capabilities = capabilities }
             lspconfig.bashls.setup{ capabilities = capabilities }
-            lspconfig.clangd.setup{ capabilities = capabilities }
+            lspconfig.clangd.setup{ capabilities = capabilities } ]]
         end,
         keys = {
-            { "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>", silent = true },
-            { "<Leader>df", "<Cmd>lua vim.lsp.buf.definition()<CR>", silent = true },
-            { "<Leader>h", "<Cmd>lua vim.lsp.buf.hover()<CR>", silent = true },
-            { "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>", mode = "x", silent = true }
         },
         dependencies = {"hrsh7th/cmp-nvim-lsp"}
     },
@@ -609,8 +627,9 @@ local plugins = {
                 formatting = {
                     format = lspkind.cmp_format(
                         {
-                            with_text = false,
-                            maxwidth = 50
+                            with_text = true,
+                            maxwidth = 50,
+                            ellipsis_char = '...'
                         }
                     )
                 },
