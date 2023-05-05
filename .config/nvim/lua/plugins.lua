@@ -213,13 +213,13 @@ local plugins = {
                     },
                     shortcut = {
                         {
-                            desc = ' Update',
+                            desc = '󰚰 Update',
                             group = 'column0',
                             action = 'Lazy update',
                             key = 'u'
                         },
                         {
-                            desc = ' Files',
+                            desc = '󰱽 Files',
                             group = 'column1',
                             action = 'Telescope frecency theme=ivy',
                             key = 'f',
