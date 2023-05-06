@@ -197,7 +197,7 @@ local plugins = {
         event = "BufNewFile, BufRead"
     },
     {
-        "glepnir/dashboard-nvim",
+        "lpl212757/dashboard-nvim",
         event = "VimEnter",
         config = function()
             require("dashboard").setup {
@@ -227,7 +227,7 @@ local plugins = {
                         {
                             desc = ' Directory',
                             group = 'column2',
-                            action = 'Telescope file_browser theme=ivy',
+                            action = 'Telescope file_browser',
                             key = 'd',
                         },
                         {
@@ -243,11 +243,17 @@ local plugins = {
                             key = 'p'
                         }
                     },
-                    project = { enable = true, limit = 8, action = 'Telescope find_files cwd=' }
+                    project = {
+                        enable = true,
+                        limit = 8,
+                    }
                 }
             }
         end,
-        dependencies = {"nvim-tree/nvim-web-devicons"},
+        dependencies = {
+            "nvim-tree/nvim-web-devicons",
+            "ahmedkhalf/project.nvim"
+        },
         keys = {
             { "<Leader>d", "<Cmd>Dashboard<CR>", silent = true },
             { "<Up>", "<Cmd>Dashboard<CR>" },
@@ -444,6 +450,7 @@ local plugins = {
     },
     {
         "nvim-telescope/telescope.nvim",
+        event = "VimEnter",
         config = function()
             local telescope = require"telescope"
             telescope.setup {
@@ -452,6 +459,12 @@ local plugins = {
                     cache_picker = {limit_entries = 100},
                     preview = {filesize_limit = 5, treesitter = true},
                     mappings = {i = {["<Esc>"] = require"telescope.actions".close}},
+                },
+                pickers = {
+                    find_files = {
+                        theme = "ivy",
+                        find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
+                    }
                 },
                 extensions = {
                     file_browser = {
