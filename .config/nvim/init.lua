@@ -113,7 +113,7 @@ opt.infercase = true
 opt.diffopt = {"filler", "vertical", "internal", algorithm = "histogram", "indent-heuristic"}
 opt.splitright = true
 
-opt.laststatus = 2
+opt.laststatus = 3
 opt.cmdheight = 2
 opt.showtabline = 2
 opt.wildmenu = true

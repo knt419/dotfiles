@@ -1,5 +1,4 @@
 -- plugin install
-local api = vim.api
 local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
@@ -97,7 +96,7 @@ local plugins = {
     },
     {
         "nvim-zh/colorful-winsep.nvim",
-        event = "BufEnter",
+        event = "WinNew",
         config = function ()
             require"colorful-winsep".setup {}
         end
@@ -563,7 +562,7 @@ local plugins = {
             local lspconfig = require"lspconfig"
             local util = require"lspconfig/util"
             local capabilities = require"cmp_nvim_lsp".default_capabilities()
-            local on_attach = function(client, bufnr)
+            local on_attach = function()
                 local keymap = vim.keymap
                 keymap.set("n", "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>")
                 keymap.set("n", "<Leader>df", "<Cmd>lua vim.lsp.buf.definition()<CR>")
@@ -597,45 +596,55 @@ local plugins = {
             --[[ lspconfig.sqlls.setup{ capabilities = capabilities }
             lspconfig.bashls.setup{ capabilities = capabilities }
             lspconfig.clangd.setup{ capabilities = capabilities } ]]
-        end,
-        keys = {
-        },
-        dependencies = {"hrsh7th/cmp-nvim-lsp"}
+        end
     },
     {
         "hrsh7th/cmp-nvim-lsp",
-        lazy = true
+        event = "InsertEnter",
     },
     {
         "hrsh7th/cmp-buffer",
         event = "InsertEnter",
     },
     {
-        "hrsh7th/cmp-path",
+        "FelipeLema/cmp-async-path",
         event = "InsertEnter",
     },
+    --[[ {
+        "hrsh7th/cmp-path",
+        event = "InsertEnter",
+    }, ]]
     {
         "hrsh7th/cmp-cmdline",
         event = "CmdlineEnter",
     },
     {
+        "L3MON4D3/LuaSnip",
+        event = "InsertEnter",
+    },
+    {
+        "saadparwaiz1/cmp_luasnip",
+        event = "InsertEnter",
+    },
+    --[[ {
         "hrsh7th/cmp-vsnip",
         event = "InsertEnter",
     },
     {
         "hrsh7th/vim-vsnip",
         event = "InsertEnter",
-    },
+    }, ]]
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         config = function()
             local cmp = require"cmp"
             local lspkind = require"lspkind"
+            local luasnip = require"luasnip"
 
-            local feedkey = function(key, mode)
+            --[[ local feedkey = function(key, mode)
                 api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), mode, true)
-            end
+            end ]]
             require"cmp".setup {
                 formatting = {
                     format = lspkind.cmp_format(
@@ -648,7 +657,8 @@ local plugins = {
                 },
                 snippet = {
                     expand = function(args)
-                        fn["vsnip#anonymous"](args.body)
+                        -- fn["vsnip#anonymous"](args.body)
+                        require'luasnip'.lsp_expand(args.body)
                     end
                 },
                 window = {
@@ -661,8 +671,10 @@ local plugins = {
                         function(fallback)
                             if cmp.visible() then
                                 cmp.select_next_item()
-                            elseif fn["vsnip#available"](1) == 1 then
-                                feedkey("<Plug>(vsnip-expand-or-jump)", "")
+                            --[[ elseif fn["vsnip#available"](1) == 1 then
+                                feedkey("<Plug>(vsnip-expand-or-jump)", "") ]]
+                            elseif luasnip.expand_or_jumpable() then
+                                luasnip.expand_or_jump()
                             else
                                 fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
                             end
@@ -673,8 +685,10 @@ local plugins = {
                         function()
                             if cmp.visible() then
                                 cmp.select_prev_item()
-                            elseif fn["vsnip#jumpable"](-1) == 1 then
-                                feedkey("<Plug>(vsnip-jump-prev)", "")
+                            --[[ elseif fn["vsnip#jumpable"](-1) == 1 then
+                                feedkey("<Plug>(vsnip-jump-prev)", "") ]]
+                            elseif luasnip.jumpable(-1) then
+                                luasnip.jump(-1)
                             end
                         end,
                         {"i", "s"}
@@ -684,7 +698,8 @@ local plugins = {
                     {
                         {name = "nvim_lsp"},
                         {name = "nvim_lua"},
-                        {name = "vsnip"}
+                        -- {name = "vsnip"}
+                        {name = "luasnip"}
                     },
                     {
                         {name = "buffer"}
@@ -704,7 +719,7 @@ local plugins = {
                 {
                     sources = cmp.config.sources(
                         {
-                            {name = "path"}
+                            {name = "async_path"}
                         },
                         {
                             {name = "cmdline"}
