@@ -407,6 +407,7 @@ local plugins = {
     },
 
     -- file/directory
+    {"equalsraf/neovim-gui-shim"},
     {
         "aymericbeaumet/vim-symlink",
         event = "BufReadPre",
