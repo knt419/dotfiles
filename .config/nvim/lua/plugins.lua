@@ -244,6 +244,7 @@ local plugins = {
                     },
                     project = {
                         enable = true,
+                        icon = ' ',
                         limit = 8,
                     }
                 }
@@ -594,9 +595,6 @@ local plugins = {
                     }
                 }
             }
-            --[[ lspconfig.sqlls.setup{ capabilities = capabilities }
-            lspconfig.bashls.setup{ capabilities = capabilities }
-            lspconfig.clangd.setup{ capabilities = capabilities } ]]
         end
     },
     {
@@ -611,10 +609,6 @@ local plugins = {
         "FelipeLema/cmp-async-path",
         event = "InsertEnter",
     },
-    --[[ {
-        "hrsh7th/cmp-path",
-        event = "InsertEnter",
-    }, ]]
     {
         "hrsh7th/cmp-cmdline",
         event = "CmdlineEnter",
@@ -627,14 +621,6 @@ local plugins = {
         "saadparwaiz1/cmp_luasnip",
         event = "InsertEnter",
     },
-    --[[ {
-        "hrsh7th/cmp-vsnip",
-        event = "InsertEnter",
-    },
-    {
-        "hrsh7th/vim-vsnip",
-        event = "InsertEnter",
-    }, ]]
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
@@ -643,9 +629,6 @@ local plugins = {
             local lspkind = require"lspkind"
             local luasnip = require"luasnip"
 
-            --[[ local feedkey = function(key, mode)
-                api.nvim_feedkeys(api.nvim_replace_termcodes(key, true, true, true), mode, true)
-            end ]]
             require"cmp".setup {
                 formatting = {
                     format = lspkind.cmp_format(
@@ -658,7 +641,6 @@ local plugins = {
                 },
                 snippet = {
                     expand = function(args)
-                        -- fn["vsnip#anonymous"](args.body)
                         require'luasnip'.lsp_expand(args.body)
                     end
                 },
@@ -672,8 +654,6 @@ local plugins = {
                         function(fallback)
                             if cmp.visible() then
                                 cmp.select_next_item()
-                            --[[ elseif fn["vsnip#available"](1) == 1 then
-                                feedkey("<Plug>(vsnip-expand-or-jump)", "") ]]
                             elseif luasnip.expand_or_jumpable() then
                                 luasnip.expand_or_jump()
                             else
@@ -686,8 +666,6 @@ local plugins = {
                         function()
                             if cmp.visible() then
                                 cmp.select_prev_item()
-                            --[[ elseif fn["vsnip#jumpable"](-1) == 1 then
-                                feedkey("<Plug>(vsnip-jump-prev)", "") ]]
                             elseif luasnip.jumpable(-1) then
                                 luasnip.jump(-1)
                             end
@@ -699,7 +677,6 @@ local plugins = {
                     {
                         {name = "nvim_lsp"},
                         {name = "nvim_lua"},
-                        -- {name = "vsnip"}
                         {name = "luasnip"}
                     },
                     {
