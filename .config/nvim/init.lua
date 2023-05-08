@@ -136,9 +136,9 @@ opt.splitkeep = "screen"
 g.mapleader = " "
 g.is_windows = fn.has("win16") or fn.has("win32") or fn.has("win64")
 g.do_filetype_lua = 1
-g.loded_python3_provider = 0
-g.loded_ruby_provider = 0
-g.loded_perl_provider = 0
+g.loaded_python3_provider = 0
+g.loaded_ruby_provider = 0
+g.loaded_perl_provider = 0
 
 env.VISUAL = "nvim --remote"
 env.PATH = env.PATH .. ":" .. env.HOME .. "/go/bin"

@@ -542,7 +542,7 @@ local plugins = {
     -- lsp/completion
     {
         "williamboman/mason.nvim",
-        build = "<Cmd>MasonUpdate",
+        build = ":MasonUpdate",
         cmd = "Mason",
         config = function()
             require"mason".setup {}
