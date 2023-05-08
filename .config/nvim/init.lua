@@ -174,7 +174,6 @@ keymap.set("v", ">", ">gv")
 keymap.set("n", ";", ":")
 keymap.set("n", "<CR><CR>", "o<Esc>", {silent = true})
 keymap.set("n", "<Leader>q", "<Cmd>bd<CR>", {silent = true})
--- keymap.set("n", "<Leader>w", "<Cmd>w<CR><Cmd>bd<CR>", {silent = true})
 keymap.set("n", "<Leader>n", "<Cmd>enew<CR>", {silent = true})
 keymap.set("n", "<Leader><CR>", "<Cmd>lua ReloadConfig()<CR>", {silent = false})
 keymap.set("n", "<C-n>", "*", {silent = true})
@@ -260,9 +259,9 @@ cmd [[filetype plugin indent on]]
 cmd [[autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow]]
 cmd [[autocmd MyAutoCmd VimEnter,VimResized * execute "normal <C-w>="]]
 cmd [[autocmd MyAutoCmd TermOpen * setlocal nonumber]]
+cmd [[autocmd MyAutoCmd TermOpen * let $VISUAL = "nvim --server " .. $NVIM .. " --remote"]]
 cmd [[autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif]]
 cmd [[autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline]]
--- cmd [[autocmd MyAutoCmd BufEnter * silent! lcd %:p:h]]
 cmd [[augroup highlighted_yank]]
 cmd [[autocmd!]]
 cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}]]
