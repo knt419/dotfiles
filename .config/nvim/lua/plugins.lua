@@ -195,69 +195,87 @@ local plugins = {
         "norcalli/nvim-colorizer.lua",
         event = "BufNewFile, BufRead"
     },
+    -- {
+    --     "lpl212757/dashboard-nvim",
+    --     event = "VimEnter",
+    --     config = function()
+    --         require("dashboard").setup {
+    --             config = {
+    --                 header = {
+    --                     " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+    --                     " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
+    --                     " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+    --                     " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+    --                     " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+    --                     " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
+    --                     ""
+    --                 },
+    --                 shortcut = {
+    --                     {
+    --                         desc = '󰚰 Update',
+    --                         group = 'column0',
+    --                         action = 'Lazy update',
+    --                         key = 'u'
+    --                     },
+    --                     {
+    --                         desc = '󰱽 Files',
+    --                         group = 'column1',
+    --                         action = 'Telescope frecency theme=ivy',
+    --                         key = 'f',
+    --                     },
+    --                     {
+    --                         desc = ' Directory',
+    --                         group = 'column2',
+    --                         action = 'Telescope file_browser',
+    --                         key = 'd',
+    --                     },
+    --                     {
+    --                         desc = ' init.lua',
+    --                         group = 'column3',
+    --                         action = ':e ~/.config/nvim/init.lua',
+    --                         key = 'i'
+    --                     },
+    --                     {
+    --                         desc = ' plugins.lua',
+    --                         group = 'column4',
+    --                         action = ':e ~/.config/nvim/lua/plugins.lua',
+    --                         key = 'p'
+    --                     }
+    --                 },
+    --                 project = {
+    --                     enable = true,
+    --                     icon = ' ',
+    --                     limit = 8,
+    --                 }
+    --             }
+    --         }
+    --     end,
+    --     dependencies = {
+    --         "nvim-tree/nvim-web-devicons",
+    --         "ahmedkhalf/project.nvim"
+    --     },
+    --     keys = {
+    --         { "<Leader>d", "<Cmd>Dashboard<CR>", silent = true },
+    --         { "<Up>", "<Cmd>Dashboard<CR>" },
+    --     }
+    -- },
     {
-        "lpl212757/dashboard-nvim",
-        event = "VimEnter",
-        config = function()
-            require("dashboard").setup {
-                config = {
-                    header = {
-                        " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-                        " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-                        " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-                        " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-                        " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-                        " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
-                        ""
-                    },
-                    shortcut = {
-                        {
-                            desc = '󰚰 Update',
-                            group = 'column0',
-                            action = 'Lazy update',
-                            key = 'u'
-                        },
-                        {
-                            desc = '󰱽 Files',
-                            group = 'column1',
-                            action = 'Telescope frecency theme=ivy',
-                            key = 'f',
-                        },
-                        {
-                            desc = ' Directory',
-                            group = 'column2',
-                            action = 'Telescope file_browser',
-                            key = 'd',
-                        },
-                        {
-                            desc = ' init.lua',
-                            group = 'column3',
-                            action = ':e ~/.config/nvim/init.lua',
-                            key = 'i'
-                        },
-                        {
-                            desc = ' plugins.lua',
-                            group = 'column4',
-                            action = ':e ~/.config/nvim/lua/plugins.lua',
-                            key = 'p'
+        "goolord/alpha-nvim",
+        config = function ()
+            local alpha = require"alpha"
+            local startify = require"alpha.themes.startify"
+
+            startify.section.header.val = {
+                            " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+                            " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
+                            " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+                            " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+                            " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+                            " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
+                            ""
                         }
-                    },
-                    project = {
-                        enable = true,
-                        icon = ' ',
-                        limit = 8,
-                    }
-                }
-            }
-        end,
-        dependencies = {
-            "nvim-tree/nvim-web-devicons",
-            "ahmedkhalf/project.nvim"
-        },
-        keys = {
-            { "<Leader>d", "<Cmd>Dashboard<CR>", silent = true },
-            { "<Up>", "<Cmd>Dashboard<CR>" },
-        }
+            alpha.setup(startify.config)
+        end
     },
     {
         "nvimdev/whiskyline.nvim",
@@ -350,7 +368,7 @@ local plugins = {
         end
     },
     {
-        "b3nj5m1n/kommentary",
+        "tpope/vim-commentary",
         event = "BufEnter"
     },
     {

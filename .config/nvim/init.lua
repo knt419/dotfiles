@@ -253,8 +253,6 @@ _G.ReloadConfig = function()
     vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
 end
 
-cmd [[filetype plugin indent on]]
-
 -- autocmd
 cmd [[autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow]]
 cmd [[autocmd MyAutoCmd VimEnter,VimResized * execute "normal <C-w>="]]
