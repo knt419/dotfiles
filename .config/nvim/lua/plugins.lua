@@ -91,10 +91,6 @@ local plugins = {
         lazy = true
     },
     {
-        "unblevable/quick-scope",
-        event = "BufEnter"
-    },
-    {
         "nvim-zh/colorful-winsep.nvim",
         event = "WinNew",
         config = function ()
@@ -123,7 +119,7 @@ local plugins = {
     },
     {
         "levouh/tint.nvim",
-        event = "BufEnter",
+        event = "WinNew",
         config = function ()
             require"tint".setup {}
         end
@@ -169,6 +165,7 @@ local plugins = {
     },
     {
         "akinsho/bufferline.nvim",
+        event = "UIEnter",
         config = function()
             require"bufferline".setup {
                 options = {
@@ -275,10 +272,14 @@ local plugins = {
                             ""
                         }
             alpha.setup(startify.config)
-        end
+        end,
+        keys = {
+            { "<Up>", "<Cmd>Alpha<CR>" },
+        }
     },
     {
         "nvimdev/whiskyline.nvim",
+        event = "UIEnter",
         dependencies = {"nvim-tree/nvim-web-devicons"},
         config = function()
             require"whiskyline".setup {
@@ -361,11 +362,8 @@ local plugins = {
         }
     },
     {
-        "ur4ltz/surround.nvim",
-        event = "BufEnter",
-        config = function()
-            require"surround".setup {mappings_style = "sandwich"}
-        end
+        "echasnovski/mini.surround",
+        event = "BufEnter"
     },
     {
         "tpope/vim-commentary",
@@ -435,13 +433,13 @@ local plugins = {
         "tami5/sqlite.lua",
         lazy = true
     },
-    {
-        "ahmedkhalf/project.nvim",
-        lazy = true,
-        config = function ()
-            require"project_nvim".setup{}
-        end
-    },
+    -- {
+    --     "ahmedkhalf/project.nvim",
+    --     lazy = true,
+    --     config = function ()
+    --         require"project_nvim".setup{}
+    --     end
+    -- },
     {
         "jemag/telescope-diff.nvim",
         keys = {
@@ -496,15 +494,15 @@ local plugins = {
                         override_file_sorter = true,
                         case_mode = "smart_case"
                     },
-                    project = {
-                        hidden_files = true
-                    }
+                    -- project = {
+                    --     hidden_files = true
+                    -- }
                 }
             }
             telescope.load_extension("fzf")
             telescope.load_extension("file_browser")
             telescope.load_extension("frecency")
-            telescope.load_extension("projects")
+            -- telescope.load_extension("projects")
             telescope.load_extension("diff")
         end,
         dependencies = {
