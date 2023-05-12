@@ -258,6 +258,7 @@ local plugins = {
     -- },
     {
         "goolord/alpha-nvim",
+        event = "VimEnter",
         config = function ()
             local alpha = require"alpha"
             local startify = require"alpha.themes.startify"
@@ -324,7 +325,6 @@ local plugins = {
             }
         end
     },
-    -- {"nvim-treesitter/nvim-treesitter-textobjects"},
     {
         "lewis6991/gitsigns.nvim",
         event = "BufReadPre",
@@ -433,13 +433,6 @@ local plugins = {
         "tami5/sqlite.lua",
         lazy = true
     },
-    -- {
-    --     "ahmedkhalf/project.nvim",
-    --     lazy = true,
-    --     config = function ()
-    --         require"project_nvim".setup{}
-    --     end
-    -- },
     {
         "jemag/telescope-diff.nvim",
         keys = {
@@ -494,15 +487,11 @@ local plugins = {
                         override_file_sorter = true,
                         case_mode = "smart_case"
                     },
-                    -- project = {
-                    --     hidden_files = true
-                    -- }
                 }
             }
             telescope.load_extension("fzf")
             telescope.load_extension("file_browser")
             telescope.load_extension("frecency")
-            -- telescope.load_extension("projects")
             telescope.load_extension("diff")
         end,
         dependencies = {
