@@ -158,7 +158,7 @@ local plugins = {
                 show_current_context = true,
                 show_current_context_start = true,
                 buftype_exclude = {"help", "terminal"},
-                filetype_exclude = {"startify", "dashboard", "alpha", "mason", "lazy"},
+                filetype_exclude = {"startify", "dashboard", "alpha", "mason", "lazy", "starter"},
                 use_treesitter = true
             }
         end
@@ -193,89 +193,57 @@ local plugins = {
         event = "BufNewFile, BufRead"
     },
     -- {
-    --     "lpl212757/dashboard-nvim",
+    --     "goolord/alpha-nvim",
     --     event = "VimEnter",
-    --     config = function()
-    --         require("dashboard").setup {
-    --             config = {
-    --                 header = {
-    --                     " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-    --                     " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-    --                     " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-    --                     " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-    --                     " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-    --                     " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
-    --                     ""
-    --                 },
-    --                 shortcut = {
-    --                     {
-    --                         desc = '󰚰 Update',
-    --                         group = 'column0',
-    --                         action = 'Lazy update',
-    --                         key = 'u'
-    --                     },
-    --                     {
-    --                         desc = '󰱽 Files',
-    --                         group = 'column1',
-    --                         action = 'Telescope frecency theme=ivy',
-    --                         key = 'f',
-    --                     },
-    --                     {
-    --                         desc = ' Directory',
-    --                         group = 'column2',
-    --                         action = 'Telescope file_browser',
-    --                         key = 'd',
-    --                     },
-    --                     {
-    --                         desc = ' init.lua',
-    --                         group = 'column3',
-    --                         action = ':e ~/.config/nvim/init.lua',
-    --                         key = 'i'
-    --                     },
-    --                     {
-    --                         desc = ' plugins.lua',
-    --                         group = 'column4',
-    --                         action = ':e ~/.config/nvim/lua/plugins.lua',
-    --                         key = 'p'
+    --     config = function ()
+    --         local alpha = require"alpha"
+    --         local startify = require"alpha.themes.startify"
+
+    --         startify.section.header.val = {
+    --                         " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
+    --                         " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
+    --                         " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
+    --                         " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
+    --                         " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
+    --                         " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
+    --                         ""
     --                     }
-    --                 },
-    --                 project = {
-    --                     enable = true,
-    --                     icon = ' ',
-    --                     limit = 8,
-    --                 }
-    --             }
-    --         }
+    --         alpha.setup(startify.config)
     --     end,
-    --     dependencies = {
-    --         "nvim-tree/nvim-web-devicons",
-    --         "ahmedkhalf/project.nvim"
-    --     },
     --     keys = {
-    --         { "<Leader>d", "<Cmd>Dashboard<CR>", silent = true },
-    --         { "<Up>", "<Cmd>Dashboard<CR>" },
+    --         { "<Up>", "<Cmd>Alpha<CR>" },
     --     }
     -- },
     {
-        "goolord/alpha-nvim",
+        "echasnovski/mini.starter",
         event = "VimEnter",
-        config = function ()
-            local alpha = require"alpha"
-            local startify = require"alpha.themes.startify"
-
-            startify.section.header.val = {
-                            " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-                            " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-                            " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-                            " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-                            " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-                            " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
-                            ""
-                        }
-            alpha.setup(startify.config)
+        config = function()
+            local starter = require('mini.starter')
+            starter.setup({
+                evaluate_single = true,
+                header =
+                            " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗\n" ..
+                            " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║\n" ..
+                            " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║\n" ..
+                            " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║\n" ..
+                            " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║\n" ..
+                            " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝\n" ..
+                            "\n"
+                ,
+                items = {
+                starter.sections.builtin_actions(),
+                starter.sections.telescope(),
+                starter.sections.recent_files(10, false),
+                },
+                content_hooks = {
+                starter.gen_hook.adding_bullet(),
+                starter.gen_hook.indexing('all', { 'Builtin actions' }),
+                starter.gen_hook.aligning('center', 'center'),
+                },
+            })
         end,
         keys = {
-            { "<Up>", "<Cmd>Alpha<CR>" },
+            { "<Up>", "<Cmd>lua MiniStarter.open()<CR>" }
         }
     },
     {
@@ -363,7 +331,10 @@ local plugins = {
     },
     {
         "echasnovski/mini.surround",
-        event = "BufEnter"
+        event = "BufEnter",
+        config = function()
+            require"mini.surround".setup{}
+        end
     },
     {
         "tpope/vim-commentary",
