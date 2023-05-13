@@ -99,7 +99,7 @@ local plugins = {
     },
     {
         "kevinhwang91/nvim-hlslens",
-        event = "BufNewFile, BufRead",
+        event = {"BufNew", "BufRead"},
         config = function ()
             require"scrollbar.handlers.search".setup({
                 override_lens = function () end,
@@ -126,11 +126,16 @@ local plugins = {
     },
     {
         "rcarriga/nvim-notify",
-        lazy = true
+        lazy = true,
+        config = function ()
+            require"notify".setup {
+                render = "compact"
+            }
+        end
     },
     {
         "folke/noice.nvim",
-        event = "CmdlineEnter",
+        event = "VeryLazy",
         config = function()
             require("noice").setup({
                 lsp = {
@@ -165,30 +170,37 @@ local plugins = {
     -- },
     {
         'nvimdev/indentmini.nvim',
-        event = 'BufEnter',
+        event = {"BufNew", "BufReadPre"},
         config = function()
             require"indentmini".setup {
                 exclude = {"mason", "lazy", "starter"}
             }
-            cmd.highlight("default link IndentLine Comment")
+            cmd.highlight("default link IndentLine Whitespace")
         end,
     },
+    -- {
+    --     "akinsho/bufferline.nvim",
+    --     event = "UIEnter",
+    --     config = function()
+    --         require"bufferline".setup {
+    --             options = {
+    --                 diagnostics = "nvim_lsp"
+    --             },
+    --             highlights = {
+    --                 buffer_selected = {
+    --                     bold = true
+    --                 }
+    --             }
+    --         }
+    --     end,
+    --     dependencies = "nvim-tree/nvim-web-devicons"
+    -- },
     {
-        "akinsho/bufferline.nvim",
-        event = "UIEnter",
-        config = function()
-            require"bufferline".setup {
-                options = {
-                    diagnostics = "nvim_lsp"
-                },
-                highlights = {
-                    buffer_selected = {
-                        bold = true
-                    }
-                }
-            }
-        end,
-        dependencies = "nvim-tree/nvim-web-devicons"
+        "echasnovski/mini.tabline",
+        event = {"BufNew", "BufReadPre"},
+        config = function ()
+            require"mini.tabline".setup {}
+        end
     },
     {
         "nvim-tree/nvim-web-devicons",
@@ -200,7 +212,7 @@ local plugins = {
     },
     {
         "norcalli/nvim-colorizer.lua",
-        event = "BufNewFile, BufRead"
+        event = {"BufNew", "BufReadPre"},
     },
     -- {
     --     "goolord/alpha-nvim",
@@ -240,9 +252,9 @@ local plugins = {
                             " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝\n" ..
                             "\n"
                 ,
+                footer = "",
                 items = {
                 starter.sections.builtin_actions(),
-                starter.sections.telescope(),
                 starter.sections.recent_files(10, false),
                 },
                 content_hooks = {
@@ -258,7 +270,7 @@ local plugins = {
     },
     {
         "nvimdev/whiskyline.nvim",
-        event = "UIEnter",
+        event = {"BufNew", "BufReadPre"},
         dependencies = {"nvim-tree/nvim-web-devicons"},
         config = function()
             require"whiskyline".setup {
@@ -268,15 +280,15 @@ local plugins = {
     },
     {
         "rickhowe/diffchar.vim",
-        event = "BufNewFile, BufRead",
+        event = {"BufNew", "BufReadPre"},
     },
     {
         "yamatsum/nvim-cursorline",
-        event = "BufNewFile, BufRead",
+        event = {"BufNew", "BufReadPre"},
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        event = "BufEnter",
+        event = {"BufNew", "BufReadPre"},
         config = function()
             require"nvim-treesitter.configs".setup {
                 auto_install = true,
@@ -305,7 +317,7 @@ local plugins = {
     },
     {
         "lewis6991/gitsigns.nvim",
-        event = "BufReadPre",
+        event = {"BufNew", "BufReadPre"},
         config = function ()
             require"gitsigns".setup {}
             require"scrollbar.handlers.gitsigns".setup {}
@@ -341,14 +353,14 @@ local plugins = {
     },
     {
         "echasnovski/mini.surround",
-        event = "BufEnter",
+        event = {"BufNew", "BufReadPre"},
         config = function()
             require"mini.surround".setup{}
         end
     },
     {
         "tpope/vim-commentary",
-        event = "BufEnter"
+        event = {"BufNew", "BufRead"},
     },
     {
         "kana/vim-smartword",
@@ -361,7 +373,7 @@ local plugins = {
     },
     {
         "kana/vim-niceblock",
-        event = "BufNewFile, BufRead",
+        event = {"BufNew", "BufRead"},
     },
     {
         "haya14busa/vim-asterisk",
@@ -387,7 +399,7 @@ local plugins = {
     },
     {
         "ntpeters/vim-better-whitespace",
-        event = "BufNewFile, BufRead",
+        event = {"BufNew", "BufReadPre"},
         config = function()
             g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "markdown", "dashboard"}
         end
@@ -441,7 +453,8 @@ local plugins = {
     },
     {
         "nvim-telescope/telescope.nvim",
-        event = "VimEnter",
+        lazy = true,
+        event = {"BufNew", "BufReadPre"},
         config = function()
             local telescope = require"telescope"
             telescope.setup {
@@ -545,7 +558,7 @@ local plugins = {
     },
     {
         "neovim/nvim-lspconfig",
-        event = "BufReadPre",
+        event = {"BufNew", "BufReadPre"},
         config = function()
             local lspconfig = require"lspconfig"
             local util = require"lspconfig/util"
@@ -597,7 +610,7 @@ local plugins = {
     },
     {
         "hrsh7th/cmp-cmdline",
-        event = "CmdlineEnter",
+        event = "VeryLazy",
     },
     {
         "L3MON4D3/LuaSnip",
