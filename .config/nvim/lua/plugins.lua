@@ -150,18 +150,28 @@ local plugins = {
             "rcarriga/nvim-notify"
         }
     },
+    -- {
+    --     "lukas-reineke/indent-blankline.nvim",
+    --     event = "BufEnter",
+    --     config = function()
+    --         require"indent_blankline".setup {
+    --             show_current_context = true,
+    --             show_current_context_start = true,
+    --             buftype_exclude = {"help", "terminal"},
+    --             filetype_exclude = {"startify", "dashboard", "alpha", "mason", "lazy", "starter"},
+    --             use_treesitter = true
+    --         }
+    --     end
+    -- },
     {
-        "lukas-reineke/indent-blankline.nvim",
-        event = "BufEnter",
+        'nvimdev/indentmini.nvim',
+        event = 'BufEnter',
         config = function()
-            require"indent_blankline".setup {
-                show_current_context = true,
-                show_current_context_start = true,
-                buftype_exclude = {"help", "terminal"},
-                filetype_exclude = {"startify", "dashboard", "alpha", "mason", "lazy", "starter"},
-                use_treesitter = true
+            require"indentmini".setup {
+                exclude = {"mason", "lazy", "starter"}
             }
-        end
+            cmd.highlight("default link IndentLine Comment")
+        end,
     },
     {
         "akinsho/bufferline.nvim",
