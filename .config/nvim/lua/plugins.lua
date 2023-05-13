@@ -27,7 +27,7 @@ local plugins = {
     -- performance improve
     {
         "nathom/filetype.nvim",
-        event = "BufNew"
+        event = {"BufWritePre", "BufReadPre"}
     },
 
     -- colorscheme
@@ -170,7 +170,7 @@ local plugins = {
     -- },
     {
         'nvimdev/indentmini.nvim',
-        event = {"BufNew", "BufReadPre"},
+        event = {"BufWrite", "BufRead"},
         config = function()
             require"indentmini".setup {
                 exclude = {"mason", "lazy", "starter"}
@@ -197,7 +197,7 @@ local plugins = {
     -- },
     {
         "echasnovski/mini.tabline",
-        event = {"BufNew", "BufReadPre"},
+        event = {"BufNew", "BufRead"},
         config = function ()
             require"mini.tabline".setup {}
         end
@@ -212,7 +212,7 @@ local plugins = {
     },
     {
         "norcalli/nvim-colorizer.lua",
-        event = {"BufNew", "BufReadPre"},
+        event = {"BufNew", "BufRead"},
     },
     -- {
     --     "goolord/alpha-nvim",
@@ -270,7 +270,7 @@ local plugins = {
     },
     {
         "nvimdev/whiskyline.nvim",
-        event = {"BufNew", "BufReadPre"},
+        event = {"BufNew", "BufRead"},
         dependencies = {"nvim-tree/nvim-web-devicons"},
         config = function()
             require"whiskyline".setup {
@@ -280,15 +280,15 @@ local plugins = {
     },
     {
         "rickhowe/diffchar.vim",
-        event = {"BufNew", "BufReadPre"},
+        event = {"BufNew", "BufRead"},
     },
     {
         "yamatsum/nvim-cursorline",
-        event = {"BufNew", "BufReadPre"},
+        event = {"BufNew", "BufRead"},
     },
     {
         "nvim-treesitter/nvim-treesitter",
-        event = {"BufNew", "BufReadPre"},
+        event = {"BufWritePre", "BufReadPre"},
         config = function()
             require"nvim-treesitter.configs".setup {
                 auto_install = true,
@@ -317,7 +317,7 @@ local plugins = {
     },
     {
         "lewis6991/gitsigns.nvim",
-        event = {"BufNew", "BufReadPre"},
+        event = {"BufWritePre", "BufReadPre"},
         config = function ()
             require"gitsigns".setup {}
             require"scrollbar.handlers.gitsigns".setup {}
@@ -353,14 +353,14 @@ local plugins = {
     },
     {
         "echasnovski/mini.surround",
-        event = {"BufNew", "BufReadPre"},
+        event = {"BufNew", "BufRead"},
         config = function()
             require"mini.surround".setup{}
         end
     },
     {
         "tpope/vim-commentary",
-        event = {"BufNew", "BufRead"},
+        event = {"BufWritePre", "BufReadPre"},
     },
     {
         "kana/vim-smartword",
@@ -399,7 +399,7 @@ local plugins = {
     },
     {
         "ntpeters/vim-better-whitespace",
-        event = {"BufNew", "BufReadPre"},
+        event = {"BufNew", "BufRead"},
         config = function()
             g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "markdown", "dashboard"}
         end
@@ -453,8 +453,7 @@ local plugins = {
     },
     {
         "nvim-telescope/telescope.nvim",
-        lazy = true,
-        event = {"BufNew", "BufReadPre"},
+        cmd = "Telescope",
         config = function()
             local telescope = require"telescope"
             telescope.setup {
@@ -501,7 +500,7 @@ local plugins = {
     },
     {
         "januswel/fencja.vim",
-        event = "BufReadPre"
+        event = "BufRead"
     },
 
     -- git
@@ -532,6 +531,7 @@ local plugins = {
     -- language support
     {
         "Decodetalkers/csv-tools.lua",
+        event = {"BufWritePre", "BufReadPre"},
         ft = "csv",
         config = function ()
             require"csvtools".setup {}
@@ -558,7 +558,7 @@ local plugins = {
     },
     {
         "neovim/nvim-lspconfig",
-        event = {"BufNew", "BufReadPre"},
+        event = {"BufWritePre", "BufReadPre"},
         config = function()
             local lspconfig = require"lspconfig"
             local util = require"lspconfig/util"
