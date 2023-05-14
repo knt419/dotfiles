@@ -241,6 +241,28 @@ local plugins = {
         event = "VimEnter",
         config = function()
             local starter = require('mini.starter')
+            local footer_packages = (function()
+                local count = 0
+                local startup = 0
+                local timer = vim.loop.new_timer()
+                timer:start(0, 1000, vim.schedule_wrap(function()
+                    local status, lazy = pcall(require, 'lazy')
+                    if status then
+                        count = lazy.stats().count
+                        startup = lazy.stats().startuptime
+                    end
+                    MiniStarter.refresh()
+                    if startup ~= 0 then
+                        timer:stop()
+                        return
+                    end
+                end))
+
+                return function ()
+                    return 'neovim loaded ' .. count .. ' packages, ' .. string.format('%.2f', startup) .. 'ms to launch 🚀'
+                end
+            end)()
+
             starter.setup({
                 evaluate_single = true,
                 header =
@@ -252,10 +274,10 @@ local plugins = {
                             " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝\n" ..
                             "\n"
                 ,
-                footer = "\n\n\n\n\n",
+                footer = footer_packages,
                 items = {
                 starter.sections.builtin_actions(),
-                starter.sections.recent_files(10, false),
+                starter.sections.recent_files(9, false),
                 },
                 content_hooks = {
                 starter.gen_hook.adding_bullet(),
