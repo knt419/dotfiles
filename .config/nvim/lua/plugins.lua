@@ -252,7 +252,7 @@ local plugins = {
                             " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝\n" ..
                             "\n"
                 ,
-                footer = "",
+                footer = "\n\n\n\n\n",
                 items = {
                 starter.sections.builtin_actions(),
                 starter.sections.recent_files(10, false),
