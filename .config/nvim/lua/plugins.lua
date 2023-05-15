@@ -181,69 +181,45 @@ local plugins = {
             cmd.highlight("default link IndentLine Whitespace")
         end,
     },
-    -- {
-    --     "akinsho/bufferline.nvim",
-    --     event = {"BufNew", "BufRead"},
-    --     config = function()
-    --         require"bufferline".setup {
-    --             options = {
-    --                 diagnostics = "nvim_lsp"
-    --             },
-    --             highlights = {
-    --                 buffer_selected = {
-    --                     bold = true
-    --                 }
-    --             }
-    --         }
-    --     end,
-    --     dependencies = "nvim-tree/nvim-web-devicons"
-    -- },
-    -- {
-    --     "echasnovski/mini.tabline",
-    --     event = {"BufNew", "BufRead"},
-    --     config = function ()
-    --         require"mini.tabline".setup {}
-    --     end
-    -- },
     {
         "willothy/nvim-cokeline",
         event = {"BufNew", "BufRead"},
         config = function ()
-            local get_hex = require('cokeline/utils').get_hex
+            local get_hex = require"cokeline/utils".get_hex
 
-            require('cokeline').setup({
-            default_hl = {
-                fg = function(buffer)
-                return
-                    buffer.is_focused
-                    and get_hex('Normal', 'fg')
-                    or get_hex('Comment', 'fg')
-                end,
-                bg = 'NONE',
-            },
+            require"cokeline".setup {
+                default_hl = {
+                    fg = function(buffer)
+                    return
+                        buffer.is_focused
+                        and get_hex('Normal', 'fg')
+                        or get_hex('Comment', 'fg')
+                    end,
+                    bg = 'NONE',
+                },
 
-            components = {
-                {
-                text = function(buffer) return (buffer.index ~= 1) and '│' or '' end,
-                fg = get_hex('Normal', 'fg')
+                components = {
+                    {
+                        text = function(buffer) return (buffer.index ~= 1) and '│' or '' end,
+                        fg = get_hex('Normal', 'fg')
+                    },
+                    {
+                        text = function(buffer) return '  ' .. buffer.devicon.icon end,
+                        fg = function(buffer) return buffer.devicon.color end,
+                    },
+                    {
+                        text = function(buffer) return ' ' .. buffer.filename .. '  ' end,
+                        style = function(buffer) return buffer.is_focused and 'bold' or nil end,
+                    },
+                    {
+                        text = '',
+                        delete_buffer_on_left_click = true,
+                    },
+                    {
+                        text = '  ',
+                    },
                 },
-                {
-                text = function(buffer) return '  ' .. buffer.devicon.icon end,
-                fg = function(buffer) return buffer.devicon.color end,
-                },
-                {
-                text = function(buffer) return ' ' .. buffer.filename .. '  ' end,
-                style = function(buffer) return buffer.is_focused and 'bold' or nil end,
-                },
-                {
-                text = '',
-                delete_buffer_on_left_click = true,
-                },
-                {
-                text = '  ',
-                },
-            },
-            })
+            }
         end
     },
     {
@@ -258,28 +234,6 @@ local plugins = {
         "norcalli/nvim-colorizer.lua",
         event = {"BufNew", "BufRead"},
     },
-    -- {
-    --     "goolord/alpha-nvim",
-    --     event = "VimEnter",
-    --     config = function ()
-    --         local alpha = require"alpha"
-    --         local startify = require"alpha.themes.startify"
-
-    --         startify.section.header.val = {
-    --                         " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗",
-    --                         " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║",
-    --                         " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║",
-    --                         " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║",
-    --                         " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║",
-    --                         " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝",
-    --                         ""
-    --                     }
-    --         alpha.setup(startify.config)
-    --     end,
-    --     keys = {
-    --         { "<Up>", "<Cmd>Alpha<CR>" },
-    --     }
-    -- },
     {
         "echasnovski/mini.starter",
         event = "VimEnter",
