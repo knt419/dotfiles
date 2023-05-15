@@ -84,6 +84,13 @@ local plugins = {
         "alexeyneu/blue-moon",
         lazy = true
     },
+    {
+        "rmehri01/onenord.nvim",
+        lazy = true,
+        config = function ()
+            require"onenord".setup {}
+        end
+    },
 
     -- editor display
     {
@@ -108,7 +115,16 @@ local plugins = {
     },
     {
         "petertriho/nvim-scrollbar",
-        event = "BufNew",
+        event = {
+            "BufWinEnter",
+            "CmdwinLeave",
+            "TabEnter",
+            "TermEnter",
+            "TextChanged",
+            "VimResized",
+            "WinEnter",
+            "WinScrolled",
+        },
         config = function ()
             require"scrollbar".setup {
                 marks = {
@@ -155,19 +171,6 @@ local plugins = {
             "rcarriga/nvim-notify"
         }
     },
-    -- {
-    --     "lukas-reineke/indent-blankline.nvim",
-    --     event = "BufEnter",
-    --     config = function()
-    --         require"indent_blankline".setup {
-    --             show_current_context = true,
-    --             show_current_context_start = true,
-    --             buftype_exclude = {"help", "terminal"},
-    --             filetype_exclude = {"startify", "dashboard", "alpha", "mason", "lazy", "starter"},
-    --             use_treesitter = true
-    --         }
-    --     end
-    -- },
     {
         'nvimdev/indentmini.nvim',
         event = {"BufWrite", "BufRead"},
@@ -180,7 +183,7 @@ local plugins = {
     },
     -- {
     --     "akinsho/bufferline.nvim",
-    --     event = "UIEnter",
+    --     event = {"BufNew", "BufRead"},
     --     config = function()
     --         require"bufferline".setup {
     --             options = {
@@ -195,11 +198,52 @@ local plugins = {
     --     end,
     --     dependencies = "nvim-tree/nvim-web-devicons"
     -- },
+    -- {
+    --     "echasnovski/mini.tabline",
+    --     event = {"BufNew", "BufRead"},
+    --     config = function ()
+    --         require"mini.tabline".setup {}
+    --     end
+    -- },
     {
-        "echasnovski/mini.tabline",
+        "willothy/nvim-cokeline",
         event = {"BufNew", "BufRead"},
         config = function ()
-            require"mini.tabline".setup {}
+            local get_hex = require('cokeline/utils').get_hex
+
+            require('cokeline').setup({
+            default_hl = {
+                fg = function(buffer)
+                return
+                    buffer.is_focused
+                    and get_hex('Normal', 'fg')
+                    or get_hex('Comment', 'fg')
+                end,
+                bg = 'NONE',
+            },
+
+            components = {
+                {
+                text = function(buffer) return (buffer.index ~= 1) and '│' or '' end,
+                fg = get_hex('Normal', 'fg')
+                },
+                {
+                text = function(buffer) return '  ' .. buffer.devicon.icon end,
+                fg = function(buffer) return buffer.devicon.color end,
+                },
+                {
+                text = function(buffer) return ' ' .. buffer.filename .. '  ' end,
+                style = function(buffer) return buffer.is_focused and 'bold' or nil end,
+                },
+                {
+                text = '',
+                delete_buffer_on_left_click = true,
+                },
+                {
+                text = '  ',
+                },
+            },
+            })
         end
     },
     {
@@ -708,6 +752,7 @@ local plugins = {
             cmp.setup.cmdline(
                 "/",
                 {
+                    mapping = cmp.mapping.preset.cmdline(),
                     sources = {
                         {name = "buffer"}
                     }
@@ -716,6 +761,7 @@ local plugins = {
             cmp.setup.cmdline(
                 ":",
                 {
+                    mapping = cmp.mapping.preset.cmdline(),
                     sources = cmp.config.sources(
                         {
                             {name = "async_path"}
