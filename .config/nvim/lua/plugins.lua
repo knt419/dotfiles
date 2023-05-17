@@ -181,44 +181,64 @@ local plugins = {
             cmd.highlight("default link IndentLine Whitespace")
         end,
     },
+    -- {
+    --     "willothy/nvim-cokeline",
+    --     event = {"BufNew", "BufRead"},
+    --     config = function ()
+    --         local get_hex = require"cokeline/utils".get_hex
+
+    --         require"cokeline".setup {
+    --             default_hl = {
+    --                 fg = function(buffer)
+    --                 return
+    --                     buffer.is_focused
+    --                     and get_hex('Normal', 'fg')
+    --                     or get_hex('Comment', 'fg')
+    --                 end,
+    --                 bg = 'NONE',
+    --             },
+
+    --             components = {
+    --                 {
+    --                     text = function(buffer) return (buffer.index ~= 1) and '│' or '' end,
+    --                     fg = get_hex('Normal', 'fg')
+    --                 },
+    --                 {
+    --                     text = function(buffer) return '  ' .. buffer.devicon.icon end,
+    --                     fg = function(buffer) return buffer.devicon.color end,
+    --                 },
+    --                 {
+    --                     text = function(buffer) return ' ' .. buffer.filename .. '  ' end,
+    --                     style = function(buffer) return buffer.is_focused and 'bold' or nil end,
+    --                 },
+    --                 {
+    --                     text = '',
+    --                     delete_buffer_on_left_click = true,
+    --                 },
+    --                 {
+    --                     text = '  ',
+    --                 },
+    --             },
+    --         }
+    --     end
+    -- },
+    -- {
+    --     "nvimdev/whiskyline.nvim",
+    --     event = {"BufNew", "BufRead"},
+    --     dependencies = {"nvim-tree/nvim-web-devicons"},
+    --     config = function()
+    --         require"whiskyline".setup {
+    --             bg = '#3B3E48'
+    --         }
+    --     end
+    -- },
     {
-        "willothy/nvim-cokeline",
+        "ojroques/nvim-hardline",
         event = {"BufNew", "BufRead"},
         config = function ()
-            local get_hex = require"cokeline/utils".get_hex
-
-            require"cokeline".setup {
-                default_hl = {
-                    fg = function(buffer)
-                    return
-                        buffer.is_focused
-                        and get_hex('Normal', 'fg')
-                        or get_hex('Comment', 'fg')
-                    end,
-                    bg = 'NONE',
-                },
-
-                components = {
-                    {
-                        text = function(buffer) return (buffer.index ~= 1) and '│' or '' end,
-                        fg = get_hex('Normal', 'fg')
-                    },
-                    {
-                        text = function(buffer) return '  ' .. buffer.devicon.icon end,
-                        fg = function(buffer) return buffer.devicon.color end,
-                    },
-                    {
-                        text = function(buffer) return ' ' .. buffer.filename .. '  ' end,
-                        style = function(buffer) return buffer.is_focused and 'bold' or nil end,
-                    },
-                    {
-                        text = '',
-                        delete_buffer_on_left_click = true,
-                    },
-                    {
-                        text = '  ',
-                    },
-                },
+            require"hardline".setup {
+                bufferline = true,
+                theme = 'nordic',
             }
         end
     },
@@ -287,16 +307,6 @@ local plugins = {
         keys = {
             { "<Up>", "<Cmd>lua MiniStarter.open()<CR>" }
         }
-    },
-    {
-        "nvimdev/whiskyline.nvim",
-        event = {"BufNew", "BufRead"},
-        dependencies = {"nvim-tree/nvim-web-devicons"},
-        config = function()
-            require"whiskyline".setup {
-                bg = '#3B3E48'
-            }
-        end
     },
     {
         "rickhowe/diffchar.vim",

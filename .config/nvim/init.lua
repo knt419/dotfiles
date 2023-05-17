@@ -175,7 +175,6 @@ keymap.set("n", ";", ":")
 keymap.set("n", "<CR><CR>", "o<Esc>", {silent = true})
 keymap.set("n", "<Leader>q", "<Cmd>bd<CR>", {silent = true})
 keymap.set("n", "<Leader>n", "<Cmd>enew<CR>", {silent = true})
-keymap.set("n", "<Leader><CR>", "<Cmd>lua ReloadConfig()<CR>", {silent = false})
 keymap.set("n", "<C-n>", "*", {silent = true})
 keymap.set("n", "<C-p>", "#", {silent = true})
 keymap.set("c", "<C-v>", "<C-r>+", {silent = true})
@@ -240,17 +239,6 @@ _G.my_ntab_r_function = function()
     else
         return "<C-w>W"
     end
-end
-
-_G.ReloadConfig = function()
-    for name, _ in pairs(package.loaded) do
-        if name:match("^user") and not name:match("nvim-tree") then
-            package.loaded[name] = nil
-        end
-    end
-
-    dofile(vim.env.MYVIMRC)
-    vim.notify("Nvim configuration reloaded!", vim.log.levels.INFO)
 end
 
 -- autocmd
