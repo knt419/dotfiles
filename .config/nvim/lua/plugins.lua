@@ -162,6 +162,7 @@ local plugins = {
                     }
                 },
                 presets = {
+                    -- command_palette = true,
                     inc_rename = true
                 }
             })
@@ -259,28 +260,6 @@ local plugins = {
         event = "VimEnter",
         config = function()
             local starter = require('mini.starter')
-            local footer_packages = (function()
-                local count = 0
-                local startup = 0
-                local timer = vim.loop.new_timer()
-                timer:start(0, 1000, vim.schedule_wrap(function()
-                    local status, lazy = pcall(require, 'lazy')
-                    if status then
-                        count = lazy.stats().count
-                        startup = lazy.stats().startuptime
-                    end
-                    MiniStarter.refresh()
-                    if startup ~= 0 then
-                        timer:stop()
-                        return
-                    end
-                end))
-
-                return function ()
-                    return 'neovim loaded ' .. count .. ' packages, ' .. string.format('%.2f', startup) .. 'ms to launch 🚀'
-                end
-            end)()
-
             starter.setup({
                 evaluate_single = true,
                 header =
@@ -292,16 +271,28 @@ local plugins = {
                             " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝\n" ..
                             "\n"
                 ,
-                footer = footer_packages,
                 items = {
-                starter.sections.builtin_actions(),
-                starter.sections.recent_files(9, false),
+                    starter.sections.recent_files(9, false, false),
+                    { name = "open file", action = "Telescope frecency theme=ivy", section = "Telescope" },
+                    { name = "file browser", action = "lua require'telescope'.extensions.file_browser.file_browser()", section = "Telescope" },
+                    { name = "init.lua", action = "e $MYVIMRC", section = "Config" },
+                    { name = "plugin.lua", action = "e ~/.config/nvim/lua/plugins.lua", section = "Config" },
+                    starter.sections.builtin_actions(),
                 },
                 content_hooks = {
-                starter.gen_hook.adding_bullet(),
-                starter.gen_hook.indexing('all', { 'Builtin actions' }),
-                starter.gen_hook.aligning('center', 'center'),
+                    starter.gen_hook.adding_bullet(),
+                    starter.gen_hook.indexing('all', { 'Telescope', 'Config', 'Builtin actions' } ),
+                    starter.gen_hook.aligning('center', 'center'),
                 },
+            })
+            vim.api.nvim_create_autocmd("User", {
+                pattern = "LazyVimStarted",
+                callback = function()
+                    local stats = require"lazy".stats()
+                    local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
+                    starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages, ' .. ms .. 'ms to launch 🚀'
+                    pcall(starter.refresh)
+                end,
             })
         end,
         keys = {
@@ -772,9 +763,37 @@ local plugins = {
 }
 
 local lazyopt = {
+    defaults = {
+        lazy = true,
+    },
     concurrency = 8,
     git = {
         timeout = 300
+    },
+    performance = {
+        rtp = {
+            disabled_plugins = {
+                "gzip",
+                "man",
+                "matchit",
+                "matchparen",
+                "shada_plugin",
+                "tarPlugin",
+                "tar",
+                "zipPlugin",
+                "zip",
+                "netrwPlugin",
+                "netrw",
+                "2html_plugin",
+                "getscript",
+                "getscriptPlugin",
+                "logipat",
+                "filetype",
+                "tohtml",
+                "tutor",
+                "spellfile"
+            },
+        }
     }
 }
 
