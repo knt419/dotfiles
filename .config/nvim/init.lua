@@ -19,36 +19,7 @@ local env = vim.env
 local keymap = vim.keymap
 local api = vim.api
 
--- reset autocmd
-cmd [[augroup MyAutoCmd]]
-cmd [[autocmd!]]
-cmd [[augroup END]]
-
 cmd [[cd ~]]
-
--- disable plugins
--- local disabled_built_ins = {
---     "gzip",
---     "man",
---     "matchit",
---     "matchparen",
---     "shada_plugin",
---     "tarPlugin",
---     "tar",
---     "zipPlugin",
---     "zip",
---     "netrwPlugin",
---     "netrw",
---     "2html_plugin",
---     "getscript",
---     "getscriptPlugin",
---     "logipat",
---     "filetype"
--- }
-
--- for i in pairs(disabled_built_ins) do
---     g["loaded_" .. disabled_built_ins[i]] = 1
--- end
 
 -- option
 opt.encoding = "utf-8"
@@ -243,27 +214,22 @@ _G.my_ntab_r_function = function()
 end
 
 -- autocmd
--- cmd [[autocmd MyAutoCmd QuickFixCmdPost *grep* cwindow]]
 api.nvim_create_autocmd( "QuickFixCmdPost", {
     pattern = "*grep*",
     command = "cwindow"
 })
--- cmd [[autocmd MyAutoCmd VimEnter,VimResized * execute "normal <C-w>="]]
 api.nvim_create_autocmd({"VimEnter", "VimResized"}, {
     pattern = "*",
     command = "normal <C-w>="
 })
--- cmd [[autocmd MyAutoCmd TermOpen * setlocal nonumber]]
 api.nvim_create_autocmd("TermOpen", {
     pattern = "*",
     command = "setlocal nonumber"
 })
--- cmd [[autocmd MyAutoCmd TermOpen * let $VISUAL = "nvim --server " .. $NVIM .. " --remote"]]
 api.nvim_create_autocmd("TermOpen", {
     pattern = "*",
     command = [[let $VISUAL = "nvim --server " .. $NVIM .. " --remote"]]
 })
--- cmd [[autocmd MyAutoCmd CursorMoved,CursorMovedI,WinLeave * if &cursorline | setlocal nocursorline | endif]]
 api.nvim_create_autocmd({"CursorMoved", "CursorMovedI", "WinLeave"}, {
     pattern = "*",
     callback = function ()
@@ -272,15 +238,10 @@ api.nvim_create_autocmd({"CursorMoved", "CursorMovedI", "WinLeave"}, {
         end
     end
 })
--- cmd [[autocmd MyAutoCmd CursorHold,CursorHoldI * setlocal cursorline]]
 api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
     pattern = "*",
     command = "setlocal cursorline"
 })
--- cmd [[augroup highlighted_yank]]
--- cmd [[autocmd!]]
--- cmd [[autocmd TextYankPost * silent! lua vim.highlight.on_yank{higroup="IncSearch", timeout=700}]]
--- cmd [[augroup END]]
 api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
     callback = function() vim.highlight.on_yank{higroup="IncSearch", timeout=700} end

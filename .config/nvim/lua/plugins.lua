@@ -26,10 +26,10 @@ g.sqlite_clib_path = fn.substitute(fn.stdpath("data"), "\\", "/", "g") .. "/sqli
 local plugins = {
 
     -- performance improve
-    {
-        "nathom/filetype.nvim",
-        event = {"BufWritePre", "BufReadPre"}
-    },
+    -- {
+    --     "nathom/filetype.nvim",
+    --     event = {"BufWritePre", "BufReadPre"}
+    -- },
 
     -- colorscheme
     {
