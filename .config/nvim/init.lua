@@ -26,28 +26,28 @@ cmd [[augroup END]]
 cmd [[cd ~]]
 
 -- disable plugins
-local disabled_built_ins = {
-    "gzip",
-    "man",
-    "matchit",
-    "matchparen",
-    "shada_plugin",
-    "tarPlugin",
-    "tar",
-    "zipPlugin",
-    "zip",
-    "netrwPlugin",
-    "netrw",
-    "2html_plugin",
-    "getscript",
-    "getscriptPlugin",
-    "logipat",
-    "filetype"
-}
+-- local disabled_built_ins = {
+--     "gzip",
+--     "man",
+--     "matchit",
+--     "matchparen",
+--     "shada_plugin",
+--     "tarPlugin",
+--     "tar",
+--     "zipPlugin",
+--     "zip",
+--     "netrwPlugin",
+--     "netrw",
+--     "2html_plugin",
+--     "getscript",
+--     "getscriptPlugin",
+--     "logipat",
+--     "filetype"
+-- }
 
-for i in pairs(disabled_built_ins) do
-    g["loaded_" .. disabled_built_ins[i]] = 1
-end
+-- for i in pairs(disabled_built_ins) do
+--     g["loaded_" .. disabled_built_ins[i]] = 1
+-- end
 
 -- option
 opt.encoding = "utf-8"
