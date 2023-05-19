@@ -3,6 +3,7 @@ local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
+local api = vim.api
 
 local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -285,7 +286,7 @@ local plugins = {
                     starter.gen_hook.aligning('center', 'center'),
                 },
             })
-            vim.api.nvim_create_autocmd("User", {
+            api.nvim_create_autocmd("User", {
                 pattern = "LazyVimStarted",
                 callback = function()
                     local stats = require"lazy".stats()
@@ -799,17 +800,21 @@ local lazyopt = {
 
 require("lazy").setup(plugins, lazyopt)
 
--- functions
+-- autocmd
 
-_G.my_diffenter_function = function()
-    cmd [[DisableWhitespace]]
-end
+api.nvim_create_autocmd("OptionSet", {
+    pattern = "diff",
+    command = "DisableWhitespace"
+})
 
-_G.my_diffexit_function = function()
-    cmd [[EnableWhitespace]]
-    cmd [[diffoff]]
-end
-
-cmd [[autocmd MyAutoCmd InsertLeave * silent! pclose!]]
-cmd [[autocmd MyAutoCmd OptionSet diff if &diff | call v:lua.my_diffenter_function() | endif]]
-cmd [[autocmd MyAutoCmd WinEnter * if (winnr('$') == 1) && (getbufvar(winbufnr(0), '&diff')) == 1 | call v:lua.my_diffexit_function() | endif]]
+api.nvim_create_autocmd("WinEnter", {
+    pattern = "*",
+    callback = function()
+        if fn.winlayout()[1] == "leaf"
+            and fn.tabpagenr("$") == 1
+            and vim.wo.diff == true then
+            cmd [[EnableWhitespace]]
+            vim.wo.diff = false
+        end
+    end,
+})
