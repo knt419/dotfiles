@@ -26,10 +26,6 @@ g.sqlite_clib_path = fn.substitute(fn.stdpath("data"), "\\", "/", "g") .. "/sqli
 local plugins = {
 
     -- performance improve
-    -- {
-    --     "nathom/filetype.nvim",
-    --     event = {"BufWritePre", "BufReadPre"}
-    -- },
 
     -- colorscheme
     {
@@ -278,6 +274,7 @@ local plugins = {
                     { name = "file browser", action = "lua require'telescope'.extensions.file_browser.file_browser()", section = "Telescope" },
                     { name = "init.lua", action = "e $MYVIMRC", section = "Config" },
                     { name = "plugin.lua", action = "e ~/.config/nvim/lua/plugins.lua", section = "Config" },
+                    { name = "Lazy.nvim", action = "Lazy", section = "Config" },
                     starter.sections.builtin_actions(),
                 },
                 content_hooks = {
