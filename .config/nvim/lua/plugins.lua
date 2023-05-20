@@ -32,41 +32,41 @@ local plugins = {
         "tyrannicaltoucan/vim-deep-space",
         lazy = true
     },
-    -- {
-    --     "rebelot/kanagawa.nvim",
-    --     lazy = true,
-    --     config = function ()
-    --         require"kanagawa".setup{
-    --             commentStyle = { italic = false },
-    --             keywordStyle = { italic = false },
-    --             dimInactive = true
-    --         }
-    --     end
-    -- },
-    -- {
-    --     "marko-cerovac/material.nvim",
-    --     lazy = true,
-    --     config = function()
-    --         g.material_style = "darker"
-    --         require"material".setup {
-    --             contrast = {
-    --                 floating_windows = true,
-    --                 non_current_windows = true
-    --             },
-    --             plugins = {
-    --                 "dashboard",
-    --                 "gitsigns",
-    --                 "indent-blankline",
-    --                 "nvim-cmp",
-    --                 "nvim-web-devicons",
-    --                 "telescope"
-    --             }
-    --         }
-    --     end,
-    --     keys = {
-    --         { "<Leader>m", "<Cmd>lua require'material.functions'.find_style()<CR>", silent = true },
-    --     }
-    -- },
+    {
+        "rebelot/kanagawa.nvim",
+        lazy = true,
+        config = function ()
+            require"kanagawa".setup{
+                commentStyle = { italic = false },
+                keywordStyle = { italic = false },
+                dimInactive = true
+            }
+        end
+    },
+    {
+        "marko-cerovac/material.nvim",
+        lazy = true,
+        config = function()
+            g.material_style = "darker"
+            require"material".setup {
+                contrast = {
+                    floating_windows = true,
+                    non_current_windows = true
+                },
+                plugins = {
+                    "dashboard",
+                    "gitsigns",
+                    "indent-blankline",
+                    "nvim-cmp",
+                    "nvim-web-devicons",
+                    "telescope"
+                }
+            }
+        end,
+        keys = {
+            { "<Leader>m", "<Cmd>lua require'material.functions'.find_style()<CR>", silent = true },
+        }
+    },
     {
         "sainnhe/edge",
         lazy = true,
@@ -77,10 +77,10 @@ local plugins = {
             g.edge_dim_inactive_windows = 1
         end
     },
-    -- {
-    --     "alexeyneu/blue-moon",
-    --     lazy = true
-    -- },
+    {
+        "alexeyneu/blue-moon",
+        lazy = true
+    },
     {
         "rmehri01/onenord.nvim",
         lazy = true,
@@ -103,7 +103,7 @@ local plugins = {
     },
     {
         "kevinhwang91/nvim-hlslens",
-        event = {"BufNew", "BufRead"},
+        event = "CmdlineEnter",
         config = function ()
             require"scrollbar.handlers.search".setup({
                 override_lens = function () end,
@@ -112,11 +112,7 @@ local plugins = {
     },
     {
         "petertriho/nvim-scrollbar",
-        event = {
-            "BufRead",
-            "TabEnter",
-            "WinEnter",
-        },
+        event = {"BufNewFile", "BufRead"},
         config = function ()
             require"scrollbar".setup {
                 marks = {
@@ -143,7 +139,7 @@ local plugins = {
     },
     {
         "folke/noice.nvim",
-        event = "VeryLazy",
+        event = {"CmdlineEnter", "BufNewFile", "BufRead"},
         config = function()
             require("noice").setup({
                 lsp = {
@@ -154,7 +150,6 @@ local plugins = {
                     }
                 },
                 presets = {
-                    -- command_palette = true,
                     inc_rename = true
                 }
             })
@@ -166,7 +161,7 @@ local plugins = {
     },
     {
         'nvimdev/indentmini.nvim',
-        event = {"BufWrite", "BufRead"},
+        event = {"BufNewFile", "BufRead"},
         config = function()
             require"indentmini".setup {
                 exclude = {"mason", "lazy", "starter"}
@@ -225,19 +220,9 @@ local plugins = {
     --         }
     --     end
     -- },
-    -- {
-    --     "ojroques/nvim-hardline",
-    --     event = {"BufNew", "BufRead"},
-    --     config = function ()
-    --         require"hardline".setup {
-    --             bufferline = true,
-    --             theme = 'nordic',
-    --         }
-    --     end
-    -- },
     {
         "nvim-lualine/lualine.nvim",
-        event = {"BufNew", "BufRead"},
+        event = {"BufNewFile", "BufRead"},
         config = function ()
             require"lualine".setup {
                 options = {
@@ -266,7 +251,7 @@ local plugins = {
     },
     {
         "norcalli/nvim-colorizer.lua",
-        event = {"BufNew", "BufRead"},
+        event = {"BufNewFile", "BufRead"},
     },
     {
         "echasnovski/mini.starter",
@@ -286,12 +271,12 @@ local plugins = {
                 ,
                 items = {
                     starter.sections.recent_files(9, false, false),
-                    { name = "Open file 📃", action = "Telescope frecency theme=ivy", section = "Telescope" },
-                    { name = "File browser 📂", action = "lua require'telescope'.extensions.file_browser.file_browser()", section = "Telescope" },
-                    { name = "Init.lua 🛠", action = "e $MYVIMRC", section = "Config" },
-                    { name = "Plugin.lua 🔌", action = "e ~/.config/nvim/lua/plugins.lua", section = "Config" },
-                    { name = "Lazy.nvim 💤", action = "Lazy", section = "Config" },
-                    { name = "Mason 🔨", action = "Mason", section = "Config" },
+                    { name = "Open file", action = "Telescope frecency theme=ivy", section = "Telescope" },
+                    { name = "File browser", action = "lua require'telescope'.extensions.file_browser.file_browser()", section = "Telescope" },
+                    { name = "Init.lua", action = "e $MYVIMRC", section = "Config" },
+                    { name = "Plugin.lua", action = "e ~/.config/nvim/lua/plugins.lua", section = "Config" },
+                    { name = "Lazy.nvim", action = "Lazy", section = "Config" },
+                    { name = "Mason", action = "Mason", section = "Config" },
                     starter.sections.builtin_actions(),
                 },
                 content_hooks = {
@@ -309,6 +294,7 @@ local plugins = {
                     pcall(starter.refresh)
                 end,
             })
+            cmd [[cd ~]]
         end,
         keys = {
             { "<Up>", "<Cmd>lua MiniStarter.open()<CR>" }
@@ -316,12 +302,26 @@ local plugins = {
     },
     {
         "rickhowe/diffchar.vim",
-        event = {"BufNew", "BufRead"},
+        event = "OptionSet diff"
     },
-    {
-        "yamatsum/nvim-cursorline",
-        event = {"BufNew", "BufRead"},
-    },
+    -- {
+    --     "yamatsum/nvim-cursorline",
+    --     event = {"BufNewFile", "BufRead"},
+    --     config = function ()
+    --         require('nvim-cursorline').setup {
+    --             cursorline = {
+    --                 enable = true,
+    --                 timeout = 700,
+    --                 number = false,
+    --             },
+    --             cursorword = {
+    --                 enable = true,
+    --                 min_length = 3,
+    --                 hl = { underline = true },
+    --             }
+    --         }
+    --     end
+    -- },
     {
         "nvim-treesitter/nvim-treesitter",
         event = {"BufWritePre", "BufReadPre"},
@@ -381,7 +381,7 @@ local plugins = {
         end
     },
     {
-        "rhysd/accelerated-jk",
+        "rainbowhxch/accelerated-jk.nvim",
         keys = {
             { "j", "<Plug>(accelerated_jk_gj)" },
             { "k", "<Plug>(accelerated_jk_gk)" }
@@ -389,14 +389,17 @@ local plugins = {
     },
     {
         "echasnovski/mini.surround",
-        event = {"BufNew", "BufRead"},
+        event = {"BufNewFile", "BufRead"},
         config = function()
             require"mini.surround".setup{}
         end
     },
     {
         "tpope/vim-commentary",
-        event = {"BufWritePre", "BufReadPre"},
+        keys = {
+            { "gc", "<Plug>Commentary", mode = {"x", "n", "o"} },
+            { "gcc", "<Plug>CommentaryLine" }
+        }
     },
     {
         "kana/vim-smartword",
@@ -409,7 +412,7 @@ local plugins = {
     },
     {
         "kana/vim-niceblock",
-        event = {"BufNew", "BufRead"},
+        event = {"BufNewFile", "BufRead"},
     },
     {
         "haya14busa/vim-asterisk",
@@ -435,9 +438,26 @@ local plugins = {
     },
     {
         "ntpeters/vim-better-whitespace",
-        event = {"BufNew", "BufRead"},
+        event = {"BufNewFile", "BufRead"},
         config = function()
             g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "markdown", "dashboard"}
+
+            api.nvim_create_autocmd("OptionSet", {
+                pattern = "diff",
+                command = "DisableWhitespace"
+            })
+
+            api.nvim_create_autocmd("WinEnter", {
+                pattern = "*",
+                callback = function()
+                    if fn.winlayout()[1] == "leaf"
+                        and fn.tabpagenr("$") == 1
+                        and vim.wo.diff == true then
+                        cmd [[EnableWhitespace]]
+                        vim.wo.diff = false
+                    end
+                end,
+            })
         end
     },
     {
@@ -453,7 +473,10 @@ local plugins = {
     },
 
     -- file/directory
-    {"equalsraf/neovim-gui-shim"},
+    {
+        "equalsraf/neovim-gui-shim",
+        event = "VeryLazy"
+    },
     {
         "aymericbeaumet/vim-symlink",
         event = "BufReadPre",
@@ -566,14 +589,16 @@ local plugins = {
 
     -- language support
     {
-        "Decodetalkers/csv-tools.lua",
-        event = {"BufWritePre", "BufReadPre"},
-        ft = "csv",
-        config = function ()
-            require"csvtools".setup {}
-        end
+        'cameron-wags/rainbow_csv.nvim',
+        config = true,
+        cmd = {
+            'RainbowAlign',
+            'RainbowDelim',
+            'RainbowDelimSimple',
+            'RainbowDelimQuoted',
+            'RainbowMultiDelim'
+        }
     },
-
     -- lsp/completion
     {
         "williamboman/mason.nvim",
@@ -646,7 +671,7 @@ local plugins = {
     },
     {
         "hrsh7th/cmp-cmdline",
-        event = "VeryLazy",
+        event = "CmdlineEnter",
     },
     {
         "L3MON4D3/LuaSnip",
@@ -814,21 +839,3 @@ local lazyopt = {
 
 require("lazy").setup(plugins, lazyopt)
 
--- autocmd
-
-api.nvim_create_autocmd("OptionSet", {
-    pattern = "diff",
-    command = "DisableWhitespace"
-})
-
-api.nvim_create_autocmd("WinEnter", {
-    pattern = "*",
-    callback = function()
-        if fn.winlayout()[1] == "leaf"
-            and fn.tabpagenr("$") == 1
-            and vim.wo.diff == true then
-            cmd [[EnableWhitespace]]
-            vim.wo.diff = false
-        end
-    end,
-})

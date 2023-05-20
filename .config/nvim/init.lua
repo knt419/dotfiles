@@ -19,8 +19,6 @@ local env = vim.env
 local keymap = vim.keymap
 local api = vim.api
 
-cmd [[cd ~]]
-
 -- option
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
@@ -163,8 +161,32 @@ keymap.set("n", "<S-Left>", "<C-w><")
 keymap.set("n", "<S-Right>", "<C-w>>")
 keymap.set("n", "<S-Up>", "<C-w>-")
 keymap.set("n", "<S-Down>", "<C-w>+")
-keymap.set("n", "<Tab>", "v:lua.my_ntab_function()", {expr = true})
-keymap.set("n", "<S-Tab>", "v:lua.my_ntab_r_function()", {expr = true})
+
+keymap.set("n", "<Tab>", function()
+                            if fn.winlayout()[1] == "leaf" then
+                                if fn.tabpagenr("$") <= 1
+                                    and fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
+                                        return "<Cmd>echo 'no buffer to switch.'<CR>"
+                                else
+                                    return "<Cmd>bn<CR>"
+                                end
+                            else
+                                return "<C-w>w"
+                            end
+                        end, {expr = true})
+keymap.set("n", "<S-Tab>", function()
+                            if fn.winlayout()[1] == "leaf" then
+                                if fn.tabpagenr("$") <= 1
+                                    and fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
+                                        return "<Cmd>echo 'no buffer to switch.'<CR>"
+                                else
+                                    return "<Cmd>bp<CR>"
+                                end
+                            else
+                                return "<C-w>W"
+                            end
+                        end, {expr = true})
+
 keymap.set("n", "<C-Left>", "<C-w>h")
 keymap.set("n", "<C-Right>", "<C-w>l")
 keymap.set("n", "<C-Up>", "<C-w>k")
@@ -179,39 +201,10 @@ keymap.set("n", "っd", "dd")
 keymap.set("n", "っy", "yy")
 keymap.set("i", "っ", "<Esc>")
 
+-- load plugins
 require"plugins"
 
-_G.my_ntab_function = function()
-    if fn.winlayout()[1] == "leaf" then
-        if fn.tabpagenr("$") <= 1
-            and fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
-                return "<Cmd>echo 'no buffer to switch.'<CR>"
-        else
-            return "<Cmd>bn<CR>"
-        end
-    else
-        return "<C-w>w"
-    end
-end
-
-_G.my_ntab_r_function = function()
-    if fn.winlayout()[1] == "leaf" then
-        if fn.tabpagenr("$") <= 1
-            and fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
-                return "<Cmd>echo 'no buffer to switch.'<CR>"
-        else
-            return "<Cmd>bp<CR>"
-        end
-    else
-        return "<C-w>W"
-    end
-end
-
 -- autocmd
-api.nvim_create_autocmd( "QuickFixCmdPost", {
-    pattern = "*grep*",
-    command = "cwindow"
-})
 api.nvim_create_autocmd({"VimEnter", "VimResized"}, {
     pattern = "*",
     command = "normal <C-w>="
