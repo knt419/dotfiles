@@ -183,12 +183,9 @@ require"plugins"
 
 _G.my_ntab_function = function()
     if fn.winlayout()[1] == "leaf" then
-        if fn.tabpagenr("$") <= 1 then
-            if fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
+        if fn.tabpagenr("$") <= 1
+            and fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
                 return "<Cmd>echo 'no buffer to switch.'<CR>"
-            else
-                return "<Cmd>bn<CR>"
-            end
         else
             return "<Cmd>bn<CR>"
         end
@@ -199,12 +196,9 @@ end
 
 _G.my_ntab_r_function = function()
     if fn.winlayout()[1] == "leaf" then
-        if fn.tabpagenr("$") <= 1 then
-            if fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
+        if fn.tabpagenr("$") <= 1
+            and fn.len(fn.getbufinfo({buflisted = 1})) <= 1 then
                 return "<Cmd>echo 'no buffer to switch.'<CR>"
-            else
-                return "<Cmd>bp<CR>"
-            end
         else
             return "<Cmd>bp<CR>"
         end

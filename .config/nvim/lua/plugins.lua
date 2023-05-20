@@ -32,41 +32,41 @@ local plugins = {
         "tyrannicaltoucan/vim-deep-space",
         lazy = true
     },
-    {
-        "rebelot/kanagawa.nvim",
-        lazy = true,
-        config = function ()
-            require"kanagawa".setup{
-                commentStyle = { italic = false },
-                keywordStyle = { italic = false },
-                dimInactive = true
-            }
-        end
-    },
-    {
-        "marko-cerovac/material.nvim",
-        lazy = true,
-        config = function()
-            g.material_style = "darker"
-            require"material".setup {
-                contrast = {
-                    floating_windows = true,
-                    non_current_windows = true
-                },
-                plugins = {
-                    "dashboard",
-                    "gitsigns",
-                    "indent-blankline",
-                    "nvim-cmp",
-                    "nvim-web-devicons",
-                    "telescope"
-                }
-            }
-        end,
-        keys = {
-            { "<Leader>m", "<Cmd>lua require'material.functions'.find_style()<CR>", silent = true },
-        }
-    },
+    -- {
+    --     "rebelot/kanagawa.nvim",
+    --     lazy = true,
+    --     config = function ()
+    --         require"kanagawa".setup{
+    --             commentStyle = { italic = false },
+    --             keywordStyle = { italic = false },
+    --             dimInactive = true
+    --         }
+    --     end
+    -- },
+    -- {
+    --     "marko-cerovac/material.nvim",
+    --     lazy = true,
+    --     config = function()
+    --         g.material_style = "darker"
+    --         require"material".setup {
+    --             contrast = {
+    --                 floating_windows = true,
+    --                 non_current_windows = true
+    --             },
+    --             plugins = {
+    --                 "dashboard",
+    --                 "gitsigns",
+    --                 "indent-blankline",
+    --                 "nvim-cmp",
+    --                 "nvim-web-devicons",
+    --                 "telescope"
+    --             }
+    --         }
+    --     end,
+    --     keys = {
+    --         { "<Leader>m", "<Cmd>lua require'material.functions'.find_style()<CR>", silent = true },
+    --     }
+    -- },
     {
         "sainnhe/edge",
         lazy = true,
@@ -77,10 +77,10 @@ local plugins = {
             g.edge_dim_inactive_windows = 1
         end
     },
-    {
-        "alexeyneu/blue-moon",
-        lazy = true
-    },
+    -- {
+    --     "alexeyneu/blue-moon",
+    --     lazy = true
+    -- },
     {
         "rmehri01/onenord.nvim",
         lazy = true,
@@ -113,14 +113,9 @@ local plugins = {
     {
         "petertriho/nvim-scrollbar",
         event = {
-            "BufWinEnter",
-            "CmdwinLeave",
+            "BufRead",
             "TabEnter",
-            "TermEnter",
-            "TextChanged",
-            "VimResized",
             "WinEnter",
-            "WinScrolled",
         },
         config = function ()
             require"scrollbar".setup {
