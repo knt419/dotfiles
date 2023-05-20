@@ -225,13 +225,34 @@ local plugins = {
     --         }
     --     end
     -- },
+    -- {
+    --     "ojroques/nvim-hardline",
+    --     event = {"BufNew", "BufRead"},
+    --     config = function ()
+    --         require"hardline".setup {
+    --             bufferline = true,
+    --             theme = 'nordic',
+    --         }
+    --     end
+    -- },
     {
-        "ojroques/nvim-hardline",
+        "nvim-lualine/lualine.nvim",
         event = {"BufNew", "BufRead"},
         config = function ()
-            require"hardline".setup {
-                bufferline = true,
-                theme = 'nordic',
+            require"lualine".setup {
+                options = {
+                    component_separators = { left = '', right = '' },
+                    section_separators = { left = '', right = '' },
+                    globalstatus = true,
+                },
+                tabline = {
+                    lualine_a = {'buffers'},
+                    lualine_b = {},
+                    lualine_c = {},
+                    lualine_x = {},
+                    lualine_y = {},
+                    lualine_z = {'tabs'}
+                }
             }
         end
     },
@@ -265,11 +286,11 @@ local plugins = {
                 ,
                 items = {
                     starter.sections.recent_files(9, false, false),
-                    { name = "open file", action = "Telescope frecency theme=ivy", section = "Telescope" },
-                    { name = "file browser", action = "lua require'telescope'.extensions.file_browser.file_browser()", section = "Telescope" },
-                    { name = "init.lua", action = "e $MYVIMRC", section = "Config" },
-                    { name = "plugin.lua", action = "e ~/.config/nvim/lua/plugins.lua", section = "Config" },
-                    { name = "Lazy.nvim", action = "Lazy", section = "Config" },
+                    { name = "Open file", action = "Telescope frecency theme=ivy", section = "Telescope" },
+                    { name = "File browser", action = "lua require'telescope'.extensions.file_browser.file_browser()", section = "Telescope" },
+                    { name = "Init.lua ", action = "e $MYVIMRC", section = "Config" },
+                    { name = "Plugin.lua ", action = "e ~/.config/nvim/lua/plugins.lua", section = "Config" },
+                    { name = "Lazy.nvim 💤", action = "Lazy", section = "Config" },
                     { name = "Mason", action = "Mason", section = "Config" },
                     starter.sections.builtin_actions(),
                 },
