@@ -275,10 +275,11 @@ local plugins = {
                     { name = "init.lua", action = "e $MYVIMRC", section = "Config" },
                     { name = "plugin.lua", action = "e ~/.config/nvim/lua/plugins.lua", section = "Config" },
                     { name = "Lazy.nvim", action = "Lazy", section = "Config" },
+                    { name = "Mason", action = "Mason", section = "Config" },
                     starter.sections.builtin_actions(),
                 },
                 content_hooks = {
-                    starter.gen_hook.adding_bullet(),
+                    starter.gen_hook.adding_bullet(" │ "),
                     starter.gen_hook.indexing('all', { 'Telescope', 'Config', 'Builtin actions' } ),
                     starter.gen_hook.aligning('center', 'center'),
                 },
