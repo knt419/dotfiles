@@ -169,62 +169,10 @@ local plugins = {
             cmd.highlight("default link IndentLine Whitespace")
         end,
     },
-    -- {
-    --     "willothy/nvim-cokeline",
-    --     event = {"BufNew", "BufRead"},
-    --     config = function ()
-    --         local get_hex = require"cokeline/utils".get_hex
-
-    --         require"cokeline".setup {
-    --             default_hl = {
-    --                 fg = function(buffer)
-    --                 return
-    --                     buffer.is_focused
-    --                     and get_hex('Normal', 'fg')
-    --                     or get_hex('Comment', 'fg')
-    --                 end,
-    --                 bg = 'NONE',
-    --             },
-
-    --             components = {
-    --                 {
-    --                     text = function(buffer) return (buffer.index ~= 1) and '│' or '' end,
-    --                     fg = get_hex('Normal', 'fg')
-    --                 },
-    --                 {
-    --                     text = function(buffer) return '  ' .. buffer.devicon.icon end,
-    --                     fg = function(buffer) return buffer.devicon.color end,
-    --                 },
-    --                 {
-    --                     text = function(buffer) return ' ' .. buffer.filename .. '  ' end,
-    --                     style = function(buffer) return buffer.is_focused and 'bold' or nil end,
-    --                 },
-    --                 {
-    --                     text = '',
-    --                     delete_buffer_on_left_click = true,
-    --                 },
-    --                 {
-    --                     text = '  ',
-    --                 },
-    --             },
-    --         }
-    --     end
-    -- },
-    -- {
-    --     "nvimdev/whiskyline.nvim",
-    --     event = {"BufNew", "BufRead"},
-    --     dependencies = {"nvim-tree/nvim-web-devicons"},
-    --     config = function()
-    --         require"whiskyline".setup {
-    --             bg = '#3B3E48'
-    --         }
-    --     end
-    -- },
     {
         "nvim-lualine/lualine.nvim",
         event = {"BufNewFile", "BufRead"},
         config = function ()
-            local utils = require('lualine.utils.utils')
             require"lualine".setup {
                 options = {
                     component_separators = { left = '', right = '' },
@@ -239,45 +187,45 @@ local plugins = {
                     }
                     },
                     lualine_b = {
-                        -- function() return '' end,
-                        'filename',
                         {
-                            'branch',
-                            icon = ''
+                            'filetype',
+                            icons_enabled = true,
+                            draw_empty = true,
+                            fmt = function ()
+                                return fn.expand('%:t')
+                            end,
+                            padding = { left = 2, right = 1 },
                         },
                         {
                             'diff',
-                            symbols = { added = ' ', modified = '󰝤 ', removed = ' ' }
+                            padding = { left = 1, right = 2 },
+                            symbols = { added = ' ', modified = ' ', removed = ' ' },
                         },
                     },
                     lualine_c = {
-                        -- {
-                        --     function ()
-                        --        return ':'
-                        --     end
-                        -- },
                         {
                             function()
                                 local msg = 'No Active Lsp'
                                 local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
                                 local clients = vim.lsp.get_active_clients()
                                 if next(clients) == nil then
-                                return msg
+                                    return msg
                                 end
                                 for _, client in ipairs(clients) do
-                                local filetypes = client.config.filetypes
-                                if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                                    return client.name
-                                end
+                                    local filetypes = client.config.filetypes
+                                    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+                                        return client.name
+                                    end
                                 end
                                 return msg
                             end,
-                            icon = ' LSP:',
-                            color = { fg = '#ffffff' },
+                            icon = ' LSP :',
+                            padding = { left = 2, right = 2 },
+                            color = { fg = '#d08f70' },
                         },
                         {
                             'diagnostics',
-                            symbols = { error = ' ', warn = ' ', info = ' ' }
+                            symbols ={ error = ' ', warn = ' ', info = ' ', hint = ' ' }
                         },
                     },
                     lualine_x = {'encoding', 'fileformat'},
@@ -291,12 +239,26 @@ local plugins = {
                     }},
                     lualine_b = {{
                         'buffers',
-                        separator = '│',
-                        use_mode_colors = true,
+                        symbols = {
+                                modified = ' ●',      -- Text to show when the buffer is modified
+                                alternate_file = '', -- Text to show to identify the alternate file
+                                directory =  '',     -- Text to show when the buffer is a directory
+                        },
                     }},
                     lualine_c = {},
                     lualine_x = {},
-                    lualine_y = {},
+                    lualine_y = {
+                        {
+                            function ()
+                                return fn.fnamemodify(fn.finddir(".git", ".;"), ":h:t")
+                            end,
+                            icon = ''
+                        },
+                        {
+                            'branch',
+                            icon = ''
+                        },
+                    },
                     lualine_z = {'tabs'}
                 }
             }
