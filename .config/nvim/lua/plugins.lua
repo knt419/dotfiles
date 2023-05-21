@@ -224,15 +224,47 @@ local plugins = {
         "nvim-lualine/lualine.nvim",
         event = {"BufNewFile", "BufRead"},
         config = function ()
+            local utils = require('lualine.utils.utils')
             require"lualine".setup {
                 options = {
                     component_separators = { left = '', right = '' },
                     section_separators = { left = '', right = '' },
                     globalstatus = true,
+                    colored = true,
+                },
+                sections = {
+                    lualine_a = { {
+                        function() return ' ' end,
+                        padding = 0
+                    }
+                    },
+                    lualine_b = {
+                        function() return '' end,
+                        {
+                            'branch',
+                            icon = ''
+                        },
+                        {
+                            'diff',
+                            symbols = { added = ' ', modified = '󰝤 ', removed = ' ' }
+                        },
+                        {
+                            'diagnostics',
+                            symbols = { error = ' ', warn = ' ', info = ' ' }
+                        },
+                    },
+                    lualine_c = {'filename'},
+                    lualine_x = {'encoding', 'fileformat', 'filetype'},
+                    lualine_y = {'progress', 'location'},
+                    lualine_z = {}
                 },
                 tabline = {
-                    lualine_a = {'buffers'},
-                    lualine_b = {},
+                    lualine_a = {},
+                    lualine_b = { {
+                        'buffers',
+                        separator = '│',
+                        use_mode_colors = true,
+                    }},
                     lualine_c = {},
                     lualine_x = {},
                     lualine_y = {},
