@@ -177,6 +177,7 @@ local plugins = {
                 options = {
                     component_separators = { left = '', right = '' },
                     section_separators = { left = '', right = '' },
+                    always_divide_middle = false,
                     globalstatus = true,
                     colored = true,
                 },
@@ -246,20 +247,21 @@ local plugins = {
                         },
                     }},
                     lualine_c = {},
-                    lualine_x = {},
-                    lualine_y = {
+                    lualine_x = {
                         {
                             function ()
                                 return fn.fnamemodify(fn.finddir(".git", ".;"), ":h:t")
                             end,
-                            icon = ''
+                            icon = '',
+                            padding = { left = 2, right = 1 }
                         },
                         {
                             'branch',
                             icon = ''
                         },
                     },
-                    lualine_z = {'tabs'}
+                    lualine_y = {'tabs' },
+                    lualine_z = {}
                 }
             }
         end
