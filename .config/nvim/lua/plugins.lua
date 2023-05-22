@@ -182,28 +182,51 @@ local plugins = {
                     colored = true,
                 },
                 sections = {
-                    lualine_a = { {
-                        function() return ' ' end,
-                        padding = 0
-                    }
-                    },
+                    lualine_a = {},
                     lualine_b = {
                         {
-                            'filetype',
-                            icons_enabled = true,
-                            draw_empty = true,
-                            fmt = function ()
-                                return fn.expand('%:t')
+                            function ()
+                                return '▊'
                             end,
-                            padding = { left = 2, right = 1 },
+                            color = { fg = '#51afef' },
+                            padding = 0
                         },
                         {
-                            'diff',
-                            padding = { left = 1, right = 2 },
-                            symbols = { added = ' ', modified = ' ', removed = ' ' },
+                            'filetype',
+                            icon_only = true,
+                        },
+                        {
+                            'filename',
+                            file_status = true,      -- Displays file status (readonly status, modified status)
+                            newfile_status = false,  -- Display new file status (new file means no write after created)
+                            path = 0,                -- 0: Just the filename
+                                                    -- 1: Relative path
+                                                    -- 2: Absolute path
+                                                    -- 3: Absolute path, with tilde as the home directory
+                                                    -- 4: Filename and parent dir, with tilde as the home directory
+
+                            shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
+                                                    -- for other components. (terrible name, any suggestions?)
+                            symbols = {
+                                modified = '[+]',      -- Text to show when the file is modified.
+                                readonly = '',      -- Text to show when the file is non-modifiable or readonly.
+                                unnamed = '[No Name]', -- Text to show for unnamed buffers.
+                                newfile = '[New]',     -- Text to show for newly created file before first write
+                            },
+                            padding = { left = 0, right = 1},
                         },
                     },
                     lualine_c = {
+                        {
+                            'diff',
+                            padding = { left = 1, right = 2},
+                            symbols = { added = ' ', modified = ' ', removed = ' ' },
+                        },
+                        {
+                            function ()
+                                return '%='
+                            end
+                        },
                         {
                             function()
                                 local msg = 'No Active Lsp'
@@ -220,7 +243,7 @@ local plugins = {
                                 end
                                 return msg
                             end,
-                            icon = ' LSP :',
+                            icon = ' ',
                             padding = { left = 2, right = 2 },
                             color = { fg = '#d08f70' },
                         },
@@ -229,8 +252,29 @@ local plugins = {
                             symbols ={ error = ' ', warn = ' ', info = ' ', hint = ' ' }
                         },
                     },
-                    lualine_x = {'encoding', 'fileformat'},
-                    lualine_y = {'progress', 'location'},
+                    lualine_x = {
+                        {
+                            'encoding',
+                            fmt = function (string)
+                                return string:upper()
+                            end
+                        },
+                        'fileformat',
+                        'progress',
+                        {
+                            'location',
+                            icon = '',
+                            padding = 0,
+                        },
+                        {
+                            function()
+                                return '▊'
+                            end,
+                            color = { fg = '#51afef' },
+                            padding = { left = 1, rihgt = 0 },
+                        },
+                    },
+                    lualine_y = {},
                     lualine_z = {}
                 },
                 tabline = {
@@ -252,7 +296,7 @@ local plugins = {
                             function ()
                                 return fn.fnamemodify(fn.finddir(".git", ".;"), ":h:t")
                             end,
-                            icon = '',
+                            icon = '',
                             padding = { left = 2, right = 1 }
                         },
                         {
