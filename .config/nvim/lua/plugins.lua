@@ -197,21 +197,15 @@ local plugins = {
                         },
                         {
                             'filename',
-                            file_status = true,      -- Displays file status (readonly status, modified status)
-                            newfile_status = false,  -- Display new file status (new file means no write after created)
-                            path = 0,                -- 0: Just the filename
-                                                    -- 1: Relative path
-                                                    -- 2: Absolute path
-                                                    -- 3: Absolute path, with tilde as the home directory
-                                                    -- 4: Filename and parent dir, with tilde as the home directory
-
-                            shorting_target = 40,    -- Shortens path to leave 40 spaces in the window
-                                                    -- for other components. (terrible name, any suggestions?)
+                            file_status = true,
+                            newfile_status = false,
+                            path = 0,
+                            shorting_target = 40,
                             symbols = {
-                                modified = '[+]',      -- Text to show when the file is modified.
-                                readonly = '',      -- Text to show when the file is non-modifiable or readonly.
-                                unnamed = '[No Name]', -- Text to show for unnamed buffers.
-                                newfile = '[New]',     -- Text to show for newly created file before first write
+                                modified = '[+]',
+                                readonly = '',
+                                unnamed = '[No Name]',
+                                newfile = '[New]',
                             },
                             padding = { left = 0, right = 1},
                         },
@@ -259,7 +253,10 @@ local plugins = {
                                 return string:upper()
                             end
                         },
-                        'fileformat',
+                        {
+                            'fileformat',
+                            padding = { left = 1, right = 2 },
+                        }
                     },
                     lualine_y = {
                         'progress',
@@ -373,7 +370,10 @@ local plugins = {
                     pcall(starter.refresh)
                 end,
             })
-            cmd [[cd ~]]
+            -- api.nvim_create_autocmd("User", {
+            --     pattern = "MiniStarterOpened",
+            --     command = "cd ~"
+            -- })
         end,
         keys = {
             { "<Up>", "<Cmd>lua MiniStarter.open()<CR>" }
