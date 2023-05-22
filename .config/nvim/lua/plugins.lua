@@ -260,10 +260,12 @@ local plugins = {
                             end
                         },
                         'fileformat',
+                    },
+                    lualine_y = {
                         'progress',
                         {
                             'location',
-                            icon = '',
+                            icon = '',
                             padding = 0,
                         },
                         {
@@ -274,22 +276,27 @@ local plugins = {
                             padding = { left = 1, rihgt = 0 },
                         },
                     },
-                    lualine_y = {},
                     lualine_z = {}
                 },
                 tabline = {
-                    lualine_a = {{
-                        function() return ' ' end,
-                        padding = 0
-                    }},
-                    lualine_b = {{
-                        'buffers',
-                        symbols = {
-                                modified = ' ●',      -- Text to show when the buffer is modified
-                                alternate_file = '', -- Text to show to identify the alternate file
-                                directory =  '',     -- Text to show when the buffer is a directory
+                    lualine_a = {},
+                    lualine_b = {
+                        {
+                            function ()
+                                return '▌'
+                            end,
+                            color = { fg = '#51afef' },
+                            padding = 0
                         },
-                    }},
+                        {
+                            'buffers',
+                            symbols = {
+                                    modified = ' ●',      -- Text to show when the buffer is modified
+                                    alternate_file = '', -- Text to show to identify the alternate file
+                                    directory =  '',     -- Text to show when the buffer is a directory
+                            }
+                        }
+                    },
                     lualine_c = {},
                     lualine_x = {
                         {
@@ -321,6 +328,9 @@ local plugins = {
     {
         "norcalli/nvim-colorizer.lua",
         event = {"BufNewFile", "BufRead"},
+        config = function ()
+            require"colorizer".setup()
+        end
     },
     {
         "echasnovski/mini.starter",
@@ -373,24 +383,6 @@ local plugins = {
         "rickhowe/diffchar.vim",
         event = "OptionSet diff"
     },
-    -- {
-    --     "yamatsum/nvim-cursorline",
-    --     event = {"BufNewFile", "BufRead"},
-    --     config = function ()
-    --         require('nvim-cursorline').setup {
-    --             cursorline = {
-    --                 enable = true,
-    --                 timeout = 700,
-    --                 number = false,
-    --             },
-    --             cursorword = {
-    --                 enable = true,
-    --                 min_length = 3,
-    --                 hl = { underline = true },
-    --             }
-    --         }
-    --     end
-    -- },
     {
         "nvim-treesitter/nvim-treesitter",
         event = {"BufWritePre", "BufReadPre"},
