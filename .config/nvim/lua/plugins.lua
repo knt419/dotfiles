@@ -366,7 +366,6 @@ local plugins = {
                 pattern = "LazyVimStarted",
                 callback = function()
                     local stats = require"lazy".stats()
-                    -- starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages, ' .. math.floor(stats.startuptime+0.5) .. 'ms to launch 🚀'
                     starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages, ' .. string.format("%.2f",stats.startuptime) .. 'ms to launch 🚀'
                     pcall(starter.refresh)
                 end,
