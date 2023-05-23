@@ -29,13 +29,10 @@ opt.writebackup = false
 opt.swapfile = false
 opt.backupdir:remove(".")
 
-opt.fsync = false
 opt.autoread = false
-opt.hidden = true
 opt.switchbuf = "useopen"
 opt.confirm = true
 opt.number = true
-opt.ruler = true
 opt.signcolumn = "yes"
 opt.display = "uhex,lastline"
 opt.scrolloff = 5
@@ -54,9 +51,7 @@ opt.tabstop = 4
 opt.expandtab = true
 opt.shiftwidth = 4
 opt.shiftround = true
-opt.smarttab = true
 opt.smartindent = true
-opt.autoindent = true
 opt.complete = {".", "w", "b"}
 opt.conceallevel = 0
 opt.helplang = "ja,en"
@@ -67,7 +62,6 @@ opt.list = true
 opt.listchars = {tab = "» ", trail = "·", eol = "↲", extends = "»", precedes = "«", nbsp = "%"}
 opt.fillchars = {eob = "\u{0020}"}
 opt.virtualedit = "block"
-opt.backspace = {"indent", "eol", "start"}
 opt.whichwrap = "b,s,h,l,<,>,[,]"
 opt.mouse = "a"
 opt.synmaxcol = 300
@@ -75,9 +69,7 @@ opt.updatetime = 300
 
 opt.ignorecase = true
 opt.smartcase = true
-opt.incsearch = true
 opt.wrapscan = true
-opt.hlsearch = true
 opt.infercase = true
 
 opt.diffopt = {"filler", "vertical", "internal", algorithm = "histogram", "indent-heuristic"}
@@ -86,10 +78,8 @@ opt.splitright = true
 opt.laststatus = 3
 opt.cmdheight = 2
 opt.showtabline = 2
-opt.wildmenu = true
 opt.wildmode = {list = "full"}
 opt.wrap = true
-opt.showcmd = true
 opt.showmode = false
 opt.iskeyword:append("-")
 opt.linebreak = true
@@ -110,8 +100,21 @@ g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_perl_provider = 0
 
+if g.is_windows then
+    g.clipboard = {
+        name = "win32yank.exe",
+        copy = {
+            ['+'] = {'win32yank.exe', '-i', '--crlf'},
+            ['*'] = {'win32yank.exe', '-i', '--crlf'},
+        },
+        paste = {
+            ['+'] = {'win32yank.exe', '-o', '--lf'},
+            ['*'] = {'win32yank.exe', '-o', '--lf'},
+        }
+    }
+end
+
 env.VISUAL = "nvim --remote"
-env.PATH = env.PATH .. ":" .. env.HOME .. "/go/bin"
 
 -- keymap {{{
 keymap.set("n", "<Esc>", "<Esc><Cmd>nohlsearch<CR><Esc>", {silent = true})
@@ -128,22 +131,18 @@ keymap.set("n", "U", "<C-r>", {silent = true})
 keymap.set("n", "<BS>", "<C-^>", {silent = true})
 keymap.set("n", "+", "<C-a>", {silent = true})
 keymap.set("n", "-", "<C-x>", {silent = true})
-keymap.set("", "<C-j>", "}", {silent = true})
-keymap.set("", "<C-k>", "{", {silent = true})
-keymap.set("", "<C-l>", "$", {silent = true})
-keymap.set("", "<C-;>", "$", {silent = true})
-keymap.set("", "<C-h>", "^", {silent = true})
-keymap.set("", "os", "<Cmd>e ++enc=cp932<CR>", {silent = true})
-keymap.set("", "oe", "<Cmd>e ++enc=euc-jp<CR>", {silent = true})
-keymap.set("", "ou", "<Cmd>e ++enc=utf-8<CR>", {silent = true})
-keymap.set("", "q;", ":q")
+keymap.set("n", "<C-l>", "$", {silent = true})
+keymap.set("n", "<C-;>", "$", {silent = true})
+keymap.set("n", "os", "<Cmd>e ++enc=cp932<CR>", {silent = true})
+keymap.set("n", "oe", "<Cmd>e ++enc=euc-jp<CR>", {silent = true})
+keymap.set("n", "ou", "<Cmd>e ++enc=utf-8<CR>", {silent = true})
+keymap.set("n", "q;", ":q")
 
 keymap.set("v", "<", "<gv")
 keymap.set("v", ">", ">gv")
 
 keymap.set("n", ";", ":")
 keymap.set("n", "<CR><CR>", "o<Esc>", {silent = true})
-keymap.set("n", "<Leader>q", "<Cmd>bd<CR>", {silent = true})
 keymap.set("n", "<Leader>n", "<Cmd>enew<CR>", {silent = true})
 keymap.set("n", "<C-n>", "*", {silent = true})
 keymap.set("n", "<C-p>", "#", {silent = true})
@@ -151,11 +150,6 @@ keymap.set("c", "<C-v>", "<C-r>+", {silent = true})
 keymap.set("c", "<C-c>", "<C-r><C-w>")
 keymap.set("i", "<Esc>", "<Esc><Cmd>set iminsert=0<CR>", {silent = true})
 keymap.set("i", "jj", "<Esc><Cmd>set iminsert=0<CR>", {silent = true})
-
-keymap.set("i", "<C-l>", "<C-g>U<Right>")
-keymap.set("i", "<C-;>", "<C-g>U<C-o>$")
-keymap.set("i", "<C-j>", "<C-g>U<C-o>o")
-keymap.set("i", "<C-k>", "<C-g>U<C-o>O")
 
 keymap.set("n", "<S-Left>", "<C-w><")
 keymap.set("n", "<S-Right>", "<C-w>>")
@@ -192,15 +186,6 @@ keymap.set("n", "<C-Right>", "<C-w>l")
 keymap.set("n", "<C-Up>", "<C-w>k")
 keymap.set("n", "<C-Down>", "<C-w>j")
 
--- keymap for japanese ime
-keymap.set("n", "あ", "a")
-keymap.set("n", "い", "i")
-keymap.set("n", "う", "u")
-keymap.set("n", "お", "o")
-keymap.set("n", "っd", "dd")
-keymap.set("n", "っy", "yy")
-keymap.set("i", "っ", "<Esc>")
-
 -- load plugins
 require"plugins"
 
@@ -211,11 +196,10 @@ api.nvim_create_autocmd({"VimEnter", "VimResized"}, {
 })
 api.nvim_create_autocmd("TermOpen", {
     pattern = "*",
-    command = "setlocal nonumber"
-})
-api.nvim_create_autocmd("TermOpen", {
-    pattern = "*",
-    command = [[let $VISUAL = "nvim --server " .. $NVIM .. " --remote"]]
+    callback = function ()
+        vim.wo.number = false
+        -- vim.env.VISUAL = "nvim --server " .. vim.env.NVIM .. " --remote"
+    end
 })
 api.nvim_create_autocmd({"CursorMoved", "CursorMovedI", "WinLeave"}, {
     pattern = "*",
@@ -234,5 +218,4 @@ api.nvim_create_autocmd("TextYankPost", {
     callback = function() vim.highlight.on_yank{higroup="IncSearch", timeout=700} end
 })
 
-opt.background = "dark"
 cmd.colorscheme("onenord")

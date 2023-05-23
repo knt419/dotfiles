@@ -149,6 +149,15 @@ local plugins = {
                         ["cmp.entry.get_documentation"] = true
                     }
                 },
+                routes = {
+                    {
+                        filter = {
+                            event = "msg_show",
+                            find = "%d+L, %d+B",
+                        },
+                        view = "mini",
+                    },
+                },
                 presets = {
                     inc_rename = true
                 }
@@ -535,11 +544,6 @@ local plugins = {
 
     -- file/directory
     {
-        "equalsraf/neovim-gui-shim",
-        -- event = "VeryLazy"
-        lazy = false,
-    },
-    {
         "aymericbeaumet/vim-symlink",
         event = "BufReadPre",
     },
@@ -751,7 +755,7 @@ local plugins = {
             local lspkind = require"lspkind"
             local luasnip = require"luasnip"
 
-            require"cmp".setup {
+            cmp.setup {
                 formatting = {
                     format = lspkind.cmp_format(
                         {
@@ -804,7 +808,12 @@ local plugins = {
                     {
                         {name = "buffer"}
                     }
-                )
+                ),
+                experimental = {
+                    ghost_text = {
+                        hl_group = "LspCodeLens",
+                    },
+                },
             }
             cmp.setup.cmdline(
                 "/",
