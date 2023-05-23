@@ -83,7 +83,7 @@ local plugins = {
     },
     {
         "rmehri01/onenord.nvim",
-        lazy = true,
+        lazy = false,
         config = function ()
             require"onenord".setup {}
         end
@@ -288,9 +288,9 @@ local plugins = {
                         {
                             'buffers',
                             symbols = {
-                                    modified = ' ●',      -- Text to show when the buffer is modified
-                                    alternate_file = '', -- Text to show to identify the alternate file
-                                    directory =  '',     -- Text to show when the buffer is a directory
+                                    modified = ' ●',
+                                    alternate_file = '',
+                                    directory =  '',
                             }
                         }
                     },
@@ -331,7 +331,8 @@ local plugins = {
     },
     {
         "echasnovski/mini.starter",
-        event = "VimEnter",
+        -- event = "VimEnter",
+        lazy = false,
         config = function()
             local starter = require('mini.starter')
             starter.setup({
@@ -346,7 +347,7 @@ local plugins = {
                             "\n"
                 ,
                 items = {
-                    starter.sections.recent_files(9, false, false),
+                    starter.sections.recent_files(5, false, false),
                     { name = "Open file", action = "Telescope frecency theme=ivy", section = "Telescope" },
                     { name = "File browser", action = "lua require'telescope'.extensions.file_browser.file_browser()", section = "Telescope" },
                     { name = "Init.lua", action = "e $MYVIMRC", section = "Config" },
@@ -365,8 +366,8 @@ local plugins = {
                 pattern = "LazyVimStarted",
                 callback = function()
                     local stats = require"lazy".stats()
-                    local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                    starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages, ' .. ms .. 'ms to launch 🚀'
+                    -- starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages, ' .. math.floor(stats.startuptime+0.5) .. 'ms to launch 🚀'
+                    starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages, ' .. string.format("%.2f",stats.startuptime) .. 'ms to launch 🚀'
                     pcall(starter.refresh)
                 end,
             })
@@ -536,7 +537,8 @@ local plugins = {
     -- file/directory
     {
         "equalsraf/neovim-gui-shim",
-        event = "VeryLazy"
+        -- event = "VeryLazy"
+        lazy = false,
     },
     {
         "aymericbeaumet/vim-symlink",
