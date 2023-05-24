@@ -184,6 +184,7 @@ local plugins = {
         config = function ()
             require"lualine".setup {
                 options = {
+                    theme = "onenord",
                     component_separators = { left = '', right = '' },
                     section_separators = { left = '', right = '' },
                     always_divide_middle = false,
@@ -379,10 +380,10 @@ local plugins = {
                     pcall(starter.refresh)
                 end,
             })
-            -- api.nvim_create_autocmd("User", {
-            --     pattern = "MiniStarterOpened",
-            --     command = "cd ~"
-            -- })
+            api.nvim_create_autocmd("User", {
+                pattern = "MiniStarterOpened",
+                command = "cd ~"
+            })
         end,
         keys = {
             { "<Up>", "<Cmd>lua MiniStarter.open()<CR>" }
@@ -620,7 +621,6 @@ local plugins = {
             { "<Leader>g", "<Cmd>Telescope live_grep theme=ivy<CR>", silent = true },
             { "<Leader><Leader>", "<Cmd>Telescope builtin theme=ivy<CR>", silent = true },
             { "<Left>", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>" },
-            { "<Leader>e", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>", silent = true }
         }
     },
     {
