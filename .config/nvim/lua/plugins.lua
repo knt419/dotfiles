@@ -173,6 +173,7 @@ local plugins = {
         event = {"BufNewFile", "BufRead"},
         config = function()
             require"indentmini".setup {
+                char = '│',
                 exclude = {"mason", "lazy", "starter"}
             }
             cmd.highlight("default link IndentLine Whitespace")
@@ -387,10 +388,9 @@ local plugins = {
                 pattern = "MiniStarterOpened",
                 command = "cd ~"
             })
-        end,
-        keys = {
-            { "<Up>", "<Cmd>lua MiniStarter.open()<CR>" }
-        }
+            local keymap = vim.keymap
+            keymap.set("n", "<Up>", "<Cmd>lua MiniStarter.open()<CR>")
+        end
     },
     {
         "rickhowe/diffchar.vim",
@@ -559,9 +559,11 @@ local plugins = {
         "jemag/telescope-diff.nvim",
         keys = {
             { "<Leader>di", function ()
+                                require"telescope".load_extension("diff")
                                 require"telescope".extensions.diff.diff_files({ hidden = true})
                             end },
             { "<Leader>dc", function ()
+                                require"telescope".load_extension("diff")
                                 require"telescope".extensions.diff.diff_current({ hidden = true})
                             end }
         }
@@ -614,7 +616,6 @@ local plugins = {
             telescope.load_extension("fzf")
             telescope.load_extension("file_browser")
             telescope.load_extension("frecency")
-            telescope.load_extension("diff")
         end,
         dependencies = {
             "nvim-lua/plenary.nvim",
@@ -886,7 +887,7 @@ local lazyopt = {
         rtp = {
             disabled_plugins = {
                 "gzip",
-                -- "health",
+                "health",
                 "man",
                 "matchit",
                 "matchparen",
