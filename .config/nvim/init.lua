@@ -97,6 +97,10 @@ g.do_filetype_lua = 1
 g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_perl_provider = 0
+g.did_install_default_menus = 1
+g.did_install_syntax_menu = 1
+g.skip_loading_mswin = 1
+g.did_indent_on = 1
 
 if g.is_windows then
     g.clipboard = {
@@ -214,4 +218,4 @@ api.nvim_create_autocmd("TextYankPost", {
     callback = function() vim.highlight.on_yank{higroup="IncSearch", timeout=700} end
 })
 
-cmd.colorscheme("onenord")
+cmd.colorscheme("catppuccin")

@@ -83,9 +83,24 @@ local plugins = {
     -- },
     {
         "rmehri01/onenord.nvim",
-        lazy = false,
+        -- lazy = false,
         config = function ()
             require"onenord".setup {}
+        end
+    },
+    {
+        "catppuccin/nvim",
+        lazy = false,
+        name = "catppuccin",
+        config = function ()
+            require"catppuccin".setup {
+                flavour = "frappe",
+                no_italic = true,
+                integrations = {
+                    nvimtree = false,
+                    notify = true,
+                }
+            }
         end
     },
 
@@ -185,7 +200,7 @@ local plugins = {
         config = function ()
             require"lualine".setup {
                 options = {
-                    theme = "onenord",
+                    theme = "catppuccin",
                     component_separators = { left = '', right = '' },
                     section_separators = { left = '', right = '' },
                     always_divide_middle = false,
@@ -199,7 +214,7 @@ local plugins = {
                             function ()
                                 return '▊'
                             end,
-                            color = { fg = '#51afef' },
+                            -- color = { fg = '#51afef' },
                             padding = 0
                         },
                         {
@@ -280,7 +295,7 @@ local plugins = {
                             function()
                                 return '▊'
                             end,
-                            color = { fg = '#51afef' },
+                            -- color = { fg = '#51afef' },
                             padding = { left = 1, rihgt = 0 },
                         },
                     },
@@ -293,7 +308,7 @@ local plugins = {
                             function ()
                                 return '▌'
                             end,
-                            color = { fg = '#51afef' },
+                            -- color = { fg = '#51afef' },
                             padding = 0
                         },
                         {
@@ -345,7 +360,6 @@ local plugins = {
     },
     {
         "echasnovski/mini.starter",
-        -- event = "VimEnter",
         lazy = false,
         config = function()
             local starter = require('mini.starter')
@@ -897,6 +911,8 @@ local lazyopt = {
                 "tohtml",
                 "tutor",
                 "zipPlugin",
+                "rplugin",
+                "editorconfig",
             },
         }
     }
