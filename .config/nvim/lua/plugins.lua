@@ -309,6 +309,9 @@ local plugins = {
                             function ()
                                 return fn.fnamemodify(fn.finddir(".git", ".;"), ":h:t")
                             end,
+                            cond = function ()
+                                return fn.finddir(".git", ".;") ~= ""
+                            end,
                             icon = '',
                             padding = { left = 2, right = 1 }
                         },
@@ -885,24 +888,16 @@ local lazyopt = {
         rtp = {
             disabled_plugins = {
                 "gzip",
+                -- "health",
                 "man",
                 "matchit",
                 "matchparen",
-                "shada_plugin",
-                "tarPlugin",
-                "tar",
-                "zipPlugin",
-                "zip",
                 "netrwPlugin",
-                "netrw",
-                "2html_plugin",
-                "getscript",
-                "getscriptPlugin",
-                "logipat",
-                "filetype",
+                "spellfile",
+                "tarPlugin",
                 "tohtml",
                 "tutor",
-                "spellfile"
+                "zipPlugin",
             },
         }
     }
