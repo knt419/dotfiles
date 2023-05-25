@@ -45,7 +45,6 @@ opt.termguicolors = true
 opt.guifont = "HackGen Console NF:h13"
 opt.guifontwide = "HackGen Console NF:h13"
 opt.emoji = true
-opt.linespace = 0
 opt.showmatch = false
 opt.tabstop = 4
 opt.expandtab = true
@@ -76,7 +75,6 @@ opt.diffopt = {"filler", "vertical", "internal", algorithm = "histogram", "inden
 opt.splitright = true
 
 opt.laststatus = 3
-opt.cmdheight = 2
 opt.showtabline = 2
 opt.wildmode = {list = "full"}
 opt.wrap = true
@@ -114,7 +112,6 @@ if g.is_windows then
     }
 end
 
-env.VISUAL = "nvim --remote"
 
 -- keymap {{{
 keymap.set("n", "<Esc>", "<Esc><Cmd>nohlsearch<CR><Esc>", {silent = true})
@@ -189,11 +186,15 @@ api.nvim_create_autocmd("VimResized", {
     pattern = "*",
     command = "normal <C-w>="
 })
-api.nvim_create_autocmd("TermOpen", {
+api.nvim_create_autocmd("TermEnter", {
     pattern = "*",
     callback = function ()
         vim.wo.number = false
-        -- vim.env.VISUAL = "nvim --server " .. vim.env.NVIM .. " --remote"
+        -- if env.NVIM == nil then
+        --     env.VISUAL = "nvim --remote"
+        -- else
+        --     env.VISUAL = "nvim --server " .. env.NVIM .. " --remote"
+        -- end
     end
 })
 api.nvim_create_autocmd({"CursorMoved", "CursorMovedI", "WinLeave"}, {
