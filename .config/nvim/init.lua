@@ -22,7 +22,7 @@ local api = vim.api
 -- option
 opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
-opt.fileencodings = "iso-2022-jp,cp932,euc-jp,utf-8"
+opt.fileencodings = "iso-2022-jp,utf-8,cp932,euc-jp"
 
 opt.backup = false
 opt.writebackup = false
@@ -146,7 +146,7 @@ keymap.set("n", "<CR><CR>", "o<Esc>", {silent = true})
 keymap.set("n", "<Leader>n", "<Cmd>enew<CR>", {silent = true})
 keymap.set("n", "<C-n>", "*", {silent = true})
 keymap.set("n", "<C-p>", "#", {silent = true})
-keymap.set("c", "<C-v>", "<C-r>+", {silent = true})
+keymap.set("c", "<C-v>", "<C-r>+")
 keymap.set("c", "<C-c>", "<C-r><C-w>")
 keymap.set("i", "<Esc>", "<Esc><Cmd>set iminsert=0<CR>", {silent = true})
 keymap.set("i", "jj", "<Esc><Cmd>set iminsert=0<CR>", {silent = true})
@@ -181,16 +181,11 @@ keymap.set("n", "<S-Tab>", function()
                             end
                         end, {expr = true})
 
-keymap.set("n", "<C-Left>", "<C-w>h")
-keymap.set("n", "<C-Right>", "<C-w>l")
-keymap.set("n", "<C-Up>", "<C-w>k")
-keymap.set("n", "<C-Down>", "<C-w>j")
-
 -- load plugins
 require"plugins"
 
 -- autocmd
-api.nvim_create_autocmd({"VimEnter", "VimResized"}, {
+api.nvim_create_autocmd("VimResized", {
     pattern = "*",
     command = "normal <C-w>="
 })

@@ -28,59 +28,59 @@ local plugins = {
     -- performance improve
 
     -- colorscheme
-    {
-        "tyrannicaltoucan/vim-deep-space",
-        lazy = true
-    },
-    {
-        "rebelot/kanagawa.nvim",
-        lazy = true,
-        config = function ()
-            require"kanagawa".setup{
-                commentStyle = { italic = false },
-                keywordStyle = { italic = false },
-                dimInactive = true
-            }
-        end
-    },
-    {
-        "marko-cerovac/material.nvim",
-        lazy = true,
-        config = function()
-            g.material_style = "darker"
-            require"material".setup {
-                contrast = {
-                    floating_windows = true,
-                    non_current_windows = true
-                },
-                plugins = {
-                    "dashboard",
-                    "gitsigns",
-                    "indent-blankline",
-                    "nvim-cmp",
-                    "nvim-web-devicons",
-                    "telescope"
-                }
-            }
-        end,
-        keys = {
-            { "<Leader>m", "<Cmd>lua require'material.functions'.find_style()<CR>", silent = true },
-        }
-    },
-    {
-        "sainnhe/edge",
-        lazy = true,
-        config = function ()
-            g.edge_style = 'aura'
-            g.edge_disable_italic_comment = 1
-            g.edge_transparent_background = 0
-            g.edge_dim_inactive_windows = 1
-        end
-    },
-    {
-        "alexeyneu/blue-moon",
-        lazy = true
-    },
+    -- {
+    --     "tyrannicaltoucan/vim-deep-space",
+    --     lazy = true
+    -- },
+    -- {
+    --     "rebelot/kanagawa.nvim",
+    --     lazy = true,
+    --     config = function ()
+    --         require"kanagawa".setup{
+    --             commentStyle = { italic = false },
+    --             keywordStyle = { italic = false },
+    --             dimInactive = true
+    --         }
+    --     end
+    -- },
+    -- {
+    --     "marko-cerovac/material.nvim",
+    --     lazy = true,
+    --     config = function()
+    --         g.material_style = "darker"
+    --         require"material".setup {
+    --             contrast = {
+    --                 floating_windows = true,
+    --                 non_current_windows = true
+    --             },
+    --             plugins = {
+    --                 "dashboard",
+    --                 "gitsigns",
+    --                 "indent-blankline",
+    --                 "nvim-cmp",
+    --                 "nvim-web-devicons",
+    --                 "telescope"
+    --             }
+    --         }
+    --     end,
+    --     keys = {
+    --         { "<Leader>m", "<Cmd>lua require'material.functions'.find_style()<CR>", silent = true },
+    --     }
+    -- },
+    -- {
+    --     "sainnhe/edge",
+    --     lazy = true,
+    --     config = function ()
+    --         g.edge_style = 'aura'
+    --         g.edge_disable_italic_comment = 1
+    --         g.edge_transparent_background = 0
+    --         g.edge_dim_inactive_windows = 1
+    --     end
+    -- },
+    -- {
+    --     "alexeyneu/blue-moon",
+    --     lazy = true
+    -- },
     {
         "rmehri01/onenord.nvim",
         lazy = false,
@@ -184,6 +184,7 @@ local plugins = {
         config = function ()
             require"lualine".setup {
                 options = {
+                    theme = "onenord",
                     component_separators = { left = '', right = '' },
                     section_separators = { left = '', right = '' },
                     always_divide_middle = false,
@@ -382,10 +383,10 @@ local plugins = {
                     pcall(starter.refresh)
                 end,
             })
-            -- api.nvim_create_autocmd("User", {
-            --     pattern = "MiniStarterOpened",
-            --     command = "cd ~"
-            -- })
+            api.nvim_create_autocmd("User", {
+                pattern = "MiniStarterOpened",
+                command = "cd ~"
+            })
         end,
         keys = {
             { "<Up>", "<Cmd>lua MiniStarter.open()<CR>" }
@@ -623,7 +624,6 @@ local plugins = {
             { "<Leader>g", "<Cmd>Telescope live_grep theme=ivy<CR>", silent = true },
             { "<Leader><Leader>", "<Cmd>Telescope builtin theme=ivy<CR>", silent = true },
             { "<Left>", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>" },
-            { "<Leader>e", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>", silent = true }
         }
     },
     {
@@ -681,9 +681,7 @@ local plugins = {
         "williamboman/mason-lspconfig.nvim",
         lazy = true,
         config = function()
-            require"mason-lspconfig".setup{
-                ensure_installed = { "lua_ls", "sqlls", "bashls", "clangd", "vimls"}
-            }
+            require"mason-lspconfig".setup{}
         end
     },
     {
