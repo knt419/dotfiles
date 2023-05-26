@@ -374,7 +374,7 @@ local plugins = {
     {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
-        config = require"config.telescope",
+        config = require"config.teles",
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
