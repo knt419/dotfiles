@@ -3,7 +3,6 @@ local cmd = vim.cmd
 local fn = vim.fn
 local g = vim.g
 local opt = vim.opt
-local api = vim.api
 
 local lazypath = fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -26,6 +25,10 @@ g.sqlite_clib_path = fn.substitute(fn.stdpath("data"), "\\", "/", "g") .. "/sqli
 local plugins = {
 
     -- performance improve
+    {
+        "nathom/filetype.nvim",
+        lazy = false,
+    },
 
     -- colorscheme
     -- {
@@ -92,6 +95,7 @@ local plugins = {
         "catppuccin/nvim",
         lazy = false,
         name = "catppuccin",
+        priority = 1000,
         config = function ()
             require"catppuccin".setup {
                 flavour = "frappe",
@@ -101,6 +105,7 @@ local plugins = {
                     notify = true,
                 }
             }
+            cmd.colorscheme"catppuccin"
         end
     },
 
@@ -197,148 +202,7 @@ local plugins = {
     {
         "nvim-lualine/lualine.nvim",
         event = {"BufNewFile", "BufRead"},
-        config = function ()
-            require"lualine".setup {
-                options = {
-                    theme = "catppuccin",
-                    component_separators = { left = '', right = '' },
-                    section_separators = { left = '', right = '' },
-                    always_divide_middle = false,
-                    globalstatus = true,
-                    colored = true,
-                },
-                sections = {
-                    lualine_a = {},
-                    lualine_b = {
-                        {
-                            function ()
-                                return '▊'
-                            end,
-                            -- color = { fg = '#51afef' },
-                            padding = 0
-                        },
-                        {
-                            'filetype',
-                            icon_only = true,
-                        },
-                        {
-                            'filename',
-                            file_status = true,
-                            newfile_status = false,
-                            path = 0,
-                            shorting_target = 40,
-                            symbols = {
-                                modified = '',
-                                readonly = '',
-                                unnamed = '[No Name]',
-                                newfile = '󰎔',
-                            },
-                            padding = { left = 0, right = 1},
-                        },
-                    },
-                    lualine_c = {
-                        {
-                            'diff',
-                            symbols = { added = ' ', modified = ' ', removed = ' ' },
-                        },
-                        {
-                            function ()
-                                return '%='
-                            end
-                        },
-                        {
-                            function()
-                                local msg = 'No Active Lsp'
-                                local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-                                local clients = vim.lsp.get_active_clients()
-                                if next(clients) == nil then
-                                    return msg
-                                end
-                                for _, client in ipairs(clients) do
-                                    local filetypes = client.config.filetypes
-                                    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                                        return client.name
-                                    end
-                                end
-                                return msg
-                            end,
-                            icon = ' ',
-                            color = { fg = '#d08f70' },
-                        },
-                        {
-                            'diagnostics',
-                            symbols ={ error = ' ', warn = ' ', info = ' ', hint = ' ' }
-                        },
-                    },
-                    lualine_x = {
-                        {
-                            'encoding',
-                            fmt = function (string)
-                                return string:upper()
-                            end,
-                            padding = 0,
-                        },
-                        {
-                            'fileformat',
-                        }
-                    },
-                    lualine_y = {
-                        {
-                            -- 'location',
-                            '%l:%c',
-                            icon = '',
-                        },
-                        {
-                            function()
-                                return '▊'
-                            end,
-                            -- color = { fg = '#51afef' },
-                            padding = 0,
-                        },
-                    },
-                    lualine_z = {}
-                },
-                tabline = {
-                    lualine_a = {},
-                    lualine_b = {
-                        {
-                            function ()
-                                return '▌'
-                            end,
-                            -- color = { fg = '#51afef' },
-                            padding = 0
-                        },
-                        {
-                            'buffers',
-                            symbols = {
-                                    modified = ' ●',
-                                    alternate_file = '',
-                                    directory =  '',
-                            }
-                        }
-                    },
-                    lualine_c = {},
-                    lualine_x = {
-                        {
-                            function ()
-                                return fn.fnamemodify(fn.finddir(".git", ".;"), ":h:t")
-                            end,
-                            cond = function ()
-                                return fn.finddir(".git", ".;") ~= ""
-                            end,
-                            icon = '',
-                            padding = { left = 2, right = 1 }
-                        },
-                        {
-                            'branch',
-                            icon = ''
-                        },
-                    },
-                    lualine_y = {'tabs' },
-                    lualine_z = {}
-                }
-            }
-        end
+        config = require"config.lualine",
     },
     {
         "nvim-tree/nvim-web-devicons",
@@ -358,50 +222,7 @@ local plugins = {
     {
         "echasnovski/mini.starter",
         lazy = false,
-        config = function()
-            local starter = require('mini.starter')
-            starter.setup({
-                evaluate_single = true,
-                header =
-                            " ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗\n" ..
-                            " ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║\n" ..
-                            " ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║\n" ..
-                            " ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║\n" ..
-                            " ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║\n" ..
-                            " ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝\n" ..
-                            "\n"
-                ,
-                items = {
-                    starter.sections.recent_files(5, false, false),
-                    { name = "Open file", action = "Telescope frecency theme=ivy", section = "Telescope" },
-                    { name = "File browser", action = "lua require'telescope'.extensions.file_browser.file_browser()", section = "Telescope" },
-                    { name = "Init.lua", action = "e $MYVIMRC", section = "Config" },
-                    { name = "Plugin.lua", action = "e ~/.config/nvim/lua/plugins.lua", section = "Config" },
-                    { name = "Lazy.nvim", action = "Lazy", section = "Config" },
-                    { name = "Mason", action = "Mason", section = "Config" },
-                    starter.sections.builtin_actions(),
-                },
-                content_hooks = {
-                    starter.gen_hook.adding_bullet(" │ "),
-                    starter.gen_hook.indexing('all', { 'Telescope', 'Config', 'Builtin actions' } ),
-                    starter.gen_hook.aligning('center', 'center'),
-                },
-            })
-            api.nvim_create_autocmd("User", {
-                pattern = "LazyVimStarted",
-                callback = function()
-                    local stats = require"lazy".stats()
-                    starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages, ' .. string.format("%.2f",stats.startuptime) .. 'ms to launch 🚀'
-                    pcall(starter.refresh)
-                end,
-            })
-            api.nvim_create_autocmd("User", {
-                pattern = "MiniStarterOpened",
-                command = "cd ~"
-            })
-            local keymap = vim.keymap
-            keymap.set("n", "<Up>", "<Cmd>lua MiniStarter.open()<CR>")
-        end
+        config = require"config.starter",
     },
     {
         "rickhowe/diffchar.vim",
@@ -524,26 +345,7 @@ local plugins = {
     {
         "ntpeters/vim-better-whitespace",
         event = {"BufNewFile", "BufRead"},
-        config = function()
-            g.better_whitespace_filetypes_blacklist = {"diff", "gitcommit", "qf", "help", "markdown", "dashboard"}
-
-            api.nvim_create_autocmd("OptionSet", {
-                pattern = "diff",
-                command = "DisableWhitespace"
-            })
-
-            api.nvim_create_autocmd("WinEnter", {
-                pattern = "*",
-                callback = function()
-                    if fn.winlayout()[1] == "leaf"
-                        and fn.tabpagenr("$") == 1
-                        and vim.wo.diff == true then
-                        cmd [[EnableWhitespace]]
-                        vim.wo.diff = false
-                    end
-                end,
-            })
-        end
+        config = require"config.whitespace",
     },
     {
         "smjonas/inc-rename.nvim",
@@ -596,38 +398,7 @@ local plugins = {
     {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
-        config = function()
-            local telescope = require"telescope"
-            telescope.setup {
-                defaults = {
-                    winblend = 30,
-                    cache_picker = {limit_entries = 100},
-                    preview = {filesize_limit = 5, treesitter = true},
-                    mappings = {i = {["<Esc>"] = require"telescope.actions".close}},
-                },
-                pickers = {
-                    find_files = {
-                        theme = "ivy",
-                        find_command = { "rg", "--files", "--hidden", "--glob", "!**/.git/*" },
-                    }
-                },
-                extensions = {
-                    file_browser = {
-                        theme = "ivy",
-                        hidden = true
-                    },
-                    fzf = {
-                        fuzzy = true,
-                        override_generic_sorter = true,
-                        override_file_sorter = true,
-                        case_mode = "smart_case"
-                    },
-                }
-            }
-            telescope.load_extension("fzf")
-            telescope.load_extension("file_browser")
-            telescope.load_extension("frecency")
-        end,
+        config = require"config.telescope",
         dependencies = {
             "nvim-lua/plenary.nvim",
         },
@@ -699,42 +470,7 @@ local plugins = {
     {
         "neovim/nvim-lspconfig",
         event = {"BufWritePre", "BufReadPre"},
-        config = function()
-            local lspconfig = require"lspconfig"
-            local util = require"lspconfig/util"
-            local capabilities = require"cmp_nvim_lsp".default_capabilities()
-            local on_attach = function()
-                local keymap = vim.keymap
-                keymap.set("n", "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>")
-                keymap.set("n", "<Leader>df", "<Cmd>lua vim.lsp.buf.definition()<CR>")
-                keymap.set("n", "<Leader>wa", "<Cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
-                keymap.set("n", "<Leader>wr", "<Cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
-                keymap.set("n", "<Leader>wl", "<Cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
-                keymap.set("n", "<Leader>h", "<Cmd>lua vim.lsp.buf.hover()<CR>")
-                keymap.set("x", "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>")
-            end
-            require"mason-lspconfig".setup_handlers{
-                function (server_name)
-                    lspconfig[server_name].setup{
-                        on_attach = on_attach,
-                        capabilities = capabilities,
-                    }
-                end,
-            }
-
-            lspconfig.lua_ls.setup{
-                root_dir =  util.find_git_ancestor,
-                on_attach = on_attach,
-                capabilities = capabilities,
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = {'vim'}
-                        }
-                    }
-                }
-            }
-        end
+        config = require"config.lspconfig",
     },
     {
         "hrsh7th/cmp-nvim-lsp",
@@ -763,95 +499,7 @@ local plugins = {
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
-        config = function()
-            local cmp = require"cmp"
-            local lspkind = require"lspkind"
-            local luasnip = require"luasnip"
-
-            cmp.setup {
-                formatting = {
-                    format = lspkind.cmp_format(
-                        {
-                            with_text = true,
-                            maxwidth = 50,
-                            ellipsis_char = '...'
-                        }
-                    )
-                },
-                snippet = {
-                    expand = function(args)
-                        require'luasnip'.lsp_expand(args.body)
-                    end
-                },
-                window = {
-                    completion = cmp.config.window.bordered(),
-                    documentation = cmp.config.window.bordered(),
-                },
-                mapping = {
-                    ["<CR>"] = cmp.mapping.confirm({select = true}),
-                    ["<Tab>"] = cmp.mapping(
-                        function(fallback)
-                            if cmp.visible() then
-                                cmp.select_next_item()
-                            elseif luasnip.expand_or_jumpable() then
-                                luasnip.expand_or_jump()
-                            else
-                                fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
-                            end
-                        end,
-                        {"i", "s"}
-                    ),
-                    ["<S-Tab>"] = cmp.mapping(
-                        function()
-                            if cmp.visible() then
-                                cmp.select_prev_item()
-                            elseif luasnip.jumpable(-1) then
-                                luasnip.jump(-1)
-                            end
-                        end,
-                        {"i", "s"}
-                    )
-                },
-                sources = cmp.config.sources(
-                    {
-                        {name = "nvim_lsp"},
-                        {name = "nvim_lua"},
-                        {name = "luasnip"}
-                    },
-                    {
-                        {name = "buffer"}
-                    }
-                ),
-                experimental = {
-                    ghost_text = {
-                        hl_group = "LspCodeLens",
-                    },
-                },
-            }
-            cmp.setup.cmdline(
-                "/",
-                {
-                    mapping = cmp.mapping.preset.cmdline(),
-                    sources = {
-                        {name = "buffer"}
-                    }
-                }
-            )
-            cmp.setup.cmdline(
-                ":",
-                {
-                    mapping = cmp.mapping.preset.cmdline(),
-                    sources = cmp.config.sources(
-                        {
-                            {name = "async_path"}
-                        },
-                        {
-                            {name = "cmdline"}
-                        }
-                    )
-                }
-            )
-        end,
+        config = require"config.cmp",
         dependencies = {"onsails/lspkind-nvim"}
     },
     {

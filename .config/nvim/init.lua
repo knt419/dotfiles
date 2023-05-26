@@ -92,8 +92,9 @@ opt.winblend = 10
 opt.splitkeep = "screen"
 
 g.mapleader = " "
-g.is_windows = fn.has("win16") or fn.has("win32") or fn.has("win64")
-g.do_filetype_lua = 1
+g.is_windows = fn.has("win16") == 1 or fn.has("win32") == 1 or fn.has("win64") == 1
+g.do_filetype_lua = 0
+g.did_load_filetypes = 1
 g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_perl_provider = 0
@@ -102,7 +103,7 @@ g.did_install_syntax_menu = 1
 g.skip_loading_mswin = 1
 g.did_indent_on = 1
 
-if g.is_windows == 1 then
+if g.is_windows then
     g.clipboard = {
         name = "win32yank.exe",
         copy = {
@@ -217,5 +218,3 @@ api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
     callback = function() vim.highlight.on_yank{higroup="IncSearch", timeout=700} end
 })
-
-cmd.colorscheme("catppuccin")
