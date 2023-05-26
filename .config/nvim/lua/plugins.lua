@@ -231,7 +231,7 @@ local plugins = {
                                 modified = '',
                                 readonly = '',
                                 unnamed = '[No Name]',
-                                newfile = '[New]',
+                                newfile = '󰎔',
                             },
                             padding = { left = 0, right = 1},
                         },
@@ -280,7 +280,6 @@ local plugins = {
                         },
                         {
                             'fileformat',
-                            -- padding = { left = 1, right = 2 },
                         }
                     },
                     lualine_y = {
