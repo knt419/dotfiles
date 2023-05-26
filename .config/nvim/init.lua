@@ -191,10 +191,11 @@ api.nvim_create_autocmd("VimResized", {
     pattern = "*",
     command = "normal <C-w>="
 })
-api.nvim_create_autocmd("TermEnter", {
+api.nvim_create_autocmd("TermOpen", {
     pattern = "*",
     callback = function ()
         vim.wo.number = false
+        vim.cmd"startinsert!"
         -- if env.NVIM == nil then
         --     env.VISUAL = "nvim --remote"
         -- else

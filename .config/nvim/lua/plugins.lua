@@ -231,31 +231,7 @@ local plugins = {
     {
         "nvim-treesitter/nvim-treesitter",
         event = {"BufWritePre", "BufReadPre"},
-        config = function()
-            require"nvim-treesitter.configs".setup {
-                auto_install = true,
-                highlight = {
-                    enable = true
-                },
-                indent = {
-                    enable = true
-                },
-                matchup = {
-                    enable = true
-                },
-                pairs = {
-                    enable = true,
-                    keymaps = {
-                        goto_partner = "<leader>%",
-                        delete_balanced = "X"
-                    },
-                    delete_balanced = {
-                        only_on_first_char = false,
-                        longest_partner = false
-                    }
-                }
-            }
-        end
+        config = require"config.treesitter",
     },
     {
         "lewis6991/gitsigns.nvim",
@@ -424,7 +400,7 @@ local plugins = {
     },
     {
         "kdheepak/lazygit.nvim",
-        config = function ()
+        init = function ()
             g.lazygit_floating_window_winblend = 0
             g.lazygit_floating_window_scaling_factor = 0.9
             g.lazygit_floating_window_corner_chars = {'╭', '╮', '╰', '╯' }
@@ -505,28 +481,6 @@ local plugins = {
     {
         "hrsh7th/cmp-nvim-lua",
         event = "InsertEnter",
-    },
-    {
-        "mhartington/formatter.nvim",
-        config = function()
-            require"formatter".setup {
-                filetype = {
-                    lua = {
-                        -- luafmt
-                        function()
-                            return {
-                                exe = "luafmt",
-                                args = {"--indent-count", 4, "--stdin"},
-                                stdin = true
-                            }
-                        end
-                    }
-                }
-            }
-        end,
-        keys = {
-            { "<Leader>fm", "<Cmd>Format<CR>" }
-        }
     },
     {
         "onsails/lspkind-nvim",
