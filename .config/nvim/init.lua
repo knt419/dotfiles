@@ -102,7 +102,7 @@ g.did_install_syntax_menu = 1
 g.skip_loading_mswin = 1
 g.did_indent_on = 1
 
-if g.is_windows then
+if g.is_windows == 1 then
     g.clipboard = {
         name = "win32yank.exe",
         copy = {

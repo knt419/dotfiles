@@ -239,7 +239,6 @@ local plugins = {
                     lualine_c = {
                         {
                             'diff',
-                            padding = { left = 1, right = 2},
                             symbols = { added = ' ', modified = ' ', removed = ' ' },
                         },
                         {
@@ -264,7 +263,6 @@ local plugins = {
                                 return msg
                             end,
                             icon = ' ',
-                            padding = { left = 2, right = 2 },
                             color = { fg = '#d08f70' },
                         },
                         {
@@ -277,26 +275,26 @@ local plugins = {
                             'encoding',
                             fmt = function (string)
                                 return string:upper()
-                            end
+                            end,
+                            padding = 0,
                         },
                         {
                             'fileformat',
-                            padding = { left = 1, right = 2 },
+                            -- padding = { left = 1, right = 2 },
                         }
                     },
                     lualine_y = {
-                        'progress',
                         {
-                            'location',
+                            -- 'location',
+                            '%l:%c',
                             icon = '',
-                            padding = 0,
                         },
                         {
                             function()
                                 return '▊'
                             end,
                             -- color = { fg = '#51afef' },
-                            padding = { left = 1, rihgt = 0 },
+                            padding = 0,
                         },
                     },
                     lualine_z = {}
