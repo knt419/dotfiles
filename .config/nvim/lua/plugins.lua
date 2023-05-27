@@ -81,31 +81,40 @@ local plugins = {
     --     end
     -- },
     -- {
-    --     "alexeyneu/blue-moon",
-    --     lazy = true
+    --     "rmehri01/onenord.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function ()
+    --         require"onenord".setup {}
+    --         cmd.colorscheme"onenord"
+    --     end
+    -- },
+    -- {
+    --     "catppuccin/nvim",
+    --     -- lazy = false,
+    --     name = "catppuccin",
+    --     -- priority = 1000,
+    --     config = function ()
+    --         require"catppuccin".setup {
+    --             flavour = "frappe",
+    --             no_italic = true,
+    --             integrations = {
+    --                 nvimtree = false,
+    --                 notify = true,
+    --             }
+    --         }
+    --         cmd.colorscheme"catppuccin"
+    --     end
     -- },
     {
-        "rmehri01/onenord.nvim",
-        -- lazy = false,
-        config = function ()
-            require"onenord".setup {}
-        end
-    },
-    {
-        "catppuccin/nvim",
+        "shaunsingh/nord.nvim",
         lazy = false,
-        name = "catppuccin",
         priority = 1000,
         config = function ()
-            require"catppuccin".setup {
-                flavour = "frappe",
-                no_italic = true,
-                integrations = {
-                    nvimtree = false,
-                    notify = true,
-                }
-            }
-            cmd.colorscheme"catppuccin"
+            g.nord_contrast = true
+            g.nord_italic = false
+            g.nord_bold = false
+            require"nord".set {}
         end
     },
 
@@ -400,7 +409,7 @@ local plugins = {
     },
     {
         "kdheepak/lazygit.nvim",
-        init = function ()
+        config = function ()
             g.lazygit_floating_window_winblend = 0
             g.lazygit_floating_window_scaling_factor = 0.9
             g.lazygit_floating_window_border_chars = {'╭','─', '╮', '│', '╯','─', '╰', '│'}
