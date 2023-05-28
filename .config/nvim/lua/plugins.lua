@@ -33,7 +33,6 @@ local plugins = {
     -- colorscheme
     -- {
     --     "tyrannicaltoucan/vim-deep-space",
-    --     lazy = true
     -- },
     -- {
     --     "rebelot/kanagawa.nvim",
@@ -118,7 +117,6 @@ local plugins = {
     -- editor display
     {
         "MunifTanjim/nui.nvim",
-        lazy = true
     },
     {
         "nvim-zh/colorful-winsep.nvim",
@@ -324,7 +322,6 @@ local plugins = {
     },
     {
         "tami5/sqlite.lua",
-        lazy = true
     },
     {
         "jemag/telescope-diff.nvim",
@@ -464,7 +461,6 @@ local plugins = {
     },
     {
         "onsails/lspkind-nvim",
-        lazy = true
     }
 }
 

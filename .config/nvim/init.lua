@@ -211,7 +211,7 @@ api.nvim_create_autocmd({"CursorMoved", "CursorMovedI", "WinLeave"}, {
 })
 api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
     pattern = "*",
-    command = "setlocal cursorline"
+    callback = function () vim.wo.cursorline = true end
 })
 api.nvim_create_autocmd("TextYankPost", {
     pattern = "*",
