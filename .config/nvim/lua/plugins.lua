@@ -121,9 +121,7 @@ local plugins = {
     {
         "nvim-zh/colorful-winsep.nvim",
         event = "WinNew",
-        config = function ()
-            require"colorful-winsep".setup {}
-        end
+        config = true
     },
     {
         "kevinhwang91/nvim-hlslens",
@@ -148,9 +146,7 @@ local plugins = {
     {
         "levouh/tint.nvim",
         event = "WinNew",
-        config = function ()
-            require"tint".setup {}
-        end
+        config = true,
     },
     {
         "rcarriga/nvim-notify",
@@ -187,17 +183,14 @@ local plugins = {
     },
     {
         "nvim-tree/nvim-web-devicons",
-        config = function ()
-            require"nvim-web-devicons".setup {
-                color_icons = true}
-        end
+        config = true,
     },
     {
         "norcalli/nvim-colorizer.lua",
         event = {"BufNewFile", "BufRead"},
         config = function ()
             require"colorizer".setup()
-        end
+        end,
     },
     {
         "echasnovski/mini.starter",
@@ -227,9 +220,7 @@ local plugins = {
     {
         "windwp/nvim-autopairs",
         event = "InsertEnter",
-        config = function()
-            require"nvim-autopairs".setup {}
-        end
+        config = true,
     },
     {
         "godlygeek/tabular",
@@ -238,9 +229,7 @@ local plugins = {
     {
         "lilibyte/tabhula.nvim",
         event = "InsertEnter",
-        config = function ()
-            require"tabhula".setup{}
-        end
+        config = true,
     },
     {
         "rainbowhxch/accelerated-jk.nvim",
@@ -252,9 +241,7 @@ local plugins = {
     {
         "echasnovski/mini.surround",
         event = {"BufNewFile", "BufRead"},
-        config = function()
-            require"mini.surround".setup{}
-        end
+        config = true,
     },
     {
         "tpope/vim-commentary",
@@ -410,15 +397,11 @@ local plugins = {
         "williamboman/mason.nvim",
         build = ":MasonUpdate",
         cmd = "Mason",
-        config = function()
-            require"mason".setup {}
-        end
+        config = true,
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        config = function()
-            require"mason-lspconfig".setup{}
-        end
+        config = true,
     },
     {
         "neovim/nvim-lspconfig",
