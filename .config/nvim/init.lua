@@ -75,7 +75,7 @@ opt.diffopt = {"filler", "vertical", "internal", algorithm = "histogram", "inden
 opt.splitright = true
 
 opt.laststatus = 3
-opt.showtabline = 2
+-- opt.showtabline = 2
 opt.wildmode = {list = "full"}
 opt.wrap = true
 opt.showmode = false
@@ -133,8 +133,6 @@ keymap.set("n", "U", "<C-r>", {silent = true})
 keymap.set("n", "<BS>", "<C-^>", {silent = true})
 keymap.set("n", "+", "<C-a>", {silent = true})
 keymap.set("n", "-", "<C-x>", {silent = true})
-keymap.set("n", "<C-l>", "$", {silent = true})
-keymap.set("n", "<C-;>", "$", {silent = true})
 keymap.set("n", "os", "<Cmd>e ++enc=cp932<CR>", {silent = true})
 keymap.set("n", "oe", "<Cmd>e ++enc=euc-jp<CR>", {silent = true})
 keymap.set("n", "ou", "<Cmd>e ++enc=utf-8<CR>", {silent = true})
