@@ -37,7 +37,6 @@ local plugins = {
     -- },
     -- {
     --     "rebelot/kanagawa.nvim",
-    --     lazy = true,
     --     config = function ()
     --         require"kanagawa".setup{
     --             commentStyle = { italic = false },
@@ -48,7 +47,6 @@ local plugins = {
     -- },
     -- {
     --     "marko-cerovac/material.nvim",
-    --     lazy = true,
     --     config = function()
     --         g.material_style = "darker"
     --         require"material".setup {
@@ -72,7 +70,6 @@ local plugins = {
     -- },
     -- {
     --     "sainnhe/edge",
-    --     lazy = true,
     --     config = function ()
     --         g.edge_style = 'aura'
     --         g.edge_disable_italic_comment = 1
@@ -159,7 +156,6 @@ local plugins = {
     },
     {
         "rcarriga/nvim-notify",
-        lazy = true,
         config = function ()
             require"notify".setup {
                 render = "compact"
@@ -193,7 +189,6 @@ local plugins = {
     },
     {
         "nvim-tree/nvim-web-devicons",
-        lazy = true,
         config = function ()
             require"nvim-web-devicons".setup {
                 color_icons = true}
@@ -346,16 +341,13 @@ local plugins = {
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
-        lazy = true,
         build = "make"
     },
     {
         "nvim-telescope/telescope-file-browser.nvim",
-        lazy = true,
     },
     {
         "nvim-telescope/telescope-frecency.nvim",
-        lazy = true,
         dependencies = {"tami5/sqlite.lua"}
     },
     {
@@ -402,7 +394,6 @@ local plugins = {
     },
     {
         "nvim-lua/plenary.nvim",
-        lazy = true,
     },
 
     -- language support
@@ -428,7 +419,6 @@ local plugins = {
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        lazy = true,
         config = function()
             require"mason-lspconfig".setup{}
         end
