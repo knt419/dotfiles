@@ -423,11 +423,11 @@ local plugins = {
     },
     {
         "hrsh7th/cmp-buffer",
-        event = "InsertEnter",
+        event = {"InsertEnter", "BufRead"},
     },
     {
         "FelipeLema/cmp-async-path",
-        event = "InsertEnter",
+        event = {"InsertEnter", "CmdlineEnter"},
     },
     {
         "hrsh7th/cmp-cmdline",
