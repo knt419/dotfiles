@@ -118,7 +118,6 @@ local plugins = {
         lazy = false,
         priority = 1000,
         config = function ()
-            -- require"astrotheme".setup {}
             cmd.colorscheme"dogrun"
         end
     },
@@ -382,7 +381,7 @@ local plugins = {
             "nvim-lua/plenary.nvim",
         },
         keys = {
-            { "<Right>", "<Cmd>LazyGit<CR>" }
+            { "<Right>", "<Cmd>cd %:h<CR><Cmd>LazyGit<CR>" }
         }
     },
     {
