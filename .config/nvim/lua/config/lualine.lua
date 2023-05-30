@@ -1,7 +1,7 @@
 return function ()
     require"lualine".setup {
         options = {
-            theme = "nord",
+            -- theme = "nord",
             component_separators = { left = '', right = '' },
             section_separators = { left = '', right = '' },
             always_divide_middle = false,
@@ -15,7 +15,7 @@ return function ()
                     function ()
                         return '▊'
                     end,
-                    color = { fg = '#51afef' },
+                    -- color = { fg = '#51afef' },
                     padding = 0
                 },
                 {
@@ -93,7 +93,7 @@ return function ()
                     function()
                         return '▊'
                     end,
-                    color = { fg = '#51afef' },
+                    -- color = { fg = '#51afef' },
                     padding = 0,
                 },
             },
@@ -106,7 +106,7 @@ return function ()
                     function ()
                         return '▌'
                     end,
-                    color = { fg = '#51afef' },
+                    -- color = { fg = '#51afef' },
                     padding = 0
                 },
                 {

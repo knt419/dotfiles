@@ -102,15 +102,24 @@ local plugins = {
     --         cmd.colorscheme"catppuccin"
     --     end
     -- },
+    -- {
+    --     "shaunsingh/nord.nvim",
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function ()
+    --         g.nord_contrast = true
+    --         g.nord_italic = false
+    --         g.nord_bold = false
+    --         require"nord".set {}
+    --     end
+    -- },
     {
-        "shaunsingh/nord.nvim",
+        "wadackel/vim-dogrun",
         lazy = false,
         priority = 1000,
         config = function ()
-            g.nord_contrast = true
-            g.nord_italic = false
-            g.nord_bold = false
-            require"nord".set {}
+            -- require"astrotheme".setup {}
+            cmd.colorscheme"dogrun"
         end
     },
 
