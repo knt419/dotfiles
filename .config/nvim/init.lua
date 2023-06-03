@@ -26,6 +26,8 @@ opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
 opt.backupdir:remove(".")
+opt.history = 50
+opt.shada = [['10,<30,f0,s5]]
 
 opt.autoread = false
 opt.switchbuf = "useopen"
@@ -90,8 +92,6 @@ opt.splitkeep = "screen"
 
 g.mapleader = " "
 g.is_windows = fn.has("win16") == 1 or fn.has("win32") == 1 or fn.has("win64") == 1
-g.do_filetype_lua = 0
-g.did_load_filetypes = 1
 g.loaded_python3_provider = 0
 g.loaded_ruby_provider = 0
 g.loaded_perl_provider = 0
@@ -101,6 +101,7 @@ g.loaded_syntax_completion = 1
 g.loaded_sql_completion = 1
 g.skip_loading_mswin = 1
 g.did_indent_on = 1
+g.editorconfig = false
 
 if g.is_windows then
     g.clipboard = {

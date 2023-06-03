@@ -20,8 +20,6 @@ end
 
 opt.rtp:prepend(lazypath)
 
-g.sqlite_clib_path = fn.substitute(fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
-
 local plugins = {
 
     -- performance improve
@@ -171,7 +169,7 @@ local plugins = {
         config = require"config.noice",
         dependencies = {
             "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify"
+            "rcarriga/nvim-notify",
         }
     },
     {
@@ -317,7 +315,12 @@ local plugins = {
         event = "BufReadPre",
     },
     {
-        "tami5/sqlite.lua",
+        "kkharji/sqlite.lua",
+        init = function ()
+            if g.is_windows then
+                g.sqlite_clib_path = fn.substitute(fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
+            end
+        end,
     },
     {
         "jemag/telescope-diff.nvim",
@@ -341,7 +344,7 @@ local plugins = {
     },
     {
         "nvim-telescope/telescope-frecency.nvim",
-        dependencies = {"tami5/sqlite.lua"}
+        dependencies = {"kkharji/sqlite.lua"}
     },
     {
         "nvim-telescope/telescope.nvim",
