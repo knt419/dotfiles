@@ -111,6 +111,7 @@ return function ()
                 },
                 {
                     'buffers',
+                    use_mode_colors = true,
                     symbols = {
                             modified = ' ●',
                             alternate_file = '',

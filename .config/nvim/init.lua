@@ -120,10 +120,6 @@ end
 require"plugins"
 
 -- autocmd
-api.nvim_create_autocmd("VimResized", {
-    pattern = "*",
-    command = "normal <C-w>="
-})
 api.nvim_create_autocmd("User", {
     pattern = "LazyVimStarted",
     callback = function()
