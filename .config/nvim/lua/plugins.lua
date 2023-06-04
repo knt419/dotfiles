@@ -134,9 +134,7 @@ local plugins = {
         "kevinhwang91/nvim-hlslens",
         event = "CmdlineEnter",
         config = function ()
-            require"scrollbar.handlers.search".setup({
-                override_lens = function () end,
-            })
+            require"scrollbar.handlers.search".setup {}
         end
     },
     {
@@ -324,16 +322,13 @@ local plugins = {
     },
     {
         "jemag/telescope-diff.nvim",
+        config = function ()
+            require"telescope".load_extension("diff")
+        end,
         keys = {
-            { "<Leader>di", function ()
-                                require"telescope".load_extension("diff")
-                                require"telescope".extensions.diff.diff_files({ hidden = true})
-                            end },
-            { "<Leader>dc", function ()
-                                require"telescope".load_extension("diff")
-                                require"telescope".extensions.diff.diff_current({ hidden = true})
-                            end }
-        }
+            { "<Leader>di", function () require"telescope".extensions.diff.diff_files({ hidden = true }) end },
+            { "<Leader>dc", function () require"telescope".extensions.diff.diff_current({ hidden = true }) end },
+        },
     },
     {
         "nvim-telescope/telescope-fzf-native.nvim",
@@ -492,7 +487,6 @@ local lazyopt = {
                 "zip",
                 "zipPlugin",
                 "rplugin",
-                "editorconfig",
                 "getscript",
                 "getscriptPlugin",
                 "logiPat",
