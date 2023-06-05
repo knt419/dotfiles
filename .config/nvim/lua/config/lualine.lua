@@ -1,7 +1,6 @@
 return function ()
     require"lualine".setup {
         options = {
-            -- theme = "nord",
             component_separators = { left = '', right = '' },
             section_separators = { left = '', right = '' },
             always_divide_middle = false,
@@ -12,40 +11,26 @@ return function ()
             lualine_a = {},
             lualine_b = {
                 {
-                    function ()
-                        return '▊'
-                    end,
-                    -- color = { fg = '#51afef' },
-                    padding = 0
-                },
-                {
-                    'filetype',
-                    icon_only = true,
-                },
-                {
-                    'filename',
-                    file_status = true,
-                    newfile_status = false,
-                    path = 0,
-                    shorting_target = 40,
-                    symbols = {
-                        modified = '',
-                        readonly = '',
-                        unnamed = '[No Name]',
-                        newfile = '󰎔',
-                    },
-                    padding = { left = 0, right = 1},
+                    function() return ' ' end,
+                    padding = 2
                 },
             },
             lualine_c = {
+                {
+                    'filetype',
+                    icon_only = true,
+                    padding = 0
+                },
+                {
+                    'filename',
+                    symbols = { modified = '', readonly = '' },
+                },
                 {
                     'diff',
                     symbols = { added = ' ', modified = ' ', removed = ' ' },
                 },
                 {
-                    function ()
-                        return '%='
-                    end
+                    function () return '%=' end
                 },
                 {
                     function()
@@ -81,44 +66,31 @@ return function ()
                 },
                 {
                     'fileformat',
-                }
-            },
-            lualine_y = {
+                },
                 {
-                    -- 'location',
                     '%l:%c',
                     icon = '',
                 },
-                {
-                    function()
-                        return '▊'
-                    end,
-                    -- color = { fg = '#51afef' },
-                    padding = 0,
-                },
             },
+            lualine_y = {},
             lualine_z = {}
         },
         tabline = {
-            lualine_a = {},
+            lualine_a = {
+            },
             lualine_b = {
+            },
+            lualine_c = {
                 {
-                    function ()
-                        return '▌'
-                    end,
-                    -- color = { fg = '#51afef' },
+                    function () return '▊' end,
                     padding = 0
                 },
                 {
                     'buffers',
-                    symbols = {
-                            modified = ' ●',
-                            alternate_file = '',
-                            directory =  '',
-                    }
+                    buffers_color = { active = 'lualine_a_normal', inactive = 'lualine_b_inactive' },
+                    symbols = { modified = ' ', alternate_file = '', directory =  '' }
                 }
             },
-            lualine_c = {},
             lualine_x = {
                 {
                     function ()

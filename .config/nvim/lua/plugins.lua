@@ -31,15 +31,21 @@ local plugins = {
     -- colorscheme
     -- {
     --     "tyrannicaltoucan/vim-deep-space",
+    --     event = "VeryLazy",
+    --     config = function ()
+    --         cmd.colorscheme"deep-space"
+    --     end
     -- },
     -- {
     --     "rebelot/kanagawa.nvim",
+    --     event = "VeryLazy",
     --     config = function ()
     --         require"kanagawa".setup{
     --             commentStyle = { italic = false },
     --             keywordStyle = { italic = false },
     --             dimInactive = true
     --         }
+    --         cmd.colorscheme"kanagawa"
     --     end
     -- },
     -- {
@@ -114,8 +120,6 @@ local plugins = {
     {
         "wadackel/vim-dogrun",
         event = "VeryLazy",
-        -- lazy = false,
-        -- priority = 1000,
         config = function ()
             cmd.colorscheme"dogrun"
         end
