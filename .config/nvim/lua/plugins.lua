@@ -491,6 +491,7 @@ local lazyopt = {
                 "getscriptPlugin",
                 "logiPat",
                 "rrhelper",
+                "editorconfig",
             },
         }
     }

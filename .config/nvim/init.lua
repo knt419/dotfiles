@@ -101,7 +101,6 @@ g.loaded_syntax_completion = 1
 g.loaded_sql_completion = 1
 g.skip_loading_mswin = 1
 g.did_indent_on = 1
-g.editorconfig = false
 
 if g.is_windows then
     g.clipboard = {
