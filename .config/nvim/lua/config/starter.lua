@@ -30,20 +30,5 @@ return function()
             starter.gen_hook.aligning('center', 'center'),
         },
     })
-    vim.api.nvim_create_autocmd("User", {
-        pattern = "LazyVimStarted",
-        callback = function()
-            if vim.bo.filetype == "starter" then
-                local stats = require"lazy".stats()
-                starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages, ' .. string.format("%.2f",stats.startuptime) .. 'ms to launch 🚀'
-                pcall(starter.refresh)
-            end
-        end,
-    })
-    vim.api.nvim_create_autocmd("User", {
-        pattern = "MiniStarterOpened",
-        command = "cd ~"
-    })
-    local keymap = vim.keymap
-    keymap.set("n", "<Up>", "<Cmd>lua MiniStarter.open()<CR>")
+    vim.keymap.set("n", "<Up>", "<Cmd>lua MiniStarter.open()<CR>")
 end

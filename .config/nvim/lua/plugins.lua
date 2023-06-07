@@ -23,10 +23,6 @@ opt.rtp:prepend(lazypath)
 local plugins = {
 
     -- performance improve
-    {
-        "nathom/filetype.nvim",
-        lazy = false,
-    },
 
     -- colorscheme
     -- {
@@ -126,9 +122,6 @@ local plugins = {
     },
 
     -- editor display
-    {
-        "MunifTanjim/nui.nvim",
-    },
     {
         "nvim-zh/colorful-winsep.nvim",
         event = "WinNew",
@@ -339,9 +332,6 @@ local plugins = {
         build = "make"
     },
     {
-        "nvim-telescope/telescope-file-browser.nvim",
-    },
-    {
         "nvim-telescope/telescope-frecency.nvim",
         dependencies = {"kkharji/sqlite.lua"}
     },
@@ -351,6 +341,8 @@ local plugins = {
         config = require"config.teles",
         dependencies = {
             "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-file-browser.nvim",
+            "nvim-telescope/telescope-frecency.nvim",
         },
         keys = {
             { "<Leader>f", "<Cmd>Telescope frecency theme=ivy<CR>", silent = true },
@@ -387,9 +379,6 @@ local plugins = {
             { "<Right>", "<Cmd>cd %:h<CR><Cmd>LazyGit<CR>" }
         }
     },
-    {
-        "nvim-lua/plenary.nvim",
-    },
 
     -- language support
     {
@@ -420,18 +409,6 @@ local plugins = {
         config = require"config.lspconfig",
     },
     {
-        "hrsh7th/cmp-nvim-lsp",
-        event = "InsertEnter",
-    },
-    {
-        "hrsh7th/cmp-buffer",
-        event = {"InsertEnter", "BufRead"},
-    },
-    {
-        "FelipeLema/cmp-async-path",
-        event = {"InsertEnter", "CmdlineEnter"},
-    },
-    {
         "hrsh7th/cmp-cmdline",
         event = "CmdlineEnter",
     },
@@ -440,22 +417,18 @@ local plugins = {
         event = "InsertEnter",
     },
     {
-        "saadparwaiz1/cmp_luasnip",
-        event = "InsertEnter",
-    },
-    {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         config = require"config.cmp",
-        dependencies = {"onsails/lspkind-nvim"}
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            "onsails/lspkind-nvim",
+            "saadparwaiz1/cmp_luasnip",
+            "FelipeLema/cmp-async-path",
+            "hrsh7th/cmp-buffer",
+            "hrsh7th/cmp-nvim-lua",
+        }
     },
-    {
-        "hrsh7th/cmp-nvim-lua",
-        event = "InsertEnter",
-    },
-    {
-        "onsails/lspkind-nvim",
-    }
 }
 
 local lazyopt = {
