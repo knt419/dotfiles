@@ -5,7 +5,6 @@ opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
 opt.fileencodings = "iso-2022-jp,utf-8,cp932,euc-jp"
 
-opt.backup = false
 opt.writebackup = false
 opt.swapfile = false
 opt.backupdir:remove(".")
@@ -20,15 +19,12 @@ opt.signcolumn = "yes"
 opt.display = "uhex,lastline"
 opt.scrolloff = 5
 opt.foldmethod = "marker"
-opt.foldenable = true
 opt.foldlevelstart = 10
-opt.lazyredraw = false
 opt.termguicolors = true
 
 opt.guifont = "HackGen Console NF:h13"
 opt.guifontwide = "HackGen Console NF:h13"
 opt.emoji = true
-opt.showmatch = false
 opt.tabstop = 4
 opt.expandtab = true
 opt.shiftwidth = 4
@@ -39,7 +35,6 @@ opt.conceallevel = 0
 opt.helplang = "ja,en"
 
 opt.clipboard:append{'unnamedplus'}
-opt.startofline = false
 opt.list = true
 opt.listchars = {tab = "» ", trail = "·", eol = "↲", extends = "»", precedes = "«", nbsp = "%"}
 opt.fillchars = {eob = "\u{0020}"}
