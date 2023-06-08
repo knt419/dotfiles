@@ -51,9 +51,7 @@ return function()
             {
                 {name = "nvim_lsp"},
                 {name = "nvim_lua"},
-                {name = "luasnip"}
-            },
-            {
+                {name = "luasnip"},
                 {name = "buffer"}
             }
         ),
@@ -78,9 +76,7 @@ return function()
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources(
                 {
-                    {name = "async_path"}
-                },
-                {
+                    {name = "async_path"},
                     {name = "cmdline"}
                 }
             )
