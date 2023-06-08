@@ -132,7 +132,10 @@ local plugins = {
         event = "CmdlineEnter",
         config = function ()
             require"scrollbar.handlers.search".setup {}
-        end
+        end,
+        dependencies = {
+            "petertriho/nvim-scrollbar",
+        },
     },
     {
         "petertriho/nvim-scrollbar",
@@ -216,8 +219,9 @@ local plugins = {
             require"scrollbar.handlers.gitsigns".setup {}
         end,
         dependencies = {
-            "nvim-lua/plenary.nvim"
-        }
+            "petertriho/nvim-scrollbar",
+            "nvim-lua/plenary.nvim",
+        },
     },
     {
         "windwp/nvim-autopairs",
@@ -310,30 +314,37 @@ local plugins = {
         event = "BufReadPre",
     },
     {
-        "kkharji/sqlite.lua",
-        init = function ()
-            if g.is_windows then
-                g.sqlite_clib_path = fn.substitute(fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
-            end
-        end,
-    },
-    {
         "jemag/telescope-diff.nvim",
         config = function ()
             require"telescope".load_extension("diff")
         end,
+        dependencies = {
+            "nvim-telescope/telescope.nvim",
+        },
         keys = {
             { "<Leader>di", function () require"telescope".extensions.diff.diff_files({ hidden = true }) end },
             { "<Leader>dc", function () require"telescope".extensions.diff.diff_current({ hidden = true }) end },
         },
     },
     {
-        "nvim-telescope/telescope-fzf-native.nvim",
-        build = "make"
-    },
-    {
         "nvim-telescope/telescope-frecency.nvim",
-        dependencies = {"kkharji/sqlite.lua"}
+        config = function ()
+            require"telescope".load_extension("frecency")
+        end,
+        dependencies = {
+            {
+                "kkharji/sqlite.lua",
+                init = function ()
+                    if g.is_windows then
+                        g.sqlite_clib_path = fn.substitute(fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
+                    end
+                end,
+            },
+            "nvim-telescope/telescope.nvim",
+        },
+        keys = {
+            { "<Leader>f", "<Cmd>Telescope frecency theme=ivy<CR>", silent = true },
+        },
     },
     {
         "nvim-telescope/telescope.nvim",
@@ -342,14 +353,16 @@ local plugins = {
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
-            "nvim-telescope/telescope-frecency.nvim",
+            {
+                "nvim-telescope/telescope-fzf-native.nvim",
+                build = "make"
+            },
         },
         keys = {
-            { "<Leader>f", "<Cmd>Telescope frecency theme=ivy<CR>", silent = true },
             { "<Leader>g", "<Cmd>Telescope live_grep theme=ivy<CR>", silent = true },
             { "<Leader><Leader>", "<Cmd>Telescope builtin theme=ivy<CR>", silent = true },
             { "<Left>", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>" },
-        }
+        },
     },
     {
         "januswel/fencja.vim",
@@ -400,13 +413,16 @@ local plugins = {
         config = true,
     },
     {
-        "williamboman/mason-lspconfig.nvim",
-        config = true,
-    },
-    {
         "neovim/nvim-lspconfig",
         event = {"BufWritePre", "BufReadPre"},
         config = require"config.lspconfig",
+        dependencies = {
+            "hrsh7th/cmp-nvim-lsp",
+            {
+                "williamboman/mason-lspconfig.nvim",
+                config = true,
+            },
+        },
     },
     {
         "hrsh7th/cmp-cmdline",
