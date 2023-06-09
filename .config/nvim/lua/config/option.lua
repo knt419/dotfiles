@@ -46,7 +46,6 @@ opt.updatetime = 300
 
 opt.ignorecase = true
 opt.smartcase = true
-opt.wrapscan = true
 opt.infercase = true
 
 opt.diffopt = {"filler", "vertical", "internal", algorithm = "histogram", "indent-heuristic"}
@@ -54,7 +53,6 @@ opt.splitright = true
 
 opt.laststatus = 3
 opt.wildmode = {list = "full"}
-opt.wrap = true
 opt.showmode = false
 opt.iskeyword:append("-")
 opt.linebreak = true
