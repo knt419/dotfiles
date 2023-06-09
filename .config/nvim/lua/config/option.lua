@@ -24,14 +24,12 @@ opt.termguicolors = true
 
 opt.guifont = "HackGen Console NF:h13"
 opt.guifontwide = "HackGen Console NF:h13"
-opt.emoji = true
 opt.tabstop = 4
 opt.expandtab = true
 opt.shiftwidth = 4
 opt.shiftround = true
 opt.smartindent = true
 opt.complete = {".", "w", "b"}
-opt.conceallevel = 0
 opt.helplang = "ja,en"
 
 opt.clipboard:append{'unnamedplus'}
