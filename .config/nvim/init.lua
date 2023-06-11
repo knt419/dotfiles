@@ -10,12 +10,14 @@
 --____________________________________________________________________________\
 --____________________________________________________________________________|
 vim.scriptencoding = "utf-8"
+vim.loader.enable()
+
+vim.cmd.syntax"off"
 
 -- option
 require"config.option"
 
 -- load plugins
-vim.loader.enable()
 require"plugins"
 
 -- keymap,autocmd
@@ -24,11 +26,11 @@ vim.api.nvim_create_autocmd("User", {
     callback = function()
         require"config.keymap"
         require"config.autocmd"
-        if vim.bo.filetype == "starter" then
+        if vim.api.nvim_buf_line_count(0) <= 1 then
             local starter = require"mini.starter"
             local stats = require"lazy".stats()
-            starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages, ' .. string.format("%.2f",stats.startuptime) .. 'ms to launch 🚀'
-            pcall(starter.refresh)
+            starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages in ' .. string.format("%.2f",stats.startuptime) .. 'ms 🚀'
+            pcall(starter.open)
         end
         vim.cmd.cd"~"
     end

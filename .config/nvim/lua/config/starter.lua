@@ -1,6 +1,7 @@
 return function()
     local starter = require('mini.starter')
     starter.setup({
+        autoopen = false,
         evaluate_single = true,
         header = table.concat (
             {

@@ -327,26 +327,6 @@ local plugins = {
         },
     },
     {
-        "nvim-telescope/telescope-frecency.nvim",
-        config = function ()
-            require"telescope".load_extension("frecency")
-        end,
-        dependencies = {
-            {
-                "kkharji/sqlite.lua",
-                init = function ()
-                    if g.is_windows then
-                        g.sqlite_clib_path = fn.substitute(fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
-                    end
-                end,
-            },
-            "nvim-telescope/telescope.nvim",
-        },
-        keys = {
-            { "<Leader>f", "<Cmd>Telescope frecency theme=ivy<CR>", silent = true },
-        },
-    },
-    {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
         config = require"config.teles",
@@ -357,11 +337,25 @@ local plugins = {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "make"
             },
+            {
+                "nvim-telescope/telescope-frecency.nvim",
+                dependencies = {
+                    {
+                        "kkharji/sqlite.lua",
+                        init = function ()
+                            if g.is_windows then
+                                g.sqlite_clib_path = fn.substitute(fn.stdpath("data"), "\\", "/", "g") .. "/sqlite3.dll"
+                            end
+                        end,
+                    },
+                },
+            },
         },
         keys = {
             { "<Leader>g", "<Cmd>Telescope live_grep theme=ivy<CR>", silent = true },
             { "<Leader><Leader>", "<Cmd>Telescope builtin theme=ivy<CR>", silent = true },
             { "<Left>", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>" },
+            { "<Leader>f", "<Cmd>Telescope frecency theme=ivy<CR>", silent = true },
         },
     },
     {

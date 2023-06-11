@@ -1,9 +1,8 @@
 local g = vim.g
 local opt = vim.opt
 
-opt.encoding = "utf-8"
 opt.fileencoding = "utf-8"
-opt.fileencodings = "iso-2022-jp,utf-8,cp932,euc-jp"
+opt.fileencodings = "ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp"
 
 opt.writebackup = false
 opt.swapfile = false
