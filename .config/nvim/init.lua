@@ -26,12 +26,10 @@ vim.api.nvim_create_autocmd("User", {
     callback = function()
         require"config.keymap"
         require"config.autocmd"
-        if vim.bo.filetype == "starter" then
-            local starter = require"mini.starter"
-            local stats = require"lazy".stats()
-            starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages in ' .. string.format("%.2f",stats.startuptime) .. 'ms 🚀'
-            pcall(starter.refresh)
-        end
+        local starter = require"mini.starter"
+        local stats = require"lazy".stats()
+        starter.config.footer = 'neovim loaded ' .. stats.count .. ' packages in ' .. string.format("%.2f",stats.startuptime) .. 'ms 🚀'
+        pcall(starter.open)
         vim.cmd.cd"~"
     end
 })
