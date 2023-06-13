@@ -12,8 +12,6 @@
 vim.scriptencoding = "utf-8"
 vim.loader.enable()
 
-vim.cmd.syntax"off"
-
 -- option
 require"config.option"
 

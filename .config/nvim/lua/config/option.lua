@@ -17,8 +17,6 @@ opt.number = true
 opt.signcolumn = "yes"
 opt.display = "uhex,lastline"
 opt.scrolloff = 5
-opt.foldmethod = "marker"
-opt.foldlevelstart = 10
 opt.termguicolors = true
 
 opt.guifont = "HackGen Console NF:h13"
@@ -26,10 +24,7 @@ opt.guifontwide = "HackGen Console NF:h13"
 opt.tabstop = 4
 opt.expandtab = true
 opt.shiftwidth = 4
-opt.shiftround = true
 opt.smartindent = true
-opt.complete = {".", "w", "b"}
-opt.helplang = "ja,en"
 
 opt.clipboard:append{'unnamedplus'}
 opt.list = true
@@ -39,24 +34,20 @@ opt.virtualedit = "block"
 opt.whichwrap = "b,s,h,l,<,>,[,]"
 opt.mouse = "a"
 opt.synmaxcol = 300
-opt.updatetime = 300
 
 opt.ignorecase = true
 opt.smartcase = true
 opt.infercase = true
 
 opt.diffopt = {"filler", "vertical", "internal", algorithm = "histogram", "indent-heuristic"}
-opt.splitright = true
 
 opt.laststatus = 3
 opt.wildmode = {list = "full"}
-opt.showmode = false
 opt.iskeyword:append("-")
 opt.linebreak = true
 opt.breakindent = true
 opt.breakindentopt = {shift = 2}
 opt.showbreak = "↪"
-opt.tags = ""
 
 opt.inccommand = "split"
 opt.pumblend = 10

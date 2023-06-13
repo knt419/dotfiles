@@ -399,6 +399,7 @@ local plugins = {
             'RainbowMultiDelim'
         }
     },
+
     -- lsp/completion
     {
         "williamboman/mason.nvim",
