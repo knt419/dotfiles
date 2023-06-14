@@ -3,7 +3,6 @@ local fn = vim.fn
 
 keymap.set("n", "<Esc>", "<Esc><Cmd>nohlsearch<CR><Esc>", {silent = true})
 keymap.set("n", "<Esc><Esc>", "<Cmd>bdelete<CR>", {silent = true})
-keymap.set("n", "Y", "y$", {silent = true})
 keymap.set("x", "Y", '"+y', {silent = true})
 keymap.set("n", "x", '"_x', {silent = true})
 keymap.set("n", "rr", ":<C-u>%s///g<Left><Left>")
