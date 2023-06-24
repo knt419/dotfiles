@@ -220,8 +220,11 @@ local plugins = {
 
     -- file/directory
     {
-        "aymericbeaumet/vim-symlink",
+       "aymericbeaumet/vim-symlink", --not compatible with neovim's autochdir
         event = "BufReadPre",
+        dependencies = {
+            "moll/vim-bbye",
+        }
     },
     {
         "jemag/telescope-diff.nvim",
