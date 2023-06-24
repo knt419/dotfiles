@@ -293,7 +293,10 @@ local plugins = {
             "nvim-lua/plenary.nvim",
         },
         keys = {
-            { "<Right>", "<Cmd>cd %:h<CR><Cmd>LazyGit<CR>" }
+            { "<Right>", function ()
+                vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h'))
+                vim.cmd[[LazyGit]]
+            end }
         }
     },
 

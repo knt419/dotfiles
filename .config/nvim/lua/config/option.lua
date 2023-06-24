@@ -11,7 +11,7 @@ opt.history = 50
 opt.shada = [['10,<30,f0,s5]]
 
 opt.autoread = false
-opt.autochdir = true
+-- opt.autochdir = true
 opt.switchbuf = "useopen"
 opt.confirm = true
 opt.number = true
