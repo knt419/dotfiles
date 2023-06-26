@@ -10,10 +10,14 @@ return function ()
         end
         return prefix .. status[type]
     end
+    local ff = function ()
+        local icon = { dos = '', unix = '', mac = ''}
+        return icon[vim.bo.fileformat]
+    end
     require"staline".setup {
         sections = {
             left = {
-                '  ', ' ', ' ',
+                '  ', ' ', ' ', 'branch',
                 'file_name',
                  {
                     "GitSignsAdd",
@@ -39,20 +43,13 @@ return function ()
             mid = { 'lsp_name', ' ', 'lsp' },
             right = {
                 vim.bo.fileencoding:upper(), ' ',
-                function ()
-                    if vim.bo.fileformat == 'dos' then
-                        return ' '
-                    elseif vim.bo.fileformat == 'unix' then
-                        return ' '
-                    else
-                        return ' '
-                    end
-                end, ' ', '%l:%c',
+                ff , ' ',
+                ' ', '%03l:%02c ',
             },
         },
         defaults = {
             mod_synbol = ' ',
-            branch_symbol = '',
+            branch_symbol = ' ',
             true_colors = true,
         },
         lsp_symbols = {
