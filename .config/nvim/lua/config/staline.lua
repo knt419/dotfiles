@@ -1,14 +1,15 @@
 return function ()
     vim.opt.showtabline=2
-    local git_status = function(type, prefix)
+    local git_status = function(type)
         local status = vim.b.gitsigns_status_dict
-        if not status then
-          return nil
+        if status == nil then
+          return ''
         end
-        if not status[type] or status[type] == 0 then
-          return nil
+        if status[type] == nil or status[type] == 0 then
+          return ''
         end
-        return prefix .. status[type]
+        local prefix = { added = '', changed = '', removed = ''}
+        return prefix[type] .. ' ' .. status[type]
     end
     local ff = function ()
         local icon = { dos = '', unix = '', mac = ''}
@@ -19,24 +20,25 @@ return function ()
             left = {
                 '  ', ' ', ' ', 'branch',
                 'file_name',
+                ' ',
                  {
                     "GitSignsAdd",
                     function()
-                       return git_status("added", " ") or ''
+                       return git_status("added")
                     end
                 },
                 ' ',
                 {
                     "GitSignsChange",
                     function()
-                       return git_status("changed", " ") or ''
+                       return git_status("changed")
                     end
                 },
                 ' ',
                 {
                     "GitSignsDelete",
                     function()
-                       return git_status("removed", " ") or ''
+                       return git_status("removed")
                     end
                 },
             },
