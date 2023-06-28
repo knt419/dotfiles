@@ -15,51 +15,36 @@ return function ()
         local icon = { dos = '', unix = '', mac = ''}
         return icon[vim.bo.fileformat]
     end
+    local fname = function ()
+        local icon, highlightname = require"nvim-web-devicons".get_icon(vim.fn.expand('%:t'), vim.bo.filetype)
+        if highlightname == nil then
+            return '%t'
+        end
+        return '%#' .. highlightname .. '#' .. icon .. ' %t'
+    end
     require"staline".setup {
         sections = {
             left = {
-                '  ', ' ', ' ', 'branch',
-                'file_name',
-                ' ',
-                 {
-                    "GitSignsAdd",
-                    function()
-                       return git_status("added")
-                    end
-                },
-                ' ',
-                {
-                    "GitSignsChange",
-                    function()
-                       return git_status("changed")
-                    end
-                },
-                ' ',
-                {
-                    "GitSignsDelete",
-                    function()
-                       return git_status("removed")
-                    end
-                },
+                '  ', 'mode', ' ', 'branch',
+                fname,
+                ' ', { 'GitSignsAdd', function() return git_status("added") end },
+                ' ', { 'GitSignsChange', function() return git_status("changed") end },
+                ' ', { 'GitSignsDelete', function() return git_status("removed") end },
             },
-            mid = { 'lsp_name', ' ', 'lsp' },
+            mid = { { 'SpecialKey', 'lsp_name' }, ' ', 'lsp' },
             right = {
-                vim.bo.fileencoding:upper(), ' ',
-                ff , ' ',
-                ' ', '%03l:%02c ',
+                { 'Keyword', vim.bo.fileencoding:upper() }, ' ',
+                { 'Keyword', ff }, ' ',
+                { 'Keyword', ' %03l:%02c'}, ' ',
             },
         },
+        mode_icons = { n = " ", i = " ", c = " ", v = "󰒉 ", V = " ", [''] = "󰾂 "},
         defaults = {
             mod_synbol = ' ',
             branch_symbol = ' ',
             true_colors = true,
         },
-        lsp_symbols = {
-                Error=" ",
-                Info=" ",
-                Warn=" ",
-                Hint=" ",
-        },
+        lsp_symbols = { Error=" ", Info=" ", Warn=" ", Hint=" ", },
     }
     require"stabline".setup {}
 end
