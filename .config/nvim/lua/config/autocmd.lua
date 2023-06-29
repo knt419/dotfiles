@@ -4,6 +4,10 @@ api.nvim_create_autocmd("VimResized", {
     callback = function () vim.cmd.wincmd"=" end
 })
 
+api.nvim_create_autocmd("BufReadPost", {
+    callback = function () vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h')) end
+})
+
 api.nvim_create_autocmd("TermOpen", {
     callback = function ()
         vim.wo.number = false
