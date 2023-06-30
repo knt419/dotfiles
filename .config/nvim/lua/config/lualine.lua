@@ -111,6 +111,6 @@ return function ()
             lualine_z = {}
         }
     }
-    vim.cmd.doautocmd'BufEnter'
+    vim.cmd.doautocmd('BufEnter')
 end
 

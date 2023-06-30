@@ -27,7 +27,7 @@ local plugins = {
         'wadackel/vim-dogrun',
         event = 'VeryLazy',
         config = function ()
-            cmd.colorscheme'dogrun'
+            cmd.colorscheme('dogrun')
         end
     },
 
