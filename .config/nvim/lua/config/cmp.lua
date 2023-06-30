@@ -23,8 +23,8 @@ return function()
             documentation = cmp.config.window.bordered(),
         },
         mapping = {
-            ["<CR>"] = cmp.mapping.confirm({select = true}),
-            ["<Tab>"] = cmp.mapping(
+            ['<CR>'] = cmp.mapping.confirm({select = true}),
+            ['<Tab>'] = cmp.mapping(
                 function(fallback)
                     if cmp.visible() then
                         cmp.select_next_item()
@@ -34,9 +34,9 @@ return function()
                         fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
                     end
                 end,
-                {"i", "s"}
+                {'i', 's'}
             ),
-            ["<S-Tab>"] = cmp.mapping(
+            ['<S-Tab>'] = cmp.mapping(
                 function()
                     if cmp.visible() then
                         cmp.select_prev_item()
@@ -44,40 +44,40 @@ return function()
                         luasnip.jump(-1)
                     end
                 end,
-                {"i", "s"}
+                {'i', 's'}
             )
         },
         sources = cmp.config.sources(
             {
-                {name = "nvim_lsp"},
-                {name = "nvim_lua"},
-                {name = "luasnip"},
-                {name = "buffer"}
+                {name = 'nvim_lsp'},
+                {name = 'nvim_lua'},
+                {name = 'luasnip'},
+                {name = 'buffer'}
             }
         ),
         experimental = {
             ghost_text = {
-                hl_group = "LspCodeLens",
+                hl_group = 'LspCodeLens',
             },
         },
     }
     cmp.setup.cmdline(
-        "/",
+        '/',
         {
             mapping = cmp.mapping.preset.cmdline(),
             sources = {
-                {name = "buffer"}
+                {name = 'buffer'}
             }
         }
     )
     cmp.setup.cmdline(
-        ":",
+        ':',
         {
             mapping = cmp.mapping.preset.cmdline(),
             sources = cmp.config.sources(
                 {
-                    {name = "async_path"},
-                    {name = "cmdline"}
+                    {name = 'async_path'},
+                    {name = 'cmdline'}
                 }
             )
         }

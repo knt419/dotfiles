@@ -27,9 +27,9 @@ return function ()
             left = {
                 '  ', 'mode', ' ', 'branch',
                 fname,
-                ' ', { 'GitSignsAdd', function() return git_status("added") end },
-                ' ', { 'GitSignsChange', function() return git_status("changed") end },
-                ' ', { 'GitSignsDelete', function() return git_status("removed") end },
+                ' ', { 'GitSignsAdd', function() return git_status('added') end },
+                ' ', { 'GitSignsChange', function() return git_status('changed') end },
+                ' ', { 'GitSignsDelete', function() return git_status('removed') end },
             },
             mid = { { 'SpecialKey', 'lsp_name' }, ' ', 'lsp' },
             right = {
@@ -38,13 +38,13 @@ return function ()
                 { 'Keyword', ' %03l:%02c'}, ' ',
             },
         },
-        mode_icons = { n = " ", i = " ", c = " ", v = "󰒉 ", V = " ", [''] = "󰾂 "},
+        mode_icons = { n = ' ', i = ' ', c = ' ', v = '󰒉 ', V = ' ', [''] = '󰾂 '},
         defaults = {
             mod_synbol = ' ',
             branch_symbol = ' ',
             true_colors = true,
         },
-        lsp_symbols = { Error=" ", Info=" ", Warn=" ", Hint=" ", },
+        lsp_symbols = { Error=' ', Info=' ', Warn=' ', Hint=' ', },
     }
     require('stabline').setup {}
 end

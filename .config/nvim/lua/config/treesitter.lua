@@ -13,8 +13,8 @@ return function()
         pairs = {
             enable = true,
             keymaps = {
-                goto_partner = "<leader>%",
-                delete_balanced = "X"
+                goto_partner = '<leader>%',
+                delete_balanced = 'X'
             },
             delete_balanced = {
                 only_on_first_char = false,

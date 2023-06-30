@@ -94,10 +94,10 @@ return function ()
             lualine_x = {
                 {
                     function ()
-                        return vim.fn.fnamemodify(vim.fn.finddir(".git", ".;"), ":h:t")
+                        return vim.fn.fnamemodify(vim.fn.finddir('.git', '.;'), ':h:t')
                     end,
                     cond = function ()
-                        return vim.fn.finddir(".git", ".;") ~= ""
+                        return vim.fn.finddir('.git', '.;') ~= ''
                     end,
                     icon = '',
                     padding = { left = 2, right = 1 }
@@ -111,6 +111,6 @@ return function ()
             lualine_z = {}
         }
     }
-    vim.cmd.doautocmd"BufEnter"
+    vim.cmd.doautocmd'BufEnter'
 end
 
