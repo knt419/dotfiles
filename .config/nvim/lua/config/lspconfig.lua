@@ -1,7 +1,7 @@
 return function()
-    local lspconfig = require"lspconfig"
-    local util = require"lspconfig/util"
-    local capabilities = require"cmp_nvim_lsp".default_capabilities()
+    local lspconfig = require('lspconfig')
+    local util = require('lspconfig/util')
+    local capabilities = require('cmp_nvim_lsp').default_capabilities()
     local on_attach = function()
         local keymap = vim.keymap
         keymap.set("n", "<Leader>rf", "<Cmd>lua vim.lsp.buf.references()<CR>")
@@ -12,7 +12,7 @@ return function()
         keymap.set("n", "<Leader>h", "<Cmd>lua vim.lsp.buf.hover()<CR>")
         keymap.set("x", "<Leader>f", "<Cmd>lua vim.lsp.buf.formatting()<CR>")
     end
-    require"mason-lspconfig".setup_handlers{
+    require('mason-lspconfig').setup_handlers{
         function (server_name)
             lspconfig[server_name].setup{
                 on_attach = on_attach,

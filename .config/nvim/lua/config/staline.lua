@@ -16,13 +16,13 @@ return function ()
         return icon[vim.bo.fileformat]
     end
     local fname = function ()
-        local icon, highlightname = require"nvim-web-devicons".get_icon(vim.fn.expand('%:t'), vim.bo.filetype)
+        local icon, highlightname = require('nvim-web-devicons').get_icon(vim.fn.expand('%:t'), vim.bo.filetype)
         if highlightname == nil then
             return '%t'
         end
         return '%#' .. highlightname .. '#' .. icon .. ' %t'
     end
-    require"staline".setup {
+    require('staline').setup {
         sections = {
             left = {
                 '  ', 'mode', ' ', 'branch',
@@ -46,6 +46,6 @@ return function ()
         },
         lsp_symbols = { Error=" ", Info=" ", Warn=" ", Hint=" ", },
     }
-    require"stabline".setup {}
+    require('stabline').setup {}
 end
 

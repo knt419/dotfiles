@@ -41,7 +41,7 @@ local plugins = {
         "kevinhwang91/nvim-hlslens",
         event = "CmdlineEnter",
         config = function ()
-            require"scrollbar.handlers.search".setup {}
+            require('scrollbar.handlers.search').setup {}
         end,
         dependencies = {
             "petertriho/nvim-scrollbar",
@@ -51,7 +51,7 @@ local plugins = {
         "petertriho/nvim-scrollbar",
         event = {"BufNewFile", "BufRead"},
         config = function ()
-            require"scrollbar".setup {
+            require('scrollbar').setup {
                 marks = {
                     Search = { color = 'orange' },
                 }
@@ -66,7 +66,7 @@ local plugins = {
     {
         "rcarriga/nvim-notify",
         config = function ()
-            require"notify".setup {
+            require('notify').setup {
                 render = "compact"
             }
         end
@@ -74,7 +74,7 @@ local plugins = {
     {
         "folke/noice.nvim",
         event = {"CmdlineEnter", "BufNewFile", "BufRead"},
-        config = require"config.noice",
+        config = require('config.noice'),
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
@@ -84,7 +84,7 @@ local plugins = {
         'nvimdev/indentmini.nvim',
         event = {"BufNewFile", "BufRead"},
         config = function()
-            require"indentmini".setup {
+            require('indentmini').setup {
                 char = '│',
                 exclude = {"mason", "lazy", "starter"}
             }
@@ -94,7 +94,7 @@ local plugins = {
     {
         "tamton-aquib/staline.nvim",
         event = {"BufNewFile", "BufRead"},
-        config = require"config.staline"
+        config = require('config.staline')
     },
     {
         "nvim-tree/nvim-web-devicons",
@@ -104,13 +104,13 @@ local plugins = {
         "norcalli/nvim-colorizer.lua",
         event = {"BufNewFile", "BufRead"},
         config = function ()
-            require"colorizer".setup()
+            require('colorizer').setup()
         end,
     },
     {
         "echasnovski/mini.starter",
         lazy = false,
-        config = require"config.starter",
+        config = require('config.starter'),
     },
     {
         "rickhowe/diffchar.vim",
@@ -119,14 +119,14 @@ local plugins = {
     {
         "nvim-treesitter/nvim-treesitter",
         event = {"BufWritePre", "BufReadPre"},
-        config = require"config.treesitter",
+        config = require('config.treesitter'),
     },
     {
         "lewis6991/gitsigns.nvim",
         event = {"BufWritePre", "BufReadPre"},
         config = function ()
-            require"gitsigns".setup {}
-            require"scrollbar.handlers.gitsigns".setup {}
+            require('gitsigns').setup {}
+            require('scrollbar.handlers.gitsigns').setup {}
         end,
         dependencies = {
             "petertriho/nvim-scrollbar",
@@ -204,12 +204,12 @@ local plugins = {
     {
         "ntpeters/vim-better-whitespace",
         event = {"BufNewFile", "BufRead"},
-        config = require"config.whitespace",
+        config = require('config.whitespace'),
     },
     {
         "smjonas/inc-rename.nvim",
         config = function ()
-            require"inc_rename".setup{}
+            require('inc_rename').setup{}
         end,
         keys = {
             { "<Leader>rn", function()
@@ -229,20 +229,20 @@ local plugins = {
     {
         "jemag/telescope-diff.nvim",
         config = function ()
-            require"telescope".load_extension("diff")
+            require('telescope').load_extension("diff")
         end,
         dependencies = {
             "nvim-telescope/telescope.nvim",
         },
         keys = {
-            { "<Leader>di", function () require"telescope".extensions.diff.diff_files({ hidden = true }) end },
-            { "<Leader>dc", function () require"telescope".extensions.diff.diff_current({ hidden = true }) end },
+            { "<Leader>di", function () require('telescope').extensions.diff.diff_files({ hidden = true }) end },
+            { "<Leader>dc", function () require('telescope').extensions.diff.diff_current({ hidden = true }) end },
         },
     },
     {
         "nvim-telescope/telescope.nvim",
         cmd = "Telescope",
-        config = require"config.teles",
+        config = require('config.teles'),
         dependencies = {
             "nvim-lua/plenary.nvim",
             "nvim-telescope/telescope-file-browser.nvim",
@@ -267,7 +267,7 @@ local plugins = {
         keys = {
             { "<Leader>g", "<Cmd>Telescope live_grep theme=ivy<CR>", silent = true },
             { "<Leader><Leader>", "<Cmd>Telescope builtin theme=ivy<CR>", silent = true },
-            { "<Left>", "<Cmd>lua require'telescope'.extensions.file_browser.file_browser()<CR>" },
+            { "<Left>", "<Cmd>lua require('telescope').extensions.file_browser.file_browser()<CR>" },
             { "<Leader>f", "<Cmd>Telescope frecency theme=ivy<CR>", silent = true },
         },
     },
@@ -326,7 +326,7 @@ local plugins = {
     {
         "neovim/nvim-lspconfig",
         event = {"BufWritePre", "BufReadPre"},
-        config = require"config.lspconfig",
+        config = require('config.lspconfig'),
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             {
@@ -346,7 +346,7 @@ local plugins = {
     {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
-        config = require"config.cmp",
+        config = require('config.cmp'),
         dependencies = {
             "hrsh7th/cmp-nvim-lsp",
             "onsails/lspkind-nvim",
@@ -401,5 +401,5 @@ local lazyopt = {
     }
 }
 
-require("lazy").setup(plugins, lazyopt)
+require('lazy').setup(plugins, lazyopt)
 

@@ -1,11 +1,11 @@
 return function()
-    local telescope = require"telescope"
+    local telescope = require('telescope')
     telescope.setup {
         defaults = {
             winblend = 30,
             cache_picker = {limit_entries = 100},
             preview = {filesize_limit = 5, treesitter = true},
-            mappings = {i = {["<Esc>"] = require"telescope.actions".close}},
+            mappings = {i = {["<Esc>"] = require('telescope.actions').close}},
         },
         pickers = {
             find_files = {
