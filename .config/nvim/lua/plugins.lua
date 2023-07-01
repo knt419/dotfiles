@@ -267,7 +267,7 @@ local plugins = {
         keys = {
             { '<Leader>g', '<Cmd>Telescope live_grep theme=ivy<CR>', silent = true },
             { '<Leader><Leader>', '<Cmd>Telescope builtin theme=ivy<CR>', silent = true },
-            { '<Left>', '<Cmd>lua require(\'telescope\').extensions.file_browser.file_browser()<CR>' },
+            { '<Left>', function () require('telescope').extensions.file_browser.file_browser() end },
             { '<Leader>f', '<Cmd>Telescope frecency theme=ivy<CR>', silent = true },
         },
     },
