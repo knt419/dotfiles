@@ -177,7 +177,7 @@ local plugins = {
     },
     {
         'kana/vim-niceblock',
-        event = {'BufNewFile', 'BufRead'},
+        event = 'ModeChanged *:[vV\x16]*',
     },
     {
         'haya14busa/vim-asterisk',
