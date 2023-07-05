@@ -1,2 +1,3 @@
 .config/nvim/init.vim.local
 .bashrc_local
+.config/nvim/lazy-lock.json
