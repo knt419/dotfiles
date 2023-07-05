@@ -20,12 +20,12 @@ api.nvim_create_autocmd('TermOpen', {
     end
 })
 
-api.nvim_create_autocmd('TermClose', {
-    pattern = 'term://*lazygit',
-    callback = function ()
-        vim.api.nvim_input("<CR>")
-    end
-})
+-- api.nvim_create_autocmd('TermClose', {
+--     pattern = 'term://*lazygit',
+--     callback = function ()
+--         vim.api.nvim_input("<CR>")
+--     end
+-- })
 
 api.nvim_create_autocmd({'CursorMoved', 'CursorMovedI', 'WinLeave'}, {
     callback = function ()

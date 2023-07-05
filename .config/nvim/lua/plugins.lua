@@ -218,12 +218,36 @@ local plugins = {
         }
     },
 
+    -- terminal
+    {
+        'numToStr/FTerm.nvim',
+        config = function ()
+            require('FTerm').setup {
+                cmd = 'nu',
+                blend = 10,
+                dimensions = {
+                    height = 0.9,
+                    width = 0.9,
+                },
+            }
+        end,
+        keys = {
+            { '<Down>', function () require('FTerm').toggle() end },
+        }
+    },
+
     -- file/directory
     {
        'aymericbeaumet/vim-symlink', --not compatible with neovim's autochdir
         event = 'BufReadPre',
         dependencies = {
             'moll/vim-bbye',
+        }
+    },
+    {
+        'moll/vim-bbye',
+        keys = {
+            { '<Esc><Esc>', '<Cmd>Bdelete<CR>', silent = true}
         }
     },
     {
@@ -277,13 +301,6 @@ local plugins = {
     },
 
     -- git
-    {
-        'tpope/vim-fugitive',
-        cmd = 'Git',
-        keys = {
-            { '<Down>', '<Cmd>Git pull<CR>' },
-        }
-    },
     {
         'kdheepak/lazygit.nvim',
         config = function ()
