@@ -222,8 +222,9 @@ local plugins = {
     {
         'numToStr/FTerm.nvim',
         config = function ()
+            local shcmd = vim.env.SHELL or 'nu'
             require('FTerm').setup {
-                cmd = 'nu',
+                cmd = shcmd,
                 blend = 10,
                 dimensions = {
                     height = 0.9,
