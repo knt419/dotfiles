@@ -230,9 +230,26 @@ local plugins = {
                     width = 0.9,
                 },
             }
+            vim.api.nvim_create_user_command('FtermLazygitOpen', function ()
+                local fterm = require('FTerm')
+                local lazygit = fterm:new({
+                    ft = 'fterm_lazygit',
+                    cmd = 'gitui',
+                    blend = 10,
+                    dimensions = {
+                        height = 0.9,
+                        width = 0.9,
+                    },
+                })
+                lazygit:open()
+            end, {})
         end,
         keys = {
             { '<Down>', function () require('FTerm').toggle() end },
+            { '<Right>', function ()
+                vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h'))
+                vim.cmd.FtermLazygitOpen()
+            end },
         }
     },
 
@@ -298,26 +315,6 @@ local plugins = {
     {
         'januswel/fencja.vim',
         event = 'BufRead'
-    },
-
-    -- git
-    {
-        'kdheepak/lazygit.nvim',
-        config = function ()
-            g.lazygit_floating_window_winblend = 0
-            g.lazygit_floating_window_scaling_factor = 0.9
-            g.lazygit_floating_window_border_chars = {'╭','─', '╮', '│', '╯','─', '╰', '│'}
-            g.lazygit_floating_window_use_plenary = 0
-        end,
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-        },
-        keys = {
-            { '<Right>', function ()
-                vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h'))
-                vim.cmd[[LazyGit]]
-            end }
-        }
     },
 
     -- language support
