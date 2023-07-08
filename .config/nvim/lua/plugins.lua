@@ -24,12 +24,20 @@ local plugins = {
 
     -- colorscheme
     {
-        'wadackel/vim-dogrun',
+        'FrenzyExists/aquarium-vim',
         event = 'VeryLazy',
         config = function ()
-            cmd.colorscheme('dogrun')
+            cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
+            cmd.colorscheme('aquarium')
         end
     },
+    -- {
+    --     'wadackel/vim-dogrun',
+    --     event = 'VeryLazy',
+    --     config = function ()
+    --         cmd.colorscheme('dogrun')
+    --     end
+    -- },
 
     -- editor display
     {
@@ -85,10 +93,11 @@ local plugins = {
         event = {'BufNewFile', 'BufRead'},
         config = function()
             require('indentmini').setup {
-                char = '│',
+                char = '⎸',
+                -- char = '│',
                 exclude = {'mason', 'lazy', 'starter'}
             }
-            cmd.highlight('default link IndentLine Whitespace')
+            cmd.highlight('default link IndentLine LineNr')
         end,
     },
     {
