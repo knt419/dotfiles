@@ -20,7 +20,7 @@ opt.display = 'uhex,lastline'
 opt.scrolloff = 5
 opt.termguicolors = true
 
-opt.guifont = 'HackGen Console NF:h13'
+opt.guifont = 'OperatorMono Nerd Font:h12'
 opt.guifontwide = 'HackGen Console NF:h13'
 opt.tabstop = 4
 opt.expandtab = true

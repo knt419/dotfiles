@@ -93,8 +93,7 @@ local plugins = {
         event = {'BufNewFile', 'BufRead'},
         config = function()
             require('indentmini').setup {
-                char = '⎸',
-                -- char = '│',
+                char = '│',
                 exclude = {'mason', 'lazy', 'starter'}
             }
             cmd.highlight('default link IndentLine LineNr')

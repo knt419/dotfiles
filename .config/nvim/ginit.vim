@@ -1,5 +1,5 @@
 if exists('g:GtkGuiLoaded')
-    call rpcnotify(1, 'Gui', 'Font', 'HackGen Console NF 13')
+    call rpcnotify(1, 'Gui', 'Font', 'CaskaydiaCove NFM 13')
 endif
 
 " local
