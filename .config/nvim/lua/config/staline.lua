@@ -33,9 +33,9 @@ return function ()
             },
             mid = { { 'SpecialKey', 'lsp_name' }, ' ', 'lsp' },
             right = {
-                { 'Keyword', vim.bo.fileencoding:upper() }, ' ',
-                { 'Keyword', ff }, ' ',
-                { 'Keyword', ' %03l:%02c'}, ' ',
+                { 'Number', vim.bo.fileencoding }, ' ',
+                { 'Number', ff }, ' ',
+                { 'Number', ' %03l:%02c'}, ' ',
             },
         },
         mode_icons = { n = ' ', i = ' ', c = ' ', v = '󰒉 ', V = ' ', [''] = '󰾂 '},

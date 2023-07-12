@@ -31,13 +31,6 @@ local plugins = {
             cmd.colorscheme('aquarium')
         end
     },
-    -- {
-    --     'wadackel/vim-dogrun',
-    --     event = 'VeryLazy',
-    --     config = function ()
-    --         cmd.colorscheme('dogrun')
-    --     end
-    -- },
 
     -- editor display
     {
