@@ -241,10 +241,10 @@ local plugins = {
                     VISUAL = visual,
                 },
             }
-            vim.api.nvim_create_user_command('FtermLazygitOpen', function ()
+            vim.api.nvim_create_user_command('FtermGituiOpen', function ()
                 local fterm = require('FTerm')
-                local lazygit = fterm:new({
-                    ft = 'fterm_lazygit',
+                local gitui = fterm:new({
+                    ft = 'fterm_gitui',
                     cmd = 'gitui',
                     blend = 10,
                     dimensions = {
@@ -252,14 +252,14 @@ local plugins = {
                         width = 0.9,
                     },
                 })
-                lazygit:open()
+                gitui:open()
             end, {})
         end,
         keys = {
             { '<Down>', function () require('FTerm').toggle() end },
             { '<Right>', function ()
                 vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h'))
-                vim.cmd.FtermLazygitOpen()
+                vim.cmd.FtermGituiOpen()
             end },
         }
     },
