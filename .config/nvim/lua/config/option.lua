@@ -18,6 +18,7 @@ opt.number = true
 opt.signcolumn = 'yes'
 opt.display = 'uhex,lastline'
 opt.scrolloff = 5
+opt.sidescrolloff = 10
 opt.termguicolors = true
 
 opt.guifont = 'OperatorMono Nerd Font:h12'
