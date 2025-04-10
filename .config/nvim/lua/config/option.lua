@@ -68,7 +68,7 @@ g.loaded_sql_completion = 1
 g.skip_loading_mswin = 1
 g.did_indent_on = 1
 
-g.neovide_transparency = 0.95
+g.neovide_opacity = 0.95
 g.neovide_cursor_vfx_mode = "torpedo"
 
 if g.is_windows then
