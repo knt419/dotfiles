@@ -223,6 +223,14 @@ local plugins = {
         ft = {
             "markdown",
         },
+        config = function ()
+            require('render-markdown').setup {
+                heading = {
+                    sign = false,
+                    icons = { ' '},
+                },
+            }
+        end,
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
             'nvim-tree/nvim-web-devicons',

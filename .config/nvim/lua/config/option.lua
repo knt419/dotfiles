@@ -21,8 +21,8 @@ opt.scrolloff = 5
 opt.sidescrolloff = 10
 opt.termguicolors = true
 
-opt.guifont = 'OperatorMono Nerd Font:h12'
-opt.guifontwide = 'HackGen Console NF:h13'
+opt.guifont = 'OperatorMono Nerd Font:h16'
+opt.guifontwide = 'HackGen Console NF:h15'
 opt.tabstop = 4
 opt.expandtab = true
 opt.shiftwidth = 4
