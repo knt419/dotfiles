@@ -227,7 +227,6 @@ local plugins = {
             require('render-markdown').setup {
                 heading = {
                     sign = false,
-                    icons = { ' '},
                 },
             }
         end,
