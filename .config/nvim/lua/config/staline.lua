@@ -38,7 +38,7 @@ return function ()
                 { 'Number', ' %03l:%02c'}, ' ',
             },
         },
-        mode_icons = { n = ' ', i = ' ', c = ' ', v = '󰒉 ', V = ' ', [''] = '󰾂 '},
+        mode_icons = { n = ' ', i = ' ', c = ' ', v = '󰒉 ', V = ' ', [''] = '󰾂 '},
         defaults = {
             mod_synbol = ' ',
             branch_symbol = ' ',
