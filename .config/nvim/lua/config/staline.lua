@@ -16,11 +16,11 @@ return function ()
         return icon[vim.bo.fileformat]
     end
     local fname = function ()
-        local icon, highlightname = require('nvim-web-devicons').get_icon(vim.fn.expand('%:t'), vim.bo.filetype)
+        local icon, highlightname = require('nvim-web-devicons').get_icon(vim.fn.expand('%:t'), vim.fn.expand("%:e"))
         if highlightname == nil then
             return '%t'
         end
-        return '%#' .. highlightname .. '#' .. icon .. ' %t'
+        return '%#' .. highlightname .. '#' .. icon .. '  %t'
     end
     require('staline').setup {
         sections = {
