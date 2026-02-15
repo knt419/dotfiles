@@ -373,34 +373,56 @@ local plugins = {
         event = {'BufWritePre', 'BufReadPre'},
         config = require('config.lspconfig'),
         dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
+            -- 'hrsh7th/cmp-nvim-lsp',
             {
                 'williamboman/mason-lspconfig.nvim',
                 config = true,
             },
         },
     },
-    {
-        'hrsh7th/cmp-cmdline',
-        event = 'CmdlineEnter',
-    },
+    -- {
+    --     'hrsh7th/cmp-cmdline',
+    --     event = 'CmdlineEnter',
+    -- },
     {
         'L3MON4D3/LuaSnip',
         event = 'InsertEnter',
     },
+    -- {
+    --     'hrsh7th/nvim-cmp',
+    --     event = 'InsertEnter',
+    --     config = require('config.cmp'),
+    --     dependencies = {
+    --         'hrsh7th/cmp-nvim-lsp',
+    --         'onsails/lspkind-nvim',
+    --         'saadparwaiz1/cmp_luasnip',
+    --         'FelipeLema/cmp-async-path',
+    --         'hrsh7th/cmp-buffer',
+    --         'hrsh7th/cmp-nvim-lua',
+    --     }
+    -- },
     {
-        'hrsh7th/nvim-cmp',
+        'saghen/blink.cmp',
+        version = '1.*',
         event = 'InsertEnter',
-        config = require('config.cmp'),
-        dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            'onsails/lspkind-nvim',
-            'saadparwaiz1/cmp_luasnip',
-            'FelipeLema/cmp-async-path',
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-nvim-lua',
-        }
-    },
+        ---@module 'blink.cmp'
+        ---@type blink.cmp.config
+        opts = {
+            keymap = { preset = "enter"},
+            apperance = {
+                nerd_font_variant = "mono",
+            },
+            completion = { documentation = { auto_show = true, auto_show_delay_ms = 500 } },
+            sources = {
+                default = { "lsp", "path", "snippets", "buffer" },
+            },
+            fuzzy = {
+                implementation = "prefer_rust_with_warning",
+            },
+            ghost_text = { enabled = true },
+        },
+        opts_extend = { "sources.default" },
+    }
 }
 
 local lazyopt = {

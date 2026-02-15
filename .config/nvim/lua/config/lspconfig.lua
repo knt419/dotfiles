@@ -1,7 +1,8 @@
 return function()
     local lspconfig = require('lspconfig')
     local util = require('lspconfig/util')
-    local capabilities = require('cmp_nvim_lsp').default_capabilities()
+    local capabilities = require('blink.cmp').get_lsp_capabilities()
+    -- local capabilities = require('cmp_nvim_lsp').default_capabilities()
     local on_attach = function()
         local keymap = vim.keymap
         keymap.set('n', '<Leader>rf', '<Cmd>lua vim.lsp.buf.references()<CR>')
