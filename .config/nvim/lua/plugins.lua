@@ -374,6 +374,7 @@ local plugins = {
         config = require('config.lspconfig'),
         dependencies = {
             -- 'hrsh7th/cmp-nvim-lsp',
+            'saghen/blink.cmp',
             {
                 'williamboman/mason-lspconfig.nvim',
                 config = true,
