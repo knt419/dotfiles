@@ -363,22 +363,25 @@ local plugins = {
 
     -- lsp/completion
     {
-        'williamboman/mason.nvim',
+        'mason-org/mason.nvim',
         build = ':MasonUpdate',
         cmd = 'Mason',
         config = true,
+    },
+    {
+        "mason-org/mason-lspconfig.nvim",
+        opts = {},
+        dependencies = {
+            { "mason-org/mason.nvim", opts = {} },
+            "neovim/nvim-lspconfig",
+        },
     },
     {
         'neovim/nvim-lspconfig',
         event = {'BufWritePre', 'BufReadPre'},
         config = require('config.lspconfig'),
         dependencies = {
-            -- 'hrsh7th/cmp-nvim-lsp',
             'saghen/blink.cmp',
-            {
-                'williamboman/mason-lspconfig.nvim',
-                config = true,
-            },
         },
     },
     -- {
@@ -405,7 +408,7 @@ local plugins = {
     {
         'saghen/blink.cmp',
         version = '1.*',
-        event = 'InsertEnter',
+        event = { 'InsertEnter', 'CmdlineEnter' },
         ---@module 'blink.cmp'
         ---@type blink.cmp.config
         opts = {
@@ -413,13 +416,17 @@ local plugins = {
             apperance = {
                 nerd_font_variant = "mono",
             },
-            completion = { documentation = { auto_show = true, auto_show_delay_ms = 500 } },
+            completion = {
+                documentation = { auto_show = true, auto_show_delay_ms = 500 },
+                menu = { border = "rounded" },
+            },
             sources = {
                 default = { "lsp", "path", "snippets", "buffer" },
             },
             fuzzy = {
                 implementation = "prefer_rust_with_warning",
             },
+            signature = { window = { border = "rounded" } },
             ghost_text = { enabled = true },
         },
         opts_extend = { "sources.default" },
