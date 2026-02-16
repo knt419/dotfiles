@@ -363,48 +363,29 @@ local plugins = {
 
     -- lsp/completion
     {
-        'mason-org/mason.nvim',
-        build = ':MasonUpdate',
-        cmd = 'Mason',
-        config = true,
-    },
-    {
         "mason-org/mason-lspconfig.nvim",
         opts = {},
         dependencies = {
-            { "mason-org/mason.nvim", opts = {} },
-            "neovim/nvim-lspconfig",
+            {
+                "mason-org/mason.nvim",
+                build = ':MasonUpdate',
+                cmd = 'Mason',
+                opts = {}
+            },
+            {
+                'neovim/nvim-lspconfig',
+                event = {'BufWritePre', 'BufReadPre'},
+                config = require('config.lspconfig'),
+                dependencies = {
+                    'saghen/blink.cmp',
+                },
+            },
         },
     },
-    {
-        'neovim/nvim-lspconfig',
-        event = {'BufWritePre', 'BufReadPre'},
-        config = require('config.lspconfig'),
-        dependencies = {
-            'saghen/blink.cmp',
-        },
-    },
-    -- {
-    --     'hrsh7th/cmp-cmdline',
-    --     event = 'CmdlineEnter',
-    -- },
     {
         'L3MON4D3/LuaSnip',
         event = 'InsertEnter',
     },
-    -- {
-    --     'hrsh7th/nvim-cmp',
-    --     event = 'InsertEnter',
-    --     config = require('config.cmp'),
-    --     dependencies = {
-    --         'hrsh7th/cmp-nvim-lsp',
-    --         'onsails/lspkind-nvim',
-    --         'saadparwaiz1/cmp_luasnip',
-    --         'FelipeLema/cmp-async-path',
-    --         'hrsh7th/cmp-buffer',
-    --         'hrsh7th/cmp-nvim-lua',
-    --     }
-    -- },
     {
         'saghen/blink.cmp',
         version = '1.*',
