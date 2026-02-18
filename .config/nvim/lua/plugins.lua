@@ -383,10 +383,6 @@ local plugins = {
         },
     },
     {
-        'L3MON4D3/LuaSnip',
-        event = 'InsertEnter',
-    },
-    {
       "zbirenbaum/copilot.lua",
       cmd = "Copilot",
       event = "InsertEnter",
@@ -403,7 +399,13 @@ local plugins = {
         'saghen/blink.cmp',
         version = '1.*',
         optional = true,
-        dependencies = { "fang2hou/blink-copilot" },
+        dependencies = {
+            "fang2hou/blink-copilot",
+            {
+                'L3MON4D3/LuaSnip',
+                version = 'v2.*',
+            },
+        },
         event = { 'InsertEnter', 'CmdlineEnter' },
         ---@module 'blink.cmp'
         ---@type blink.cmp.config
