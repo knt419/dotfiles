@@ -387,13 +387,32 @@ local plugins = {
         event = 'InsertEnter',
     },
     {
+      "zbirenbaum/copilot.lua",
+      cmd = "Copilot",
+      event = "InsertEnter",
+      opts = {
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+        filetypes = {
+          markdown = true,
+          help = true,
+        },
+      },
+    },
+    {
         'saghen/blink.cmp',
         version = '1.*',
+        optional = true,
+        dependencies = { "fang2hou/blink-copilot" },
         event = { 'InsertEnter', 'CmdlineEnter' },
         ---@module 'blink.cmp'
         ---@type blink.cmp.config
         opts = {
-            keymap = { preset = "enter"},
+            keymap = {
+                preset = "enter",
+                ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+                ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+            },
             apperance = {
                 nerd_font_variant = "mono",
             },
@@ -401,8 +420,19 @@ local plugins = {
                 documentation = { auto_show = true, auto_show_delay_ms = 500 },
                 menu = { border = "rounded" },
             },
+            snippets = {
+                preset = "luasnip",
+            },
             sources = {
-                default = { "lsp", "path", "snippets", "buffer" },
+                default = { "copilot", "lsp", "path", "snippets", "buffer" },
+                providers = {
+                    copilot = {
+                        name = "copilot",
+                        module = "blink-copilot",
+                        score_offset = 100,
+                        async = true,
+                    },
+                },
             },
             fuzzy = {
                 implementation = "prefer_rust_with_warning",
