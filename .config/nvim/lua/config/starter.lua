@@ -30,6 +30,16 @@ return function()
         content_hooks = {
             starter.gen_hook.adding_bullet(' │ '),
             starter.gen_hook.indexing('all', { '  Telescope', '  Config', '  Builtin actions' } ),
+            function(content)
+                for _, line in ipairs(content) do
+                    for _, unit in ipairs(line) do
+                        if unit.string == 'Recent files' then
+                            unit.string = '  Recent files'
+                        end
+                    end
+                end
+                return content
+            end,
             starter.gen_hook.aligning('center', 'center'),
         },
     })
