@@ -406,6 +406,12 @@ local plugins = {
                 version = 'v2.*',
                 build = "make install_jsregexp",
             },
+            {
+                'xzbdmw/colorful-menu.nvim',
+                config = function ()
+                    require('colorful-menu').setup {}
+                end,
+            },
         },
         event = { 'InsertEnter', 'CmdlineEnter' },
         ---@module 'blink.cmp'
@@ -416,18 +422,29 @@ local plugins = {
                 ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
                 ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
             },
-            apperance = {
-                nerd_font_variant = "mono",
-            },
             completion = {
                 documentation = {
                     auto_show = true,
                     auto_show_delay_ms = 500,
                     window = {
-                        border = "rounded",
+                        winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
                     },
                 },
-                menu = { border = "rounded", },
+                menu = {
+                    draw = {
+                        columns = { { "kind_icon" }, { "label", gap = 1 } },
+                        components = {
+                            label = {
+                                text = function(ctx)
+                                    return require("colorful-menu").blink_components_text(ctx)
+                                end,
+                                highlight = function(ctx)
+                                    return require("colorful-menu").blink_components_highlight(ctx)
+                                end,
+                            },
+                        },
+                    },
+                },
             },
             snippets = {
                 preset = "luasnip",
@@ -446,7 +463,6 @@ local plugins = {
             fuzzy = {
                 implementation = "prefer_rust_with_warning",
             },
-            signature = { window = { border = "rounded" } },
             ghost_text = { enabled = true },
         },
         opts_extend = { "sources.default" },

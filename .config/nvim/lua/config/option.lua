@@ -55,6 +55,7 @@ opt.inccommand = 'split'
 opt.pumblend = 10
 opt.winblend = 10
 opt.splitkeep = 'screen'
+opt.winborder = 'rounded'
 
 g.mapleader = ' '
 g.is_windows = vim.fn.has('win64') == 1
