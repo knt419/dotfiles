@@ -9,5 +9,14 @@ return function()
         vim.keymap.set('n', 'gh', vim.lsp.buf.hover, opts)
       end,
     })
+    vim.lsp.config("lua_ls", {
+     settings = {
+             Lua = {
+                 diagnostics = {
+                      globals = { "vim" }
+                 }
+             }
+         }
+    })
     vim.lsp.enable(require('mason-lspconfig').get_installed_servers())
 end
