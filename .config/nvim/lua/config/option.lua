@@ -72,10 +72,6 @@ g.did_indent_on = 1
 g.neovide_opacity = 0.95
 g.neovide_cursor_vfx_mode = "torpedo"
 
-local opts = { buffer = bufnr, noremap = true, silent = true }
-vim.keymap.set('n', '<C-PageDown>', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<C-PageUp>', vim.diagnostic.goto_prev, opts)
-
 if g.is_windows then
     g.clipboard = {
         name = 'win32yank.exe',
@@ -89,3 +85,5 @@ if g.is_windows then
         }
     }
 end
+
+vim.diagnostic.config({ jump = { float = true }})

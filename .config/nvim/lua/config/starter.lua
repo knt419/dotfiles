@@ -3,7 +3,7 @@ return function()
     starter.setup({
         autoopen = false,
         evaluate_single = true,
-        header = table.concat (
+        header = table.concat(
             {
                 '                                                                      ▄██████▄        ',
                 '                                                                  ▄█▀▀▀▀▀██▀▀▀▀▀█▄    ',
@@ -29,7 +29,7 @@ return function()
         },
         content_hooks = {
             starter.gen_hook.adding_bullet(' │ '),
-            starter.gen_hook.indexing('all', { '  Telescope', '  Config', '  Builtin actions' } ),
+            starter.gen_hook.indexing('all', { '  Telescope', '  Config', '  Builtin actions' }),
             function(content)
                 for _, line in ipairs(content) do
                     for _, unit in ipairs(line) do
