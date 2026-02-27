@@ -30,8 +30,13 @@ config.colors = {
   },
 }
 config.keys = {
-    { key = "PageDown", mods = "CTRL", action = wezterm.actton.ActivateTabRelative(1) },
+    { key = "PageDown", mods = "CTRL", action = wezterm.action.ActivateTabRelative(1) },
     { key = "PageUp", mods = "CTRL", action = wezterm.action.ActivateTabRelative(-1) },
+    {
+    key = 'n', mods = 'CTRL|SHIFT', action = wezterm.action.SpawnCommandInNewTab {
+      args = { 'nvim' }
+        }
+    },
 }
 
 -- or, changing the font size and color scheme.
