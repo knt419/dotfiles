@@ -9,8 +9,14 @@ local config = wezterm.config_builder()
 -- For example, changing the initial geometry for new windows:
 config.initial_cols = 120
 config.initial_rows = 28
-config.window_background_opacity = 0
-config.win32_system_backdrop = 'Mica'
+config.window_background_opacity = 0.4
+config.win32_system_backdrop = 'Acrylic'
+config.window_padding = {
+    left = 0,
+    right = 0,
+    top = 0,
+    bottom = 0,
+}
 config.use_ime = true
 config.window_decorations = "RESIZE"
 config.show_tabs_in_tab_bar = true
