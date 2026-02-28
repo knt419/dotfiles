@@ -25,6 +25,18 @@ config.window_frame = {
     inactive_titlebar_bg = "none",
     active_titlebar_bg = "none",
 }
+wezterm.on('update-status', function (elems, pane)
+    -- ホームディレクトリを~に置換
+    local home = os.getenv("HOME")
+    if home and cwd_str:find(home, 1, true) == 1 then
+        cwd_str = "~" .. cwd_str:sub(#home + 1)
+    end
+
+    -- 長いパスを短縮
+    if #dir > 30 then
+        dir = ".../" .. parts[#parts-1] .. "/" .. parts[#parts]
+    end
+end)
 
 config.window_background_gradient = {
     colors = { "#000000" },
@@ -48,7 +60,11 @@ config.keys = {
 
 -- or, changing the font size and color scheme.
 config.font_size = 16
-config.font = wezterm.font 'OperatorMono Nerd Font'
+config.font = wezterm.font('OperatorMono Nerd Font', {
+    weight = "Regular",
+    stretch = "Normal",
+    style = "Normal"
+})
 config.color_scheme = 'Aquarium Dark'
 
 -- Spawn a nu shell in login mode
