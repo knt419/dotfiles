@@ -4,13 +4,15 @@ local wezterm = require 'wezterm'
 -- This will hold the configuration.
 local config = wezterm.config_builder()
 
+config.front_end = "WebGpu"
+
 -- This is where you actually apply your config choices.
 
 -- For example, changing the initial geometry for new windows:
 config.initial_cols = 120
 config.initial_rows = 28
-config.window_background_opacity = 0.4
-config.win32_system_backdrop = 'Acrylic'
+config.window_background_opacity = 0.8
+-- config.win32_system_backdrop = 'Acrylic'
 config.window_padding = {
     left = 0,
     right = 0,
@@ -20,7 +22,6 @@ config.window_padding = {
 config.use_ime = true
 config.window_decorations = "RESIZE"
 config.show_tabs_in_tab_bar = true
-config.hide_tab_bar_if_only_one_tab = true
 config.window_frame = {
     inactive_titlebar_bg = "none",
     active_titlebar_bg = "none",
