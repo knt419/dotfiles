@@ -12,7 +12,7 @@ config.front_end = "WebGpu"
 config.initial_cols = 120
 config.initial_rows = 28
 config.window_background_opacity = 0.8
--- config.win32_system_backdrop = 'Acrylic'
+config.win32_system_backdrop = 'Acrylic'
 config.window_padding = {
     left = 0,
     right = 0,
@@ -20,16 +20,13 @@ config.window_padding = {
     bottom = 0,
 }
 config.use_ime = true
-config.window_decorations = "RESIZE"
+config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.show_tabs_in_tab_bar = true
 config.window_frame = {
     inactive_titlebar_bg = "none",
     active_titlebar_bg = "none",
 }
 
-config.window_background_gradient = {
-    colors = { "#000000" },
-}
 config.colors = {
     tab_bar = {
         inactive_tab_edge = "none",
@@ -46,6 +43,31 @@ config.keys = {
         }
     },
 }
+
+
+local HEADER = '   ' -- 文字化けしちゃってるかもしれませんが、アイコンフォント入ってます。
+
+local SYMBOL_COLOR = { '#ffb2cc', '#a4a4a4' }
+local FONT_COLOR = { '#dddddd', '#888888' }
+local BACK_COLOR = '#2d2d2d'
+local HOVER_COLOR = '#434343'
+
+wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
+  local index = tab.is_active and 1 or 2
+
+  local bg = hover and HOVER_COLOR or BACK_COLOR
+  local zoomed = tab.active_pane.is_zoomed and '🔎 ' or ' '
+
+  return {
+    { Foreground = { Color = SYMBOL_COLOR[index] } },
+    { Background = { Color = bg } },
+    { Text = HEADER .. zoomed },
+
+    { Foreground = { Color = FONT_COLOR[index] } },
+    { Background = { Color = bg } },
+    { Text = tab.active_pane.title },
+  }
+end)
 
 -- or, changing the font size and color scheme.
 config.font_size = 16
