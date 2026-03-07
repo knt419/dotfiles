@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 
 local DEFAULT_FG = { Color = '#9a9eab' }
-local DEFAULT_BG = { Color = "none" }
+local DEFAULT_BG = { Color = 'none' }
 
 local SPACE = '    '
 

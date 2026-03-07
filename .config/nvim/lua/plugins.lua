@@ -26,7 +26,7 @@ local plugins = {
     {
         'FrenzyExists/aquarium-vim',
         event = 'VeryLazy',
-        config = function ()
+        config = function()
             cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
             cmd.colorscheme('aquarium')
         end
@@ -41,7 +41,7 @@ local plugins = {
     {
         'kevinhwang91/nvim-hlslens',
         event = 'CmdlineEnter',
-        config = function ()
+        config = function()
             require('scrollbar.handlers.search').setup {}
         end,
         dependencies = {
@@ -50,8 +50,8 @@ local plugins = {
     },
     {
         'petertriho/nvim-scrollbar',
-        event = {'BufNewFile', 'BufRead'},
-        config = function ()
+        event = { 'BufNewFile', 'BufRead' },
+        config = function()
             require('scrollbar').setup {
                 marks = {
                     Search = { color = 'orange' },
@@ -66,7 +66,7 @@ local plugins = {
     },
     {
         'rcarriga/nvim-notify',
-        config = function ()
+        config = function()
             require('notify').setup {
                 render = 'compact'
             }
@@ -74,7 +74,7 @@ local plugins = {
     },
     {
         'folke/noice.nvim',
-        event = {'CmdlineEnter', 'BufNewFile', 'BufRead'},
+        event = { 'CmdlineEnter', 'BufNewFile', 'BufRead' },
         config = require('config.noice'),
         dependencies = {
             'MunifTanjim/nui.nvim',
@@ -83,18 +83,18 @@ local plugins = {
     },
     {
         'nvimdev/indentmini.nvim',
-        event = {'BufNewFile', 'BufRead'},
+        event = { 'BufNewFile', 'BufRead' },
         config = function()
             require('indentmini').setup {
                 char = '│',
-                exclude = {'mason', 'lazy', 'starter'}
+                exclude = { 'mason', 'lazy', 'starter' }
             }
             cmd.highlight('default link IndentLine LineNr')
         end,
     },
     {
         'tamton-aquib/staline.nvim',
-        event = {'BufNewFile', 'BufRead'},
+        event = { 'BufNewFile', 'BufRead' },
         config = require('config.staline')
     },
     {
@@ -103,8 +103,8 @@ local plugins = {
     },
     {
         'norcalli/nvim-colorizer.lua',
-        event = {'BufNewFile', 'BufRead'},
-        config = function ()
+        event = { 'BufNewFile', 'BufRead' },
+        config = function()
             require('colorizer').setup()
         end,
     },
@@ -119,13 +119,13 @@ local plugins = {
     },
     {
         'nvim-treesitter/nvim-treesitter',
-        event = {'BufWritePre', 'BufReadPre'},
+        event = { 'BufWritePre', 'BufReadPre' },
         config = require('config.treesitter'),
     },
     {
         'lewis6991/gitsigns.nvim',
-        event = {'BufWritePre', 'BufReadPre'},
-        config = function ()
+        event = { 'BufWritePre', 'BufReadPre' },
+        config = function()
             require('gitsigns').setup {}
             require('scrollbar.handlers.gitsigns').setup {}
         end,
@@ -157,22 +157,22 @@ local plugins = {
     },
     {
         'echasnovski/mini.surround',
-        event = {'BufNewFile', 'BufRead'},
+        event = { 'BufNewFile', 'BufRead' },
         config = true,
     },
     {
         'tpope/vim-commentary',
         keys = {
-            { 'gc', '<Plug>Commentary', mode = {'x', 'n', 'o'} },
+            { 'gc',  '<Plug>Commentary',    mode = { 'x', 'n', 'o' } },
             { 'gcc', '<Plug>CommentaryLine' }
         }
     },
     {
         'kana/vim-smartword',
         keys = {
-            { 'w', '<Plug>(smartword-w)' },
-            { 'b', '<Plug>(smartword-b)' },
-            { 'e', '<Plug>(smartword-e)' },
+            { 'w',  '<Plug>(smartword-w)' },
+            { 'b',  '<Plug>(smartword-b)' },
+            { 'e',  '<Plug>(smartword-e)' },
             { 'ge', '<Plug>(smartword-ge)' }
         }
     },
@@ -183,16 +183,16 @@ local plugins = {
     {
         'haya14busa/vim-asterisk',
         keys = {
-            { '*', '<Plug>(asterisk-z*)' },
+            { '*',  '<Plug>(asterisk-z*)' },
             { 'g*', '<Plug>(asterisk-gz*)' },
-            { '#', '<Plug>(asterisk-#)' },
+            { '#',  '<Plug>(asterisk-#)' },
             { 'g#', '<Plug>(asterisk-g#)' }
         }
     },
     {
         'terryma/vim-expand-region',
         keys = {
-            { 'v', '<Plug>(expand_region_expand)', mode = 'x' },
+            { 'v',     '<Plug>(expand_region_expand)', mode = 'x' },
             { '<C-v>', '<Plug>(expand_region_shrink)', mode = 'x' }
         }
     },
@@ -204,18 +204,23 @@ local plugins = {
     },
     {
         'ntpeters/vim-better-whitespace',
-        event = {'BufNewFile', 'BufRead'},
+        event = { 'BufNewFile', 'BufRead' },
         config = require('config.whitespace'),
     },
     {
         'smjonas/inc-rename.nvim',
-        config = function ()
-            require('inc_rename').setup{}
+        config = function()
+            require('inc_rename').setup {}
         end,
         keys = {
-            { '<Leader>rn', function()
-                                return ':IncRename ' .. fn.expand('<cword>')
-                            end, expr = true, silent = true },
+            {
+                '<Leader>rn',
+                function()
+                    return ':IncRename ' .. fn.expand('<cword>')
+                end,
+                expr = true,
+                silent = true
+            },
         }
     },
     {
@@ -223,7 +228,7 @@ local plugins = {
         ft = {
             "markdown",
         },
-        config = function ()
+        config = function()
             require('render-markdown').setup {
                 heading = {
                     sign = false,
@@ -238,11 +243,19 @@ local plugins = {
         ---@type render.md.UserConfig
         opts = {},
     },
+    {
+        'xiyaowong/transparent.nvim',
+        lazy = false,
+        config = function()
+            require('transparent').setup {}
+        end,
+    },
+
 
     -- terminal
     {
         'numToStr/FTerm.nvim',
-        config = function ()
+        config = function()
             local shcmd = vim.env.SHELL or 'nu'
             local visual
             if not vim.env.NVIM then
@@ -261,7 +274,7 @@ local plugins = {
                     VISUAL = visual,
                 },
             }
-            vim.api.nvim_create_user_command('FtermGituiOpen', function ()
+            vim.api.nvim_create_user_command('FtermGituiOpen', function()
                 local fterm = require('FTerm')
                 local gitui = fterm:new({
                     ft = 'fterm_gitui',
@@ -276,8 +289,8 @@ local plugins = {
             end, {})
         end,
         keys = {
-            { '<Down>', function () require('FTerm').toggle() end },
-            { '<Right>', function ()
+            { '<Down>', function() require('FTerm').toggle() end },
+            { '<Right>', function()
                 vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h'))
                 vim.cmd.FtermGituiOpen()
             end },
@@ -286,7 +299,7 @@ local plugins = {
 
     -- file/directory
     {
-       'aymericbeaumet/vim-symlink', --not compatible with neovim's autochdir
+        'aymericbeaumet/vim-symlink', --not compatible with neovim's autochdir
         event = 'BufReadPre',
         dependencies = {
             'moll/vim-bbye',
@@ -295,20 +308,20 @@ local plugins = {
     {
         'moll/vim-bbye',
         keys = {
-            { '<Esc><Esc>', '<Cmd>Bdelete<CR>', silent = true}
+            { '<Esc><Esc>', '<Cmd>Bdelete<CR>', silent = true }
         }
     },
     {
         'jemag/telescope-diff.nvim',
-        config = function ()
+        config = function()
             require('telescope').load_extension('diff')
         end,
         dependencies = {
             'nvim-telescope/telescope.nvim',
         },
         keys = {
-            { '<Leader>di', function () require('telescope').extensions.diff.diff_files({ hidden = true }) end },
-            { '<Leader>dc', function () require('telescope').extensions.diff.diff_current({ hidden = true }) end },
+            { '<Leader>di', function() require('telescope').extensions.diff.diff_files({ hidden = true }) end },
+            { '<Leader>dc', function() require('telescope').extensions.diff.diff_current({ hidden = true }) end },
         },
     },
     {
@@ -327,7 +340,7 @@ local plugins = {
                 dependencies = {
                     {
                         'kkharji/sqlite.lua',
-                        init = function ()
+                        init = function()
                             if g.is_windows then
                                 g.sqlite_clib_path = fn.substitute(fn.stdpath('data'), '\\', '/', 'g') .. '/sqlite3.dll'
                             end
@@ -337,10 +350,10 @@ local plugins = {
             },
         },
         keys = {
-            { '<Leader>g', '<Cmd>Telescope live_grep theme=ivy<CR>', silent = true },
-            { '<Leader><Leader>', '<Cmd>Telescope builtin theme=ivy<CR>', silent = true },
-            { '<Left>', function () require('telescope').extensions.file_browser.file_browser() end },
-            { '<Leader>f', '<Cmd>Telescope frecency theme=ivy<CR>', silent = true },
+            { '<Leader>g',        '<Cmd>Telescope live_grep theme=ivy<CR>',                                  silent = true },
+            { '<Leader><Leader>', '<Cmd>Telescope builtin theme=ivy<CR>',                                    silent = true },
+            { '<Left>',           function() require('telescope').extensions.file_browser.file_browser() end },
+            { '<Leader>f',        '<Cmd>Telescope frecency theme=ivy<CR>',                                   silent = true },
         },
     },
     {
@@ -374,7 +387,7 @@ local plugins = {
             },
             {
                 'neovim/nvim-lspconfig',
-                event = {'BufWritePre', 'BufReadPre'},
+                event = { 'BufWritePre', 'BufReadPre' },
                 config = require('config.lspconfig'),
                 dependencies = {
                     'saghen/blink.cmp',
@@ -383,17 +396,17 @@ local plugins = {
         },
     },
     {
-      "zbirenbaum/copilot.lua",
-      cmd = "Copilot",
-      event = "InsertEnter",
-      opts = {
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-        filetypes = {
-          markdown = true,
-          help = true,
+        "zbirenbaum/copilot.lua",
+        cmd = "Copilot",
+        event = "InsertEnter",
+        opts = {
+            suggestion = { enabled = false },
+            panel = { enabled = false },
+            filetypes = {
+                markdown = true,
+                help = true,
+            },
         },
-      },
     },
     {
         'saghen/blink.cmp',
@@ -408,7 +421,7 @@ local plugins = {
             },
             {
                 'xzbdmw/colorful-menu.nvim',
-                config = function ()
+                config = function()
                     require('colorful-menu').setup {}
                 end,
             },
@@ -513,4 +526,3 @@ local lazyopt = {
 }
 
 require('lazy').setup(plugins, lazyopt)
-
