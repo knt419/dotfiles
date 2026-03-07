@@ -1,7 +1,7 @@
 local wezterm = require 'wezterm'
 
 local DEFAULT_FG = { Color = '#9a9eab' }
-local DEFAULT_BG = { Color = '#333333' }
+local DEFAULT_BG = { Color = "none" }
 
 local SPACE = '    '
 
@@ -56,7 +56,7 @@ local function GetHostAndCwd(elems, pane)
         return
     end
 
-    local current_dir = cwd:match("^/(.*)$")
+    local current_dir = wezterm.truncate_left(cwd:match("^/(.*)$"), 30)
 
     AddElement(elems, HEADER_HOST, host)
     AddElement(elems, HEADER_CWD, current_dir)

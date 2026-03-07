@@ -22,16 +22,8 @@ config.window_padding = {
 config.use_ime = true
 config.window_decorations = "INTEGRATED_BUTTONS|RESIZE"
 config.show_tabs_in_tab_bar = true
-config.window_frame = {
-    inactive_titlebar_bg = "none",
-    active_titlebar_bg = "none",
-}
+config.show_close_tab_button_in_tabs = false
 
-config.colors = {
-    tab_bar = {
-        inactive_tab_edge = "none",
-    },
-}
 config.keys = {
     { key = "PageDown", mods = "CTRL", action = wezterm.action.ActivateTabRelative(1) },
     { key = "PageUp",   mods = "CTRL", action = wezterm.action.ActivateTabRelative(-1) },
@@ -45,7 +37,7 @@ config.keys = {
 }
 
 
-local HEADER = '   ' -- 文字化けしちゃってるかもしれませんが、アイコンフォント入ってます。
+local HEADER = '   '
 
 local SYMBOL_COLOR = { '#ffb2cc', '#a4a4a4' }
 local FONT_COLOR = { '#dddddd', '#888888' }
@@ -69,6 +61,10 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
   }
 end)
 
+config.window_frame = {
+    inactive_titlebar_bg = "none",
+    active_titlebar_bg = "none",
+}
 -- or, changing the font size and color scheme.
 config.font_size = 16
 config.font = wezterm.font('OperatorMono Nerd Font', {
@@ -83,5 +79,18 @@ config.default_prog = { 'nu' }
 
 require 'status'
 
+config.colors = {
+    tab_bar = {
+        inactive_tab_edge = "none",
+        inactive_tab = {
+          fg_color = '#9a9eab',
+          bg_color = "none",
+        },
+        new_tab = {
+          fg_color = '#9a9eab',
+          bg_color = "none",
+        },
+    },
+}
 -- Finally, return the configuration to wezterm:
 return config
