@@ -3,3 +3,4 @@
 .config/nvim/lazy-lock.json
 .config/lazygit/config.yml
 .config/lazygit/state.yml
+.config/nushell/history.txt
