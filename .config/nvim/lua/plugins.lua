@@ -96,7 +96,7 @@ local plugins = {
     {
         'tamton-aquib/staline.nvim',
         event = { 'BufNewFile', 'BufRead' },
-        config = require('config.staline')
+        config = require('config.staline'),
     },
     {
         'nvim-tree/nvim-web-devicons',
@@ -248,7 +248,11 @@ local plugins = {
         'xiyaowong/transparent.nvim',
         lazy = false,
         config = function()
-            require('transparent').setup {}
+            require('transparent').setup {
+                extra_groups = {
+                    'NormalFloat', 'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
+                },
+            }
         end,
     },
 

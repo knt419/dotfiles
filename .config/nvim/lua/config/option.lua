@@ -44,6 +44,7 @@ opt.infercase = true
 opt.diffopt = {'filler', 'vertical', 'internal', algorithm = 'histogram', 'indent-heuristic'}
 
 opt.laststatus = 3
+opt.showtabline = 2
 opt.wildmode = {list = 'full'}
 opt.iskeyword:append('-')
 opt.linebreak = true

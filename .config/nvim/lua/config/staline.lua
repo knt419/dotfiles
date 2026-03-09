@@ -46,6 +46,8 @@ return function ()
         },
         lsp_symbols = { Error=' ', Info=' ', Warn=' ', Hint=' ', },
     }
-    require('stabline').setup {}
+    require('stabline').setup {
+        inactive_bg = 'NONE',
+    }
 end
 
