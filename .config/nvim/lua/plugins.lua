@@ -68,7 +68,8 @@ local plugins = {
         'rcarriga/nvim-notify',
         config = function()
             require('notify').setup {
-                render = 'compact'
+                render = 'compact',
+                background_colour = "#000000",
             }
         end
     },
