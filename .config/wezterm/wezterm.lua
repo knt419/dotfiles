@@ -7,6 +7,7 @@ local config = wezterm.config_builder()
 -- config.front_end = 'WebGpu'
 config.use_ime = true
 config.default_prog = { 'nu' }
+config.canonicalize_pasted_newlines = 'LineFeed'
 
 -- display
 --- layout
@@ -29,13 +30,13 @@ config.window_padding = {
 
 --- appearance
 config.color_scheme = 'Aquarium Dark'
-config.window_background_opacity = 0.8
+config.window_background_opacity = 0.7
 config.win32_system_backdrop = 'Acrylic'
 config.show_close_tab_button_in_tabs = false
 
 config.window_frame = {
     font = wezterm.font('OperatorMono Nerd Font', { weight = 'Bold' }),
-    font_size = 11.0,
+    font_size = 13.0,
     inactive_titlebar_bg = 'none',
     active_titlebar_bg = 'none',
 }
