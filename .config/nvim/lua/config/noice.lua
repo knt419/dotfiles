@@ -19,5 +19,12 @@ return function()
         presets = {
             inc_rename = true,
         },
+        views = {
+            cmdline_popup = {
+                win_options = {
+                    winblend = 10,
+                },
+            },
+        },
     })
 end

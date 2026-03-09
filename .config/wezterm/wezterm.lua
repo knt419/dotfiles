@@ -34,15 +34,18 @@ config.win32_system_backdrop = 'Acrylic'
 config.show_close_tab_button_in_tabs = false
 
 config.window_frame = {
+    font = wezterm.font('OperatorMono Nerd Font', { weight = 'Bold' }),
+    font_size = 11.0,
     inactive_titlebar_bg = 'none',
     active_titlebar_bg = 'none',
 }
 
 config.colors = {
     tab_bar = {
+        inactive_tab_edge = 'none',
         new_tab = {
-          fg_color = '#9a9eab',
-          bg_color = 'none',
+            fg_color = '#9a9eab',
+            bg_color = 'none',
         },
     },
 }

@@ -47,7 +47,9 @@ return function ()
         lsp_symbols = { Error=' ', Info=' ', Warn=' ', Hint=' ', },
     }
     require('stabline').setup {
-        inactive_bg = 'NONE',
+        fg = '#ffffff',
+        bg = '#404040',
+        inactive_fg = '#404040',
     }
 end
 

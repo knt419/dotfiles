@@ -1,10 +1,10 @@
 local wezterm = require 'wezterm'
 
-local HEADER = '   '
+local HEADER = ''
 
 local SYMBOL_COLOR = { '#ffb2cc', '#a4a4a4' }
 local FONT_COLOR = { '#dddddd', '#888888' }
-local TAB_COLOR = { '#434343', 'none' }
+local TAB_COLOR = { '#404040', 'none' }
 
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
   local index = tab.is_active and 1 or 2

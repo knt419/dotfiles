@@ -3,14 +3,14 @@ local wezterm = require 'wezterm'
 local DEFAULT_FG = { Color = '#9a9eab' }
 local DEFAULT_BG = { Color = 'none' }
 
-local SPACE = '    '
+local SPACE = ' '
 
 local HEADER_KEY_NORMAL = { Foreground = DEFAULT_FG, Text = ' ' }
 local HEADER_LEADER = { Foreground = { Color = '#ffffff' }, Text = ' ' }
 local HEADER_IME = { Foreground = DEFAULT_FG, Text = 'あ' }
 
-local HEADER_HOST = { Foreground = { Color = '#75b1a9' }, Text = '' }
-local HEADER_CWD = { Foreground = { Color = '#92aac7' }, Text = '' }
+local HEADER_HOST = { Foreground = { Color = '#75b1a9' }, Text = ' ' }
+-- local HEADER_CWD = { Foreground = { Color = '#92aac7' }, Text = ' ' }
 local HEADER_DATE = { Foreground = { Color = '#ffccac' }, Text = '󱪺' }
 local HEADER_TIME = { Foreground = { Color = '#bcbabe' }, Text = '' }
 local HEADER_BATTERY = { Foreground = { Color = '#dfe166' }, Text = '' }
@@ -59,7 +59,7 @@ local function GetHostAndCwd(elems, pane)
     local current_dir = wezterm.truncate_left(cwd:match("^/(.*)$"), 30)
 
     AddElement(elems, HEADER_HOST, host)
-    AddElement(elems, HEADER_CWD, current_dir)
+    -- AddElement(elems, HEADER_CWD, current_dir)
 end
 
 local function GetDate(elems)
