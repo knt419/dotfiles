@@ -48,18 +48,9 @@ local function LeftUpdate(window, pane)
     window:set_left_status(wezterm.format(elems))
 end
 
-local function GetHostAndCwd(elems, pane)
-    local uri = pane:get_current_working_dir()
-    local cwd = uri.file_path
+local function GetHost(elems, pane)
     local host = wezterm.hostname()
-    if not cwd then
-        return
-    end
-
-    local current_dir = wezterm.truncate_left(cwd:match("^/(.*)$"), 30)
-
     AddElement(elems, HEADER_HOST, host)
-    -- AddElement(elems, HEADER_CWD, current_dir)
 end
 
 local function GetDate(elems)
@@ -83,7 +74,7 @@ end
 local function RightUpdate(window, pane)
     local elems = {}
 
-    GetHostAndCwd(elems, pane)
+    GetHost(elems, pane)
     GetDate(elems)
     GetBattery(elems, window)
     GetTime(elems)
