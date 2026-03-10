@@ -30,4 +30,24 @@ return {
         mods = 'CTRL',
         action = wezterm.action.CharSelect,
     },
+    {
+        key = 'l',
+        mods = 'CTRL',
+        action = wezterm.action.ShowLauncher,
+    },
+    {
+        key = 'd',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action.ShowDebugOverlay,
+    },
+    {
+        key = '-',
+        mods = 'CTRL',
+        action = wezterm.action.SplitVertical,
+    },
+    {
+        key = '/',
+        mods = 'CTRL',
+        action = wezterm.action.SplitHorizontal,
+    },
 }
