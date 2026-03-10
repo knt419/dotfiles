@@ -10,4 +10,9 @@ return {
             args = { 'nvim' }
         }
     },
+    {
+        key = 'Escape',
+        mods = 'SHIFT',
+        action = wezterm.action.ActivateCopyMode,
+    },
 }

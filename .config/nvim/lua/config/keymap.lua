@@ -29,8 +29,8 @@ keymap.set('n', '<S-Right>', '<C-w>>')
 keymap.set('n', '<S-Up>', '<C-w>-')
 keymap.set('n', '<S-Down>', '<C-w>+')
 
-keymap.set('n', '<C-PageUp>', function() vim.diagnostic.jump({ count = -1 }) end)
-keymap.set('n', '<C-PageDown>', function() vim.diagnostic.jump({ count = 1 }) end)
+keymap.set('n', '<C-p>', function() vim.diagnostic.jump({ count = -1 }) end)
+keymap.set('n', '<C-n>', function() vim.diagnostic.jump({ count = 1 }) end)
 
 keymap.set('n', '<Tab>', function()
     if fn.winlayout()[1] == 'leaf' then
