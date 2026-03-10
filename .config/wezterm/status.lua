@@ -10,7 +10,6 @@ local HEADER_LEADER = { Foreground = { Color = '#ffffff' }, Text = ' ' }
 local HEADER_IME = { Foreground = DEFAULT_FG, Text = 'あ' }
 
 local HEADER_HOST = { Foreground = { Color = '#75b1a9' }, Text = ' ' }
--- local HEADER_CWD = { Foreground = { Color = '#92aac7' }, Text = ' ' }
 local HEADER_DATE = { Foreground = { Color = '#ffccac' }, Text = '󱪺' }
 local HEADER_TIME = { Foreground = { Color = '#bcbabe' }, Text = '' }
 local HEADER_BATTERY = { Foreground = { Color = '#dfe166' }, Text = '' }
@@ -40,7 +39,7 @@ local function GetKeyboard(elems, window)
     AddIcon(elems, window:composition_status() and HEADER_IME or HEADER_KEY_NORMAL)
 end
 
-local function LeftUpdate(window, pane)
+local function LeftUpdate(window)
     local elems = {}
 
     GetKeyboard(elems, window)
@@ -48,7 +47,7 @@ local function LeftUpdate(window, pane)
     window:set_left_status(wezterm.format(elems))
 end
 
-local function GetHost(elems, pane)
+local function GetHost(elems)
     local host = wezterm.hostname()
     AddElement(elems, HEADER_HOST, host)
 end
@@ -71,10 +70,10 @@ local function GetBattery(elems, window)
     end
 end
 
-local function RightUpdate(window, pane)
+local function RightUpdate(window)
     local elems = {}
 
-    GetHost(elems, pane)
+    GetHost(elems)
     GetDate(elems)
     GetBattery(elems, window)
     GetTime(elems)
@@ -82,7 +81,7 @@ local function RightUpdate(window, pane)
     window:set_right_status(wezterm.format(elems))
 end
 
-wezterm.on('update-status', function(window, pane)
-    LeftUpdate(window, pane)
-    RightUpdate(window, pane)
+wezterm.on('update-status', function(window)
+    LeftUpdate(window)
+    RightUpdate(window)
 end)

@@ -51,6 +51,10 @@ config.colors = {
     },
 }
 
+config.window_background_gradient = {
+    colors = { "#000000" },
+}
+
 require 'tabbar'
 require 'status'
 config.keys = require 'keybinding'
