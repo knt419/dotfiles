@@ -53,7 +53,7 @@ config.colors = {
 
 require 'tabbar'
 require 'status'
-config.keys = require 'keymap'
+config.keys = require 'keybinding'
 
 -- Finally, return the configuration to wezterm:
 return config
