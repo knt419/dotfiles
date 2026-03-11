@@ -356,11 +356,17 @@ local plugins = {
             },
         },
         keys = {
-            { '<Leader>g',        '<Cmd>Telescope live_grep theme=ivy<CR>',                                                                                     silent = true },
-            { '<Leader><Leader>', '<Cmd>Telescope builtin theme=ivy<CR>',                                                                                       silent = true },
+            { '<Leader>g',        '<Cmd>Telescope live_grep theme=ivy<CR>',                                  silent = true },
+            { '<Leader><Leader>', '<Cmd>Telescope builtin theme=ivy<CR>',                                    silent = true },
             { '<Left>',           function() require('telescope').extensions.file_browser.file_browser() end },
-            { '<Leader>f',        function() require("telescope").extensions.smart_open.smart_open(require(
-                'telescope.themes').get_ivy({ winblend = 10 })) end,                                                                                            silent = true },
+            {
+                '<Leader>f',
+                function()
+                    require("telescope").extensions.smart_open.smart_open(require(
+                        'telescope.themes').get_ivy({ winblend = 10 }))
+                end,
+                silent = true
+            },
         },
     },
     {
@@ -375,6 +381,7 @@ local plugins = {
         ---@type CsvView.Options
         opts = {
             parser = { comments = { "#", "//" } },
+            view = { display_mode = "border" },
             keymaps = {
                 -- Text objects for selecting fields
                 textobject_field_inner = { "if", mode = { "o", "x" } },
