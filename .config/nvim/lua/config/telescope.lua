@@ -3,9 +3,9 @@ return function()
     telescope.setup {
         defaults = {
             winblend = 30,
-            cache_picker = {limit_entries = 100},
-            preview = {filesize_limit = 5, treesitter = true},
-            mappings = {i = {['<Esc>'] = require('telescope.actions').close}},
+            cache_picker = { limit_entries = 100 },
+            preview = { filesize_limit = 5, treesitter = true },
+            mappings = { i = { ['<Esc>'] = require('telescope.actions').close } },
         },
         pickers = {
             find_files = {
@@ -24,9 +24,12 @@ return function()
                 override_file_sorter = true,
                 case_mode = 'smart_case'
             },
+            smart_open = {
+                match_algorithm = "fzf",
+            },
         }
     }
     telescope.load_extension('fzf')
     telescope.load_extension('file_browser')
-    telescope.load_extension('frecency')
+    telescope.load_extension('smart_open')
 end

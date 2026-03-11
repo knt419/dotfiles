@@ -337,11 +337,8 @@ local plugins = {
             'nvim-lua/plenary.nvim',
             'nvim-telescope/telescope-file-browser.nvim',
             {
-                'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'make'
-            },
-            {
-                'nvim-telescope/telescope-frecency.nvim',
+                'danielfalk/smart-open.nvim',
+                branch = '0.2.x',
                 dependencies = {
                     {
                         'kkharji/sqlite.lua',
@@ -351,6 +348,10 @@ local plugins = {
                             end
                         end,
                     },
+                    {
+                        'nvim-telescope/telescope-fzf-native.nvim',
+                        build = 'make'
+                    },
                 },
             },
         },
@@ -358,7 +359,7 @@ local plugins = {
             { '<Leader>g',        '<Cmd>Telescope live_grep theme=ivy<CR>',                                  silent = true },
             { '<Leader><Leader>', '<Cmd>Telescope builtin theme=ivy<CR>',                                    silent = true },
             { '<Left>',           function() require('telescope').extensions.file_browser.file_browser() end },
-            { '<Leader>f',        '<Cmd>Telescope frecency theme=ivy<CR>',                                   silent = true },
+            { '<Leader>f',        function() require("telescope").extensions.smart_open.smart_open(require('telescope.themes').get_ivy({ winblend = 10 })) end,    silent = true },
         },
     },
     {
