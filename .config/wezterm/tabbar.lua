@@ -16,14 +16,14 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
     local title = tab.active_pane.foreground_process_name:match("([^/\\]+)$"):gsub("%.[eE][xX][eE]$", "") or 'wezterm'
 
     local icons = {
-        ["bash"] = wezterm.nerdfonts.dev_terminal .. ' ',
-        ["wezterm"] = wezterm.nerdfonts.dev_terminal .. ' ',
-        ["zsh"] = wezterm.nerdfonts.dev_terminal .. ' ',
-        ["nu"] = wezterm.nerdfonts.dev_terminal .. ' ',
-        ["vim"] = wezterm.nerdfonts.custom_vim .. ' ',
-        ["nvim"] = wezterm.nerdfonts.custom_neovim .. ' ',
-        ["python"] = wezterm.nerdfonts.dev_python .. ' ',
-        ["node"] = wezterm.nerdfonts.dev_nodejs_small .. ' ',
+        ["bash"] = wezterm.nerdfonts.dev_terminal,
+        ["wezterm"] = wezterm.nerdfonts.dev_terminal,
+        ["zsh"] = wezterm.nerdfonts.dev_terminal,
+        ["nu"] = wezterm.nerdfonts.dev_terminal,
+        ["vim"] = wezterm.nerdfonts.custom_vim,
+        ["nvim"] = wezterm.nerdfonts.custom_neovim,
+        ["python"] = wezterm.nerdfonts.dev_python,
+        ["node"] = wezterm.nerdfonts.dev_nodejs_small,
     }
 
     return {
@@ -33,7 +33,7 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
 
         { Foreground = { Color = SYMBOL_COLOR[index] } },
         { Background = { Color = TAB_COLOR[index] } },
-        { Text = icons[title] or wezterm.nerdfonts.dev_terminal .. zoomed },
+        { Text = ( icons[title] or wezterm.nerdfonts.dev_terminal ) .. zoomed },
 
         { Foreground = { Color = FONT_COLOR[index] } },
         { Background = { Color = TAB_COLOR[index] } },
