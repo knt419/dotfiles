@@ -162,13 +162,6 @@ local plugins = {
         config = true,
     },
     {
-        'tpope/vim-commentary',
-        keys = {
-            { 'gc',  '<Plug>Commentary',    mode = { 'x', 'n', 'o' } },
-            { 'gcc', '<Plug>CommentaryLine' }
-        }
-    },
-    {
         'kana/vim-smartword',
         keys = {
             { 'w',  '<Plug>(smartword-w)' },
@@ -204,9 +197,12 @@ local plugins = {
         }
     },
     {
-        'ntpeters/vim-better-whitespace',
+        "cappyzawa/trim.nvim",
         event = { 'BufNewFile', 'BufRead' },
-        config = require('config.whitespace'),
+        opts = {
+            ft_blocklist = {'diff', 'gitcommit', 'qf', 'help', 'markdown', 'dashboard'},
+            highlight = true,
+        }
     },
     {
         'smjonas/inc-rename.nvim',
