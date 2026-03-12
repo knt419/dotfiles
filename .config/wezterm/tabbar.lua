@@ -13,27 +13,7 @@ end)
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
     local index = tab.is_active and 1 or 2
     local zoomed = tab.active_pane.is_zoomed and '🔎 ' or ' '
-    local pane = wezterm.mux.get_pane(tab.active_pane.pane_id)
-    local info = pane:get_foreground_process_info()
-
-    local title = "wezterm"
-
-    local priority_processes = { "nvim", "vim", "tmux", "ssh", "pwsh", "powershell", "cmd", "bash", "zsh", "nu" }
-
-    local current_info = info
-    while current_info do
-        local process_name = current_info.name:match("([^/\\]+)$"):gsub("%.[eE][xX][eE]$", "")
-
-        for _, priority in ipairs(priority_processes) do
-            if process_name:lower() == priority then
-                title = priority
-                break
-            else
-                title = process_name
-            end
-        end
-        current_info = current_info.parent
-    end
+    local title = tab.active_pane.foreground_process_name:match("([^/\\]+)$"):gsub("%.[eE][xX][eE]$", "") or 'wezterm'
 
     local icons = {
         ["bash"] = wezterm.nerdfonts.dev_terminal .. ' ',
@@ -43,6 +23,7 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
         ["vim"] = wezterm.nerdfonts.custom_vim .. ' ',
         ["nvim"] = wezterm.nerdfonts.custom_neovim .. ' ',
         ["python"] = wezterm.nerdfonts.dev_python .. ' ',
+        ["node"] = wezterm.nerdfonts.dev_nodejs_small .. ' ',
     }
 
     return {
