@@ -41,9 +41,7 @@ local plugins = {
     {
         'kevinhwang91/nvim-hlslens',
         event = 'CmdlineEnter',
-        config = function()
-            require('scrollbar.handlers.search').setup {}
-        end,
+        config = true,
         dependencies = {
             'petertriho/nvim-scrollbar',
         },
@@ -51,27 +49,26 @@ local plugins = {
     {
         'petertriho/nvim-scrollbar',
         event = { 'BufNewFile', 'BufRead' },
-        config = function()
-            require('scrollbar').setup {
-                marks = {
-                    Search = { color = 'orange' },
-                }
+        opts = {
+            marks = {
+                Search = { color = 'orange' },
             }
-        end
+        },
     },
     {
-        'levouh/tint.nvim',
+        'tadaa/vimade',
         event = 'WinNew',
-        config = true,
+        opts = {
+            recipe = { 'minimalist', { animate = true } },
+            basebg = '#2a2a2a',
+        }
     },
     {
         'rcarriga/nvim-notify',
-        config = function()
-            require('notify').setup {
-                render = 'compact',
-                background_colour = "#000000",
-            }
-        end
+        opts = {
+            render = 'compact',
+            background_colour = "#000000",
+        },
     },
     {
         'folke/noice.nvim',
@@ -105,9 +102,7 @@ local plugins = {
     {
         'norcalli/nvim-colorizer.lua',
         event = { 'BufNewFile', 'BufRead' },
-        config = function()
-            require('colorizer').setup()
-        end,
+        config = true,
     },
     {
         'echasnovski/mini.starter',
@@ -200,15 +195,13 @@ local plugins = {
         "cappyzawa/trim.nvim",
         event = { 'BufNewFile', 'BufRead' },
         opts = {
-            ft_blocklist = {'diff', 'gitcommit', 'qf', 'help', 'markdown', 'dashboard'},
+            ft_blocklist = { 'diff', 'gitcommit', 'qf', 'help', 'markdown', 'dashboard' },
             highlight = true,
         }
     },
     {
         'smjonas/inc-rename.nvim',
-        config = function()
-            require('inc_rename').setup {}
-        end,
+        config = true,
         keys = {
             {
                 '<Leader>rn',
@@ -222,16 +215,12 @@ local plugins = {
     },
     {
         'MeanderingProgrammer/render-markdown.nvim',
-        ft = {
-            "markdown",
+        ft = { 'markdown' },
+        opts = {
+            heading = {
+                sign = false,
+            },
         },
-        config = function()
-            require('render-markdown').setup {
-                heading = {
-                    sign = false,
-                },
-            }
-        end,
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
             'nvim-tree/nvim-web-devicons',
@@ -243,13 +232,11 @@ local plugins = {
     {
         'xiyaowong/transparent.nvim',
         lazy = false,
-        config = function()
-            require('transparent').setup {
-                extra_groups = {
-                    'NormalFloat', 'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
-                },
-            }
-        end,
+        opts = {
+            extra_groups = {
+                'NormalFloat', 'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
+            },
+        },
     },
 
 
