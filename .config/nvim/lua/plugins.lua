@@ -430,9 +430,7 @@ local plugins = {
             },
             {
                 'xzbdmw/colorful-menu.nvim',
-                config = function()
-                    require('colorful-menu').setup {}
-                end,
+                config = true,
             },
         },
         event = { 'InsertEnter', 'CmdlineEnter' },
