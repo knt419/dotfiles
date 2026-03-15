@@ -137,10 +137,6 @@ local plugins = {
         config = true,
     },
     {
-        'godlygeek/tabular',
-        cmd = 'Tabularize'
-    },
-    {
         'lilibyte/tabhula.nvim',
         event = 'InsertEnter',
         config = true,
@@ -187,48 +183,12 @@ local plugins = {
         }
     },
     {
-        'junegunn/vim-easy-align',
-        keys = {
-            { '<CR>', '<Plug>(LiveEasyAlign)', mode = 'x' }
-        }
-    },
-    {
         "cappyzawa/trim.nvim",
         event = { 'BufNewFile', 'BufRead' },
         opts = {
             ft_blocklist = { 'diff', 'gitcommit', 'qf', 'help', 'markdown', 'dashboard' },
             highlight = true,
         }
-    },
-    {
-        'smjonas/inc-rename.nvim',
-        config = true,
-        keys = {
-            {
-                '<Leader>rn',
-                function()
-                    return ':IncRename ' .. fn.expand('<cword>')
-                end,
-                expr = true,
-                silent = true
-            },
-        }
-    },
-    {
-        'MeanderingProgrammer/render-markdown.nvim',
-        ft = { 'markdown' },
-        opts = {
-            heading = {
-                sign = false,
-            },
-        },
-        dependencies = {
-            'nvim-treesitter/nvim-treesitter',
-            'nvim-tree/nvim-web-devicons',
-        },
-        ---@module 'render-markdown'
-        ---@type render.md.UserConfig
-        opts = {},
     },
     {
         'xiyaowong/transparent.nvim',
@@ -286,7 +246,7 @@ local plugins = {
         }
     },
 
-    -- file/directory
+    -- file/directory open/read
     {
         'aymericbeaumet/vim-symlink', --not compatible with neovim's autochdir
         event = 'BufReadPre',
@@ -358,7 +318,7 @@ local plugins = {
         event = 'BufRead'
     },
 
-    -- language support
+    -- file editing support
     {
         "hat0uma/csvview.nvim",
         ---@module "csvview"
@@ -381,6 +341,31 @@ local plugins = {
             },
         },
         cmd = { "CsvViewEnable", "CsvViewDisable", "CsvViewToggle" },
+    },
+    {
+        'MeanderingProgrammer/render-markdown.nvim',
+        ft = { 'markdown' },
+        ---@module 'render-markdown'
+        ---@type render.md.UserConfig
+        opts = {
+            heading = {
+                sign = false,
+            },
+        },
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-tree/nvim-web-devicons',
+        },
+    },
+    {
+        'godlygeek/tabular',
+        cmd = 'Tabularize'
+    },
+    {
+        'junegunn/vim-easy-align',
+        keys = {
+            { '<CR>', '<Plug>(LiveEasyAlign)', mode = 'x' }
+        }
     },
 
     -- lsp/completion
@@ -486,7 +471,21 @@ local plugins = {
             ghost_text = { enabled = true },
         },
         opts_extend = { "sources.default" },
-    }
+    },
+    {
+        'smjonas/inc-rename.nvim',
+        config = true,
+        keys = {
+            {
+                '<Leader>rn',
+                function()
+                    return ':IncRename ' .. fn.expand('<cword>')
+                end,
+                expr = true,
+                silent = true
+            },
+        }
+    },
 }
 
 local lazyopt = {
