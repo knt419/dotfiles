@@ -111,10 +111,6 @@ local plugins = {
         config = require('config.starter'),
     },
     {
-        'rickhowe/diffchar.vim',
-        event = 'OptionSet diff'
-    },
-    {
         'nvim-treesitter/nvim-treesitter',
         event = { 'BufWritePre', 'BufReadPre' },
         config = require('config.treesitter'),
@@ -348,6 +344,11 @@ local plugins = {
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
         opts = {
+            completions = {
+                lsp = {
+                    enabled = true
+                }
+            },
             heading = {
                 sign = false,
             },
@@ -366,6 +367,10 @@ local plugins = {
         keys = {
             { '<CR>', '<Plug>(LiveEasyAlign)', mode = 'x' }
         }
+    },
+    {
+        'rickhowe/diffchar.vim',
+        event = 'OptionSet diff'
     },
 
     -- lsp/completion
@@ -503,7 +508,6 @@ local lazyopt = {
         rtp = {
             disabled_plugins = {
                 'gzip',
-                'health',
                 'man',
                 'matchit',
                 'matchparen',
@@ -520,9 +524,6 @@ local lazyopt = {
                 'vimballPlugin',
                 'zip',
                 'zipPlugin',
-                'rplugin',
-                'getscript',
-                'getscriptPlugin',
                 'logiPat',
                 'rrhelper',
                 'editorconfig',
