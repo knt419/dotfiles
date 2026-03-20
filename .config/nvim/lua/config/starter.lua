@@ -43,5 +43,5 @@ return function()
             starter.gen_hook.aligning('center', 'center'),
         },
     })
-    vim.keymap.set('n', '<Up>', '<Cmd>lua MiniStarter.open()<CR>')
+    vim.keymap.set('n', '<Leader>s', '<Cmd>lua MiniStarter.open()<CR>')
 end

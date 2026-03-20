@@ -155,7 +155,9 @@ local plugins = {
         'rainbowhxch/accelerated-jk.nvim',
         keys = {
             { 'j', '<Plug>(accelerated_jk_gj)' },
-            { 'k', '<Plug>(accelerated_jk_gk)' }
+            { 'k', '<Plug>(accelerated_jk_gk)' },
+            { '<down>', '<Plug>(accelerated_jk_gj)' },
+            { '<up>', '<Plug>(accelerated_jk_gk)' },
         }
     },
     {
@@ -248,8 +250,8 @@ local plugins = {
             end, {})
         end,
         keys = {
-            { '<Down>', function() require('FTerm').toggle() end },
-            { '<Right>', function()
+            { '<Leader>t', function() require('FTerm').toggle() end },
+            { '<Leader>gi', function()
                 vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h'))
                 vim.cmd.FtermGituiOpen()
             end },
@@ -310,11 +312,11 @@ local plugins = {
             },
         },
         keys = {
-            { '<Leader>g',        '<Cmd>Telescope live_grep theme=ivy<CR>',                                  silent = true },
+            { '<Leader>gr',        '<Cmd>Telescope live_grep theme=ivy<CR>',                                  silent = true },
             { '<Leader><Leader>', '<Cmd>Telescope builtin theme=ivy<CR>',                                    silent = true },
-            { '<Left>',           function() require('telescope').extensions.file_browser.file_browser() end },
+            { '<Leader>fb',           function() require('telescope').extensions.file_browser.file_browser() end },
             {
-                '<Leader>f',
+                '<Leader>fo',
                 function()
                     require('telescope').extensions.smart_open.smart_open(require(
                         'telescope.themes').get_ivy({ winblend = 10 }))
