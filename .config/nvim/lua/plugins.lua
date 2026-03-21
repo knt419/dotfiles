@@ -333,6 +333,7 @@ local plugins = {
     -- file editing support
     {
         'hat0uma/csvview.nvim',
+        ft = 'csv',
         ---@module 'csvview'
         ---@type CsvView.Options
         opts = {
@@ -383,13 +384,13 @@ local plugins = {
     -- lsp/completion
     {
         'mason-org/mason-lspconfig.nvim',
-        opts = {},
+        config = true,
         dependencies = {
             {
                 'mason-org/mason.nvim',
                 build = ':MasonUpdate',
                 cmd = 'Mason',
-                opts = {}
+                config = true,
             },
             {
                 'neovim/nvim-lspconfig',
