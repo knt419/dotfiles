@@ -25,7 +25,7 @@ return function()
                 case_mode = 'smart_case'
             },
             smart_open = {
-                match_algorithm = "fzf",
+                match_algorithm = 'fzf',
             },
         }
     }
