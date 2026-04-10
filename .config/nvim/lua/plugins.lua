@@ -33,7 +33,7 @@ local plugins = {
     -- },
     {
         'oxfist/night-owl.nvim',
-        lazy = false,  -- make sure we load this during startup if it is your main colorscheme
+        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
         priority = 1000, -- make sure to load this before all the other start plugins
         config = function()
             -- load the colorscheme here
@@ -80,15 +80,30 @@ local plugins = {
             background_colour = '#000000',
         },
     },
+    -- {
+    --     'folke/noice.nvim',
+    --     event = { 'CmdlineEnter', 'BufNewFile', 'BufRead' },
+    --     config = require('config.noice'),
+    --     dependencies = {
+    --         'MunifTanjim/nui.nvim',
+    --         'rcarriga/nvim-notify',
+    --         'smjonas/inc-rename.nvim',
+    --     }
+    -- },
     {
-        'folke/noice.nvim',
-        event = { 'CmdlineEnter', 'BufNewFile', 'BufRead' },
-        config = require('config.noice'),
-        dependencies = {
-            'MunifTanjim/nui.nvim',
-            'rcarriga/nvim-notify',
-            'smjonas/inc-rename.nvim',
-        }
+        "rachartier/tiny-cmdline.nvim",
+        lazy = false,
+        -- event = { 'CmdlineEnter', 'BufNewFile', 'BufRead' },
+        init = function()
+            vim.o.cmdheight = 0
+            require("vim._core.ui2").enable({})
+        end,
+        config = function()
+            require("tiny-cmdline").setup({
+                native_types = {},
+                on_reposition = require("tiny-cmdline").adapters.blink,
+            })
+        end,
     },
     {
         'nvimdev/indentmini.nvim',
@@ -150,10 +165,10 @@ local plugins = {
     {
         'rainbowhxch/accelerated-jk.nvim',
         keys = {
-            { 'j', '<Plug>(accelerated_jk_gj)' },
-            { 'k', '<Plug>(accelerated_jk_gk)' },
+            { 'j',      '<Plug>(accelerated_jk_gj)' },
+            { 'k',      '<Plug>(accelerated_jk_gk)' },
             { '<down>', '<Plug>(accelerated_jk_gj)' },
-            { '<up>', '<Plug>(accelerated_jk_gk)' },
+            { '<up>',   '<Plug>(accelerated_jk_gk)' },
         }
     },
     {
@@ -268,57 +283,101 @@ local plugins = {
             { '<Esc><Esc>', '<Cmd>Bdelete<CR>', silent = true }
         }
     },
+    -- {
+    --     'jemag/telescope-diff.nvim',
+    --     config = function()
+    --         require('telescope').load_extension('diff')
+    --     end,
+    --     dependencies = {
+    --         'nvim-telescope/telescope.nvim',
+    --     },
+    --     keys = {
+    --         { '<Leader>di', function() require('telescope').extensions.diff.diff_files({ hidden = true }) end },
+    --         { '<Leader>dc', function() require('telescope').extensions.diff.diff_current({ hidden = true }) end },
+    --     },
+    -- },
+    -- {
+    --     'nvim-telescope/telescope.nvim',
+    --     cmd = 'Telescope',
+    --     config = require('config.telescope'),
+    --     dependencies = {
+    --         'nvim-lua/plenary.nvim',
+    --         'nvim-telescope/telescope-file-browser.nvim',
+    --         {
+    --             'danielfalk/smart-open.nvim',
+    --             branch = '0.2.x',
+    --             dependencies = {
+    --                 {
+    --                     'kkharji/sqlite.lua',
+    --                     init = function()
+    --                         if g.is_windows then
+    --                             g.sqlite_clib_path = fn.substitute(fn.stdpath('data'), '\\', '/', 'g') .. '/sqlite3.dll'
+    --                         end
+    --                     end,
+    --                 },
+    --                 {
+    --                     'nvim-telescope/telescope-fzf-native.nvim',
+    --                     build = 'make'
+    --                 },
+    --             },
+    --         },
+    --     },
+    --     keys = {
+    --         { '<Leader>gr',        '<Cmd>Telescope live_grep theme=ivy<CR>',                                  silent = true },
+    --         { '<Leader><Leader>', '<Cmd>Telescope builtin theme=ivy<CR>',                                    silent = true },
+    --         { '<Leader>fb',           function() require('telescope').extensions.file_browser.file_browser() end },
+    --         {
+    --             '<Leader>fo',
+    --             function()
+    --                 require('telescope').extensions.smart_open.smart_open(require(
+    --                     'telescope.themes').get_ivy({ winblend = 10 }))
+    --             end,
+    --             silent = true
+    --         },
+    --     },
+    -- },
+    -- {
+    --     "comfysage/artio.nvim",
+    --     lazy = false,
+    --     config = function()
+    --         require("vim._core.ui2").enable({
+    --             enable = true,
+    --             msg = {
+    --                 target = "msg",
+    --             }
+    --         })
+    --         vim.ui.select = require("artio").select
+    --         vim.keymap.set("n", "<leader>fg", "<Plug>(artio-grep)")
+    --
+    --         -- smart file picker
+    --         vim.keymap.set("n", "<leader>ff", "<Plug>(artio-smart)")
+    --
+    --         -- general built-in pickers
+    --         vim.keymap.set("n", "<leader>fh", "<Plug>(artio-helptags)")
+    --         vim.keymap.set("n", "<leader>fb", "<Plug>(artio-buffers)")
+    --         vim.keymap.set("n", "<leader>f/", "<Plug>(artio-buffergrep)")
+    --         vim.keymap.set("n", "<leader>fo", "<Plug>(artio-oldfiles)")
+    --         vim.keymap.set("n", "<leader><leader>", function()
+    --             require('artio.builtins').files({
+    --                 findprg = [[ rg --files --hidden ]],
+    --             })
+    --         end)
+    --     end,
+    -- },
     {
-        'jemag/telescope-diff.nvim',
+        "ibhagwan/fzf-lua",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
+        ---@module "fzf-lua"
+        ---@type fzf-lua.Config|{}
+        ---@diagnostic disable: missing-fields
         config = function()
-            require('telescope').load_extension('diff')
+            require "fzf-lua".setup({ "ivy" })
         end,
-        dependencies = {
-            'nvim-telescope/telescope.nvim',
-        },
+        ---@diagnostic enable: missing-fields
         keys = {
-            { '<Leader>di', function() require('telescope').extensions.diff.diff_files({ hidden = true }) end },
-            { '<Leader>dc', function() require('telescope').extensions.diff.diff_current({ hidden = true }) end },
-        },
-    },
-    {
-        'nvim-telescope/telescope.nvim',
-        cmd = 'Telescope',
-        config = require('config.telescope'),
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope-file-browser.nvim',
-            {
-                'danielfalk/smart-open.nvim',
-                branch = '0.2.x',
-                dependencies = {
-                    {
-                        'kkharji/sqlite.lua',
-                        init = function()
-                            if g.is_windows then
-                                g.sqlite_clib_path = fn.substitute(fn.stdpath('data'), '\\', '/', 'g') .. '/sqlite3.dll'
-                            end
-                        end,
-                    },
-                    {
-                        'nvim-telescope/telescope-fzf-native.nvim',
-                        build = 'make'
-                    },
-                },
-            },
-        },
-        keys = {
-            { '<Leader>gr',        '<Cmd>Telescope live_grep theme=ivy<CR>',                                  silent = true },
-            { '<Leader><Leader>', '<Cmd>Telescope builtin theme=ivy<CR>',                                    silent = true },
-            { '<Leader>fb',           function() require('telescope').extensions.file_browser.file_browser() end },
-            {
-                '<Leader>fo',
-                function()
-                    require('telescope').extensions.smart_open.smart_open(require(
-                        'telescope.themes').get_ivy({ winblend = 10 }))
-                end,
-                silent = true
-            },
+            { "<leader>ff", "<cmd>FzfLua files<cr>",     desc = "Find Files" },
+            { "<leader>fg", "<cmd>FzfLua live_grep<cr>", desc = "Live Grep" },
+            { "<leader>fb", "<cmd>FzfLua buffers<cr>",   desc = "Buffers" },
         },
     },
     {
