@@ -284,6 +284,7 @@ local plugins = {
         ---@diagnostic enable: missing-fields
         keys = {
             { "<leader>fo", "<cmd>FzfLua files<cr>",     desc = "Find Files" },
+            { "<leader><leader>", "<cmd>FzfLua builtin<cr>",     desc = "builtin commands" },
             { "<leader>g", "<cmd>FzfLua live_grep<cr>", desc = "Live Grep" },
             { "<leader>b", "<cmd>FzfLua buffers<cr>",   desc = "Buffers" },
         },
@@ -294,9 +295,9 @@ local plugins = {
         keys = {
             { "<leader>fb", "<cmd>lua require('fzf-lua-explorer').explorer()<cr>", desc = "Explorer" }
         },
-        config = function()
-            require("fzf-lua-explorer").setup()
-        end
+        opts = {
+            show_icons = false,
+        },
     },
     {
         'januswel/fencja.vim',
