@@ -92,13 +92,13 @@ local plugins = {
     -- },
     {
         "rachartier/tiny-cmdline.nvim",
-        lazy = false,
-        -- event = { 'CmdlineEnter', 'BufNewFile', 'BufRead' },
+        -- lazy = false,
+        event = 'CmdlineEnter',
         init = function()
             vim.o.cmdheight = 0
-            require("vim._core.ui2").enable({})
         end,
         config = function()
+            require("vim._core.ui2").enable({})
             require("tiny-cmdline").setup({
                 native_types = {},
                 on_reposition = require("tiny-cmdline").adapters.blink,
@@ -496,6 +496,7 @@ local plugins = {
             },
         },
         event = { 'InsertEnter', 'CmdlineEnter' },
+        -- lazy = false,
         ---@module 'blink.cmp'
         ---@type blink.cmp.config
         opts = {
@@ -503,6 +504,12 @@ local plugins = {
                 preset = 'enter',
                 ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
                 ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+            },
+            cmdline = {
+                enabled = true,     -- デフォルトは false の可能性があります
+                completion = {
+                    menu = { auto_show = true },
+                },
             },
             completion = {
                 documentation = {
