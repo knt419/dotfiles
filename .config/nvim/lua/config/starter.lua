@@ -18,7 +18,7 @@ return function()
         ,
         items = {
             starter.sections.recent_files(5, false, false),
-            { name = 'Open file', action = 'lua require("fzf-lua").files()', section = '  fzf-lua' },
+            { name = 'Open file', action = 'lua require("fzf-lua-frecency").frecency()', section = '  fzf-lua' },
             { name = 'File browser', action = 'lua require("fzf-lua-explorer").explorer({ cwd = vim.fn.getcwd() })', section = '  fzf-lua' },
             { name = 'Init.lua', action = 'e $MYVIMRC', section = '  Config' },
             { name = 'Plugin.lua', action = 'e ~/.config/nvim/lua/plugins.lua', section = '  Config' },

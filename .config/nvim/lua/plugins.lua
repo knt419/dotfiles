@@ -278,15 +278,36 @@ local plugins = {
         ---@module "fzf-lua"
         ---@type fzf-lua.Config|{}
         ---@diagnostic disable: missing-fields
-        config = function()
-            require "fzf-lua".setup({ "ivy" })
-        end,
+        -- config = function(_, opts)
+        --     require('fzf-lua').setup({ 'telescope' }, opts)
+        -- end,
         ---@diagnostic enable: missing-fields
+        opts = {
+            winopts = {
+                height = 0.80,
+                width = 0.8,
+                row = 0.50,
+                border = "rounded",
+                preview = {
+                    border = "rounded",
+                    horizontal = "right:50%",
+                    flip_columns = 160,
+                    winopts = {
+                        number = false,
+                    },
+                },
+            },
+            fzf_opts = {
+                ["--layout"] = "reverse",
+                -- ["--style"] = "full:rounded",
+                -- ["--height"] = "45%",
+                -- ["--margin"] = "0,5%",
+            }
+        },
         keys = {
-            { "<leader>fo", "<cmd>FzfLua files<cr>",     desc = "Find Files" },
-            { "<leader><leader>", "<cmd>FzfLua builtin<cr>",     desc = "builtin commands" },
-            { "<leader>g", "<cmd>FzfLua live_grep<cr>", desc = "Live Grep" },
-            { "<leader>b", "<cmd>FzfLua buffers<cr>",   desc = "Buffers" },
+            { "<leader><leader>", "<cmd>FzfLua builtin<cr>",   desc = "builtin commands" },
+            { "<leader>g",        "<cmd>FzfLua live_grep<cr>", desc = "Live Grep" },
+            { "<leader>b",        "<cmd>FzfLua buffers<cr>",   desc = "Buffers" },
         },
     },
     {
@@ -297,7 +318,16 @@ local plugins = {
         },
         opts = {
             show_icons = false,
+            clipboard_buffer = { enabled = false, },
         },
+    },
+    {
+        "elanmed/fzf-lua-frecency.nvim",
+        dependencies = { "ibhagwan/fzf-lua" },
+        keys = {
+            { "<leader>fo", "<cmd>lua require('fzf-lua-frecency').frecency({ cwd_only = true, })<cr>", desc = "frecency" }
+        },
+        config = true,
     },
     {
         'januswel/fencja.vim',
@@ -471,7 +501,6 @@ local plugins = {
             fuzzy = {
                 implementation = 'prefer_rust_with_warning',
             },
-            ghost_text = { enabled = true },
         },
         opts_extend = { 'sources.default' },
     },
