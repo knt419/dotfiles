@@ -25,7 +25,7 @@ local plugins = {
     -- colorscheme
     {
         'FrenzyExists/aquarium-vim',
-        event = 'VeryLazy',
+        lazy = false,
         config = function()
             cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
             cmd.colorscheme('aquarium')
@@ -285,12 +285,13 @@ local plugins = {
         },
         keys = {
             { "<leader><leader>", "<cmd>FzfLua builtin<cr>",   desc = "builtin commands" },
-            { "<leader>g",        "<cmd>FzfLua live_grep<cr>", desc = "Live Grep" },
+            { "<leader>fg",        "<cmd>FzfLua live_grep<cr>", desc = "Live Grep" },
             { "<leader>b",        "<cmd>FzfLua buffers<cr>",   desc = "Buffers" },
         },
     },
     {
         "otavioschwanck/fzf-lua-explorer.nvim",
+        lazy = false,
         dependencies = { "ibhagwan/fzf-lua" },
         keys = {
             { "<leader>fb", "<cmd>lua require('fzf-lua-explorer').explorer()<cr>", desc = "Explorer" }
@@ -300,7 +301,10 @@ local plugins = {
             clipboard_buffer = { enabled = false, },
             fzf_opts = {
                 ["--layout"] = "reverse",
+                ['--multi'] = true,
+                ['--bind'] = 'tab:toggle'
             },
+            fzf_colors = true,
         },
     },
     {
