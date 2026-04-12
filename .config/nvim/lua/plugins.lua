@@ -81,17 +81,17 @@ local plugins = {
         },
     },
     {
-        "rachartier/tiny-cmdline.nvim",
+        'rachartier/tiny-cmdline.nvim',
         event = 'CmdlineEnter',
         init = function()
             vim.o.cmdheight = 0
         end,
         config = function()
-            require("vim._core.ui2").enable({})
-            require("tiny-cmdline").setup({
+            require('vim._core.ui2').enable({})
+            require('tiny-cmdline').setup({
                 menu_col_offset = 1,
                 native_types = {},
-                on_reposition = require("tiny-cmdline").adapters.blink,
+                on_reposition = require('tiny-cmdline').adapters.blink,
             })
         end,
     },
@@ -274,44 +274,39 @@ local plugins = {
         }
     },
     {
-        "ibhagwan/fzf-lua",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        ---@module "fzf-lua"
+        'ibhagwan/fzf-lua',
+        dependencies = { 'nvim-tree/nvim-web-devicons' },
+        ---@module 'fzf-lua'
         ---@type fzf-lua.Config|{}
         opts = {
+            file_icons = true,
             fzf_opts = {
-                ["--layout"] = "reverse",
+                ['--layout'] = 'reverse',
             }
         },
         keys = {
-            { "<leader><leader>", "<cmd>FzfLua builtin<cr>",   desc = "builtin commands" },
-            { "<leader>fg",        "<cmd>FzfLua live_grep<cr>", desc = "Live Grep" },
-            { "<leader>b",        "<cmd>FzfLua buffers<cr>",   desc = "Buffers" },
+            { '<leader><leader>', '<cmd>FzfLua builtin<cr>',   desc = 'builtin commands' },
+            { '<leader>fg',       '<cmd>FzfLua live_grep<cr>', desc = 'Live Grep' },
+            { '<leader>b',        '<cmd>FzfLua buffers<cr>',   desc = 'Buffers' },
         },
     },
     {
-        "otavioschwanck/fzf-lua-explorer.nvim",
+        'knt419/fzf-lua-explorer.nvim',
         lazy = false,
-        dependencies = { "ibhagwan/fzf-lua" },
+        dependencies = { 'ibhagwan/fzf-lua' },
         keys = {
-            { "<leader>fb", "<cmd>lua require('fzf-lua-explorer').explorer()<cr>", desc = "Explorer" }
+            { '<leader>fb', '<cmd>lua require("fzf-lua-explorer").explorer()<cr>', desc = 'Explorer' }
         },
         opts = {
-            show_icons = false,
             clipboard_buffer = { enabled = false, },
-            fzf_opts = {
-                ["--layout"] = "reverse",
-                ['--multi'] = true,
-                ['--bind'] = 'tab:toggle'
-            },
             fzf_colors = true,
         },
     },
     {
-        "elanmed/fzf-lua-frecency.nvim",
-        dependencies = { "ibhagwan/fzf-lua" },
+        'elanmed/fzf-lua-frecency.nvim',
+        dependencies = { 'ibhagwan/fzf-lua' },
         keys = {
-            { "<leader>fo", "<cmd>lua require('fzf-lua-frecency').frecency({ cwd_only = true, })<cr>", desc = "frecency" }
+            { '<leader>fo', '<cmd>lua require("fzf-lua-frecency").frecency({ cwd_only = true, })<cr>', desc = 'frecency' }
         },
         config = true,
     },
