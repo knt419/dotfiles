@@ -23,24 +23,24 @@ opt.rtp:prepend(lazypath)
 local plugins = {
 
     -- colorscheme
-    -- {
-    --     'FrenzyExists/aquarium-vim',
-    --     event = 'VeryLazy',
-    --     config = function()
-    --         cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
-    --         cmd.colorscheme('aquarium')
-    --     end
-    -- },
     {
-        'oxfist/night-owl.nvim',
-        lazy = false,    -- make sure we load this during startup if it is your main colorscheme
-        priority = 1000, -- make sure to load this before all the other start plugins
+        'FrenzyExists/aquarium-vim',
+        event = 'VeryLazy',
         config = function()
-            -- load the colorscheme here
-            require('night-owl').setup()
-            vim.cmd.colorscheme('night-owl')
-        end,
+            cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
+            cmd.colorscheme('aquarium')
+        end
     },
+    -- {
+    --     'oxfist/night-owl.nvim',
+    --     lazy = false,
+    --     priority = 1000,
+    --     config = function()
+    --         -- load the colorscheme here
+    --         require('night-owl').setup()
+    --         vim.cmd.colorscheme('night-owl')
+    --     end,
+    -- },
 
     -- editor display
     {
@@ -89,6 +89,7 @@ local plugins = {
         config = function()
             require("vim._core.ui2").enable({})
             require("tiny-cmdline").setup({
+                menu_col_offset = 1,
                 native_types = {},
                 on_reposition = require("tiny-cmdline").adapters.blink,
             })
@@ -277,31 +278,9 @@ local plugins = {
         dependencies = { "nvim-tree/nvim-web-devicons" },
         ---@module "fzf-lua"
         ---@type fzf-lua.Config|{}
-        ---@diagnostic disable: missing-fields
-        -- config = function(_, opts)
-        --     require('fzf-lua').setup({ 'telescope' }, opts)
-        -- end,
-        ---@diagnostic enable: missing-fields
         opts = {
-            winopts = {
-                height = 0.80,
-                width = 0.8,
-                row = 0.50,
-                border = "rounded",
-                preview = {
-                    border = "rounded",
-                    horizontal = "right:50%",
-                    flip_columns = 160,
-                    winopts = {
-                        number = false,
-                    },
-                },
-            },
             fzf_opts = {
                 ["--layout"] = "reverse",
-                -- ["--style"] = "full:rounded",
-                -- ["--height"] = "45%",
-                -- ["--margin"] = "0,5%",
             }
         },
         keys = {
@@ -319,6 +298,9 @@ local plugins = {
         opts = {
             show_icons = false,
             clipboard_buffer = { enabled = false, },
+            fzf_opts = {
+                ["--layout"] = "reverse",
+            },
         },
     },
     {
