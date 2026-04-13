@@ -73,16 +73,9 @@ local plugins = {
             basebg = '#2a2a2a',
         }
     },
-    -- {
-    --     'rcarriga/nvim-notify',
-    --     opts = {
-    --         render = 'compact',
-    --         background_colour = '#000000',
-    --     },
-    -- },
     {
         'rachartier/tiny-cmdline.nvim',
-        event = 'CmdlineEnter',
+        lazy = false,
         init = function()
             vim.o.cmdheight = 0
         end,
@@ -95,17 +88,6 @@ local plugins = {
             })
         end,
     },
-    -- {
-    --     'nvimdev/indentmini.nvim',
-    --     event = { 'BufNewFile', 'BufRead' },
-    --     config = function()
-    --         require('indentmini').setup {
-    --             char = '│',
-    --             exclude = { 'mason', 'lazy', 'starter' }
-    --         }
-    --         cmd.highlight('default link IndentLine LineNr')
-    --     end,
-    -- },
     {
         'tamton-aquib/staline.nvim',
         event = { 'BufNewFile', 'BufRead' },
@@ -120,11 +102,11 @@ local plugins = {
         event = { 'BufNewFile', 'BufRead' },
         config = true,
     },
-    {
-        'echasnovski/mini.starter',
-        lazy = false,
-        config = require('config.starter'),
-    },
+    -- {
+    --     'echasnovski/mini.starter',
+    --     lazy = false,
+    --     config = require('config.starter'),
+    -- },
     {
         'nvim-treesitter/nvim-treesitter',
         event = { 'BufWritePre', 'BufReadPre' },
@@ -267,49 +249,6 @@ local plugins = {
             'moll/vim-bbye',
         }
     },
-    -- {
-    --     'moll/vim-bbye',
-    --     keys = {
-    --         { '<Esc><Esc>', '<Cmd>Bdelete<CR>', silent = true }
-    --     }
-    -- },
-    -- {
-    --     'ibhagwan/fzf-lua',
-    --     dependencies = { 'nvim-tree/nvim-web-devicons' },
-    --     ---@module 'fzf-lua'
-    --     ---@type fzf-lua.Config|{}
-    --     opts = {
-    --         file_icons = true,
-    --         fzf_opts = {
-    --             ['--layout'] = 'reverse',
-    --         }
-    --     },
-    --     keys = {
-    --         { '<leader><leader>', '<cmd>FzfLua builtin<cr>',   desc = 'builtin commands' },
-    --         { '<leader>fg',       '<cmd>FzfLua live_grep<cr>', desc = 'Live Grep' },
-    --         { '<leader>b',        '<cmd>FzfLua buffers<cr>',   desc = 'Buffers' },
-    --     },
-    -- },
-    -- {
-    --     'knt419/fzf-lua-explorer.nvim',
-    --     lazy = false,
-    --     dependencies = { 'ibhagwan/fzf-lua' },
-    --     keys = {
-    --         { '<leader>fb', '<cmd>lua require("fzf-lua-explorer").explorer()<cr>', desc = 'Explorer' }
-    --     },
-    --     opts = {
-    --         clipboard_buffer = { enabled = false, },
-    --         fzf_colors = true,
-    --     },
-    -- },
-    -- {
-    --     'elanmed/fzf-lua-frecency.nvim',
-    --     dependencies = { 'ibhagwan/fzf-lua' },
-    --     keys = {
-    --         { '<leader>fo', '<cmd>lua require("fzf-lua-frecency").frecency({ cwd_only = true, })<cr>', desc = 'frecency' }
-    --     },
-    --     config = true,
-    -- },
     {
         "folke/snacks.nvim",
         priority = 1000,
@@ -317,7 +256,30 @@ local plugins = {
         ---@type snacks.Config
         opts = {
             bigfile = { enabled = true },
-            dim = { enabled = true },
+            dashboard = {
+                enabled = true,
+                preset = {
+                    header = table.concat(
+                        {
+                            '                                                                      ▄██████▄        ',
+                            '                                                                  ▄█▀▀▀▀▀██▀▀▀▀▀█▄    ',
+                            ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗          ▐█      ▐▌      █▌   ',
+                            ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║          ▐█▄    ▄██▄    ▄█▌   ',
+                            ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║  ▄█▄    ▄▄███████▀▀███████▄▄  ',
+                            ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║   ▀    ████     ▄  ▄     ████ ',
+                            ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║        ████     █  █     ████ ',
+                            ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝        ▀███▄            ▄███▀ ',
+                            '                                                                  ▀▀████████████▀▀    '
+                        }, '\n')
+                },
+                sections = {
+                    { section = "header" },
+                    { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+                    { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+                    { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
+                    { section = "startup" },
+                  },
+                },
             explorer = { enabled = true },
             indent = { enabled = true },
             notifier = { enabled = true },
@@ -335,11 +297,18 @@ local plugins = {
                         regex = true,
                     },
                 },
+                win = {
+                    input = {
+                        keys = {
+                            ["<Esc>"] = { "close", mode = { "n", "i" } },
+                        },
+                    },
+                },
             },
             statuscolumn = {
                 enabled = true,
-                left = { 'mark', 'sign' },
-                right = { 'git' },
+                left = { 'git' },
+                right = { 'sign' },
                 git = {
                     pattens = { 'GitSign', 'MiniDiffSign' },
                 }
@@ -351,7 +320,9 @@ local plugins = {
             }
         },
         keys = {
+            { "<leader><leader>",  function() Snacks.picker.pickers() end,  desc = "Builtin" },
             { "<leader>fo", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
+            { "<leader>s", function() Snacks.dashboard() end, desc = "Dashboard" },
             { "<leader>g",  function() Snacks.picker.grep() end,  desc = "Grep" },
             { "<leader>fb", function() Snacks.explorer() end,     desc = "File Explorer" },
             { "<Esc><Esc>", function() Snacks.bufdelete() end,    desc = "Delete Buffer" },
