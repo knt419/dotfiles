@@ -102,11 +102,6 @@ local plugins = {
         event = { 'BufNewFile', 'BufRead' },
         config = true,
     },
-    -- {
-    --     'echasnovski/mini.starter',
-    --     lazy = false,
-    --     config = require('config.starter'),
-    -- },
     {
         'nvim-treesitter/nvim-treesitter',
         event = { 'BufWritePre', 'BufReadPre' },
