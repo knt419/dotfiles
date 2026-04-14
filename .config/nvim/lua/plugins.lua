@@ -80,7 +80,24 @@ local plugins = {
             vim.o.cmdheight = 0
         end,
         config = function()
-            require('vim._core.ui2').enable({})
+            require('vim._core.ui2').enable({
+                enable = true,
+                msg = {
+                    targets = {
+                        [""] = "msg",
+                        empty = "cmd",
+                        bufwrite = "msg",
+                        confirm = "cmd",
+                        emsg = "pager",
+                        echo = "msg",
+                    },
+                    height = 0.25,
+                    position = 'bottom',
+                },
+                cmd = {
+                    height = 0.1,
+                },
+            })
             require('tiny-cmdline').setup({
                 menu_col_offset = 1,
                 native_types = {},
@@ -188,39 +205,7 @@ local plugins = {
     -- terminal
     {
         'numToStr/FTerm.nvim',
-        config = function()
-            local shcmd = vim.env.SHELL or 'nu'
-            local visual
-            if not vim.env.NVIM then
-                visual = 'nvim --remote'
-            else
-                visual = 'nvim --server ' .. vim.env.NVIM .. ' --remote'
-            end
-            require('FTerm').setup {
-                cmd = shcmd,
-                blend = 10,
-                dimensions = {
-                    height = 0.9,
-                    width = 0.9,
-                },
-                env = {
-                    VISUAL = visual,
-                },
-            }
-            vim.api.nvim_create_user_command('FtermGituiOpen', function()
-                local fterm = require('FTerm')
-                local gitui = fterm:new({
-                    ft = 'fterm_gitui',
-                    cmd = 'gitui',
-                    blend = 10,
-                    dimensions = {
-                        height = 0.9,
-                        width = 0.9,
-                    },
-                })
-                gitui:open()
-            end, {})
-        end,
+        config = require('config.fterm'),
         keys = {
             { '<Leader>t', function() require('FTerm').toggle() end },
             { '<Leader>gi', function()
@@ -243,78 +228,14 @@ local plugins = {
         priority = 1000,
         lazy = false,
         ---@type snacks.Config
-        opts = {
-            bigfile = { enabled = true },
-            dashboard = {
-                enabled = true,
-                preset = {
-                    header = table.concat(
-                        {
-                            '                                                                      ▄██████▄        ',
-                            '                                                                  ▄█▀▀▀▀▀██▀▀▀▀▀█▄    ',
-                            ' ███╗   ██╗ ███████╗ ██████╗  ██╗   ██╗ ██╗ ███╗   ███╗          ▐█      ▐▌      █▌   ',
-                            ' ████╗  ██║ ██╔════╝██╔═══██╗ ██║   ██║ ██║ ████╗ ████║          ▐█▄    ▄██▄    ▄█▌   ',
-                            ' ██╔██╗ ██║ █████╗  ██║   ██║ ██║   ██║ ██║ ██╔████╔██║  ▄█▄    ▄▄███████▀▀███████▄▄  ',
-                            ' ██║╚██╗██║ ██╔══╝  ██║   ██║ ╚██╗ ██╔╝ ██║ ██║╚██╔╝██║   ▀    ████     ▄  ▄     ████ ',
-                            ' ██║ ╚████║ ███████╗╚██████╔╝  ╚████╔╝  ██║ ██║ ╚═╝ ██║        ████     █  █     ████ ',
-                            ' ╚═╝  ╚═══╝ ╚══════╝ ╚═════╝    ╚═══╝   ╚═╝ ╚═╝     ╚═╝        ▀███▄            ▄███▀ ',
-                            '                                                                  ▀▀████████████▀▀    '
-                        }, '\n')
-                },
-                sections = {
-                    { section = 'header' },
-                    { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
-                    { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
-                    { icon = ' ', title = 'Keymaps', section = 'keys', indent = 2, padding = 1 },
-                    { section = 'startup' },
-                  },
-                },
-            explorer = { enabled = true },
-            indent = { enabled = true },
-            notifier = { enabled = true },
-            picker = {
-                enabled = true,
-                ui_select = true,
-                sources = {
-                    files = {
-                        hidden = true,
-                        cmd = 'fd',
-                    },
-                    grep = {
-                        hidden = true,
-                        cmd = 'rg',
-                        regex = true,
-                    },
-                },
-                win = {
-                    input = {
-                        keys = {
-                            ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
-                        },
-                    },
-                },
-            },
-            statuscolumn = {
-                enabled = true,
-                left = { 'git' },
-                right = { 'sign' },
-                git = {
-                    pattens = { 'GitSign', 'MiniDiffSign' },
-                }
-            },
-            styles = {
-                notification = {
-                    wo = { wrap = true } -- Wrap notifications
-                }
-            }
-        },
+        opts = require('config.snacks'),
         keys = {
-            { '<leader><leader>',  function() Snacks.picker.pickers() end,  desc = 'Builtin' },
-            { '<leader>fo', function() Snacks.picker.smart() end, desc = 'Smart Find Files' },
-            { '<leader>s', function() Snacks.dashboard() end, desc = 'Dashboard' },
-            { '<leader>g',  function() Snacks.picker.grep() end,  desc = 'Grep' },
-            { '<leader>fb', function() Snacks.explorer() end,     desc = 'File Explorer' },
-            { '<Esc><Esc>', function() Snacks.bufdelete() end,    desc = 'Delete Buffer' },
+            { '<leader><leader>', function() Snacks.picker.pickers() end, desc = 'Builtin' },
+            { '<leader>fo',       function() Snacks.picker.smart() end,   desc = 'Smart Find Files' },
+            { '<leader>s',        function() Snacks.dashboard() end,      desc = 'Dashboard' },
+            { '<leader>gg',       function() Snacks.picker.grep() end,    desc = 'Grep' },
+            { '<leader>fb',       function() Snacks.explorer() end,       desc = 'File Explorer' },
+            { '<Esc><Esc>',       function() Snacks.bufdelete() end,      desc = 'Delete Buffer' },
         }
     },
     {
@@ -366,10 +287,6 @@ local plugins = {
             'nvim-treesitter/nvim-treesitter',
             'nvim-tree/nvim-web-devicons',
         },
-    },
-    {
-        'godlygeek/tabular',
-        cmd = 'Tabularize'
     },
     {
         'junegunn/vim-easy-align',
@@ -436,60 +353,7 @@ local plugins = {
         -- lazy = false,
         ---@module 'blink.cmp'
         ---@type blink.cmp.config
-        opts = {
-            keymap = {
-                preset = 'enter',
-                ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
-                ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
-            },
-            cmdline = {
-                enabled = true,
-                completion = {
-                    menu = { auto_show = true },
-                },
-            },
-            completion = {
-                documentation = {
-                    auto_show = true,
-                    auto_show_delay_ms = 500,
-                    window = {
-                        winhighlight = 'Normal:Normal,FloatBorder:FloatBorder',
-                    },
-                },
-                menu = {
-                    draw = {
-                        columns = { { 'kind_icon' }, { 'label', gap = 1 } },
-                        components = {
-                            label = {
-                                text = function(ctx)
-                                    return require('colorful-menu').blink_components_text(ctx)
-                                end,
-                                highlight = function(ctx)
-                                    return require('colorful-menu').blink_components_highlight(ctx)
-                                end,
-                            },
-                        },
-                    },
-                },
-            },
-            snippets = {
-                preset = 'luasnip',
-            },
-            sources = {
-                default = { 'copilot', 'lsp', 'path', 'snippets', 'buffer' },
-                providers = {
-                    copilot = {
-                        name = 'copilot',
-                        module = 'blink-copilot',
-                        score_offset = 100,
-                        async = true,
-                    },
-                },
-            },
-            fuzzy = {
-                implementation = 'prefer_rust_with_warning',
-            },
-        },
+        opts = require('config.blink'),
         opts_extend = { 'sources.default' },
     },
     {
