@@ -1,14 +1,14 @@
 return function ()
     vim.opt.showtabline=2
     local git_status = function(type)
-        local status = vim.b.gitsigns_status_dict
+        local status = vim.b.minidiff_summary
         if status == nil then
           return ''
         end
         if status[type] == nil or status[type] == 0 then
           return ''
         end
-        local prefix = { added = '', changed = '', removed = ''}
+        local prefix = { add = '', change = '', delete = ''}
         return prefix[type] .. ' ' .. status[type]
     end
     local ff = function ()
@@ -27,9 +27,9 @@ return function ()
             left = {
                 '  ', 'mode', ' ', 'branch',
                 fname,
-                ' ', { 'GitSignsAdd', function() return git_status('added') end },
-                ' ', { 'GitSignsChange', function() return git_status('changed') end },
-                ' ', { 'GitSignsDelete', function() return git_status('removed') end },
+                ' ', { 'MiniDiffSignAdd', function() return git_status('add') end },
+                ' ', { 'MiniDiffSignChange', function() return git_status('change') end },
+                ' ', { 'MiniDiffSignDelete', function() return git_status('delete') end },
             },
             mid = { { 'SpecialKey', 'lsp_name' }, ' ', 'lsp' },
             right = {
@@ -52,4 +52,3 @@ return function ()
         inactive_fg = '#404040',
     }
 end
-

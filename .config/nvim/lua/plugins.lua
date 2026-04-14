@@ -108,16 +108,10 @@ local plugins = {
         config = require('config.treesitter'),
     },
     {
-        'lewis6991/gitsigns.nvim',
+        'nvim-mini/mini.diff',
         event = { 'BufWritePre', 'BufReadPre' },
-        config = function()
-            require('gitsigns').setup {}
-            require('scrollbar.handlers.gitsigns').setup {}
-        end,
-        dependencies = {
-            'petertriho/nvim-scrollbar',
-            'nvim-lua/plenary.nvim',
-        },
+        version = '*',
+        config = true,
     },
     {
         'windwp/nvim-autopairs',
@@ -245,7 +239,7 @@ local plugins = {
         }
     },
     {
-        "folke/snacks.nvim",
+        'folke/snacks.nvim',
         priority = 1000,
         lazy = false,
         ---@type snacks.Config
@@ -268,11 +262,11 @@ local plugins = {
                         }, '\n')
                 },
                 sections = {
-                    { section = "header" },
-                    { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-                    { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-                    { icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-                    { section = "startup" },
+                    { section = 'header' },
+                    { icon = ' ', title = 'Recent Files', section = 'recent_files', indent = 2, padding = 1 },
+                    { icon = ' ', title = 'Projects', section = 'projects', indent = 2, padding = 1 },
+                    { icon = ' ', title = 'Keymaps', section = 'keys', indent = 2, padding = 1 },
+                    { section = 'startup' },
                   },
                 },
             explorer = { enabled = true },
@@ -284,18 +278,18 @@ local plugins = {
                 sources = {
                     files = {
                         hidden = true,
-                        cmd = "fd",
+                        cmd = 'fd',
                     },
                     grep = {
                         hidden = true,
-                        cmd = "rg",
+                        cmd = 'rg',
                         regex = true,
                     },
                 },
                 win = {
                     input = {
                         keys = {
-                            ["<Esc>"] = { "close", mode = { "n", "i" } },
+                            ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
                         },
                     },
                 },
@@ -315,12 +309,12 @@ local plugins = {
             }
         },
         keys = {
-            { "<leader><leader>",  function() Snacks.picker.pickers() end,  desc = "Builtin" },
-            { "<leader>fo", function() Snacks.picker.smart() end, desc = "Smart Find Files" },
-            { "<leader>s", function() Snacks.dashboard() end, desc = "Dashboard" },
-            { "<leader>g",  function() Snacks.picker.grep() end,  desc = "Grep" },
-            { "<leader>fb", function() Snacks.explorer() end,     desc = "File Explorer" },
-            { "<Esc><Esc>", function() Snacks.bufdelete() end,    desc = "Delete Buffer" },
+            { '<leader><leader>',  function() Snacks.picker.pickers() end,  desc = 'Builtin' },
+            { '<leader>fo', function() Snacks.picker.smart() end, desc = 'Smart Find Files' },
+            { '<leader>s', function() Snacks.dashboard() end, desc = 'Dashboard' },
+            { '<leader>g',  function() Snacks.picker.grep() end,  desc = 'Grep' },
+            { '<leader>fb', function() Snacks.explorer() end,     desc = 'File Explorer' },
+            { '<Esc><Esc>', function() Snacks.bufdelete() end,    desc = 'Delete Buffer' },
         }
     },
     {
