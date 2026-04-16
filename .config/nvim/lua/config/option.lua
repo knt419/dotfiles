@@ -87,4 +87,10 @@ if g.is_windows then
     }
 end
 
-vim.diagnostic.config({ jump = { float = true }})
+vim.diagnostic.config {
+  jump = {
+    on_jump = function(_, bufnr)
+      vim.diagnostic.open_float { bufnr = bufnr, scope = 'cursor', focus = false }
+    end,
+  },
+}

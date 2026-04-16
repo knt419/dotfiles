@@ -115,7 +115,7 @@ local plugins = {
         config = true,
     },
     {
-        'norcalli/nvim-colorizer.lua',
+        'NvChad/nvim-colorizer.lua',
         event = { 'BufNewFile', 'BufRead' },
         config = true,
     },
@@ -219,9 +219,6 @@ local plugins = {
     {
         'aymericbeaumet/vim-symlink', --not compatible with neovim's autochdir
         event = 'BufReadPre',
-        dependencies = {
-            'moll/vim-bbye',
-        }
     },
     {
         'folke/snacks.nvim',
