@@ -58,6 +58,15 @@ opt.winblend = 10
 opt.splitkeep = 'screen'
 opt.winborder = 'rounded'
 
+opt.sh = 'nu'
+opt.shelltemp = false
+opt.shellredir = 'out+err> %s'
+opt.shellcmdflag = '--stdin --no-newline -c'
+opt.shellslash = true
+opt.shellxescape = ''
+opt.shellxquote = ''
+opt.shellquote = ''
+
 g.mapleader = ' '
 g.is_windows = vim.fn.has('win64') == 1
 g.loaded_python3_provider = 0

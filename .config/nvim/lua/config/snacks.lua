@@ -29,12 +29,14 @@ return {
     notifier = {
         enabled = true,
         style = 'fancy',
-        keep = function(notif)
-            return vim.fn.getcmdpos() > 0 or vim.bo.buftype == 'prompt'
-        end,
-        filter = function(notif)
-            return not notif.msg:match("^:%s*")
-        end,
+        -- keep = function(notif)
+        --     return vim.fn.getcmdpos() > 0 or vim.bo.buftype == 'prompt'
+        -- end,
+        keep = false,
+        -- filter = function(notif)
+        --     return not notif.msg:match("^:%s*")
+        -- end,
+        filter = nil,
     },
     picker = {
         enabled = true,
@@ -66,9 +68,9 @@ return {
             pattens = { 'GitSign', 'MiniDiffSign' },
         }
     },
-    -- styles = {
-    --     notification = {
-    --         wo = { wrap = true }         -- Wrap notifications
-    --     }
-    -- }
+    styles = {
+        notification = {
+            -- wo = { wrap = true }         -- Wrap notifications
+        }
+    }
 }

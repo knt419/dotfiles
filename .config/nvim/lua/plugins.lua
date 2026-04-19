@@ -75,7 +75,8 @@ local plugins = {
     },
     {
         'rachartier/tiny-cmdline.nvim',
-        lazy = false,
+        -- lazy = false,
+        event = 'UIEnter',
         init = function()
             vim.o.cmdheight = 0
         end,
@@ -92,7 +93,7 @@ local plugins = {
                         echo = "msg",
                     },
                     height = 0.25,
-                    position = 'bottom',
+                    position = 'top',
                 },
                 cmd = {
                     height = 0.1,
