@@ -28,10 +28,10 @@ opt.expandtab = true
 opt.shiftwidth = 4
 opt.smartindent = true
 
-opt.clipboard:append{'unnamedplus'}
+opt.clipboard:append { 'unnamedplus' }
 opt.list = true
-opt.listchars = {tab = '» ', trail = '·', eol = '↲', extends = '»', precedes = '«', nbsp = '%'}
-opt.fillchars = {eob = '\u{0020}'}
+opt.listchars = { tab = '» ', trail = '·', eol = '↲', extends = '»', precedes = '«', nbsp = '%' }
+opt.fillchars = { eob = '\u{0020}', diff = '/' }
 opt.virtualedit = 'block'
 opt.whichwrap = 'b,s,h,l,<,>,[,]'
 opt.mouse = 'a'
@@ -41,15 +41,15 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.infercase = true
 
-opt.diffopt = {'filler', 'vertical', 'internal', algorithm = 'histogram', 'indent-heuristic'}
+opt.diffopt = { 'filler', 'vertical', 'internal', algorithm = 'histogram', 'indent-heuristic', inline = 'char', context = 3, linematch = 60, 'followwrap' }
 
 opt.laststatus = 3
 opt.showtabline = 2
-opt.wildmode = {list = 'full'}
-opt.iskeyword:append('-')
+opt.wildmode = { list = 'full' }
+opt.iskeyword:append({'-', '_'})
 opt.linebreak = true
 opt.breakindent = true
-opt.breakindentopt = {shift = 2}
+opt.breakindentopt = { shift = 2 }
 opt.showbreak = '↪'
 
 opt.inccommand = 'split'
@@ -86,20 +86,20 @@ if g.is_windows then
     g.clipboard = {
         name = 'win32yank.exe',
         copy = {
-            ['+'] = {'win32yank.exe', '-i', '--crlf'},
-            ['*'] = {'win32yank.exe', '-i', '--crlf'},
+            ['+'] = { 'win32yank.exe', '-i', '--crlf' },
+            ['*'] = { 'win32yank.exe', '-i', '--crlf' },
         },
         paste = {
-            ['+'] = {'win32yank.exe', '-o', '--lf'},
-            ['*'] = {'win32yank.exe', '-o', '--lf'},
+            ['+'] = { 'win32yank.exe', '-o', '--lf' },
+            ['*'] = { 'win32yank.exe', '-o', '--lf' },
         }
     }
 end
 
 vim.diagnostic.config {
-  jump = {
-    on_jump = function(_, bufnr)
-      vim.diagnostic.open_float { bufnr = bufnr, scope = 'cursor', focus = false }
-    end,
-  },
+    jump = {
+        on_jump = function(_, bufnr)
+            vim.diagnostic.open_float { bufnr = bufnr, scope = 'cursor', focus = false }
+        end,
+    },
 }

@@ -1,7 +1,6 @@
 -- plugin install
 local cmd = vim.cmd
 local fn = vim.fn
-local g = vim.g
 local opt = vim.opt
 
 local lazypath = fn.stdpath('data') .. '/lazy/lazy.nvim'
@@ -75,7 +74,6 @@ local plugins = {
     },
     {
         'rachartier/tiny-cmdline.nvim',
-        -- lazy = false,
         event = 'UIEnter',
         init = function()
             vim.o.cmdheight = 0
@@ -217,10 +215,10 @@ local plugins = {
     },
 
     -- file/directory open/read
-    {
-        'aymericbeaumet/vim-symlink', --not compatible with neovim's autochdir
-        event = 'BufReadPre',
-    },
+    -- {
+    --     'aymericbeaumet/vim-symlink', --not compatible with neovim's autochdir
+    --     event = 'BufReadPre',
+    -- },
     {
         'folke/snacks.nvim',
         priority = 1000,
@@ -286,10 +284,6 @@ local plugins = {
         keys = {
             { '<CR>', '<Plug>(LiveEasyAlign)', mode = 'x' }
         }
-    },
-    {
-        'rickhowe/diffchar.vim',
-        event = 'OptionSet diff'
     },
 
     -- lsp/completion
