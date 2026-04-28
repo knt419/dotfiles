@@ -44,7 +44,7 @@ local plugins = {
     -- editor display
     {
         'nvim-zh/colorful-winsep.nvim',
-        event = 'WinNew',
+        event = 'VeryLazy',
         config = true
     },
     {
@@ -57,7 +57,8 @@ local plugins = {
     },
     {
         'petertriho/nvim-scrollbar',
-        event = { 'BufNewFile', 'BufRead' },
+        event = 'FileType',
+        ft = "snacks_dashboard",
         opts = {
             marks = {
                 Search = { color = 'orange' },
@@ -66,7 +67,8 @@ local plugins = {
     },
     {
         'tadaa/vimade',
-        event = 'WinNew',
+        event = 'VeryLazy',
+        -- ft = "snacks_dashboard",
         opts = {
             recipe = { 'minimalist', { animate = true } },
             basebg = '#2a2a2a',
@@ -74,7 +76,8 @@ local plugins = {
     },
     {
         'rachartier/tiny-cmdline.nvim',
-        event = 'UIEnter',
+        event = 'FileType',
+        ft = "snacks_dashboard",
         init = function()
             vim.o.cmdheight = 0
         end,
@@ -106,7 +109,8 @@ local plugins = {
     },
     {
         'tamton-aquib/staline.nvim',
-        event = { 'BufNewFile', 'BufRead' },
+        event = 'FileType',
+        ft = "snacks_dashboard",
         config = require('config.staline'),
     },
     {
@@ -115,28 +119,30 @@ local plugins = {
     },
     {
         'NvChad/nvim-colorizer.lua',
-        event = { 'BufNewFile', 'BufRead' },
+        event = 'VeryLazy',
         config = true,
     },
     {
         'nvim-treesitter/nvim-treesitter',
-        event = { 'BufWritePre', 'BufReadPre' },
+        event = 'FileType',
+        ft = "snacks_dashboard",
         config = require('config.treesitter'),
     },
     {
         'nvim-mini/mini.diff',
-        event = { 'BufWritePre', 'BufReadPre' },
+        event = 'FileType',
+        ft = "snacks_dashboard",
         version = '*',
         config = true,
     },
     {
         'windwp/nvim-autopairs',
-        event = 'InsertEnter',
+        event = 'BufReadPost',
         config = true,
     },
     {
         'lilibyte/tabhula.nvim',
-        event = 'InsertEnter',
+        event = 'BufReadPost',
         config = true,
     },
     {
@@ -150,7 +156,7 @@ local plugins = {
     },
     {
         'echasnovski/mini.surround',
-        event = { 'BufNewFile', 'BufRead' },
+        event = 'VeryLazy',
         config = true,
     },
     {
@@ -184,7 +190,7 @@ local plugins = {
     },
     {
         'cappyzawa/trim.nvim',
-        event = { 'BufNewFile', 'BufRead' },
+        event = 'VeryLazy',
         opts = {
             ft_blocklist = { 'diff', 'gitcommit', 'qf', 'help', 'markdown', 'dashboard' },
             highlight = true,
@@ -215,10 +221,6 @@ local plugins = {
     },
 
     -- file/directory open/read
-    -- {
-    --     'aymericbeaumet/vim-symlink', --not compatible with neovim's autochdir
-    --     event = 'BufReadPre',
-    -- },
     {
         'folke/snacks.nvim',
         priority = 1000,
@@ -236,7 +238,7 @@ local plugins = {
     },
     {
         'januswel/fencja.vim',
-        event = 'BufRead'
+        event = 'BufReadPre',
     },
 
     -- file editing support
@@ -310,7 +312,7 @@ local plugins = {
     {
         'zbirenbaum/copilot.lua',
         cmd = 'Copilot',
-        event = 'InsertEnter',
+        event = 'BufReadPost',
         opts = {
             suggestion = { enabled = false },
             panel = { enabled = false },
@@ -336,7 +338,7 @@ local plugins = {
                 config = true,
             },
         },
-        event = { 'InsertEnter', 'CmdlineEnter' },
+        event = 'BufReadPost',
         ---@module 'blink.cmp'
         ---@type blink.cmp.config
         opts = require('config.blink'),
