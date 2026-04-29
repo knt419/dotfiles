@@ -127,6 +127,11 @@ local plugins = {
         event = 'FileType',
         ft = "snacks_dashboard",
         config = require('config.treesitter'),
+        keys = {
+            { 'v',     function() require("nvim-treesitter.incremental_selection").init_selection() end,   mode = 'n' },
+            { 'v',     function() require("nvim-treesitter.incremental_selection").node_incremental() end, mode = 'x' },
+            { '<C-v>', function() require("nvim-treesitter.incremental_selection").node_decremental() end, mode = 'x' },
+        }
     },
     {
         'nvim-mini/mini.diff',
@@ -181,13 +186,13 @@ local plugins = {
             { 'g#', '<Plug>(asterisk-g#)' }
         }
     },
-    {
-        'terryma/vim-expand-region',
-        keys = {
-            { 'v',     '<Plug>(expand_region_expand)', mode = 'x' },
-            { '<C-v>', '<Plug>(expand_region_shrink)', mode = 'x' }
-        }
-    },
+    -- {
+    --     'terryma/vim-expand-region',
+    --     keys = {
+    --         { 'v',     '<Plug>(expand_region_expand)', mode = 'x' },
+    --         { '<C-v>', '<Plug>(expand_region_shrink)', mode = 'x' }
+    --     }
+    -- },
     {
         'cappyzawa/trim.nvim',
         event = 'VeryLazy',
