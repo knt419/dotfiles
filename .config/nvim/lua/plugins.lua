@@ -44,7 +44,7 @@ local plugins = {
     -- editor display
     {
         'nvim-zh/colorful-winsep.nvim',
-        event = 'VeryLazy',
+        event = 'BufReadPost',
         config = true
     },
     {
@@ -67,7 +67,7 @@ local plugins = {
     },
     {
         'tadaa/vimade',
-        event = 'VeryLazy',
+        event = 'BufReadPost',
         opts = {
             recipe = { 'minimalist', { animate = true } },
             basebg = '#2a2a2a',
@@ -123,8 +123,7 @@ local plugins = {
     },
     {
         'nvim-treesitter/nvim-treesitter',
-        event = 'FileType',
-        ft = 'snacks_dashboard',
+        event = 'VeryLazy',
         config = require('config.treesitter'),
         keys = {
             { 'v',     function() require('nvim-treesitter.incremental_selection').init_selection() end,   mode = 'n' },
@@ -160,7 +159,7 @@ local plugins = {
     },
     {
         'echasnovski/mini.surround',
-        event = 'VeryLazy',
+        event = 'BufReadPost',
         config = true,
     },
     {
@@ -198,7 +197,7 @@ local plugins = {
         lazy = false,
         opts = {
             extra_groups = {
-                'NormalFloat', 'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
+                'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
             },
         },
     },
@@ -288,6 +287,7 @@ local plugins = {
     -- lsp/completion
     {
         'mason-org/mason-lspconfig.nvim',
+        event = 'VeryLazy',
         config = true,
         dependencies = {
             {
@@ -298,7 +298,6 @@ local plugins = {
             },
             {
                 'neovim/nvim-lspconfig',
-                event = { 'BufWritePre', 'BufReadPre' },
                 config = require('config.lspconfig'),
                 dependencies = {
                     'saghen/blink.cmp',
