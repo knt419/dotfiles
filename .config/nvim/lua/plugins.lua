@@ -58,7 +58,7 @@ local plugins = {
     {
         'petertriho/nvim-scrollbar',
         event = 'FileType',
-        ft = "snacks_dashboard",
+        ft = 'snacks_dashboard',
         opts = {
             marks = {
                 Search = { color = 'orange' },
@@ -68,7 +68,6 @@ local plugins = {
     {
         'tadaa/vimade',
         event = 'VeryLazy',
-        -- ft = "snacks_dashboard",
         opts = {
             recipe = { 'minimalist', { animate = true } },
             basebg = '#2a2a2a',
@@ -77,7 +76,7 @@ local plugins = {
     {
         'rachartier/tiny-cmdline.nvim',
         event = 'FileType',
-        ft = "snacks_dashboard",
+        ft = 'snacks_dashboard',
         init = function()
             vim.o.cmdheight = 0
         end,
@@ -86,12 +85,12 @@ local plugins = {
                 enable = true,
                 msg = {
                     targets = {
-                        [""] = "msg",
-                        empty = "cmd",
-                        bufwrite = "msg",
-                        confirm = "cmd",
-                        emsg = "pager",
-                        echo = "msg",
+                        [''] = 'msg',
+                        empty = 'cmd',
+                        bufwrite = 'msg',
+                        confirm = 'cmd',
+                        emsg = 'pager',
+                        echo = 'msg',
                     },
                     height = 0.25,
                     position = 'top',
@@ -110,7 +109,7 @@ local plugins = {
     {
         'tamton-aquib/staline.nvim',
         event = 'FileType',
-        ft = "snacks_dashboard",
+        ft = 'snacks_dashboard',
         config = require('config.staline'),
     },
     {
@@ -125,18 +124,18 @@ local plugins = {
     {
         'nvim-treesitter/nvim-treesitter',
         event = 'FileType',
-        ft = "snacks_dashboard",
+        ft = 'snacks_dashboard',
         config = require('config.treesitter'),
         keys = {
-            { 'v',     function() require("nvim-treesitter.incremental_selection").init_selection() end,   mode = 'n' },
-            { 'v',     function() require("nvim-treesitter.incremental_selection").node_incremental() end, mode = 'x' },
-            { '<C-v>', function() require("nvim-treesitter.incremental_selection").node_decremental() end, mode = 'x' },
+            { 'v',     function() require('nvim-treesitter.incremental_selection').init_selection() end,   mode = 'n' },
+            { 'v',     function() require('nvim-treesitter.incremental_selection').node_incremental() end, mode = 'x' },
+            { '<C-v>', function() require('nvim-treesitter.incremental_selection').node_decremental() end, mode = 'x' },
         }
     },
     {
         'nvim-mini/mini.diff',
         event = 'FileType',
-        ft = "snacks_dashboard",
+        ft = 'snacks_dashboard',
         version = '*',
         config = true,
     },
@@ -186,13 +185,6 @@ local plugins = {
             { 'g#', '<Plug>(asterisk-g#)' }
         }
     },
-    -- {
-    --     'terryma/vim-expand-region',
-    --     keys = {
-    --         { 'v',     '<Plug>(expand_region_expand)', mode = 'x' },
-    --         { '<C-v>', '<Plug>(expand_region_shrink)', mode = 'x' }
-    --     }
-    -- },
     {
         'cappyzawa/trim.nvim',
         event = 'VeryLazy',

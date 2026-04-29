@@ -25,18 +25,11 @@ return {
         },
     },
     explorer = { enabled = true },
+    input = { enabled = true },
     indent = { enabled = true },
     notifier = {
         enabled = true,
         style = 'fancy',
-        -- keep = function(notif)
-        --     return vim.fn.getcmdpos() > 0 or vim.bo.buftype == 'prompt'
-        -- end,
-        keep = false,
-        -- filter = function(notif)
-        --     return not notif.msg:match("^:%s*")
-        -- end,
-        filter = nil,
     },
     picker = {
         enabled = true,
@@ -70,7 +63,7 @@ return {
     },
     styles = {
         notification = {
-            -- wo = { wrap = true }         -- Wrap notifications
+            wo = { wrap = true }         -- Wrap notifications
         }
     }
 }
