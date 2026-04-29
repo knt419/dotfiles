@@ -365,9 +365,6 @@ local lazyopt = {
         timeout = 300
     },
     performance = {
-        cache = {
-            enabled = false,
-        },
         rtp = {
             disabled_plugins = {
                 'gzip',
