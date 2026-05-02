@@ -20,6 +20,7 @@ opt.display = 'uhex,lastline'
 opt.scrolloff = 5
 opt.sidescrolloff = 10
 opt.termguicolors = true
+opt.foldlevel = 99
 
 opt.guifont = 'OperatorMono Nerd Font:h16'
 opt.guifontwide = 'HackGen Console NF:h15'
@@ -66,6 +67,8 @@ opt.shellslash = true
 opt.shellxescape = ''
 opt.shellxquote = ''
 opt.shellquote = ''
+
+vim.env.CC = 'gcc'
 
 g.mapleader = ' '
 g.is_windows = vim.fn.has('win64') == 1

@@ -65,14 +65,14 @@ local plugins = {
             }
         },
     },
-    {
-        'tadaa/vimade',
-        event = 'BufReadPost',
-        opts = {
-            recipe = { 'minimalist', { animate = true } },
-            basebg = '#2a2a2a',
-        }
-    },
+    -- {
+    --     'tadaa/vimade',
+    --     event = 'BufReadPost',
+    --     opts = {
+    --         recipe = { 'minimalist', { animate = true } },
+    --         basebg = '#2a2a2a',
+    --     }
+    -- },
     {
         'rachartier/tiny-cmdline.nvim',
         event = 'FileType',
@@ -83,18 +83,6 @@ local plugins = {
         config = function()
             require('vim._core.ui2').enable({
                 enable = true,
-                msg = {
-                    targets = {
-                        [''] = 'msg',
-                        empty = 'cmd',
-                        bufwrite = 'msg',
-                        confirm = 'cmd',
-                        emsg = 'pager',
-                        echo = 'msg',
-                    },
-                    height = 0.25,
-                    position = 'top',
-                },
                 cmd = {
                     height = 0.1,
                 },
@@ -124,12 +112,8 @@ local plugins = {
     {
         'nvim-treesitter/nvim-treesitter',
         event = 'VeryLazy',
-        config = require('config.treesitter'),
-        keys = {
-            { 'v',     function() require('nvim-treesitter.incremental_selection').init_selection() end,   mode = 'n' },
-            { 'v',     function() require('nvim-treesitter.incremental_selection').node_incremental() end, mode = 'x' },
-            { '<C-v>', function() require('nvim-treesitter.incremental_selection').node_decremental() end, mode = 'x' },
-        }
+        build = ':TSUpdate',
+        init = require('config.treesitter'),
     },
     {
         'nvim-mini/mini.diff',
