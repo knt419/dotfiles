@@ -117,10 +117,15 @@ local plugins = {
         config = true,
     },
     {
-        'NvChad/nvim-colorizer.lua',
+        'nvim-mini/mini.hipatterns',
         event = 'VeryLazy',
-        config = true,
+        version = '*',
     },
+    -- {
+    --     'NvChad/nvim-colorizer.lua',
+    --     event = 'VeryLazy',
+    --     config = true,
+    -- },
     {
         'nvim-treesitter/nvim-treesitter',
         event = 'VeryLazy',
