@@ -37,6 +37,14 @@ keymap.set('x', '<C-v>', function() require("vim.treesitter._select").select_chi
 
 keymap.set('n', '<C-Left>', 'zc')
 
+keymap.set('n', '*', [[:let @/='\<'.expand('<cword>').'\>'|set hlsearch<CR>]],
+    { desc = "Search word under cursor without jumping" })
+keymap.set('n', '#', [[:let @/='\<'.expand('<cword>').'\>'|set hlsearch<CR>]],
+    { desc = "Search word under cursor backwards without jumping" })
+
+keymap.set('x', '*', [[y/\V<C-R>=escape(@", '/\')<CR><CR>N]], { desc = "Search visual selection" })
+keymap.set('x', '#', [[y?\V<C-R>=escape(@", '?\')<CR><CR>N]], { desc = "Search visual selection backwards" })
+
 keymap.set('n', '<Tab>', function()
     if fn.winlayout()[1] == 'leaf' then
         if fn.tabpagenr('$') <= 1

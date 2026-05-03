@@ -90,7 +90,6 @@ local plugins = {
                         bufwrite = "msg",
                         confirm = "cmd",
                         empty = "cmd",
-                        -- emsg = "pager",
                         emsg = "msg",
                     },
                     height = 0.2,
@@ -136,10 +135,15 @@ local plugins = {
         config = true,
     },
     {
-        'windwp/nvim-autopairs',
+        'nvim-mini/mini.pairs',
         event = 'BufReadPost',
-        config = true,
+        version = '*',
     },
+    -- {
+    --     'windwp/nvim-autopairs',
+    --     event = 'BufReadPost',
+    --     config = true,
+    -- },
     {
         'lilibyte/tabhula.nvim',
         event = 'BufReadPost',
@@ -172,23 +176,23 @@ local plugins = {
         'kana/vim-niceblock',
         event = 'ModeChanged *:[vV\x16]*',
     },
-    {
-        'haya14busa/vim-asterisk',
-        keys = {
-            { '*',  '<Plug>(asterisk-z*)' },
-            { 'g*', '<Plug>(asterisk-gz*)' },
-            { '#',  '<Plug>(asterisk-#)' },
-            { 'g#', '<Plug>(asterisk-g#)' }
-        }
-    },
-    {
-        'cappyzawa/trim.nvim',
-        event = 'VeryLazy',
-        opts = {
-            ft_blocklist = { 'diff', 'gitcommit', 'qf', 'help', 'markdown', 'dashboard' },
-            highlight = true,
-        }
-    },
+    -- {
+    --     'haya14busa/vim-asterisk',
+    --     keys = {
+    --         { '*',  '<Plug>(asterisk-z*)' },
+    --         { 'g*', '<Plug>(asterisk-gz*)' },
+    --         { '#',  '<Plug>(asterisk-#)' },
+    --         { 'g#', '<Plug>(asterisk-g#)' }
+    --     }
+    -- },
+    -- {
+    --     'cappyzawa/trim.nvim',
+    --     event = 'VeryLazy',
+    --     opts = {
+    --         ft_blocklist = { 'diff', 'gitcommit', 'qf', 'help', 'markdown', 'dashboard' },
+    --         highlight = true,
+    --     }
+    -- },
     {
         'xiyaowong/transparent.nvim',
         lazy = false,
@@ -201,17 +205,17 @@ local plugins = {
 
 
     -- terminal
-    {
-        'numToStr/FTerm.nvim',
-        config = require('config.fterm'),
-        keys = {
-            { '<Leader>t', function() require('FTerm').toggle() end },
-            { '<Leader>gi', function()
-                vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h'))
-                vim.cmd.FtermGituiOpen()
-            end },
-        }
-    },
+    -- {
+    --     'numToStr/FTerm.nvim',
+    --     config = require('config.fterm'),
+    --     keys = {
+    --         { '<Leader>t', function() require('FTerm').toggle() end },
+    --         { '<Leader>gi', function()
+    --             vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h'))
+    --             vim.cmd.FtermGituiOpen()
+    --         end },
+    --     }
+    -- },
 
     -- file/directory open/read
     {
@@ -221,12 +225,21 @@ local plugins = {
         ---@type snacks.Config
         opts = require('config.snacks'),
         keys = {
-            { '<leader><leader>', function() Snacks.picker.pickers() end, desc = 'Builtin' },
-            { '<leader>fo',       function() Snacks.picker.smart() end,   desc = 'Smart Find Files' },
-            { '<leader>s',        function() Snacks.dashboard() end,      desc = 'Dashboard' },
-            { '<leader>gg',       function() Snacks.picker.grep() end,    desc = 'Grep' },
-            { '<leader>fb',       function() Snacks.explorer() end,       desc = 'File Explorer' },
-            { '<Esc><Esc>',       function() Snacks.bufdelete() end,      desc = 'Delete Buffer' },
+            { '<leader><leader>', function() Snacks.picker.pickers() end,  desc = 'Builtin' },
+            { '<leader>fo',       function() Snacks.picker.smart() end,    desc = 'Smart Find Files' },
+            { '<leader>s',        function() Snacks.dashboard() end,       desc = 'Dashboard' },
+            { '<leader>gg',       function() Snacks.picker.grep() end,     desc = 'Grep' },
+            { '<leader>fb',       function() Snacks.explorer() end,        desc = 'File Explorer' },
+            { '<Esc><Esc>',       function() Snacks.bufdelete() end,       desc = 'Delete Buffer' },
+            { '<leader>t',        function() Snacks.terminal.toggle() end, desc = 'Toggle Terminal' },
+            {
+                '<leader>gi',
+                function()
+                    vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h'))
+                    Snacks.terminal.toggle('gitui')
+                end,
+                desc = 'Gitui'
+            }
         }
     },
     {

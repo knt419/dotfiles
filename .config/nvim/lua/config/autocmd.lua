@@ -1,5 +1,14 @@
 local api = vim.api
 
+api.nvim_create_autocmd("BufWritePre", {
+    pattern = "*",
+    callback = function()
+        local save_cursor = vim.fn.getpos(".")
+        vim.cmd([[%s/\s\+$//e]])
+        vim.fn.setpos(".", save_cursor)
+    end,
+})
+
 api.nvim_create_autocmd('VimResized', {
     callback = function () vim.cmd.wincmd('=') end
 })
@@ -12,11 +21,6 @@ api.nvim_create_autocmd('TermOpen', {
     callback = function ()
         vim.wo.number = false
         vim.cmd('startinsert!')
-        -- if env.NVIM == nil then
-        --     env.VISUAL = 'nvim --remote'
-        -- else
-        --     env.VISUAL = 'nvim --server ' .. env.NVIM .. ' --remote'
-        -- end
     end
 })
 
@@ -35,4 +39,3 @@ api.nvim_create_autocmd({'CursorHold', 'CursorHoldI'}, {
 api.nvim_create_autocmd('TextYankPost', {
     callback = function() vim.highlight.on_yank{higroup='IncSearch', timeout=700} end
 })
-
