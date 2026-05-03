@@ -21,7 +21,7 @@ require('plugins')
 
 -- keymap,autocmd
 vim.api.nvim_create_autocmd('User', {
-    pattern = 'LazyVimStarted',
+    pattern = 'VeryLazy',
     callback = function()
         require('config.keymap')
         require('config.autocmd')
