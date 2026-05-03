@@ -1,16 +1,55 @@
 return {
     keymap = {
         preset = 'enter',
-        ['<Tab>'] = { 'select_next', 'snippet_forward', 'fallback' },
-        ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
+        ['<Tab>'] = {
+            function(cmp)
+                if cmp.is_visible() then
+                    cmp.select_next()
+                    return true
+                end
+            end,
+            'snippet_forward',
+            'fallback',
+        },
+        ['<S-Tab>'] = {
+            function(cmp)
+                if cmp.is_visible() then
+                    cmp.select_prev()
+                    return true
+                end
+            end,
+            'snippet_backward',
+            'fallback',
+        },
     },
     cmdline = {
         enabled = true,
         completion = {
+            list = {
+                selection = {
+                    preselect = true,
+                },
+            },
             menu = { auto_show = true },
+        },
+        keymap = {
+            ['<CR>'] = {
+                function(cmp)
+                    if cmp.is_visible() then
+                        cmp.select_and_accept()
+                        return true
+                    end
+                end,
+                'fallback',
+            },
         },
     },
     completion = {
+        list = {
+            selection = {
+                preselect = false,
+            },
+        },
         documentation = {
             auto_show = true,
             auto_show_delay_ms = 500,

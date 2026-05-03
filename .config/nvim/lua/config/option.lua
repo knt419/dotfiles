@@ -1,5 +1,12 @@
 local g = vim.g
 local opt = vim.opt
+local env = vim.env
+
+function Foldtext()
+  local line = vim.fn.getline(vim.v.foldstart)
+  local count = vim.v.foldend - vim.v.foldstart + 1
+  return string.format('%s  - %d lines folded -', line, count)
+end
 
 opt.fileencoding = 'utf-8'
 opt.fileencodings = 'ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp'
@@ -21,6 +28,7 @@ opt.scrolloff = 5
 opt.sidescrolloff = 10
 opt.termguicolors = true
 opt.foldlevel = 99
+opt.foldtext = 'v:lua.Foldtext()'
 
 opt.guifont = 'OperatorMono Nerd Font:h16'
 opt.guifontwide = 'HackGen Console NF:h15'
@@ -32,7 +40,7 @@ opt.smartindent = true
 opt.clipboard:append { 'unnamedplus' }
 opt.list = true
 opt.listchars = { tab = '» ', trail = '·', eol = '↲', extends = '»', precedes = '«', nbsp = '%' }
-opt.fillchars = { eob = '\u{0020}', diff = '/' }
+opt.fillchars = { eob = '\u{0020}', diff = '/', fold = ' ', foldclose = '' }
 opt.virtualedit = 'block'
 opt.whichwrap = 'b,s,h,l,<,>,[,]'
 opt.mouse = 'a'
@@ -68,7 +76,7 @@ opt.shellxescape = ''
 opt.shellxquote = ''
 opt.shellquote = ''
 
-vim.env.CC = 'gcc'
+env.CC = 'gcc'
 
 g.mapleader = ' '
 g.is_windows = vim.fn.has('win64') == 1

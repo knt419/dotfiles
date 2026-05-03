@@ -55,15 +55,19 @@ return {
     },
     statuscolumn = {
         enabled = true,
-        left = { 'git' },
+        left = { 'fold', 'git' },
         right = { 'sign' },
+        folds = {
+            open = false,
+            git_hl = false,
+        },
         git = {
-            pattens = { 'GitSign', 'MiniDiffSign' },
+            pattens = 'MiniDiffSign',
         }
     },
     styles = {
         notification = {
-            wo = { wrap = true }         -- Wrap notifications
+            wo = { wrap = true } -- Wrap notifications
         }
     }
 }

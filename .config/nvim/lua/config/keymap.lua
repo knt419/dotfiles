@@ -35,6 +35,8 @@ keymap.set('n', '<C-n>', function() vim.diagnostic.jump({ count = 1 }) end)
 keymap.set('x', 'v', function() require('vim.treesitter._select').select_parent() end)
 keymap.set('x', '<C-v>', function() require("vim.treesitter._select").select_child() end)
 
+keymap.set('n', '<C-Left>', 'zc')
+
 keymap.set('n', '<Tab>', function()
     if fn.winlayout()[1] == 'leaf' then
         if fn.tabpagenr('$') <= 1
