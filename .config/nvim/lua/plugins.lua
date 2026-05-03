@@ -83,6 +83,19 @@ local plugins = {
         config = function()
             require('vim._core.ui2').enable({
                 enable = true,
+                msg = {
+                    targets = {
+                        [""] = "msg",
+                        echo = "msg",
+                        bufwrite = "msg",
+                        confirm = "cmd",
+                        empty = "cmd",
+                        -- emsg = "pager",
+                        emsg = "msg",
+                    },
+                    height = 0.2,
+                    position = "top",
+                },
                 cmd = {
                     height = 0.1,
                 },
