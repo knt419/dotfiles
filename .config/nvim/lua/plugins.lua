@@ -149,6 +149,7 @@ local plugins = {
         'nvim-mini/mini.pairs',
         event = 'BufReadPost',
         version = '*',
+        config = true,
     },
     -- {
     --     'windwp/nvim-autopairs',
