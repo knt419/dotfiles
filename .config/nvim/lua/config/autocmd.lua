@@ -1,5 +1,11 @@
 local api = vim.api
 
+vim.api.nvim_create_autocmd({ "WinEnter", "BufEnter" }, {
+  callback = function()
+    vim.cmd("redrawstatus")
+  end,
+})
+
 api.nvim_create_autocmd("BufWritePre", {
     pattern = "*",
     callback = function()
