@@ -106,11 +106,17 @@ local plugins = {
             })
         end,
     },
+    -- {
+    --     'tamton-aquib/staline.nvim',
+    --     event = 'FileType',
+    --     ft = 'snacks_dashboard',
+    --     config = require('config.staline'),
+    -- },
     {
-        'tamton-aquib/staline.nvim',
+        "rebelot/heirline.nvim",
         event = 'FileType',
         ft = 'snacks_dashboard',
-        config = require('config.staline'),
+        config = require('config.heirline'),
     },
     {
         'nvim-tree/nvim-web-devicons',
