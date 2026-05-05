@@ -48,14 +48,32 @@ return function()
 
     -- Git branch
     local GitBranch = {
-        condition = conditions.is_git_repo,
         provider = function()
-            local head = vim.b.gitsigns_head
-            if head then
-                return ' ' .. head
+            local file = vim.api.nvim_buf_get_name(0)
+            if file == "" then return "" end
+
+            local dir = vim.fn.fnamemodify(file, ":p:h")
+            local git_dir = vim.fn.finddir(".git", dir .. ";")
+            if git_dir == "" then return "" end
+
+            local root = vim.fn.fnamemodify(git_dir, ":h")
+
+            local branch_name = vim.fn.systemlist({
+                "git",
+                "-C",
+                root,
+                "branch",
+                "--show-current",
+            })
+
+            if not branch_name or branch_name[1] == "" then
+                return ""
             end
-            return ''
+
+            return ' ' .. branch_name[1]
         end,
+
+        hl = { fg = "purple", bold = true },
     }
 
     local FileName = {

@@ -36,8 +36,15 @@ return {
             ['<CR>'] = {
                 function(cmp)
                     if cmp.is_visible() then
-                        cmp.select_and_accept()
-                        return true
+                        local line = vim.fn.getcmdline()
+                        local cmd = line:match("^(%S+)") or ""
+
+                        if vim.fn.fullcommand(cmd) == '' then --コマンドが存在しない場合に補完
+                            cmp.select_and_accept()
+                            return true
+                        else
+                            return false
+                        end
                     end
                 end,
                 'fallback',
