@@ -221,8 +221,10 @@ return function()
             end,
             name = "heirline_tabline_buffer_callback",
         },
+        b,
         TablineFileName,
         TablineFileFlags,
+        b,
     }
 
     local TablineBufferBlock = utils.surround({ "", "" }, function(self)
