@@ -2,17 +2,20 @@ return function()
     local conditions = require('heirline.conditions')
     local utils = require('heirline.utils')
 
+    local b = { provider = ' ' }
+    local spacer = { provider = '%=' }
+
     local git_status = function(type)
         local status = vim.b.minidiff_summary
         if not status or not status[type] or status[type] == 0 then
             return ''
         end
-        local prefix = { add = '', change = '', delete = '' }
-        return prefix[type] .. ' ' .. status[type]
+        local prefix = { add = ' ', change = ' ', delete = ' ' }
+        return prefix[type] .. status[type]
     end
 
     local ff = function()
-        local icon = { dos = '', unix = '', mac = '' }
+        local icon = { dos = ' ', unix = ' ', mac = ' ' }
         return icon[vim.bo.fileformat] or ''
     end
 
@@ -47,33 +50,29 @@ return function()
     }
 
     -- Git branch
-    local GitBranch = {
+    local Branch = {
         provider = function()
-            local file = vim.api.nvim_buf_get_name(0)
-            if file == "" then return "" end
-
-            local dir = vim.fn.fnamemodify(file, ":p:h")
-            local git_dir = vim.fn.finddir(".git", dir .. ";")
-            if git_dir == "" then return "" end
-
-            local root = vim.fn.fnamemodify(git_dir, ":h")
+            local root = vim.fs.root(0, { ".git" })
+            if not root then
+                return ''
+            end
 
             local branch_name = vim.fn.systemlist({
-                "git",
-                "-C",
+                'git',
+                '-C',
                 root,
-                "branch",
-                "--show-current",
+                'branch',
+                '--show-current',
             })
 
-            if not branch_name or branch_name[1] == "" then
-                return ""
+            if not branch_name or branch_name[1] == '' then
+                return ''
             end
 
             return ' ' .. branch_name[1]
         end,
 
-        hl = { fg = "purple", bold = true },
+        hl = { fg = 'purple', bold = true },
     }
 
     local FileName = {
@@ -111,51 +110,28 @@ return function()
         provider = function()
             local clients = vim.lsp.get_clients({ bufnr = 0 })
             if #clients == 0 then return '' end
-            return ' :' .. clients[1].name
+            return '󱐋 ' .. clients[1].name
         end,
-        hl = 'Normal',
+        hl = { fg = 'NvimLightYellow' },
     }
 
     -- Diagnostics
-    local Diagnostics = {
-        {
+    local function diag(sev, icon, hl)
+        return {
             provider = function()
-                local e = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-                local out = ''
-                if e > 0 then out = out .. ' ' .. e .. ' ' end
-                return out
+                local n = vim.diagnostic.count(0)[sev] or 0
+                return n > 0 and (icon .. n .. ' ') or ''
             end,
-            hl = 'DiagnosticError'
-        },
-        {
-            provider = function()
-                local i = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
-                local out = ''
-                if i > 0 then out = out .. ' ' .. i .. ' ' end
-                return out
-            end,
-            hl = 'DiagnosticInfo'
-        },
-        {
-            provider = function()
-                local w = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-                local out = ''
-                if w > 0 then out = out .. ' ' .. w .. ' ' end
-                return out
-            end,
-            hl = 'DiagnosticWarn'
-        },
-        {
-            provider = function()
-                local h = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
-                local out = ''
-                if h > 0 then out = out .. ' ' .. h .. ' ' end
-                return out
-            end,
-            hl = 'DiagnosticHint'
-        },
-    }
+            hl = hl,
+        }
+    end
 
+    local Diagnostics = {
+        diag(vim.diagnostic.severity.ERROR, ' ', 'DiagnosticError'),
+        diag(vim.diagnostic.severity.WARN, ' ', 'DiagnosticWarn'),
+        diag(vim.diagnostic.severity.INFO, ' ', 'DiagnosticInfo'),
+        diag(vim.diagnostic.severity.HINT, '󰛨 ', 'DiagnosticHint'),
+    }
     -- Encoding
     local Encoding = {
         provider = function()
@@ -172,42 +148,99 @@ return function()
 
     -- Position
     local Ruler = {
-        provider = '%03l%02c',
+        provider = '󰳂 %03l:%02c',
         hi = 'Number',
     }
 
     local StatusLine = {
-
-        { provider = '　' },
-        ViMode,
-        { provider = ' ' },
-        GitBranch,
-        { provider = ' ' },
-        FileName,
-        { provider = ' ' },
-        GitAdd,
-        { provider = ' ' },
-        GitChange,
-        { provider = ' ' },
-        GitDelete,
-
-        { provider = '%=' },
-
-        LSPName,
-        { provider = ' ' },
-        Diagnostics,
-
-        { provider = '%=' },
-
-        Encoding,
-        { provider = ' ' },
-        FileFormat,
-        { provider = ' ' },
-        Ruler,
-        { provider = ' ' },
+        b, b, ViMode, b, Branch, b, FileName, b, GitAdd, b, GitChange, b, GitDelete,
+        spacer,
+        LSPName, b, Diagnostics,
+        spacer,
+        Encoding, b, FileFormat, b, Ruler,
     }
+
+    local TablineFileName = {
+        provider = function(self)
+            local filename = self.filename
+            filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
+            return filename
+        end,
+        hl = function(self)
+            return { bold = self.is_active or self.is_visible }
+        end,
+    }
+
+    local TablineFileFlags = {
+        {
+            condition = function(self)
+                return vim.api.nvim_get_option_value("modified", { buf = self.bufnr })
+            end,
+            provider = "[+]",
+            hl = { fg = "green" },
+        },
+        {
+            condition = function(self)
+                return not vim.api.nvim_get_option_value("modifiable", { buf = self.bufnr })
+                    or vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
+            end,
+            provider = function(self)
+                if vim.api.nvim_get_option_value("buftype", { buf = self.bufnr }) == "terminal" then
+                    return "  "
+                else
+                    return ""
+                end
+            end,
+            hl = { fg = "orange" },
+        },
+    }
+
+    local TablineFileNameBlock = {
+        init = function(self)
+            self.filename = vim.api.nvim_buf_get_name(self.bufnr)
+        end,
+        hl = function(self)
+            if self.is_active then
+                return "TabLineSel"
+            else
+                return "TabLine"
+            end
+        end,
+        on_click = {
+            callback = function(_, minwid, _, button)
+                if (button == "m") then
+                    vim.schedule(function()
+                        vim.api.nvim_buf_delete(minwid, { force = false })
+                    end)
+                else
+                    vim.api.nvim_win_set_buf(0, minwid)
+                end
+            end,
+            minwid = function(self)
+                return self.bufnr
+            end,
+            name = "heirline_tabline_buffer_callback",
+        },
+        TablineFileName,
+        TablineFileFlags,
+    }
+
+    local TablineBufferBlock = utils.surround({ "", "" }, function(self)
+        if self.is_active then
+            return utils.get_highlight("TabLineSel").bg
+        else
+            return utils.get_highlight("TabLine").bg
+        end
+    end, { TablineFileNameBlock })
+
+    local BufferLine = utils.make_buflist(
+        TablineBufferBlock,
+        { provider = "", hl = { fg = "gray" } },
+        { provider = "", hl = { fg = "gray" } }
+    )
 
     require('heirline').setup({
         statusline = StatusLine,
+        tabline = BufferLine,
     })
 end
