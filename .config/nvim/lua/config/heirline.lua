@@ -230,8 +230,8 @@ return function()
 
     local BufferLine = utils.make_buflist(
         TablineBufferBlock,
-        { provider = '', hl = { fg = 'gray' } },
-        { provider = '', hl = { fg = 'gray' } }
+        { provider = ' ', hl = { fg = 'gray' } },
+        { provider = ' ', hl = { fg = 'gray' } }
     )
 
     require('heirline').setup({
