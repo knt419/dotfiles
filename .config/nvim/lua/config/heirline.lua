@@ -3,6 +3,7 @@ return function()
     local utils = require('heirline.utils')
 
     local b = { provider = ' ' }
+    local bb = { provider = '  ' }
     local spacer = { provider = '%=' }
 
     local git_status = function(type)
@@ -52,7 +53,7 @@ return function()
     -- Git branch
     local Branch = {
         provider = function()
-            local root = vim.fs.root(0, { ".git" })
+            local root = vim.fs.root(0, { '.git' })
             if not root then
                 return ''
             end
@@ -72,7 +73,7 @@ return function()
             return ' ' .. branch_name[1]
         end,
 
-        hl = { fg = 'purple', bold = true },
+        hl = { fg = 'lightgray', bold = true },
     }
 
     local FileName = {
@@ -83,7 +84,7 @@ return function()
                 { default = true })
         end,
         provider = function(self)
-            return self.icon and (self.icon .. " " .. self.filename) or self.filename
+            return self.icon and (self.icon .. ' ' .. self.filename) or self.filename
         end,
         hl = function(self)
             return { fg = self.icon_color }
@@ -137,23 +138,23 @@ return function()
         provider = function()
             return vim.bo.fileencoding ~= '' and vim.bo.fileencoding or vim.o.encoding
         end,
-        hi = 'Number',
+        hl = 'Number',
     }
 
     -- Fileformat
     local FileFormat = {
         provider = ff,
-        hi = 'Number',
+        hl = 'Number',
     }
 
     -- Position
     local Ruler = {
         provider = '󰳂 %03l:%02c',
-        hi = 'Number',
+        hl = 'Number',
     }
 
     local StatusLine = {
-        b, b, ViMode, b, Branch, b, FileName, b, GitAdd, b, GitChange, b, GitDelete,
+        bb, ViMode, b, Branch, b, FileName, bb, GitAdd, b, GitChange, b, GitDelete,
         spacer,
         LSPName, b, Diagnostics,
         spacer,
@@ -161,37 +162,43 @@ return function()
     }
 
     local TablineFileName = {
-        provider = function(self)
+        init = function(self)
             local filename = self.filename
-            filename = filename == "" and "[No Name]" or vim.fn.fnamemodify(filename, ":t")
-            return filename
+            self.filename = filename == '' and '[No Name]' or vim.fn.fnamemodify(self.filename, ':t')
+            local extension = vim.fn.fnamemodify(filename, ':e')
+            self.icon, self.fg = require('nvim-web-devicons').get_icon_color(filename, extension, { default = true })
+        end,
+        provider = function(self)
+            return self.icon .. ' ' .. self.filename
         end,
         hl = function(self)
-            return { bold = self.is_active or self.is_visible }
+            if self.is_active then
+                return { fg = self.fg, bold = true }
+            end
+            return { bold = self.is_visible }
         end,
     }
 
     local TablineFileFlags = {
         {
             condition = function(self)
-                return vim.api.nvim_get_option_value("modified", { buf = self.bufnr })
+                return vim.api.nvim_get_option_value('modified', { buf = self.bufnr })
             end,
-            provider = "[+]",
-            hl = { fg = "green" },
+            provider = ' 󰷫',
         },
         {
             condition = function(self)
-                return not vim.api.nvim_get_option_value("modifiable", { buf = self.bufnr })
-                    or vim.api.nvim_get_option_value("readonly", { buf = self.bufnr })
+                return not vim.api.nvim_get_option_value('modifiable', { buf = self.bufnr })
+                    or vim.api.nvim_get_option_value('readonly', { buf = self.bufnr })
             end,
             provider = function(self)
-                if vim.api.nvim_get_option_value("buftype", { buf = self.bufnr }) == "terminal" then
-                    return "  "
+                if vim.api.nvim_get_option_value('buftype', { buf = self.bufnr }) == 'terminal' then
+                    return '  '
                 else
-                    return ""
+                    return ' '
                 end
             end,
-            hl = { fg = "orange" },
+            hl = { fg = 'orange' },
         },
     }
 
@@ -201,14 +208,14 @@ return function()
         end,
         hl = function(self)
             if self.is_active then
-                return "TabLineSel"
+                return { bg = '#404040' }
             else
-                return "TabLine"
+                return 'TabLine'
             end
         end,
         on_click = {
             callback = function(_, minwid, _, button)
-                if (button == "m") then
+                if (button == 'm') then
                     vim.schedule(function()
                         vim.api.nvim_buf_delete(minwid, { force = false })
                     end)
@@ -219,26 +226,33 @@ return function()
             minwid = function(self)
                 return self.bufnr
             end,
-            name = "heirline_tabline_buffer_callback",
+            name = 'heirline_tabline_buffer_callback',
         },
-        b,
+        bb,
         TablineFileName,
         TablineFileFlags,
-        b,
+        bb,
     }
 
-    local TablineBufferBlock = utils.surround({ "", "" }, function(self)
-        if self.is_active then
-            return utils.get_highlight("TabLineSel").bg
-        else
-            return utils.get_highlight("TabLine").bg
-        end
-    end, { TablineFileNameBlock })
+    local TablineBufferBlock = {
+        {
+            condition = function(self)
+                return self.is_active
+            end,
+            utils.surround({ '▐', '▌' }, 'lightgray', { TablineFileNameBlock }),
+        },
+        {
+            condition = function(self)
+                return not self.is_active
+            end,
+            utils.surround({ ' ', ' ' }, 'NONE', { TablineFileNameBlock }),
+        },
+    }
 
     local BufferLine = utils.make_buflist(
         TablineBufferBlock,
-        { provider = "", hl = { fg = "gray" } },
-        { provider = "", hl = { fg = "gray" } }
+        { provider = '', hl = { fg = 'gray' } },
+        { provider = '', hl = { fg = 'gray' } }
     )
 
     require('heirline').setup({
