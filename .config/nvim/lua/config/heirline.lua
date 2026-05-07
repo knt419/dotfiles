@@ -6,14 +6,27 @@ return function()
     local bb = { provider = '  ' }
     local spacer = { provider = '%=' }
 
-    local git_status = function(type)
-        local status = vim.b.minidiff_summary
-        if not status or not status[type] or status[type] == 0 then
-            return ''
-        end
-        local prefix = { add = ' ', change = ' ', delete = ' ' }
-        return prefix[type] .. status[type]
+    local function git_component(key, icon, hl)
+        return {
+            provider = function(self)
+                local n = self.summary[key]
+                return (n and n > 0) and (icon .. n) or ''
+            end,
+            hl = hl,
+        }
     end
+
+    local Git = {
+        condition = function()
+            return vim.b.minidiff_summary ~= nil
+        end,
+        init = function(self)
+            self.summary = vim.b.minidiff_summary
+        end,
+        git_component('add', ' ', 'MiniDiffSignAdd'), b,
+        git_component('change', ' ', 'MiniDiffSignChange'), b,
+        git_component('delete', ' ', 'MiniDiffSignDelete'),
+    }
 
     local ff = function()
         local icon = { dos = ' ', unix = ' ', mac = ' ' }
@@ -50,14 +63,12 @@ return function()
         end
     }
 
-    -- Git branch
     local Branch = {
         provider = function()
             local root = vim.fs.root(0, { '.git' })
             if not root then
                 return ''
             end
-
             local branch_name = vim.fn.systemlist({
                 'git',
                 '-C',
@@ -65,14 +76,11 @@ return function()
                 'branch',
                 '--show-current',
             })
-
             if not branch_name or branch_name[1] == '' then
                 return ''
             end
-
             return ' ' .. branch_name[1]
         end,
-
         hl = { fg = 'lightgray', bold = true },
     }
 
@@ -90,23 +98,7 @@ return function()
             return { fg = self.icon_color }
         end
     }
-    -- Git diff
-    local GitAdd = {
-        provider = function() return git_status('add') end,
-        hl = 'MiniDiffSignAdd',
-    }
 
-    local GitChange = {
-        provider = function() return git_status('change') end,
-        hl = 'MiniDiffSignChange',
-    }
-
-    local GitDelete = {
-        provider = function() return git_status('delete') end,
-        hl = 'MiniDiffSignDelete',
-    }
-
-    -- LSP name
     local LSPName = {
         provider = function()
             local clients = vim.lsp.get_clients({ bufnr = 0 })
@@ -116,7 +108,6 @@ return function()
         hl = { fg = 'NvimLightYellow' },
     }
 
-    -- Diagnostics
     local function diag(sev, icon, hl)
         return {
             provider = function()
@@ -133,7 +124,7 @@ return function()
         diag(vim.diagnostic.severity.INFO, ' ', 'DiagnosticInfo'),
         diag(vim.diagnostic.severity.HINT, '󰛨 ', 'DiagnosticHint'),
     }
-    -- Encoding
+
     local Encoding = {
         provider = function()
             return vim.bo.fileencoding ~= '' and vim.bo.fileencoding or vim.o.encoding
@@ -141,20 +132,18 @@ return function()
         hl = 'Number',
     }
 
-    -- Fileformat
     local FileFormat = {
         provider = ff,
         hl = 'Number',
     }
 
-    -- Position
     local Ruler = {
         provider = '󰳂 %03l:%02c',
         hl = 'Number',
     }
 
     local StatusLine = {
-        bb, ViMode, b, Branch, b, FileName, bb, GitAdd, b, GitChange, b, GitDelete,
+        bb, ViMode, b, Branch, b, FileName, bb, Git,
         spacer,
         LSPName, b, Diagnostics,
         spacer,
@@ -215,13 +204,7 @@ return function()
         end,
         on_click = {
             callback = function(_, minwid, _, button)
-                if (button == 'm') then
-                    vim.schedule(function()
-                        vim.api.nvim_buf_delete(minwid, { force = false })
-                    end)
-                else
-                    vim.api.nvim_win_set_buf(0, minwid)
-                end
+                vim.api.nvim_win_set_buf(0, minwid)
             end,
             minwid = function(self)
                 return self.bufnr
@@ -236,15 +219,11 @@ return function()
 
     local TablineBufferBlock = {
         {
-            condition = function(self)
-                return self.is_active
-            end,
+            condition = function(self) return self.is_active end,
             utils.surround({ '▐', '▌' }, 'lightgray', { TablineFileNameBlock }),
         },
         {
-            condition = function(self)
-                return not self.is_active
-            end,
+            condition = function(self) return not self.is_active end,
             utils.surround({ ' ', ' ' }, 'NONE', { TablineFileNameBlock }),
         },
     }

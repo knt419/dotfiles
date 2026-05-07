@@ -106,12 +106,6 @@ local plugins = {
             })
         end,
     },
-    -- {
-    --     'tamton-aquib/staline.nvim',
-    --     event = 'FileType',
-    --     ft = 'snacks_dashboard',
-    --     config = require('config.staline'),
-    -- },
     {
         "rebelot/heirline.nvim",
         event = 'FileType',
@@ -127,11 +121,6 @@ local plugins = {
         event = 'VeryLazy',
         version = '*',
     },
-    -- {
-    --     'NvChad/nvim-colorizer.lua',
-    --     event = 'VeryLazy',
-    --     config = true,
-    -- },
     {
         'nvim-treesitter/nvim-treesitter',
         event = 'VeryLazy',
@@ -151,11 +140,6 @@ local plugins = {
         version = '*',
         config = true,
     },
-    -- {
-    --     'windwp/nvim-autopairs',
-    --     event = 'BufReadPost',
-    --     config = true,
-    -- },
     {
         'lilibyte/tabhula.nvim',
         event = 'BufReadPost',
@@ -188,23 +172,6 @@ local plugins = {
         'kana/vim-niceblock',
         event = 'ModeChanged *:[vV\x16]*',
     },
-    -- {
-    --     'haya14busa/vim-asterisk',
-    --     keys = {
-    --         { '*',  '<Plug>(asterisk-z*)' },
-    --         { 'g*', '<Plug>(asterisk-gz*)' },
-    --         { '#',  '<Plug>(asterisk-#)' },
-    --         { 'g#', '<Plug>(asterisk-g#)' }
-    --     }
-    -- },
-    -- {
-    --     'cappyzawa/trim.nvim',
-    --     event = 'VeryLazy',
-    --     opts = {
-    --         ft_blocklist = { 'diff', 'gitcommit', 'qf', 'help', 'markdown', 'dashboard' },
-    --         highlight = true,
-    --     }
-    -- },
     {
         'xiyaowong/transparent.nvim',
         lazy = false,
@@ -214,20 +181,6 @@ local plugins = {
             },
         },
     },
-
-
-    -- terminal
-    -- {
-    --     'numToStr/FTerm.nvim',
-    --     config = require('config.fterm'),
-    --     keys = {
-    --         { '<Leader>t', function() require('FTerm').toggle() end },
-    --         { '<Leader>gi', function()
-    --             vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h'))
-    --             vim.cmd.FtermGituiOpen()
-    --         end },
-    --     }
-    -- },
 
     -- file/directory open/read
     {
