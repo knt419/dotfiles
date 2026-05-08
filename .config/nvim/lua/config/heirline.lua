@@ -65,21 +65,16 @@ return function()
 
     local Branch = {
         provider = function()
-            local root = vim.fs.root(0, { '.git' })
-            if not root then
-                return ''
-            end
-            local branch_name = vim.fn.systemlist({
+            local result = vim.system({
                 'git',
-                '-C',
-                root,
-                'branch',
-                '--show-current',
-            })
-            if not branch_name or branch_name[1] == '' then
+                'rev-parse',
+                '--abbrev-ref',
+                'HEAD',
+            }, { text = true }):wait()
+            if result.code ~= 0 then
                 return ''
             end
-            return ' ' .. branch_name[1]
+            return ' ' .. vim.trim(result.stdout)
         end,
         hl = { fg = 'lightgray', bold = true },
     }
