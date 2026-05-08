@@ -63,8 +63,17 @@ return function()
         end
     }
 
+    local git_branch_cache = {}
+
     local Branch = {
         provider = function()
+            local filename = vim.api.nvim_buf_get_name(0)
+            if git_branch_cache[filename] then
+                if git_branch_cache[filename] == '' then
+                    return ''
+                end
+                return ' ' .. git_branch_cache[filename]
+            end
             local result = vim.system({
                 'git',
                 'rev-parse',
@@ -72,8 +81,10 @@ return function()
                 'HEAD',
             }, { text = true }):wait()
             if result.code ~= 0 then
+                git_branch_cache[filename] = ''
                 return ''
             end
+            git_branch_cache[filename] = vim.trim(result.stdout)
             return ' ' .. vim.trim(result.stdout)
         end,
         hl = { fg = 'lightgray', bold = true },
