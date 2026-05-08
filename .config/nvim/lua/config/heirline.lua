@@ -9,8 +9,8 @@ return function()
     local function git_component(key, icon, hl)
         return {
             provider = function(self)
-                local n = self.summary[key]
-                return (n and n > 0) and (icon .. n) or ''
+                local n = self.summary[key] or 0
+                return n > 0 and (icon .. n) or ''
             end,
             hl = hl,
         }
@@ -23,15 +23,10 @@ return function()
         init = function(self)
             self.summary = vim.b.minidiff_summary
         end,
-        git_component('add', ' ', 'MiniDiffSignAdd'), b,
-        git_component('change', ' ', 'MiniDiffSignChange'), b,
-        git_component('delete', ' ', 'MiniDiffSignDelete'),
+        git_component('add', '  ', 'MiniDiffSignAdd'),
+        git_component('change', '  ', 'MiniDiffSignChange'),
+        git_component('delete', '  ', 'MiniDiffSignDelete'),
     }
-
-    local ff = function()
-        local icon = { dos = ' ', unix = ' ', mac = ' ' }
-        return icon[vim.bo.fileformat] or ''
-    end
 
     local ViMode = {
         init = function(self)
@@ -66,13 +61,10 @@ return function()
     local git_branch_cache = {}
 
     local Branch = {
-        provider = function()
-            local filename = vim.api.nvim_buf_get_name(0)
-            if git_branch_cache[filename] then
-                if git_branch_cache[filename] == '' then
-                    return ''
-                end
-                return ' ' .. git_branch_cache[filename]
+        provider = function(self)
+            local cache = git_branch_cache[self.filepath]
+            if cache then
+                return cache == '' and '' or ' ' .. cache
             end
             local result = vim.system({
                 'git',
@@ -81,10 +73,10 @@ return function()
                 'HEAD',
             }, { text = true }):wait()
             if result.code ~= 0 then
-                git_branch_cache[filename] = ''
+                git_branch_cache[self.filepath] = ''
                 return ''
             end
-            git_branch_cache[filename] = vim.trim(result.stdout)
+            git_branch_cache[self.filepath] = vim.trim(result.stdout)
             return ' ' .. vim.trim(result.stdout)
         end,
         hl = { fg = 'lightgray', bold = true },
@@ -92,16 +84,16 @@ return function()
 
     local FileName = {
         init = function(self)
-            self.filename = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':t')
+            self.filename = vim.fn.fnamemodify(self.filepath, ':t')
             local extension = vim.fn.fnamemodify(self.filename, ':e')
-            self.icon, self.icon_color = require('nvim-web-devicons').get_icon_color(self.filename, extension,
+            self.icon, self.icon_hl = require('nvim-web-devicons').get_icon(self.filename, extension,
                 { default = true })
         end,
         provider = function(self)
             return self.icon and (self.icon .. ' ' .. self.filename) or self.filename
         end,
         hl = function(self)
-            return { fg = self.icon_color }
+            return self.icon_hl
         end
     }
 
@@ -139,7 +131,10 @@ return function()
     }
 
     local FileFormat = {
-        provider = ff,
+        provider = function()
+            local icon = { dos = ' ', unix = ' ', mac = ' ' }
+            return icon[vim.bo.fileformat] or ''
+        end,
         hl = 'Number',
     }
 
@@ -149,11 +144,14 @@ return function()
     }
 
     local StatusLine = {
-        bb, ViMode, b, Branch, b, FileName, bb, Git,
+        init = function(self)
+            self.filepath = vim.api.nvim_buf_get_name(0)
+        end,
+        { bb, ViMode, b, Branch, b, FileName, b, Git, },
         spacer,
-        LSPName, b, Diagnostics,
+        { LSPName, b, Diagnostics, },
         spacer,
-        Encoding, b, FileFormat, b, Ruler,
+        { Encoding, b, FileFormat, b, Ruler, },
     }
 
     local TablineFileName = {
@@ -209,7 +207,7 @@ return function()
             end
         end,
         on_click = {
-            callback = function(_, minwid, _, button)
+            callback = function(_,minwid,_,button)
                 vim.api.nvim_win_set_buf(0, minwid)
             end,
             minwid = function(self)
@@ -217,10 +215,7 @@ return function()
             end,
             name = 'heirline_tabline_buffer_callback',
         },
-        bb,
-        TablineFileName,
-        TablineFileFlags,
-        bb,
+        { bb, TablineFileName, TablineFileFlags, bb, }
     }
 
     local TablineBufferBlock = {
