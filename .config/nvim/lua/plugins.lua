@@ -22,14 +22,14 @@ opt.rtp:prepend(lazypath)
 local plugins = {
 
     -- colorscheme
-    {
-        'FrenzyExists/aquarium-vim',
-        lazy = false,
-        config = function()
-            cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
-            cmd.colorscheme('aquarium')
-        end
-    },
+    -- {
+    --     'FrenzyExists/aquarium-vim',
+    --     lazy = false,
+    --     config = function()
+    --         cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
+    --         cmd.colorscheme('aquarium')
+    --     end
+    -- },
     -- {
     --     'oxfist/night-owl.nvim',
     --     lazy = false,
@@ -40,6 +40,14 @@ local plugins = {
     --         vim.cmd.colorscheme('night-owl')
     --     end,
     -- },
+    {
+        'rebelot/kanagawa.nvim',
+        lazy = false,
+        config = function()
+            cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
+            cmd.colorscheme('kanagawa-wave')
+        end
+    },
 
     -- editor display
     {
