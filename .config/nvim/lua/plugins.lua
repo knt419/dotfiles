@@ -167,7 +167,7 @@ local plugins = {
         lazy = false,
         opts = {
             extra_groups = {
-                'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu', 'BlinkCmpMenuBorder', 'GitSignsDelete', 'GitSignsDelete', 'GitSignsDelete', 'MiniDiffSignAdd', 'MiniDiffSignChange', 'MiniDiffSignDelete'
+                'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu', 'BlinkCmpMenuBorder', 'GitSignsDelete', 'GitSignsDelete', 'GitSignsDelete', 'MiniDiffSignAdd', 'MiniDiffSignChange', 'MiniDiffSignDelete', 'DiagnosticSignError', 'DiagnosticSignWarn', 'DiagnosticSignInfo', 'DiagnosticSignHint'
             },
         },
     },
