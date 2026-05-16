@@ -14,7 +14,7 @@ api.nvim_create_autocmd('VimResized', {
 })
 
 api.nvim_create_autocmd('BufReadPost', {
-    callback = function() vim.api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h')) end
+    callback = function() api.nvim_set_current_dir(vim.fn.fnamemodify(vim.fn.resolve(vim.fn.expand('%:p')), ':h')) end
 })
 
 api.nvim_create_autocmd('TermOpen', {
@@ -40,19 +40,16 @@ api.nvim_create_autocmd('TextYankPost', {
     callback = function() vim.highlight.on_yank { higroup = 'IncSearch', timeout = 700 } end
 })
 
-
-local ui2 = require('vim._core.ui2')
-local msgs = require('vim._core.ui2.messages')
-local orig_set_pos = msgs.set_pos
-msgs.set_pos = function(tgt)
-    orig_set_pos(tgt)
-    if (tgt == 'msg' or tgt == nil) and vim.api.nvim_win_is_valid(ui2.wins.msg) then
-        pcall(api.nvim_win_set_config, ui2.wins.msg, {
-            relative = 'editor',
-            anchor = 'NE',
-            row = 1,
-            col = vim.o.columns - 1,
-            border = 'rounded',
-        })
-    end
-end
+api.nvim_create_autocmd( "BufWinEnter" , {
+    pattern = '*',
+    callback = function()
+        local ft = vim.bo.filetype
+        if ft:match("^snacks_picker_") then
+            for _, win in ipairs(api.nvim_tabpage_list_wins(0)) do
+                if vim.wo[win].winblend == 0 then
+                    api.nvim_set_option_value('winblend', 25, { win = win })
+                end
+            end
+        end
+    end,
+})

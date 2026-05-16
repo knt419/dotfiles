@@ -33,10 +33,10 @@ return {
     },
     picker = {
         enabled = true,
-        ui_select = true,
-        layout = {
-            backdrop = false, -- 背景の黒いマスクウィンドウを消去する（最重要）
+        matcher = {
+            frecency = true,
         },
+        ui_select = true,
         sources = {
             files = {
                 hidden = true,
