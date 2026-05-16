@@ -46,10 +46,15 @@ return {
             },
         },
         win = {
+            wo = { winblend = 25 },
             input = {
+                wo = { winblend = 25 },
                 keys = {
                     ['<Esc>'] = { 'close', mode = { 'n', 'i' } },
                 },
+            },
+            list = {
+                wo = { winblend = 25 },
             },
         },
     },
@@ -66,6 +71,16 @@ return {
         }
     },
     styles = {
+        input = {
+            wo = {
+                winblend = 25,
+            },
+        },
+        float = {
+            wo = {
+                winblend = 25,
+            },
+        },
         notification = {
             wo = { wrap = true } -- Wrap notifications
         }

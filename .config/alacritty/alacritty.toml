@@ -1,2 +1,2 @@
-[shell]
-program = "nu"
+[terminal]
+shell = { program = "nu.exe" }

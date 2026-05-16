@@ -89,24 +89,6 @@ local plugins = {
             vim.o.cmdheight = 0
         end,
         config = function()
-            require('vim._core.ui2').enable({
-                enable = true,
-                msg = {
-                    targets = {
-                        [""] = "msg",
-                        echo = "cmd",
-                        bufwrite = "msg",
-                        confirm = "cmd",
-                        empty = "cmd",
-                        emsg = "msg",
-                    },
-                    height = 0.2,
-                    position = "top",
-                },
-                cmd = {
-                    height = 0.1,
-                },
-            })
             require('tiny-cmdline').setup({
                 menu_col_offset = 1,
                 native_types = {},
@@ -185,7 +167,7 @@ local plugins = {
         lazy = false,
         opts = {
             extra_groups = {
-                'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
+                'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu', 'BlinkCmpMenuBorder', 'GitSignsDelete', 'GitSignsDelete', 'GitSignsDelete', 'MiniDiffSignAdd', 'MiniDiffSignChange', 'MiniDiffSignDelete'
             },
         },
     },

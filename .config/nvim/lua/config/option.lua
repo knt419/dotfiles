@@ -3,9 +3,9 @@ local opt = vim.opt
 local env = vim.env
 
 function Foldtext()
-  local line = vim.fn.getline(vim.v.foldstart)
-  local count = vim.v.foldend - vim.v.foldstart + 1
-  return string.format('%s  - %d lines folded -', line, count)
+    local line = vim.fn.getline(vim.v.foldstart)
+    local count = vim.v.foldend - vim.v.foldstart + 1
+    return string.format('%s  - %d lines folded -', line, count)
 end
 
 opt.fileencoding = 'utf-8'
@@ -50,12 +50,13 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.infercase = true
 
-opt.diffopt = { 'filler', 'vertical', 'internal', algorithm = 'histogram', 'indent-heuristic', inline = 'char', context = 3, linematch = 60, 'followwrap' }
+opt.diffopt = { 'filler', 'vertical', 'internal', algorithm = 'histogram', 'indent-heuristic', inline = 'char', context = 3, linematch = 60,
+    'followwrap' }
 
 opt.laststatus = 3
 opt.showtabline = 2
 opt.wildmode = { list = 'full' }
-opt.iskeyword:append({'-', '_'})
+opt.iskeyword:append({ '-', '_' })
 opt.linebreak = true
 opt.breakindent = true
 opt.breakindentopt = { shift = 2 }
@@ -91,7 +92,7 @@ g.skip_loading_mswin = 1
 g.did_indent_on = 1
 
 g.neovide_opacity = 0.95
-g.neovide_cursor_vfx_mode = "torpedo"
+g.neovide_cursor_vfx_mode = 'torpedo'
 
 if g.is_windows then
     g.clipboard = {
@@ -114,3 +115,50 @@ vim.diagnostic.config {
         end,
     },
 }
+
+require('vim._core.ui2').enable({
+	enable = true,
+	msg = {
+		targets = {
+			[''] = 'msg',
+			empty = 'cmd',
+			bufwrite = 'msg',
+			confirm = 'cmd',
+			emsg = 'pager',
+			echo = 'msg',
+			echomsg = 'msg',
+			echoerr = 'pager',
+			completion = 'cmd',
+			list_cmd = 'pager',
+			lua_error = 'pager',
+			lua_print = 'msg',
+			progress = 'pager',
+			rpc_error = 'pager',
+			quickfix = 'msg',
+			search_cmd = 'cmd',
+			search_count = 'cmd',
+			shell_cmd = 'pager',
+			shell_err = 'pager',
+			shell_out = 'pager',
+			shell_ret = 'msg',
+			undo = 'msg',
+			verbose = 'pager',
+			wildlist = 'cmd',
+			wmsg = 'msg',
+			typed_cmd = 'cmd',
+		},
+		cmd = {
+			height = 0.5,
+		},
+		dialog = {
+			height = 0.5,
+		},
+		msg = {
+			height = 0.3,
+			timeout = 5000,
+		},
+		pager = {
+			height = 0.5,
+		},
+	},
+})
