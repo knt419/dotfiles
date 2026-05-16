@@ -4,17 +4,24 @@ local fn = vim.fn
 local opt = vim.opt
 
 local lazypath = fn.stdpath('data') .. '/lazy/lazy.nvim'
-if not vim.loop.fs_stat(lazypath) then
-    fn.system(
-        {
-            'git',
-            'clone',
-            '--filter=blob:none',
-            'https://github.com/folke/lazy.nvim.git',
-            '--branch=stable', -- latest stable release
-            lazypath
-        }
-    )
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+    local result = vim.system({
+        'git',
+        'clone',
+        '--filter=blob:none',
+        'https://github.com/folke/lazy.nvim.git',
+        '--branch=stable', -- latest stable release
+        lazypath
+    }, { text = true }):wait()
+    if result.code ~= 0 then
+        vim.api.nvim_echo({
+            { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
+            { result,                         'WarningMsg' },
+            { '\nPress any key to exit...' },
+        }, true, {})
+        vim.fn.getchar()
+        os.exit(1)
+    end
 end
 
 opt.rtp:prepend(lazypath)
@@ -29,16 +36,6 @@ local plugins = {
     --         cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
     --         cmd.colorscheme('aquarium')
     --     end
-    -- },
-    -- {
-    --     'oxfist/night-owl.nvim',
-    --     lazy = false,
-    --     priority = 1000,
-    --     config = function()
-    --         -- load the colorscheme here
-    --         require('night-owl').setup()
-    --         vim.cmd.colorscheme('night-owl')
-    --     end,
     -- },
     {
         'rebelot/kanagawa.nvim',
@@ -167,7 +164,10 @@ local plugins = {
         lazy = false,
         opts = {
             extra_groups = {
-                'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu', 'BlinkCmpMenuBorder', 'GitSignsDelete', 'GitSignsDelete', 'GitSignsDelete', 'MiniDiffSignAdd', 'MiniDiffSignChange', 'MiniDiffSignDelete', 'DiagnosticSignError', 'DiagnosticSignWarn', 'DiagnosticSignInfo', 'DiagnosticSignHint'
+                'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
+                'BlinkCmpMenuBorder', 'GitSignsDelete', 'GitSignsDelete', 'GitSignsDelete', 'MiniDiffSignAdd',
+                'MiniDiffSignChange', 'MiniDiffSignDelete', 'DiagnosticSignError', 'DiagnosticSignWarn',
+                'DiagnosticSignInfo', 'DiagnosticSignHint'
             },
         },
     },
