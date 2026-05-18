@@ -2,7 +2,7 @@ return function()
     require('nvim-treesitter').setup()
     local ts_install = require('nvim-treesitter.config')
     local ensureInstalled = {
-        'lua', 'vim', 'java', 'c', 'bash', 'markdown'
+        'lua', 'vim', 'java', 'c', 'bash', 'markdown', 'regex'
     }
     local alreadyInstalled = ts_install.get_installed()
     local parsersToInstall = vim.iter(ensureInstalled)

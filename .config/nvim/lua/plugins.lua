@@ -209,9 +209,7 @@ local plugins = {
             { "nvim-lua/plenary.nvim", lazy = true },
         },
         keys = {
-            -- 👇 in this section, choose your own keymappings!
-            { "<leader>yy", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "Open yazi at the current file", },
-            { "<leader>yw", "<cmd>Yazi cwd<cr>", desc = "Open the file manager in nvim's working directory", },
+            { "<leader>y", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "Open yazi at the current file", },
             { "<c-up>", "<cmd>Yazi toggle<cr>", desc = "Resume the last yazi session", },
         },
         ---@type YaziConfig | {}
