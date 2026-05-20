@@ -94,7 +94,7 @@ local plugins = {
         end,
     },
     {
-        "rebelot/heirline.nvim",
+        'rebelot/heirline.nvim',
         event = 'FileType',
         ft = 'snacks_dashboard',
         config = require('config.heirline'),
@@ -152,7 +152,6 @@ local plugins = {
             { 'w',  '<Plug>(smartword-w)' },
             { 'b',  '<Plug>(smartword-b)' },
             { 'e',  '<Plug>(smartword-e)' },
-            { 'ge', '<Plug>(smartword-ge)' }
         }
     },
     {
@@ -167,7 +166,7 @@ local plugins = {
                 'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
                 'BlinkCmpMenuBorder', 'GitSignsDelete', 'GitSignsDelete', 'GitSignsDelete', 'MiniDiffSignAdd',
                 'MiniDiffSignChange', 'MiniDiffSignDelete', 'DiagnosticSignError', 'DiagnosticSignWarn',
-                'DiagnosticSignInfo', 'DiagnosticSignHint'
+                'DiagnosticSignInfo', 'DiagnosticSignHint', 'Folded'
             },
         },
     },
@@ -202,21 +201,21 @@ local plugins = {
         event = 'BufReadPre',
     },
     {
-        "mikavilpas/yazi.nvim",
-        version = "*", -- use the latest stable version
-        event = "VeryLazy",
+        'mikavilpas/yazi.nvim',
+        version = '*', -- use the latest stable version
+        event = 'VeryLazy',
         dependencies = {
-            { "nvim-lua/plenary.nvim", lazy = true },
+            { 'nvim-lua/plenary.nvim', lazy = true },
         },
         keys = {
-            { "<leader>y", mode = { "n", "v" }, "<cmd>Yazi<cr>", desc = "Open yazi at the current file", },
-            { "<c-up>", "<cmd>Yazi toggle<cr>", desc = "Resume the last yazi session", },
+            { '<leader>y', mode = { 'n', 'v' }, '<cmd>Yazi<cr>', desc = 'Open yazi at the current file', },
+            { '<c-up>', '<cmd>Yazi toggle<cr>', desc = 'Resume the last yazi session', },
         },
         ---@type YaziConfig | {}
         opts = {
             open_for_directories = false,
             keymaps = {
-                show_help = "<f1>",
+                show_help = '<f1>',
             },
         },
     },

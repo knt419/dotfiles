@@ -4,9 +4,17 @@ local env = vim.env
 
 function Foldtext()
     local line = vim.fn.getline(vim.v.foldstart)
+    local endline = vim.fn.getline(vim.v.foldend):gsub('^[ \t]+', '')
     local count = vim.v.foldend - vim.v.foldstart + 1
-    return string.format('%s  - %d lines folded -', line, count)
+
+    return {
+        { line, 'Label' },
+        { '  ...  ', 'Comment' },
+        { endline, 'Label' },
+        { string.format('  // %d lines ', count), 'Comment' },
+    }
 end
+opt.foldtext = 'v:lua.Foldtext()'
 
 opt.fileencoding = 'utf-8'
 opt.fileencodings = 'ucs-bom,utf-8,iso-2022-jp,cp932,euc-jp'
@@ -28,7 +36,6 @@ opt.scrolloff = 5
 opt.sidescrolloff = 10
 opt.termguicolors = true
 opt.foldlevel = 99
-opt.foldtext = 'v:lua.Foldtext()'
 
 opt.guifont = 'OperatorMono Nerd Font:h16'
 opt.guifontwide = 'HackGen Console NF:h15'

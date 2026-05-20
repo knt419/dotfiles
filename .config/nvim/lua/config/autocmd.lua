@@ -40,11 +40,11 @@ api.nvim_create_autocmd('TextYankPost', {
     callback = function() vim.highlight.on_yank { higroup = 'IncSearch', timeout = 700 } end
 })
 
-api.nvim_create_autocmd( "BufWinEnter" , {
+api.nvim_create_autocmd( 'BufWinEnter' , {
     pattern = '*',
     callback = function()
         local ft = vim.bo.filetype
-        if ft:match("^snacks_picker_") then
+        if ft:match('^snacks_picker_') then
             for _, win in ipairs(api.nvim_tabpage_list_wins(0)) do
                 if vim.wo[win].winblend == 0 then
                     api.nvim_set_option_value('winblend', 25, { win = win })
