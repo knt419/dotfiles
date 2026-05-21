@@ -1,3 +1,31 @@
+[credential]
+    helper =
+
 [url "git@github.com:"]
     InsteadOf = https://github.com/
     insteadOf = http://github.com/
+
+[user]
+	name = knt419
+	email = knt419@gmail.com
+
+[filter "lfs"]
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+
+[ghq]
+    root = ~/repo
+
+[push]
+    default = current
+
+[core]
+    autoCRLF = false
+
+[merge]
+  tool = nvim
+
+[mergetool "nvim"]
+  cmd = nvim -c '2wincmd w | diffthis | 3wincmd w | diffthis | 1wincmd w | wincmd J' -O $MERGED $LOCAL $REMOTE
