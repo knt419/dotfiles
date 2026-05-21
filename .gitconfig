@@ -1,5 +1,9 @@
-[url "git@github.com:"]
-    InsteadOf = https://github.com/
+[includeIf "env:WSL_DISTRO_NAME"]
+    path = ~/.gitconfig-wsl
+
+[user]
+	name = knt419
+	email = knt419@gmail.com
 
 [filter "lfs"]
     clean = git-lfs clean -- %f
