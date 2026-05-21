@@ -59,3 +59,23 @@ def --env y [...args] {
 	}
 	rm -fp $tmp
 }
+
+if ("WSL_DISTRO_NAME" in ($env | columns)) {
+    $env.GALLIUM_DRIVER = "d3d12"
+    $env.MESA_LOADER_DRIVER_OVERRIDE = "d3d12"
+    $env.SSH_AUTH_SOCK = $"($env.HOME)/.ssh/agent.sock"
+
+    ssh-add -l out+err> /dev/null
+
+    if $env.LAST_EXIT_CODE != 0 {
+        rm -f $env.SSH_AUTH_SOCK
+
+        ^ssh-agent -a $env.SSH_AUTH_SOCK
+        | lines
+        | parse "{key}={value};*"
+        | transpose -r
+        | load-env
+
+        ssh-add $"($env.HOME)/.ssh/id_ed25519"
+    }
+}
