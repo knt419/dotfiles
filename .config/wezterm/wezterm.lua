@@ -6,8 +6,15 @@ local config = wezterm.config_builder()
 -- base configuration
 -- config.front_end = 'WebGpu'
 config.use_ime = true
-config.default_prog = { 'nu' }
 config.canonicalize_pasted_newlines = 'LineFeed'
+
+local wsl_domains = wezterm.default_wsl_domains()
+
+if #wsl_domains > 0 then
+    config.default_domain = wsl_domains[1].name
+else
+    config.default_prog = { 'nu' }
+end
 
 -- display
 --- layout

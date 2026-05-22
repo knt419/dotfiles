@@ -11,6 +11,13 @@ return {
         }
     },
     {
+        key = 'a',
+        mods = 'CTRL|SHIFT',
+        action = wezterm.action.SpawnCommandInNewTab {
+            args = { 'wsl' }
+        }
+    },
+    {
         key = 't',
         mods = 'CTRL|SHIFT',
         action = wezterm.action.SpawnTab 'CurrentPaneDomain'
