@@ -9,7 +9,11 @@ local BORDER_RIGHT = { wezterm.nerdfonts.ple_right_half_circle_thick, ' ' }
 wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_width)
     local index = tab.is_active and 1 or 2
     local zoomed = tab.active_pane.is_zoomed and '🔎 ' or ' '
-    local title = tab.active_pane.foreground_process_name:match("([^/\\]+)$"):gsub("%.[eE][xX][eE]$", "") or 'wezterm'
+    local process = tab.active_pane.foreground_process_name
+    local title = 'wezterm'
+    if process then
+        title = tab.active_pane.foreground_process_name:match("([^/\\]+)$"):gsub("%.[eE][xX][eE]$", "")
+    end
 
     local icons = {
         ["bash"] = wezterm.nerdfonts.dev_terminal,
@@ -20,6 +24,8 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
         ["nvim"] = wezterm.nerdfonts.custom_neovim,
         ["python"] = wezterm.nerdfonts.dev_python,
         ["node"] = wezterm.nerdfonts.dev_nodejs_small,
+        ["wslhost"] = wezterm.nerdfonts.dev_archlinux,
+        ["wsl"] = wezterm.nerdfonts.dev_archlinux,
     }
 
     return {
