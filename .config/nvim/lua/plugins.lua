@@ -37,12 +37,25 @@ local plugins = {
     --         cmd.colorscheme('aquarium')
     --     end
     -- },
+    -- {
+    --     'rebelot/kanagawa.nvim',
+    --     lazy = false,
+    --     config = function()
+    --         cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
+    --         cmd.colorscheme('kanagawa-wave')
+    --     end
+    -- },
     {
-        'rebelot/kanagawa.nvim',
+        'catppuccin/nvim',
+        name = 'catppuccin',
+        -- 'dgox16/oldworld.nvim',
         lazy = false,
         config = function()
+            require('catppuccin').setup({
+                transparent_background = true,
+            })
             cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
-            cmd.colorscheme('kanagawa-wave')
+            cmd.colorscheme('catppuccin-macchiato')
         end
     },
 
@@ -158,18 +171,18 @@ local plugins = {
         'kana/vim-niceblock',
         event = 'ModeChanged *:[vV\x16]*',
     },
-    {
-        'xiyaowong/transparent.nvim',
-        lazy = false,
-        opts = {
-            extra_groups = {
-                'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
-                'BlinkCmpMenuBorder', 'GitSignsDelete', 'GitSignsDelete', 'GitSignsDelete', 'MiniDiffSignAdd',
-                'MiniDiffSignChange', 'MiniDiffSignDelete', 'DiagnosticSignError', 'DiagnosticSignWarn',
-                'DiagnosticSignInfo', 'DiagnosticSignHint', 'Folded'
-            },
-        },
-    },
+    -- {
+    --     'xiyaowong/transparent.nvim',
+    --     lazy = false,
+    --     opts = {
+    --         extra_groups = {
+    --             'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
+    --             'BlinkCmpMenuBorder', 'GitSignsDelete', 'GitSignsDelete', 'GitSignsDelete', 'MiniDiffSignAdd',
+    --             'MiniDiffSignChange', 'MiniDiffSignDelete', 'DiagnosticSignError', 'DiagnosticSignWarn',
+    --             'DiagnosticSignInfo', 'DiagnosticSignHint', 'Folded'
+    --         },
+    --     },
+    -- },
 
     -- file/directory open/read
     {
