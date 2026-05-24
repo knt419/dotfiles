@@ -64,16 +64,13 @@ if ("WSL_DISTRO_NAME" in ($env | columns)) {
     $env.GALLIUM_DRIVER = "d3d12"
     $env.MESA_LOADER_DRIVER_OVERRIDE = "d3d12"
     let sock = $"($env.HOME)/.ssh/agent.sock"
-
     $env.SSH_AUTH_SOCK = $sock
 
-    ssh-add -l out+err> /dev/null
+    let ssh_ok = (ssh-add -l | complete)
 
-    if $env.LAST_EXIT_CODE != 0 {
+    if $ssh_ok.exit_code != 0 {
         rm -f $sock
-
-        systemctl --user restart ssh-agent
-
+        ^ssh-agent -a $sock | ignore
         ssh-add $"($env.HOME)/.ssh/id_ed25519"
     }
 }
