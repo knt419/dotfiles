@@ -18,6 +18,7 @@
 # them for future reference.
 mkdir ($nu.data-dir | path join "vendor/autoload")
 starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+alias l = ls
 alias ll = ls -l
 $env.config = {
   shell_integration: {
@@ -74,3 +75,5 @@ if ("WSL_DISTRO_NAME" in ($env | columns)) {
         ssh-add $"($env.HOME)/.ssh/id_ed25519"
     }
 }
+
+cd ~
