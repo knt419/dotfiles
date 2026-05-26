@@ -76,4 +76,17 @@ if ("WSL_DISTRO_NAME" in ($env | columns)) {
     }
 }
 
-cd ~
+if (not ($env | get -o PREFIX | is-empty) and ($env.PREFIX | str contains "com.termux")) {
+    let sock = $"($env.HOME)/.ssh/agent.sock"
+    $env.SSH_AUTH_SOCK = $sock
+
+    let active_agents = (ps | where name =~ "ssh-agent")
+
+    if ($active_agents | is-empty) {
+          rm -f $sock
+          ^ssh-agent -a $sock | ignore
+          ssh-add $"($env.HOME)/.ssh/id_ed25519"
+    }
+}
+
+cd $env.Home
