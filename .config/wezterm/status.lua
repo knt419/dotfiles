@@ -24,29 +24,6 @@ local function AddElement(elems, header, str)
     table.insert(elems, { Text = str .. SPACE })
 end
 
-local function AddIcon(elems, icon)
-    table.insert(elems, { Foreground = icon.Foreground })
-    table.insert(elems, { Background = DEFAULT_BG })
-    table.insert(elems, { Text = SPACE .. icon.Text .. SPACE })
-end
-
-local function GetKeyboard(elems, window)
-    if window:leader_is_active() then
-        AddIcon(elems, HEADER_LEADER)
-        return
-    end
-
-    AddIcon(elems, window:composition_status() and HEADER_IME or HEADER_KEY_NORMAL)
-end
-
-local function LeftUpdate(window)
-    local elems = {}
-
-    GetKeyboard(elems, window)
-
-    window:set_left_status(wezterm.format(elems))
-end
-
 local function GetHost(elems)
     local host = wezterm.hostname()
     AddElement(elems, HEADER_HOST, host)
@@ -82,6 +59,5 @@ local function RightUpdate(window)
 end
 
 wezterm.on('update-status', function(window)
-    LeftUpdate(window)
     RightUpdate(window)
 end)
