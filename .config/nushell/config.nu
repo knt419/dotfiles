@@ -49,7 +49,17 @@ $env.config = {
         # reset_application_mode is escape \x1b[?1l and was added to help ssh work better
         reset_application_mode: false
     }
+  keybindings: [
+      {
+        name: clear_current_prompt
+        modifier: control
+        keycode: backspace
+        mode: [emacs, vi_insert, vi_normal]
+        event: { edit: Clear }
+      }
+  ]
 }
+
 
 def --env y [...args] {
 	let tmp = (mktemp -t "yazi-cwd.XXXXXX")
