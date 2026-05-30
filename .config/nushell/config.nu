@@ -71,6 +71,75 @@ def --env y [...args] {
 	rm -fp $tmp
 }
 
+def --env yy [] {
+    let tmp = (mktemp)
+
+    yazi --cwd-file $tmp
+
+    let cwd = (
+        try {
+            open $tmp
+        } catch {
+            ""
+        }
+    )
+
+    if ($cwd | is-not-empty) and ($cwd != $env.PWD) {
+        cd $cwd
+    }
+
+    rm -f $tmp
+}
+
+def --env smart-left [] {
+    cd ..
+}
+
+def smart-down [] {
+    ls
+    | sort-by type name
+    | select name type size modified
+}
+
+def --env smart-right [] {
+    let dirs = (
+        ls
+        | where type == dir
+        | sort-by name
+    )
+
+    let count = ($dirs | length)
+
+    if $count == 0 {
+        return
+    }
+
+    if $count == 1 {
+        cd ($dirs.0.name)
+        return
+    }
+
+    yy
+}
+
+def --env left-handler [] {
+    if (commandline | is-empty) {
+        smart-left
+    }
+}
+
+def --env right-handler [] {
+    if (commandline | is-empty) {
+        smart-right
+    }
+}
+
+def down-handler [] {
+    if (commandline | is-empty) {
+        smart-down
+    }
+}
+
 if ("WSL_DISTRO_NAME" in ($env | columns)) {
     $env.GALLIUM_DRIVER = "d3d12"
     $env.MESA_LOADER_DRIVER_OVERRIDE = "d3d12"
@@ -98,5 +167,42 @@ if (not ($env | get -o PREFIX | is-empty) and ($env.PREFIX | str contains "com.t
           ssh-add $"($env.HOME)/.ssh/id_ed25519"
     }
 }
+
+$env.config.keybindings ++= [
+
+    {
+        name: smart-left
+        modifier: none
+        keycode: left
+        mode: [emacs vi_normal vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: "left-handler"
+        }
+    }
+
+    {
+        name: smart-right
+        modifier: none
+        keycode: right
+        mode: [emacs vi_normal vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: "right-handler"
+        }
+    }
+
+    {
+        name: smart-down
+        modifier: none
+        keycode: down
+        mode: [emacs vi_normal vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: "down-handler"
+        }
+    }
+
+]
 
 cd $env.Home
