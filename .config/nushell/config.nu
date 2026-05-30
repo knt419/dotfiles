@@ -49,26 +49,17 @@ $env.config = {
         # reset_application_mode is escape \x1b[?1l and was added to help ssh work better
         reset_application_mode: false
     }
-  keybindings: [
-      {
-        name: clear_current_prompt
-        modifier: control
-        keycode: backspace
-        mode: [emacs, vi_insert, vi_normal]
-        event: { edit: Clear }
-      }
-  ]
 }
 
 
 def --env y [...args] {
-	let tmp = (mktemp -t "yazi-cwd.XXXXXX")
-	^yazi ...$args --cwd-file $tmp
-	let cwd = (open $tmp)
-	if $cwd != $env.PWD and ($cwd | path exists) {
-		cd $cwd
-	}
-	rm -fp $tmp
+    let tmp = (mktemp -t "yazi-cwd.XXXXXX")
+    ^yazi ...$args --cwd-file $tmp
+    let cwd = (open $tmp)
+    if $cwd != $env.PWD and ($cwd | path exists) {
+        cd $cwd
+    }
+    rm -fp $tmp
 }
 
 def --env yy [] {
@@ -89,16 +80,6 @@ def --env yy [] {
     }
 
     rm -f $tmp
-}
-
-def --env smart-left [] {
-    cd ..
-}
-
-def smart-down [] {
-    ls
-    | sort-by type name
-    | select name type size modified
 }
 
 def --env smart-right [] {
@@ -122,21 +103,36 @@ def --env smart-right [] {
     yy
 }
 
+def --env esc-handler [] {
+    if (commandline get-cursor) == 0 {
+      commandline edit --replace ""
+    } else {
+      commandline set-cursor 0
+    }
+}
+
 def --env left-handler [] {
     if (commandline | is-empty) {
-        smart-left
+        cd ..
+    } else {
+      commandline set-cursor ((commandline get-cursor) - 1)
     }
 }
 
 def --env right-handler [] {
     if (commandline | is-empty) {
         smart-right
+    } else {
+      commandline set-cursor ((commandline get-cursor) + 1)
     }
 }
 
 def down-handler [] {
     if (commandline | is-empty) {
-        smart-down
+        print ""
+        ls
+        | sort-by type name
+        | select name type size modified
     }
 }
 
@@ -169,40 +165,51 @@ if (not ($env | get -o PREFIX | is-empty) and ($env.PREFIX | str contains "com.t
 }
 
 $env.config.keybindings ++= [
-
+    {
+      name: clear_current_prompt
+      modifier: none
+      keycode: esc
+      mode: [emacs, vi_insert, vi_normal]
+      event: {
+        send: executehostcommand
+        cmd: "esc-handler"
+        }
+    }
     {
         name: smart-left
         modifier: none
         keycode: left
         mode: [emacs vi_normal vi_insert]
         event: {
-            send: executehostcommand
-            cmd: "left-handler"
+              send: executehostcommand
+              cmd: "left-handler"
         }
     }
-
     {
         name: smart-right
         modifier: none
         keycode: right
         mode: [emacs vi_normal vi_insert]
         event: {
-            send: executehostcommand
-            cmd: "right-handler"
+            until: [
+                { send: historyhintcomplete }
+                { send: executehostcommand
+                  cmd: "right-handler" }
+            ]
         }
     }
-
     {
         name: smart-down
         modifier: none
         keycode: down
         mode: [emacs vi_normal vi_insert]
         event: {
-            send: executehostcommand
-            cmd: "down-handler"
+          until: [
+            { send: executehostcommand
+              cmd: "down-handler" }
+            ]
         }
     }
-
 ]
 
 cd $env.Home

@@ -21,6 +21,11 @@ return function()
             }
         }
     })
+    vim.lsp.config('nushell', {
+        cmd = { 'nu', '-n' , '--lsp' },
+        filetypes = { 'nu' },
+    })
     vim.lsp.enable(require('mason-lspconfig').get_installed_servers())
     vim.lsp.enable('lua_ls')
+    vim.lsp.enable('nushell')
 end
