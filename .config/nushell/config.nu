@@ -160,9 +160,15 @@ def --env right-handler [] {
 def down-handler [] {
     if (commandline | is-empty) {
         print ""
-        ls
-        | sort-by type name
-        | select name type size modified
+
+        let listing = (
+                ls
+                | sort-by type name
+                | select name type size modified
+                | table
+        )
+
+        print $listing
     }
 }
 
