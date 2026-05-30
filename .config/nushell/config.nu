@@ -169,6 +169,7 @@ def down-handler [] {
         )
 
         print $listing
+        print ""
     }
 }
 
