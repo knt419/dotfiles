@@ -142,7 +142,10 @@ def --env left-handler [] {
     if (commandline | is-empty) {
         cd ..
     } else {
-      commandline set-cursor ((commandline get-cursor) - 1)
+    let cursor = (commandline get-cursor)
+        if $cursor > 0 {
+            commandline set-cursor ($cursor - 1)
+        }
     }
 }
 
