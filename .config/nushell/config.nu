@@ -89,26 +89,6 @@ def --env y [...args] {
     rm -fp $tmp
 }
 
-def --env yy [] {
-    let tmp = (mktemp)
-
-    yazi --cwd-file $tmp
-
-    let cwd = (
-        try {
-            open $tmp
-        } catch {
-            ""
-        }
-    )
-
-    if ($cwd | is-not-empty) and ($cwd != $env.PWD) {
-        cd $cwd
-    }
-
-    rm -f $tmp
-}
-
 def --env smart-right [] {
     let dirs = (
         ls
@@ -127,7 +107,7 @@ def --env smart-right [] {
         return
     }
 
-    yy
+    y
 }
 
 def --env esc-handler [] {
