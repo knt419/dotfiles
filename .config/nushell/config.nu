@@ -51,6 +51,33 @@ $env.config = {
     }
 }
 
+if ("WSL_DISTRO_NAME" in ($env | columns)) {
+    $env.GALLIUM_DRIVER = "d3d12"
+    $env.MESA_LOADER_DRIVER_OVERRIDE = "d3d12"
+    let sock = $"($env.HOME)/.ssh/agent.sock"
+    $env.SSH_AUTH_SOCK = $sock
+
+    let ssh_ok = (ssh-add -l | complete)
+
+    if $ssh_ok.exit_code != 0 {
+        rm -f $sock
+        ^ssh-agent -a $sock | ignore
+        ssh-add $"($env.HOME)/.ssh/id_ed25519"
+    }
+}
+
+if (not ($env | get -o PREFIX | is-empty) and ($env.PREFIX | str contains "com.termux")) {
+    let sock = $"($env.HOME)/.ssh/agent.sock"
+    $env.SSH_AUTH_SOCK = $sock
+
+    let active_agents = (ps | where name =~ "ssh-agent")
+
+    if ($active_agents | is-empty) {
+          rm -f $sock
+          ^ssh-agent -a $sock | ignore
+          ssh-add $"($env.HOME)/.ssh/id_ed25519"
+    }
+}
 
 def --env y [...args] {
     let tmp = (mktemp -t "yazi-cwd.XXXXXX")
@@ -136,33 +163,6 @@ def down-handler [] {
     }
 }
 
-if ("WSL_DISTRO_NAME" in ($env | columns)) {
-    $env.GALLIUM_DRIVER = "d3d12"
-    $env.MESA_LOADER_DRIVER_OVERRIDE = "d3d12"
-    let sock = $"($env.HOME)/.ssh/agent.sock"
-    $env.SSH_AUTH_SOCK = $sock
-
-    let ssh_ok = (ssh-add -l | complete)
-
-    if $ssh_ok.exit_code != 0 {
-        rm -f $sock
-        ^ssh-agent -a $sock | ignore
-        ssh-add $"($env.HOME)/.ssh/id_ed25519"
-    }
-}
-
-if (not ($env | get -o PREFIX | is-empty) and ($env.PREFIX | str contains "com.termux")) {
-    let sock = $"($env.HOME)/.ssh/agent.sock"
-    $env.SSH_AUTH_SOCK = $sock
-
-    let active_agents = (ps | where name =~ "ssh-agent")
-
-    if ($active_agents | is-empty) {
-          rm -f $sock
-          ^ssh-agent -a $sock | ignore
-          ssh-add $"($env.HOME)/.ssh/id_ed25519"
-    }
-}
 
 $env.config.keybindings ++= [
     {
