@@ -21,7 +21,7 @@ starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.n
 alias l = ls
 alias ll = ls -l
 $env.config = {
-  shell_integration: {
+    shell_integration: {
         # osc2 abbreviates the path if in the home_dir, sets the tab/window title, shows the running command in the tab/window title
         osc2: false
         # osc7 is a way to communicate the path to the terminal, this is helpful for spawning new tabs in the same directory
@@ -51,13 +51,13 @@ $env.config = {
     }
 }
 
-if ("WSL_DISTRO_NAME" in ($env | columns)) {
+if "WSL_DISTRO_NAME" in ($env | columns) {
     $env.GALLIUM_DRIVER = "d3d12"
     $env.MESA_LOADER_DRIVER_OVERRIDE = "d3d12"
     let sock = $"($env.HOME)/.ssh/agent.sock"
     $env.SSH_AUTH_SOCK = $sock
 
-    let ssh_ok = (ssh-add -l | complete)
+    let ssh_ok = ssh-add -l | complete
 
     if $ssh_ok.exit_code != 0 {
         rm -f $sock
@@ -66,16 +66,16 @@ if ("WSL_DISTRO_NAME" in ($env | columns)) {
     }
 }
 
-if (not ($env | get -o PREFIX | is-empty) and ($env.PREFIX | str contains "com.termux")) {
+if not ($env | get -o PREFIX | is-empty) and ($env.PREFIX | str contains "com.termux") {
     let sock = $"($env.HOME)/.ssh/agent.sock"
     $env.SSH_AUTH_SOCK = $sock
 
-    let active_agents = (ps | where name =~ "ssh-agent")
+    let active_agents = ps | where name =~ "ssh-agent"
 
     if ($active_agents | is-empty) {
-          rm -f $sock
-          ^ssh-agent -a $sock | ignore
-          ssh-add $"($env.HOME)/.ssh/id_ed25519"
+        rm -f $sock
+        ^ssh-agent -a $sock | ignore
+        ssh-add $"($env.HOME)/.ssh/id_ed25519"
     }
 }
 
@@ -96,7 +96,7 @@ def --env smart-right [] {
         | sort-by name
     )
 
-    let count = ($dirs | length)
+    let count = $dirs | length
 
     if $count == 0 {
         return
@@ -112,9 +112,9 @@ def --env smart-right [] {
 
 def --env esc-handler [] {
     if (commandline get-cursor) == 0 {
-      commandline edit --replace ""
+        commandline edit --replace ""
     } else {
-      commandline set-cursor 0
+        commandline set-cursor 0
     }
 }
 
@@ -122,7 +122,7 @@ def --env left-handler [] {
     if (commandline | is-empty) {
         cd ..
     } else {
-    let cursor = (commandline get-cursor)
+        let cursor = (commandline get-cursor)
         if $cursor > 0 {
             commandline set-cursor ($cursor - 1)
         }
@@ -133,7 +133,7 @@ def --env right-handler [] {
     if (commandline | is-empty) {
         smart-right
     } else {
-      commandline set-cursor ((commandline get-cursor) + 1)
+        commandline set-cursor ((commandline get-cursor) + 1)
     }
 }
 
@@ -153,27 +153,20 @@ def down-handler [] {
     }
 }
 
-
 $env.config.keybindings ++= [
     {
-      name: clear_current_prompt
-      modifier: none
-      keycode: esc
-      mode: [emacs, vi_insert, vi_normal]
-      event: {
-        send: executehostcommand
-        cmd: "esc-handler"
-        }
+        name: clear_current_prompt
+        modifier: none
+        keycode: esc
+        mode: [emacs, vi_insert, vi_normal]
+        event: {send: executehostcommand, cmd: "esc-handler"}
     }
     {
         name: smart-left
         modifier: none
         keycode: left
         mode: [emacs vi_normal vi_insert]
-        event: {
-              send: executehostcommand
-              cmd: "left-handler"
-        }
+        event: {send: executehostcommand, cmd: "left-handler"}
     }
     {
         name: smart-right
@@ -182,9 +175,8 @@ $env.config.keybindings ++= [
         mode: [emacs vi_normal vi_insert]
         event: {
             until: [
-                { send: historyhintcomplete }
-                { send: executehostcommand
-                  cmd: "right-handler" }
+                {send: historyhintcomplete}
+                {send: executehostcommand, cmd: "right-handler"}
             ]
         }
     }
@@ -194,9 +186,8 @@ $env.config.keybindings ++= [
         keycode: down
         mode: [emacs vi_normal vi_insert]
         event: {
-          until: [
-            { send: executehostcommand
-              cmd: "down-handler" }
+            until: [
+                {send: executehostcommand, cmd: "down-handler"}
             ]
         }
     }
