@@ -47,6 +47,15 @@ return {
                 cmd = 'rg',
                 regex = true,
             },
+            explorer = {
+                win = {
+                    list = {
+                        keys = {
+                            ['.'] = 'toggle_hidden',
+                        }
+                    }
+                }
+            }
         },
         win = {
             input = {
