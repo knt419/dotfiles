@@ -1,6 +1,5 @@
 [mgr]
-scrolloff = 255
-sort_reverse = true
+sort_reverse = false
 show_hidden = true
 
 [[input.prepend_keymap]]
