@@ -36,7 +36,7 @@ config.window_padding = {
 }
 
 --- appearance
-config.color_scheme = 'Aquarium Dark'
+config.color_scheme = 'Catppuccin Macchiato'
 config.window_background_opacity = 0.7
 config.win32_system_backdrop = 'Acrylic'
 config.show_close_tab_button_in_tabs = false
