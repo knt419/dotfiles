@@ -21,7 +21,7 @@ end
 config.initial_cols = 120
 config.initial_rows = 28
 config.font_size = 16
-config.font = wezterm.font('OperatorMono Nerd Font', {
+config.font = wezterm.font('OperatorMono Nerd Font Medium', {
     weight = 'Regular',
     stretch = 'Normal',
     style = 'Normal'
