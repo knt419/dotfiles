@@ -36,7 +36,8 @@ config.window_padding = {
 }
 
 --- appearance
-config.color_scheme = 'Catppuccin Macchiato'
+config.color_scheme = 'Nova (base16)'
+-- config.color_scheme = 'Tokyo Night'
 config.window_background_opacity = 0.7
 config.win32_system_backdrop = 'Acrylic'
 config.show_close_tab_button_in_tabs = false

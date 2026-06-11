@@ -45,17 +45,25 @@ local plugins = {
     --         cmd.colorscheme('kanagawa-wave')
     --     end
     -- },
+    -- {
+    --     'catppuccin/nvim',
+    --     name = 'catppuccin',
+    --     -- 'dgox16/oldworld.nvim',
+    --     lazy = false,
+    --     config = function()
+    --         require('catppuccin').setup({
+    --             transparent_background = true,
+    --         })
+    --         cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
+    --         cmd.colorscheme('catppuccin-macchiato')
+    --     end
+    -- },
     {
-        'catppuccin/nvim',
-        name = 'catppuccin',
-        -- 'dgox16/oldworld.nvim',
+        'knt419/nova.nvim',
         lazy = false,
         config = function()
-            require('catppuccin').setup({
-                transparent_background = true,
-            })
             cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
-            cmd.colorscheme('catppuccin-macchiato')
+            cmd.colorscheme('nova',{ transparent_bg = true })
         end
     },
 
