@@ -33,6 +33,7 @@ local plugins = {
     --     'FrenzyExists/aquarium-vim',
     --     lazy = false,
     --     config = function()
+    --         vim.g.aqua_transparency = 1
     --         cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
     --         cmd.colorscheme('aquarium')
     --     end
@@ -62,8 +63,9 @@ local plugins = {
         'knt419/nova.nvim',
         lazy = false,
         config = function()
+            vim.g.nova_transparent_bg = true
             cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
-            cmd.colorscheme('nova',{ transparent_bg = true })
+            cmd.colorscheme('nova')
         end
     },
 
