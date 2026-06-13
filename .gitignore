@@ -4,3 +4,6 @@
 .config/lazygit/config.yml
 .config/lazygit/state.yml
 .config/nushell/history.txt
+.config/yazi/flavors
+.config/yazi/plugins/full-border.yazi
+.config/yazi/plugins/starship.yazi
