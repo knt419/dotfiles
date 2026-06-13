@@ -5,6 +5,27 @@ return function()
     local b = { provider = ' ' }
     local bb = { provider = '  ' }
     local spacer = { provider = '%=' }
+    local function blend_colors(color1, color2_hl, alpha)
+        -- color2_hl（ハイライトグループ名）から背景色（bg）を取得。無ければデフォルト値
+        local hl = vim.api.nvim_get_hl(0, { name = color2_hl, link = false })
+        local bg2_num = hl.bg or hl.background or 0x1e1e2e -- フォールバック用の暗い色
+
+        -- color1 ("#404040") を数値に変換
+        local bg1_num = tonumber(color1:gsub("#", ""), 16) or 0x404040
+
+        -- RGB成分を分解
+        local r1, g1, b1 = bit.rshift(bg1_num, 16), bit.band(bit.rshift(bg1_num, 8), 0xff), bit.band(bg1_num, 0xff)
+        local r2, g2, b2 = bit.rshift(bg2_num, 16), bit.band(bit.rshift(bg2_num, 8), 0xff), bit.band(bg2_num, 0xff)
+
+        -- ブレンド計算 (alpha は 0 から 1 の範囲にする)
+        local a = alpha / 100
+        local r = math.floor(r1 * a + r2 * (1 - a))
+        local g = math.floor(g1 * a + g2 * (1 - a))
+        local b = math.floor(b1 * a + b2 * (1 - a))
+
+        -- 16進数カラー文字列 (#RRGGBB) に戻す
+        return string.format("#%02x%02x%02x", r, g, b)
+    end
 
     local function git_component(key, icon, hl)
         return {
@@ -147,9 +168,9 @@ return function()
         init = function(self)
             self.filepath = vim.api.nvim_buf_get_name(0)
         end,
-        { bb, ViMode, b, Branch, b, FileName, b, Git, },
+        { bb,      ViMode, b,           Branch, b, FileName, b, Git, },
         spacer,
-        { LSPName, b, Diagnostics, },
+        { LSPName, b,      Diagnostics, },
         spacer,
         { Encoding, b, FileFormat, b, Ruler, },
     }
@@ -201,13 +222,14 @@ return function()
         end,
         hl = function(self)
             if self.is_active then
-                return { bg = '#404040' }
+                local blended_bg = blend_colors("#404040", "TabLineFill", 1)
+                return { bg = blended_bg }
             else
                 return 'TabLine'
             end
         end,
         on_click = {
-            callback = function(_,minwid,_,button)
+            callback = function(_, minwid, _, button)
                 vim.api.nvim_win_set_buf(0, minwid)
             end,
             minwid = function(self)
