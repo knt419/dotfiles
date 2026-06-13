@@ -243,7 +243,8 @@ return function()
     local TablineBufferBlock = {
         {
             condition = function(self) return self.is_active end,
-            utils.surround({ '▐', '▌' }, 'lightgray', { TablineFileNameBlock }),
+            utils.surround({ '▐', '▌' }, blend_colors("lightgray", "TabLineFill", 80), { TablineFileNameBlock }),
+            -- utils.surround({ '▐', '▌' }, 'lightgray', { TablineFileNameBlock }),
         },
         {
             condition = function(self) return not self.is_active end,
