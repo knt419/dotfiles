@@ -26,6 +26,7 @@ config.font = wezterm.font('OperatorMono Nerd Font Medium', {
     stretch = 'Normal',
     style = 'Normal'
 })
+config.font = wezterm.font_with_fallback { 'OperatorMono Nerd Font Medium', 'UDEV Gothic NF', }
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 config.show_tabs_in_tab_bar = true
 config.window_padding = {
