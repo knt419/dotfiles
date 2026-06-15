@@ -5,8 +5,13 @@ hash = "7b625412411be411153886894d9acaf"
 
 [[plugin.deps]]
 use = "Rolv-Apneseth/starship"
-rev = "a837101"
-hash = "635b0feb9215772d22020eb0abf0bb34"
+rev = "159eaba"
+hash = "7de446280b1ba8c49ffd86dbc24bbbe6"
+
+[[plugin.deps]]
+use = "knt419/bottom"
+rev = "b76bf69"
+hash = "1ff871b3028004239f195e1525bfe6bb"
 
 [[flavor.deps]]
 use = "yazi-rs/flavors:catppuccin-mocha"

@@ -9,6 +9,16 @@ run = 'open --interactive'
 desc = "Open files with tools"
 
 [[mgr.prepend_keymap]]
+on = "<Up>"
+run = "arrow 1"
+desc = "Move down (reversed for bottom-aligned)"
+
+[[mgr.prepend_keymap]]
+on = "<Down>"
+run = "arrow -1"
+desc = "Move up (reversed for bottom-aligned)"
+
+[[mgr.prepend_keymap]]
 on   = "<Esc>"
 run  = "close"
 desc = "close yazi"
