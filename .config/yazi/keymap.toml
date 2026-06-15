@@ -1,0 +1,15 @@
+[[mgr.prepend_keymap]]
+on = [ "g", "n" ]
+run = 'shell --block "nvim -d %s1 %s2"'
+desc = "Diff selected files"
+
+[[mgr.prepend_keymap]]
+on = [ "g", "o" ]
+run = 'open --interactive'
+desc = "Open files with tools"
+
+[[mgr.prepend_keymap]]
+on   = "<Esc>"
+run  = "close"
+desc = "close yazi"
+

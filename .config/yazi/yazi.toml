@@ -1,8 +1,25 @@
 [mgr]
-sort_reverse = false
 show_hidden = true
 
-[[input.prepend_keymap]]
-on   = "<Esc>"
-run  = "close"
-desc = "Cancel input"
+[opener]
+edit = [
+	{ run = "$EDITOR $0", desc = "Edit", block = true, for = "unix" },
+	{ run = "%EDITOR% %0", desc = "Edit", block = true, for = "windows" },
+]
+
+open = [
+    { run = "xdg-open $1", desc = "Open", for = "unix" },
+]
+
+diff = [
+    { run = "nvim -d $1 $2", desc = "diff", block = true },
+]
+
+test = [
+    { run = "echo %s", block = true, desc = "Test" },
+]
+
+[open]
+prepend_rules = [
+    { mime = "text/*", use = ["edit", "open", "diff", "test"]}
+]
