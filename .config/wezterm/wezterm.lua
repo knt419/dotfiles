@@ -20,13 +20,13 @@ end
 --- layout
 config.initial_cols = 120
 config.initial_rows = 28
-config.font_size = 16
-config.font = wezterm.font('OperatorMono Nerd Font Medium', {
+config.font_size = 14
+config.font = wezterm.font('Maple Mono NF CN', {
     weight = 'Regular',
     stretch = 'Normal',
     style = 'Normal'
 })
-config.font = wezterm.font_with_fallback { 'OperatorMono Nerd Font Medium', 'UDEV Gothic NF', }
+config.font = wezterm.font_with_fallback { 'Maple Mono NF CN', 'OperatorMono Nerd Font Medium', 'UDEV Gothic NF', }
 config.window_decorations = 'INTEGRATED_BUTTONS|RESIZE'
 config.show_tabs_in_tab_bar = true
 config.window_padding = {
