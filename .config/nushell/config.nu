@@ -22,6 +22,7 @@ alias l = ls
 alias la = ls -a
 alias ll = ls -l
 alias q = exit
+$env.LANG = "ja_JP.UTF-8"
 $env.config = {
     shell_integration: {
         # osc2 abbreviates the path if in the home_dir, sets the tab/window title, shows the running command in the tab/window title

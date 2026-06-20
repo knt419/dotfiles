@@ -29,15 +29,15 @@ opt.rtp:prepend(lazypath)
 local plugins = {
 
     -- colorscheme
-    -- {
-    --     'FrenzyExists/aquarium-vim',
-    --     lazy = false,
-    --     config = function()
-    --         vim.g.aqua_transparency = 1
-    --         cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
-    --         cmd.colorscheme('aquarium')
-    --     end
-    -- },
+    {
+        'FrenzyExists/aquarium-vim',
+        lazy = false,
+        config = function()
+            -- vim.g.aqua_transparency = 1
+            cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
+            cmd.colorscheme('aquarium')
+        end
+    },
     -- {
     --     'rebelot/kanagawa.nvim',
     --     lazy = false,
@@ -59,15 +59,15 @@ local plugins = {
     --         cmd.colorscheme('catppuccin-macchiato')
     --     end
     -- },
-    {
-        'knt419/nova.nvim',
-        lazy = false,
-        config = function()
-            vim.g.nova_transparent_bg = true
-            cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
-            cmd.colorscheme('nova')
-        end
-    },
+    -- {
+    --     'knt419/nova.nvim',
+    --     lazy = false,
+    --     config = function()
+    --         vim.g.nova_transparent_bg = true
+    --         cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
+    --         cmd.colorscheme('nova')
+    --     end
+    -- },
 
     -- editor display
     {
