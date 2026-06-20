@@ -1,10 +1,11 @@
 background-opacity = 0.9
 background-blur = true
 command = nu
-font-family = "OperatorMono Nerd Font Medium"
-font-family-bold = "OperatorMono Nerd Font"
-font-family-italic = "OperatorMono Nerd Font Medium"
-font-family-bold-italic = "OperatorMono Nerd Font"
-font-size = 16
+font-family = "Maple Mono NF CN"
+#font-family = "OperatorMono Nerd Font Medium"
+#font-family-bold = "OperatorMono Nerd Font"
+#font-family-italic = "OperatorMono Nerd Font Medium"
+#font-family-bold-italic = "OperatorMono Nerd Font"
+font-size = 15
 theme = TokyoNight
 window-theme = ghostty
