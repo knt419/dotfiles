@@ -30,6 +30,7 @@ return function()
         v     = C.magenta,
         V     = C.magenta,
         ['\22'] = C.magenta,
+        R     = C.orange,
     }
 
     local b = { provider = ' ' }
@@ -70,6 +71,7 @@ return function()
                 v     = '󰒉 ',
                 V     = ' ',
                 ['\22'] = '󰾂 ',
+                R     = '󰬲 ',
             },
         },
         provider = function(self)
