@@ -25,6 +25,7 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
         ["nvim"]    = { wezterm.nerdfonts.custom_neovim,     '#6ebf60' },
         ["python"]  = { wezterm.nerdfonts.dev_python,        '#F92672' },
         ["node"]    = { wezterm.nerdfonts.dev_nodejs_small,  '#A6E22E' },
+        ["opencode"]    = { '󰆡',  '#DDDDDD' },
         ["wslhost"] = { wezterm.nerdfonts.dev_archlinux,     '#1793d1' },
         ["wsl"]     = { wezterm.nerdfonts.dev_archlinux,     '#1793d1' },
     }
