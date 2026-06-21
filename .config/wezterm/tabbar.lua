@@ -16,26 +16,29 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
     end
 
     local icons = {
-        ["bash"] = wezterm.nerdfonts.dev_terminal,
-        ["wezterm"] = wezterm.nerdfonts.dev_terminal,
-        ["zsh"] = wezterm.nerdfonts.dev_terminal,
-        ["nu"] = wezterm.nerdfonts.dev_terminal,
-        ["vim"] = wezterm.nerdfonts.custom_vim,
-        ["nvim"] = wezterm.nerdfonts.custom_neovim,
-        ["python"] = wezterm.nerdfonts.dev_python,
-        ["node"] = wezterm.nerdfonts.dev_nodejs_small,
-        ["wslhost"] = wezterm.nerdfonts.dev_archlinux,
-        ["wsl"] = wezterm.nerdfonts.dev_archlinux,
+        ["bash"]    = { wezterm.nerdfonts.dev_terminal,      '#E6DB74' },
+        ["wezterm"] = { wezterm.nerdfonts.dev_terminal,      '#A6E22E' },
+        ["zsh"]     = { wezterm.nerdfonts.dev_terminal,      '#E6DB74' },
+        ["nu"]      = { wezterm.nerdfonts.dev_terminal,      '#66D9EF' },
+        ["vim"]     = { wezterm.nerdfonts.custom_vim,        '#A6E22E' },
+        ["nvim"]    = { wezterm.nerdfonts.custom_neovim,     '#66D9EF' },
+        ["python"]  = { wezterm.nerdfonts.dev_python,        '#F92672' },
+        ["node"]    = { wezterm.nerdfonts.dev_nodejs_small,  '#A6E22E' },
+        ["wslhost"] = { wezterm.nerdfonts.dev_archlinux,     '#A3B8EF' },
+        ["wsl"]     = { wezterm.nerdfonts.dev_archlinux,     '#A3B8EF' },
     }
+
+    local entry = icons[title] or { wezterm.nerdfonts.dev_terminal, ICON_COLOR[index] }
+    local icon, icon_color = entry[1], entry[2]
 
     return {
         { Foreground = { Color = TAB_COLOR[index] } },
         { Background = { Color = 'none' } },
         { Text = BORDER_LEFT[index] },
 
-        { Foreground = { Color = ICON_COLOR[index] } },
+        { Foreground = { Color = icon_color } },
         { Background = { Color = TAB_COLOR[index] } },
-        { Text = ( icons[title] or wezterm.nerdfonts.dev_terminal ) .. zoomed },
+        { Text = icon .. zoomed },
 
         { Foreground = { Color = FONT_COLOR[index] } },
         { Background = { Color = TAB_COLOR[index] } },
