@@ -19,6 +19,16 @@ run = "arrow -1"
 desc = "Move up (reversed for bottom-aligned)"
 
 [[mgr.prepend_keymap]]
+on = "k"
+run = "arrow 1"
+desc = "Move down (reversed for bottom-aligned)"
+
+[[mgr.prepend_keymap]]
+on = "j"
+run = "arrow -1"
+desc = "Move up (reversed for bottom-aligned)"
+
+[[mgr.prepend_keymap]]
 on   = "<Esc>"
 run  = "close"
 desc = "close yazi"
