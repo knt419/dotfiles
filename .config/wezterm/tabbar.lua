@@ -16,16 +16,16 @@ wezterm.on('format-tab-title', function(tab, tabs, panes, config, hover, max_wid
     end
 
     local icons = {
-        ["bash"]    = { wezterm.nerdfonts.dev_terminal,      '#E6DB74' },
-        ["wezterm"] = { wezterm.nerdfonts.dev_terminal,      '#A6E22E' },
-        ["zsh"]     = { wezterm.nerdfonts.dev_terminal,      '#E6DB74' },
-        ["nu"]      = { wezterm.nerdfonts.dev_terminal,      '#66D9EF' },
+        ["bash"]    = { wezterm.nerdfonts.dev_terminal,      '#3e91da' },
+        ["wezterm"] = { wezterm.nerdfonts.dev_terminal,      '#5042d0' },
+        ["zsh"]     = { wezterm.nerdfonts.dev_terminal,      '#f15a24' },
+        ["nu"]      = { wezterm.nerdfonts.dev_terminal,      '#1dd361' },
         ["vim"]     = { wezterm.nerdfonts.custom_vim,        '#A6E22E' },
-        ["nvim"]    = { wezterm.nerdfonts.custom_neovim,     '#66D9EF' },
+        ["nvim"]    = { wezterm.nerdfonts.custom_neovim,     '#6ebf60' },
         ["python"]  = { wezterm.nerdfonts.dev_python,        '#F92672' },
         ["node"]    = { wezterm.nerdfonts.dev_nodejs_small,  '#A6E22E' },
-        ["wslhost"] = { wezterm.nerdfonts.dev_archlinux,     '#A3B8EF' },
-        ["wsl"]     = { wezterm.nerdfonts.dev_archlinux,     '#A3B8EF' },
+        ["wslhost"] = { wezterm.nerdfonts.dev_archlinux,     '#1793d1' },
+        ["wsl"]     = { wezterm.nerdfonts.dev_archlinux,     '#1793d1' },
     }
 
     local entry = icons[title] or { wezterm.nerdfonts.dev_terminal, ICON_COLOR[index] }
