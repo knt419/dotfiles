@@ -238,17 +238,17 @@ return function()
             end,
             name = 'heirline_tabline_buffer_callback',
         },
-        { bb, TablineFileName, TablineFileFlags, bb, },
+        { b, TablineFileName, TablineFileFlags, b, },
     }
 
     local TablineBufferBlock = {
         {
             condition = function(self) return self.is_active end,
-            utils.surround({ '▐', '▌' }, C.bg_light, { TablineFileNameBlock }),
+            utils.surround({ '▌' ,'▐' }, C.fg, { TablineFileNameBlock }),
         },
         {
             condition = function(self) return not self.is_active end,
-            utils.surround({ ' ', ' ' }, C.bg, { TablineFileNameBlock }),
+            utils.surround({ '█', '█' }, C.bg, { TablineFileNameBlock }),
         },
     }
 
@@ -260,6 +260,6 @@ return function()
 
     require('heirline').setup({
         statusline = StatusLine,
-        tabline = BufferLine,
+        tabline = { BufferLine, { provider = "%=", hl = { bg = C.bg } } },
     })
 end
