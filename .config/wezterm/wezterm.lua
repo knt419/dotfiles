@@ -56,7 +56,7 @@ config.colors = {
         inactive_tab_edge = 'none',
         new_tab = {
             fg_color = '#9a9eab',
-            bg_color = 'none',
+            bg_color = '#1a1a24',
         },
     },
 }
