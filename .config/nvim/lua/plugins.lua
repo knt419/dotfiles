@@ -109,6 +109,7 @@ local plugins = {
             vim.o.cmdheight = 0
         end,
         config = function()
+            vim.api.nvim_set_hl(0, "TinyCmdlineBorder", { link = "MsgArea", default = true })
             require('tiny-cmdline').setup({
                 menu_col_offset = 1,
                 native_types = {},
@@ -172,9 +173,9 @@ local plugins = {
     {
         'kana/vim-smartword',
         keys = {
-            { 'w',  '<Plug>(smartword-w)' },
-            { 'b',  '<Plug>(smartword-b)' },
-            { 'e',  '<Plug>(smartword-e)' },
+            { 'w', '<Plug>(smartword-w)' },
+            { 'b', '<Plug>(smartword-b)' },
+            { 'e', '<Plug>(smartword-e)' },
         }
     },
     {
@@ -231,8 +232,8 @@ local plugins = {
             { 'nvim-lua/plenary.nvim', lazy = true },
         },
         keys = {
-            { '<leader>y', mode = { 'n', 'v' }, '<cmd>Yazi<cr>', desc = 'Open yazi at the current file', },
-            { '<c-up>', '<cmd>Yazi toggle<cr>', desc = 'Resume the last yazi session', },
+            { '<leader>y', mode = { 'n', 'v' },    '<cmd>Yazi<cr>',                       desc = 'Open yazi at the current file', },
+            { '<c-up>',    '<cmd>Yazi toggle<cr>', desc = 'Resume the last yazi session', },
         },
         ---@type YaziConfig | {}
         opts = {
