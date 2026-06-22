@@ -34,18 +34,12 @@ local plugins = {
         lazy = false,
         config = function()
             -- vim.g.aqua_transparency = 1
+            cmd.autocmd('BufEnter,ColorScheme * highlight LineNr NONE | highlight LineNr cterm=bold gui=bold guifg=#44495e')
             cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
+            cmd.autocmd('BufEnter,ColorScheme * highlight NormalFloat NONE | highlight default link NormalFloat Pmenu')
             cmd.colorscheme('aquarium')
         end
     },
-    -- {
-    --     'rebelot/kanagawa.nvim',
-    --     lazy = false,
-    --     config = function()
-    --         cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
-    --         cmd.colorscheme('kanagawa-wave')
-    --     end
-    -- },
     -- {
     --     'catppuccin/nvim',
     --     name = 'catppuccin',
@@ -53,7 +47,7 @@ local plugins = {
     --     lazy = false,
     --     config = function()
     --         require('catppuccin').setup({
-    --             transparent_background = true,
+    --             -- transparent_background = true,
     --         })
     --         cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
     --         cmd.colorscheme('catppuccin-macchiato')
@@ -98,7 +92,7 @@ local plugins = {
     --     event = 'BufReadPost',
     --     opts = {
     --         recipe = { 'minimalist', { animate = true } },
-    --         basebg = '#2a2a2a',
+            -- basebg = '#2a2a2a',
     --     }
     -- },
     {
