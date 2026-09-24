@@ -62,6 +62,7 @@ opt.diffopt = { 'filler', 'vertical', 'internal', algorithm = 'histogram', 'inde
 
 opt.laststatus = 3
 opt.showtabline = 2
+opt.cmdheight = 0 -- must be set before require('vim._core.ui2') captures it
 opt.wildmode = { list = 'full' }
 opt.iskeyword:append({ '-', '_' })
 opt.linebreak = true
