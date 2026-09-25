@@ -37,8 +37,10 @@ opt.sidescrolloff = 10
 opt.termguicolors = true
 opt.foldlevel = 99
 
-opt.guifont = 'OperatorMono Nerd Font:h16'
-opt.guifontwide = 'HackGen Console NF:h15'
+opt.guifont = 'Maple Mono NF CN:h16'
+-- opt.guifont = 'OperatorMono Nerd Font:h16'
+opt.guifontwide = 'Maple Mono NF CN:h16'
+-- opt.guifontwide = 'HackGen Console NF:h15'
 opt.tabstop = 4
 opt.expandtab = true
 opt.shiftwidth = 4
