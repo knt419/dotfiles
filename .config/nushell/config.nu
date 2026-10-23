@@ -203,3 +203,4 @@ $env.config.keybindings ++= [
 ]
 
 cd $env.Home
+source "~/.cargo/env.nu"

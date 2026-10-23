@@ -16,7 +16,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
     if result.code ~= 0 then
         vim.api.nvim_echo({
             { 'Failed to clone lazy.nvim:\n', 'ErrorMsg' },
-            { result,                         'WarningMsg' },
+            { result.stderr,                  'WarningMsg' },
             { '\nPress any key to exit...' },
         }, true, {})
         vim.fn.getchar()
@@ -34,7 +34,8 @@ local plugins = {
         lazy = false,
         config = function()
             -- vim.g.aqua_transparency = 1
-            cmd.autocmd('BufEnter,ColorScheme * highlight LineNr NONE | highlight LineNr cterm=bold gui=bold guifg=#44495e')
+            cmd.autocmd(
+            'BufEnter,ColorScheme * highlight LineNr NONE | highlight LineNr cterm=bold gui=bold guifg=#44495e')
             cmd.autocmd('BufEnter,ColorScheme * highlight NonText NONE | highlight default link NonText LineNr')
             cmd.autocmd('BufEnter,ColorScheme * highlight NormalFloat NONE | highlight default link NormalFloat Pmenu')
             cmd.colorscheme('aquarium')
@@ -79,8 +80,7 @@ local plugins = {
     },
     {
         'petertriho/nvim-scrollbar',
-        event = 'FileType',
-        ft = 'snacks_dashboard',
+        event = 'VeryLazy',
         opts = {
             marks = {
                 Search = { color = 'orange' },
@@ -92,13 +92,12 @@ local plugins = {
     --     event = 'BufReadPost',
     --     opts = {
     --         recipe = { 'minimalist', { animate = true } },
-            -- basebg = '#2a2a2a',
+    -- basebg = '#2a2a2a',
     --     }
     -- },
     {
         'rachartier/tiny-cmdline.nvim',
-        event = 'FileType',
-        ft = 'snacks_dashboard',
+        event = 'VeryLazy',
         init = function()
             vim.o.cmdheight = 0
         end,
@@ -113,13 +112,12 @@ local plugins = {
     },
     {
         'rebelot/heirline.nvim',
-        event = 'FileType',
-        ft = 'snacks_dashboard',
+        event = 'VeryLazy',
         config = require('config.heirline'),
     },
     {
         'nvim-tree/nvim-web-devicons',
-        config = true,
+        lazy = false,
     },
     {
         'nvim-mini/mini.hipatterns',
@@ -134,8 +132,7 @@ local plugins = {
     },
     {
         'nvim-mini/mini.diff',
-        event = 'FileType',
-        ft = 'snacks_dashboard',
+        event = 'VeryLazy',
         version = '*',
         config = true,
     },
@@ -176,18 +173,17 @@ local plugins = {
         'kana/vim-niceblock',
         event = 'ModeChanged *:[vV\x16]*',
     },
-    -- {
-    --     'xiyaowong/transparent.nvim',
-    --     lazy = false,
-    --     opts = {
-    --         extra_groups = {
-    --             'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
-    --             'BlinkCmpMenuBorder', 'GitSignsDelete', 'GitSignsDelete', 'GitSignsDelete', 'MiniDiffSignAdd',
-    --             'MiniDiffSignChange', 'MiniDiffSignDelete', 'DiagnosticSignError', 'DiagnosticSignWarn',
-    --             'DiagnosticSignInfo', 'DiagnosticSignHint', 'Folded'
-    --         },
-    --     },
-    -- },
+    {
+        'xiyaowong/transparent.nvim',
+        lazy = false,
+        opts = {
+            extra_groups = {
+                'FloatBorder', 'NvimTreeNormal', 'NvimTreeNormalNC', 'Tabline', 'TablineFill', 'Pmenu',
+                'BlinkCmpMenuBorder', 'MiniDiffSignAdd', 'MiniDiffSignChange', 'MiniDiffSignDelete',
+                'DiagnosticSignError', 'DiagnosticSignWarn', 'DiagnosticSignInfo', 'DiagnosticSignHint', 'Folded'
+            },
+        },
+    },
 
     -- file/directory open/read
     {
@@ -260,10 +256,11 @@ local plugins = {
     },
     {
         'MeanderingProgrammer/render-markdown.nvim',
-        ft = { 'markdown' },
+        ft = { 'markdown', 'opencode_output' },
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
         opts = {
+            anti_conceal = { enabled = false },
             completions = {
                 lsp = {
                     enabled = true
@@ -318,6 +315,17 @@ local plugins = {
                 help = true,
             },
         },
+    },
+    {
+        'sudo-tee/opencode.nvim',
+        event = 'VeryLazy',
+        dependencies = {
+            -- Optional: choose a picker you already use, or keep vim.ui.select.
+            'folke/snacks.nvim',
+            -- Optional: use your configured completion engine, or built-in completion.
+            'saghen/blink.cmp',
+        },
+        opts = {},
     },
     {
         'saghen/blink.cmp',
