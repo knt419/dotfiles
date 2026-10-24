@@ -17,11 +17,43 @@
 # You can remove these comments if you want or leave
 # them for future reference.
 mkdir ($nu.data-dir | path join "vendor/autoload")
-starship init nu | save -f ($nu.data-dir | path join "vendor/autoload/starship.nu")
+let autoload = ($nu.data-dir | path join "vendor/autoload")
+
+# starship（Omarchy/Windows 共通。条件分岐の外で毎回生成）
+^starship init nu | save -f ($autoload | path join "starship.nu")
+
+# --- zoxide / mise（Omarchy のときだけ有効化） --------------------------------
+# コード自体は OS 非依存。Windows でも使いたい場合は下の if を外すだけでよい。
+# 生成ファイルが無い / ツール本体より古いときだけ作り直す（毎回の外部呼び出しを回避）。
+if (($env.IS_OMARCHY? | default false) == true) {
+    # cd の代わりに z / zi（bash 側 alias cd=zd に相当）
+    if (which zoxide | is-not-empty) {
+        let bin = (which zoxide | get 0.path)
+        let out = ($autoload | path join "zoxide.nu")
+        if (not ($out | path exists)) or ((ls $bin | get 0.modified) > (ls $out | get 0.modified)) {
+            ^zoxide init nushell | save -f $out
+        }
+    }
+
+    # ディレクトリごとのツール版切替（bash 側 mise activate に相当）
+    if (which mise | is-not-empty) {
+        let bin = (which mise | get 0.path)
+        let out = ($autoload | path join "mise.nu")
+        if (not ($out | path exists)) or ((ls $bin | get 0.modified) > (ls $out | get 0.modified)) {
+            ^mise activate nu | save -f $out
+        }
+    }
+}
 alias l = ls
 alias la = ls -a
 alias ll = ls -l
 alias q = exit
+
+# n [path...] → nvim（引数なしなら nvim .）。bash 側の n() と同じ
+# --wrapped が無いと `n --version` や `n -o a b` のような nvim のフラグが通らない
+def --env --wrapped n [...args: string] {
+    if ($args | is-empty) { ^nvim . } else { ^nvim ...$args }
+}
 $env.LANG = "ja_JP.UTF-8"
 # WezTerm は独自の shell integration を持ち nushell 側と競合するため、WezTerm の
 # ときだけ全て無効化する。それ以外 (Ghostty など) は nushell の既定値を有効にする。
@@ -202,5 +234,4 @@ $env.config.keybindings ++= [
     }
 ]
 
-cd $env.Home
-source "~/.cargo/env.nu"
+cd $nu.home-dir
