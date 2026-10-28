@@ -178,8 +178,13 @@ def --env right-handler [] {
     }
 }
 
-def down-handler [] {
-    if (commandline | is-empty) {
+def --env down-handler [] {
+    let buf = (commandline)
+
+    if ($buf | str trim | is-empty) {
+        $env.__down_idx = null
+        $env.__down_buf = null
+
         print ""
 
         let listing = (
@@ -191,6 +196,37 @@ def down-handler [] {
 
         print $listing
         print ""
+        return
+    }
+
+    # 非空のときは履歴を進む。ネイティブの NextHistory はホストコマンドから
+    # 呼べない（until の後続イベントは実行されない）ので、history を引いて自前で移動する。
+    let hist = (try { history | get command } catch { [] })
+    if ($hist | is-empty) { return }
+
+    # 直前に自分が置いた行ならその位置を、そうでなければバッファ内容から位置を推定する
+    let tracked = ((($env.__down_buf? | default "") == $buf)
+        and (($env.__down_idx? | default (-1)) >= 0))
+    let idx = if $tracked {
+        $env.__down_idx
+    } else {
+        let hits = ($hist | enumerate | where item == $buf | get index)
+        if ($hits | is-empty) { -1 } else { $hits | last }
+    }
+
+    # 履歴に無い行（打ちかけのコマンド）ではネイティブと同じく何もしない
+    if $idx < 0 { return }
+
+    let next = $idx + 1
+    if $next >= ($hist | length) {
+        $env.__down_idx = null
+        $env.__down_buf = ""
+        commandline edit --replace ""
+    } else {
+        let entry = ($hist | get $next)
+        $env.__down_idx = $next
+        $env.__down_buf = $entry
+        commandline edit --replace $entry
     }
 }
 
