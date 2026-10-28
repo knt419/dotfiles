@@ -132,7 +132,7 @@ def --env y [...args] {
 
 def --env smart-right [] {
     let dirs = (
-        ls
+        ls --all
         | where type == dir
         | sort-by name
     )
